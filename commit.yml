@@ -2,16 +2,10 @@
 branches: {
   }
 fileChange:
-  /crmeb:
-    newFile: !uuid '5e5a62604214b1cf8ba23dc71a19e521f4f51466'
-    oldFile: !uuid '954c785f113e1f1a80ed1a18c7404a97ff2f6bce'
-  /crmeb/lib:
-    newFile: null
-    oldFile: !uuid '13ddcf237e4d6001efbb9d8f69261e804608549e'
-  /crmeb/lib/yly_sdk-1.1.jar:
-    newFile: null
-    oldFile: !uuid 'cb814696d80c178b9157570006db6ce292e10724'
-gitCommitId: !uuid 'da475ff7cd2271cc9f4d748463ce7c7bdc1ed777'
+  /crmeb_java_v1.0.sql:
+    newFile: !uuid 'b3a9c61d29f68979851568f05bf2b64d48b49026'
+    oldFile: !uuid 'a06a8ce876abed087ee8c458d09d98a59e981b6f'
+gitCommitId: !uuid '094ad4ac7dfb101ab22551b341ff7dfd33bc5a08'
 renames: {
   }
-revisionId: 5
+revisionId: 6
