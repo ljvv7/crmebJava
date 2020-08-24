@@ -2,70 +2,10 @@
 branches: {
   }
 fileChange:
-  /crmeb:
-    newFile: !uuid '02fd4ee7cbaf33d9dd1148bccfead5b2d679bbe6'
-    oldFile: !uuid '9d21af436a3cc50d44746abf9dcfe223717c6210'
-  /crmeb/src:
-    newFile: !uuid 'b9acbc0d102ea3815ab9ecbb1dd90b9cc0f3293a'
-    oldFile: !uuid '0cfc1decd78fe2f6d3e24f331acd0b15f6b56f64'
-  /crmeb/src/main:
-    newFile: !uuid 'ca1e97ff84ba29ba0d06d3bff118803069980966'
-    oldFile: !uuid '3a94a9a9af1c5d788bf5da07bbdf3f3674013828'
-  /crmeb/src/main/java:
-    newFile: !uuid 'ee67f3fc1e2186e8f29568490080441de80cc32a'
-    oldFile: !uuid '7e2c52548efc3512639eea8c24ff8d9ad5b62870'
-  /crmeb/src/main/java/com:
-    newFile: !uuid '2c5b7abd8bdcfd3bde877246b3f4c41eed997ee6'
-    oldFile: !uuid '8f5b054c84c4963f0465ac03bf5d7d5a464238ff'
-  /crmeb/src/main/java/com/zbkj:
-    newFile: !uuid '4691cd8299d6d1c56f77fa842755486e0eb510c6'
-    oldFile: !uuid '3966807955dcb3115bd6bb0aba62d0b232205442'
-  /crmeb/src/main/java/com/zbkj/crmeb:
-    newFile: !uuid '2ae9b7a77e801be0009375bbe7c9734abcf20e71'
-    oldFile: !uuid '628cf6e97c69311b30598b8555777d9cbc90774a'
-  /crmeb/src/main/java/com/zbkj/crmeb/front:
-    newFile: !uuid 'c48c4ae8e4827d9e37d622f30fd985a222083da8'
-    oldFile: !uuid 'c025afd6a0e9b77f5aca0babbe4123918c66a55d'
-  /crmeb/src/main/java/com/zbkj/crmeb/front/service:
-    newFile: !uuid '0e6df7756ea85d9334a9717f4fcd1d833f797e56'
-    oldFile: !uuid '2fd34267184271994b6213f0fb9d998b7add0219'
-  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl:
-    newFile: !uuid '8e84863de6e0c7da3647bb20ee6f1a391ae2cbb2'
-    oldFile: !uuid 'd1d7db79f532fb70569a556c8c94698ad8e4b570'
-  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl/ProductServiceImpl.java:
-    newFile: !uuid '42ac4d0e7a0b9ad1ed7b5635290c8e5573a0cf99'
-    oldFile: !uuid '9aafecd3c3f4b01551040c2b1c6086511ea5b992'
-  /crmeb/src/main/java/com/zbkj/crmeb/store:
-    newFile: !uuid 'af339ea07e8d6777ff568ad3329f1d5786393ee1'
-    oldFile: !uuid 'b478ffdcea81d61f17f145fd510a1bbec3fb5a46'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/controller:
-    newFile: !uuid 'e775384ae421c6060cadcefea5c1a356d197bafa'
-    oldFile: !uuid '7f05ac8300c810feb43267883261dabf19e4fba1'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/controller/StoreProductRuleController.java:
-    newFile: !uuid 'eb6521393e8d30f4497491528dd9d009dab5afe3'
-    oldFile: !uuid '7e2f5178a3dfc7ac3c1cd13bd67aac4566eb86e5'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service:
-    newFile: !uuid 'b95267db24b2d85536a77b1b9b40b1346b6b6880'
-    oldFile: !uuid '5d160bf70da198e3f4d50a22ec46b51818a824cc'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/StoreProductRuleService.java:
-    newFile: !uuid 'a0f8ab6c9a71b78422ac6f7ec3fcc03721d1cf7d'
-    oldFile: !uuid 'f228641e603cb45daa6f013829b1c7763ad9d91f'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl:
-    newFile: !uuid 'd3f53e33e08699e05226ff6bf82610acb84b25f2'
-    oldFile: !uuid 'ac28318442402d906e6b2ccec696d0b659af0201'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/OrderTaskServiceImpl.java:
-    newFile: !uuid '781dece7742e0b67224fa0df976a910075591ac5'
-    oldFile: !uuid '00f255e17d6fbf86a455ec32483226cb568c616d'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreProductRuleServiceImpl.java:
-    newFile: !uuid '3578abf0280b9a5b8bc71525a8d53685d0b2dbb7'
-    oldFile: !uuid 'd2c1f08bb1051d5c47d8e28807ba3f4d9e519a0f'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/utilService:
-    newFile: !uuid 'f9145ecb6d507ef2f49c21f2ad3191e38180251c'
-    oldFile: !uuid '5841a20b1b1da9b9f65e0a92737e6a9b25676fdc'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/utilService/OrderUtils.java:
-    newFile: !uuid '18461eafe4985eff9a1d0f279bfc039a67d1fe1a'
-    oldFile: !uuid 'c9133158f82b4c5fb8fb9a2ab3a2432f89b9d979'
-gitCommitId: !uuid 'b9b49f6e85a5e617e210743c0ca685bc05bca69d'
+  /README.md:
+    newFile: !uuid 'e208044e0ca7306e86602fb841d31ad973b0ecd6'
+    oldFile: !uuid 'aac4f3c5eea215f22d9e5cc4555427d7f9e091f9'
+gitCommitId: !uuid '01633931aa3d01d6ec87069a44c95bc44214c099'
 renames: {
   }
-revisionId: 29
+revisionId: 30
