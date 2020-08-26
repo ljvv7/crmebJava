@@ -2,10 +2,73 @@
 branches: {
   }
 fileChange:
-  /crmeb_java_v1.0.sql:
-    newFile: !uuid 'e9f637172a8d61150c48706b0c38563b99780dff'
-    oldFile: !uuid '34c6860d646594912534f543d8c3fbdfbec35278'
-gitCommitId: !uuid '757153a0777a024a8b2156b4e1c22e22a20a75d4'
+  /crmeb:
+    newFile: !uuid '8bb225ac8f634c7b8e50a7764d1430b6441e0ad8'
+    oldFile: !uuid 'f909649f39cbc35c18113d27714f03891b6ec663'
+  /crmeb/src:
+    newFile: !uuid 'c34cb0793ebd903d7e34857b7d174fe380d45963'
+    oldFile: !uuid 'd42559bc9d699477718244be27d61dbc08b2f748'
+  /crmeb/src/main:
+    newFile: !uuid '63997c957ead657b6579452f57e82531f00da162'
+    oldFile: !uuid 'a6042369492fd5fddaa3e3c7821f2a6ffabb0e0f'
+  /crmeb/src/main/java:
+    newFile: !uuid '8323e378c33564b2e1a6ec3afdc04a02910b1188'
+    oldFile: !uuid '522db0839b32c91c50f0829d77cdd4d78b0dc561'
+  /crmeb/src/main/java/com:
+    newFile: !uuid '563d31fe8ea77cf6267028141e8cf5c9bfd4b083'
+    oldFile: !uuid '51569c261a4e3df4b9bbd4754c5b17bc8106506c'
+  /crmeb/src/main/java/com/constants:
+    newFile: !uuid '51d00b2f20434857f4e7bc52d32cf8c96328e6a5'
+    oldFile: !uuid 'fb72c78fd4efc613e8bc786f0e89fd15d05d0ace'
+  /crmeb/src/main/java/com/constants/Constants.java:
+    newFile: !uuid '2161a9b2f6747653b94cdd3dd08200186af954d6'
+    oldFile: !uuid '8d8dba493475dd84352cc59e91f771994e96250b'
+  /crmeb/src/main/java/com/utils:
+    newFile: !uuid '45f57d02a0045da411daf355f9a0301597b20642'
+    oldFile: !uuid 'e210a0f5d2ace7c4b3df5fa66a2535a87edd6b58'
+  /crmeb/src/main/java/com/utils/RedisUtil.java:
+    newFile: !uuid '48a3b8f27cc340f79ef4df671471a7debf7acee2'
+    oldFile: !uuid '973f315f48b4f2ed314f3d3c46420e0da49b3744'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '6ce540a415f96966f074b3f74c4de1b98fbaf6c3'
+    oldFile: !uuid 'bb56269ce8ebd66a7100c60428d82253960084d7'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid '75d49bcb67ddd7843845b8a3ed358cd41403111f'
+    oldFile: !uuid '2fdd8e1581862f9a8becca18b8f9c273716f93a5'
+  /crmeb/src/main/java/com/zbkj/crmeb/config:
+    newFile: !uuid '06b5bfe767797b5bdff63809909ae32b5c94c2d4'
+    oldFile: !uuid 'cb76c32cf2b474965c65ea2876afa928fe2bf5de'
+  /crmeb/src/main/java/com/zbkj/crmeb/config/RedisConfig.java:
+    newFile: !uuid 'f21978361b2b6fa96936a80af71ae77ecbc5f164'
+    oldFile: !uuid 'bd6756333e555a4541041cadea6e425ca9d82675'
+  /crmeb/src/main/java/com/zbkj/crmeb/system:
+    newFile: !uuid '38d36b94bf9b060c27322bf3b3a2dc2d552a6daf'
+    oldFile: !uuid 'bbf615c3810a1ac6d1a423398e1f871f2960ba9a'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service:
+    newFile: !uuid '023d2468dc471fc81f42b2f0fc1d4a31075cc8d0'
+    oldFile: !uuid 'baedcf4879293d4b33834196d8a65f7dc3cf7c73'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/SystemConfigService.java:
+    newFile: !uuid '51c6eace06a5bfb70a05322f883ac71682b2a5bf'
+    oldFile: !uuid 'c76244824193af94b362512c70b72b62711f078c'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl:
+    newFile: !uuid '19b66868b9420030681845fff6f77fe85a49a592'
+    oldFile: !uuid '80fde2d50b2042eb7d8d87030e21f05c59872243'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemConfigServiceImpl.java:
+    newFile: !uuid '6f81f573e042996e74350d0e0f10116906917177'
+    oldFile: !uuid 'f1821e59a2b2c3d4a86bbf4c3bf9d99b745399e5'
+  /crmeb/src/main/java/com/zbkj/crmeb/upload:
+    newFile: !uuid '71f9eebd896fe7b9f940dd7ba132b9c20555f7eb'
+    oldFile: !uuid '5b6b9ae767bbcd726c086e4872bebc64442c50ff'
+  /crmeb/src/main/java/com/zbkj/crmeb/upload/service:
+    newFile: !uuid '09c70d12a64c06ec541b0f56803ccc0f92ac2b5c'
+    oldFile: !uuid '343e5e23a0ab9b5ea3a0087312a8ca9c193f5177'
+  /crmeb/src/main/java/com/zbkj/crmeb/upload/service/impl:
+    newFile: !uuid 'eec15a8820fd092e5bd3f6664453abed34e84778'
+    oldFile: !uuid '086dc373d5938e4e82ff2e12180a6e48df78aa83'
+  /crmeb/src/main/java/com/zbkj/crmeb/upload/service/impl/AsyncServiceImpl.java:
+    newFile: !uuid 'd055af669390038d3e48710582d50376ea3786e5'
+    oldFile: !uuid 'e4d09875364269617bb374efdf6503394c2000b0'
+gitCommitId: !uuid 'd7c67dee8b264c7faa5484f6a591b9fd88f43d05'
 renames: {
   }
-revisionId: 44
+revisionId: 45
