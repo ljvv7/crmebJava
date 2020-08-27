@@ -3,9 +3,57 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid '168733f5978bab10b007c95181e23072e8c6c7ed'
-    oldFile: !uuid 'cd6486ecdd7a6f9ce66f17f520ef68dd2dab90a5'
-gitCommitId: !uuid '995878ddcfceead4a482ea528816615760714271'
+    newFile: !uuid '7e7f2573de8ffc60a38562f1759b9a8ac29775d6'
+    oldFile: !uuid '168733f5978bab10b007c95181e23072e8c6c7ed'
+  /接口文档:
+    newFile: !uuid '5c8152a285e13038ed59e4d3f6f9d408b1b49500'
+    oldFile: null
+  /接口文档/admin:
+    newFile: !uuid '1351e341f88a2504a46ed107feed086ad1386b05'
+    oldFile: null
+  /接口文档/admin/admin_api.html:
+    newFile: !uuid '012463b280b99056145fe6b90ec565ee609e0403'
+    oldFile: null
+  /接口文档/admin/admin_api.json:
+    newFile: !uuid '4b2455cb5d4a1ecc81729d4412074f1b7dffe6ff'
+    oldFile: null
+  /接口文档/admin/admin_api.md:
+    newFile: !uuid '7f90b298ad4193ebd66fda7294f5804514bf46c5'
+    oldFile: null
+  /接口文档/admin/admin_swaggerApi.json:
+    newFile: !uuid '7212e69964b68299da9a0c66757f1fb97e8eceaa'
+    oldFile: null
+  /接口文档/app:
+    newFile: !uuid '35ef3079ee5fb8713fe879411541aaceb847b587'
+    oldFile: null
+  /接口文档/app/app_api.html:
+    newFile: !uuid 'd1574bd9b96ea841979411648936b5dd07c5994e'
+    oldFile: null
+  /接口文档/app/app_api.json:
+    newFile: !uuid '9eeab0dd3f9801c7581775c9bddd63de2e51adbe'
+    oldFile: null
+  /接口文档/app/app_api.md:
+    newFile: !uuid '4531ac0fd4e5d6e0e361acb9f3c1a89d8c869fae'
+    oldFile: null
+  /接口文档/app/app_swaggerApi.json:
+    newFile: !uuid 'eadc46bbe7bfcdf558817266a9a08d4d56380a08'
+    oldFile: null
+  /接口文档/公共接口:
+    newFile: !uuid '8fecd1ff9710de9d587a39de7cf210cc6a892413'
+    oldFile: null
+  /接口文档/公共接口/public_api.html:
+    newFile: !uuid 'ad9c6f4a916cdfb38a30cf24b173bb68116629dd'
+    oldFile: null
+  /接口文档/公共接口/public_api.json:
+    newFile: !uuid '3eadaf1e816b8e1008fb50fc99fd010f48b118e1'
+    oldFile: null
+  /接口文档/公共接口/public_api.md:
+    newFile: !uuid 'ba7bee77a74027d832ab841b611de0be4634d379'
+    oldFile: null
+  /接口文档/公共接口/public_swaggerApi.json:
+    newFile: !uuid 'c73df23a02a616114b7b2a936eeae745cd345360'
+    oldFile: null
+gitCommitId: !uuid 'b9ffb534e937ef4b1e74a837d0736a89772deae7'
 renames: {
   }
-revisionId: 49
+revisionId: 50
