@@ -2,10 +2,134 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid 'a6741a00a324a8b97ca62f2e4138c279d44c124b'
-    oldFile: !uuid '07103da4f47bda1103d4d710c6ba4f12c7406ffb'
-gitCommitId: !uuid '7441b006e187dd3cf63c6f0bdadbfe89a8386350'
-renames: {
-  }
-revisionId: 52
+  /crmeb:
+    newFile: !uuid 'ae0e7e1b248d298ee0c446aee3924b32a12bdd34'
+    oldFile: !uuid 'a49630a4a18b2bdaea48ed81c7bfdb0f627e25e1'
+  /crmeb/src:
+    newFile: !uuid 'b549494f688126009d35f92d5a57492256729c41'
+    oldFile: !uuid '057a1271337d764b7eeca01dcfc6dfe3a7110d39'
+  /crmeb/src/main:
+    newFile: !uuid '5f8a3b50119b905ae641e7b87a6c105fd4d8e020'
+    oldFile: !uuid 'ccdeacfa02dfb036bdcca2227de0652fa5d64bbc'
+  /crmeb/src/main/java:
+    newFile: !uuid '1a8b399f6accf23ede3ccf07193ac9105ca645a4'
+    oldFile: !uuid '1a2d4e0ef5ce78d44486b95cc187daa786295c95'
+  /crmeb/src/main/java/com:
+    newFile: !uuid '8a573a5a25c04daf3cea56a40adc52d46660ee6b'
+    oldFile: !uuid 'b9f349fa2a11e2753301ae13fd5e72285ae93132'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '88c3b7cc6e8c11b7404c81aff70f83d09bd318cf'
+    oldFile: !uuid 'ab3524ce6f3deb622566970e33ce9dfbeeffc77a'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid 'f8827e619a451f63762847a3afd1c405d48ce01d'
+    oldFile: !uuid '2b00c48b316b86bf59af96d5a46eaec29a54f139'
+  /crmeb/src/main/java/com/zbkj/crmeb/front:
+    newFile: !uuid 'd002ff44a8d0c153b313923dd81a5e0626351934'
+    oldFile: !uuid '738894c8e939cbfcd82d2f357e43bcee44c3a6a1'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request:
+    newFile: !uuid 'b2071cc9b32dfb499a02198b391f4a2c5bd86be6'
+    oldFile: !uuid '2e1e73ebabe211de79319197b30dd2fb01425b89'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request/LoginRequest.java:
+    newFile: !uuid '7250649a4f4233efccdf61a64e8c81d3b97bf805'
+    oldFile: !uuid '1097580f50ed4a2ace8864f44289882bd6fa418e'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service:
+    newFile: !uuid 'b8990e087ae919ffc34e2019f4b18b1eef6282d4'
+    oldFile: !uuid '08a124890d151e41aad7d38ef1bb4b3509447994'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl:
+    newFile: !uuid '67260d72c23b737eea14e3f71d3bbab2fa04507f'
+    oldFile: !uuid '553be4afd181fad9018fa11bceea203605844408'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl/OrderServiceImpl.java:
+    newFile: !uuid '35aa175a0fa0b16f8d7470880c8cb72c5ed72ec2'
+    oldFile: !uuid '40071aaa26b59a0d7c849d9a8c234a88d609f8dc'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms:
+    newFile: !uuid '347e97de747a0a03cae9a68f40e65729099e6333'
+    oldFile: !uuid '7a1bcc076a7367224736b312ebe672e81ac414e9'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms/service:
+    newFile: !uuid 'b37bec7a6c039c87f5e93290025816e741d8c238'
+    oldFile: !uuid 'fc9bf674de8217611dcdd56fe99890313589e0cf'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms/service/impl:
+    newFile: !uuid '531a8748741d6e3069d403d391518adbadbb11a1'
+    oldFile: !uuid '69713335c484009179e3dc87ff38d6e8583f5dfa'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms/service/impl/SmsServiceImpl.java:
+    newFile: !uuid '958e16b1e4e1aa192d19d0efd63321461f2756d8'
+    oldFile: !uuid '32b485574303ac9ac0336497b9651924a234f020'
+  /crmeb/src/main/java/com/zbkj/crmeb/system:
+    newFile: !uuid '3619e883b9dbf75e6d1c24fecb8874f838509ab3'
+    oldFile: !uuid '176964bce50fb2cb9d4dfa1e2dd0af26df56e861'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/request:
+    newFile: !uuid 'b2e67016c240888848c67f09c96412c9e9b43194'
+    oldFile: !uuid 'b55352d4a506a057129d049b07c319475073a47b'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/request/SystemAdminLoginRequest.java:
+    newFile: !uuid 'd0eb35e2cbc91495a41bf1205fac9ce7e8c5bef7'
+    oldFile: !uuid '103dce7700f3ad6f18db40d45bc8b681cf41dae4'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service:
+    newFile: !uuid 'c4ce6de129b6c5168be80224fd3696b9eb08346b'
+    oldFile: !uuid 'd94b95d2faceba02cb3a8a87f7211e5a4aec668b'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl:
+    newFile: !uuid 'cfebeecf90344134b0204ade4fb3f3d2335335c3'
+    oldFile: !uuid '3d03c7c54fc9a3f3613bc8ccaa4390e644241572'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemConfigServiceImpl.java:
+    newFile: !uuid '25e189b6b4148020567990035fe34a96bf4fe0ac'
+    oldFile: !uuid '6f81f573e042996e74350d0e0f10116906917177'
+  /crmeb/src/main/java/com/zbkj/crmeb/task:
+    newFile: !uuid 'bfafb10d5c84fb6e667bbe8d39ccca8d0cc68f6d'
+    oldFile: !uuid '707aa7090171cbe17c4eccb6cf8a9456432d0566'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncCloud.java:
+    newFile: null
+    oldFile: !uuid '978ba43e0c81d5b7f9bb79542b65caa8e3f6db11'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncSmsSend.java:
+    newFile: null
+    oldFile: !uuid '62e9cf60ee3deb60b0733a2b32456166e1e418ca'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncSmsSendResult.java:
+    newFile: null
+    oldFile: !uuid '523a9b65d5916669ecc5f6b7968c93b08815ee8d'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncWeChatProgramTempMessage.java:
+    newFile: null
+    oldFile: !uuid '132e59b7501c0d9e5e02f05557b2b658611acde6'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncWeChatPublicTempMessage.java:
+    newFile: null
+    oldFile: !uuid 'f92db8e7b7cd808c98b78140ced61d8285ac00d0'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/cloud:
+    newFile: !uuid 'd56d33c585631818a46184b3038d5ab2e7580f83'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/cloud/AsyncCloud.java:
+    newFile: !uuid 'dcefd7ede73922c885f2597f48a093dbbfa9083a'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/sms:
+    newFile: !uuid '298d6f991c14dffe5a757c7ddff9576a270ed710'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/sms/AsyncSmsSend.java:
+    newFile: !uuid '3e6ec93234df995de7bb8222a0a7c676610c723b'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/sms/AsyncSmsSendResult.java:
+    newFile: !uuid '3c20540dec0317c56bbfa81979be7ad85b08582a'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/wechat:
+    newFile: !uuid 'ba282bd0921fa064501594979ebe9dfbb03b0e2b'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/wechat/AsyncWeChatProgramTempMessage.java:
+    newFile: !uuid 'd60fd7c56d982c18c9c0f6063025cbefda3a6d4a'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/wechat/AsyncWeChatPublicTempMessage.java:
+    newFile: !uuid 'b0a26ca77f118460be9b9a932afd6b193838bafa'
+    oldFile: null
+  /crmeb/src/main/resources:
+    newFile: !uuid '88dff41ac5290ad75916ff3c83883cbb4437211e'
+    oldFile: !uuid '0cf0404d293ea3b223a5e4e9ae768ff8cf1e8a6a'
+  /crmeb/src/main/resources/application-prod.yml:
+    newFile: !uuid '0dbb53b981972ca74de7c3a04ace9329ebaa34a9'
+    oldFile: !uuid '1e06d659a65c57563f63f3eefa263815632f5bc3'
+  /crmeb/src/main/resources/application.yml:
+    newFile: !uuid '1592dc082659e95aea1156381a8cd402a286af44'
+    oldFile: !uuid '71aec0692b0f4bfd38c2b50c90f4825163715907'
+  /crmeb_java_v1.0.sql:
+    newFile: !uuid 'c49d3195c3fb5c44b4f688a0a0783774c06f4ee0'
+    oldFile: !uuid 'fc09fe74c6a92b7ac49a76a4b3cc5b30dfe2ff20'
+gitCommitId: !uuid 'db358c369611def9e6097546f9955fd4676b797f'
+renames:
+  /crmeb/src/main/java/com/zbkj/crmeb/task/cloud/AsyncCloud.java: /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncCloud.java
+  /crmeb/src/main/java/com/zbkj/crmeb/task/sms/AsyncSmsSend.java: /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncSmsSend.java
+  /crmeb/src/main/java/com/zbkj/crmeb/task/sms/AsyncSmsSendResult.java: /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncSmsSendResult.java
+  /crmeb/src/main/java/com/zbkj/crmeb/task/wechat/AsyncWeChatProgramTempMessage.java: /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncWeChatProgramTempMessage.java
+  /crmeb/src/main/java/com/zbkj/crmeb/task/wechat/AsyncWeChatPublicTempMessage.java: /crmeb/src/main/java/com/zbkj/crmeb/task/AsyncWeChatPublicTempMessage.java
+revisionId: 53
