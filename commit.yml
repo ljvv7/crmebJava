@@ -2,13 +2,10 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid '8d742dbbd1028df41e975fac9bdbf2b5d7665bdf'
-    oldFile: !uuid '638b07d06bed56d4903465b19c34fd3a45613e8f'
-  /联系我们.md:
-    newFile: !uuid '60cc0cbaf896eb21833ce6c0f16df538e9cbf568'
-    oldFile: !uuid 'a8cddc7203e83e59ace2bb72a27576ee8b03682d'
-gitCommitId: !uuid 'bb2a48488746ad9c7e02940849e94361bff7c8c7'
+  /crmeb_java_v1.0.sql:
+    newFile: !uuid '406e3324c0b6bc0572da4858503fb360025b44bb'
+    oldFile: !uuid '38ec8fce7405e4081a232206872f1c288387cc62'
+gitCommitId: !uuid 'f235612510f85b84bdad8c28128e9f2617ba4859'
 renames: {
   }
-revisionId: 59
+revisionId: 60
