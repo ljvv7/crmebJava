@@ -2,43 +2,49 @@
 branches: {
   }
 fileChange:
+  /README.md:
+    newFile: !uuid '44584f7c2b700b47260d1d339ffa0e3028430c79'
+    oldFile: !uuid '8d742dbbd1028df41e975fac9bdbf2b5d7665bdf'
   /crmeb:
-    newFile: !uuid '498769b46f3ecbbb53149c45d9d076fb2625fd6a'
-    oldFile: !uuid '54e3cb4525e37d85b5f82d9605b8c5e7d54cfe5f'
+    newFile: !uuid '07beb4b4e29018ac052e2a8bcb2b11ce307196dc'
+    oldFile: !uuid '498769b46f3ecbbb53149c45d9d076fb2625fd6a'
   /crmeb/src:
-    newFile: !uuid '9dc8648dc34bee6a46540bafa0af49551b157b75'
-    oldFile: !uuid 'd3f4b8eafa8257b89ff6b7cc5f0cd1209f7890a5'
+    newFile: !uuid '15054bad3ecb3c9d5dce065dcf42ed750a0aa13b'
+    oldFile: !uuid '9dc8648dc34bee6a46540bafa0af49551b157b75'
   /crmeb/src/main:
-    newFile: !uuid 'a78e796c5bb17edd4e5124d51a613d5cf34d2e6a'
-    oldFile: !uuid '79d5e4f68f88902cf3f2fc09ee5607bc5c601f11'
+    newFile: !uuid '48c0e69d73a5dfc7cefee3ea0ba64661b8f14015'
+    oldFile: !uuid 'a78e796c5bb17edd4e5124d51a613d5cf34d2e6a'
   /crmeb/src/main/java:
-    newFile: !uuid '1130bedbfe904c38a7eb606a482b0f62df23ecf5'
-    oldFile: !uuid '6c897d4eb2a77eb3d425c54fa5a4c2a2c3f9d693'
+    newFile: !uuid '1a86318bb69e047e1dbb501c047310f6a0fba189'
+    oldFile: !uuid '1130bedbfe904c38a7eb606a482b0f62df23ecf5'
   /crmeb/src/main/java/com:
-    newFile: !uuid 'a38d51b3a94d57bac241e7136d80346a9c585b58'
-    oldFile: !uuid '8ec670056ded8c297ccaaf8c60c00ae1bf0adf82'
+    newFile: !uuid '0bca67c275c034e80f93edacd3dfd3d1b7928b3b'
+    oldFile: !uuid 'a38d51b3a94d57bac241e7136d80346a9c585b58'
   /crmeb/src/main/java/com/zbkj:
-    newFile: !uuid 'bddc3025087a4290ae7d527f955aca5810a25c13'
-    oldFile: !uuid '815c82dbf5b937ed3cd315f70ac2eb5d0c474a2b'
+    newFile: !uuid '74ae34c25ead3634f9a26ce093e5d02771894def'
+    oldFile: !uuid 'bddc3025087a4290ae7d527f955aca5810a25c13'
   /crmeb/src/main/java/com/zbkj/crmeb:
-    newFile: !uuid '110c7653937bedf85b1295736f4a8fb4412dc2b7'
-    oldFile: !uuid '6a2e31addaf0e16d4bc6c484d7f712cadac802ad'
+    newFile: !uuid '37964045cc5c23fa1f244d079f1fc861139aa6f0'
+    oldFile: !uuid '110c7653937bedf85b1295736f4a8fb4412dc2b7'
   /crmeb/src/main/java/com/zbkj/crmeb/system:
-    newFile: !uuid '5cc7cb01d3d3fc310aa2d4a26de82dbb17251cb0'
-    oldFile: !uuid '996a9042fdb8a11c46dfbcfd3f35e66c7b0c2713'
+    newFile: !uuid '6076f248038e803af8b51692544b75c92e76e1a6'
+    oldFile: !uuid '5cc7cb01d3d3fc310aa2d4a26de82dbb17251cb0'
   /crmeb/src/main/java/com/zbkj/crmeb/system/service:
-    newFile: !uuid '649ba4e1dc76ad5c063a8bca45aabdf6d8100486'
-    oldFile: !uuid 'dc23676bd138c29ccef7f772ba0e68db20c653ec'
+    newFile: !uuid 'acae1a09e3e5e6a80beb392a20dd329d82202488'
+    oldFile: !uuid '649ba4e1dc76ad5c063a8bca45aabdf6d8100486'
   /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl:
-    newFile: !uuid '2dd15767b996e043fb3ef79d09483a84fe434d16'
-    oldFile: !uuid '014dc9b5f6c637a939e92378862edd18b2d25107'
-  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemCityAsyncServiceImpl.java:
-    newFile: !uuid 'd46efff663eaca9bc147b84a14be162bf0a45f64'
-    oldFile: !uuid '80f6cf0c4aed4cf7c571a7909ff160086f825001'
-  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemCityServiceImpl.java:
-    newFile: !uuid 'b7710e1dfa1ef178fc1753ccd04a148561f3d496'
-    oldFile: !uuid '701395a83e49333ff5dec0247814841fd34d8a54'
-gitCommitId: !uuid '388e731e4ce4c19e308c7021073059e622cdbd9e'
+    newFile: !uuid '682b809f3532d7cb41d52f286e380cd82003ac81'
+    oldFile: !uuid '2dd15767b996e043fb3ef79d09483a84fe434d16'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemConfigServiceImpl.java:
+    newFile: !uuid 'a14cfa5d816fb332ed723f781ca0621f21945a44'
+    oldFile: !uuid '25e189b6b4148020567990035fe34a96bf4fe0ac'
+  /crmeb/src/main/resources:
+    newFile: !uuid '7b55f252bea14ea8027ff6287f309a11a87b3666'
+    oldFile: !uuid '88dff41ac5290ad75916ff3c83883cbb4437211e'
+  /crmeb/src/main/resources/application-prod.yml:
+    newFile: !uuid '3e3420e0cb75bb7c7018dbf911a5e1f2dd74a78a'
+    oldFile: !uuid '0dbb53b981972ca74de7c3a04ace9329ebaa34a9'
+gitCommitId: !uuid 'a272e7bb042b02c2af0ea0912aec36da1c38ddca'
 renames: {
   }
-revisionId: 61
+revisionId: 62
