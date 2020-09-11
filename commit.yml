@@ -2,13 +2,40 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid '4b51a3f1f1ecb9cb67d49acfb8865a8cae6dfc2e'
-    oldFile: !uuid '44584f7c2b700b47260d1d339ffa0e3028430c79'
-  /联系我们.md:
-    newFile: !uuid '55b0c56a8c8f6c1025abe95eb031aca260be4718'
-    oldFile: !uuid '60cc0cbaf896eb21833ce6c0f16df538e9cbf568'
-gitCommitId: !uuid '0d6b2f6cbc8c8b5c0c5b029d70df3844952614b7'
+  /crmeb:
+    newFile: !uuid '246449ce2a5c122aefa776e0db4b40df6f00ba21'
+    oldFile: !uuid '07beb4b4e29018ac052e2a8bcb2b11ce307196dc'
+  /crmeb/src:
+    newFile: !uuid '22c6c3ebee991d7f54c13888e459eedc2ecbf45a'
+    oldFile: !uuid '15054bad3ecb3c9d5dce065dcf42ed750a0aa13b'
+  /crmeb/src/main:
+    newFile: !uuid 'ee834f0b7fd3f875213e79a4c6d3b433f9aaed83'
+    oldFile: !uuid '48c0e69d73a5dfc7cefee3ea0ba64661b8f14015'
+  /crmeb/src/main/java:
+    newFile: !uuid '9df8f7c6b198180ce60bfee5fc6f2d141282c33c'
+    oldFile: !uuid '1a86318bb69e047e1dbb501c047310f6a0fba189'
+  /crmeb/src/main/java/com:
+    newFile: !uuid '385b86c65f998bdc54ddc6886fb73a781e38ccbe'
+    oldFile: !uuid '0bca67c275c034e80f93edacd3dfd3d1b7928b3b'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '750bc2161ca44900bb8b9a55e5dc938a09ec85cb'
+    oldFile: !uuid '74ae34c25ead3634f9a26ce093e5d02771894def'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid '46879f697bbbbdf4b2f430b4781970956ebc3cc3'
+    oldFile: !uuid '37964045cc5c23fa1f244d079f1fc861139aa6f0'
+  /crmeb/src/main/java/com/zbkj/crmeb/store:
+    newFile: !uuid 'cf811287031f595996ca0d151473b41e56ee3c7d'
+    oldFile: !uuid 'f2f9707b1397efe62dff8fe5db799ec85f29fdfa'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service:
+    newFile: !uuid '8a6a812aee826efcdb4968648dca7340cd462ea3'
+    oldFile: !uuid '4f8be2bb261b31d13a7e97eb74457d5bae58f0b2'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl:
+    newFile: !uuid 'bef933e119767da794e3fb8a9572262f41206908'
+    oldFile: !uuid '34bff1c3686dafca72144fcce9d6a01dad3605da'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreProductServiceImpl.java:
+    newFile: !uuid '55009df0422b299faacba2a6de699637d15049da'
+    oldFile: !uuid '4e06e478fc218e716b84eaf752db2ad48244376a'
+gitCommitId: !uuid '87e3cbf6554cd24b0ebf31b21319ac30a85edbc6'
 renames: {
   }
-revisionId: 63
+revisionId: 64
