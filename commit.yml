@@ -3,12 +3,24 @@ branches: {
   }
 fileChange:
   /crmeb:
-    newFile: !uuid '16442f1347dff92e407ccd0089454c682ad7655e'
-    oldFile: !uuid '456c612e34eef186068716063b0612a1e1c603a7'
-  /crmeb/pom.xml:
-    newFile: !uuid '9e02580a9b489b2f8a61cb74752f4e66037a8ab6'
-    oldFile: !uuid 'f45ccce369c4b513f64bd11f08e309cde2d7c67a'
-gitCommitId: !uuid '45700e5d1acb90a41d84658d1b5115570550b7e1'
+    newFile: !uuid 'eebbe51ae92486e9bf2c6ccfaf41f7461955e9be'
+    oldFile: !uuid '16442f1347dff92e407ccd0089454c682ad7655e'
+  /crmeb/src:
+    newFile: !uuid 'da2c4fd1f20fc5b5839510136a1f824763d65412'
+    oldFile: !uuid 'c0b97077c0b36c0f8887175ccb7ba54a16c58bdf'
+  /crmeb/src/main:
+    newFile: !uuid 'f4f7843970babf3325c9a3dc0bdf3d497abc2329'
+    oldFile: !uuid 'c961b781cbb7ba5491ee1b9e247736b6e4a99a8c'
+  /crmeb/src/main/resources:
+    newFile: !uuid 'e7e07e6468e6bfb5194bad84bd4ddc381d72a435'
+    oldFile: !uuid 'a5dead1d8cc486ff1989298011d628fee4e92fc6'
+  /crmeb/src/main/resources/application-prod.yml:
+    newFile: !uuid '45ac10bfd29fd1848c75419f1afad7035a39492c'
+    oldFile: !uuid '3e3420e0cb75bb7c7018dbf911a5e1f2dd74a78a'
+  /crmeb/src/main/resources/application.yml:
+    newFile: !uuid '1fab4d69c814271d89fc5b7d8025066eb368897e'
+    oldFile: !uuid '1592dc082659e95aea1156381a8cd402a286af44'
+gitCommitId: !uuid '2270378fc1e6e6a47473bcfc1de1d3a01669af49'
 renames: {
   }
-revisionId: 67
+revisionId: 68
