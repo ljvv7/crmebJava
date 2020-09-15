@@ -3,24 +3,117 @@ branches: {
   }
 fileChange:
   /crmeb:
-    newFile: !uuid 'eebbe51ae92486e9bf2c6ccfaf41f7461955e9be'
-    oldFile: !uuid '16442f1347dff92e407ccd0089454c682ad7655e'
+    newFile: !uuid 'ef44c088abb78efdad778c0f21eeaa962276ab5d'
+    oldFile: !uuid 'eebbe51ae92486e9bf2c6ccfaf41f7461955e9be'
   /crmeb/src:
-    newFile: !uuid 'da2c4fd1f20fc5b5839510136a1f824763d65412'
-    oldFile: !uuid 'c0b97077c0b36c0f8887175ccb7ba54a16c58bdf'
+    newFile: !uuid '95446f65503aab566c698740bb00775170a131f5'
+    oldFile: !uuid 'da2c4fd1f20fc5b5839510136a1f824763d65412'
   /crmeb/src/main:
-    newFile: !uuid 'f4f7843970babf3325c9a3dc0bdf3d497abc2329'
-    oldFile: !uuid 'c961b781cbb7ba5491ee1b9e247736b6e4a99a8c'
-  /crmeb/src/main/resources:
-    newFile: !uuid 'e7e07e6468e6bfb5194bad84bd4ddc381d72a435'
-    oldFile: !uuid 'a5dead1d8cc486ff1989298011d628fee4e92fc6'
-  /crmeb/src/main/resources/application-prod.yml:
-    newFile: !uuid '45ac10bfd29fd1848c75419f1afad7035a39492c'
-    oldFile: !uuid '3e3420e0cb75bb7c7018dbf911a5e1f2dd74a78a'
-  /crmeb/src/main/resources/application.yml:
-    newFile: !uuid '1fab4d69c814271d89fc5b7d8025066eb368897e'
-    oldFile: !uuid '1592dc082659e95aea1156381a8cd402a286af44'
-gitCommitId: !uuid '2270378fc1e6e6a47473bcfc1de1d3a01669af49'
+    newFile: !uuid 'c6c5856b059bbfbf620a2ec12ac0bf827bb53168'
+    oldFile: !uuid 'f4f7843970babf3325c9a3dc0bdf3d497abc2329'
+  /crmeb/src/main/java:
+    newFile: !uuid '2faa82bed0febe6f1149e1545a3b1774f5458346'
+    oldFile: !uuid '9ca81ca9d1e662b3e6f8a24fa0b7c61ff1ff2242'
+  /crmeb/src/main/java/com:
+    newFile: !uuid 'dbf4cafe1ad042067476c1771ffdb4c5d2fdb1f7'
+    oldFile: !uuid '0aab8be724d50199b5b97c3971827024178fdce8'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '9f806513fffa69ac8fef3e1dd586829a8d9b6e24'
+    oldFile: !uuid 'd0cd84c065edc7ebb9c4c138b9c3de17359e9fd5'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid 'f20770dedf1553c50ea9cb7e2a6eae08c052917f'
+    oldFile: !uuid '1525f9b2fc39e6264fc79ad927511deade4e5a7e'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms:
+    newFile: !uuid '6683024d8b388efc876dbdfe37f49e03b00810aa'
+    oldFile: !uuid '38e906598b4a4f731dc6dde83b05a3649c0d2909'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms/service:
+    newFile: !uuid '4527c5f83dc9bb5b434f73a7c10ab0f1742e02b8'
+    oldFile: !uuid '9b72e1eed6f4cce9e275a4335fe747c91972b50c'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms/service/impl:
+    newFile: !uuid '414d5c75c400737611c511c7dc61ca2660f1dd8c'
+    oldFile: !uuid 'fb97f922b01623716158ff59969bb9040c6290e6'
+  /crmeb/src/main/java/com/zbkj/crmeb/sms/service/impl/SmsServiceImpl.java:
+    newFile: !uuid '5c2d8c4b523905f52e2b1d3bef38668671a12068'
+    oldFile: !uuid '3f0de236db9e159e53e89904cb49acf8c454f3cb'
+  /crmeb/src/main/java/com/zbkj/crmeb/system:
+    newFile: !uuid 'c552c0418902edf15f7d3b14bc57cef6dbe6aa93'
+    oldFile: !uuid '6548f046f710ef9dc1fed9bf7ecc19ca5c64161a'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service:
+    newFile: !uuid '23aa1e7333116c255540d4fc925e48bc8782d75b'
+    oldFile: !uuid 'b784135838d8735bdd84b77536d326b1636e935f'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl:
+    newFile: !uuid '975503350ea49e414cda79f0c0476715d62b327d'
+    oldFile: !uuid '2bdc60e0b29e1c2a056ceafb05379d1e8cdc1616'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemCityServiceImpl.java:
+    newFile: !uuid 'e5b12adfbb7e5d5507c622612a4b4e779ce034d9'
+    oldFile: !uuid 'b7710e1dfa1ef178fc1753ccd04a148561f3d496'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemConfigServiceImpl.java:
+    newFile: !uuid 'acebe869ce5830a4754c5bc4eeb50134a2a06860'
+    oldFile: !uuid '6935a3a78fa90b405ab072af4cbce0c177de41fa'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat:
+    newFile: !uuid '2d851898eac28a58fc1d3c45cb8d18b3f931fbb3'
+    oldFile: !uuid 'd1f2b26c2df0a27477523ddb78557addec013d36'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/controller:
+    newFile: !uuid 'f59a4c3c03f58db03dd88cea634a9d7d9cf8cbc3'
+    oldFile: !uuid 'd6bbcf92acf8c8a3b59e9c22cf8aaffdedd0f8b3'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/controller/WechatMediaController.java:
+    newFile: null
+    oldFile: !uuid '9ef9b9c37d788441db1ccf77fce2f0548244cd92'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/controller/WechatMessageController.java:
+    newFile: null
+    oldFile: !uuid 'd6c7494d34b9980f9b1d6924c14450c1b0f3abb3'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/dao:
+    newFile: !uuid 'f9b849280394669d06604206744196053048e403'
+    oldFile: !uuid 'af1fd4cf2bc3c71a82d38807a97f9f41fe20c96f'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/dao/WechatMediaDao.java:
+    newFile: null
+    oldFile: !uuid '1ab8d3d2ef5e40a19da5e2b8b7a84a991685933a'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/dao/WechatMessageDao.java:
+    newFile: null
+    oldFile: !uuid '550fac71541fe2147984a3e860b6662d8843e559'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/model:
+    newFile: !uuid 'b09d415c8e8ce13d8e09d6cadf8c7dcd35570973'
+    oldFile: !uuid '5c2344b7af5affb6260140c87e27ea83bc24af79'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/model/WechatMedia.java:
+    newFile: null
+    oldFile: !uuid '4f123381aae5b32b5ee2f9815481041a1cd6934d'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/model/WechatMessage.java:
+    newFile: null
+    oldFile: !uuid '75d21b5dfca63f35475f654921a900222309df50'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/request:
+    newFile: !uuid '2c8f91aa9222deddfab65f4b6ac54e333561b46c'
+    oldFile: !uuid '663da2a266605da99123673b18e219017f60a5b8'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/request/WechatMediaRequest.java:
+    newFile: null
+    oldFile: !uuid 'bdd6f94558ca89c4da111cb2457faf1a06941246'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/request/WechatMediaSearchRequest.java:
+    newFile: null
+    oldFile: !uuid '3a97453d62f49b48f0125c6bc1a70ba890b51291'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/request/WechatMessageRequest.java:
+    newFile: null
+    oldFile: !uuid '527abc1ef75eb048e1483e903db73849f10fc010'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/request/WechatMessageSearchRequest.java:
+    newFile: null
+    oldFile: !uuid 'e134de52264e11ee170db80839cab5ed0a06fcab'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service:
+    newFile: !uuid '36654d1351915195c2e744aea77a5fde5e1c3d8e'
+    oldFile: !uuid '87ae4cf474a2b3e710c9d30d9aa0f66939eb3b9f'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service/WechatMediaService.java:
+    newFile: null
+    oldFile: !uuid '6519a67e4fbff1bfc431fd583e77ea07d368e403'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service/WechatMessageService.java:
+    newFile: null
+    oldFile: !uuid '8ddceda54b7816f3fc5da7a677939576d54c61e9'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service/impl:
+    newFile: !uuid 'd1df842d793dad40de28860f020f0b9dc62534ec'
+    oldFile: !uuid 'ad2b0a0b3cdf3e2594c753f1d77f51fb3e8adb37'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service/impl/WechatMediaServiceImpl.java:
+    newFile: null
+    oldFile: !uuid '1921cfb3eaedcac840efd67145a401984348fefc'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service/impl/WechatMessageServiceImpl.java:
+    newFile: null
+    oldFile: !uuid '83ee0a5c9a328581ebf0113c014e41bad157ef11'
+gitCommitId: !uuid '6c788dd6ea84415920dee4242fe428adea92e0f9'
 renames: {
   }
-revisionId: 68
+revisionId: 69
