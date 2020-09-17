@@ -2,16 +2,73 @@
 branches: {
   }
 fileChange:
+  /admin:
+    newFile: !uuid '86dee5d35f8c7458e895a1333d0839d52199e99e'
+    oldFile: !uuid '86c412ff7b056810cd38055f1c8626f885e94f31'
+  /admin/src:
+    newFile: !uuid 'fcb77961734c66bc484b52aee36f99b83513a4e5'
+    oldFile: !uuid '0245e1a6ba1a69a7783132790028b57a0f85e19a'
+  /admin/src/components:
+    newFile: !uuid '04f986ac0adbe676e020a55da47337f8e5c0857c'
+    oldFile: !uuid '28afe4a0737fceda5fb9fe58c4f3e93544009c53'
+  /admin/src/components/Category:
+    newFile: !uuid 'e911d0de2d8b4f70d0e50d22695d32bff681835e'
+    oldFile: !uuid '716226c7384e9bcf581a7960380fa468a917ec52'
+  /admin/src/components/Category/edit.vue:
+    newFile: !uuid 'f90fae0a142e155b61ce614751a146866b420bf2'
+    oldFile: !uuid '1ccad61655bb34f9ce5137e35180de7a4eae2c33'
+  /admin/src/views:
+    newFile: !uuid 'bfdcec36b9076b329d19192a336a41925fbd26bf'
+    oldFile: !uuid '8a8ac8262c12af50684b04a5bb7ff2df825ba523'
+  /admin/src/views/order:
+    newFile: !uuid 'de0551ba03a4c5bc721be1e82aa1e0c3195f79d0'
+    oldFile: !uuid '7c99f8d2a45167173239ef0c40f56ddede2e9f15'
+  /admin/src/views/order/index.vue:
+    newFile: !uuid '372616a0307e667d2667bf1f49180d6f04daea97'
+    oldFile: !uuid '7ba09a90ed91319c5d82e8af839c80dc718865b5'
+  /admin/src/views/order/orderDetail.vue:
+    newFile: !uuid '83450d341d04027533746ccd7db468879729a038'
+    oldFile: !uuid 'd105703736366d9059c7648bea479538d5fc8c00'
   /crmeb:
-    newFile: !uuid '4299d6309c5ca3b21ed3039ba279bb90227607a8'
-    oldFile: !uuid '2a254ec177716589ef104502cdfe89e71c840d0d'
-  /crmeb/sql:
-    newFile: !uuid '99cabfe6eaa97dfd0fa7f9cdc214f87f9202c595'
-    oldFile: !uuid 'df966c63f053ae3ecf8de281be9a54205e9994f4'
-  /crmeb/sql/crmeb_java_v1.1.sql:
-    newFile: !uuid 'd08fb68858d34ab1937c6fdee9440c86eea9c06c'
-    oldFile: !uuid 'bdc0742d91fd65fdf4385cc633b59b80f69074d1'
-gitCommitId: !uuid 'a39c541012849a90c51596e651ce0bbe60cd5bd3'
+    newFile: !uuid '0963458755966300807547267407b06f0263be4a'
+    oldFile: !uuid '4299d6309c5ca3b21ed3039ba279bb90227607a8'
+  /crmeb/src:
+    newFile: !uuid '30aa20b4251d1fa6686b8e9c77cf602d6ef77587'
+    oldFile: !uuid '1c66d35bc16625a3d5454f7a3b51db27b170471c'
+  /crmeb/src/main:
+    newFile: !uuid '3424481c243ef86146cbf0686135110f431ba768'
+    oldFile: !uuid '677f47d04ceafb5e7517051857b3dcf39ef520a7'
+  /crmeb/src/main/java:
+    newFile: !uuid 'a2601a4c555e8f5c43403e3769b30da6369dc2da'
+    oldFile: !uuid '24a6ffd7a9fe7f8a213da748fbf9a32a3a970670'
+  /crmeb/src/main/java/com:
+    newFile: !uuid 'e4d055a03fc672e7db5c5356d71315e93cf68e43'
+    oldFile: !uuid '1e114c5aa89455a7814a0294c00dc34f1a8ea834'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '97392c311b7acf6519bab92d253822eb128d4444'
+    oldFile: !uuid 'c04a225e67fc31626760abb4095028f23bb59fd3'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid '3d9ab7abb568f8e22229de53ffece1bfdcbb82cf'
+    oldFile: !uuid '9db494eba6b8f2286af3e23f7c686a8c46116743'
+  /crmeb/src/main/java/com/zbkj/crmeb/system:
+    newFile: !uuid '2df40b73b148bed0f74898797a5db3ef6cfb8aa1'
+    oldFile: !uuid '6548f046f710ef9dc1fed9bf7ecc19ca5c64161a'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/model:
+    newFile: !uuid 'b3cb86e2e99260756c763f59e0bc471932d4d27a'
+    oldFile: !uuid 'beb330fc8a827573c4f30958fc5f0c4aa3fc1b6f'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/model/SystemConfig.java:
+    newFile: !uuid '293d5fe4ea516d69228da79feddb8c9c3e81241b'
+    oldFile: !uuid '98a12fb3388cccf5f1dcd713413257d5bb0c95b4'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service:
+    newFile: !uuid '62a76e3d6aa2063fe6fa79f81f1a1a706973d5d4'
+    oldFile: !uuid 'b784135838d8735bdd84b77536d326b1636e935f'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl:
+    newFile: !uuid 'd326089b4279dd30e0d72e515d7382dec65aed8d'
+    oldFile: !uuid '2bdc60e0b29e1c2a056ceafb05379d1e8cdc1616'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemConfigServiceImpl.java:
+    newFile: !uuid 'dc6bc360564458b944f419ad0d809ddd2fac75ba'
+    oldFile: !uuid '6935a3a78fa90b405ab072af4cbce0c177de41fa'
+gitCommitId: !uuid 'b2801f344e64d79a7da505ff8efbaec93804e14e'
 renames: {
   }
-revisionId: 74
+revisionId: 75
