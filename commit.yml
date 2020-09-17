@@ -2,55 +2,43 @@
 branches: {
   }
 fileChange:
-  /crmeb:
-    newFile: !uuid '6e86d0f38f511582ddbd24b1e805d78f0c791fee'
-    oldFile: !uuid '0963458755966300807547267407b06f0263be4a'
-  /crmeb/src:
-    newFile: !uuid '2bf697513aa246bf45394d98549ebacbee333abf'
-    oldFile: !uuid '30aa20b4251d1fa6686b8e9c77cf602d6ef77587'
-  /crmeb/src/main:
-    newFile: !uuid 'd49b147d1090c6ea72c3905f8c015deb5034c9a3'
-    oldFile: !uuid '3424481c243ef86146cbf0686135110f431ba768'
-  /crmeb/src/main/java:
-    newFile: !uuid '5a6bef3b0e3c2ed2dd5f19d1eba3f20823837cf4'
-    oldFile: !uuid 'a2601a4c555e8f5c43403e3769b30da6369dc2da'
-  /crmeb/src/main/java/com:
-    newFile: !uuid 'a404979d8c6049bea2dbeee95d7aee28d59b30be'
-    oldFile: !uuid 'e4d055a03fc672e7db5c5356d71315e93cf68e43'
-  /crmeb/src/main/java/com/zbkj:
-    newFile: !uuid '886ba2687501a752748a7dbc9cdeff3ff65116a7'
-    oldFile: !uuid '97392c311b7acf6519bab92d253822eb128d4444'
-  /crmeb/src/main/java/com/zbkj/crmeb:
-    newFile: !uuid 'b02a3d26156e8dea0650d44def78fa9eec548736'
-    oldFile: !uuid '3d9ab7abb568f8e22229de53ffece1bfdcbb82cf'
-  /crmeb/src/main/java/com/zbkj/crmeb/express:
-    newFile: !uuid 'e9db9cb733475adb9910e3b0cb1a09f7b9c2e242'
-    oldFile: !uuid '1bc12ec69a1c73d5cf9db885f33dd43e4da4d5f3'
-  /crmeb/src/main/java/com/zbkj/crmeb/express/service:
-    newFile: !uuid 'd901c235bafb37ad983fe6971b7ad9734ef9ca13'
-    oldFile: !uuid '1bba60496a65bcc9a9d0020e03fa613d709811a3'
-  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl:
-    newFile: !uuid '5d3a77e9a496ef1326fc917b18daed921270e25f'
-    oldFile: !uuid '21c2c6b6ced71dab6cf1fac628db215129aba1d6'
-  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl/ShippingTemplatesServiceImpl.java:
-    newFile: !uuid 'c9159129384287c9537ce6b2fa0f888b0ec61262'
-    oldFile: !uuid '791ff3b34bd140403770a7208b306c9ff76b9f58'
-  /crmeb/src/main/java/com/zbkj/crmeb/store:
-    newFile: !uuid 'dde437f8706f84cb3f6a500aad7acaa88c1ebeb8'
-    oldFile: !uuid 'f9f4babec4340362d41b5182cee51f1bf3e3138d'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service:
-    newFile: !uuid 'b797b019b9f7849529b00050a18d1cc08b14c642'
-    oldFile: !uuid '842d292293e5f460b0d769385a07b8c7afa2ebb8'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl:
-    newFile: !uuid 'fb4c69f6c9d9db84ab047448477a54d297214e5c'
-    oldFile: !uuid '0ee3168981a3f90fa64690783b307da3c4b55783'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderServiceImpl.java:
-    newFile: !uuid 'cc7e1926c741cff31b4d07efb215a50b7ba6fc73'
-    oldFile: !uuid 'f60b7630e2dd343e9781ceb50ad11cbbfd6217b3'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderVerificationImpl.java:
-    newFile: !uuid 'dff1ca82f8e7c7d69e1791796f4b972dec1f7ec7'
-    oldFile: !uuid 'f59788b13f499612c1b8bc0802382be2dc4d8483'
-gitCommitId: !uuid 'c9af25e8853e17f508d1905f888318b072203dc4'
+  /admin:
+    newFile: !uuid 'a9266d88134e74e58605c4243058d17fe7b9d6cc'
+    oldFile: !uuid '86dee5d35f8c7458e895a1333d0839d52199e99e'
+  /admin/src:
+    newFile: !uuid '18b57bd0c56a8514e6ebb311696771bdf091f254'
+    oldFile: !uuid 'fcb77961734c66bc484b52aee36f99b83513a4e5'
+  /admin/src/components:
+    newFile: !uuid '3c30aafe92a1e3f9a7f29a6f9a5e7e3e9787a432'
+    oldFile: !uuid '04f986ac0adbe676e020a55da47337f8e5c0857c'
+  /admin/src/components/FormGenerator:
+    newFile: !uuid 'cbf85e89b61b1f65aae45d8b49c320bf640c2a81'
+    oldFile: !uuid 'dcb4ad973ce2f7675ad4377abf725aa209989f88'
+  /admin/src/components/FormGenerator/components:
+    newFile: !uuid '0fbc9c07c4988a5de3f2fff8196c38b5dc51eea8'
+    oldFile: !uuid 'c68113d3ae4e523e09aa9290f02832396203517c'
+  /admin/src/components/FormGenerator/components/parser:
+    newFile: !uuid 'add44a31880176825121d9e0d590e7e9b389b866'
+    oldFile: !uuid 'e2b9534531f64d44ea348e033eae8f27e3366876'
+  /admin/src/components/FormGenerator/components/parser/Parser.vue:
+    newFile: !uuid '84d81bcaeb8f1cdb406bc0213eac205e8cc55b69'
+    oldFile: !uuid 'ed626285f6be388ad6d2ef53558804999815f81b'
+  /admin/src/views:
+    newFile: !uuid '5c237d552caaced48892cd96a04f99cb68ba9a4e'
+    oldFile: !uuid 'bfdcec36b9076b329d19192a336a41925fbd26bf'
+  /admin/src/views/appSetting:
+    newFile: !uuid 'd5b466e27a9b757c23eaaead75fa6318a0db1a8c'
+    oldFile: !uuid '80d319027e85053ed1aa8e431d39c66b9247ce47'
+  /admin/src/views/appSetting/wxAccount:
+    newFile: !uuid 'ee2cae783e88687ac2889e74d986a7149955f3c2'
+    oldFile: !uuid 'ef5cdde6aa07396842d3e6060340cea49ebcab30'
+  /admin/src/views/appSetting/wxAccount/wxTemplate:
+    newFile: !uuid '590ab9037970c956613163372718ff9edcf7d793'
+    oldFile: !uuid '6e52a4ab6662cad0a922d48f63dd31dc7b10597c'
+  /admin/src/views/appSetting/wxAccount/wxTemplate/index.vue:
+    newFile: !uuid 'c074c38b43c6a0c9dd183693e1613e486fc555d2'
+    oldFile: !uuid '932f94c4af1813599cdff1f4fe4aa0896cccb97d'
+gitCommitId: !uuid '2974dce33b4d519c3d06870dfe9b19c40d3f97c3'
 renames: {
   }
-revisionId: 76
+revisionId: 77
