@@ -2,10 +2,40 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid '28884c53f5cb74b5c2114522356f492e406d2557'
-    oldFile: !uuid '621221bf496ae80237ef04173ab97392e402bb72'
-gitCommitId: !uuid 'd59117a4ac5b555306c679a9d9b8801e732efba2'
+  /crmeb:
+    newFile: !uuid '17a7b9c4bb503ff70a0e5baa93da16175213a951'
+    oldFile: !uuid '7d6a9d7a89065c4f268ec7b76be2b10269e36ad3'
+  /crmeb/src:
+    newFile: !uuid '0ed791d54ab184db1c1ced79ee90f28d33dc51de'
+    oldFile: !uuid '9fbde96184d13584c0a14a4974b8f2d27a5400df'
+  /crmeb/src/main:
+    newFile: !uuid '64c17fa447df7e155b1c448e731fac93d6af84bc'
+    oldFile: !uuid 'e071281d85a5d717424951c07b059cf7addffd38'
+  /crmeb/src/main/java:
+    newFile: !uuid 'a9e50b4b509d4eee32e85537e582eda2f5b9ceb9'
+    oldFile: !uuid '0a1290daf2f229d7dea4dfb16b32fe2d76dc5b00'
+  /crmeb/src/main/java/com:
+    newFile: !uuid '656775b4785c3a46b52678026edc62f40f70741b'
+    oldFile: !uuid 'ddae56a7610e0ffd4cf8859a5563a39ca98e68a5'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '880ff7d2b78147f7d2af0a35a5961b9239df958c'
+    oldFile: !uuid '31d9ed734b5048dd4b2d5a42e95fd6faa9f16186'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid '19195b1bd4178e7879c1709b75178fbb65524826'
+    oldFile: !uuid '9be8843804aaf71bb4a21d051e30424951cb37a2'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill:
+    newFile: !uuid '4803493464b5b4afc75072c8a186d16dbb78ba11'
+    oldFile: !uuid '6f61e992b3725227baa06fee34d2780c2a6fc437'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service:
+    newFile: !uuid '073d70f0c913183148396e256375489ea431cfe5'
+    oldFile: !uuid 'f87eddee388e61c07d8f4fc7acbb2ead857c5d98'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/impl:
+    newFile: !uuid 'f50cbabed6925db188287414719d17747930ec2c'
+    oldFile: !uuid '8425955f21975c901ed582ff61c8a8980f84d5b5'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/impl/StoreSeckillMangerServiceImpl.java:
+    newFile: !uuid 'c71bd0c5c6d89121f8a3dd128765cde1982dc8ea'
+    oldFile: !uuid '7ec44672f03012c78581314fc2c74586dddee557'
+gitCommitId: !uuid 'e6748bb026efc406f356f607569284d317cd9ff4'
 renames: {
   }
-revisionId: 98
+revisionId: 99
