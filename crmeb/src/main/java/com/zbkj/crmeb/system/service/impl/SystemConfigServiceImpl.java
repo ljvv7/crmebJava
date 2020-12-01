@@ -152,13 +152,12 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
         saveBatch(systemConfigList);
 
-        //删除之前隐藏的数据
+        //删除之前隐藏的数据（已经同步删除redis）
         deleteStatusByFormId(systemFormCheckRequest.getId());
 
-        List<SystemConfig> forAsyncPram = systemConfigList.stream().map(e -> {
-            e.setStatus(true);
-            return e;
-        }).collect(Collectors.toList());
+        //将新的数据写入到redis
+        List<SystemConfig> forAsyncPram = systemConfigList.stream()
+            .peek(e -> e.setStatus(false)).collect(Collectors.toList());
         async(forAsyncPram);
 
         return true;
