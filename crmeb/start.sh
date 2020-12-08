@@ -4,7 +4,7 @@
 startTime=`date +'%Y-%m-%d %H:%M:%S'`
 
 #接口项目站点路径（目录按照各自配置）
-APP_PATH=/www/wwwroot/api.java.crmeb.net #线上地址
+APP_PATH=/wyw
 #APP_PATH=/Library/WebServer/Documents/zhongbang/java/crmeb #本地地址
 
 #jar包文件名称
@@ -99,27 +99,27 @@ echo "当前时间："$endTime
 #    }
 #  }'
 
-host="www.xx.net"; #此处填写自己的前端访问域名
-domain="https://www.xx.com"; #此处填写自己的前端访问域名 带http/https
-version="crmeb_java_1.0"; #版本号, 此处不需要修改
-ip="111.111.111.111"; #您当前服务器的IP
+# host="www.xx.net"; #此处填写自己的前端访问域名
+# domain="https://www.xx.com"; #此处填写自己的前端访问域名 带http/https
+# version="crmeb_java_1.0"; #版本号, 此处不需要修改
+# ip="111.111.111.111"; #您当前服务器的IP
 
-if test -e $INSTALL_FILE;then
-  echo '已经统计过首次安装'
-else
-  #开源不易，首次安装统计
-  curl 'http://shop.crmeb.net/index.php/admin/server.upgrade_api/updatewebinfo' \
-   -H 'Content-Type: application/json' \
-   -d '
-   {
-    "host": "'$host'",
-    "https": "'$domain'",
-    "version": "'$version'",
-    "ip": "'$ip'"
-  }'
-  touch $INSTALL_FILE
-  echo "install" > $INSTALL_FILE
-fi
+# if test -e $INSTALL_FILE;then
+#   echo '已经统计过首次安装'
+# else
+#   #开源不易，首次安装统计
+#   curl 'http://shop.crmeb.net/index.php/admin/server.upgrade_api/updatewebinfo' \
+#    -H 'Content-Type: application/json' \
+#    -d '
+#    {
+#     "host": "'$host'",
+#     "https": "'$domain'",
+#     "version": "'$version'",
+#     "ip": "'$ip'"
+#   }'
+#   touch $INSTALL_FILE
+#   echo "install" > $INSTALL_FILE
+# fi
 
 ##实时查看启动日志
 #  #tail -f $LOG_FILE

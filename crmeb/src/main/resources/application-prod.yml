@@ -16,13 +16,13 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/crmeb_java_test?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
-    username: youMysqlAccount
-    password: youMysqlPwd
+    url: jdbc:mysql://172.17.16.14:3306/crmeb_prod?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
+    username: root
+    password: 7*R#oPy9aVevUk
   redis:
-    host:  redisPath #地址
+    host:  127.0.0.1 #地址
     port: 6379 #端口
-    password: #密码
+    password: 7*R#oPy9aVevUk #密码
     timeout: 30000 # 连接超时时间（毫秒）
     database: 0 #默认数据库
     jedis:
@@ -52,7 +52,7 @@ mybatis-plus:
 #swagger 配置
 swagger:
   basic:
-    enable: true #是否开启界面
+    enable: false #是否开启界面
     check: true #是否打开验证
-    username: crmeb #访问swagger的账号
-    password: ZeypRDYBfM #访问swagger的密码
+    username: swtest #访问swagger的账号
+    password: 7*R#oPy9aVevUk #访问swagger的密码
