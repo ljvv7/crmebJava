@@ -2,19 +2,28 @@
 branches: {
   }
 fileChange:
-  /LICENSE:
-    newFile: !uuid '152f2f3695e17132a288be363636078352426c03'
-    oldFile: !uuid '818433ecc0e094a4db1023c68b33f24344643ad8'
-  /README.md:
-    newFile: !uuid 'f4b2eaca08a40aef73a9618d2426c2ac6b4a094a'
-    oldFile: !uuid 'ff3819e66da908ab4bddc380206055dbe9dc8f62'
+  /app:
+    newFile: !uuid 'b313bace25c037a959a5c1773e1068394bd304cf'
+    oldFile: !uuid 'be2c53f5ea35813da9130faec8ca86706a3852cd'
+  /app/pages:
+    newFile: !uuid 'a548b9a8a876a632944d6cd8eeebdd77118554ff'
+    oldFile: !uuid 'b7ce2eb5146edd60422b169c9ecc84740c3dcc8c'
+  /app/pages/user:
+    newFile: !uuid 'f9fd0127d699375a6596eaff1b69120dd5fa86bd'
+    oldFile: !uuid '6845ce288176e66aed3d8d9cf1ebef81fd08c51a'
+  /app/pages/user/index.vue:
+    newFile: !uuid '13a82fab557aad0ea3d8f44c885f5d14d37140f5'
+    oldFile: !uuid '9851a08f141e0cc7cd705dd9362e4760b8874bac'
   /crmeb:
-    newFile: !uuid '5b1af05c17fae347b236915c0d30122d90b23292'
-    oldFile: !uuid '282f95a71c2d69db97818dee2fc7d1a9687f6399'
-  /crmeb/README.md:
-    newFile: !uuid 'acab8c227c555bcd7620238bf4e7ddb7ffae2947'
-    oldFile: !uuid '387da3e8501c71fb67e358b7cabe884ed5855882'
-gitCommitId: !uuid '52c943e0e5786ae09c57ef18170b0599d2b4685a'
+    newFile: !uuid 'ae63a35883f528735f37128820d263a2657d8690'
+    oldFile: !uuid '5b1af05c17fae347b236915c0d30122d90b23292'
+  /crmeb/sql:
+    newFile: !uuid '3154c88b99b6a0c409c74517f020e383c5aa9193'
+    oldFile: !uuid 'ce190b26021b0b037fd9311fc41d0df6d4d4f260'
+  /crmeb/sql/crmeb_java.sql:
+    newFile: !uuid '256f8e257cbe2a5a9bbb423669ae74b298d42078'
+    oldFile: !uuid 'f49ce077333f68b8a87688bb87560957f92099ad'
+gitCommitId: !uuid '1f7bc66266cac3e5e6e302fee184e3a0af1a0a5e'
 renames: {
   }
-revisionId: 111
+revisionId: 112
