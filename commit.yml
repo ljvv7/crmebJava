@@ -2,10 +2,40 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid 'b890e1b4d767aee839782a861dcf893664644659'
-    oldFile: !uuid 'f2db7d26f4d2cdc25509b1a4ab0ce6bfb265ece7'
-gitCommitId: !uuid '4ef5b480ec9dd5a20975c8d634e11f897f56b43d'
+  /admin:
+    newFile: !uuid 'd44cef09495798e4a63f8df23b0d3eefb28c492b'
+    oldFile: !uuid '7cec1650336f656a9b4f46f9049e3f1f06c57f3b'
+  /admin/package-lock.json:
+    newFile: !uuid '62f27b3b692720e40e77f338fc85c6d25efdc1c0'
+    oldFile: !uuid '0e6767bb7113391413efa01403cdda64f3d5bb85'
+  /admin/src:
+    newFile: !uuid '87f920e936be6f625bfc0336d1ba70dd61c4277f'
+    oldFile: !uuid '9a641995f9aa411dfbb74954164cf910be95d514'
+  /admin/src/views:
+    newFile: !uuid '35741d265b50926ea727a50c6b7829f26be0b26d'
+    oldFile: !uuid '8521d220b07132771d95351da1ff9ed0b93d298f'
+  /admin/src/views/systemSetting:
+    newFile: !uuid 'f328da0c32e4c67d8359a9a7baa7fa3d3cd3031f'
+    oldFile: !uuid 'dce80eea19aceefb68ca41680f1e6e9d3517459f'
+  /admin/src/views/systemSetting/setting:
+    newFile: !uuid 'ae8f39af317c1d6ef46f9f9862a3ca86ca381ff8'
+    oldFile: !uuid '0209783241deb5f5be2709244237b17c60a2b908'
+  /admin/src/views/systemSetting/setting/index.vue:
+    newFile: !uuid 'a260665fb04aa5278bb7a2f994e80f44c35f9d1b'
+    oldFile: !uuid 'f99009802f8acfc22615edc7073abbae7204b132'
+  /crmeb:
+    newFile: !uuid 'b076bde9186fb5890feb12da874847b2f80d3c08'
+    oldFile: !uuid '53f8956410ccfa4954cbe572b165a015726a986e'
+  /crmeb/sql:
+    newFile: !uuid '1f58a76f78e4aeae6a83695759e48dd77fa84842'
+    oldFile: !uuid 'fc4148c2356d8895024a55bccda79d6a23348eb6'
+  /crmeb/sql/crmeb_java.sql:
+    newFile: !uuid 'fce8ebaab7561e5bfb7daf003bf4966b600bf25f'
+    oldFile: !uuid '3229a1933245ecb201142f824b646386f357fb79'
+  /crmeb/start.sh:
+    newFile: !uuid '6236ed39103b87c70278c72dc2ed4a6976987ecf'
+    oldFile: !uuid 'd1a15c31916159f4588e819460a47a5c3512d8b6'
+gitCommitId: !uuid 'd9bd1701693125611c0fcc1ccb3bebbc90692321'
 renames: {
   }
-revisionId: 119
+revisionId: 120
