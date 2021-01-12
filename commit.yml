@@ -2,73 +2,10 @@
 branches: {
   }
 fileChange:
-  /admin:
-    newFile: !uuid 'a88a5c5f335fed426e79bb6e90f71c5006cf974e'
-    oldFile: !uuid 'd44cef09495798e4a63f8df23b0d3eefb28c492b'
-  /admin/src:
-    newFile: !uuid '65f6c97513448820173b5a277c4d2ef80f85fce3'
-    oldFile: !uuid '87f920e936be6f625bfc0336d1ba70dd61c4277f'
-  /admin/src/components:
-    newFile: !uuid 'bbb01ad8e4232c79eff1305b960e9573107c4041'
-    oldFile: !uuid '56dbe7c0c7370879c6ced0ba5d7018b5b97394d2'
-  /admin/src/components/couponList:
-    newFile: !uuid '8b9ca41621877403ec889f34c87c20b10e135c89'
-    oldFile: !uuid '8596161c2f687fc864f138c94bf6bad8fb5384b0'
-  /admin/src/components/couponList/index.vue:
-    newFile: !uuid 'f57426e4393e85a251cd0b754a189caff3b84f42'
-    oldFile: !uuid '5efaafdda5e9b1e5596bf65a5b3c3ca54ed33dfb'
-  /admin/src/views:
-    newFile: !uuid '1954052a79c4ce45ebb46939a51650850ebdccee'
-    oldFile: !uuid '35741d265b50926ea727a50c6b7829f26be0b26d'
-  /admin/src/views/store:
-    newFile: !uuid '1c691cd5af0208a6752ded19ad0315a04f96d0ee'
-    oldFile: !uuid 'ff9642f5f0c074259379128605c503b072639c24'
-  /admin/src/views/store/creatStore:
-    newFile: !uuid '95ed4d8b7a6223fd9db699b2e39362dcfe4ae2ae'
-    oldFile: !uuid 'd0b88b543653661e421eb2fdb9f6b3918b7275e1'
-  /admin/src/views/store/creatStore/index.vue:
-    newFile: !uuid '6e73e9f4724b2e309c1162bba7154c9da6adb4c5'
-    oldFile: !uuid '93fd8cefdaa8489674d8a2a855050027710656b2'
-  /crmeb:
-    newFile: !uuid '8b94a4f671dfe3a75014a8e3a37ee68f73a56a41'
-    oldFile: !uuid '74c9efefb595f4af210aeccc52b5c510e76ba741'
-  /crmeb/src:
-    newFile: !uuid 'd18bd832b15e197bda7d8394193c3012682a7d90'
-    oldFile: !uuid 'aa12cce1d796e02b9d0f96dd17d6d805d40ea504'
-  /crmeb/src/main:
-    newFile: !uuid '7f509ef38110e5a6c23b4d9d918c809dd6cff531'
-    oldFile: !uuid 'a0f821f68a416ed4986790b413943c25837dd279'
-  /crmeb/src/main/java:
-    newFile: !uuid '482abd0deff1c6eb7eba3e3d3f91276c5b1d0cbd'
-    oldFile: !uuid '58381da0e0c39fddd97eafb29e19a2b76025a9aa'
-  /crmeb/src/main/java/com:
-    newFile: !uuid '6de0fcec76f8853798fadb2bb03948bad907b8e4'
-    oldFile: !uuid '5978abf1cbede542e36d106f33207b7b81e37e55'
-  /crmeb/src/main/java/com/zbkj:
-    newFile: !uuid 'ccec9ab8293b682581e9370511098484c56a3616'
-    oldFile: !uuid '93800d76951217b94356e1229384f2755a160576'
-  /crmeb/src/main/java/com/zbkj/crmeb:
-    newFile: !uuid 'fa32de8e5bb40f98a8cee517120096f29315a265'
-    oldFile: !uuid 'ac259b0d3d9c3484382844c8fd6003eb66a84368'
-  /crmeb/src/main/java/com/zbkj/crmeb/store:
-    newFile: !uuid '4b2a510c27e9523e21b94690979214e9b64cbc50'
-    oldFile: !uuid 'f98c7edc6e9551986c16faa5059e67f7086ce9b0'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/request:
-    newFile: !uuid '8637517bcb0c7239051f3eaecaa39929f544caea'
-    oldFile: !uuid 'f9815fc2ba3ec6d3a446b54407750951a659292a'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/request/StoreOrderRefundRequest.java:
-    newFile: !uuid 'd77adc449052ced0ef7319cbae89fadc750b1eeb'
-    oldFile: !uuid 'c5c9af59e23077b969d25e6aa565219a1b070624'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service:
-    newFile: !uuid 'e0a186444b2b679e5e1721b9194860f2b834d253'
-    oldFile: !uuid '5ba1541e2a72c0f2556aca13f08faa27a737acea'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl:
-    newFile: !uuid '70e37d3a1b5e913c199b6e5289b3ff508d19a71f'
-    oldFile: !uuid '28109cf61cbd7af5d02d6d4f7d16e871033952fb'
-  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderServiceImpl.java:
-    newFile: !uuid 'dee991811a11cb55d111a75bdafe5c1cec7956a1'
-    oldFile: !uuid '95c2201471b83b794f41436db8fc978b583f0956'
-gitCommitId: !uuid '89fbecbceeff36791907bfc4525e4cec61565acd'
+  /README.md:
+    newFile: !uuid '35c88899d2ad9073b56924469bd18f0cee4a0da3'
+    oldFile: !uuid '3e24caf2d02d6c2a7541262949215d1f39d5b93d'
+gitCommitId: !uuid '8b3e515fce29ef1eb801ec6b1fca798538e44cd0'
 renames: {
   }
-revisionId: 124
+revisionId: 125
