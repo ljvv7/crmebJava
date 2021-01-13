@@ -2,10 +2,127 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid 'd8996429ec4346bdaf8202b2736207a0ec2e2601'
-    oldFile: !uuid '2f2cc90dadb8e254e8cf9e6bdec94ebc77ddef9f'
-gitCommitId: !uuid 'debb5e654d32a7e5fba8eaa23d5d5335af50f72c'
+  /admin:
+    newFile: !uuid 'baa6a9f208be23a90eb823c46fd737008b9d36bb'
+    oldFile: !uuid 'a88a5c5f335fed426e79bb6e90f71c5006cf974e'
+  /admin/src:
+    newFile: !uuid '2bba04ea63ea21d17f907579acabdfdade615544'
+    oldFile: !uuid '65f6c97513448820173b5a277c4d2ef80f85fce3'
+  /admin/src/views:
+    newFile: !uuid '130cb3a5871a551e70a7d9d5960c81b81cedbbad'
+    oldFile: !uuid '1954052a79c4ce45ebb46939a51650850ebdccee'
+  /admin/src/views/order:
+    newFile: !uuid 'eb49414a27bda0469e451c623303f6e7dbe86cbe'
+    oldFile: !uuid '000dab7bc8f6ee01f468c09c107951c3164d0a49'
+  /admin/src/views/order/orderDetail.vue:
+    newFile: !uuid '5a467ac79917b0a7fecc2a214357d4a837f71cb9'
+    oldFile: !uuid 'f36b5f632b876bab021406f2c9ba8d928b9fac5d'
+  /admin/src/views/systemSetting:
+    newFile: !uuid 'ccdde46348f959864797c3f534da53057e7bf2d5'
+    oldFile: !uuid 'f328da0c32e4c67d8359a9a7baa7fa3d3cd3031f'
+  /admin/src/views/systemSetting/logistics:
+    newFile: !uuid '9797f01a2c75e048836dc05da380c5ec9b27ea73'
+    oldFile: !uuid 'c7fc5ec51baf285797eff5aad6781411cda0a70f'
+  /admin/src/views/systemSetting/logistics/companyList:
+    newFile: !uuid '1ef058c763dbc8423600a6f1f43582d3eae91d0c'
+    oldFile: !uuid '1a17d7dc4e781dee0dea64d20b8e35ff6d70e8f7'
+  /admin/src/views/systemSetting/logistics/companyList/index.vue:
+    newFile: !uuid '3dcd7b87d7e54649cffc07623c8dda672b9baaf9'
+    oldFile: !uuid '900b7bc80a4fb4ad3d9fc884a7b62927e5280934'
+  /crmeb:
+    newFile: !uuid 'f884f4f0f5b027d59e9be7b02d4fc8ddbcd91896'
+    oldFile: !uuid '8b94a4f671dfe3a75014a8e3a37ee68f73a56a41'
+  /crmeb/src:
+    newFile: !uuid 'b65b7e456d59b0f450de1da9acb378be49d70e25'
+    oldFile: !uuid 'd18bd832b15e197bda7d8394193c3012682a7d90'
+  /crmeb/src/main:
+    newFile: !uuid '82c495e632e45f27056ea59d453494ad230ff237'
+    oldFile: !uuid '7f509ef38110e5a6c23b4d9d918c809dd6cff531'
+  /crmeb/src/main/java:
+    newFile: !uuid 'bcf0d739a63a660b5e55ecc5a9f68011fe930014'
+    oldFile: !uuid '482abd0deff1c6eb7eba3e3d3f91276c5b1d0cbd'
+  /crmeb/src/main/java/com:
+    newFile: !uuid 'c7cf45d48b18bcedd3479b0a6f04aee78d66d84f'
+    oldFile: !uuid '6de0fcec76f8853798fadb2bb03948bad907b8e4'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '074305abbf9bf13c840dde336a86111692a99c27'
+    oldFile: !uuid 'ccec9ab8293b682581e9370511098484c56a3616'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid '2da307261bb0f843fbfa40d0672d3aedd529bff5'
+    oldFile: !uuid 'fa32de8e5bb40f98a8cee517120096f29315a265'
+  /crmeb/src/main/java/com/zbkj/crmeb/CrmebApplication.java:
+    newFile: !uuid 'd746c791bef47dbbebf179a9147ad3e067c03005'
+    oldFile: !uuid '578f5dbcd14a8c6c9c37a7becaf52708ac3205ac'
+  /crmeb/src/main/java/com/zbkj/crmeb/express:
+    newFile: !uuid 'e3082f323ad1407373eee6b3e318a8de9cba90af'
+    oldFile: !uuid '58a8e9f8322cb0f7f5eacad23369fe0d1a08fb93'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/controller:
+    newFile: !uuid 'e31ea6e7e967fbd9ad7350d6354ad5b506732232'
+    oldFile: !uuid '3e68f20c44c03b48bf731291c9602a2577e214c3'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/controller/ExpressController.java:
+    newFile: !uuid 'a8ccd7b2f34d9fe7be6298702e10e1768e468531'
+    oldFile: !uuid 'b135065cbff290981f564d72674e141bce0a16f0'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service:
+    newFile: !uuid 'c3b7f1e6e2141bef3e2723ea1ad858496232870d'
+    oldFile: !uuid '9af95eef8ce433850e37c37f641f7001171358a6'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/ExpressService.java:
+    newFile: !uuid 'bc2cdb2bdea987706b17aff0acecf6ead8073fc7'
+    oldFile: !uuid '06366afb846b341c9037762194ac1104ae470860'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl:
+    newFile: !uuid '15bf58d7de0e2680aa987121d8a78f059d0ee46d'
+    oldFile: !uuid '4340fdb2de2fd698ff093623178d0fa97f0d4ec6'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl/ExpressServiceImpl.java:
+    newFile: !uuid 'e11763a4888d690ad8d483cc632117a6dd3c3d8b'
+    oldFile: !uuid '14f902bc005adbeb2eeca161f0b364a7c0ae9d42'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl/LogisticsServiceImpl.java:
+    newFile: !uuid 'c71fc33e0eda7d69402c23f1042f2f40a86ffe83'
+    oldFile: !uuid 'fa53322a252c7a04435e512f2aa87c07a22b9623'
+  /crmeb/src/main/java/com/zbkj/crmeb/front:
+    newFile: !uuid '868f7bbab4fc1a17b3f22a9daabea64c51d985e7'
+    oldFile: !uuid '9c71de657d3f48dc705e863a9bcebb19620b586a'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller:
+    newFile: !uuid '1851d11107ad67705f37c0171e2f93108e312a90'
+    oldFile: !uuid '8b157d6ed7740190d42aec0e18f625012beb04b8'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller/ExpressController.java:
+    newFile: !uuid '14ca052fd2126246eab7c3d288a5e96e029d681f'
+    oldFile: !uuid '3b5578888b1cb8102791d940bc40dbc6d65b495f'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass:
+    newFile: !uuid 'd83519ae2ddfc6958cdc6621ec44c106fb932fca'
+    oldFile: !uuid 'a5bd9ce88e39060fe4a67bf6615ae60e4d5c3d39'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass/vo:
+    newFile: !uuid '327b915c0cbfb4236a6e6511c916b49b51599b58'
+    oldFile: !uuid 'c47354ec438ca7f7e51ff8dd289032defc65bab5'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass/vo/OnePassLogisticsQueryVo.java:
+    newFile: !uuid '7c0b76cb4c542dd1a361282467839ba844170761'
+    oldFile: !uuid 'd285a4e3170789e1e992d8da963751c4d676e4ee'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass/vo/OnePassLogisticsTrackVo.java:
+    newFile: !uuid '666a6ce5ec7d744f142e8ca097602a7009bf348e'
+    oldFile: !uuid '39987139682e8698f942efad687e81e4406e8ecd'
+  /crmeb/src/main/java/com/zbkj/crmeb/store:
+    newFile: !uuid '5e29c0102deda166d4a992b2872bc45222ceaad1'
+    oldFile: !uuid '4b2a510c27e9523e21b94690979214e9b64cbc50'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/model:
+    newFile: !uuid '581a178eab8d709f11fa66159d7c7b573316ebff'
+    oldFile: !uuid '9932ee0d86d575e92b5168649842b4fcf626df77'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/model/StoreProductDescription.java:
+    newFile: !uuid '2746e63ac7741c110f1eb08159f0de612ebb4269'
+    oldFile: !uuid '9157d2e9e32b996e6d9060cd003cf62e9944bf23'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request:
+    newFile: !uuid 'f9815fc2ba3ec6d3a446b54407750951a659292a'
+    oldFile: !uuid '8637517bcb0c7239051f3eaecaa39929f544caea'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request/StoreOrderRefundRequest.java:
+    newFile: !uuid 'c5c9af59e23077b969d25e6aa565219a1b070624'
+    oldFile: !uuid 'd77adc449052ced0ef7319cbae89fadc750b1eeb'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service:
+    newFile: !uuid '9d93f0110c061e3e6ea74bfcd5fdad52ef5402c8'
+    oldFile: !uuid 'e0a186444b2b679e5e1721b9194860f2b834d253'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl:
+    newFile: !uuid '014bad02151ced11b0c5de354a6df016e6c3cf09'
+    oldFile: !uuid '70e37d3a1b5e913c199b6e5289b3ff508d19a71f'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderServiceImpl.java:
+    newFile: !uuid '3ec72efe57524e66092e92bfbd327ded8ffd80c5'
+    oldFile: !uuid 'dee991811a11cb55d111a75bdafe5c1cec7956a1'
+gitCommitId: !uuid '4e42da0fc16b91b2f31c11f1e959d408591194f9'
 renames: {
   }
-revisionId: 127
+revisionId: 128
