@@ -2,829 +2,757 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid 'd41e62f3f4def5048e001ac75adf3c08b1e8ea7d'
-    oldFile: !uuid 'd8996429ec4346bdaf8202b2736207a0ec2e2601'
-  /admin:
-    newFile: !uuid 'f22aecf4c08fc055d6a92fdec4357083200ea86c'
-    oldFile: !uuid 'baa6a9f208be23a90eb823c46fd737008b9d36bb'
-  /admin/README.es.md:
-    newFile: !uuid '1d0cf47b597fd38a6861b92e15301fc55db5636d'
-    oldFile: null
-  /admin/README.ja.md:
-    newFile: !uuid '954b4758e5387c000bc2f85c626e71a6225bb4bc'
-    oldFile: null
-  /admin/package-lock.json:
-    newFile: null
-    oldFile: !uuid '62f27b3b692720e40e77f338fc85c6d25efdc1c0'
-  /admin/public:
-    newFile: !uuid 'c88ed107ee33c223094d801919e75c5430e350ff'
-    oldFile: !uuid '71e06451e66093588812d22a084c6a6997de82f7'
-  /admin/public/UEditor:
-    newFile: !uuid '07708a9f820da7afacc1d607884d76c9ea9aebd1'
-    oldFile: !uuid '585e016b85dd9c8e967af5b8f3ab5efbdf3afd79'
-  /admin/public/UEditor/ueditor.config.js:
-    newFile: !uuid '825608d65a3373d921bc452eb33542ec87003ef8'
-    oldFile: !uuid '417f39be7c299e11783587fb72614195f072dc6d'
-  /admin/src:
-    newFile: !uuid '837e3875c9088c24f1fc2aff982f7789b33cd7fa'
-    oldFile: !uuid '2bba04ea63ea21d17f907579acabdfdade615544'
-  /admin/src/api:
-    newFile: !uuid '714b85cc7fcdd00b0bb93853044b54c9039e6fe7'
-    oldFile: !uuid 'bdcd35a83275fe5a148cf199bd763959578e2152'
-  /admin/src/api/categoryApi.js:
-    newFile: !uuid '532699fa1d9f3615584e691e908eb6f17e4a12be'
-    oldFile: !uuid '5dd3ad099f873d3f9267962075d715a9f2b1ef80'
-  /admin/src/api/sms.js:
-    newFile: !uuid 'b100f5bc2e26eb752e531e4312e96661f9d4efa6'
-    oldFile: !uuid '5f282119d71d35c968fe3a6fc96445245241574e'
-  /admin/src/assets:
-    newFile: !uuid 'eacf39ee90b6ea1799aad395d7d553f0b5014b59'
-    oldFile: !uuid 'cc61ba0b3429fe90c9d887abb60d0774142be8d7'
-  /admin/src/assets/imgs:
-    newFile: !uuid '121356a463554f6188b13d1bda720f301768261a'
-    oldFile: !uuid 'ea618bd73000f71aca7ea73eba42a72e8585ea30'
-  /admin/src/assets/imgs/kefuImg.jpg:
-    newFile: !uuid 'e609d0346be37b80367b1535945da94941d98b8a'
-    oldFile: null
-  /admin/src/components:
-    newFile: !uuid '2e156854fa40645ceecc2efaf57510a4770a4f22'
-    oldFile: !uuid 'bbb01ad8e4232c79eff1305b960e9573107c4041'
-  /admin/src/components/Category:
-    newFile: !uuid '5900dc2a1697879b3bca6051327b1a90e515fe1f'
-    oldFile: !uuid 'dec066d4411084651553905f39495cc49099a32a'
-  /admin/src/components/Category/edit.vue:
-    newFile: !uuid 'c8e5a6d9d57e9e4b8bc76ff357be091b887e0693'
-    oldFile: !uuid 'a81ffd2b9b45eb7b2a4f6fce3a59a2528f756642'
-  /admin/src/components/Category/list.vue:
-    newFile: !uuid 'fe74df89143dedd65841e5a817f9164a0a6cf054'
-    oldFile: !uuid '4cc1183009ba279fd3b2a86440ed2b3b114fc42e'
-  /admin/src/components/FormGenerator:
-    newFile: !uuid '079349a764aafd919b882d855ed3d51972844f04'
-    oldFile: !uuid '9ecf2b73e90f9c05370831669888e6b9b65c6b30'
-  /admin/src/components/FormGenerator/components:
-    newFile: !uuid '35b73e585a7c1fe7f4acab6e4193a257cb345ea3'
-    oldFile: !uuid 'ff5ed0ccaf5f04cd0d4271f2c73734eac1d3886c'
-  /admin/src/components/FormGenerator/components/parser:
-    newFile: !uuid '7fa2eee4ee23bd0102d6b331df873c7e819f8130'
-    oldFile: !uuid 'c5304aa029e3e4b26b1c7d089f63c6c290a08a07'
-  /admin/src/components/FormGenerator/components/parser/Parser.vue:
-    newFile: !uuid '0c27e19d1db83d5bfc506f2e868ea2c6e8af02d5'
-    oldFile: !uuid 'ad4da1b80296002782e395071c0559531d39c5f1'
-  /admin/src/components/articleList:
-    newFile: !uuid 'b23a0b4b444de92fbd989701331fd14638040da9'
-    oldFile: !uuid '0f850488e0f879db1b95b7da78e41ff30e5338f6'
-  /admin/src/components/articleList/index.vue:
-    newFile: !uuid '163f38a7a0af40f4e923ab871e29ceac856601ca'
-    oldFile: !uuid 'e0e8f4fb4a3c97f756c1c4092938feec5be6f4fc'
-  /admin/src/components/couponList:
-    newFile: !uuid 'f9ff9ca3dc091d497aae23e677ed658e18aed6db'
-    oldFile: !uuid '8b9ca41621877403ec889f34c87c20b10e135c89'
-  /admin/src/components/couponList/index.vue:
-    newFile: !uuid '25ad91d36f5bdd0f524ada7973f9fa3c5e5ecaa6'
-    oldFile: !uuid 'f57426e4393e85a251cd0b754a189caff3b84f42'
-  /admin/src/components/customerInfo:
-    newFile: !uuid 'cef91307a95e6cfc6865fb53b39a42bb55342751'
-    oldFile: !uuid '1c1d91cc4f4ebc2df10b3b44dc079044693047dd'
-  /admin/src/components/customerInfo/index.vue:
-    newFile: !uuid 'c02c2d7ef6f3252fca0f583e92585e240aeb9c31'
-    oldFile: !uuid '95ad79284466227fb6fbcb0d80a53808fc95139b'
-  /admin/src/components/ueditorFrom:
-    newFile: !uuid '9bcf5dbbb1bb285d6e3982a45a3d9d47dc28ceeb'
-    oldFile: !uuid '57a00ca5e430048bc1e0c420a37f0988386b6a56'
-  /admin/src/components/ueditorFrom/index.vue:
-    newFile: !uuid 'bd7fb3f6dfeb695eedb9545e386a053b68d03fe5'
-    oldFile: !uuid 'd67afdd6f6cb0d71a416750a9a6688d4e8489441'
-  /admin/src/components/uploadPicture:
-    newFile: !uuid 'c5f84491c3b119274d7b51ccea23102bf6d7057c'
-    oldFile: !uuid 'baa91a53b4174e042cc0b2ddf121c999113f61ff'
-  /admin/src/components/uploadPicture/index.vue:
-    newFile: !uuid '7ef5b7eb5a9b1a2b26c0fb3205247fb2ab0c826b'
-    oldFile: !uuid '7cb9315d8204d1e4b3c33538a8711603a5430393'
-  /admin/src/filters:
-    newFile: !uuid '93ba5ca8e884bfa987e134c1cca436f76f3384fb'
-    oldFile: !uuid '46a387e9d191c977a55f2c1eb14bb87b63ff58b1'
-  /admin/src/filters/order.js:
-    newFile: !uuid '919e24552d67d68ef0ca587d33f05538a5480dd2'
-    oldFile: !uuid '0edbddca124913fc9933f0ef223387db082523b2'
-  /admin/src/filters/user.js:
-    newFile: !uuid 'db012af080662ab2916601c429f3bd9e2237ac0c'
-    oldFile: !uuid '5c4149b2c62df241bb6e8018cf48973abc4d961d'
-  /admin/src/layout:
-    newFile: !uuid '3a0df1fbfe5f29fbb74815ca5950b7a6ec921151'
-    oldFile: !uuid '1fa3c086d751fb989204de1026933ea76d53d948'
-  /admin/src/layout/components:
-    newFile: !uuid '0ec09fc08e0d3f8959fea0de374df92bc1b494fd'
-    oldFile: !uuid '8ed332750d34a01d86cdcac7fd36541672db2186'
-  /admin/src/layout/components/AppMain.vue:
-    newFile: !uuid '60b277439a1c650c8d1b029bf1495ec9a2fa7401'
-    oldFile: !uuid '7a9dd9fbdcc6c9045a60d1f784604f6ca97afc2d'
-  /admin/src/layout/components/TagsView:
-    newFile: !uuid '3abc3256c9b8bd2d2e9922c7a04f82227c002599'
-    oldFile: !uuid 'dbf695e30807b5a46ceba2f26107c3b4b9d24698'
-  /admin/src/layout/components/TagsView/index.vue:
-    newFile: !uuid 'a7dca2737d84a602ebb0ad8f6df462966c572225'
-    oldFile: !uuid '5666efdc587a8d76ca4d56f8865e31bec0c32bed'
-  /admin/src/layout/index.vue:
-    newFile: !uuid '77d257365afcf2a9f61fd8a717d86fe9a363e933'
-    oldFile: !uuid '965bcd1b1df67b0bab716b8e1e41f96d4a5788f4'
-  /admin/src/main.js:
-    newFile: !uuid 'cd5d88a0555afc210cd7b2f2ff1a9998e4eaee4f'
-    oldFile: !uuid 'b637e6295ccf4c36a745107e3b6b51b2e97f338a'
-  /admin/src/router:
-    newFile: !uuid '989b3aac54254717e3dfa152d7f8595396e660c1'
-    oldFile: !uuid 'be33ae475a4ee0a27304a3aafcda101a709f3f9c'
-  /admin/src/router/modules:
-    newFile: !uuid 'c6062c4937e6f40c6da5b28746af36149642a479'
-    oldFile: !uuid 'e6e849a39c2cbd88e00f8722ae548957748d065a'
-  /admin/src/router/modules/content.js:
-    newFile: !uuid '4687f3c48cac45135fb91a1984cf455424647301'
-    oldFile: !uuid '8a7b015098fa5d5a5273e5b5871c8bcaa28362ae'
-  /admin/src/styles:
-    newFile: !uuid 'a2e52ae4628075a33aeb2189a85d1d3612922783'
-    oldFile: !uuid '7cf48144979a0f006a05bee3e114e0611216ba64'
-  /admin/src/styles/styles.scss:
-    newFile: !uuid 'd8abe062d8d1bd598a070e7435947ac9fdaa1c9c'
-    oldFile: !uuid '91726f7f0a88b10641c2f73fc7f2432ce24b5eb1'
-  /admin/src/utils:
-    newFile: !uuid 'f5e4139c6dd0a31789bb2b29d587c01f5bd0e902'
-    oldFile: !uuid 'd6560ce5efe907cba12bf6725da4aab5102afb77'
-  /admin/src/utils/ZBKJIutil.js:
-    newFile: !uuid '3ee5e3ae1cffa49979969c8b5fcbde43b42d76fe'
-    oldFile: !uuid '3b3c3890869044d4efc3c346f37a8ccd247930c9'
-  /admin/src/utils/utils.js:
-    newFile: !uuid '184d94504b625435437a85f27282544bb5ea2a53'
-    oldFile: null
-  /admin/src/views:
-    newFile: !uuid '911a7af9369e9d3676d2f062f702fe8fc9bb0760'
-    oldFile: !uuid '130cb3a5871a551e70a7d9d5960c81b81cedbbad'
-  /admin/src/views/appSetting:
-    newFile: !uuid '1b5e8f6fed39afc85f42135c11a8135dfd118e04'
-    oldFile: !uuid 'aac89893368a452b0eb14d9b68d07cbe5184eeab'
-  /admin/src/views/appSetting/routine:
-    newFile: !uuid 'c3a57153603de77b1ca2d1db7b3b7cefa67faec5'
-    oldFile: !uuid '1b993065de5e871835d5bdfe4152964b3768330e'
-  /admin/src/views/appSetting/routine/myTemplate:
-    newFile: !uuid '01fccbf85635627eaf3707c35e5425bac3d673a5'
-    oldFile: !uuid 'de0808330baff3506ad7dd0d36acb3b2404a3c1f'
-  /admin/src/views/appSetting/routine/myTemplate/index.vue:
-    newFile: !uuid '7f8e4d2055cb5935d8ba938df3b192f36477f7fd'
-    oldFile: !uuid 'edf2a7aa2852d16756ab6373867910369dfcd3fc'
-  /admin/src/views/appSetting/wxAccount:
-    newFile: !uuid '71266a2074e642aec381df2705bfae5ba220877f'
-    oldFile: !uuid '7e94b28f45765fd689186894ea3e71f8a3bb4c84'
-  /admin/src/views/appSetting/wxAccount/wxTemplate:
-    newFile: !uuid 'a4c42a163d338d86ba5521602a7a327500787340'
-    oldFile: !uuid '11998af4e2d2300d46ece5b5aec738f274ac6932'
-  /admin/src/views/appSetting/wxAccount/wxTemplate/index.vue:
-    newFile: !uuid 'e3f2a8aff6a95bfcbe0e6a8c387419dd0b706c4a'
-    oldFile: !uuid '6a0b9d3a3a7b9a77ee16f84f4f979b9f6730ed32'
-  /admin/src/views/content:
-    newFile: !uuid 'ad4a6830a4399c52c3e8fad31fc7abb33e6e16fb'
-    oldFile: !uuid '380dd571c82a2de625bae720e1f99ad66006e9e4'
-  /admin/src/views/content/article:
-    newFile: !uuid 'ff0df0caacb7c88a636fe0502925871792bd8979'
-    oldFile: !uuid '36b70c7e0bc189ba7247f63fadb558f989420a1e'
-  /admin/src/views/content/article/edit.vue:
-    newFile: !uuid '37f32261371bf2ccfda0685a0366adfe0397957c'
-    oldFile: !uuid 'dd7b34b4ace2ad46dcd8869f47c19af570a96e3a'
-  /admin/src/views/content/article/list.vue:
-    newFile: !uuid '7c0622fedb3f97abe0dd73cc1daadfbf050cbc2a'
-    oldFile: !uuid '58aef059e20262d3286db1d138a09dc16088d486'
-  /admin/src/views/content/articleclass:
-    newFile: !uuid '2df5ecf94a6220857110b57becbba177d9380aff'
-    oldFile: !uuid 'a3b0420b341ea0ef63fe39ad709a9abf60bfb467'
-  /admin/src/views/content/articleclass/list.vue:
-    newFile: !uuid '6f5f2be1305136c43152d0498ce24502857a829c'
-    oldFile: !uuid '484f944362c351762c3f9e8d7461c450b992961e'
-  /admin/src/views/dashboard:
-    newFile: !uuid '989dbde9b2375804897ab06d94467611ceaf5eab'
-    oldFile: !uuid '5bce607309e0719b632c5cfef3713f70b61f36ce'
-  /admin/src/views/dashboard/components:
-    newFile: !uuid '5d39c7302f5cec7ec4ec28cc5e5161c7c7aa8ed9'
-    oldFile: !uuid '6aea70b236a394f39a7c6415be209c4331f31c09'
-  /admin/src/views/dashboard/components/baseInfo.vue:
-    newFile: !uuid '65e9ff2eb241f655783aaf89434a7edfa8c3ca80'
-    oldFile: !uuid '5f538a84ef61bf945882c94a56044d8912e91b77'
-  /admin/src/views/distribution:
-    newFile: !uuid 'fd2d181405063fa90f280db7635e7518ee927026'
-    oldFile: !uuid '420b2197aac600a92a685a3527baec0f060af24d'
-  /admin/src/views/distribution/config:
-    newFile: !uuid '5cbbf27c4ed8990e6c2f291839a6af502e55bda3'
-    oldFile: !uuid 'eb3798e529a88fc105eaa24208fe52ed465f8dc7'
-  /admin/src/views/distribution/config/index.vue:
-    newFile: !uuid 'f38fad16a9ab94fa12b8a58a840366f2db2a4fc6'
-    oldFile: !uuid '7fb629f55c53d1534f172486737307e85edf5c65'
-  /admin/src/views/distribution/index.vue:
-    newFile: !uuid '6c6005384e9ed35fef0ec9831e50ee5fe406e90b'
-    oldFile: !uuid '8f3be98c9c4536a93177163e470c760284d9ed23'
-  /admin/src/views/financial:
-    newFile: !uuid '5d2a28d957acd80460f34909c735b7ba4620d362'
-    oldFile: !uuid '70c9dc4336a740a8140fc7d3c1479cf991ccd5ea'
-  /admin/src/views/financial/brokerage:
-    newFile: !uuid '0fef67ccbc9f7e5eb0da4b234cdfb8b0d070f781'
-    oldFile: !uuid '343bd187d64a06ecc94d17c6d0c9032b63b501d8'
-  /admin/src/views/financial/brokerage/index.vue:
-    newFile: !uuid 'a3dd00f2ff7662396a6574686cbcb54196daaf1e'
-    oldFile: !uuid 'b5f1edf380b3ca2755647af712c69a136c4406d5'
-  /admin/src/views/financial/commission:
-    newFile: !uuid 'f734319bed75c8188c443a5c0dbada998f341890'
-    oldFile: !uuid '28ab58cb9a7d8e0513256540c815391b09ea44d6'
-  /admin/src/views/financial/commission/withdrawal:
-    newFile: !uuid '7cbb30700af01fe757704629f8a3115971666ca9'
-    oldFile: !uuid 'ce23892a738dccc84ebbb1c4c3f4a6c56fa4f872'
-  /admin/src/views/financial/commission/withdrawal/index.vue:
-    newFile: !uuid 'b91299324a1e167c5094de010488c3ccd52426ed'
-    oldFile: !uuid '293a13a8c24486ea35564f058a17fcc6e1f8816b'
-  /admin/src/views/financial/record:
-    newFile: !uuid '3fcc92d2bda8802862b5e254bbf1527c83060fce'
-    oldFile: !uuid 'e0a1e66014a0868936851dc449df08a73f034ce0'
-  /admin/src/views/financial/record/charge:
-    newFile: !uuid '8397b6e3d522d13da16c9e7390ac39c399b0aedf'
-    oldFile: !uuid '755c54482bb3456c4089c13a1216d2c816d0f99a'
-  /admin/src/views/financial/record/charge/index.vue:
-    newFile: !uuid '519479ddc7742754014f2a1b7a497a7ca5ae8526'
-    oldFile: !uuid '85e7795866484063f2f26f1ba27718b5ae756704'
-  /admin/src/views/financial/record/monitor:
-    newFile: !uuid '1b38aac656139c2ee556f53640d1e5ac52520048'
-    oldFile: !uuid '594548a5b851b40771b17ce3804d8450115ba99f'
-  /admin/src/views/financial/record/monitor/index.vue:
-    newFile: !uuid '8753052cf853c6bcb113164e8fab5e47703c7f31'
-    oldFile: !uuid '9a1e385acccbc98e255b771a9b2670cfe2e7db58'
-  /admin/src/views/maintain:
-    newFile: !uuid '231a758a84cc48c6d2f96a4d1afbdcbc742169a0'
-    oldFile: !uuid '7f3bfeefd7c930d7ae786abf992d6ba45b19fb47'
-  /admin/src/views/maintain/devconfig:
-    newFile: !uuid '79d12152b20f218f8ef7a2846091557de8c2a3d4'
-    oldFile: !uuid '231fd5e5ee29b40f1747ccc5d6c971ec8cbb56c4'
-  /admin/src/views/maintain/devconfig/combineDataList.vue:
-    newFile: !uuid 'c060c5fe9dd99a41be6e0d2954d55b56444b93f1'
-    oldFile: !uuid 'bd020201749cc31ba05e1f4029c7cc90463dfd90'
-  /admin/src/views/maintain/devconfig/combinedData.vue:
-    newFile: !uuid 'd11b9d9f0ce0916972768c57d14c092c248b5d4f'
-    oldFile: !uuid '6eb6d74da11ea3a13fa69adbbf002c02c4b61d13'
-  /admin/src/views/maintain/devconfig/configCategotyEdit.vue:
-    newFile: !uuid 'f7d2c1ce7da1c3471484583695cc4df213960537'
-    oldFile: !uuid '9c91b8a177684d4bbd6b4caa90d91673600ca90b'
-  /admin/src/views/maintain/devconfig/configCategroy.vue:
-    newFile: !uuid '0273172545cf596da6b8da4a729babd1c6ce2723'
-    oldFile: !uuid '65121aba7f7fb6fb6942f01c673f165616b8e3bb'
-  /admin/src/views/maintain/formConfig:
-    newFile: !uuid '4d11844ad05d762bdb5a3f3d2e571effe4aaeadb'
-    oldFile: !uuid 'a241d25cb9f29286f1178bca4523fa2573b78df8'
-  /admin/src/views/maintain/formConfig/index.vue:
-    newFile: !uuid 'a0f512a6786eae75192d6383ab4943cd950ea68c'
-    oldFile: !uuid '7f68ffc8c25fc049de74d56c999f418cb15a0016'
-  /admin/src/views/marketing:
-    newFile: !uuid '7ffee4b81b6e58cfc611c2a6b913d295f88aae29'
-    oldFile: !uuid '2ef6471bf078c5c9cda84a9325c42ee8aa755d0d'
-  /admin/src/views/marketing/bargain:
-    newFile: !uuid '0d74b91cec6d35b1a808946fa51295a1fcf5dd8a'
-    oldFile: !uuid '03090be72680b88c95497f4899f2e8a9fd5f1fdb'
-  /admin/src/views/marketing/bargain/bargainGoods:
-    newFile: !uuid 'ea8d176d1c43f9907dee53f087d695db6e0921d9'
-    oldFile: !uuid '36b57f6ac4d3daabcf1ae9a815c666905f686c31'
-  /admin/src/views/marketing/bargain/bargainGoods/creatBargain.vue:
-    newFile: !uuid '599f7f94ff76a9bf32319a281e972a36a53e2759'
-    oldFile: !uuid 'ad983de04bd1ef05ada04a69eaa28ec005040fcc'
-  /admin/src/views/marketing/bargain/bargainList:
-    newFile: !uuid '77684e4d3810aa8ea77642926f36c70b825e3f9a'
-    oldFile: !uuid '56860193dce61ab47580e0b346be9b14ae4e3f81'
-  /admin/src/views/marketing/bargain/bargainList/index.vue:
-    newFile: !uuid '8719de73226d930216c1fd12c362b8ba75aecac1'
-    oldFile: !uuid '3b1a6c797615c54ab3762414b8b076d5b7503dbf'
-  /admin/src/views/marketing/coupon:
-    newFile: !uuid '1b47fb6ee06008a8ff17d96b70b834f9c5b926b9'
-    oldFile: !uuid '666173f084acb636220987d5ebc7d538dcc7bd8a'
-  /admin/src/views/marketing/coupon/list:
-    newFile: !uuid '4ad76bac5361e05c2086d84330f21dcd5043b8e4'
-    oldFile: !uuid '5f7f16276552bb691fce96ba9bed1fedf60f6a43'
-  /admin/src/views/marketing/coupon/list/creatCoupon.vue:
-    newFile: !uuid '0dcf0210336af9b6cf9efcc9572d0213acc6ebc4'
-    oldFile: !uuid 'de3378ecbfaeb39c7a6267f59fcc2d80a40ca2e1'
-  /admin/src/views/marketing/coupon/list/index.vue:
-    newFile: !uuid '0c746b7bca7dd8c3675a9474a10759c7cb7ec0c8'
-    oldFile: !uuid '4e768caad3e3a9a64ba39f237e44142aba90360c'
-  /admin/src/views/marketing/coupon/record:
-    newFile: !uuid '86665d7b7433d722f3bb7e25a02903d937df20a2'
-    oldFile: !uuid '9dc56d607e57ae9e5f2cc489c33bbab35450865c'
-  /admin/src/views/marketing/coupon/record/index.vue:
-    newFile: !uuid '3f1e6fffb231162e8faa1791646b5562194880cf'
-    oldFile: !uuid '01d26f7915b60d01f5bb417e902d4253666b101d'
-  /admin/src/views/marketing/groupBuy:
-    newFile: !uuid '61c93e02f8933a13b24d204b0d3d5a092a957922'
-    oldFile: !uuid 'c9fb41f32c587ab01dfc9b5e970962629f0bcd69'
-  /admin/src/views/marketing/groupBuy/groupList:
-    newFile: !uuid '407c1149a34e923ac25f68945335c3eddded4445'
-    oldFile: !uuid '43004bbd4cc913328d05a4416176d05a9ca5c830'
-  /admin/src/views/marketing/groupBuy/groupList/index.vue:
-    newFile: !uuid '596e8d300c6327020a3a84f9260bac977265d1ca'
-    oldFile: !uuid '433fb295d44e34c52f0a13644126f15c01392159'
-  /admin/src/views/marketing/integral:
-    newFile: !uuid 'b0a4488d41ae8e897886db0ad9798cbbe1fd88de'
-    oldFile: !uuid 'c2d3f6b2d28a3eaf7c6db791c01ba2a47c833991'
-  /admin/src/views/marketing/integral/config:
-    newFile: !uuid '4b23f4a95f642501b4330a58fabad9e14c858af8'
-    oldFile: !uuid '44f7df217faeb4e5496f91177c755e95be7fa6b8'
-  /admin/src/views/marketing/integral/config/index.vue:
-    newFile: !uuid '93faba0d7295c080a4bbf61689e9aa76e79bb609'
-    oldFile: !uuid '639f3fc1ce8afcdb240dda8ad5c293356cbdf889'
-  /admin/src/views/marketing/integral/integralLog:
-    newFile: !uuid '13227275606e612b833f647f52d9289f278cadd5'
-    oldFile: !uuid '2d0148bb0e78658cf14de4d6a57b767701029865'
-  /admin/src/views/marketing/integral/integralLog/index.vue:
-    newFile: !uuid '6cf7e8e9564508d68d1e66787c136a37a0a96777'
-    oldFile: !uuid '9e3e0e2893953f567b0c259647a39d5f2b6d4f3d'
-  /admin/src/views/marketing/spike:
-    newFile: !uuid '0691ff1bc4795fbae82c02728cb282948302ab06'
-    oldFile: !uuid 'c7b1a33ec91d9b6228add0a916c49a6d6112bbae'
-  /admin/src/views/marketing/spike/config:
-    newFile: !uuid '272c846485a7e43e03b4c371d2828041f6f972c8'
-    oldFile: !uuid 'faba8284b90a9454a8f12447b229427cfab62e2d'
-  /admin/src/views/marketing/spike/config/edit.vue:
-    newFile: !uuid '9ceaeed5a70f8fd978669222d936c53669d9bf36'
-    oldFile: !uuid '6283dd4cd93823cb2dd956154756cd1cd4533160'
-  /admin/src/views/marketing/spike/config/index.vue:
-    newFile: !uuid 'a5bf230ffeefffcc8b6f3da5d536cf7519251c7f'
-    oldFile: !uuid '39bfa13d6fa8e35c253167c738308cdb543f1dcd'
-  /admin/src/views/order:
-    newFile: !uuid '962d7b253691991bcd02462c0d23f78912fed85b'
-    oldFile: !uuid 'eb49414a27bda0469e451c623303f6e7dbe86cbe'
-  /admin/src/views/order/index.vue:
-    newFile: !uuid '1c0b4e55e3e92ad924d7ef37b2ae0b3c0d34fb77'
-    oldFile: !uuid '42e8e66910f8e6c54f5950935d2bcf7171719b6f'
-  /admin/src/views/order/orderDetail.vue:
-    newFile: !uuid 'f25fd8534696612b5ab82ae6617127c4c154d25c'
-    oldFile: !uuid '5a467ac79917b0a7fecc2a214357d4a837f71cb9'
-  /admin/src/views/order/orderSend.vue:
-    newFile: !uuid '9177476ba386f9247f67fce90f70e332f9ccd686'
-    oldFile: !uuid '3e4448085219ff85e8ea32fce569b0f6b9caa1d9'
-  /admin/src/views/sms:
-    newFile: !uuid 'e5b6dbd0a6652a4d85377829843667eecc51e97f'
-    oldFile: !uuid '6769fb2a44a078af005af697119bb132b95a2ce4'
-  /admin/src/views/sms/smsConfig:
-    newFile: !uuid 'b77c6c95a100dd1da5ab2581d5aac551dc779493'
-    oldFile: !uuid 'a4121d10f9f6f2ab286f588522936b7cf5979ab4'
-  /admin/src/views/sms/smsConfig/components:
-    newFile: !uuid '3c2035f234ab3afbfb293eb94074b73d5a48f42b'
-    oldFile: !uuid 'a4a2f224992d8d95c149101e3a5cce2a6704a73c'
-  /admin/src/views/sms/smsConfig/components/tableList.vue:
-    newFile: !uuid '28d9ad517d8630c7d38f118fc4f9d768e2eada72'
-    oldFile: !uuid '56552462ac1e6b7ee8f6df1ae0956ba6d29a452e'
-  /admin/src/views/store:
-    newFile: !uuid '42ac149d90b67f62fc6aa50f4a125fc7956c12af'
-    oldFile: !uuid '1c691cd5af0208a6752ded19ad0315a04f96d0ee'
-  /admin/src/views/store/index.vue:
-    newFile: !uuid '8f33f89e1cfa275ed1cc08aa8fb120a6a70b00cf'
-    oldFile: !uuid '253f657dde78bdf8fe01205517d6b5369c134958'
-  /admin/src/views/store/sort:
-    newFile: !uuid '0fd67ecd4a35a516f7f82a56b186add9207ce51d'
-    oldFile: !uuid '831965462dcd1404484dc5a3ac47723ad4b0d195'
-  /admin/src/views/store/sort/index.vue:
-    newFile: !uuid 'efd2ece0a38f071ae4e9d31636d34eebf4beeac2'
-    oldFile: !uuid 'b6a2da8addfc19cbfde81789c4e208d67b73d9db'
-  /admin/src/views/store/storeAttr:
-    newFile: !uuid '5a2cc7282055c1faef89449dd46112a7bc87b1df'
-    oldFile: !uuid '46782bf96b79b13e5ab49da12ae2df9362b031bc'
-  /admin/src/views/store/storeAttr/index.vue:
-    newFile: !uuid 'faf3f971fe300792e4610b7a57e5fdbc0848499b'
-    oldFile: !uuid '98c4145c0a7f4c41669259311861d1b738756327'
-  /admin/src/views/store/storeComment:
-    newFile: !uuid '4b220a9148839ab6dcb3dc2f24a9ea51871f644c'
-    oldFile: !uuid 'fb4c45ad2bf553f333540325492b65633d6eaeb1'
-  /admin/src/views/store/storeComment/creatComment.vue:
-    newFile: !uuid '3e9619c3ef3910ffd1df0c2657d841099b11368a'
-    oldFile: !uuid '5b292d017c7555b803d81d8f6349052216c4909c'
-  /admin/src/views/store/storeComment/index.vue:
-    newFile: !uuid '62ea73d10eac50fe2fd7dab8b0475db61e24f17b'
-    oldFile: !uuid 'e85fbf76ad072bfedc706aca7b0fee0aa46517bf'
-  /admin/src/views/store/taoBao.vue:
-    newFile: !uuid 'afb117d8669105bc55f484922a1414e664866ff8'
-    oldFile: !uuid '7c3ac2e6866c7b2fd99126e655cee23271e6a6ce'
-  /admin/src/views/systemSetting:
-    newFile: !uuid '9fd73c6ae1e9a7d7ee5a0c17b5508a734a2ba2ab'
-    oldFile: !uuid 'ccdde46348f959864797c3f534da53057e7bf2d5'
-  /admin/src/views/systemSetting/administratorAuthority:
-    newFile: !uuid 'ca439a2b4393becdd8be4c2bcc2b4480e16513b5'
-    oldFile: !uuid 'fdafbe7938d8908cf28c53817a0ba734a6b8c75d'
-  /admin/src/views/systemSetting/administratorAuthority/adminList:
-    newFile: !uuid '52c0506abf2ed140426e0cf93961fcd1f4272f41'
-    oldFile: !uuid '0b84e4a0832e27ed2947aaefe6e9c60307da61d7'
-  /admin/src/views/systemSetting/administratorAuthority/adminList/edit.vue:
-    newFile: !uuid 'a8c24923a2cf4b71f0c702d3a35c877c811841c0'
-    oldFile: !uuid '3c5f5133d3d56454133d307a57e41998cfa6953a'
-  /admin/src/views/systemSetting/administratorAuthority/adminList/index.vue:
-    newFile: !uuid '71c2f899159ab450a389ef7147e10b78a69b39a7'
-    oldFile: !uuid '4c8a7716fefbaede94aacc668aa996ed50fd2a46'
-  /admin/src/views/systemSetting/administratorAuthority/identityManager:
-    newFile: !uuid '1c49eb622d341499de49b1889cb8d1b3228563a3'
-    oldFile: !uuid '3d63e96b473c4029f161be3c25e55584441263f5'
-  /admin/src/views/systemSetting/administratorAuthority/identityManager/edit.vue:
-    newFile: !uuid 'd9d2940a36fda215d12118e9bb549eaedda7cafe'
-    oldFile: !uuid 'be4b512c61fb7c18b79b17ec41c6429b60e539e5'
-  /admin/src/views/systemSetting/administratorAuthority/identityManager/index.vue:
-    newFile: !uuid 'b30ebcefeb585ec2d7816cf79a2fbed67d493770'
-    oldFile: !uuid 'f604698a0b94355ee765d7f5508db7b827df2d75'
-  /admin/src/views/systemSetting/administratorAuthority/permissionRules:
-    newFile: !uuid '28b565bcb9b1847595c7193d46ca3466c5694a83'
-    oldFile: !uuid '9320974926c87bfce01bdc6f48d35a2cc39f8fc7'
-  /admin/src/views/systemSetting/administratorAuthority/permissionRules/index.vue:
-    newFile: !uuid '5556237fd9ccb454818613d2a673312a9c7f8690'
-    oldFile: !uuid 'b02ac984fb340a8cd9553dd78d54971e095c6380'
-  /admin/src/views/systemSetting/logistics:
-    newFile: !uuid '76ed0abce08b521d7dd3b923ae576f124b5e9ad4'
-    oldFile: !uuid '9797f01a2c75e048836dc05da380c5ec9b27ea73'
-  /admin/src/views/systemSetting/logistics/companyList:
-    newFile: !uuid '5d6d76ffe153221d12cc06b38c9f325e489644fa'
-    oldFile: !uuid '1ef058c763dbc8423600a6f1f43582d3eae91d0c'
-  /admin/src/views/systemSetting/logistics/companyList/index.vue:
-    newFile: !uuid 'ce14124929d87880cfde7353c44a02fb4f979483'
-    oldFile: !uuid '3dcd7b87d7e54649cffc07623c8dda672b9baaf9'
-  /admin/src/views/systemSetting/setting:
-    newFile: !uuid '1cc9f64f04e3e0a2c16c51da405017dc34718aad'
-    oldFile: !uuid 'ae8f39af317c1d6ef46f9f9862a3ca86ca381ff8'
-  /admin/src/views/systemSetting/setting/index.vue:
-    newFile: !uuid 'b52ac6a627f7a3ab9ace10474c8476de105edefe'
-    oldFile: !uuid 'a260665fb04aa5278bb7a2f994e80f44c35f9d1b'
-  /admin/src/views/systemSetting/systemStore:
-    newFile: !uuid 'c71ac09329ae5306b8c5a22db14a40ebe39e9304'
-    oldFile: !uuid '688d68b719eee093039b7a9b6c147835cbb8c1ca'
-  /admin/src/views/systemSetting/systemStore/order:
-    newFile: !uuid '6fc82c7d39bd31eb1550d756057ae11546c18cc7'
-    oldFile: !uuid '9bb63af7bb692cdc6597b16f2180f3d1d3d71feb'
-  /admin/src/views/systemSetting/systemStore/order/index.vue:
-    newFile: !uuid 'ddc1472092e0d4323133d1f3bb770514d803f2c2'
-    oldFile: !uuid 'd7cb1415931f97caa306682bb8b3a99d03929724'
-  /admin/src/views/user:
-    newFile: !uuid '67aab27b18bfb9397a5c934b849349549cd1930d'
-    oldFile: !uuid '44a979279a433be4fe4bb9e7a7c364f3e4c91d25'
-  /admin/src/views/user/grade:
-    newFile: !uuid 'a8a0e163912bfdffa777634b9b09e1b3fe196108'
-    oldFile: !uuid '9274df23e7c3f2d6678e6cb5ba4b7edfae40afd7'
-  /admin/src/views/user/grade/creatGrade.vue:
-    newFile: !uuid '562ad06b73484297f6dfa5ea3663d050c3191d21'
-    oldFile: !uuid 'b4d86203525b27d7de20dd52cdb13c695d3b8a33'
-  /admin/src/views/user/grade/index.vue:
-    newFile: !uuid '8e202e27fc990412ad9e81f8c2b6ec8f5ce89260'
-    oldFile: !uuid '9b4b61d8d2b5a10998158fc218b51b6e32854c4e'
-  /admin/src/views/user/list:
-    newFile: !uuid '66aff3af274aee7db2d65cedcde6d1064c9c182e'
-    oldFile: !uuid '2496da6d099abc73a65e7d64b40f31e7ff110308'
-  /admin/src/views/user/list/index.vue:
-    newFile: !uuid 'ebb314e8f8bc5388e6587007879f248cddbfa40d'
-    oldFile: !uuid '2f38256494a44bfd3f9de8740124be2cefb71db9'
-  /app:
-    newFile: !uuid 'ff07b8b7209feb69f858e7a57f7a211660e9fb3c'
-    oldFile: !uuid 'b313bace25c037a959a5c1773e1068394bd304cf'
-  /app/api:
-    newFile: !uuid '5f0668ddc001bf0b435349e972c55e63f1ef40f7'
-    oldFile: !uuid '88d34fd8aa1d6a4e15891da74dc1e3b6baca68ae'
-  /app/api/order.js:
-    newFile: !uuid 'b85ca0905a0bd0d4e89b8e0138f7e70c07bf1f7d'
-    oldFile: !uuid 'a170677d0e6f2fdd59d54caf37e704e94f1f88de'
-  /app/api/public.js:
-    newFile: !uuid 'fd82616cb46884be31dabad4b182b75b20659dd9'
-    oldFile: !uuid '42a6ac65ff83bd2a2d99dfb8bf24388adf1cdda3'
-  /app/api/user.js:
-    newFile: !uuid 'fe38a6dae6832559be9741b7daf3a8f4f24b8374'
-    oldFile: !uuid '2937d88f519944c7abe2c57f6de7caac923ca2ac'
-  /app/components:
-    newFile: !uuid '248db327083cd9271dc04505e6e41e624fad0593'
-    oldFile: !uuid 'e12661df41f4217d70fd6d0b0bef79014e5220f8'
-  /app/components/Authorize002.vue:
-    newFile: null
-    oldFile: !uuid '0a85d2a2483c828d83c94edecbabc278cbcdaa56'
-  /app/components/couponListWindow:
-    newFile: !uuid '3e2db9c0f62b64d211e09aadc89e56f99822739a'
-    oldFile: !uuid '6ac0a3c6fde38d843b4d779646b7f359785c5527'
-  /app/components/couponListWindow/index.vue:
-    newFile: !uuid '8edaf13820163855d161abf912659edeb3bcdc7e'
-    oldFile: !uuid '852464f69917b91eede408207dd4c05d558a752e'
-  /app/components/couponListWindow/备份.vue:
-    newFile: null
-    oldFile: !uuid '23359206cd1ca2b105c9aebc69f9f6a70092ba77'
-  /app/components/couponWindow:
-    newFile: !uuid '87974a28f0f00ad0f01ef9e4dcb5b2fda3cb5d46'
-    oldFile: !uuid '188dac1cead6c4f3af2d331b0c64efb18a0bdc11'
-  /app/components/couponWindow/index.vue:
-    newFile: !uuid 'b0428035ae498c7862ddbbaa624a547108e2e002'
-    oldFile: !uuid 'b22660c09b6c85028a1e2da759f221f7546836bf'
-  /app/components/payment:
-    newFile: !uuid 'de96f01f86f29fe88124c0c076ecb499672cd17d'
-    oldFile: !uuid 'bfb77c1e5e73426dfa849dd5fdcf71380f405098'
-  /app/components/payment/index.vue:
-    newFile: !uuid '36628ec3f037fff2cccb7d46822493605ca13f8d'
-    oldFile: !uuid '7167e20d1bc1a9fc9b1e33841e55938d069c957b'
-  /app/components/productWindow:
-    newFile: !uuid '0d3dfbd9ecfaae659f26ea7648cbbb93015fe4ee'
-    oldFile: !uuid 'ce25c233ad3cc9d43d487cb0f8aaa186c47ca6cb'
-  /app/components/productWindow/index.vue:
-    newFile: !uuid '1aaa9367f366d2b0925f049ac0235b84c34af78b'
-    oldFile: !uuid 'b7abf08c0b34877284aea3ba97212fb10ff25430'
-  /app/components/tabNav.vue:
-    newFile: !uuid 'c9eded2e1a409171872c92c97544d39053e361e3'
-    oldFile: !uuid 'bf1572945d0fafcc92377b406d8ef52e17a45828'
-  /app/components/userEvaluation:
-    newFile: !uuid '983bf541fda68a5adb9ba98dcd7370689c32bb23'
-    oldFile: !uuid '8bb676f88673baa617742da7d72e183a0c8922ab'
-  /app/components/userEvaluation/index.vue:
-    newFile: !uuid '76d10a79d839dc90e6d46280f09b636b74c2cd3f'
-    oldFile: !uuid '053e00f1ed970147c26b601d0579e4ff102b0cae'
-  /app/components/wPicker:
-    newFile: !uuid '931b483ce7fbbef35841780e355756e49481a3a6'
-    oldFile: !uuid 'a51fe8162ac355c1a28e3e5e32cd73fe0cb343f0'
-  /app/components/wPicker/w-picker.js:
-    newFile: !uuid '05948357465372623f20340ad5a1af3a606c99a0'
-    oldFile: !uuid '28a9baa367127ea654d1d878e320f878697ecd2e'
-  /app/components/wPicker/w-picker.vue:
-    newFile: !uuid 'dae62b742c531000bc11db7c76ca0850e40e027f'
-    oldFile: !uuid 'b83d59711a69bd1c90f07365f72e154ec4ccc653'
-  /app/libs:
-    newFile: !uuid '38b8d4225045c3fec7e57d0e2e68643c51441e6f'
-    oldFile: !uuid '6317468342644d4e285620ffb0ca75b1daea310b'
-  /app/libs/wechat.js:
-    newFile: !uuid 'f5b170afdf2626b90309e0a93593755ff604bc23'
-    oldFile: !uuid '56568cbcae06432dd35f067af388e79adafe83e9'
-  /app/pages:
-    newFile: !uuid 'ebc4acf0623360b05f56acb65af4db016586a6d6'
-    oldFile: !uuid 'a548b9a8a876a632944d6cd8eeebdd77118554ff'
-  /app/pages/activity:
-    newFile: !uuid '120a4ed9ad148c0ee6bd3f5e8f8a603922b5f582'
-    oldFile: !uuid 'be2af041df10219300ce7007659529e090ef2192'
-  /app/pages/activity/goods_bargain_details:
-    newFile: !uuid 'c82ea8448306adddbbb0a44c57245c3f48096e2c'
-    oldFile: !uuid '783973d385d81017ff8b07003aed9e611488e4df'
-  /app/pages/activity/goods_bargain_details/index.vue:
-    newFile: !uuid 'b5a7a75c3725c03e1779cb6cd7be7786825e73f8'
-    oldFile: !uuid '80ba89e95c6359c57046962d647c76fb159c42f3'
-  /app/pages/activity/goods_combination_details:
-    newFile: !uuid '48e62ffe41fab62e298ee13797fc0a4783ec1120'
-    oldFile: !uuid 'c8678f52605f78f7b11b49537c4713242f455702'
-  /app/pages/activity/goods_combination_details/index.vue:
-    newFile: !uuid 'fbd8f9db09a2f5393d9ae40d171e5fbe9a7cdc80'
-    oldFile: !uuid '1bfef03a179cb5466c866f715d57b6b95ce96499'
-  /app/pages/activity/goods_combination_status:
-    newFile: !uuid 'b045b6a73e20bde05d270cd5cdb8b23925da0fcf'
-    oldFile: !uuid 'e84e996da0cbe585f192f5ab4f981aff7c5fe62b'
-  /app/pages/activity/goods_combination_status/index.vue:
-    newFile: !uuid '39dda0656df7a12482c00645649bfe20779070bd'
-    oldFile: !uuid '2a79e0aeefdb9b6d3f3d50ce2ad26b9119943894'
-  /app/pages/activity/goods_seckill_details:
-    newFile: !uuid 'f24f7c6664478a989c44d44242134df63c69662f'
-    oldFile: !uuid '26fee467fcfcae091cca215fd7c35ad5aeb2d51e'
-  /app/pages/activity/goods_seckill_details/index.vue:
-    newFile: !uuid '3b36f0870d36a7c42ffbe06317d46ab43d8fcfb8'
-    oldFile: !uuid 'f3dd534f406a97ee39f5d3fb16a382e3e00e3c9d'
-  /app/pages/activity/poster-poster:
-    newFile: !uuid '25dc7a4eeb5546ffe2368975755cc28d67e2fce2'
-    oldFile: !uuid '45ae9ee5965fa3720301fbc110059e6108639f89'
-  /app/pages/activity/poster-poster/index.vue:
-    newFile: !uuid '4227970794833a3f225c481f8a2019a838959490'
-    oldFile: !uuid '2626fa54ff209bd556354c45e873b40e5b3e0321'
-  /app/pages/admin:
-    newFile: !uuid 'f13c45551589e8b5552add30a5a94b8cfe3b09e9'
-    oldFile: !uuid '72f7c4c9159c6d181b3c2886d4ba155c85fd155e'
-  /app/pages/admin/delivery:
-    newFile: !uuid '58a262607a2d856aec1088e5f105e1ef964411f0'
-    oldFile: !uuid '4bb2786877bd27edc4065706500c1167bd5d441a'
-  /app/pages/admin/delivery/index.vue:
-    newFile: !uuid 'dfcf0ea60c231178fb90c8448259dbb03f1028e1'
-    oldFile: !uuid 'f5bf6ea24dd485bc76a9e8ab812f9c83c543fcec'
-  /app/pages/admin/orderDetail:
-    newFile: !uuid '7f2b2977387b033b1c86846fbdef121beb24bc01'
-    oldFile: !uuid 'ad08e0e87e1a37726835776ba692a6f81f582ac8'
-  /app/pages/admin/orderDetail/index.vue:
-    newFile: !uuid 'b1edd734e8b3665e6dcf9ff2ad904ed9da5df48e'
-    oldFile: !uuid '3d959d47b4499e156a051881326e65fea91aed95'
-  /app/pages/admin/orderList:
-    newFile: !uuid '57f0c470e12822bdff20919f4dbdbcc9e15fb0f0'
-    oldFile: !uuid '7ebb84cae9b441e13f89948ab8cf914d35520c2f'
-  /app/pages/admin/orderList/index.vue:
-    newFile: !uuid '69994365e2733409041701d1a8bb4b5be4591168'
-    oldFile: !uuid '352f1ddd960371aa8010ee99c9b7e7a8b372f1a7'
-  /app/pages/auth:
-    newFile: !uuid '1024a38abeda11a69ef160becf64ee5a54939d18'
-    oldFile: !uuid '294a2a9808d006b5aab2fcd1976f71afdca6e4e9'
-  /app/pages/auth/index.vue:
-    newFile: !uuid 'd199a88396ca638520d0175ce4140f86cf897d75'
-    oldFile: !uuid 'b9b2b4e9a310dc47c1054a10394020d435eaf18d'
-  /app/pages/customer_list:
-    newFile: !uuid 'fa1fd705a9fbe63dcb8bc4b043c8682ee13212f4'
-    oldFile: !uuid 'ca62496ff4b691d023341dcaab65b3185594ad12'
-  /app/pages/customer_list/chat.vue:
-    newFile: !uuid 'a8d1965e6e7b25ac7cfb1fedae631d44c42af126'
-    oldFile: !uuid '32988c64e269ecb30de58639951be321be40e397'
-  /app/pages/goods_cate:
-    newFile: !uuid '85dfefe987de2b1eb30d276fb5a434e6f2712e84'
-    oldFile: !uuid '42989bf22b93b0d254e0ad756af564848eb50c23'
-  /app/pages/goods_cate/goods_cate.vue:
-    newFile: !uuid '62642a31161f0030360808923603410074e8b92e'
-    oldFile: !uuid 'e634ddca66df66be75e5f585e38dc050240246c9'
-  /app/pages/goods_details:
-    newFile: !uuid '51738dcc18520d4dbeb758834c562658f37efb61'
-    oldFile: !uuid '798bf773f2e3bb7372be8ceeb7b21f8ef8e77af2'
-  /app/pages/goods_details/index.vue:
-    newFile: !uuid 'd94b8ef28334252a1f64b30c3259d3fb4a2aeb09'
-    oldFile: !uuid 'c70417712a3ac75f7a1cb810ca3f2641739dd0bd'
-  /app/pages/goods_details/index001.vue:
-    newFile: null
-    oldFile: !uuid '61bdbe34868dc45d0904cdc94f22f15c8972701d'
-  /app/pages/goods_details/index003.vue:
-    newFile: null
-    oldFile: !uuid '1feb4e6c3ae3db87409fc884ec59c77ee8345c2f'
-  /app/pages/index:
-    newFile: !uuid '7d14658ffcfc12a9a32afda240b078e00040924c'
-    oldFile: !uuid '6a8d2bbe13b608186ee36161c5c0039855ad8593'
-  /app/pages/index/index.vue:
-    newFile: !uuid '7eb9e5d337b3c6e94c43414f449ef7c65e24329f'
-    oldFile: !uuid '4c92ab01fdc5bf5b808695361629b9380c280be3'
-  /app/pages/news_details:
-    newFile: !uuid 'ed9292a10cba75a0b6abe56a9a00d39a15dddb11'
-    oldFile: !uuid 'f19bc2d1691d5e6d5349b6dff4281c7d44d34c3b'
-  /app/pages/news_details/index.vue:
-    newFile: !uuid '2def71a45975c52d2cc8d9de585bedd55577e0db'
-    oldFile: !uuid 'b89c77c37ab59d170b87c529b20553bc43eb4d60'
-  /app/pages/order_addcart:
-    newFile: !uuid '270a07cdd8e476f222e8431f43e82eaf43bd7951'
-    oldFile: !uuid '0fea358ddafd6bedb56688a0284a122ba85ad61b'
-  /app/pages/order_addcart/order_addcart.vue:
-    newFile: !uuid '09974a7f9dd6f1bcb968d62532e92c8e57011545'
-    oldFile: !uuid '7dd7cd3d1155787d29f03ea88e877b96f13a0e46'
-  /app/pages/order_addcart/order_addcart01.vue:
-    newFile: !uuid 'c0e481824d1ed5c2aa96e016f3bf184eba1bb815'
-    oldFile: !uuid '370c5f0165ed306c58d331feac3ea53b23b7db1c'
-  /app/pages/order_addcart/order_addcart11.vue:
-    newFile: !uuid 'ae1375ae97492ad128375282dbc2d32a2b3c0448'
-    oldFile: !uuid '68065a0a1c97b677df4508b012260384360de579'
-  /app/pages/order_details:
-    newFile: !uuid 'e15f53f5dc4da39434f83fca0e6b0900cb917f2b'
-    oldFile: !uuid 'ae90140161349042ada95ec56bac2f364c4576d2'
-  /app/pages/order_details/index.vue:
-    newFile: !uuid '5ecf304068d84516b21d416ae419dc22b83d4b44'
-    oldFile: !uuid '9ecacecae961a9399b9859f300c183f9682a8274'
-  /app/pages/order_pay_status:
-    newFile: !uuid 'fb1f8e322763c8f90ee581fbfd9d3c990bca9e38'
-    oldFile: !uuid 'df2f9afbbbede9c3eee75902f092378d3dd48ce0'
-  /app/pages/order_pay_status/index.vue:
-    newFile: !uuid 'e70ca4f31cddec6c0e64d101dd0d5ef5eb9f7e0b'
-    oldFile: !uuid 'e6d8b31442910abe6075741d8592688da5515da2'
-  /app/pages/user:
-    newFile: !uuid '39a82f795bd91cd2d81aaea2e91125d9ffb4a4c3'
-    oldFile: !uuid 'f9fd0127d699375a6596eaff1b69120dd5fa86bd'
-  /app/pages/user/index.vue:
-    newFile: !uuid '516e48070b4add36a1f8546b923fb8261ead1e0b'
-    oldFile: !uuid '13a82fab557aad0ea3d8f44c885f5d14d37140f5'
-  /app/pages/users:
-    newFile: !uuid '92dff96e2a07dcef57c9399f27d4cde21099aea6'
-    oldFile: !uuid '4638f3b7cb0b0f832793220918333cdeff8b7d29'
-  /app/pages/users/commission_rank:
-    newFile: !uuid '302819f35fa702965f0cfb13441357cc3b8a857b'
-    oldFile: !uuid 'c987b3c7a6e8b18a68a66cd5143856137fb985c6'
-  /app/pages/users/commission_rank/index.vue:
-    newFile: !uuid '3785eaf649798cfb532d6b76496b11a02fb2b6b2'
-    oldFile: !uuid 'e316c9bb482a7b6d8a7140904f427bc925f6d26d'
-  /app/pages/users/goods_comment_con:
-    newFile: !uuid 'eb2aeb9ea820b16fc7b71823a0bb9267147e1a77'
-    oldFile: !uuid '0c93badbe9593e7003edae8be47c55db85b5de89'
-  /app/pages/users/goods_comment_con/index.vue:
-    newFile: !uuid 'c5ef38760320259c2c93e3a52bbe5f53269b7b50'
-    oldFile: !uuid 'b35de0afda4b5f8c41fa018b720ff6f0ee74731e'
-  /app/pages/users/goods_details_store:
-    newFile: !uuid '6f0750ef5b0a49f551db50e1a34bbcaa54e670b4'
-    oldFile: !uuid '3bcb1315f073f9f7a17d6bbedc3438ff50d5747f'
-  /app/pages/users/goods_details_store/index.vue:
-    newFile: !uuid 'a679ef953528af47659bfcc6be80a0d69bda1b02'
-    oldFile: !uuid 'f477c908fa28c5d51b708f5a6c331cdf1c4724d9'
-  /app/pages/users/goods_return:
-    newFile: !uuid 'c7c9b6f63a3c1854677fdcdfb8425feb1b90da41'
-    oldFile: !uuid '7b1f7b74d2fbbf0f3c18c113cb0d2e60f8d46c03'
-  /app/pages/users/goods_return/index.vue:
-    newFile: !uuid 'e9a810749e4a6c234cc73ca2b038f8b5d0bd2dd6'
-    oldFile: !uuid '5d7871337975f590c77b4643b5d9661995197dd2'
-  /app/pages/users/login:
-    newFile: !uuid '66c9bca47f3705ddcb07768b87a65880ce541ba4'
-    oldFile: !uuid '3f5f7bde7a347d9d89098514b2752888f826e4f0'
-  /app/pages/users/login/index.vue:
-    newFile: !uuid '725abf8e1692779c25219942485c4605698ade02'
-    oldFile: !uuid 'e192cc7353159276042ceb787863ada072363db0'
-  /app/pages/users/order_confirm:
-    newFile: !uuid 'e54d51a41e6129a4af5abd8f725b6df46802232b'
-    oldFile: !uuid 'dfc70ff99481ee250ef8008d3490177f7947ed7f'
-  /app/pages/users/order_confirm/index.vue:
-    newFile: !uuid 'fbfe2667db3c5fcdafabbdcf935c9ff75d8f3e9a'
-    oldFile: !uuid '73b7b168fe1b504d91e4bb05966c820ba0e6e476'
-  /app/pages/users/promoter-list:
-    newFile: !uuid 'deb9a1c781bdcf9581bb4e501af33da912fcc967'
-    oldFile: !uuid '6f62867d6d1b27d2a9a2acec5591e803a4142d9b'
-  /app/pages/users/promoter-list/index.vue:
-    newFile: !uuid 'a525143897f9cc2bd13d2688f15327d1a8d0ac0a'
-    oldFile: !uuid '016ced4bdd9310d996d8ed4e277bd7f4bd0cc34b'
-  /app/pages/users/retrievePassword:
-    newFile: !uuid '42b25ef8825503ce2efc43dd4c2b26f6685f3ca8'
-    oldFile: !uuid 'c0ace2c76d8ed5cbfcade759d40f0f9dcbe3873b'
-  /app/pages/users/retrievePassword/index.vue:
-    newFile: !uuid 'e9937e6a24b6984b43786286815d0aa89029fc3c'
-    oldFile: !uuid 'f38d95fc77eae5e16e0a4131e30dd93441d5915c'
-  /app/pages/users/user_coupon:
-    newFile: !uuid '4860b10145cfaa44bb2aa011ebe445f50aeb7fcf'
-    oldFile: !uuid '85a94d7fd6330dedb3bada23789e1414b2cb6d05'
-  /app/pages/users/user_coupon/index.vue:
-    newFile: !uuid '2872be09d85a18b06a34901500c69bf7f81a17bc'
-    oldFile: !uuid 'ec00927a971da7cf34d767e82ecf53776cb40f28'
-  /app/pages/users/user_get_coupon:
-    newFile: !uuid 'a05f18fbfb57e8cbbbbb0b8ab7683802ac57987c'
-    oldFile: !uuid 'f9d907f327018b5f8332a693fce1e52c6a532642'
-  /app/pages/users/user_get_coupon/index.vue:
-    newFile: !uuid '4b56549a38a0df48e1bd807528203554d97826e0'
-    oldFile: !uuid '096d3c5e36e68cf2bbfea7944a19e77e48026636'
-  /app/pages/users/user_info:
-    newFile: !uuid '46f4e119988c1f1b7173dd38759a899d89b40c33'
-    oldFile: !uuid 'd71d4081f6f3d917ba5ec04015d66bfe084b9c01'
-  /app/pages/users/user_info/index001.vue:
-    newFile: null
-    oldFile: !uuid '8fc2581a5ff6312f74de3be88222562099112b6b'
-  /app/pages/users/user_payment:
-    newFile: !uuid '98e791aedc6ca2502eab6ff6a3d2d5c42e197866'
-    oldFile: !uuid '47fe80abfee7119e4fea4ab5c10ee6a89ac69cb7'
-  /app/pages/users/user_payment/index.vue:
-    newFile: !uuid 'dda23ae5bdc38eb256c18208ba6891b1ea1b12e4'
-    oldFile: !uuid 'ce859812713ec30199d820ed09a0102e2cbcf973'
-  /app/pages/users/user_return_list:
-    newFile: !uuid '4ebd1f866d84250b97515843279e8d090b153e83'
-    oldFile: !uuid '8d8cd5f8253fcd34af129bc7e8154885cbacf6a5'
-  /app/pages/users/user_return_list/index.vue:
-    newFile: !uuid 'a0e93697792aa4f8624a6fa9e22007e8e7c3437f'
-    oldFile: !uuid '42a0ccf15e0fd70886a549adc894b5aea86d6e32'
-  /app/pages/users/user_spread_code:
-    newFile: !uuid '0d5952100a0df0a2d55546209c48a2c39d8a0d4d'
-    oldFile: !uuid '44317fcadee280303847a4b5719a956d4f544b05'
-  /app/pages/users/user_spread_code/index.vue:
-    newFile: !uuid '8a7bac0675a54e853a64881e2b5555b8311c1e1e'
-    oldFile: !uuid '01fc85c5f80ee0a69d0ab43b400dbd31990b6dd6'
-  /app/static:
-    newFile: !uuid 'b676878f52d2a5da0c392088dfc7b6406d144d5c'
-    oldFile: !uuid '4d80d6734d9f169c21c5770c4eb6e21e94183348'
-  /app/static/css:
-    newFile: !uuid '0cb09e8a2df77598ff8431d2cb88702a206afcfc'
-    oldFile: !uuid '282a6d2af825181f009d31c9b08351aefaed589b'
-  /app/static/css/base.css:
-    newFile: !uuid '00461e38de0dccb620d1396dcf72544be4533323'
-    oldFile: !uuid '55f0333ba6d764a8ef812a380a6823d2f55fbacb'
-  /app/static/css/style.scss:
-    newFile: !uuid 'eb1bdc6917fc2d3cbfe94d7d4d264b9800db5eba'
-    oldFile: !uuid '9353aa1f0b96ca36e1cd8bcbd912ecada1084a31'
-  /app/utils:
-    newFile: !uuid 'abbe08deaf5e0dad017d5866c669c9729a8ed00a'
-    oldFile: !uuid '5eb7e2296a494d0181af44bfa8a0dcaabddc0f23'
-  /app/utils/base64src.js:
-    newFile: !uuid '7133959721b6d8eeb7ef1922f86d5d2fd93a0182'
-    oldFile: !uuid 'c449f979daac0d4b3952780e31cbbff8e559daf7'
-  /app/utils/util.js:
-    newFile: !uuid '672a964ab0e42343c31e1ed9144c65be67aeba17'
-    oldFile: !uuid '6e749cf125994854ce522e68da3f109b3e46bf1d'
-  /app/vue.config.js:
-    newFile: !uuid '5d6b78066f28ac22d925b43a7311afabad71d264'
-    oldFile: !uuid '7a03f21dd0e9b1c88b158f7d1223ee106e8d8e0b'
   /crmeb:
-    newFile: !uuid '74714e5925480c58962704290a0c0eef5e61034e'
-    oldFile: !uuid 'f884f4f0f5b027d59e9be7b02d4fc8ddbcd91896'
-  /crmeb/sql:
-    newFile: !uuid 'd53270bb92e5ff878fcffafb5b0b224cb1fbc3e3'
-    oldFile: !uuid '8c6c129eeb662561ac2ef01ceba4dd61e573c663'
-  /crmeb/sql/crmeb_java.sql:
-    newFile: null
-    oldFile: !uuid 'dc3963f211352f90c9bf67e1b6e6209869e7bd8d'
-  /crmeb/sql/crmeb_java_v1.3.1.sql:
-    newFile: !uuid 'a428baf33be25fa07abba06aaf42b8dc4c755746'
-    oldFile: null
-  /crmeb/sql/crmeb_java_v1.3.1_part.sql:
-    newFile: !uuid '5620184dae680cd103571b58affbefdc42e43864'
-    oldFile: null
-  /crmeb/sql/crmeb_java_v1.3.sql:
-    newFile: !uuid '91cb1a80161a0e75c8257bdf4d4427a194338355'
-    oldFile: null
+    newFile: !uuid '55d246492589ee390a23a54272eed51c1496a8e3'
+    oldFile: !uuid '74714e5925480c58962704290a0c0eef5e61034e'
   /crmeb/src:
-    newFile: !uuid '64f09302e718e0f8a116011f6bc65a6108adf213'
-    oldFile: !uuid 'b65b7e456d59b0f450de1da9acb378be49d70e25'
+    newFile: !uuid '4d1c9dfc738cd5f4683fc1ec7d5910246e4df5c8'
+    oldFile: !uuid '64f09302e718e0f8a116011f6bc65a6108adf213'
   /crmeb/src/main:
-    newFile: !uuid '94200d348ea6e88407c550c961ef34a80cf14683'
-    oldFile: !uuid '82c495e632e45f27056ea59d453494ad230ff237'
+    newFile: !uuid '2843cc52c743ce34c7c81fde22e9ec264013cc04'
+    oldFile: !uuid '94200d348ea6e88407c550c961ef34a80cf14683'
+  /crmeb/src/main/java:
+    newFile: !uuid '0174e97cea269c8a1a41644b8277976b3826781e'
+    oldFile: !uuid 'bcf0d739a63a660b5e55ecc5a9f68011fe930014'
+  /crmeb/src/main/java/com:
+    newFile: !uuid 'cabaa3abe197e3647ceccce50e7fea213ac8e2f1'
+    oldFile: !uuid 'c7cf45d48b18bcedd3479b0a6f04aee78d66d84f'
+  /crmeb/src/main/java/com/constants:
+    newFile: !uuid '7eac1923c86efe88f6bfecbd9a8b3ca1ca49657a'
+    oldFile: !uuid 'd29823fdd42f68f00de305854f7ebde46b8d6465'
+  /crmeb/src/main/java/com/constants/Constants.java:
+    newFile: !uuid '49393c1a73630f396e609f4b66384f49af6212ac'
+    oldFile: !uuid '0172fa3eb830c7b370f061f860460b1d4dea6b5d'
+  /crmeb/src/main/java/com/constants/OnePassConstants.java:
+    newFile: !uuid 'ae55ea7768dc42097fa62f58da7f2bf7d9152429'
+    oldFile: !uuid 'fbbd90dee00187445820aa2e3ea28fe4b6c7b1d8'
+  /crmeb/src/main/java/com/constants/PayConstants.java:
+    newFile: !uuid 'd843b6dabf2d0c8115724d50d53344baf97c7f64'
+    oldFile: null
+  /crmeb/src/main/java/com/utils:
+    newFile: !uuid '2a8f145bd02785618235c555f2cbdc63c7be3bed'
+    oldFile: !uuid '2c870f7aa6766b0850f669cb1f9f2d0d01cb9e13'
+  /crmeb/src/main/java/com/utils/CrmebUtil.java:
+    newFile: !uuid 'e7f153e383ec985cbdf0656698019d4b98184b01'
+    oldFile: !uuid 'bbad6991512d1dea94e62e60532fc0ca46cf0115'
+  /crmeb/src/main/java/com/utils/DateUtil.java:
+    newFile: !uuid 'dd88c40219fffa56782e50542c4122c10c37007b'
+    oldFile: !uuid 'ac4f4a42d90d0e78ea44725425d2db262be18ac3'
+  /crmeb/src/main/java/com/utils/WXPayXmlUtil.java:
+    newFile: !uuid '24796737872ee5de3f91290f1d5c4cdaebb50ef3'
+    oldFile: null
+  /crmeb/src/main/java/com/utils/WxPayUtil.java:
+    newFile: !uuid '4756f00e9741a1848385960ef7bd00c513996d3c'
+    oldFile: !uuid '6d956bbad9014030a116985ecc4f0d7fe618cfd4'
+  /crmeb/src/main/java/com/utils/XmlUtil.java:
+    newFile: !uuid '2b1797c44f410575023dc758bca207d27f4ea91e'
+    oldFile: !uuid '24a4bbf00421259f0bcaf8986e1508c67bd3fac6'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid '8026800ee9dca443639d6c6473eadd88702dba4b'
+    oldFile: !uuid '074305abbf9bf13c840dde336a86111692a99c27'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid 'c7d69c7eaed03773a32119ee563acf0237db03a0'
+    oldFile: !uuid '2da307261bb0f843fbfa40d0672d3aedd529bff5'
+  /crmeb/src/main/java/com/zbkj/crmeb/article:
+    newFile: !uuid 'cacb23e0abb1ce973f810992092cc26ebe6428fd'
+    oldFile: !uuid '60e77f793f195facc818610f4edb026fd0f0a989'
+  /crmeb/src/main/java/com/zbkj/crmeb/article/request:
+    newFile: !uuid 'e245ecc34cb21268fa8bad852a502a7197f8a9aa'
+    oldFile: !uuid '5160a37a4d2dad895aa98c9fd0375051a5fe260d'
+  /crmeb/src/main/java/com/zbkj/crmeb/article/request/ArticleSearchRequest.java:
+    newFile: !uuid 'c17b189eba520d75df191f96194433786ac73e24'
+    oldFile: !uuid '5a21ef51ea5d8745ad84c9a9ff8c95c96f5fcff4'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain:
+    newFile: !uuid 'fd187d00ba2dea058924e5c356089e237561838e'
+    oldFile: !uuid '003b1f485e24c3f8291a30dd275b33f1b47dec2f'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/model:
+    newFile: !uuid '5d6ad4de9ad1880d14fd20eef6dde0b15e788eab'
+    oldFile: !uuid '56751a05a2a4e00c9f89c0752adfa7a2aecd423c'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/model/StoreBargain.java:
+    newFile: !uuid '1e2ad892a2935951821542615d81bef69fbfa54b'
+    oldFile: !uuid '67a3bb49538864902060a7aba336981252d05fd4'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/request:
+    newFile: !uuid '38c09dd74fcaf090540ba333189378237abdc5b1'
+    oldFile: !uuid 'cc61a862dabe3222e015ac849f23541b0c06c40b'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/request/StoreBargainRequest.java:
+    newFile: !uuid '6707994f1ac6d2538b43f8c84f40bcd858dec754'
+    oldFile: !uuid '5a61e73e659ea2a89bd1382288e0b19ae3713c61'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/response:
+    newFile: !uuid 'd40990017309983b19e50e6034b19fc6f792b524'
+    oldFile: !uuid 'c403844722be1d06a8af39e9018175c906fd63d5'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/response/StoreBargainResponse.java:
+    newFile: !uuid '43406d696107f9041574f9e5097008493cb54aff'
+    oldFile: !uuid '94489c2c42bb873fb6b53f4e1224bd32d7023699'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/service:
+    newFile: !uuid 'efdba0a18b536491337fca55fab2bb5607affe3f'
+    oldFile: !uuid '3f8f2da87c36d2e9e1d95d45c4eb8f71b9f453ff'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/service/StoreBargainService.java:
+    newFile: !uuid '5b40a2fffc4fc1c5eb1e4cfb2e83337d7181e4e9'
+    oldFile: !uuid '70d876fe0ddfff925caef683465388f72df3e8e5'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/service/impl:
+    newFile: !uuid '8eee8f4f73908dfd87d33cca8187fcf14e396cb6'
+    oldFile: !uuid 'b4850b679b73d846dd0b3e59795a91f6e508c11a'
+  /crmeb/src/main/java/com/zbkj/crmeb/bargain/service/impl/StoreBargainServiceImpl.java:
+    newFile: !uuid 'c24b3e0ca8a96f9b8f126ca684d3f21bea899596'
+    oldFile: !uuid '6aa016fdada1bcd1a8fde1433cf3086d7dac746f'
+  /crmeb/src/main/java/com/zbkj/crmeb/category:
+    newFile: !uuid '36e32d6e2b11784693bf1ad57df7b62f21465f4c'
+    oldFile: !uuid 'b2880f843d028588299ca97a2ac6d3a769af499f'
+  /crmeb/src/main/java/com/zbkj/crmeb/category/model:
+    newFile: !uuid '9797f4279a236bd317c3bd04b59f8ea190bcec58'
+    oldFile: !uuid '5da8bf3b3f32c1064063d4e3734bdaa10f15bcdf'
+  /crmeb/src/main/java/com/zbkj/crmeb/category/model/Category.java:
+    newFile: !uuid '80c36aa5ffbf5532bd5aeb552561b86846e6c214'
+    oldFile: !uuid '1b3c2b22f59d275230ca82314662f83cfd39b081'
+  /crmeb/src/main/java/com/zbkj/crmeb/category/request:
+    newFile: !uuid '924db598ac9722873f3e9f1227f34cd36280f644'
+    oldFile: !uuid 'd85f297c6a93f699d9d96d02e824a50c10cc3e87'
+  /crmeb/src/main/java/com/zbkj/crmeb/category/request/CategorySearchRequest.java:
+    newFile: !uuid '2f3a82890312c33e16c26bc08c048da06aeb68a4'
+    oldFile: !uuid '3220eed90b272687c89bca3d710c1f828b3bf6af'
+  /crmeb/src/main/java/com/zbkj/crmeb/category/service:
+    newFile: !uuid '97522737edbe4054c2c038156306d89b7687b6f3'
+    oldFile: !uuid 'd0f7e50f1e405641ece7134cf19026f313e9b2f1'
+  /crmeb/src/main/java/com/zbkj/crmeb/category/service/impl:
+    newFile: !uuid '7bdfce9f6822dd137e33330608db122566170073'
+    oldFile: !uuid '47b78b727d87a12253b96fa792d5f673256bb074'
+  /crmeb/src/main/java/com/zbkj/crmeb/category/service/impl/CategoryServiceImpl.java:
+    newFile: !uuid 'b5383a3b26fbd5971e80c5ec338ce10945ab032b'
+    oldFile: !uuid '8a6cc79f43c7323f539603f0d0f8d223491ba415'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination:
+    newFile: !uuid '5ed3d8ecde1e88b2b13046521a3d6a02ebbc2ded'
+    oldFile: !uuid 'b3b9835dab6b7cfca50ffd6bcd45f08860c7f5e6'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/controller:
+    newFile: !uuid '5af9a3f4f1be252de181ba7591ff149afc7b2f92'
+    oldFile: !uuid '3bf3ef107c0ffea7ffb5086e487ea0c27c552eac'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/controller/StoreCombinationController.java:
+    newFile: !uuid 'cfd6c24c2f9bd6d5756541e65c42f60183d9a04b'
+    oldFile: !uuid 'a0c2e6f2e8563d93b08a8ef36762600f472a2458'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/response:
+    newFile: !uuid '78ce9d161a0c6ff72222e186b663e8c5bb20a2af'
+    oldFile: !uuid '607cc224bca6c4e7a9ea0d4fcaf0ebd6b306c58a'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/response/StorePinkDetailResponse.java:
+    newFile: !uuid '9bd809c6fb428f6716ead122caef088a833a8332'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/service:
+    newFile: !uuid '174fcda68ef13c0b3e5a202f2f95ed8d26298126'
+    oldFile: !uuid '73c17624ed74f525082e8519599150b95dcfa685'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/service/StoreCombinationService.java:
+    newFile: !uuid 'e333ef67dbeb9540b17ac84efb5a2e0a3579a25a'
+    oldFile: !uuid '3dbe38f348f624c6786d1e54a662a95c678b88b2'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/service/StorePinkService.java:
+    newFile: !uuid '4b66f207fc604f36a0759042416fea425ce761cf'
+    oldFile: !uuid '5ffff3922ef6409b7de89dfb124bad9f752cd632'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/service/impl:
+    newFile: !uuid 'aabebee949d81d3ce5808e363731591d45a694a8'
+    oldFile: !uuid '3a817cbe3ef92a37227916b6ac20ec3cc0bf6a42'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/service/impl/StoreCombinationServiceImpl.java:
+    newFile: !uuid 'e57c7f041651d3ea09a12fe10543dd18a405eccc'
+    oldFile: !uuid '29b3ebb07e437582bd78175ca4689cb953552dcf'
+  /crmeb/src/main/java/com/zbkj/crmeb/combination/service/impl/StorePinkServiceImpl.java:
+    newFile: !uuid '09a920e19f117646c7695d451739b55bbde72186'
+    oldFile: !uuid '3a46c493686acc2b20ff4757d3c9dec709dcc1d8'
+  /crmeb/src/main/java/com/zbkj/crmeb/config:
+    newFile: !uuid '4e8c734f11b1f44e896e8890a7f6e0ae6d57a7f8'
+    oldFile: !uuid '92feb671d881607783af12578acea0fa50d332a5'
+  /crmeb/src/main/java/com/zbkj/crmeb/config/WebConfig.java:
+    newFile: !uuid 'dac20b3430c43d4b5ee75d3cdf6e7fc4b8d25efa'
+    oldFile: !uuid '7d3fe59ddfe6befcc4feb25b05db1c1c66fb074d'
+  /crmeb/src/main/java/com/zbkj/crmeb/export:
+    newFile: !uuid 'd8dec2c83320648d5c500925fcc13625196f5e30'
+    oldFile: !uuid '8d30f5b7dd45912b2590c9fa3d34de9ee4772428'
+  /crmeb/src/main/java/com/zbkj/crmeb/export/service:
+    newFile: !uuid '7c67a197677cd38f6bfeac52341a32489216c02a'
+    oldFile: !uuid '423ce00f93978dfff526c4fde97f95bdd7fef5bc'
+  /crmeb/src/main/java/com/zbkj/crmeb/export/service/impl:
+    newFile: !uuid '0ba157393999d42d080486d1831b716efebcdbfd'
+    oldFile: !uuid '4e320e1fac34524ee77f6d96ff05e07025fd5f23'
+  /crmeb/src/main/java/com/zbkj/crmeb/export/service/impl/ExcelServiceImpl.java:
+    newFile: !uuid 'cc96b930d443f3c83db96f71cfb43067f3f0a38b'
+    oldFile: !uuid '598e393e0987dd288ac0c3801c74d031deb54826'
+  /crmeb/src/main/java/com/zbkj/crmeb/export/vo:
+    newFile: !uuid '55e25b0ec2cd53e24f78249226f71cf27f09c6c9'
+    oldFile: !uuid '3c7b2310922743532d9062a7730bbd3f0983b97e'
+  /crmeb/src/main/java/com/zbkj/crmeb/export/vo/BargainProductExcelVo.java:
+    newFile: !uuid 'd90ca37240221c8fe94c474294a6320c83ac8a13'
+    oldFile: !uuid '3f27f15427576f2ac91313ed15a5dc75f81f9b3e'
+  /crmeb/src/main/java/com/zbkj/crmeb/export/vo/CombinationProductExcelVo.java:
+    newFile: !uuid '53d8a0bbf80720f4068dbe7d07ced9a36d7f9ba9'
+    oldFile: !uuid '2a486250f9cbdb7937cb3173837deb806353a8bb'
+  /crmeb/src/main/java/com/zbkj/crmeb/express:
+    newFile: !uuid '456a9d5d91434b7a7846c054984ff2ff80bebe6b'
+    oldFile: !uuid 'e3082f323ad1407373eee6b3e318a8de9cba90af'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/controller:
+    newFile: !uuid '339ef986ccbfa89ecf6f0ccbc900396c40d5e4a7'
+    oldFile: !uuid 'e31ea6e7e967fbd9ad7350d6354ad5b506732232'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/controller/ExpressController.java:
+    newFile: !uuid 'cce049a1dcd966dc31397dbcfb5bf68291b342b7'
+    oldFile: !uuid 'a8ccd7b2f34d9fe7be6298702e10e1768e468531'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service:
+    newFile: !uuid '8d2e82ad86eb9d0ea4e68f13ee3b69395b620b0a'
+    oldFile: !uuid 'c3b7f1e6e2141bef3e2723ea1ad858496232870d'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/ExpressService.java:
+    newFile: !uuid 'f15e03078fffe28c7376282c228ac86f373a17ec'
+    oldFile: !uuid 'bc2cdb2bdea987706b17aff0acecf6ead8073fc7'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl:
+    newFile: !uuid 'b0ed1ab238dd4938e7fce810727d57d180212216'
+    oldFile: !uuid '15bf58d7de0e2680aa987121d8a78f059d0ee46d'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl/ExpressServiceImpl.java:
+    newFile: !uuid '188ee46d6a80cbf2537a3e6d32954434c3d53657'
+    oldFile: !uuid 'e11763a4888d690ad8d483cc632117a6dd3c3d8b'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/service/impl/LogisticsServiceImpl.java:
+    newFile: !uuid '7041c5d4e13d29acf9bd173141cef5eca0496e97'
+    oldFile: !uuid 'c71fc33e0eda7d69402c23f1042f2f40a86ffe83'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/vo:
+    newFile: !uuid '62458218f1a48c21c9228103826b14b00444e33e'
+    oldFile: !uuid '977cf8dc57a0d7f040843816f0ad4306726cddf1'
+  /crmeb/src/main/java/com/zbkj/crmeb/express/vo/LogisticsResultVo.java:
+    newFile: !uuid 'cf753eece59a1256f9c63af5475e8e36acd58473'
+    oldFile: !uuid '35daad71bd30fb765607249f95b068205a9db629'
+  /crmeb/src/main/java/com/zbkj/crmeb/finance:
+    newFile: !uuid 'e20e6806aba86ce46bcd9b274b7e0259727e1f56'
+    oldFile: !uuid '87db442cf82aa4c0de2026e25f6d4c36d88d8e79'
+  /crmeb/src/main/java/com/zbkj/crmeb/finance/service:
+    newFile: !uuid '119a093d98edcfac0bf7b674aefc90e266fad04b'
+    oldFile: !uuid 'd115b83b3ff8fe7070faccfecb42853e59808d52'
+  /crmeb/src/main/java/com/zbkj/crmeb/finance/service/impl:
+    newFile: !uuid 'be013e5be5f42d70a5cd58c83b0ec0b01db4cb44'
+    oldFile: !uuid '23a1aeee6c1873caaa3a42a4fb35a08679368758'
+  /crmeb/src/main/java/com/zbkj/crmeb/finance/service/impl/UserExtractServiceImpl.java:
+    newFile: !uuid '0546d02997bc570536c9f778c01fdda439704e02'
+    oldFile: !uuid '5bafab195ca38994cbd80b53afecbc17285ea180'
+  /crmeb/src/main/java/com/zbkj/crmeb/front:
+    newFile: !uuid '984a49b740ec51686168fff29bcab08898d0b310'
+    oldFile: !uuid '868f7bbab4fc1a17b3f22a9daabea64c51d985e7'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller:
+    newFile: !uuid '03afa27952d1e220e0f919c20cc059a61dc013f0'
+    oldFile: !uuid '1851d11107ad67705f37c0171e2f93108e312a90'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller/ExpressController.java:
+    newFile: !uuid '95a313aeca49cce0a324ea12dd1b7baf122f2d13'
+    oldFile: !uuid '14ca052fd2126246eab7c3d288a5e96e029d681f'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller/IndexController.java:
+    newFile: !uuid 'e830f32c52736c4c529452e138b54cd8e1d6173f'
+    oldFile: !uuid '4db9f5344647fb917fa9543c1f184b90c2dc44a8'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller/PayController.java:
+    newFile: !uuid 'aeb430169be2e0970255c48a2ba23f9c3f22164f'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller/StoreOrderController.java:
+    newFile: !uuid 'cdce04f8dd119dca2c7110017228dc22ed3df372'
+    oldFile: !uuid '5587a245d79d8a5917b101b6e1ec1aed99c365dc'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/controller/UserController.java:
+    newFile: !uuid '9104e431ab2d41baa0b36d6321af0a4caa36cc87'
+    oldFile: !uuid 'deef33e1cce9135f29bcded06958d530ab946fd9'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request:
+    newFile: !uuid '6932825b1e0ff6d197714d83abf220e5958eac32'
+    oldFile: !uuid '771410a8b1f0e183df23747d23aeaab4e727f095'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request/ConfirmOrderRequest.java:
+    newFile: !uuid '7ffe17541efa1383d757bd7ae1991cf36315999b'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request/OrderAgainRequest.java:
+    newFile: !uuid 'dc8a3f6d18cb8092ddabe036cf8742eae4a48fb3'
+    oldFile: !uuid '55408a858364f01905f323fb1723be10baf77d39'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request/OrderCreateRequest.java:
+    newFile: !uuid 'e29021ff73ff4f98036e03dd1b3558464539bec3'
+    oldFile: !uuid '68c3efa2686bc361ba1e3d80965e963f947ed661'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request/OrderPayRequest.java:
+    newFile: !uuid 'b8e994678cd5215529f9a0d21154dbdcf531a14d'
+    oldFile: !uuid '8915b21a57df7036aeac48f7d934bcb62ff2ce42'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/request/OrderRefundApplyRequest.java:
+    newFile: !uuid 'f7be74890f706d86375802268e493be893f29910'
+    oldFile: !uuid '087771985b34124adbf7fab066dba3b194c4354c'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/response:
+    newFile: !uuid '34ba224e34393023d840f7d657b499d9f090b77b'
+    oldFile: !uuid 'e1f6e0f7e23927cfa213530ebdf75714348f0aef'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/response/ConfirmOrderResponse.java:
+    newFile: !uuid 'ab4db27ce0088dc043bbcc0785f9276dc1da85cc'
+    oldFile: !uuid '1dfb5dc14f11eb8f8348c79ec9c3543a62135f16'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/response/OrderPayResultResponse.java:
+    newFile: !uuid '3621c15df166d049d91ed75fdd1d3108afd8824c'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/front/response/PriceGroupResponse.java:
+    newFile: !uuid '53f01f0a7b8602241dbc0637541e68be973ddbb1'
+    oldFile: !uuid '0916677d2327b199bdb4089c467f00578b8374b7'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/response/StoreOrderDetailResponse.java:
+    newFile: !uuid '931473dada8b126038def1d2aca7b1eaefc00b9c'
+    oldFile: !uuid '29b69e82533d614942b0d7b0de49af45cda6542f'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/response/UserSignInfoResponse.java:
+    newFile: !uuid 'd3067430df0e0bcada4ef029fedbc9b45c01c2fc'
+    oldFile: !uuid 'b70145ba8711449514afa197ef9c74dd1f1e9d6c'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service:
+    newFile: !uuid '769ce67c5ef3874cc60ede8688909e23c0dea0dc'
+    oldFile: !uuid 'c42a0be9d9d506229c14f696e5b24f1101cff32f'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/IndexService.java:
+    newFile: !uuid 'c408454c80a673ca60356ae23449a8a5e6c05942'
+    oldFile: !uuid '51f3c4408fa572042d8e0cf7e5ab847e118cda26'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/OrderService.java:
+    newFile: !uuid '937c08fd596645e744b0535d152766a0ffd9c39f'
+    oldFile: !uuid '226f91409a4781206161691ec29d086e38e5573b'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl:
+    newFile: !uuid 'c89b54e63ff0b270b2ecf63607f2d8aefad6601d'
+    oldFile: !uuid '8775afff50dc4e32d5a2a83398beaafc5aadcbd6'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl/IndexServiceImpl.java:
+    newFile: !uuid 'f006b46e2e2d669e4ea4d0c39a117449f476e17c'
+    oldFile: !uuid '40a3f6d0c5ba49193a2a729fa311ca0365944c1c'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl/OrderServiceImpl.java:
+    newFile: !uuid 'c5fad54094e4b6b60ec55b974faa3189de30d417'
+    oldFile: !uuid '8893f0669d2823865e823c5020efbc7464b460f8'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl/ProductServiceImpl.java:
+    newFile: !uuid 'f5ee798f49e142b37fdcdb1c95afd05b3ced476e'
+    oldFile: !uuid '32d069cb5841f32eb39c869923da04650b525f46'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl/UserCenterServiceImpl.java:
+    newFile: !uuid '44e6e2e41ce14368cd505c14120ffeb7c73d2f68'
+    oldFile: !uuid '72387196cc1bd3df4a13bf7b2311666dd82137ae'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/vo:
+    newFile: !uuid '8eb3932c1e17321d01912df2cc2813fc26bfb2d5'
+    oldFile: !uuid 'd87453c2ce12a32108f8ed23c437dc04ac06df16'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/vo/WxPayJsResultVo.java:
+    newFile: !uuid '052ec2f74d92374c3b83bd4f170bd5ebd1dfad12'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/log:
+    newFile: !uuid '8a952786d299d1f109d4ba4c460d9b742bfd6fb1'
+    oldFile: !uuid 'd67dcb8a9023aef0c90e4b7a0705d0a8640349da'
+  /crmeb/src/main/java/com/zbkj/crmeb/log/service:
+    newFile: !uuid 'bfa1c4928bcd7041bd65eeb874a6900863a34dd8'
+    oldFile: !uuid '30b79b36c811f28017954b57b38ab1e444353795'
+  /crmeb/src/main/java/com/zbkj/crmeb/log/service/impl:
+    newFile: !uuid '6b5b2b88ba9eaef363d0869c5b6f60acf5ba3fd3'
+    oldFile: !uuid '93fa1f9a2cfacf80e74b99e69d465b720b6fe451'
+  /crmeb/src/main/java/com/zbkj/crmeb/log/service/impl/StoreProductLogServiceImpl.java:
+    newFile: !uuid '3cc8e16d6b3a22a084f085f7a37d0e9ee7837fb2'
+    oldFile: !uuid '025880e543d8fbfb629fbcf73c36a6223e77c065'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing:
+    newFile: !uuid '49cce22cf5cf5e9e2e05c62f56cb53c00e224cbd'
+    oldFile: !uuid 'ab59c9775666c872bb39a7c305ef7d6e896b45c4'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/response:
+    newFile: !uuid '0e85025c4d532993295c6a4418ddc68de5e16605'
+    oldFile: !uuid '4867faa2db124ae34a1fc760159e09c2e5430486'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/response/StoreCouponFrontResponse.java:
+    newFile: !uuid '0add02407fdfaa0758f897ba6f4f04d575475afa'
+    oldFile: !uuid 'fac8108406c92b828a3a51f6c4cbc3abc43ddeaa'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/response/StoreCouponUserOrder.java:
+    newFile: !uuid '1a455ddeac14dda19174872dd6321dace03889e4'
+    oldFile: !uuid 'fadfa63334ac33be223086ba758ffcc487f57a29'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/response/StoreCouponUserResponse.java:
+    newFile: !uuid '29a8ff9b0426f4b2b6184a3036a9f4f2363f7599'
+    oldFile: !uuid 'c272f2e4324227c0a39971750adb6708bed2a1af'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/service:
+    newFile: !uuid '7abfc2b47aa968ae27a809a4d0f79ac7c3a05531'
+    oldFile: !uuid '01ee43e1266d85f5bbaef376f03fd4d7cff45af0'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/service/StoreCouponUserService.java:
+    newFile: !uuid '708513e4e9637f5553bda5b2e7ba4fe22adbed6d'
+    oldFile: !uuid '7544a51f8d61898c88d258c6b5c4fe608279dc28'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/service/impl:
+    newFile: !uuid 'ebe2ce8a754c4e9dec722f957edacf6ccfef7ea1'
+    oldFile: !uuid '5fa82a234d2854d6e4beafa3e361f9084d8cdf66'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/service/impl/StoreCouponServiceImpl.java:
+    newFile: !uuid '7ae89e59955927424528fb38cac38d057ede5b15'
+    oldFile: !uuid '3326c50ffb762185381e8598c5797a7e6b9a02e1'
+  /crmeb/src/main/java/com/zbkj/crmeb/marketing/service/impl/StoreCouponUserServiceImpl.java:
+    newFile: !uuid 'c22c6e947c14b6dca06542a70c4ffea1894a3fdd'
+    oldFile: !uuid 'c45ed7a8e59b6deffdd12c4b0735fd4134b77005'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass:
+    newFile: !uuid '3aec4f0c1285a77add4906665131e7507a6ece1f'
+    oldFile: !uuid 'd83519ae2ddfc6958cdc6621ec44c106fb932fca'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass/service:
+    newFile: !uuid 'cff81dc2872a60bf2bdcc3d9e354652d53d1f56b'
+    oldFile: !uuid '4458ce5dd06cb2c9710db13875505f2017d0f2d6'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass/service/impl:
+    newFile: !uuid 'eb0a62f08699b1af1788e153ce2445b25abe3d62'
+    oldFile: !uuid 'ce6642c01b07792159e85482a5e25298f2d974d8'
+  /crmeb/src/main/java/com/zbkj/crmeb/pass/service/impl/OnePassServiceImpl.java:
+    newFile: !uuid 'f43b34c7a7362cdf9de6672b427e93b074179cb5'
+    oldFile: !uuid '310c43b3ae640edc3e9fb4c1aec738cff6bba615'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment:
+    newFile: !uuid 'c2d2899d22132aaf1aae42175dc2c8106f0e06a7'
+    oldFile: !uuid 'a585dfbcd2beffb9e4da161db7e1d7795a14ff35'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/controller:
+    newFile: !uuid '0375642ed5a09292ca80cd90a8fe3a35067b4e03'
+    oldFile: !uuid 'f2f02bde2e6d867af656b96e5bc38f5e543bc3d3'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/controller/CallbackController.java:
+    newFile: !uuid 'e4cd571524cfc48008de4458198c8761658b0bdc'
+    oldFile: !uuid '04d68c3057629ec05b4281e9a4e8a65ab1a6503a'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/service:
+    newFile: !uuid '7fcd914523bf92be8a77900f358fcfd2f715c3ca'
+    oldFile: !uuid 'eb6d81bf0d4de249c1c70f765030649a6d297cc6'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/service/CallbackService.java:
+    newFile: !uuid '646ff081286a1280cf86ba377a431230938de8f2'
+    oldFile: !uuid 'aa10e2d0b826842014a9b0cf687f0cd5a2d01dd9'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/service/OrderPayService.java:
+    newFile: !uuid '98b61f837d42f0f7d762e4016433d7e5f1f0851b'
+    oldFile: !uuid '5f124e1b39039e0c0f1fdc594c9c1ad3838e5c9c'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/service/impl:
+    newFile: !uuid '4c4b0c1a78e45fa1d6fe2a2f40afcf8e8ca46347'
+    oldFile: !uuid '96afdf86adafa9107fd555f0fc977f519e94c07f'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/service/impl/CallbackServiceImpl.java:
+    newFile: !uuid 'b6276245b067899da1fc6b5de2fe9b1d559ceb5b'
+    oldFile: !uuid 'f8e254d6b591b768fc12f0aca13ae6f39fa518c3'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/service/impl/OrderPayServiceImpl.java:
+    newFile: !uuid '9f2554a4bc1a470b0e121733d57abe67576597ed'
+    oldFile: !uuid '8f04e6d98219a61603b5f8c7749695635360b95a'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/vo:
+    newFile: !uuid 'c34fb1085193fc58f3bdfd73b6b9df427abd29cc'
+    oldFile: !uuid '0c5d4d6ed1fc772d0ccdaa7455624867a7e972ac'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/vo/wechat:
+    newFile: !uuid 'd7633cdc4ee9bac124d65b8eaabba2c7569df5c6'
+    oldFile: !uuid '114a9b1c41b378a51b6d142f99e7c006ebabfcf4'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/vo/wechat/CreateOrderRequestVo.java:
+    newFile: !uuid 'fc51e43fdfd25c8148c2e5e195adb7d6d83013a1'
+    oldFile: !uuid 'f8dcb4939875b3eef0a3f0bcc33d376e29491737'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/vo/wechat/WxRefundVo.java:
+    newFile: !uuid 'bcc9785827e24a71a6051dd208f4e2875a657a92'
+    oldFile: !uuid '943912ebd87a2ac89bd753b10407999a4bb98102'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/wechat:
+    newFile: !uuid 'df569ea5dc8178705e7b8409a76fe0c5f0442621'
+    oldFile: !uuid '089d046ef0a82931f652235fb027518ba8ed599a'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/wechat/WeChatPayService.java:
+    newFile: !uuid '18ba30fdc49ceb199d144f19813d16112558b89b'
+    oldFile: !uuid '0335d310d47eb52217e7fdbb1051ca150ee9b1d9'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/wechat/impl:
+    newFile: !uuid 'da01ea0f9397804b3e14c71fec7d3960acc54291'
+    oldFile: !uuid '8e2f9c1d1d2f9cb4428597b5aa067b1f3161f9d1'
+  /crmeb/src/main/java/com/zbkj/crmeb/payment/wechat/impl/WeChatPayServiceImpl.java:
+    newFile: !uuid '2e657ac35271b5a82b02d00c5427721ac2d7c92d'
+    oldFile: !uuid '6ab88b2f729ab13b9a5a93219877b12449234f88'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill:
+    newFile: !uuid '16b21014193bca4d8462a89f6245eccbd8a1d88a'
+    oldFile: !uuid '669b1464ebdcc1fe71829971600110dbeea1fbce'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/model:
+    newFile: !uuid '824696c945c823d31a76bee0f12136866c789732'
+    oldFile: !uuid '3c13a67b5532c49a7990e56748ac5a856eec8496'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/model/StoreSeckill.java:
+    newFile: !uuid '5d3a9abbe241bd471201f1f3e932d8e5b5f3e863'
+    oldFile: !uuid '7925be005b53ee619a23d03ab10cd201727cdbb6'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/request:
+    newFile: !uuid 'fefc108510bbf40a8454af65f0f9cd6b4288d3f0'
+    oldFile: !uuid '489edcfe54092506adb8bae94daf9d7ba344bff2'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/request/StoreSeckillRequest.java:
+    newFile: !uuid '9d6c70268e1b6218614026d509caeac9a0b3e2e4'
+    oldFile: !uuid '07b20a898b40af4fb5154c71ed77dc205b84e465'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/response:
+    newFile: !uuid '94617f0f4ac2b286b7558d7a21ffdbd3f92ef58b'
+    oldFile: !uuid '0e688884396b79c4368472c899e805f961068d0a'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/response/StoreSeckillResponse.java:
+    newFile: !uuid '32170db6ef1414a10a053108788b09d48f5367ae'
+    oldFile: !uuid '8557ef4161f0bbc57bffdf335ce43e074e4b4c98'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/response/StoreSeckillStoreInfoResponse.java:
+    newFile: !uuid '2bf0314a148c48d3377f03095830d079a6a3d71e'
+    oldFile: !uuid 'cfe4b4ad5b99b7255368b7583e8cdf7b868ec962'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service:
+    newFile: !uuid 'f29e44e4b5c5130d3ebfd1b1af6a4f9704a0bf79'
+    oldFile: !uuid 'd08ee7830c5257a0b9690f50bb6e3133031c4722'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/StoreSeckillService.java:
+    newFile: !uuid '7595dae3e028330183b118c1867a86a1e95121fc'
+    oldFile: !uuid 'dc44cd27355f905640c7cfcc3327ef501f182cb6'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/impl:
+    newFile: !uuid '4fd273e513971d1b53f46d93a89e03557a365f98'
+    oldFile: !uuid 'c6d29f9adbd6ee552ddafbb69951e491d29530eb'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/impl/StoreSeckillMangerServiceImpl.java:
+    newFile: !uuid '0ce41f1e50c5a15005cdabb4d94465e9f41315d5'
+    oldFile: !uuid 'eb65cdd922d5afc2ed2a1911fae7521a8c52144f'
+  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/impl/StoreSeckillServiceImpl.java:
+    newFile: !uuid 'd32b6fde537001c68a43b89e5958eed8695bb315'
+    oldFile: !uuid 'fc4537a0a006289e41f8009db496aa1b0b130737'
+  /crmeb/src/main/java/com/zbkj/crmeb/statistics:
+    newFile: !uuid '131a1df67f8c91ac9e7e28eea55bd8225eae6329'
+    oldFile: !uuid '37d8622cc1fc3f7739d033ba7b8453363d5e7f71'
+  /crmeb/src/main/java/com/zbkj/crmeb/statistics/service:
+    newFile: !uuid '759fca84549e40ed86270bd29a2599b46a8c76c3'
+    oldFile: !uuid '2e3faf63226a4fe14d57dd63106168e33ffba4b5'
+  /crmeb/src/main/java/com/zbkj/crmeb/statistics/service/impl:
+    newFile: !uuid '973129142676dde3ca51add5b8f5be9512b4bbb1'
+    oldFile: !uuid 'f0a932f6ffc37e3f4bcb5cdd3f076421e6ea61b5'
+  /crmeb/src/main/java/com/zbkj/crmeb/statistics/service/impl/HomeServiceImpl.java:
+    newFile: !uuid 'c64eb011e52074b8b20b364a9ebaaa60fbdee928'
+    oldFile: !uuid '551d4f0382d77a9d2ede47667d1779c897c55e24'
+  /crmeb/src/main/java/com/zbkj/crmeb/store:
+    newFile: !uuid '3a3d8f15bfe7475c31c84afdd38d8426349792c8'
+    oldFile: !uuid '5e29c0102deda166d4a992b2872bc45222ceaad1'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/controller:
+    newFile: !uuid 'b57c6040d65952036eab8f3023542a9a2934f18e'
+    oldFile: !uuid '57b686d8f2cf9dcd9b2d849fcfc1bc36adfd4bd6'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/controller/RetailShopController.java:
+    newFile: !uuid '291ec9fde92eca2bf74ed3caa1f1c2c59527e8de'
+    oldFile: !uuid 'a23751339f15b13351ad4c382916f76c990bb02d'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/controller/StoreOrderController.java:
+    newFile: !uuid '78116a6cf86cb5134a05bffed5104ca3f62ee4e5'
+    oldFile: !uuid '952a1287d9cff61283e7bdf2ee567e27b5f4bb4d'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/model:
+    newFile: !uuid '849c48fb36873dcda6c9926941f4129566826bc4'
+    oldFile: !uuid '581a178eab8d709f11fa66159d7c7b573316ebff'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/model/StoreOrder.java:
+    newFile: !uuid '5f77e04cc259c9d4b075e319ec1b9353dae8dc5c'
+    oldFile: !uuid 'b839cc1c83eafa1aa2b512cc0eb604bf87758b8a'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/model/StoreProduct.java:
+    newFile: !uuid 'd4dc1fce9c7c0b8b5151e1f832ea21612b64d409'
+    oldFile: !uuid '8aa02447fa97bd94a1390cb10c6e8caa82b62748'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/model/StoreProductReply.java:
+    newFile: !uuid '9ebb3b51619388a4b524a8ad2b99e8870ac332d7'
+    oldFile: !uuid '91909bb2eb180523585547dc7ca1b9cb62ecea7d'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request:
+    newFile: !uuid '7820f885adf168a0f2cb11c5d573b5a718dc2e84'
+    oldFile: !uuid 'f9815fc2ba3ec6d3a446b54407750951a659292a'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request/RetailShopStairUserRequest.java:
+    newFile: !uuid 'c2b8a68960d6e48cd4d9d29b5e27dbd6128691c5'
+    oldFile: !uuid '00296b90b59b67eaba3b4ef8a532b47b969518ef'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request/StoreOrderRefundRequest.java:
+    newFile: !uuid 'd8bfa00121508323ef29defb12185cd8ecae7c3e'
+    oldFile: !uuid 'c5c9af59e23077b969d25e6aa565219a1b070624'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request/StoreOrderRequest.java:
+    newFile: !uuid '989bdca226208e08353da2699cd9210faf030345'
+    oldFile: !uuid 'a4cc3399bf82c045c00668fc34c297a2efc0a282'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request/StoreProductReplyAddRequest.java:
+    newFile: !uuid 'ae12aaf27b9198b6d6dca066298d11420a752496'
+    oldFile: !uuid '4a50ef60b6c6d5b83edf166f0d8dc82b45728edb'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/request/StoreProductRequest.java:
+    newFile: !uuid 'a49f156040137fcf9dfe9647eb245085110be4cd'
+    oldFile: !uuid '01d2b45f9cf1e95ffb430631ebb1a08ac303cdfd'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response:
+    newFile: !uuid 'a4dad8463377eebf7ba5c82cebe350be4bbace8d'
+    oldFile: !uuid 'f41f5d3b120c35de5075ef9505dc51b882805c6d'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/RetailShopStatisticsResponse.java:
+    newFile: !uuid '652c91720c5f700dc7e19258248fe59d8a6ca005'
+    oldFile: !uuid '0cbaadb682781245abf109f35c2c0a9f4bd0cf59'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/RetailShopUserResponse.java:
+    newFile: !uuid 'c7dbb24ea879baa5872e9afc48594a0b50c596ab'
+    oldFile: !uuid '0c3fc2125ad26fa0b0de26759a66521c86a0e108'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreCartResponse.java:
+    newFile: !uuid 'caf63a549fe1fa545f47feaaad03f4393711453b'
+    oldFile: !uuid '28f720469eea3938b31262565252ab4bf0967f2f'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreOrderCreateResponse.java:
+    newFile: !uuid 'fb142ed2f4a9ffb52d0fd8675a06ceba3838a95c'
+    oldFile: !uuid '7b56c1d0435e0968fe257c08b7e0217560658085'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreOrderInfoResponse.java:
+    newFile: !uuid '277ed6b4c17aac5fb45892c46fffb695d23eb37f'
+    oldFile: !uuid 'ab29cf3780e217c6119306420b529e0494204655'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreOrderListResponse.java:
+    newFile: !uuid 'dd2f593cb4f1b8a5f5f51db682c78e4b1ad8ce68'
+    oldFile: !uuid '1ecb8deb35dfa679e3089e35795eedaf7ca58458'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreProductCartProductInfoResponse.java:
+    newFile: !uuid 'f69dd58ae4aa768439c2391df22ab1c1811bf60e'
+    oldFile: !uuid '0468dc3c36fc04874a099b28a341e17061add271'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreProductReplyResponse.java:
+    newFile: !uuid '8368fa2397d5a5cdeaa19753edb2ce24b11428e5'
+    oldFile: !uuid '2b57c1fa4da53f4d5a52616967051724c0ab956b'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreProductResponse.java:
+    newFile: !uuid 'ef47bcc8f1a348f49e1f869dc12de23e34616611'
+    oldFile: !uuid 'eb653401b8c5d1abc7ae18394406f28fd0473ec3'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/response/StoreProductStoreInfoResponse.java:
+    newFile: !uuid '431b93d823c0a60659dc5aad7dcadd50910daad9'
+    oldFile: !uuid '2c8086b2bbda9fec2501b7ed4546f845a95e0e3b'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service:
+    newFile: !uuid 'cb55aca87d24ac8c382918a1649febde45a0b63f'
+    oldFile: !uuid '9d93f0110c061e3e6ea74bfcd5fdad52ef5402c8'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/OrderTaskService.java:
+    newFile: !uuid '385468233acbe2d10e76f0d977730555d47e2325'
+    oldFile: !uuid 'db13d5e28272318fdf32f1e33a2a236c422936bd'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/RetailShopService.java:
+    newFile: !uuid 'f4d5b4d8616250db8a4b89bf79c68525151c438f'
+    oldFile: !uuid '3ea2f9f3b7fc2142e8b703de5ad52a6c2096102a'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/StoreCartService.java:
+    newFile: !uuid '1a5cbf572bdc78410d2ba8b212daf02d849a6626'
+    oldFile: !uuid 'ba1292d83d16a7d1deaa4e1ddd15c8e42cf17736'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/StoreOrderService.java:
+    newFile: !uuid '98577ffe7b4e26ed79a45cc76a90faf64aae04c7'
+    oldFile: !uuid '999b4adb950b1de364130b3be72df4c1c1391f62'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/StoreOrderStatusService.java:
+    newFile: !uuid '95ae2c55c31410a93c74ad83bf5f097bc2e55ba3'
+    oldFile: !uuid 'd732c5572354c6bab29a1c8eee7f8fbecdd43088'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/StoreOrderTaskService.java:
+    newFile: !uuid '650f0d79a0b065968156bbe56a9a08426af81400'
+    oldFile: !uuid '758729ff0e710fdc261f395af6960ad27803b3d4'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/StoreProductAttrValueService.java:
+    newFile: !uuid '8b22d68f1c35b2ca432968956fcb32d3d2985515'
+    oldFile: !uuid '82dbecbac9b4953a55297bb8b7583fd1cc638e31'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/StoreProductService.java:
+    newFile: !uuid '0b38bd0628d2c245130f2dd35ff8cf27c22f325f'
+    oldFile: !uuid '7a5e54bba72dab273581085b6221fff9715a3cfe'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl:
+    newFile: !uuid '3e902b488c9f6aaef321bb4a4c7e268e16eb59b2'
+    oldFile: !uuid '014bad02151ced11b0c5de354a6df016e6c3cf09'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/OrderTaskServiceImpl.java:
+    newFile: !uuid '0337ba1834d8c5de4f055f70374f133468f3ccd8'
+    oldFile: !uuid 'd03c14fe456614971735d0b98904c067a4d25a00'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/RetailShopServiceImpl.java:
+    newFile: !uuid '8259dab630a2f1d9d9e6506451d12b70ddb1425f'
+    oldFile: !uuid '9f8cb3069bd173cf0721c17546493dc685d1e668'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreCartServiceImpl.java:
+    newFile: !uuid 'e1a9efff346f950a34e054f5ac341a4aedd4e68a'
+    oldFile: !uuid 'e92f3e5cfd657f5a4fc960ac3eec31876bc0d7ae'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderRefundServiceImpl.java:
+    newFile: !uuid '14cce286d5ab481364039d7aebe105557dcd1847'
+    oldFile: !uuid '3f278d54557b827d0cb0faadf5e29dee75bf2be8'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderServiceImpl.java:
+    newFile: !uuid 'dd7e6f5585ffc847c2df5d3bb30bc0b3fe88a516'
+    oldFile: !uuid '3ec72efe57524e66092e92bfbd327ded8ffd80c5'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderStatusServiceImpl.java:
+    newFile: !uuid '56984b81255745b24e5133b9e8964af021a4ebd0'
+    oldFile: !uuid 'c3f144ac6355352bce02d6223d96bb440477be8e'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderTaskServiceImpl.java:
+    newFile: !uuid '282fe927adc5d2a1fdb190331e4b55be53b8cac3'
+    oldFile: !uuid '616744d118cbce019180be66796fbfce58a8b0f7'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreOrderVerificationImpl.java:
+    newFile: !uuid 'f8bfbdece4d379aa5159d57209d481629d38d85b'
+    oldFile: !uuid 'f479e6819b0e0fbd55fbf0685ec1c2d8c42d8b58'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreProductAttrValueServiceImpl.java:
+    newFile: !uuid 'd9f758e3f83f40a0390c777a7eca590c76b774ba'
+    oldFile: !uuid 'fd99b0eea567734c238da7b61a6dda7b84cf080d'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreProductReplyServiceImpl.java:
+    newFile: !uuid '50d3cfed5ecfafe9c9065602733333e980e9c308'
+    oldFile: !uuid '7c1d418f48976f98ddf72560abd91b8408f25f17'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/service/impl/StoreProductServiceImpl.java:
+    newFile: !uuid 'c710ff215a3ce92300cd83acf49c1883a1391699'
+    oldFile: !uuid '0aae06818943877cf73460cd034ad1c860e0b4ee'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/utilService:
+    newFile: !uuid '898098627de957f727d0737b6984d0f09b6d399f'
+    oldFile: !uuid 'f30a81047c29ea1a55b8f937f833b9780b39438a'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/utilService/OrderUtils.java:
+    newFile: !uuid '3063e0e0c24d23bcb6a9f3886c9f72b5238e9344'
+    oldFile: !uuid '21d6aefc08448e58d618de8aadbc6ad845375c60'
+  /crmeb/src/main/java/com/zbkj/crmeb/store/utilService/ProductUtils.java:
+    newFile: !uuid '03dfa8320391955f302569250de03f783c48937c'
+    oldFile: !uuid '2b263a4a99e4fc8bb0a3fffd0c14be8912bd84d0'
+  /crmeb/src/main/java/com/zbkj/crmeb/system:
+    newFile: !uuid 'b4bab5a9be5f4507b7093e5c379209850ff93e7c'
+    oldFile: !uuid 'ffb0d93db4f7e929f867d4fb40a1be7f0fec7e06'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service:
+    newFile: !uuid '1874bbb7f25714a5feab9710bbf676041fa48d68'
+    oldFile: !uuid 'e226082bd6452feeae1ae3009e49841abbd2392e'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/SystemAdminService.java:
+    newFile: !uuid 'f68533b6654c3579228b1b70310deb95240d3752'
+    oldFile: !uuid '6ce6d7b16c65d8cdc523d3677aff7fecde53d849'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl:
+    newFile: !uuid 'c3842712ffa1727a3e7dcb4d251115f0cd55cc5b'
+    oldFile: !uuid '6d9eea0b6c5db2e8ed290404b071a824c14b5e6e'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemAdminServiceImpl.java:
+    newFile: !uuid '7fbd796541cc3de69b02c993000d53d9089fbc65'
+    oldFile: !uuid '4f8594d1277147a09fa03c9bd49721c0101de1fa'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemRoleServiceImpl.java:
+    newFile: !uuid '8e2b8750d218be389fae01c1e78adf6e67fdf69a'
+    oldFile: !uuid '906174d3d812460ba467371ffbb5c198f2625c81'
+  /crmeb/src/main/java/com/zbkj/crmeb/system/service/impl/SystemStoreServiceImpl.java:
+    newFile: !uuid 'e5b44ec561f74f38752b88c5284f91b992ef284f'
+    oldFile: !uuid 'a11c10082f0a8787dbcf7a453468bea812bd306b'
+  /crmeb/src/main/java/com/zbkj/crmeb/task:
+    newFile: !uuid '00511cce6d99b94c1eb639b1c9189c7851fb1d05'
+    oldFile: !uuid '96e80f5456ee0fb62bf51f2808f599999c197c3c'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/cloud:
+    newFile: !uuid '4be840db9cde53f2b38a3c7bc227aae9325f39e7'
+    oldFile: !uuid '81064dc6b71ff6f6065cd5ad7349ef03e10644a3'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/cloud/AsyncCloud.java:
+    newFile: !uuid 'ae96c99322bbee21b90d869ce0e79fb507bb9622'
+    oldFile: !uuid '4eabf83346b2f0927b2f33ea121e9b268ae1bc6d'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/coupon:
+    newFile: !uuid 'b5e6674225c14274c8ca3c801b2557b550899e27'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/coupon/CouponOverdueTask.java:
+    newFile: !uuid '1229cb5c58b6b0353b9b49eefa412a16681e6a2e'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/order:
+    newFile: !uuid '14ec508b2c94358db42860680c7ff3be61471dc5'
+    oldFile: !uuid '7dca6b199b645f7239afbe3cdb80b790b3a50786'
+  /crmeb/src/main/java/com/zbkj/crmeb/task/order/OrderCancelTask.java:
+    newFile: !uuid 'd90ff2a3066b343f042526d0fb63e18ae26c570b'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/order/OrderCompleteTask.java:
+    newFile: !uuid '9ef059da8de3152a51e2fada1446368d5d74a9d4'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/order/OrderDeleteTask.java:
+    newFile: !uuid 'ca625291eb6123a18627019da36bc1408b9f46c0'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/order/OrderPaySuccessTask.java:
+    newFile: !uuid '00584504615c1780199b7a043e95a7b197132495'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/order/OrderReceiptTask.java:
+    newFile: !uuid 'c867964a0eab97741646385f512b979881ba9536'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/task/order/OrderRefundTask.java:
+    newFile: !uuid 'aa2f8472222dfacde5bd254fe6d5cce1b1cd135b'
+    oldFile: null
+  /crmeb/src/main/java/com/zbkj/crmeb/user:
+    newFile: !uuid '42d547ca2e57c9baf098b07a2e53c6b283d4b599'
+    oldFile: !uuid '92f78437121009be4de21b3ea38cdbe56890f147'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/controller:
+    newFile: !uuid 'b4a7b97527d46750e482466aa34c42ee4912f73b'
+    oldFile: !uuid '7618f0103deaa5b6ec70d38a79ace8073b91c988'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/controller/UserController.java:
+    newFile: !uuid 'c67aed1bdf88f54cc48ae72ecfe528c09bab8d11'
+    oldFile: !uuid '3b162bd8585de867b2193d1552511736b2f19823'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/model:
+    newFile: !uuid '6dd4f825a2c2d0c479d67b95f5f0b865e38007f6'
+    oldFile: !uuid '62d18f603eb05fe7803693dd3fe07c07dd6a41ef'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/model/User.java:
+    newFile: !uuid 'bec143a6a696f276ba856a9f656c13d04cb41257'
+    oldFile: !uuid 'd9ac9e9161548f7de2b99d904b37471a092d032a'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/request:
+    newFile: !uuid 'e1602713b1313fa0e1ca77646da9d74f0e92e1c0'
+    oldFile: !uuid '0a2bd5df8db11f6347585d092064f08ed3f1dcb5'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/request/UserOperateIntegralMoneyRequest.java:
+    newFile: !uuid '53fd7ebc638e09c6603dba9346a9a2ea4854a6cf'
+    oldFile: !uuid '4d3c29e11fd42d0c07d280ac38035be833107a5b'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/response:
+    newFile: !uuid '3b02fb0eda15d5eca430331544f6c4fd5c7d2c33'
+    oldFile: !uuid 'fe274aa4193fb71656f8dafa7598dbd392b5b5aa'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/response/TopDetail.java:
+    newFile: !uuid '7f3563de5242f263e50755da749e8e53946be435'
+    oldFile: !uuid '462dae25f0da2476b884b35a2326529626cbb7a5'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/response/UserResponse.java:
+    newFile: !uuid '7820161762bef73bd31655aebbd18fa235c16d5b'
+    oldFile: !uuid '3b0d6a479a24dba43b6f32b2906413599146c4e2'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service:
+    newFile: !uuid '524bda775ab6e49d9c63c2d972c4d16e22a0fc13'
+    oldFile: !uuid '6b8c67a36e95ea3f84f66cea9a4dd87f76694478'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/UserBillService.java:
+    newFile: !uuid 'c1e1ec950877e711ad31e1aa66a18feeab88db62'
+    oldFile: !uuid '7d6de67e23d93d6a4fd361cb6d4e01d3e7578199'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/UserLevelService.java:
+    newFile: !uuid '1c6de47cc4dddc8b19483657739e4c1bf0d9ab27'
+    oldFile: !uuid '7e134bebc57e0b0df956f032128966da6b005638'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/UserService.java:
+    newFile: !uuid '1fc2fc3a4e145d10284e9b477141b0fd5fbaeac3'
+    oldFile: !uuid '293b4056a27b80010baa451cbf1c01a31a0885e1'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/impl:
+    newFile: !uuid '07b78e7976b18ce9eda39db116a400630c031f76'
+    oldFile: !uuid 'f497ceb804223a5227c8d89cc7453ff531d332f9'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/impl/UserBillServiceImpl.java:
+    newFile: !uuid '8d38bcc1caccaee7d677649781a1e5474472113d'
+    oldFile: !uuid '1d975e85a1dfbb4febcfd99abaa531fb4902dfbf'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/impl/UserLevelServiceImpl.java:
+    newFile: !uuid 'de825131b528b6a9506b6023ed66795441358042'
+    oldFile: !uuid 'ad18e395f6714efce16292cb1d94a14d0f5643b1'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/impl/UserServiceImpl.java:
+    newFile: !uuid '142bb6da823d5d557020f589a529d82e5c7692ff'
+    oldFile: !uuid 'df78d35617a6cefd404020fb70ae40248a084663'
+  /crmeb/src/main/java/com/zbkj/crmeb/user/service/impl/UserSignServiceImpl.java:
+    newFile: !uuid '8980c2665587f5dedc3e6957736408355b061d9e'
+    oldFile: !uuid '7ff84254244f016182d51f5bc1feb77d2399e846'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat:
+    newFile: !uuid 'de0bc528906961dfdae992d527ce6ba79236e379'
+    oldFile: !uuid '317fac1906eef799935ccada0013ff1837690730'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service:
+    newFile: !uuid '6aa6031b21d5d4bc941e80e4c62d0a03f2a618de'
+    oldFile: !uuid 'abc480aa3896e7e8f2470d9ed121c71230c65e08'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service/impl:
+    newFile: !uuid 'db1b75b72ee9f69c9e003feefd77903951858c20'
+    oldFile: !uuid 'b2ef6c9b794af199462cf77ac18a69d4a1abe6d3'
+  /crmeb/src/main/java/com/zbkj/crmeb/wechat/service/impl/WeChatServiceImpl.java:
+    newFile: !uuid '3bd3bf1203a42ce1b97d3039a105a9d06b31520c'
+    oldFile: !uuid 'e0125f583e54db0154cbbf0e17560e5ea625f458'
   /crmeb/src/main/resources:
-    newFile: !uuid 'f3527d63fbc2f6ce206cb31ce82307c9f8ef332e'
-    oldFile: !uuid '6aeaf58daf42b2330d06c7fb5821636e1842de69'
-  /crmeb/src/main/resources/application-beta.yml:
-    newFile: !uuid 'd08268808e8784da2f8e9d556349c06e044d4551'
-    oldFile: !uuid 'fc8a01b2db0cd125254d5423113d68d64c1ff15d'
-  /crmeb/src/main/resources/application-dev.yml:
-    newFile: !uuid '5c0522a5ddbd788bbcdaa53b348083a06cbd88a1'
-    oldFile: !uuid 'dab938ed4c89454294d5215b8a6d961c957c05c4'
-  /crmeb/src/main/resources/application-prod.yml:
-    newFile: !uuid '4e1fdd65ce9fea9b8e96ed7e3baae5484cd7d063'
-    oldFile: !uuid '65ae8e282053203594f4a0f329ae2cada5a7abf2'
-  /crmeb/src/main/resources/application.yml:
-    newFile: !uuid '72d5f18497ad6cb53b5b95186e3e78e0a8e09cb2'
-    oldFile: !uuid 'dd9e1acb03eed3a5aa6c6e7a9aedaec53df9b9fe'
-gitCommitId: !uuid 'be34f573227527217b3526d1378a381e91bb4f99'
-renames:
-  /crmeb/sql/crmeb_java_v1.3.sql: /crmeb/sql/crmeb_java.sql
-revisionId: 129
+    newFile: !uuid 'f329b248c3f7bef24280c23a362f32145b2df1d9'
+    oldFile: !uuid 'f3527d63fbc2f6ce206cb31ce82307c9f8ef332e'
+  /crmeb/src/main/resources/mapper:
+    newFile: !uuid '42bbb82d755811e2794d3b57d32bf29009cca76d'
+    oldFile: !uuid 'cef7777b8b515148ecf070b83a2b0f07eddd6a48'
+  /crmeb/src/main/resources/mapper/user:
+    newFile: !uuid '2223fdece9f4bd06652dfcecaaba420a88230709'
+    oldFile: !uuid '98938be2c98b8c2c77511082f34b1cac3ba86d4f'
+  /crmeb/src/main/resources/mapper/user/UserBillMapper.xml:
+    newFile: !uuid '9721236eaa871bcb37165ea8f147e3aa6ec06eca'
+    oldFile: !uuid 'e9b88c12f30dee8bf049ed18035653883db6bc53'
+  /crmeb/start.sh:
+    newFile: !uuid 'd1a15c31916159f4588e819460a47a5c3512d8b6'
+    oldFile: !uuid '6236ed39103b87c70278c72dc2ed4a6976987ecf'
+gitCommitId: !uuid 'c12205e535b479e48f7424299f2632129919ad57'
+renames: {
+  }
+revisionId: 130
