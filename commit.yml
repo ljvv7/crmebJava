@@ -2,25 +2,10 @@
 branches: {
   }
 fileChange:
-  /app:
-    newFile: !uuid '7ecc78bbf904cbe0127f14f050bcd1783e6c98e3'
-    oldFile: !uuid 'ff07b8b7209feb69f858e7a57f7a211660e9fb3c'
-  /app/pages:
-    newFile: !uuid '61854edcdd8e88ea41dca3ea046e5e03a28e3c4f'
-    oldFile: !uuid 'ebc4acf0623360b05f56acb65af4db016586a6d6'
-  /app/pages/index:
-    newFile: !uuid '971ea1def6d01a7d2969c7099140c75e1e9633a6'
-    oldFile: !uuid '7d14658ffcfc12a9a32afda240b078e00040924c'
-  /app/pages/index/components:
-    newFile: !uuid '909deec45669422993a390ab77346762883070ec'
-    oldFile: !uuid 'e47de9780bcfb1967d8ea3b1f4081b5ec3caf1d0'
-  /app/pages/index/components/a_seckill.vue:
-    newFile: !uuid 'c82e638c894fa3593641a546991dabac9205647c'
-    oldFile: !uuid 'c6c2a151df99922b650d849d83129f25719700cd'
-  /app/pages/index/index.vue:
-    newFile: !uuid '4c0a6ee3a1aa2d1113f0c9bb0aae97750518fb70'
-    oldFile: !uuid '7eb9e5d337b3c6e94c43414f449ef7c65e24329f'
-gitCommitId: !uuid '8f374c7b4e308384b9672152a6827d682a427997'
+  /domain.json:
+    newFile: !uuid 'd24c9981ef0e269d7570c2c5f6ee95809a3a5b59'
+    oldFile: !uuid 'd298b36b3fcae51064ad20e79415b82aae80a7e3'
+gitCommitId: !uuid '76840ffa63359a9f92a62d1356416b626ddedb42'
 renames: {
   }
-revisionId: 131
+revisionId: 132
