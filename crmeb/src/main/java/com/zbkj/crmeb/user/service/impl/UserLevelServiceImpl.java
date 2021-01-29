@@ -216,7 +216,7 @@ public class UserLevelServiceImpl extends ServiceImpl<UserLevelDao, UserLevel> i
         Boolean execute = transactionTemplate.execute(e -> {
             if (userLevel == null) {
                 //创建新的会员等级信息
-                save(userLevel);
+                save(newLevel);
             } else {
                 //有数据，更新即可
                 newLevel.setId(userLevel.getId());
