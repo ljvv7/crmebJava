@@ -1068,7 +1068,7 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
         int copyNum = 0;
         if (copyType.equals("1")) {// 一号通
             JSONObject info = onePassService.info();
-            copyNum = Optional.ofNullable(info.getJSONObject("copy").getInteger("surp")).orElse(0);
+            copyNum = Optional.ofNullable(info.getJSONObject("copy").getInteger("num")).orElse(0);
         }
         MyRecord record = new MyRecord();
         record.set("copyType", copyType);
