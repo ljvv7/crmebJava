@@ -2,34 +2,10 @@
 branches: {
   }
 fileChange:
-  /crmeb:
-    newFile: !uuid '8d9e8d2e958372c6cdbf19349e04cdb2931330b4'
-    oldFile: !uuid 'ad3a972eeb9517e5c21ad4f65d2b870e652c6e8a'
-  /crmeb/src:
-    newFile: !uuid 'b2016ad2cc7e2a6c42ba9082034fabb091683ce7'
-    oldFile: !uuid '67ae7226d6305a56e33d4d811412612bfbe29abe'
-  /crmeb/src/main:
-    newFile: !uuid 'e54504b8c4ea0f485e247d72d2a3c09d38951097'
-    oldFile: !uuid 'e4d06d1200ce271eab71a51c79085f6e77c658ef'
-  /crmeb/src/main/java:
-    newFile: !uuid '3b36d6110c96e8142d30f13fd9e6bd8d08a7e15d'
-    oldFile: !uuid 'c0cd944007a38711c7bd3a86ec3fdb558aad4d76'
-  /crmeb/src/main/java/com:
-    newFile: !uuid '1848cf41463ecd24e198b2d8b6ccf0930dcdbebf'
-    oldFile: !uuid 'c367b83a470910a870ea40d1bd20082fe603016b'
-  /crmeb/src/main/java/com/zbkj:
-    newFile: !uuid '26e6a62b6aacc4d1de296338692f0dc0f26c74e2'
-    oldFile: !uuid '8026800ee9dca443639d6c6473eadd88702dba4b'
-  /crmeb/src/main/java/com/zbkj/crmeb:
-    newFile: !uuid 'af4fe8c7e953f9d8df0a54e50b6aaeec50234c7e'
-    oldFile: !uuid 'c7d69c7eaed03773a32119ee563acf0237db03a0'
-  /crmeb/src/main/java/com/zbkj/crmeb/config:
-    newFile: !uuid '4dadf331b904bd7499c9deee52476b23d33b15e6'
-    oldFile: !uuid '4e8c734f11b1f44e896e8890a7f6e0ae6d57a7f8'
-  /crmeb/src/main/java/com/zbkj/crmeb/config/WebConfig.java:
-    newFile: !uuid '3d97dd446ac37805c97613e6a87dde03b6572649'
-    oldFile: !uuid 'dac20b3430c43d4b5ee75d3cdf6e7fc4b8d25efa'
-gitCommitId: !uuid '0ba0200314aa48ca3dbb741c9fec0f6a67af90f1'
+  /README.md:
+    newFile: !uuid 'e8b1468de2374c31222ea5097e50844f3530d990'
+    oldFile: !uuid 'd41e62f3f4def5048e001ac75adf3c08b1e8ea7d'
+gitCommitId: !uuid 'a3dcc4471a83a5fbc447dbbb461d0346eb7574e5'
 renames: {
   }
-revisionId: 134
+revisionId: 135
