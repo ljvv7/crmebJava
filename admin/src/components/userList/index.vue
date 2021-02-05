@@ -63,7 +63,7 @@
           min-width="120"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.sex | saxFilter }}</span>
+            <span>{{ scope.row.sex | subscribeFilter }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -94,6 +94,9 @@ export default {
         2: '女'
       }
       return statusMap[status]
+    },
+    subscribeFilter(status) {
+      return status ? '已关注' : '未关注'
     },
     statusFilter(status) {
       const statusMap = {

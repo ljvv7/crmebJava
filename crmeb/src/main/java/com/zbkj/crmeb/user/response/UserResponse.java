@@ -141,4 +141,7 @@ public class UserResponse {
 
     @ApiModelProperty(value = "清除时间")
     private Date cleanTime;
+
+    @ApiModelProperty(value = "是否关注公众号")
+    private Boolean subscribe;
 }
