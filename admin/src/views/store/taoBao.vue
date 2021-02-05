@@ -194,7 +194,7 @@
 </template>
 
 <script>
-  import {crawlFromApi, treeListApi, crawlSaveApi, categoryApi, importProductApi, productCreateApi, copyConfigApi} from '@/api/store';
+  import {crawlFromApi, treeListApi, crawlSaveApi, categoryApi, importProductApi,copyProductApi, productCreateApi, copyConfigApi} from '@/api/store';
   import { shippingTemplatesList } from '@/api/logistics'
   const defaultObj = [{
     image: '',
@@ -446,8 +446,17 @@
           // if (!reg.test(this.soure_link)) {
           //   return this.$message.warning('请输入以http开头的地址！');
           // }
+          let action;
+          if(this.copyConfig.copyType && this.copyConfig.copyType !=1){
+              action = importProductApi;
+          }else{
+              action = copyProductApi;
+          }
           this.loading = true;
-          importProductApi({ url: this.url, form: this.form}).then(res => {
+          action({ url: this.url, form: this.form}).then(res => {
+            if(this.copyConfig.copyType && this.copyConfig.copyType ==1){
+              res=res.info
+            }  
             this.formValidate = {
               image: res.image,
               sliderImages: JSON.parse(res.sliderImage),
