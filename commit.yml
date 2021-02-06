@@ -2,16 +2,70 @@
 branches: {
   }
 fileChange:
+  /.gitignore:
+    newFile: !uuid '9f11b755a17d8192c60f61cb17b8902dffbd9f23'
+    oldFile: null
   /admin:
-    newFile: !uuid '1686e4d9e6774b20c0527dddc5724525b7a81d36'
-    oldFile: !uuid '85ebd363c263745b46723f7aabc03cbde4f77efc'
-  /admin/.env.development:
-    newFile: !uuid 'c04dd69b11b66f30844930ab31ab3daa86aed9b9'
-    oldFile: !uuid 'ea62b3554abaa02c03c588a921651673927600a4'
-  /admin/.env.production:
-    newFile: !uuid '50f3e67c5f0ec15b960181668eda21e413b5cb63'
-    oldFile: !uuid '2242ce1c3c48a03a938e5fa9f143b3f3079574aa'
-gitCommitId: !uuid '909cdac1c51a5e4bf6f01aead7effe626dfe3786'
+    newFile: !uuid 'e65b1eb0d1b58db65ad973ab726861b2397bf7b3'
+    oldFile: !uuid '1686e4d9e6774b20c0527dddc5724525b7a81d36'
+  /admin/.gitignore:
+    newFile: !uuid '78a752d87e8427f84570300f62bdfb5b183a9931'
+    oldFile: null
+  /admin/src:
+    newFile: !uuid '363a4a886f29bab94279043ed54b1bd5d48f81b8'
+    oldFile: !uuid '2d64e5932cae7459f658e99078bdcda85cb870c4'
+  /admin/src/assets:
+    newFile: !uuid '766dc1e6c70bed305ddcaf5b4cad1d824aaf2cbe'
+    oldFile: !uuid 'cb99840a65b017c4e12635f5205e7dec315a9017'
+  /admin/src/assets/imgs:
+    newFile: !uuid 'd519f8d00f14ecaa74cb7a4488f8abe45d67061c'
+    oldFile: !uuid '121356a463554f6188b13d1bda720f301768261a'
+  /admin/src/assets/imgs/pc1.jpg:
+    newFile: !uuid 'b5d77f259764b4b2566ddd3104f87a4c54633017'
+    oldFile: null
+  /admin/src/views:
+    newFile: !uuid '04b605801ae49fcee013475fdf762a77be946cd3'
+    oldFile: !uuid '2cfc1f9ccb993620d043923f5d3d29eecabbd242'
+  /admin/src/views/maintain:
+    newFile: !uuid '960eec8e3aa37c5c20cf77c414a08a4d7a2a4b55'
+    oldFile: !uuid '6b6fb7f1a0d34e8d62c8ebaf640ee2c709298302'
+  /admin/src/views/maintain/picture:
+    newFile: !uuid 'f30e60e712c2a0f8b64d68c19a2daa23203356f1'
+    oldFile: null
+  /admin/src/views/maintain/picture/index.vue:
+    newFile: !uuid 'a44649ab72259f5809b58cc728c5ef3c9c498438'
+    oldFile: null
+  /admin/tests:
+    newFile: !uuid 'a554d4aa70de5eadd1bdc7fa4ed3e027235454b7'
+    oldFile: null
+  /admin/tests/unit:
+    newFile: !uuid '340ec298c4a9141b74fb82cd7669f1571b5ac518'
+    oldFile: null
+  /admin/tests/unit/.eslintrc.js:
+    newFile: !uuid '958d51ba27f55d294e6950088886d7ad71199d74'
+    oldFile: null
+  /admin/tests/unit/components:
+    newFile: !uuid '73e740e85e6ca9ceb91142a115aff3cbf288b22f'
+    oldFile: null
+  /admin/tests/unit/components/Hamburger.spec.js:
+    newFile: !uuid '01ea303a5e16f875972722d7665383836b20654c'
+    oldFile: null
+  /admin/tests/unit/components/SvgIcon.spec.js:
+    newFile: !uuid '31467a9f6fba16a81a90923db02da289248e2bc6'
+    oldFile: null
+  /admin/tests/unit/utils:
+    newFile: !uuid '70df25cbf6c2f6a989803d425ec9e40f61722fcc'
+    oldFile: null
+  /admin/tests/unit/utils/formatTime.spec.js:
+    newFile: !uuid 'd07e414f0a7153e4c0b30605270ff8976fa3e3bf'
+    oldFile: null
+  /admin/tests/unit/utils/parseTime.spec.js:
+    newFile: !uuid 'bc61d1ac1d8aecbd4ff84050dc33c17205fce394'
+    oldFile: null
+  /admin/tests/unit/utils/validate.spec.js:
+    newFile: !uuid 'ef2efe614276df4ad3d30fc06a76bf88748d112e'
+    oldFile: null
+gitCommitId: !uuid '33549e54898e2a4dd51cd7ed352648e72b4c03ac'
 renames: {
   }
-revisionId: 142
+revisionId: 143
