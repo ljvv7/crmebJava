@@ -11,19 +11,26 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
-* @author Mr.Zhang edit by stivepeim 7-3
-* @description StoreCartService 接口
-* @date 2020-05-28
-*/
+ * StoreCartService 接口
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 public interface StoreCartService extends IService<StoreCart> {
 
     /**
      * 根据有效标识符获取出数据
      * @param pageParamRequest 分页参数
-     * @param cart 购物车参数
+     * @param isValid 是否失效
      * @return 购物车列表
      */
-    List<StoreCartResponse> getList(PageParamRequest pageParamRequest, StoreCart cart, boolean isValid);
+    List<StoreCartResponse> getList(PageParamRequest pageParamRequest, boolean isValid);
 
     /**
      * 根据用户id和购物车ids查询购物车集合
@@ -31,7 +38,7 @@ public interface StoreCartService extends IService<StoreCart> {
      * @param cartIds 购物车id集合
      * @return 购物车列表
      */
-    List<StoreCartResponse> getListByUserIdAndCartIds(Integer userId, List<Integer> cartIds,Integer isNew);
+    List<StoreCartResponse> getListByUserIdAndCartIds(Integer userId, List<String> cartIds,Boolean isNew);
 
     /**
      * 根据用户id和购物车id集合获取列表
@@ -62,7 +69,7 @@ public interface StoreCartService extends IService<StoreCart> {
      * @param storeCart 新增购物车参数
      * @return 新增结果
      */
-    boolean saveCate(StoreCart storeCart);
+    String saveCate(StoreCart storeCart);
 
     /**
      * 设置会员价
@@ -86,7 +93,7 @@ public interface StoreCartService extends IService<StoreCart> {
      * @param productId 商品id
      * @return 跟新结果
      */
-    boolean productStatusNotEnable(Integer productId);
+    Boolean productStatusNotEnable(Integer productId);
 
     /**
      * 购物车重选提交
@@ -94,4 +101,10 @@ public interface StoreCartService extends IService<StoreCart> {
      * @return 提交结果
      */
     boolean resetCart(CartResetRequest resetRequest);
+
+    /**
+     * 对应sku购物车生效
+     * @param skuIdList skuIdList
+     */
+    Boolean productStatusNoEnable(List<Integer> skuIdList);
 }

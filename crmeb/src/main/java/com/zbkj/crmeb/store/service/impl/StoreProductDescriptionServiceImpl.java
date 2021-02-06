@@ -1,5 +1,6 @@
 package com.zbkj.crmeb.store.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.common.PageParamRequest;
 import com.github.pagehelper.PageHelper;
 
@@ -16,10 +17,17 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* @author Mr.Zhang
-* @description StoreProductDescriptionServiceImpl 接口实现
-* @date 2020-05-27
-*/
+ * StoreProductDescriptionServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class StoreProductDescriptionServiceImpl extends ServiceImpl<StoreProductDescriptionDao, StoreProductDescription> implements StoreProductDescriptionService {
 
@@ -47,10 +55,15 @@ public class StoreProductDescriptionServiceImpl extends ServiceImpl<StoreProduct
         return dao.selectList(lambdaQueryWrapper);
     }
 
+    /**
+     * 根据商品id和type删除对应描述
+     * @param productId 商品id
+     * @param type      类型
+     */
     @Override
-    public void deleteByProductId(int productId) {
-        LambdaQueryWrapper<StoreProductDescription> lmq = new LambdaQueryWrapper<>();
-        lmq.eq(StoreProductDescription::getProductId, productId);
+    public void deleteByProductId(int productId,int type) {
+        LambdaQueryWrapper<StoreProductDescription> lmq = Wrappers.lambdaQuery();
+        lmq.eq(StoreProductDescription::getProductId, productId).eq(StoreProductDescription::getType,type);
         dao.delete(lmq);
     }
 }

@@ -1,5 +1,7 @@
 package com.zbkj.crmeb.wechat.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -16,9 +18,7 @@ import com.zbkj.crmeb.wechat.request.TemplateMessageSearchRequest;
 import com.zbkj.crmeb.wechat.service.TemplateMessageService;
 import com.zbkj.crmeb.wechat.service.WeChatService;
 import com.zbkj.crmeb.wechat.service.WechatProgramMyTempService;
-import com.zbkj.crmeb.wechat.vo.SendTemplateMessageItemVo;
-import com.zbkj.crmeb.wechat.vo.TemplateMessageIndustryVo;
-import com.zbkj.crmeb.wechat.vo.TemplateMessageVo;
+import com.zbkj.crmeb.wechat.vo.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +31,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author Mr.Zhang
-* @description TemplateMessageServiceImpl 接口实现
-* @date 2020-06-03
-*/
+ * TemplateMessageServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, TemplateMessage> implements TemplateMessageService {
     private static final Logger logger = LoggerFactory.getLogger(TemplateMessageServiceImpl.class);
@@ -83,8 +90,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
         if(StringUtils.isNotBlank(request.getTempKey())){
             lambdaQueryWrapper.eq(TemplateMessage::getTempKey, request.getTempKey());
         }
-
-        if(null != request.getType()){
+        if (ObjectUtil.isNotNull(request.getType())) {
             lambdaQueryWrapper.eq(TemplateMessage::getType, request.getType());
         }
         lambdaQueryWrapper.orderByDesc(TemplateMessage::getId);
@@ -115,7 +121,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
     }
 
     /**
-     * 发送给微信消息进入队列
+     * 发送公众号消息
      * @param tempKey String 模板消息key
      * @param map 需要替换的数据
      * @param userId Integer 用户id
@@ -175,7 +181,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
     }
 
     /**
-     * 公众号消费队列
+     * 公众号消费队列消费
      * @author Mr.Zhang
      * @since 2020-06-03
      */
@@ -206,7 +212,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
     }
 
     /**
-     * 小程序消费队列
+     * 小程序消费队列消费
      * @author Mr.Zhang
      * @since 2020-06-03
      */
@@ -253,6 +259,108 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
             data = JSONObject.parseObject(object.toString());
         }
         return JSONObject.toJavaObject(data, TemplateMessageIndustryVo.class);
+    }
+
+    /**
+     * 发送模板消息
+     * @param templateNo 模板消息编号
+     * @param temMap 内容Map
+     * @param openId 微信用户openid
+     */
+    @Override
+    public void pushTemplateMessage(String templateNo, HashMap<String, String> temMap, String openId) {
+        TemplateMessageVo templateMessageVo = new TemplateMessageVo();
+
+        TemplateMessage templateMessage = getInfoByTempKey(templateNo);
+        if(ObjectUtil.isNull(templateMessage) || StrUtil.isBlank(templateMessage.getContent())){
+            return;
+        }
+        templateMessageVo.setTemplate_id(templateMessage.getTempId());
+
+        HashMap<String, SendTemplateMessageItemVo> hashMap = new HashMap<>();
+        for (Map.Entry<String, String> entry : temMap.entrySet()){
+            hashMap.put(entry.getKey(), new SendTemplateMessageItemVo(entry.getValue()));
+        }
+
+        templateMessageVo.setData(hashMap);
+        templateMessageVo.setTouser(openId);
+        redisUtil.lPush(Constants.WE_CHAT_MESSAGE_KEY_PUBLIC, JSONObject.toJSONString(templateMessageVo));
+    }
+
+    /**
+     * 发送小程序订阅消息
+     * @param templateNo 模板消息编号
+     * @param temMap 内容Map
+     * @param openId 微信用户openId
+     */
+    @Override
+    public void pushMiniTemplateMessage(String templateNo, HashMap<String, String> temMap, String openId) {
+        TemplateMessage templateMessage = getInfoByTempKey(templateNo);
+        if(ObjectUtil.isNull(templateMessage) || StrUtil.isBlank(templateMessage.getContent())){
+            return;
+        }
+
+        ProgramTemplateMessageVo programTemplateMessageVo = new ProgramTemplateMessageVo();
+        programTemplateMessageVo.setTemplate_id(templateMessage.getTempId());
+
+        //组装关键字数据
+        HashMap<String, SendProgramTemplateMessageItemVo> hashMap = new HashMap<>();
+        temMap.forEach((key, value) -> hashMap.put(key, new SendProgramTemplateMessageItemVo(value)));
+
+        programTemplateMessageVo.setData(hashMap);
+        programTemplateMessageVo.setTouser(openId);
+        redisUtil.lPush(Constants.WE_CHAT_MESSAGE_KEY_PROGRAM, JSONObject.toJSONString(programTemplateMessageVo));
+    }
+
+    /**
+     * 获取小程序订阅模板编号
+     * @param type 场景类型
+     * 支付之前：beforePay
+     * 		支付成功通知
+     * 支付成功：afterPay
+     * 		发货、配送、收货
+     * 申请退款：refundApply
+     * 		退款成功、拒绝退款
+     * 充值之前：beforeRecharge
+     * 		充值成功通知
+     * 创建砍价：createBargain
+     * 		砍价成功、失败通知
+     * 参与拼团：pink
+     * 		拼团成功、失败通知
+     * 取消拼团：cancelPink
+     * 		退款成功、拒绝退款
+     * @return
+     */
+    @Override
+    public List<TemplateMessage> getMiniTempList(String type) {
+        LambdaQueryWrapper<TemplateMessage> lqw = new LambdaQueryWrapper<>();
+        lqw.select(TemplateMessage::getName, TemplateMessage::getTempId);
+        lqw.eq(TemplateMessage::getStatus, 1); //没有禁用的数据
+        lqw.eq(TemplateMessage::getType, 0);
+        switch (type) {
+            case "beforePay":// 支付之前
+                lqw.eq(TemplateMessage::getTempKey, Constants.WE_CHAT_PROGRAM_TEMP_KEY_ORDER_PAY);
+                break;
+            case "afterPay":// 支付成功
+                lqw.in(TemplateMessage::getTempKey, Constants.WE_CHAT_PROGRAM_TEMP_KEY_EXPRESS, Constants.WE_CHAT_PROGRAM_TEMP_KEY_DELIVERY, Constants.WE_CHAT_PROGRAM_TEMP_KEY_ORDER_RECEIVING);
+                break;
+            case "refundApply":// 申请退款
+                lqw.eq(TemplateMessage::getTempKey, "-1");
+                break;
+            case "beforeRecharge":// 充值之前
+                lqw.eq(TemplateMessage::getTempKey, "-1");
+                break;
+            case "createBargain":// 创建砍价
+                lqw.in(TemplateMessage::getTempKey, Constants.WE_CHAT_PROGRAM_TEMP_KEY_BARGAIN_SUCCESS);
+                break;
+            case "pink":// 参与拼团
+                lqw.in(TemplateMessage::getTempKey, Constants.WE_CHAT_PROGRAM_TEMP_KEY_COMBINATION_SUCCESS);
+                break;
+            case "cancelPink":// cancelPink
+                lqw.eq(TemplateMessage::getTempKey, "-1");
+                break;
+        }
+        return dao.selectList(lqw);
     }
 
     /**

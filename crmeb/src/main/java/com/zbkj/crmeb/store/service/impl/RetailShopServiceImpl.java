@@ -1,36 +1,53 @@
 package com.zbkj.crmeb.store.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.common.CommonPage;
 import com.common.PageParamRequest;
+import com.exception.CrmebException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zbkj.crmeb.finance.response.UserExtractResponse;
 import com.zbkj.crmeb.finance.service.UserExtractService;
+import com.zbkj.crmeb.store.model.StoreOrder;
 import com.zbkj.crmeb.store.request.RetailShopRequest;
 import com.zbkj.crmeb.store.request.RetailShopStairUserRequest;
-import com.zbkj.crmeb.store.response.RetailShopUserResponse;
+import com.zbkj.crmeb.store.response.RetailShopStatisticsResponse;
 import com.zbkj.crmeb.store.service.RetailShopService;
 import com.zbkj.crmeb.store.service.StoreOrderService;
 import com.zbkj.crmeb.system.service.SystemConfigService;
 import com.zbkj.crmeb.user.dao.UserDao;
 import com.zbkj.crmeb.user.model.User;
+import com.zbkj.crmeb.user.model.UserBrokerageRecord;
 import com.zbkj.crmeb.user.request.UserSearchRequest;
+import com.zbkj.crmeb.user.response.SpreadUserResponse;
 import com.zbkj.crmeb.user.response.UserResponse;
 import com.zbkj.crmeb.user.service.UserBillService;
+import com.zbkj.crmeb.user.service.UserBrokerageRecordService;
 import com.zbkj.crmeb.user.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * @Classname RetailShopServiceImpl
- * @Description 分销业务实现
- * @Date 2020/6/22 11:20 上午
- * @Created by stivepeim
+ * RetailShopServiceImpl 接口实现 分销业务实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Service
 public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements RetailShopService {
@@ -50,53 +67,73 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
     @Autowired
     private SystemConfigService systemConfigService;
 
+    @Autowired
+    private UserBrokerageRecordService userBrokerageRecordService;
+
     /**
      * 获取分销列表
-     * @param keywords
-     * @param dateLimit
-     * @param pageRequest
+     * @param keywords 搜索参数
+     * @param dateLimit 时间参数
+     * @param pageRequest 分页参数
      * @return
      */
     @Override
-    public PageInfo<RetailShopUserResponse> getList(String keywords, String dateLimit, PageParamRequest pageRequest) {
+    public CommonPage<SpreadUserResponse> getSpreadPeopleList(String keywords, String dateLimit, PageParamRequest pageRequest) {
+        // 获取分销模式 storeBrokerageStatus 1-指定分销，2-人人分销
+        String storeBrokerageStatus = systemConfigService.getValueByKeyException("store_brokerage_status");
         Page<User> pageUserPage = PageHelper.startPage(pageRequest.getPage(), pageRequest.getLimit());
+        // id,头像，昵称，姓名，电话，推广用户数，推广订单数，推广订单额，佣金总金额，已提现金额，提现次数，未提现金额，上级推广人
+        PageInfo<User> userPageInfo = userService.getAdminSpreadPeopleList(storeBrokerageStatus, keywords, dateLimit, pageRequest);
 
-//        User currentUser = userService.getUserByEntity();
-        UserSearchRequest userSearchRequest = new UserSearchRequest();
-        userSearchRequest.setStatus(true);
-        userSearchRequest.setIsPromoter(true);
-        userSearchRequest.setKeywords(keywords);
-        userSearchRequest.setData(dateLimit);
-        PageInfo<UserResponse> userResponses = userService.getList(userSearchRequest,pageRequest);
-        List<RetailShopUserResponse> retailShopUserResponses = new ArrayList<>();
-        for (UserResponse rp:userResponses.getList()) {
-            RetailShopUserResponse nrp = new RetailShopUserResponse(
-                    rp.getUid(),rp.getAccount(),rp.getPwd(),rp.getRealName(),rp.getBirthday(),rp.getCardId(),rp.getMark(),
-                    rp.getPartnerId(),rp.getGroupId(),rp.getGroupName(),rp.getTagName(),rp.getNickname(),rp.getAvatar(),rp.getPhone(),
-                    rp.getAddIp(),rp.getLastIp(),rp.getNowMoney(),rp.getBrokeragePrice(),rp.getIntegral(),rp.getExperience(),rp.getSignNum(),
-                    rp.getStatus(),rp.getLevel(),rp.getSpreadUid(),rp.getSpreadTime(),rp.getSpreadNickname(),rp.getUserType(),rp.getIsPromoter(),
-                    rp.getPayCount(),rp.getSpreadCount(),rp.getAddres(),rp.getAdminid(),rp.getLoginType(),rp.getUpdateTime(),rp.getCreateTime(),
-                    rp.getLastLoginTime(),rp.getCleanTime(),null,null);
-            retailShopUserResponses.add(nrp);
+        if (CollUtil.isEmpty(userPageInfo.getList())) {
+//            return CommonPage.restPage(userPageInfo);
         }
+        List<User> userList = userPageInfo.getList();
+        List<SpreadUserResponse> responseList = CollUtil.newArrayList();
+        userList.forEach(user -> {
+            SpreadUserResponse userResponse = new SpreadUserResponse();
+            BeanUtils.copyProperties(user, userResponse);
+            // 上级推广员名称
+            userResponse.setSpreadNickname("无");
+            if (ObjectUtil.isNotNull(user.getSpreadUid()) && user.getSpreadUid() > 0) {
+                User spreadUser = userService.getById(user.getSpreadUid());
+                userResponse.setSpreadNickname(Optional.ofNullable(spreadUser.getNickname()).orElse(""));
+            }
 
-        for (RetailShopUserResponse rShopUser:retailShopUserResponses) {
-            // 推广用户数量
-//            List<Integer> userIds = new ArrayList<>();
-            List<Integer> userIds = userResponses.getList().stream().map(e -> {
-                return e.getUid();
-            }).collect(Collectors.toList());
-//            userIds.add(currentUser.getUid());
-//            rShopUser.setSpreadPeopleCount(userService.getSpreadPeopleIdList(userIds).size());
-            rShopUser.setSpreadPeopleCount(userService.getSpreadPeopleIdList(userIds).size());
-            // 获取提现数据
-            rShopUser.setUserExtractResponse(userExtractService.getUserExtractByUserId(rShopUser.getUid()));
-            // 获取订单数据
-            rShopUser.setRetailShopOrderDataResponse(storeOrderService.getOrderDataByUserId(rShopUser.getUid()));
-            // 佣金数据
-            rShopUser.setBrokerageMoney(userBillService.getDataByUserId(rShopUser.getUid()));
-        }
-        return CommonPage.copyPageInfo(pageUserPage, retailShopUserResponses);
+            List<UserBrokerageRecord> recordList = userBrokerageRecordService.getSpreadListByUid(user.getUid());
+            if (CollUtil.isEmpty(recordList)) {
+                // 推广订单数
+                userResponse.setSpreadOrderNum(0);
+                // 推广订单额
+                userResponse.setSpreadOrderTotalPrice(BigDecimal.ZERO);
+                // 佣金总金额
+                userResponse.setTotalBrokeragePrice(BigDecimal.ZERO);
+                // 已提现金额
+                userResponse.setExtractCountPrice(BigDecimal.ZERO);
+                // 提现次数
+                userResponse.setExtractCountNum(0);
+            } else {
+                // 推广订单数
+                userResponse.setSpreadOrderNum(recordList.size());
+                // 佣金总金额
+                userResponse.setTotalBrokeragePrice(recordList.stream().map(UserBrokerageRecord::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
+                // 推广订单额
+                List<String> orderNoList = recordList.stream().map(UserBrokerageRecord::getLinkId).collect(Collectors.toList());
+                BigDecimal spreadOrderTotalPrice = storeOrderService.getSpreadOrderTotalPriceByOrderList(orderNoList);
+                userResponse.setSpreadOrderTotalPrice(spreadOrderTotalPrice);
+
+                UserExtractResponse extractResponse = userExtractService.getUserExtractByUserId(user.getUid());
+                // 已提现金额
+                userResponse.setExtractCountPrice(extractResponse.getExtractCountPrice());
+                // 提现次数
+                userResponse.setExtractCountNum(extractResponse.getExtractCountNum());
+            }
+            responseList.add(userResponse);
+        });
+        PageInfo<SpreadUserResponse> responsePageInfo = CommonPage.copyPageInfo(pageUserPage, responseList);
+        responsePageInfo.setTotal(userPageInfo.getTotal());
+        responsePageInfo.setPages(userPageInfo.getPages());
+        return CommonPage.restPage(responsePageInfo);
     }
 
     /**
@@ -108,7 +145,7 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
     public List<UserResponse> getStatisticsData(String nickName, String dateLimit) {
         UserSearchRequest request = new UserSearchRequest();
         request.setIsPromoter(true);
-        request.setData(dateLimit);
+        request.setDateLimit(dateLimit);
         request.setKeywords(nickName);
 
         PageParamRequest pageParamRequest = new PageParamRequest();
@@ -138,13 +175,13 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
         RetailShopRequest response = new RetailShopRequest();
         response.setBrokerageFuncStatus(systemConfigService.getValueByKey(keys.get(0)));
         response.setStoreBrokerageStatus(systemConfigService.getValueByKey(keys.get(1)));
-        response.setStoreBrokerageRatio(systemConfigService.getValueByKey(keys.get(2)));
-        response.setStoreBrokerageTwo(systemConfigService.getValueByKey(keys.get(3)));
-        response.setUserExtractMinPrice(systemConfigService.getValueByKey(keys.get(4)));
+        response.setStoreBrokerageRatio(Integer.parseInt(systemConfigService.getValueByKey(keys.get(2))));
+        response.setStoreBrokerageTwo(Integer.parseInt(systemConfigService.getValueByKey(keys.get(3))));
+        response.setUserExtractMinPrice(new BigDecimal(systemConfigService.getValueByKey(keys.get(4))));
         response.setUserExtractBank(systemConfigService.getValueByKey(keys.get(5)).replace("\\n","\n"));
-        response.setExtractTime(systemConfigService.getValueByKey(keys.get(6)));
-        response.setStoreBrokeragePrice(systemConfigService.getValueByKey(keys.get(7)));
-        response.setBrokerageBindind(systemConfigService.getValueByKey(keys.get(8)));
+        response.setExtractTime(Integer.parseInt(systemConfigService.getValueByKey(keys.get(6))));
+//        response.setStoreBrokeragePrice(new BigDecimal(systemConfigService.getValueByKey(keys.get(7))));
+        response.setBrokerageBindind(systemConfigService.getValueByKey(keys.get(7)));
         return response;
     }
 
@@ -155,17 +192,58 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
      */
     @Override
     public boolean setManageInfo(RetailShopRequest retailShopRequest) {
+        // 返佣比例之和+起来不能超过100%
+        int ration = retailShopRequest.getStoreBrokerageTwo() + retailShopRequest.getStoreBrokerageRatio();
+        if (ration > 100 || ration < 0) throw new CrmebException("返佣比例加起来不能超过100%");
+
         List<String> keys = initKeys();
         systemConfigService.updateOrSaveValueByName(keys.get(0), retailShopRequest.getBrokerageFuncStatus());
         systemConfigService.updateOrSaveValueByName(keys.get(1), retailShopRequest.getStoreBrokerageStatus());
-        systemConfigService.updateOrSaveValueByName(keys.get(2), retailShopRequest.getStoreBrokerageRatio());
-        systemConfigService.updateOrSaveValueByName(keys.get(3), retailShopRequest.getStoreBrokerageTwo());
-        systemConfigService.updateOrSaveValueByName(keys.get(4), retailShopRequest.getUserExtractMinPrice());
+        systemConfigService.updateOrSaveValueByName(keys.get(2), retailShopRequest.getStoreBrokerageRatio().toString());
+        systemConfigService.updateOrSaveValueByName(keys.get(3), retailShopRequest.getStoreBrokerageTwo().toString());
+        systemConfigService.updateOrSaveValueByName(keys.get(4), retailShopRequest.getUserExtractMinPrice().toString());
         systemConfigService.updateOrSaveValueByName(keys.get(5), retailShopRequest.getUserExtractBank());
-        systemConfigService.updateOrSaveValueByName(keys.get(6), retailShopRequest.getExtractTime());
-        systemConfigService.updateOrSaveValueByName(keys.get(7), retailShopRequest.getStoreBrokeragePrice());
-        systemConfigService.updateOrSaveValueByName(keys.get(8), retailShopRequest.getBrokerageBindind());
+        systemConfigService.updateOrSaveValueByName(keys.get(6), retailShopRequest.getExtractTime().toString());
+//        systemConfigService.updateOrSaveValueByName(keys.get(7), retailShopRequest.getStoreBrokeragePrice().toString());
+        systemConfigService.updateOrSaveValueByName(keys.get(7), retailShopRequest.getBrokerageBindind());
         return true;
+    }
+
+    /**
+     * 获取分销统计数据
+     * @param keywords  模糊搜索参数
+     * @param dateLimit 时间参数
+     * @return RetailShopStatisticsResponse
+     */
+    @Override
+    public RetailShopStatisticsResponse getAdminStatistics(String keywords, String dateLimit) {
+
+        // 获取分销模式 storeBrokerageStatus 1-指定分销，2-人人分销
+        String storeBrokerageStatus = systemConfigService.getValueByKeyException("store_brokerage_status");
+
+        // 获取分销人数
+        List<User> userDisList = userService.findDistributionList(keywords, dateLimit, storeBrokerageStatus);
+        if (CollUtil.isEmpty(userDisList)) {
+            return new RetailShopStatisticsResponse(0, 0, 0, BigDecimal.ZERO, 0, BigDecimal.ZERO);
+        }
+        // 分销人员人数
+        Integer distributionNum = userDisList.size();
+
+        // 发展会员人数
+        List<Integer> ids = userDisList.stream().map(User::getUid).collect(Collectors.toList());
+        Integer developNum = userService.getDevelopDistributionPeopleNum(ids, dateLimit);
+
+        List<StoreOrder> storeOrders = storeOrderService.getOrderByUserIdsForRetailShop(ids);
+        // 订单总数
+        Integer orderNum = storeOrders.size();
+        // 订单金额
+        BigDecimal orderPriceCount = storeOrders.stream().map(StoreOrder::getPayPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        // 提现次数
+        Integer withdrawCount = userExtractService.getListByUserIds(ids).size();
+        // 未提现金额
+        BigDecimal noWithdrawPrice = userDisList.stream().map(User::getBrokeragePrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return new RetailShopStatisticsResponse(distributionNum, developNum, orderNum, orderPriceCount, withdrawCount, noWithdrawPrice);
     }
 
     ///////////////////////////////////////////////////// 自定义
@@ -179,7 +257,7 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
         keys.add("user_extract_min_price");
         keys.add("user_extract_bank");
         keys.add("extract_time");
-        keys.add("store_brokerage_price");
+//        keys.add("store_brokerage_price");
         keys.add("brokerage_bindind");
         return keys;
     }

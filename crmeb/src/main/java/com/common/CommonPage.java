@@ -9,6 +9,18 @@ import com.github.pagehelper.PageInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 公共分页对象
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Data
 public class CommonPage<T> {
     private Integer page = Constants.DEFAULT_PAGE;
@@ -64,6 +76,19 @@ public class CommonPage<T> {
     public static <T> PageInfo<T> copyPageInfo(com.github.pagehelper.Page originPageInfo, List<T> list) {
         PageInfo<T> pageInfo = new PageInfo<>(list);
         BeanUtils.copyProperties(originPageInfo, pageInfo, "list");
+        return pageInfo;
+    }
+
+    /**
+     * 对象A复制对象B的分页信息 //TODO 多次数据查询导致分页数据异常解决办法
+     */
+    public static <T> PageInfo<T> copyPageInfo(PageInfo<?> originPageInfo, List<T> list) {
+        PageInfo<T> pageInfo = new PageInfo<>(list);
+        pageInfo.setPages(originPageInfo.getPages());
+        pageInfo.setPageNum(originPageInfo.getPageNum());
+        pageInfo.setPageSize(originPageInfo.getPageSize());
+        pageInfo.setTotal(originPageInfo.getTotal());
+        pageInfo.setList(list);
         return pageInfo;
     }
 }

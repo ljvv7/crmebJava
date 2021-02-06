@@ -1,6 +1,7 @@
 package com.zbkj.crmeb.user.controller;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.common.CommonPage;
 import com.common.CommonResult;
 import com.common.PageParamRequest;
@@ -8,6 +9,7 @@ import com.zbkj.crmeb.user.model.User;
 import com.zbkj.crmeb.user.request.UserOperateIntegralMoneyRequest;
 import com.zbkj.crmeb.user.request.UserRequest;
 import com.zbkj.crmeb.user.request.UserSearchRequest;
+import com.zbkj.crmeb.user.request.UserUpdateSpreadRequest;
 import com.zbkj.crmeb.user.response.TopDetail;
 import com.zbkj.crmeb.user.response.UserResponse;
 import com.zbkj.crmeb.user.service.UserService;
@@ -29,6 +31,15 @@ import java.util.List;
 
 /**
  * 用户表 前端控制器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
@@ -80,10 +91,8 @@ public class UserController {
     @ApiOperation(value = "修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public CommonResult<String> update(@RequestParam Integer id, @RequestBody UserRequest userRequest){
-        User user = new User();
-        BeanUtils.copyProperties(userRequest, user);
-        user.setUid(id);
-        if(userService.updateById(user)){
+        userRequest.setUid(id);
+        if(userService.updateUser(userRequest)){
             return CommonResult.success();
         }else{
             return CommonResult.failed();
@@ -132,14 +141,11 @@ public class UserController {
     @ApiOperation(value = "会员详情页Top数据")
     @RequestMapping(value = "topdetail", method = RequestMethod.GET)
     public CommonResult<TopDetail> topDetail (@RequestParam @Valid Integer userId){
-
         return CommonResult.success(userService.getTopDetail(userId));
     }
 
     /**
      * 操作积分
-     * @author Mr.Zhang
-     * @since 2020-04-10
      */
     @ApiOperation(value = "积分余额")
     @RequestMapping(value = "/operate/founds", method = RequestMethod.GET)
@@ -170,11 +176,9 @@ public class UserController {
     }
 
     /**
-     * 会员分组
+     * 会员标签
      * @param id String id
      * @param tagId Integer 标签id
-     * @author Mr.Zhang
-     * @since 2020-04-28
      */
     @ApiOperation(value = "标签")
     @RequestMapping(value = "/tag", method = RequestMethod.POST)
@@ -184,6 +188,19 @@ public class UserController {
             return CommonResult.success();
         }else{
             return CommonResult.failed();
+        }
+    }
+
+    /**
+     * 修改上级推广人
+     */
+    @ApiOperation(value = "修改上级推广人")
+    @RequestMapping(value = "/update/spread", method = RequestMethod.POST)
+    public CommonResult<String> editSpread(@Validated @RequestBody UserUpdateSpreadRequest request){
+        if(userService.editSpread(request)){
+            return CommonResult.success("修改成功");
+        }else{
+            return CommonResult.failed("修改失败");
         }
     }
 }

@@ -21,6 +21,15 @@ import javax.validation.Valid;
 
 /**
  * 后台管理员表 前端控制器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
@@ -32,19 +41,6 @@ public class SystemAdminController {
     @Autowired
     private SystemAdminService systemAdminService;
 
-//    @ApiOperation(value="后台用户登录")
-//    @PostMapping(value = "/login")
-//    public CommonResult<SystemAdminResponse> SystemAdminLogin(@Validated SystemAdminLoginRequest systemAdminLoginRequest) throws Exception {
-//        SystemAdminRequest systemAdminRequest = new SystemAdminRequest();
-//        systemAdminRequest.setAccount(systemAdminLoginRequest.getAccount());
-//        systemAdminRequest.setPwd(systemAdminLoginRequest.getPwd());
-//        SystemAdminResponse systemAdminResponse = systemAdminService.login(systemAdminRequest);
-//        if(null == systemAdminResponse){
-//            return CommonResult.failed(ExceptionCodeEnum.FAILED, "login failed");
-//        }
-//
-//        return CommonResult.success(systemAdminResponse, "login success");
-//    }
     /**
      * 分页显示后台管理员表
      * @param systemAdminRequest 搜索条件
@@ -133,6 +129,33 @@ public class SystemAdminController {
     public CommonResult<SystemAdmin> info(@RequestParam(value = "id") @Valid Integer id){
         SystemAdmin systemAdmin = systemAdminService.getById(id);
         return CommonResult.success(systemAdmin);
+    }
+
+    /**
+     * 修改后台管理员状态
+     * @param id Integer
+     * @author Mr.Zhang
+     * @since 2020-04-13
+     */
+    @ApiOperation(value = "修改后台管理员状态")
+    @RequestMapping(value = "/updateStatus", method = RequestMethod.GET)
+    public CommonResult<Object> updateStatus(@RequestParam(value = "id") @Valid Integer id, @RequestParam(value = "status") @Valid Boolean status){
+        if (systemAdminService.updateStatus(id, status)) {
+            return CommonResult.success("修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+
+    /**
+     * 修改后台管理员是否接收状态
+     */
+    @ApiOperation(value = "修改后台管理员是否接收状态")
+    @RequestMapping(value = "/update/isSms", method = RequestMethod.GET)
+    public CommonResult<Object> updateIsSms(@RequestParam(value = "id") @Valid Integer id){
+        if (systemAdminService.updateIsSms(id)) {
+            return CommonResult.success("修改成功");
+        }
+        return CommonResult.failed("修改失败");
     }
 }
 

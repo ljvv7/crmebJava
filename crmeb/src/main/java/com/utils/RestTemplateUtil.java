@@ -1,23 +1,61 @@
 package com.utils;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.DefaultHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.SecureRandom;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 
 /**
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  * httpClient 工具类
- * @author Mr.Zhang
- * @since 2020-04-13
  */
 
 @Component
@@ -25,6 +63,22 @@ public class RestTemplateUtil {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    public static final String WXPAYSDK_VERSION = "WXPaySDK/3.0.9";
+    public static final String USER_AGENT = WXPAYSDK_VERSION +
+            " (" + System.getProperty("os.arch") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version") +
+            ") Java/" + System.getProperty("java.version") + " HttpClient/" + HttpClient.class.getPackage().getImplementationVersion();
+
+//    /**
+//     * 设置超时时间
+//     */
+//    public RestTemplateUtil() {
+//        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+//        //30s
+//        requestFactory.setConnectTimeout(30*1000);
+//        requestFactory.setReadTimeout(30*1000);
+//        restTemplate = new RestTemplate(requestFactory);
+//    }
 
     /**
      * 发送GET请求
@@ -196,10 +250,72 @@ public class RestTemplateUtil {
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestEntity, String.class);
         try{
-            return new String(Objects.requireNonNull(responseEntity.getBody()).getBytes("ISO8859-1"), StandardCharsets.UTF_8);
+            System.out.println("responseEntity"+responseEntity);
+            return new String(Objects.requireNonNull(responseEntity.getBody()).getBytes("UTF-8"), StandardCharsets.UTF_8);
         }catch (Exception e){
             return "";
         }
+    }
+
+    /**
+     * 发送POST-JSON请求(微信退款专用)
+     *
+     * @param url
+     * @return
+     */
+
+    public String postWXRefundXml(String url, String xml, String mchId, String path) throws Exception {
+        KeyStore clientStore = KeyStore.getInstance("PKCS12");
+        // 读取本机存放的PKCS12证书文件
+        FileInputStream instream = new FileInputStream(path);
+        try {
+            // 指定PKCS12的密码(商户ID)
+            clientStore.load(instream, mchId.toCharArray());
+        } finally {
+            instream.close();
+        }
+
+        // 实例化密钥库 & 初始化密钥工厂
+        KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        kmf.init(clientStore, mchId.toCharArray());
+
+        // 创建 SSLContext
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(kmf.getKeyManagers(), null, new SecureRandom());
+
+        SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(
+                sslContext,
+                new String[]{"TLSv1"},
+                null,
+                new DefaultHostnameVerifier());
+
+        BasicHttpClientConnectionManager connManager = new BasicHttpClientConnectionManager(
+                RegistryBuilder.<ConnectionSocketFactory>create()
+                        .register("http", PlainConnectionSocketFactory.getSocketFactory())
+                        .register("https", sslConnectionSocketFactory)
+                        .build(),
+                null,
+                null,
+                null
+        );
+
+        HttpClient httpClient = HttpClientBuilder.create()
+                .setConnectionManager(connManager)
+                .build();
+
+        HttpPost httpPost = new HttpPost(url);
+
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(8*1000).setConnectTimeout(6*1000).build();
+        httpPost.setConfig(requestConfig);
+
+        StringEntity postEntity = new StringEntity(xml, "UTF-8");
+        httpPost.addHeader("Content-Type", "text/xml");
+        httpPost.addHeader("User-Agent", USER_AGENT + " " + mchId);
+        httpPost.setEntity(postEntity);
+
+        HttpResponse httpResponse = httpClient.execute(httpPost);
+        org.apache.http.HttpEntity httpEntity = httpResponse.getEntity();
+        return EntityUtils.toString(httpEntity, "UTF-8");
     }
 
     /**
@@ -313,5 +429,30 @@ public class RestTemplateUtil {
 
     public byte[] getBuffer(String url) {
         return restTemplate.getForEntity(url, byte[].class).getBody();
+    }
+
+    /**
+     * post——from-urlencoded格式请求
+     */
+    public String postFromUrlencoded(String url, MultiValueMap<String, Object> params, Map<String, String> header) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        if (CollUtil.isNotEmpty(header)) {
+            for (Map.Entry<String, String> entry : header.entrySet()) {
+                headers.add(entry.getKey(), entry.getValue());
+            }
+        }
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity =
+                new HttpEntity<>(params, headers);
+
+//        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+//        //30s
+//        requestFactory.setConnectTimeout(30*1000);
+//        requestFactory.setReadTimeout(30*1000);
+//        restTemplate = new RestTemplate(requestFactory);
+        return restTemplate.postForEntity(url, requestEntity, String.class).getBody();
     }
 }

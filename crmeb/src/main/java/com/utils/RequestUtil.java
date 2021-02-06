@@ -11,6 +11,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ *  Request工具类
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
+ */
 public class RequestUtil extends HttpServlet{
     public static HttpServletRequest getRequest() {
         if(RequestContextHolder.getRequestAttributes() != null){
@@ -87,7 +99,8 @@ public class RequestUtil extends HttpServlet{
     public static String getUri(HttpServletRequest request){
         String uri = request.getRequestURI();
         List<String> list = CrmebUtil.stringToArrayStrRegex(uri, "/");
-        list.removeIf(StringUtils::isNumeric);
+        list.removeIf(StringUtils::isNumeric); //去掉url中的数字参数
+        list.removeIf(c -> c.contains(","));// 去掉url中的逗号分隔参数
         return StringUtils.join(list, "/");
     }
 }

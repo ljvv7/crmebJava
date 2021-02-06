@@ -20,10 +20,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author Mr.Zhang
-* @Description SystemCityAsyncServiceImpl 接口实现
-* @since 2020-04-17
-*/
+ * SystemCityAsyncServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class SystemCityAsyncServiceImpl extends ServiceImpl<SystemCityDao, SystemCity> implements SystemCityAsyncService {
 
@@ -39,7 +46,8 @@ public class SystemCityAsyncServiceImpl extends ServiceImpl<SystemCityDao, Syste
      * @author Mr.Zhang
      * @since 2020-04-16
      */
-    private void setListTree() {
+    @Override
+    public void setListTree() {
         //循环数据，把数据对象变成带list结构的vo
         List<SystemCityTreeVo> treeList = new ArrayList<>();
 

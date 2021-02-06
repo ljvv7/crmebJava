@@ -1,6 +1,7 @@
 package com.zbkj.crmeb.marketing.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.common.MyRecord;
 import com.common.PageParamRequest;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.crmeb.front.request.UserCouponReceiveRequest;
@@ -16,10 +17,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
-* @author Mr.Zhang
-* @Description StoreCouponUserService 接口
-* @since  2020-05-18
-*/
+ * StoreCouponUserService 接口
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 public interface StoreCouponUserService extends IService<StoreCouponUser> {
 
     PageInfo<StoreCouponUserResponse> getList(StoreCouponUserSearchRequest request, PageParamRequest pageParamRequest);
@@ -31,7 +39,7 @@ public interface StoreCouponUserService extends IService<StoreCouponUser> {
      */
     List<StoreCouponUser> getList(StoreCouponUser storeCouponUser);
 
-    boolean receive(StoreCouponUserRequest storeCouponUserRequest);
+    Boolean receive(StoreCouponUserRequest storeCouponUserRequest);
 
     boolean use(Integer id, List<Integer> productIdList, BigDecimal price);
 
@@ -58,4 +66,22 @@ public interface StoreCouponUserService extends IService<StoreCouponUser> {
     List<StoreCouponUserOrder> getListByCartIds(List<Integer> cartIds);
 
     List<StoreCouponUserResponse> getListFront(Integer userId, PageParamRequest pageParamRequest);
+
+    /**
+     * 优惠券过期定时任务
+     */
+    void overdueTask();
+
+    /**
+     * 用户领取优惠券
+     */
+    Boolean receiveCoupon(UserCouponReceiveRequest request);
+
+    /**
+     * 支付成功赠送处理
+     * @param couponId 优惠券编号
+     * @param uid  用户uid
+     * @return
+     */
+    MyRecord paySuccessGiveAway(Integer couponId, Integer uid);
 }

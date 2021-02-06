@@ -1,10 +1,21 @@
 package com.utils;
 
+import cn.hutool.core.util.StrUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * url 工具类
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 public class UrlUtil {
     public static class UrlEntity {
@@ -44,7 +55,9 @@ public class UrlUtil {
         entity.params = new HashMap<>();
         for (String param : params) {
             String[] keyValue = param.split("=");
-            entity.params.put(keyValue[0], keyValue[1]);
+            if (keyValue.length > 1) {
+                entity.params.put(keyValue[0], keyValue[1]);
+            }
         }
 
         return entity;

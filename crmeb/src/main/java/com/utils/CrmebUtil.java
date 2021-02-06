@@ -1,5 +1,6 @@
 package com.utils;
 
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.constants.Constants;
 import com.exception.CrmebException;
@@ -15,17 +16,22 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.Security;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
- * @author stivepeim
- * @title: CrmebUtil
- * @projectName crmeb
- * @Description: 工具类
- * @since 2020/4/1414:37
+ * Crmeb工具类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 public class CrmebUtil {
 
@@ -126,8 +132,8 @@ public class CrmebUtil {
      * @param args String[] 字符串数组
      */
     public static void main(String[] args) throws Exception {
-        System.out.println(encryptPassword("123456", "admin"));
-//		System.out.println(decryptPassowrd("L8qdg72wbeQ=", "admin"));
+//        System.out.println(encryptPassword("123456", "admin"));
+		System.out.println(decryptPassowrd("", ""));
     }
 
     /**
@@ -201,7 +207,7 @@ public class CrmebUtil {
         List<String> strings = stringToArrayStrRegex(str, ",");
         List<Integer> ids = new ArrayList<>();
         for (String string : strings) {
-            ids.add(Integer.parseInt(string));
+            ids.add(Integer.parseInt(string.trim()));
         }
         return ids;
     }
@@ -582,6 +588,45 @@ public class CrmebUtil {
     }
 
     /**
+     * 同比率计算 //同比增长率= ((当前周期 - 上一个周期) ÷ 上一个周期 ) *100%
+     * @param i1 当前周期
+     * @param i2 上一个周期
+     * @author Mr.Zhang
+     * @since 2020-05-06
+     * @
+     */
+    public static BigDecimal getRateBig(Integer i1, Integer i2){
+        BigDecimal b1 = new BigDecimal(i1);
+        BigDecimal b2 = new BigDecimal(i2);
+        return getRateBig(b1, b2);
+    }
+
+    /**
+     * 同比率计算 //同比增长率= ((当前周期 - 上一个周期) ÷ 上一个周期 ) *100%
+     * 如果上个周期为0， = 当前周期 * 100%
+     * @param b1 当前周期
+     * @param b2 上一个周期
+     * @author Mr.Zhang
+     * @since 2020-05-06
+     * @
+     */
+    public static BigDecimal getRateBig(BigDecimal b1, BigDecimal b2){
+        //计算差值
+
+        if(b2.equals(b1)){
+            //数值一样，说明没有增长
+            return BigDecimal.ZERO;
+        }
+
+        if(b2.equals(BigDecimal.ZERO)){
+            //b2是0
+            return b1.setScale(2, BigDecimal.ROUND_UP);
+        }
+
+        return (b1.subtract(b2)).multiply(BigDecimal.TEN).multiply(BigDecimal.TEN).divide(b2, BigDecimal.ROUND_UP);
+    }
+
+    /**
      * hash 转换
      * @param hash final byte[] hash参数
      * @author Mr.Zhang
@@ -635,7 +680,7 @@ public class CrmebUtil {
      * @return 生成的随机码
      */
     public static String getOrderNo(String payType){
-        return getOrderNoPrefix(payType) + DateUtil.nowDate(Constants.DATE_TIME_FORMAT_NUM) + randomCount(11111, 99999);
+        return payType + DateUtil.nowDate(Constants.DATE_TIME_FORMAT_NUM) + randomCount(11111, 99999);
     }
 
     /**
@@ -737,7 +782,10 @@ public class CrmebUtil {
 
     public static String getSign(Map<String, Object> map, String signKey){
         String result = CrmebUtil.mapToStringUrl(map) + "&key=" + signKey;
-        return DigestUtils.md5Hex(result).toUpperCase();
+//        return DigestUtils.md5Hex(result).toUpperCase();
+        String sign = SecureUtil.md5(result).toUpperCase();
+        System.out.println("sign ========== " + sign);
+        return sign;
     }
 
     /**
@@ -761,5 +809,37 @@ public class CrmebUtil {
         }
 
         return list;
+    }
+
+
+    /**
+     * 百分比计算
+     * @param detailTotalNumber  销售量
+     * @param totalNumber  限量库存
+     * @return  百分比
+     */
+    public static String percentInstance(Integer detailTotalNumber, Integer totalNumber) {
+        Double bfTotalNumber = Double.valueOf(detailTotalNumber);
+        Double zcTotalNumber = Double.valueOf(totalNumber);
+        double percent = bfTotalNumber/zcTotalNumber;
+        //获取格式化对象
+        NumberFormat nt = NumberFormat.getPercentInstance();
+        //设置百分数精确度2即保留两位小数
+        nt.setMinimumFractionDigits(2);
+        return nt.format(percent);
+    }
+
+    /**
+     * 百分比计算
+     * @param detailTotalNumber  销售量
+     * @param totalNumber  限量库存
+     * @return  百分比
+     */
+    public static int percentInstanceIntVal(Integer detailTotalNumber, Integer totalNumber) {
+        Double bfTotalNumber = Double.valueOf(detailTotalNumber);
+        Double zcTotalNumber = Double.valueOf(totalNumber);
+        double percent = bfTotalNumber/zcTotalNumber;
+        double pec = percent * 100;
+        return (int)pec;
     }
 }

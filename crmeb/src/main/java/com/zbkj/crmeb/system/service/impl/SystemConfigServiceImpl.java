@@ -1,5 +1,6 @@
 package com.zbkj.crmeb.system.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.common.PageParamRequest;
@@ -7,6 +8,7 @@ import com.constants.Constants;
 import com.exception.CrmebException;
 import com.github.pagehelper.PageHelper;
 import com.utils.RedisUtil;
+import com.zbkj.crmeb.express.vo.ExpressSheetVo;
 import com.zbkj.crmeb.system.dao.SystemConfigDao;
 import com.zbkj.crmeb.system.model.SystemConfig;
 import com.zbkj.crmeb.system.request.SystemFormCheckRequest;
@@ -26,10 +28,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-* @author Mr.Zhang
-* @Description SystemConfigServiceImpl 接口实现
-* @since 2020-04-13
-*/
+ * SystemConfigServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, SystemConfig> implements SystemConfigService {
 
@@ -129,9 +138,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
         //检测form表单，并且返回需要添加的数据
         systemFormTempService.checkForm(systemFormCheckRequest);
 
-        List<SystemConfig> systemConfigSaveList = new ArrayList<>();
-        List<SystemConfig> systemConfigUpdateList = new ArrayList<>();
-        List<SystemConfig> systemConfigDeleteList = new ArrayList<>();
+        List<SystemConfig> systemConfigList = new ArrayList<>();
 
         //批量添加
         for (SystemFormItemCheckRequest systemFormItemCheckRequest : systemFormCheckRequest.getFields()) {
@@ -143,65 +150,29 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
                 //去掉图片域名之后没有数据则说明当前数据就是图片域名
                 value = systemFormItemCheckRequest.getValue();
             }
-
-            SystemConfig data = selectByName(systemFormItemCheckRequest.getName());
-
             systemConfig.setValue(value);
             systemConfig.setFormId(systemFormCheckRequest.getId());
             systemConfig.setTitle(systemFormItemCheckRequest.getTitle());
-
-            if(null == data){
-                systemConfigSaveList.add(systemConfig);
-            }else{
-                systemConfig.setId(data.getId());
-                systemConfigUpdateList.add(systemConfig);
-            }
+            systemConfigList.add(systemConfig);
         }
 
-        //拿到之前form下的所有数据
-        List<SystemConfig> formDataList = selectByFormId(systemFormCheckRequest.getId());
+        //修改之前的数据
+        updateStatusByFormId(systemFormCheckRequest.getId());
 
-        //添加或者更新数据
-        saveBatch(systemConfigSaveList);
-        saveOrUpdateBatch(systemConfigUpdateList);
+        saveBatch(systemConfigList);
 
+        //删除之前隐藏的数据
+        deleteStatusByFormId(systemFormCheckRequest.getId());
 
-        //所有需要修改的数据
-        systemConfigSaveList.addAll(systemConfigUpdateList);
-
-        List<String> collectNameList = systemConfigSaveList.stream().map(SystemConfig::getName).collect(Collectors.toList());
-
-        //删除老的数据且不在新form提交的数据
-        if(null != formDataList && formDataList.size() > 0){
-            for (SystemConfig systemConfig : formDataList) {
-                if(!collectNameList.contains(systemConfig.getName())){
-                    systemConfig.setStatus(true);
-                    systemConfigDeleteList.add(systemConfig);
-                }
-            }
-        }
-        if(systemConfigDeleteList.size() > 0){
-            dao.deleteBatchIds(systemConfigDeleteList.stream().map(SystemConfig::getId).collect(Collectors.toList()));
-
-        }
-
-        systemConfigDeleteList.addAll(systemConfigSaveList);
-        async(systemConfigDeleteList);
+        List<SystemConfig> forAsyncPram = systemConfigList.stream().map(e -> {
+            e.setStatus(true);
+            return e;
+        }).collect(Collectors.toList());
+        async(forAsyncPram);
 
         return true;
     }
 
-    private List<SystemConfig> selectByFormId(Integer formId) {
-        LambdaQueryWrapper<SystemConfig> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(SystemConfig::getFormId, formId);
-        return dao.selectList(lambdaQueryWrapper);
-    }
-
-    private SystemConfig selectByName(String value) {
-        LambdaQueryWrapper<SystemConfig> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(SystemConfig::getName, value).eq(SystemConfig::getStatus, false);
-        return dao.selectOne(lambdaQueryWrapper);
-    }
 
 
     /**
@@ -301,6 +272,58 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
         return value == null;
     }
 
+    /**
+     * 获取系统电子面单信息
+     */
+    @Override
+    public ExpressSheetVo getExpressSheet() {
+        String exportId = get("config_export_id");
+        if (StrUtil.isBlank(exportId)) {
+            throw new CrmebException("请先开通电子面单");
+        }
+        String exportTempId = get("config_export_temp_id");
+        if (StrUtil.isBlank(exportTempId)) {
+            throw new CrmebException("请先开通电子面单");
+        }
+        String exportCom = get("config_export_com");
+        if (StrUtil.isBlank(exportCom)) {
+            throw new CrmebException("请先开通电子面单");
+        }
+        String exportToName = get("config_export_to_name");
+        if (StrUtil.isBlank(exportToName)) {
+            throw new CrmebException("请先开通电子面单");
+        }
+        String exportToTel = get("config_export_to_tel");
+        if (StrUtil.isBlank(exportToTel)) {
+            throw new CrmebException("请先开通电子面单");
+        }
+        String exportToAddress = get("config_export_to_address");
+        if (StrUtil.isBlank(exportToAddress)) {
+            throw new CrmebException("请先开通电子面单");
+        }
+        String exportSiid = get("config_export_siid");
+        if (StrUtil.isBlank(exportSiid)) {
+            throw new CrmebException("请先开通电子面单");
+        }
+        return new ExpressSheetVo(Integer.valueOf(exportId), exportCom, exportTempId, exportToName, exportToTel, exportToAddress, exportSiid);
+    }
+
+    /**
+     * 获取面单默认配置信息
+     * @return ExpressSheetVo
+     */
+    @Override
+    public ExpressSheetVo getDeliveryInfo() {
+        String exportId = get("config_export_id");
+        String exportTempId = get("config_export_temp_id");
+        String exportCom = get("config_export_com");
+        String exportToName = get("config_export_to_name");
+        String exportToTel = get("config_export_to_tel");
+        String exportToAddress = get("config_export_to_address");
+        String exportSiid = get("config_export_siid");
+        String exportOpen = get("config_export_open");
+        return new ExpressSheetVo(Integer.valueOf(exportId), exportCom, exportTempId, exportToName, exportToTel, exportToAddress, exportSiid, Integer.valueOf(exportOpen));
+    }
 
 
     /**
@@ -329,17 +352,17 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
      * @since 2020-04-16
      */
     private void async(List<SystemConfig> systemConfigList){
-        if (!asyncConfig && systemConfigList.size() < 1) {
+        if (!asyncConfig) {
             //如果配置没有开启
             return;
         }
 
         for (SystemConfig systemConfig : systemConfigList) {
-            if(null != systemConfig.getStatus() && systemConfig.getStatus()){
-                //隐藏之后，删除redis的数据
-                deleteRedis(systemConfig.getName());
-                continue;
-            }
+//            if(systemConfig.getStatus()){
+//                //隐藏之后，删除redis的数据
+//                deleteRedis(systemConfig.getName());
+//                continue;
+//            }
             redisUtil.hmSet(redisKey, systemConfig.getName(), systemConfig.getValue());
         }
     }

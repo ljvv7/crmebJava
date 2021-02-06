@@ -4,7 +4,7 @@ import com.common.CommonPage;
 import com.common.CommonResult;
 import com.common.PageParamRequest;
 import com.zbkj.crmeb.system.model.SystemStoreStaff;
-import com.zbkj.crmeb.system.model.SystemStoreStaffResponse;
+import com.zbkj.crmeb.system.response.SystemStoreStaffResponse;
 import com.zbkj.crmeb.system.request.SystemStoreStaffRequest;
 import com.zbkj.crmeb.system.service.SystemStoreStaffService;
 import io.swagger.annotations.Api;
@@ -17,6 +17,15 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 门店店员表 前端控制器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController

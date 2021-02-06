@@ -1,6 +1,7 @@
 package com.utils;
 
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import com.constants.Constants;
 import com.exception.CrmebException;
 import com.zbkj.crmeb.upload.vo.FileResultVo;
@@ -15,10 +16,16 @@ import java.util.List;
 
 /**
  * 上传工具类
- * @author Mr.Zhang
- * @since 2020-05-08
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
-
 public class UploadUtil {
 
     private static UploadUtil uploadUtil = new UploadUtil();
@@ -29,7 +36,8 @@ public class UploadUtil {
 
     //类型
 //    private static String imagePath = "/image";
-    private static String type = "/image";
+//    private static String type = "/image";
+    private static String type = "/crmebimage";
 
 
     //模块
@@ -212,7 +220,7 @@ public class UploadUtil {
      * @author Mr.Zhang
      * @since 2020-05-08
      */
-    private static String getServerPath() {
+    public static String getServerPath() {
         // 文件分隔符转化为当前系统的格式
         return FilenameUtils.separatorsToSystem( getRootPath() + getWebPath());
     }
@@ -222,7 +230,7 @@ public class UploadUtil {
      * @author Mr.Zhang
      * @since 2020-05-08
      */
-    private static String getWebPath() {
+    public static String getWebPath() {
         // 文件分隔符转化为当前系统的格式
         return getType() + getModelPath() + DateUtil.nowDate(Constants.DATE_FORMAT_DATE).replace("-", "/") + "/";
     }
@@ -254,10 +262,15 @@ public class UploadUtil {
         }
         // 文件名
         String fileName = multipartFile.getOriginalFilename();
+        System.out.println("fileName = " + fileName);
         // 文件后缀名
         String extName = FilenameUtils.getExtension(fileName);
         if (StringUtils.isEmpty(extName)) {
             throw new RuntimeException("文件类型未定义不能上传...");
+        }
+
+        if (fileName.length() > 99) {
+            fileName = StrUtil.subPre(fileName, 90).concat(".").concat(extName);
         }
 
         //文件大小验证

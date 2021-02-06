@@ -22,12 +22,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>
  * 订单表
- * </p>
- *
- * @author Mr.Zhang
- * @since 2020-05-28
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -129,13 +133,13 @@ public class StoreOrderInfoResponse implements Serializable {
     private String deliveryId;
 
     @ApiModelProperty(value = "消费赚取积分")
-    private BigDecimal gainIntegral;
+    private Integer gainIntegral;
 
     @ApiModelProperty(value = "使用积分")
-    private BigDecimal useIntegral;
+    private Integer useIntegral;
 
     @ApiModelProperty(value = "给用户退了多少积分")
-    private BigDecimal backIntegral;
+    private Integer backIntegral;
 
     @ApiModelProperty(value = "备注")
     private String mark;

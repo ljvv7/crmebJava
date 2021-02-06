@@ -1,14 +1,19 @@
 package com.constants;
 
 /**
- * @author stivepeim
- * @title: Constants
- * @projectName crmeb
- * @Description: 配置类
- * @since 2020/4/1415:46
+ *  配置类
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 public class Constants {
-    public static final long TOKEN_EXPRESS_MINUTES = (60 * 1); //1小时
+    public static final long TOKEN_EXPRESS_MINUTES = (60 * 3); //3小时
 
     public static final int HTTPSTATUS_CODE_SUCCESS = 200;
 
@@ -41,7 +46,9 @@ public class Constants {
     public static final String DATE_FORMAT_YEAR_START = "yyyy-01-01 00:00:00";
     public static final String DATE_FORMAT_YEAR_END = "yyyy-12-31 23:59:59";
     public static final String DATE_FORMAT_HHMMSS = "HH:mm:ss";
-
+    public static final String DATE_FORMAT_START_PEREND = "00:00:00";
+    public static final String DATE_FORMAT_END_PEREND = "23:59:59";
+    public static final String DATE_FORMAT_HHMM = "yyyy-MM-dd HH:mm";
 
     //后台管理员操作资金mark
     public static final String USER_BILL_OPERATE_LOG_TITLE = "{$title}{$operate}了{$value}{$founds}";
@@ -55,16 +62,16 @@ public class Constants {
     public static final String USER_LOGIN_PASSWORD_MD5_KEYWORDS = "crmeb";
 
     //用户登token redis存储前缀
-    public static final String USER_TOKEN_REDIS_KEY_PREFIX = "TOKEN_USER_";
+    public static final String USER_TOKEN_REDIS_KEY_PREFIX = "TOKEN_USER:";
 
 
-    //用户登录方式
+    //用户登录方式 h5
     public static final String USER_LOGIN_TYPE_H5 = "h5";
 
-    //用户登录方式
+    //用户登录方式 公众号
     public static final String USER_LOGIN_TYPE_PUBLIC = "wechat";
 
-    //用户登录方式
+    //用户登录方式 小程序
     public static final String USER_LOGIN_TYPE_PROGRAM = "routine";
 
 
@@ -94,11 +101,13 @@ public class Constants {
     public static final Integer PRODUCT_SELECT_CATEGORY_NUM_MAX = 10;
 
     //上传类型
-    public static final String UPLOAD_TYPE_IMAGE = "image";
+//    public static final String UPLOAD_TYPE_IMAGE = "image";
+    public static final String UPLOAD_TYPE_IMAGE = "crmebimage";
 
     //上传类型
     public static final String UPLOAD_TYPE_FILE = "file";
     public static final String UPLOAD_ROOT_PATH_CONFIG_KEY = "upload_root_path";//上传地址
+    public static final String UPLOAD_MODEL_PATH_EXCEL = "excel";// excel
 
     //图片上传
     public static final String UPLOAD_IMAGE_EXT_STR_CONFIG_KEY = "image_ext_str";//图片上传
@@ -111,6 +120,9 @@ public class Constants {
 
     public static final int UPLOAD_TYPE_USER = 7; //用户上传
 
+    // 移动端文章顶部的banner图最大数量 配置数据最小3最大10
+    public static final String ARTICLE_BANNER_LIMIT = "news_slides_limit";
+
     //城市数据 redis key
     public static final String CITY_LIST = "city_list";
     //城市数据 tree redis key
@@ -120,12 +132,18 @@ public class Constants {
 
     //商品库存变动队列key
     public static final String PRODUCT_STOCK_UPDATE = "product_stock_update";
+    // 商品秒杀库存队列Key
+    public static final String PRODUCT_SECKILL_STOCK_UPDATE = "product_seckill_stock_update";
+    // 商品砍价库存队列Key
+    public static final String PRODUCT_BARGAIN_STOCK_UPDATE = "product_bargain_stock_update";
+    // 商品拼团库存队列Key
+    public static final String PRODUCT_COMBINATION_STOCK_UPDATE = "product_combination_stock_update";
     //商品库存redis key
     public static final String PRODUCT_STOCK_LIST = "product_stock_list";
 
 
     //sku库存变动队列key
-    public static final String SKU_STOCK_UPDATE = "product_stock_update";
+//    public static final String SKU_STOCK_UPDATE = "product_stock_update";
     //sku库存redis key
 //    public static final String SKU_STOCK_LIST = "product_stock_list";
 
@@ -144,7 +162,8 @@ public class Constants {
     //config配置的key
     public static final String CONFIG_KEY_SITE_URL = "site_url"; //域名
     public static final String CONFIG_KEY_API_URL = "api_url"; //接口地址
-    public static final String CONFIG_KEY_SITE_LOGO = "routine_index_logo"; //logo地址
+    public static final String CONFIG_KEY_SITE_LOGO = "mobile_top_logo"; //logo地址
+    public static final String CONFIG_KEY_MOBILE_LOGIN_LOGO = "mobile_login_logo"; // 移动端登录 logo
     public static final String CONFIG_KEY_SITE_NAME = "site_name"; //网站名称
     public static final String CONFIG_SITE_TENG_XUN_MAP_KEY = "tengxun_map_key"; //腾讯地图key
     public static final String CONFIG_BANK_LIST = "user_extract_bank"; //可提现银行
@@ -162,8 +181,8 @@ public class Constants {
     public static final String CONFIG_KEY_PAY_ROUTINE_APP_KEY = "pay_routine_key"; //小程序支付key
 
     public static final String CONFIG_KEY_RECHARGE_MIN_AMOUNT = "store_user_min_recharge"; //最小充值金额
-    public static final String CONFIG_KEY_PROGRAM_LOGO = "routine_logo"; //小程序logo
-    public static final String CONFIG_KEY_PUBLIC_LOGO = "wechat_avatar"; //公众号logo
+//    public static final String CONFIG_KEY_PROGRAM_LOGO = "routine_logo"; //小程序logo
+//    public static final String CONFIG_KEY_PUBLIC_LOGO = "wechat_avatar"; //公众号logo
 
     public static final String CONFIG_KEY_LOGISTICS_APP_CODE = "system_express_app_code"; //快递查询密钥
 
@@ -174,20 +193,19 @@ public class Constants {
 
     //分销
     public static final String CONFIG_KEY_STORE_BROKERAGE_LEVEL = "store_brokerage_rate_num"; //返佣比例前缀
+    public static final String CONFIG_KEY_STORE_BROKERAGE_RATE_ONE = "store_brokerage_ratio"; //一级返佣比例前缀
+    public static final String CONFIG_KEY_STORE_BROKERAGE_RATE_TWO = "store_brokerage_two"; //二级返佣比例前缀
     public static final String CONFIG_KEY_STORE_BROKERAGE_USER_EXTRACT_MIN_PRICE = "user_extract_min_price"; //提现最低金额
-    public static final String CONFIG_KEY_STORE_BROKERAGE_MODEL = "brokerage_func_status"; //分销模式
+    public static final String CONFIG_KEY_STORE_BROKERAGE_MODEL = "store_brokerage_status"; //分销模式1-指定分销2-人人分销
     public static final String CONFIG_KEY_STORE_BROKERAGE_USER_EXTRACT_BANK = "user_extract_bank"; //提现银行卡
     public static final String CONFIG_KEY_STORE_BROKERAGE_EXTRACT_TIME = "extract_time"; //冻结时间
     public static final String CONFIG_KEY_STORE_BROKERAGE_PERSON_PRICE = "store_brokerage_price"; //人人分销满足金额
-    public static final String CONFIG_KEY_STORE_BROKERAGE_IS_OPEN = "store_brokerage_status"; //分销启用
+    public static final String CONFIG_KEY_STORE_BROKERAGE_IS_OPEN = "brokerage_func_status"; //分销启用
+    public static final String CONFIG_KEY_STORE_BROKERAGE_BIND_TYPE = "brokerageBindind"; //分销关系绑定0-所有游湖，2-新用户
 
     //积分
     public static final String CONFIG_KEY_INTEGRAL_RATE = "integral_ratio"; //积分抵用比例(1积分抵多少金额
     public static final String CONFIG_KEY_INTEGRAL_RATE_ORDER_GIVE = "order_give_integral"; //下单支付金额按比例赠送积分（实际支付1元赠送多少积分
-
-    //后台首页登录图片
-    public static final String CONFIG_KEY_ADMIN_LOGIN_LOGO = "login_logo"; //登录页LOGO
-    public static final String CONFIG_KEY_ADMIN_LOGIN_BACKGROUND_IMAGE = "admin_login_bg_pic"; //登录页背景图
 
     //分销
     public static final String CONFIG_KEY_DISTRIBUTION_TYPE = "brokerage_bindind";
@@ -197,7 +215,7 @@ public class Constants {
 
 
     //config配置的formId
-    public static final int CONFIG_FORM_ID_INDEX = 69; //首页配置
+    public static final int CONFIG_FORM_ID_INDEX = 133; //首页配置
     public static final int CONFIG_FORM_ID_PUBLIC = 65; //公众号配置
 
 
@@ -209,10 +227,15 @@ public class Constants {
 
 
     // 商品类型 活动类型 0=商品，1=秒杀，2=砍价，3=拼团 attrResult表用到
-    public static final int PRODUCT_TYPE_NORMAL = 0;
-    public static final int PRODUCT_TYPE_SECKILL = 1;
-    public static final int PRODUCT_TYPE_BARGIN = 2;
-    public static final int PRODUCT_TYPE_GROUP = 0;
+    public static final Integer PRODUCT_TYPE_NORMAL = 0;
+    public static final String PRODUCT_TYPE_NORMAL_STR = "默认";
+    public static final Integer PRODUCT_TYPE_SECKILL = 1;
+    public static final String PRODUCT_TYPE_SECKILL_STR = "秒杀";
+    public static final Integer PRODUCT_TYPE_BARGAIN = 2;
+    public static final String PRODUCT_TYPE_BARGAIN_STR = "砍价";
+    public static final Integer PRODUCT_TYPE_PINGTUAN= 3;
+    public static final String PRODUCT_TYPE_PINGTUAN_STR= "拼团";
+    public static final Integer PRODUCT_TYPE_GROUP = 0;
 
 
 
@@ -289,7 +312,7 @@ public class Constants {
     public static final String USER_BILL_CATEGORY_BROKERAGE_PRICE = "brokerage_price"; //佣金金额
     public static final String USER_BILL_CATEGORY_SIGN_NUM = "sign_num"; //签到天数
 
-    public static final String USER_BILL_TYPE_BROKERAGE = "brokerage"; //推广
+    public static final String USER_BILL_TYPE_BROKERAGE = "brokerage"; //推广佣金
     public static final String USER_BILL_TYPE_DEDUCTION = "deduction"; //抵扣
     public static final String USER_BILL_TYPE_EXTRACT = "extract"; //提现
     public static final String USER_BILL_TYPE_TRANSFER_IN = "transferIn"; //佣金转入余额
@@ -306,6 +329,9 @@ public class Constants {
     public static final String USER_BILL_TYPE_PAY_ORDER = "pay_order"; //订单支付
     public static final String USER_BILL_TYPE_SYSTEM_ADD = "system_add"; //系统增加
     public static final String USER_BILL_TYPE_SYSTEM_SUB = "system_sub"; //系统减少
+    public static final String USER_BILL_TYPE_PAY_MEMBER = "pay_member";// 会员支付
+    public static final String USER_BILL_TYPE_OFFLINE_SCAN = "offline_scan";// 线下支付
+    public static final String USER_BILL_TYPE_USER_RECHARGE_REFUND = "user_recharge_refund";// 用户充值退款
 
     //订单状态
     public static final String ORDER_STATUS_ALL = "all"; //所有
@@ -315,6 +341,7 @@ public class Constants {
     public static final String ORDER_STATUS_BARGAIN = "bargain"; //已收货待评价
     public static final String ORDER_STATUS_COMPLETE = "complete"; //交易完成
     public static final String ORDER_STATUS_TOBE_WRITTEN_OFF = "toBeWrittenOff"; //待核销
+    public static final String ORDER_STATUS_APPLY_REFUNDING = "applyRefund"; //申请退款
     public static final String ORDER_STATUS_REFUNDING = "refunding"; //退款中
     public static final String ORDER_STATUS_REFUNDED = "refunded"; //已退款
     public static final String ORDER_STATUS_DELETED = "deleted"; //已删除
@@ -326,6 +353,7 @@ public class Constants {
     public static final String ORDER_STATUS_STR_TAKE = "用户已收货"; //用户已收货
     public static final String ORDER_STATUS_STR_COMPLETE = "交易完成"; //交易完成
     public static final String ORDER_STATUS_STR_TOBE_WRITTEN_OFF = "待核销"; //待核销
+    public static final String ORDER_STATUS_STR_APPLY_REFUNDING = "申请退款"; //申请退款
     public static final String ORDER_STATUS_STR_REFUNDING = "退款中"; //退款中
     public static final String ORDER_STATUS_STR_REFUNDED = "已退款"; //已退款
     public static final String ORDER_STATUS_STR_DELETED = "已删除"; //已删除
@@ -334,8 +362,9 @@ public class Constants {
     public static final int ORDER_STATUS_H5_UNPAID = 0; // 未支付
     public static final int ORDER_STATUS_H5_NOT_SHIPPED = 1; // 待发货
     public static final int ORDER_STATUS_H5_SPIKE = 2; // 待收货
-    public static final int ORDER_STATUS_H5_VERF = 3; // 待核销
+    public static final int ORDER_STATUS_H5_JUDGE = 3; // 待评价
     public static final int ORDER_STATUS_H5_COMPLETE = 4; // 已完成
+    public static final int ORDER_STATUS_H5_VERIFICATION = 5; // 待核销
     public static final int ORDER_STATUS_H5_REFUNDING = -1; // 退款中
     public static final int ORDER_STATUS_H5_REFUNDED = -2; // 已退款
     public static final int ORDER_STATUS_H5_REFUND = -3; // 退款
@@ -352,6 +381,7 @@ public class Constants {
     public static final String ORDER_TASK_REDIS_KEY_AFTER_CANCEL_BY_USER = "alterOrderCancelByUser"; // 用户取消订单后续操作
     public static final String ORDER_TASK_REDIS_KEY_AFTER_REFUND_BY_USER = "alterOrderRefundByUser"; // 用户订单退款后续操作
     public static final String ORDER_TASK_REDIS_KEY_AFTER_TAKE_BY_USER = "alterOrderTakeByUser"; // 用户订单收货后续操作
+    public static final String ORDER_TASK_PAY_SUCCESS_AFTER = "orderPaySuccessTask"; // 订单支付成功后续操作
 
     public static final String ORDER_STATUS_CACHE_CREATE_ORDER = "cache_key_create_order";
 
@@ -400,6 +430,7 @@ public class Constants {
 
     // 订单缓存
     public static final long ORDER_CASH_CONFIRM = (60);
+    public static final String ORDER_CACHE_PER = "ORDER_CACHE:"; // redis缓存订单前缀
 
     //订单操作类型 -> 消息
     public static final String ORDER_LOG_MESSAGE_REFUND_PRICE = "退款给用户{amount}元"; //退款
@@ -417,14 +448,27 @@ public class Constants {
     public static final int ORDER_PAY_CHANNEL_PROGRAM = 1; //小程序
 
     //微信消息模板 tempKey
-    public static final String WE_CHAT_TEMP_KEY_EXPRESS = "OPENTM200565259";
-    public static final String WE_CHAT_TEMP_KEY_DELIVERY = "OPENTM207707249";
     public static final String WE_CHAT_TEMP_KEY_FIRST = "first";
     public static final String WE_CHAT_TEMP_KEY_END = "remark";
-    public static final String WE_CHAT_PUBLIC_TEMP_KEY_RECHARGE = "OPENTM200565260";
+    // 公众号模板消息
+    public static final String WE_CHAT_TEMP_KEY_COMBINATION_SUCCESS = "OPENTM407456411";// 拼团成功
+    public static final String WE_CHAT_TEMP_KEY_BARGAIN_SUCCESS = "OPENTM410292733";// 砍价成功
+    public static final String WE_CHAT_TEMP_KEY_EXPRESS = "OPENTM200565259";// 订单发货提醒
+    public static final String WE_CHAT_TEMP_KEY_DELIVERY = "OPENTM207707249";// 订单配送通知
+    public static final String WE_CHAT_TEMP_KEY_ORDER_PAY = "OPENTM207791277";// 订单支付成功通知
+    public static final String WE_CHAT_TEMP_KEY_ORDER_RECEIVING = "OPENTM413386489";// 订单收货通知
+    public static final String WE_CHAT_TEMP_KEY_ORDER_REFUND = "OPENTM207791277";// 退款进度通知
+    public static final String WE_CHAT_PUBLIC_TEMP_KEY_RECHARGE = "OPENTM200565260";// 充值成功
+
+    // 小程序服务通知
+    public static final String WE_CHAT_PROGRAM_TEMP_KEY_COMBINATION_SUCCESS = "5164";
+    public static final String WE_CHAT_PROGRAM_TEMP_KEY_BARGAIN_SUCCESS = "2920";
+    public static final String WE_CHAT_PROGRAM_TEMP_KEY_EXPRESS = "467";
+    public static final String WE_CHAT_PROGRAM_TEMP_KEY_DELIVERY = "14198";
+    public static final String WE_CHAT_PROGRAM_TEMP_KEY_ORDER_PAY = "516";
+    public static final String WE_CHAT_PROGRAM_TEMP_KEY_ORDER_RECEIVING = "9283";
     public static final String WE_CHAT_PROGRAM_TEMP_KEY_RECHARGE = "OPENTM200565260";
-    public static final String WE_CHAT_PUBLIC_TEMP_KEY_ORDER_PAY_SUCCESS = "OPENTM200565260"; //需要添加模板消息之后修改
-    public static final String WE_CHAT_PROGRAM_TEMP_KEY_ORDER_PAY_SUCCESS = "OPENTM200565260";
+
 
 
     //CND  URL测试用
@@ -454,4 +498,32 @@ public class Constants {
     // QRcode Response text info
     public static String RESULT_QRCODE_PRAMERROR = "生成二维码参数不合法";
 
+    // 砍价计算比例下行
+    public static String BARGAIN_TATIO_DOWN = "0.2";
+    // 砍价计算比例上行
+    public static String BARGAIN_TATIO_UP = "0.8";
+
+    // 时间类型开始时间
+    public static String DATE_TIME_TYPE_BEGIN = "begin";
+
+    // 时间类型结束时间
+    public static String DATE_TIME_TYPE_END = "end";
+
+    // 商品评论类型——普通商品
+    public static String STORE_REPLY_TYPE_PRODUCT = "product";
+    // 商品评论类型——秒杀
+    public static String STORE_REPLY_TYPE_SECKILL = "seckill";
+    // 商品评论类型——拼团
+    public static String STORE_REPLY_TYPE_PINTUAN = "pintuan";
+    // 商品评论类型——砍价
+    public static String STORE_REPLY_TYPE_BARGAIN = "bargain";
+
+    // 商品记录Key（pv、uv）用
+    public static String PRODUCT_LOG_KEY = "visit_log_key";
+
+    public static final String FAIL     = "FAIL";
+    public static final String SUCCESS  = "SUCCESS";
+
+    // 订单取消Key
+    public static final String ORDER_AUTO_CANCEL_KEY = "order_auto_cancel_key";
 }

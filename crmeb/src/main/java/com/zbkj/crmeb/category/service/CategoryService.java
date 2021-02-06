@@ -11,9 +11,16 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
-* @author Mr.Zhang
-* @Description CategoryService 接口
-* @since 2020-04-16
+*   CategoryService 接口
+*  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
 */
 public interface CategoryService extends IService<Category> {
     List<Category> getList(CategorySearchRequest request, PageParamRequest pageParamRequest);
@@ -22,14 +29,12 @@ public interface CategoryService extends IService<Category> {
 
     String getPathByPId(Integer pid);
 
-    List<CategoryTreeVo> getListTree(Integer type, Integer status);
+    List<CategoryTreeVo> getListTree(Integer type, Integer status, String name);
     List<CategoryTreeVo> getListTree(Integer type, Integer status, List<Integer> categoryIdList);
 
     List<Category> getByIds(List<Integer> ids);
 
     HashMap<Integer, String> getListInId(List<Integer> cateIdList);
-
-    void checkCategoryIsExist(List<Integer> categoryIdList);
 
     Boolean checkAuth(List<Integer> pathIdList, String uri);
 
@@ -40,4 +45,11 @@ public interface CategoryService extends IService<Category> {
     int checkName(String name, Integer type);
 
     boolean checkUrl(String uri);
+
+    boolean updateStatus(Integer id);
+
+    /**
+     * 新增分类表
+     */
+    Boolean create(CategoryRequest categoryRequest);
 }

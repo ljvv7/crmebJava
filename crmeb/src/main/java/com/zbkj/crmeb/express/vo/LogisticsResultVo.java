@@ -9,6 +9,18 @@ import lombok.experimental.Accessors;
 
 import java.util.List;
 
+/**
+ *  快递轨迹
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
@@ -24,7 +36,7 @@ public class LogisticsResultVo {
     @ApiModelProperty(value = "快递运送轨迹")
     private List<LogisticsResultListVo> list;
 
-    @ApiModelProperty(value = "快递收件(揽件)1.在途中 2.正在派件 3.已签收 4.派送失败 5.疑难件 6.退件签收  */")
+    @ApiModelProperty(value = "快递收件(揽件)1.在途中 2.正在派件 3.已签收 4.派送失败 5.疑难件 6.退件签收 */")
     @JsonProperty("deliverystatus")
     private String deliveryStatus;
 

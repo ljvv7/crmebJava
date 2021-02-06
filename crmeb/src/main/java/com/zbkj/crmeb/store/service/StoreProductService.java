@@ -1,6 +1,7 @@
 package com.zbkj.crmeb.store.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.common.MyRecord;
 import com.common.PageParamRequest;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.crmeb.front.request.IndexStoreProductSearchRequest;
@@ -16,10 +17,17 @@ import java.io.IOException;
 import java.util.List;
 
 /**
-* @author Mr.Zhang
-* @description StoreProductService 接口
-* @date 2020-05-27
-*/
+ * StoreProductService 接口
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 public interface StoreProductService extends IService<StoreProduct> {
 
     /**
@@ -124,9 +132,10 @@ public interface StoreProductService extends IService<StoreProduct> {
     /**
      * 删除商品
      * @param productId 商品id
+     * @param type 类型：recycle——回收站 delete——彻底删除
      * @return 删除结果
      */
-    boolean deleteProduct(Integer productId);
+    boolean deleteProduct(Integer productId, String type);
 
     /**
      * 恢复已删除商品
@@ -136,7 +145,47 @@ public interface StoreProductService extends IService<StoreProduct> {
     boolean reStoreProduct(Integer productId);
 
     /**
-     * 后台任务批量操作
+     * 后台任务批量操作库存
      */
-    public void consumeProductStock();
+    void consumeProductStock();
+
+    /**
+     * 扣减库存任务操作
+     * @param storeProductStockRequest 扣减库存参数
+     * @return 执行结果
+     */
+    boolean doProductStock(StoreProductStockRequest storeProductStockRequest);
+
+    /**
+     * 获取复制商品配置
+     */
+    MyRecord copyConfig();
+
+    /**
+     * 复制平台商品
+     * @param url 商品链接
+     * @return
+     */
+    MyRecord copyProduct(String url);
+
+    /**
+     * 添加/扣减库存
+     * @param id 商品id
+     * @param num 数量
+     * @param type 类型：add—添加，sub—扣减
+     */
+    Boolean operationStock(Integer id, Integer num, String type);
+
+    /**
+     * 下架
+     * @param id 商品id
+     */
+    Boolean offShelf(Integer id);
+
+    /**
+     * 上架
+     * @param id 商品id
+     * @return Boolean
+     */
+    Boolean putOnShelf(Integer id);
 }

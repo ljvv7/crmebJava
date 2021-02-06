@@ -17,12 +17,16 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * <p>
  * 商品属性值表
- * </p>
- *
- * @author Mr.Zhang
- * @since 2020-05-27
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -79,7 +83,7 @@ public class StoreProductAttrValueResponse implements Serializable {
     private BigDecimal brokerageTwo;
 
     @ApiModelProperty(value = "活动类型 0=商品，1=秒杀，2=砍价，3=拼团")
-    private Boolean type;
+    private Integer type;
 
     @ApiModelProperty(value = "活动限购数量")
     private Integer quota;
@@ -96,6 +100,10 @@ public class StoreProductAttrValueResponse implements Serializable {
     @ApiModelProperty(value = "attrValue字段，取表中suk字段")
     private Object attrValue;
 
+    @ApiModelProperty(value = "砍价商品最低价")
+    private BigDecimal minPrice;
 
+    @ApiModelProperty(value = "是否选中")
+    private Boolean checked;
 
 }

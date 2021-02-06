@@ -26,6 +26,15 @@ import java.util.List;
 
 /**
  * 分类表 前端控制器
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
@@ -57,23 +66,11 @@ import java.util.List;
     /**
      * 新增分类表
      * @param categoryRequest 新增参数
-     * @author Mr.Zhang
-     * @since 2020-04-16
      */
     @ApiOperation(value = "新增")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public CommonResult<String> save(@Validated CategoryRequest categoryRequest){
-        Category category = new Category();
-
-        //检测标题是否存在
-        if(categoryService.checkName(categoryRequest.getName(), category.getType()) > 0){
-            throw new CrmebException("此分类已存在");
-        }
-
-        BeanUtils.copyProperties(categoryRequest, category);
-        category.setPath(categoryService.getPathByPId(category.getPid()));
-        category.setExtra(systemAttachmentService.clearPrefix(category.getExtra()));
-        if(categoryService.save(category)){
+        if(categoryService.create(categoryRequest)){
             return CommonResult.success();
         }else{
             return CommonResult.failed();
@@ -141,11 +138,13 @@ import java.util.List;
     @RequestMapping(value = "/list/tree", method = RequestMethod.GET)
     @ApiImplicitParams({
         @ApiImplicitParam(name="type", value="类型ID | 类型，1 产品分类，2 附件分类，3 文章分类， 4 设置分类， 5 菜单分类， 6 配置分类， 7 秒杀配置", example = "1"),
-        @ApiImplicitParam(name="status", value="-1=全部，0=未生效，1=已生效", example = "1")
+        @ApiImplicitParam(name="status", value="-1=全部，0=未生效，1=已生效", example = "1"),
+        @ApiImplicitParam(name="name", value="模糊搜索", example = "电视")
     })
     public CommonResult<List<CategoryTreeVo>> getListTree(@RequestParam(name = "type") Integer type,
-                                                          @RequestParam(name = "status") Integer status){
-        List<CategoryTreeVo> listTree = categoryService.getListTree(type, status);
+                                                          @RequestParam(name = "status") Integer status,
+                                                          @RequestParam(name = "name", required = false) String name){
+        List<CategoryTreeVo> listTree = categoryService.getListTree(type,status,name);
         return CommonResult.success(listTree);
     }
 
@@ -161,6 +160,22 @@ import java.util.List;
         return CommonResult.success(categoryService.getByIds(CrmebUtil.stringToArray(ids)));
     }
 
+    /**
+     * 更改分类状态
+     * @param id Integer 分类id
+     * @since 2020-04-16
+     * @return
+     */
+    @ApiOperation(value = "更改分类状态")
+    @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.GET)
+    @ApiImplicitParam(name = "id", value="分类id")
+    public CommonResult<Object> getByIds(@Validated @PathVariable(name = "id") Integer id){
+        if (categoryService.updateStatus(id)) {
+            return CommonResult.success("修改成功");
+        } else {
+            return CommonResult.failed("修改失败");
+        }
+    }
 }
 
 

@@ -1,9 +1,14 @@
 package com.zbkj.crmeb.article.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.common.CommonPage;
 import com.common.PageParamRequest;
+import com.exception.CrmebException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -15,19 +20,31 @@ import com.zbkj.crmeb.article.service.ArticleService;
 import com.zbkj.crmeb.article.vo.ArticleVo;
 import com.zbkj.crmeb.category.model.Category;
 import com.zbkj.crmeb.category.service.CategoryService;
+import com.zbkj.crmeb.system.service.SystemConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static com.constants.Constants.ARTICLE_BANNER_LIMIT;
 
 /**
-* @author Mr.Zhang
-* @Description ArticleServiceImpl 接口实现
-* @since 2020-04-18
+* ArticleServiceImpl 接口实现
+*  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
 */
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> implements ArticleService {
@@ -38,7 +55,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
     @Autowired
     private CategoryService categoryService;
 
-
+    @Autowired
+    private SystemConfigService systemConfigService;
     /**
     * 列表
     * @param request ArticleSearchRequest 请求参数
@@ -51,7 +69,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
     public PageInfo<ArticleVo> getList(ArticleSearchRequest request, PageParamRequest pageParamRequest) {
         Page<Article> articlePage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
 
-        LambdaQueryWrapper<Article> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Article> lambdaQueryWrapper = Wrappers.lambdaQuery();
 
         if(StringUtils.isNotBlank(request.getCid())){
             lambdaQueryWrapper.eq(Article::getCid, request.getCid());
@@ -93,6 +111,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         if(articleList.size() < 1){
             return CommonPage.copyPageInfo(articlePage, articleVoArrayList);
         }
+        // 根据配置控制banner的数量
+        String articleBannerLimitString = systemConfigService.getValueByKey(ARTICLE_BANNER_LIMIT);
+        int articleBannerLimit = Integer.parseInt(articleBannerLimitString);
 
         for (Article article : articleList) {
             ArticleVo articleVo = new ArticleVo();
@@ -102,6 +123,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
                 articleVo.setImageInputs(article.getImageInput());
             }
             articleVoArrayList.add(articleVo);
+            if(articleVoArrayList.size() >= articleBannerLimit){
+                break;
+            }
         }
 
         return CommonPage.copyPageInfo(articlePage, articleVoArrayList);
@@ -134,12 +158,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
     @Override
     public ArticleVo getVoByFront(Integer id) {
         Article article = getById(id);
-        if(null == article){
-            return null;
+        if (ObjectUtil.isNull(article)) {
+            throw new CrmebException("文章不存在");
         }
 
         if(article.getStatus()){
-            return null;
+            throw new CrmebException("文章不存在");
         }
 
         ArticleVo articleVo = new ArticleVo();
@@ -153,6 +177,15 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         if(null != category){
             articleVo.setCategoryName(category.getName());
         }
+        String visit = Optional.ofNullable(article.getVisit()).orElse("");
+        int num;
+        if (StrUtil.isBlank(visit)) {
+            num = 0;
+        } else {
+            num = Integer.parseInt(visit) + 1;
+        }
+        article.setVisit(String.valueOf(num));
+        dao.updateById(article);
         return articleVo;
     }
 }

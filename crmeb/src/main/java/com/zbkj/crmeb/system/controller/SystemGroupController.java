@@ -5,6 +5,8 @@ import com.common.CommonResult;
 import com.common.PageParamRequest;
 import com.zbkj.crmeb.system.request.SystemGroupRequest;
 import com.zbkj.crmeb.system.request.SystemGroupSearchRequest;
+import com.zbkj.crmeb.user.service.UserService;
+import com.zbkj.crmeb.user.service.impl.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -18,16 +20,27 @@ import com.zbkj.crmeb.system.model.SystemGroup;
 
 /**
  * 组合数据表 前端控制器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
 @RequestMapping("api/admin/system/group")
 @Api(tags = "设置 -- 组合数据")
-
 public class SystemGroupController {
 
     @Autowired
     private SystemGroupService systemGroupService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 分页显示组合数据表
@@ -65,13 +78,13 @@ public class SystemGroupController {
     /**
      * 删除组合数据表
      * @param id Integer
-     * @author Mr.Zhang
-     * @since 2020-05-15
      */
     @ApiOperation(value = "删除")
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public CommonResult<String> delete(@RequestParam(value = "id") Integer id){
         if(systemGroupService.removeById(id)){
+            // 删除用户对应已经存在的分组标签 虽然数据库用的是String类型但逻辑仅仅只存储一个数据，这里直接删除对应的用户分组id即可
+            userService.clearGroupByGroupId(id+"");
             return CommonResult.success();
         }else{
             return CommonResult.failed();

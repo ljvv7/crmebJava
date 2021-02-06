@@ -1,62 +1,74 @@
 package com.zbkj.crmeb.store.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.common.CommonPage;
+import com.common.MyRecord;
 import com.common.PageParamRequest;
 import com.constants.Constants;
+import com.constants.SmsConstants;
+import com.constants.UserConstants;
 import com.exception.CrmebException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.utils.DateUtil;
+import com.utils.RedisUtil;
 import com.utils.ValidateFormUtil;
 import com.utils.vo.dateLimitUtilVo;
+import com.zbkj.crmeb.combination.model.StorePink;
+import com.zbkj.crmeb.combination.service.StorePinkService;
 import com.zbkj.crmeb.express.model.Express;
 import com.zbkj.crmeb.express.service.ExpressService;
 import com.zbkj.crmeb.express.service.LogisticService;
+import com.zbkj.crmeb.express.vo.ExpressSheetVo;
 import com.zbkj.crmeb.express.vo.LogisticsResultVo;
 import com.zbkj.crmeb.finance.request.FundsMonitorSearchRequest;
 import com.zbkj.crmeb.front.vo.OrderAgainVo;
+import com.zbkj.crmeb.pass.service.OnePassService;
+import com.zbkj.crmeb.payment.service.OrderPayService;
+import com.zbkj.crmeb.sms.service.SmsService;
 import com.zbkj.crmeb.store.dao.StoreOrderDao;
 import com.zbkj.crmeb.store.model.StoreOrder;
 import com.zbkj.crmeb.store.model.StoreOrderStatus;
 import com.zbkj.crmeb.store.model.StoreProduct;
 import com.zbkj.crmeb.store.model.StoreProductAttrValue;
-import com.zbkj.crmeb.store.request.StoreDateRangeSqlPram;
-import com.zbkj.crmeb.store.request.StoreOrderRefundRequest;
-import com.zbkj.crmeb.store.request.StoreOrderSearchRequest;
-import com.zbkj.crmeb.store.request.StoreOrderSendRequest;
+import com.zbkj.crmeb.store.request.*;
 import com.zbkj.crmeb.store.response.*;
 import com.zbkj.crmeb.store.service.*;
 import com.zbkj.crmeb.store.utilService.OrderUtils;
 import com.zbkj.crmeb.store.vo.StoreOrderInfoVo;
 import com.zbkj.crmeb.system.model.SystemAdmin;
 import com.zbkj.crmeb.system.model.SystemStore;
-import com.zbkj.crmeb.system.model.SystemStoreStaff;
 import com.zbkj.crmeb.system.request.SystemWriteOffOrderSearchRequest;
 import com.zbkj.crmeb.system.response.StoreOrderItemResponse;
 import com.zbkj.crmeb.system.response.SystemWriteOffOrderResponse;
 import com.zbkj.crmeb.system.service.SystemAdminService;
+import com.zbkj.crmeb.system.service.SystemConfigService;
 import com.zbkj.crmeb.system.service.SystemStoreService;
 import com.zbkj.crmeb.system.service.SystemStoreStaffService;
 import com.zbkj.crmeb.user.model.User;
 import com.zbkj.crmeb.user.model.UserBill;
+import com.zbkj.crmeb.user.model.UserToken;
 import com.zbkj.crmeb.user.request.UserOperateFundsRequest;
 import com.zbkj.crmeb.user.service.UserBillService;
 import com.zbkj.crmeb.user.service.UserService;
+import com.zbkj.crmeb.user.service.UserTokenService;
 import com.zbkj.crmeb.wechat.service.TemplateMessageService;
 import com.zbkj.crmeb.wechat.service.impl.WechatSendMessageForMinService;
 import com.zbkj.crmeb.wechat.vo.WechatSendMessageForPaySuccess;
-import com.zbkj.crmeb.wechat.vo.WechatSendMessageForReFundEd;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -65,10 +77,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
-* @author Mr.Zhang edited by stivepeim
-* @description StoreOrderServiceImpl 接口实现
-* @date 2020-05-28
-*/
+ * StoreOrderServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder> implements StoreOrderService {
 
@@ -122,7 +141,32 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     @Autowired
     private SystemAdminService systemAdminService;
 
+    @Autowired
+    private RedisUtil redisUtil;
 
+    @Autowired
+    private StorePinkService storePinkService;
+
+    @Autowired
+    private SystemConfigService systemConfigService;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
+    @Autowired
+    private OnePassService onePassService;
+
+    @Autowired
+    private OrderPayService orderPayService;
+
+    @Autowired
+    private UserTokenService userTokenService;
+
+    @Autowired
+    private SmsService smsService;
+
+    @Autowired
+    private StoreOrderInfoService storeOrderInfoService;
 
     /**
     * 列表
@@ -268,8 +312,6 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     @Transactional(rollbackFor = {RuntimeException.class, Error.class, CrmebException.class})
     public List<String> addCartAgain(Integer userId, Integer productId, Integer cartNum, String orderUnique, String type, boolean isNew, Integer combinationId, Integer skillId, Integer bargainId) {
         List<String> cacheIdsResult = new ArrayList<>();
-        // todo 营销活动二期处理
-
         // 检测订单是否有效
         StoreOrder storeOrderPram = new StoreOrder();
         storeOrderPram.setUnique(orderUnique);
@@ -278,7 +320,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         StoreOrder existOrder = getByEntityOne(storeOrderPram);
         if(null == existOrder) throw new CrmebException("订单不存在");
         OrderAgainVo orderAgainVo = orderUtils.tidyOrder(existOrder, true, false);
-        Long cacheKey = DateUtil.getTime()+userId;
+//        Long cacheKey = DateUtil.getTime()+userId;
         List<StoreCartResponse> orderAgainCache = new ArrayList<>();
         for (StoreOrderInfoVo so : orderAgainVo.getCartInfo()) {
             // 判断商品是否有效
@@ -294,14 +336,15 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             apAttrValuePram.setProductId(productId);
             apAttrValuePram.setId(Integer.valueOf(so.getUnique()));
             apAttrValuePram.setType(0);
-            StoreProductAttrValue existSPAttrValue = storeProductAttrValueService.getByEntity(apAttrValuePram);
+            List<StoreProductAttrValue> byEntity = storeProductAttrValueService.getByEntity(apAttrValuePram);
+            StoreProductAttrValue existSPAttrValue = new StoreProductAttrValue();
+            if(null != byEntity && byEntity.size() > 0) existSPAttrValue = byEntity.get(0);
             if(null == existSPAttrValue) throw new CrmebException("请选择有效的商品属性");
             if(existSPAttrValue.getStock() < cartNum) throw new CrmebException("该商品库存不足");
             // 添加有效商品至缓存 缓存为购物车对象
             if(isNew){
                 StoreCartResponse storeCartResponse = new StoreCartResponse();
-                cacheIdsResult.add(cacheKey+"");
-                storeCartResponse.setId(cacheKey);
+//                storeCartResponse.setId(cacheKey);
                 storeCartResponse.setType(type);
                 storeCartResponse.setProductId(productId);
                 storeCartResponse.setProductAttrUnique(so.getUnique());
@@ -318,24 +361,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
                 orderAgainCache.add(storeCartResponse);
             }
         }
-        orderUtils.setCacheOrderAgain(cacheKey+"", orderAgainCache);
+        cacheIdsResult.add(orderUtils.setCacheOrderData(userService.getInfo(), orderAgainCache)+"");
 
         return cacheIdsResult;
-//        else{ // else 中的逻辑暂时未使用到
-//         StoreCart storeCartNewPram = new StoreCart();
-//         storeCartNewPram.setUid(userId);
-//         storeCartNewPram.setProductId(productId);
-//         storeCartNewPram.setCartNum(cartNum);
-//         storeCartNewPram.setProductAttrUnique(productAttrUnique);
-//         storeCartNewPram.setIsNew(isNew);
-//         storeCartNewPram.setType(type);
-//         storeCartNewPram.setCombinationId(combinationId);
-//         storeCartNewPram.setCreateTime(DateUtil.nowDateTime());
-//         storeCartNewPram.setBargainId(bargainId);
-//         storeCartNewPram.setSeckillId(skillId);
-//         saveCate(storeCartNewPram);
-//         return storeCartNewPram;
-//        }
     }
 
     /**
@@ -428,34 +456,39 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     @Override
     @Transactional
     public boolean yuePay(StoreOrder storeOrder, User currentUser, String formId) {
-        if(currentUser.getNowMoney().compareTo(storeOrder.getPayPrice()) <= 0){
+        if(currentUser.getNowMoney().compareTo(storeOrder.getPayPrice()) < 0){// 支持0元购
             throw new CrmebException("余额不足");
         }
-        BigDecimal priceSubtract = currentUser.getNowMoney().subtract(storeOrder.getPayPrice());
-        boolean updateUserResult = userService.updateNowMoney(currentUser.getUid(),priceSubtract);
-        UserBill userBill = new UserBill();
-        userBill.setTitle("购买商品");
-        userBill.setUid(currentUser.getUid());
-        userBill.setCategory("nowMoney");
-        userBill.setType(Constants.USER_BILL_TYPE_PAY_PRODUCT);
-        userBill.setNumber(storeOrder.getPayPrice());
-        userBill.setLinkId(storeOrder.getId()+"");
-        userBill.setBalance(currentUser.getNowMoney());
-        userBill.setMark("余额支付" + storeOrder.getPayPrice() + "元购买商品");
-        boolean saveUserBillResult = userBillService.save(userBill);
-        boolean paySuccessResult = paySuccess(storeOrder,currentUser,formId);
+//        BigDecimal priceSubtract = currentUser.getNowMoney().subtract(storeOrder.getPayPrice());
+//        UserBill userBill = new UserBill();
+//        userBill.setTitle("购买商品");
+//        userBill.setUid(currentUser.getUid());
+//        userBill.setCategory(Constants.USER_BILL_CATEGORY_MONEY);
+//        userBill.setType(Constants.USER_BILL_TYPE_PAY_PRODUCT);
+//        userBill.setNumber(storeOrder.getPayPrice());
+//        userBill.setLinkId(storeOrder.getId()+"");
+//        userBill.setBalance(currentUser.getNowMoney());
+//        userBill.setMark("余额支付" + storeOrder.getPayPrice() + "元购买商品");
+
+        UserToken userToken = userTokenService.getByUid(currentUser.getUid());
+
+        Boolean execute = orderPayService.paySuccess(storeOrder);
+//        Boolean execute = transactionTemplate.execute(e -> {
+//            userService.updateNowMoney(currentUser.getUid(), priceSubtract);
+//            userBillService.save(userBill);
+//            paySuccess(storeOrder, currentUser, formId);
+//            return Boolean.TRUE;
+//        });
 
         // 微信小程序订阅消息 付款成功
-        String storeNameAndCarNumString = orderUtils.getStoreNameAndCarNumString(storeOrder.getId());
-        if(StringUtils.isNotBlank(storeNameAndCarNumString)){
-            WechatSendMessageForPaySuccess paySuccess = new WechatSendMessageForPaySuccess(
-                    storeOrder.getOrderId(),storeOrder.getPayPrice()+"",storeOrder.getPayTime()+"","暂无",
-                    storeOrder.getTotalPrice()+"",storeNameAndCarNumString);
-            orderUtils.sendWeiChatMiniMessageForPaySuccess(paySuccess, currentUser.getUid());
-        }
-
-        return updateUserResult && saveUserBillResult && paySuccessResult;
-//        return updateUserResult;
+//        String storeNameAndCarNumString = orderUtils.getStoreNameAndCarNumString(storeOrder.getId());
+//        if(StringUtils.isNotBlank(storeNameAndCarNumString)){
+//            WechatSendMessageForPaySuccess paySuccess = new WechatSendMessageForPaySuccess(
+//                    storeOrder.getOrderId(),storeOrder.getPayPrice()+"",storeOrder.getPayTime()+"","暂无",
+//                    storeOrder.getTotalPrice()+"",storeNameAndCarNumString);
+//            orderUtils.sendWeiChatMiniMessageForPaySuccess(paySuccess, currentUser.getUid());
+//        }
+        return execute;
     }
 
     /**
@@ -543,13 +576,13 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         //获取门店map
         HashMap<Integer, SystemStore> systemStoreList = systemStoreService.getMapInId(storeIdList);
         //获取店员map
-        HashMap<Integer, SystemStoreStaff> systemStoreStaffList = systemStoreStaffService.getMapInId(clerkIdList);
+//        HashMap<Integer, SystemStoreStaff> systemStoreStaffList = systemStoreStaffService.getMapInId(clerkIdList);
+        HashMap<Integer, SystemAdmin> systemStoreStaffList = systemAdminService.getMapInId(clerkIdList);
         //获取订单详情map
         HashMap<Integer, List<StoreOrderInfoVo>> orderInfoList = StoreOrderInfoService.getMapInId(orderIdList);
 
         //根据用户获取信息
         List<Integer> userIdList = storeOrderList.stream().map(StoreOrder::getUid).distinct().collect(Collectors.toList());
-
         //订单用户信息
         HashMap<Integer, User> userList = userService.getMapListInUid(userIdList);
 
@@ -561,12 +594,10 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
         //推广信息
         HashMap<Integer, User> mapListInUid = new HashMap<>();
-        if(userIdList.size() > 0){
+        if(userIdList.size() > 0 && spreadPeopleUidList.size() > 0) {
             //推广人信息
             mapListInUid = userService.getMapListInUid(spreadPeopleUidList);
         }
-
-
 
         for (StoreOrder storeOrder : storeOrderList) {
             StoreOrderItemResponse storeOrderItemResponse = new StoreOrderItemResponse();
@@ -580,7 +611,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             // 添加核销人信息
             String clerkName = "";
             if(systemStoreStaffList.containsKey(storeOrder.getClerkId())){
-                clerkName = systemStoreStaffList.get(storeOrder.getClerkId()).getStaffName();
+                clerkName = systemStoreStaffList.get(storeOrder.getClerkId()).getRealName();
             }
             storeOrderItemResponse.setProductList(orderInfoList.get(storeOrder.getId()));
             storeOrderItemResponse.setTotalNum(storeOrder.getTotalNum());
@@ -599,8 +630,42 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             storeOrderItemResponse.setRefundStatus(storeOrder.getRefundStatus());
 
             storeOrderItemResponse.setClerkName(clerkName);
-            storeOrderItemResponseArrayList.add(storeOrderItemResponse);
 
+            // 添加订单类型信息
+            String orderTypeFormat = "[{}订单]{}";
+            String orderType = "";
+            // 核销
+            if (ObjectUtil.isNotNull(storeOrder.getClerkId()) && storeOrder.getClerkId() > 0) {
+                orderType = StrUtil.format(orderTypeFormat, "核销", "");
+            }
+            // 秒杀
+            if (ObjectUtil.isNotNull(storeOrder.getSeckillId()) && storeOrder.getSeckillId() > 0) {
+                orderType = StrUtil.format(orderTypeFormat, "秒杀", "");
+            }
+            // 砍价
+            if (ObjectUtil.isNotNull(storeOrder.getBargainId()) && storeOrder.getBargainId() > 0) {
+                orderType = StrUtil.format(orderTypeFormat, "砍价", "");
+            }
+            // 拼团
+            if (ObjectUtil.isNotNull(storeOrder.getPinkId()) && storeOrder.getPinkId() > 0) {
+                StorePink storePink = storePinkService.getById(storeOrder.getPinkId());
+                if (ObjectUtil.isNotNull(storePink)) {
+                    String pinkstatus = "";
+                    if (storePink.getStatus() == 2) {
+                        pinkstatus = "已完成";
+                    } else if (storePink.getStatus() == 3) {
+                        pinkstatus = "未完成";
+                    } else {
+                        pinkstatus = "正在进行中";
+                    }
+                    orderType = StrUtil.format(orderTypeFormat, "拼团", pinkstatus);
+                }
+            }
+            if (StrUtil.isBlank(orderType)) {
+                orderType = StrUtil.format(orderTypeFormat, "普通", "");
+            }
+            storeOrderItemResponse.setOrderType(orderType);
+            storeOrderItemResponseArrayList.add(storeOrderItemResponse);
         }
         return storeOrderItemResponseArrayList;
     }
@@ -701,85 +766,115 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /** 退款
      * @param request StoreOrderRefundRequest 退款参数
-     * @author Mr.Zhang
-     * @since 2020-06-10
      * @return boolean
+     * 这里只处理订单状态
+     * 余额支付需要把余额给用户加回去
+     * 其余处理放入redis中处理
      */
     @Override
-    @Transactional(rollbackFor = {RuntimeException.class, Error.class, CrmebException.class})
     public boolean refund(StoreOrderRefundRequest request) {
-        try{
-            StoreOrder storeOrder = getById(request.getOrderId());
-            if(null == storeOrder){throw new CrmebException("未查到订单");}
-            if(!storeOrder.getPaid()){throw new CrmebException("未支付无法退款");}
-            if(storeOrder.getRefundPrice().add(request.getAmount()).compareTo(storeOrder.getPayPrice()) > 0){throw new CrmebException("退款金额大于支付金额，请修改退款金额");}
-
-
-            //用户
-            User user = userService.getById(storeOrder.getUid());
-
-            //退款
-            switch (storeOrder.getPayType()){
-                case Constants.PAY_TYPE_WE_CHAT:
-                    storeOrderRefundService.refund(request, storeOrder);
-                    break;
-                case Constants.PAY_TYPE_YUE:
-                    UserOperateFundsRequest userOperateFundsRequest = new UserOperateFundsRequest();
-                    userOperateFundsRequest.setUid(storeOrder.getUid());
-                    userOperateFundsRequest.setValue(request.getAmount());
-                    userOperateFundsRequest.setFoundsCategory(Constants.USER_BILL_CATEGORY_MONEY);
-                    userOperateFundsRequest.setFoundsType(Constants.ORDER_STATUS_REFUNDED);
-                    userOperateFundsRequest.setType(1);
-                    userOperateFundsRequest.setTitle(Constants.ORDER_STATUS_STR_REFUNDED);
-                    boolean addMoney = userService.updateFounds(userOperateFundsRequest, false); //更新余额
-                    if(!addMoney){throw new CrmebException("余额退款失败");}
-
-                    //新增日志
-                    boolean addBill = userBillService.saveRefundBill(request, user);
-                    if(!addBill){throw new CrmebException("余额退款失败");}
-
-                    break;
+        StoreOrder storeOrder = getById(request.getOrderId());
+        if(ObjectUtil.isNull(storeOrder)){throw new CrmebException("未查到订单");}
+        if(!storeOrder.getPaid()){throw new CrmebException("未支付无法退款");}
+        if(storeOrder.getRefundPrice().add(request.getAmount()).compareTo(storeOrder.getPayPrice()) > 0) {
+            throw new CrmebException("退款金额大于支付金额，请修改退款金额");
+        }
+        if (request.getAmount().compareTo(BigDecimal.ZERO) == 0) {
+            if (storeOrder.getPayPrice().compareTo(BigDecimal.ZERO) != 0) {
+                throw new CrmebException("退款金额不能为0，请修改退款金额");
             }
+        }
 
-            //修改订单退款状态
-            if(request.getType() == 1){
-                storeOrder.setRefundStatus(2);
-            }else if(request.getType() == 2){
-                storeOrder.setRefundStatus(0);
-            }else{
-                throw new CrmebException("选择退款状态错误");
+        //用户
+        User user = userService.getById(storeOrder.getUid());
+
+        //退款
+        if (storeOrder.getPayType().equals(Constants.PAY_TYPE_WE_CHAT) && request.getAmount().compareTo(BigDecimal.ZERO) > 0) {
+            try {
+                storeOrderRefundService.refund(request, storeOrder);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new CrmebException("微信申请退款失败！");
             }
-            storeOrder.setRefundPrice(request.getAmount());
-            boolean updateOrder = updateById(storeOrder);
-            if(!updateOrder){
-                storeOrderStatusService.saveRefund(request.getOrderId(), request.getAmount(), "失败");
-                throw new CrmebException("订单更新失败");
+        }
+
+        //修改订单退款状态
+        storeOrder.setRefundStatus(3);
+        storeOrder.setRefundPrice(request.getAmount());
+
+        Boolean execute = transactionTemplate.execute(e -> {
+            updateById(storeOrder);
+            if (storeOrder.getPayType().equals(Constants.PAY_TYPE_YUE)) {
+                // 更新用户金额 TODO 后期要调整
+                UserOperateFundsRequest userOperateFundsRequest = new UserOperateFundsRequest();
+                userOperateFundsRequest.setUid(storeOrder.getUid());
+                userOperateFundsRequest.setValue(request.getAmount());
+                userOperateFundsRequest.setFoundsCategory(Constants.USER_BILL_CATEGORY_MONEY);
+                userOperateFundsRequest.setFoundsType(Constants.ORDER_STATUS_REFUNDED);
+                userOperateFundsRequest.setType(1);
+                userOperateFundsRequest.setTitle(Constants.ORDER_STATUS_STR_REFUNDED);
+                userService.updateFounds(userOperateFundsRequest, false); //更新余额
+                //新增日志
+                userBillService.saveRefundBill(request, user);
+                // 退款task
+                redisUtil.lPush(Constants.ORDER_TASK_REDIS_KEY_AFTER_REFUND_BY_USER, storeOrder.getId());
             }
-            //TODO 发送模板消息, 异步
+            return Boolean.TRUE;
+        });
+        if(!execute){
+            storeOrderStatusService.saveRefund(request.getOrderId(), request.getAmount(), "失败");
+            throw new CrmebException("订单更新失败");
+        }
 
+        // 发送消息通知
+        HashMap<String, String> temMap = new HashMap<>();
+        temMap.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "您的订单退款申请被通过，钱款将退还至您的支付账户，请耐心等待。");
+        temMap.put("keyword1", storeOrder.getOrderId());
+        temMap.put("keyword2", storeOrder.getPayPrice().toString());
+        temMap.put("keyword3", DateUtil.dateToStr(storeOrder.getCreateTime(), Constants.DATE_FORMAT));
+        temMap.put(Constants.WE_CHAT_TEMP_KEY_END, "感谢你的使用。");
+        pushMessageRefundOrder(storeOrder, user, temMap);
+//        // 小程序订阅消息 退款成功
+//        String storeNameAndCarNumString = orderUtils.getStoreNameAndCarNumString(storeOrder.getId());
+//        WechatSendMessageForReFundEd forReFundEd = new WechatSendMessageForReFundEd(
+//                "退款成功",storeNameAndCarNumString,request.getAmount()+"",DateUtil.nowDateTimeStr(),"退款金额已到余额中",
+//                storeOrder.getOrderId(),storeOrder.getId()+"",storeOrder.getCreateTime()+"",storeOrder.getRefundPrice()+"",
+//                storeNameAndCarNumString,storeOrder.getRefundReason(),"CRMEB",storeOrder.getRefundReasonWapExplain(),
+//                "暂无"
+//        );
+//        wechatSendMessageForMinService.sendReFundEdMessage(forReFundEd, userService.getUserIdException());
 
-            //退款成功
-            storeOrderStatusService.saveRefund(request.getOrderId(), request.getAmount(), null);
+        return execute;
+    }
 
-            //佣金
-            subtractBill(request, Constants.USER_BILL_CATEGORY_MONEY, Constants.USER_BILL_TYPE_BROKERAGE, Constants.USER_BILL_CATEGORY_BROKERAGE_PRICE);
-
-            //积分
-            subtractBill(request, Constants.USER_BILL_CATEGORY_INTEGRAL, Constants.USER_BILL_TYPE_GAIN, Constants.USER_BILL_CATEGORY_INTEGRAL);
-
-            // 小程序订阅消息 退款成功
-            String storeNameAndCarNumString = orderUtils.getStoreNameAndCarNumString(storeOrder.getId());
-            WechatSendMessageForReFundEd forReFundEd = new WechatSendMessageForReFundEd(
-                    "退款成功",storeNameAndCarNumString,request.getAmount()+"",DateUtil.nowDateTimeStr(),"退款金额已到余额中",
-                    storeOrder.getOrderId(),storeOrder.getId()+"",storeOrder.getCreateTime()+"",storeOrder.getRefundPrice()+"",
-                    storeNameAndCarNumString,storeOrder.getRefundReason(),"CRMEB",storeOrder.getRefundReasonWapExplain(),
-                    "暂无"
-            );
-            wechatSendMessageForMinService.sendReFundEdMessage(forReFundEd, userService.getUserIdException());
-
-            return true;
-        }catch (Exception e){
-            throw new CrmebException(e.getMessage());
+    /**
+     * 发送消息通知
+     * 根据用户类型发送
+     * 公众号模板消息
+     * 小程序订阅消息
+     */
+    private void pushMessageRefundOrder(StoreOrder storeOrder, User user, HashMap<String, String> temMap) {
+        if (user.getUserType().equals(UserConstants.USER_TYPE_H5)) {
+            return;
+        }
+        UserToken userToken;
+        // 公众号
+        if (user.getUserType().equals(UserConstants.USER_TYPE_WECHAT)) {
+            userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_WECHAT);
+            if (ObjectUtil.isNull(userToken)) {
+                return ;
+            }
+            // 发送微信模板消息
+            templateMessageService.pushTemplateMessage(Constants.WE_CHAT_TEMP_KEY_ORDER_REFUND, temMap, userToken.getToken());
+            return;
+        }
+        // 小程序发送订阅消息
+        String storeNameAndCarNumString = orderUtils.getStoreNameAndCarNumString(storeOrder.getId());
+        if(StringUtils.isNotBlank(storeNameAndCarNumString)){
+            WechatSendMessageForPaySuccess paySuccess = new WechatSendMessageForPaySuccess(
+                    storeOrder.getId()+"",storeOrder.getPayPrice()+"",storeOrder.getPayTime()+"","暂无",
+                    storeOrder.getTotalPrice()+"",storeNameAndCarNumString);
+            orderUtils.sendWeiChatMiniMessageForPaySuccess(paySuccess, userService.getById(storeOrder).getUid());
         }
     }
 
@@ -820,37 +915,34 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
      * @return boolean
      */
     @Override
-    @Transactional(rollbackFor = {RuntimeException.class, Error.class, CrmebException.class})
     public boolean send(StoreOrderSendRequest request) {
-        try{
+        //订单信息
+        StoreOrder storeOrder = getById(request.getId());
+        if (ObjectUtil.isNull(storeOrder)) throw new CrmebException("订单未能查到,不能发货!");
+        if (storeOrder.getIsDel()) throw new CrmebException("订单已删除,不能发货!");
+        if (storeOrder.getStatus() > 0) throw new CrmebException("订单已发货请勿重复操作!");
 
-            //订单信息
-            StoreOrder storeOrder = getInfoException(request.getId());
-            SystemAdmin currentAdmin = systemAdminService.getInfo();
+        SystemAdmin currentAdmin = systemAdminService.getInfo();
 
-            switch (request.getType()){
-                case "1":
-                    express(request, storeOrder);
-                    orderUtils.sendWeiChatMiniMessageForPackageExpress(storeOrder,currentAdmin.getId());
-                    break;
-                case "2":
-                    delivery(request, storeOrder);
-                    orderUtils.senWeiChatMiniMessageForDeliver(storeOrder,currentAdmin.getId());
-                    break;
-                case "3":
-                    virtual(request, storeOrder);
-                    break;
-                default:
-                    throw new CrmebException("类型错误");
-            }
-
-            //短信发送
-
-            return true;
-        }catch (Exception e){
-            //发货失败！
-            throw new CrmebException(e.getMessage());
+        switch (request.getType()){
+            case "1":// 发货
+                express(request, storeOrder);
+//                orderUtils.sendWeiChatMiniMessageForPackageExpress(storeOrder,currentAdmin.getId());
+                break;
+            case "2":// 送货
+                delivery(request, storeOrder);
+//                orderUtils.senWeiChatMiniMessageForDeliver(storeOrder,currentAdmin.getId());
+                break;
+            case "3":// 虚拟
+                virtual(request, storeOrder);
+                break;
+            default:
+                throw new CrmebException("类型错误");
         }
+
+        //短信发送
+
+        return true;
     }
 
     /**
@@ -877,18 +969,37 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
      * @return boolean
      */
     @Override
-    public boolean refundRefuse(Integer id, String reason) {
+    public Boolean refundRefuse(Integer id, String reason) {
         StoreOrder storeOrder = getInfoException(id);
         storeOrder.setRefundReason(reason);
         storeOrder.setRefundStatus(0);
-        storeOrder.setStatus(1);
-        updateById(storeOrder);
 
-        storeOrderStatusService.createLog(storeOrder.getId(), Constants.ORDER_LOG_REFUND_REFUSE, Constants.ORDER_LOG_MESSAGE_REFUND_REFUSE.replace("{reason}", reason));
+        User user = userService.getById(storeOrder.getUid());
 
-        //TODO 模板消息通知
-
-        return true;
+        Boolean execute = transactionTemplate.execute(e -> {
+            updateById(storeOrder);
+            storeOrderStatusService.createLog(storeOrder.getId(), Constants.ORDER_LOG_REFUND_REFUSE, Constants.ORDER_LOG_MESSAGE_REFUND_REFUSE.replace("{reason}", reason));
+            return Boolean.TRUE;
+        });
+        if (execute) {
+            // 如果是拼团订单要将拼团状态改回去
+            if (ObjectUtil.isNotNull(storeOrder) && storeOrder.getPinkId() > 0) {
+                StorePink storePink = storePinkService.getById(storeOrder.getPinkId());
+                if (storePink.getStatus().equals(3)) {
+                    storePink.setStatus(1);
+                    storePinkService.updateById(storePink);
+                }
+            }
+            // 发送消息通知
+            HashMap<String, String> temMap = new HashMap<>();
+            temMap.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "您的订单退款申请被拒绝！");
+            temMap.put("keyword1", storeOrder.getOrderId());
+            temMap.put("keyword2", storeOrder.getPayPrice().toString());
+            temMap.put("keyword3", DateUtil.dateToStr(storeOrder.getCreateTime(), Constants.DATE_FORMAT));
+            temMap.put(Constants.WE_CHAT_TEMP_KEY_END, "拒绝原因："+ reason);
+            pushMessageRefundOrder(storeOrder, user, temMap);
+        }
+        return execute;
     }
 
     /**
@@ -915,7 +1026,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         LambdaQueryWrapper<StoreOrder> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         if(null != storeOrder.getUnique()){
             lambdaQueryWrapper.or().eq(StoreOrder::getOrderId, storeOrder.getUnique())
-                    .or().eq(StoreOrder::getUnique, storeOrder.getUnique());
+            .or().eq(StoreOrder::getUnique, storeOrder.getUnique());
         }
 //        if(null != storeOrder.getUid()){
             lambdaQueryWrapper.eq(StoreOrder::getUid, storeOrder.getUid());
@@ -934,7 +1045,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             throw new CrmebException("没有查询到快递信息");
         }
 
-        return logisticService.info(info.getDeliveryId(), null);
+        return logisticService.info(info.getDeliveryId(), null, Optional.ofNullable(info.getDeliveryCode()).orElse(""), info.getUserPhone());
     }
 
     /**
@@ -969,8 +1080,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     public List<StoreOrder> getOrderByUserIdsForRetailShop(List<Integer> ids) {
         LambdaQueryWrapper<StoreOrder> lqw = new LambdaQueryWrapper<>();
         lqw.in(StoreOrder::getUid,ids);
-        lqw.ge(StoreOrder::getPaid, 1);
-        lqw.ge(StoreOrder::getRefundStatus, 0);
+        lqw.eq(StoreOrder::getPaid, 1);
+        lqw.eq(StoreOrder::getRefundStatus, 0);
+        lqw.eq(StoreOrder::getIsDel, false);
         return dao.selectList(lqw);
     }
 
@@ -991,36 +1103,67 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     /**
      * 更改订单价格
      *
-     * @param orderId 订单id wx开头
-     * @param price   待更改价格
+     * @param request 订单id改价对象
      * @return 更改结果
      */
     @Override
-    public boolean editPrice(String orderId, BigDecimal price) {
-        String oldPrice = null;
-        StoreOrder existOrder = getInfoByEntity(new StoreOrder().setOrderId(orderId));
+    public boolean editPrice(StoreOrderEditPriceRequest request) {
+        String oldPrice;
+        StoreOrder existOrder = getByOderId(request.getOrderId());
         // 订单不存在
-        if(null == existOrder) throw new CrmebException(Constants.RESULT_ORDER_NOTFOUND.replace("${orderCode}", orderId));
-
+        if(null == existOrder) {
+            throw new CrmebException(Constants.RESULT_ORDER_NOTFOUND.replace("${orderCode}", request.getOrderId()));
+        }
         // 订单已支付
-        if(existOrder.getPaid()) throw new CrmebException(Constants.RESULT_ORDER_PAYED.replace("${orderCode}", orderId));
-
+        if(existOrder.getPaid()) {
+            throw new CrmebException(Constants.RESULT_ORDER_PAYED.replace("${orderCode}", request.getOrderId()));
+        }
         // 修改价格和原来价格相同
-        if(existOrder.getPayPrice().compareTo(price) ==0)
+        if(existOrder.getPayPrice().compareTo(request.getPrice()) ==0) {
             throw new CrmebException(Constants.RESULT_ORDER_EDIT_PRICE_SAME.replace("${oldPrice}",existOrder.getPayPrice()+"")
-            .replace("${editPrice}",price+""));
+                    .replace("${editPrice}",request.getPrice()+""));
+        }
 
         oldPrice = existOrder.getPayPrice()+"";
-        // 修改订单价格
-        existOrder.setPayPrice(price);
-        boolean updateOrderPrice = updateByEntity(existOrder);
-        if(!updateOrderPrice) throw new CrmebException(Constants.RESULT_ORDER_EDIT_PRICE_SUCCESS
-                .replace("${orderNo}", existOrder.getOrderId()).replace("${price}", price+""));
-        // 订单修改状态操作
-        storeOrderStatusService.createLog(existOrder.getId(),Constants.ORDER_LOG_EDIT,
-                Constants.RESULT_ORDER_EDIT_PRICE_LOGS.replace("${orderPrice}",oldPrice)
-                        .replace("${price}", existOrder.getPayPrice()+""));
-        return true;
+
+        Boolean execute = transactionTemplate.execute(e -> {
+            // 修改订单价格
+            orderEditPrice(request.getOrderId(), request.getPrice());
+            // 订单修改状态操作
+            storeOrderStatusService.createLog(existOrder.getId(), Constants.ORDER_LOG_EDIT,
+                    Constants.RESULT_ORDER_EDIT_PRICE_LOGS.replace("${orderPrice}", oldPrice)
+                            .replace("${price}", request.getPrice() + ""));
+            return Boolean.TRUE;
+        });
+        if(!execute) {
+            throw new CrmebException(Constants.RESULT_ORDER_EDIT_PRICE_SUCCESS
+                    .replace("${orderNo}", existOrder.getOrderId()).replace("${price}", request.getPrice()+""));
+        }
+        // 发送改价短信提醒
+        User user = userService.getById(existOrder.getUid());
+        if (StrUtil.isNotBlank(user.getPhone())) {
+            // 改价短信开关是否开启
+            String smsSwitch = systemConfigService.getValueByKey(SmsConstants.SMS_CONFIG_PRICE_REVISION_SWITCH);
+            if (StrUtil.isNotBlank(smsSwitch) && smsSwitch.equals("1")) {
+                // 发送改价短信提醒
+                smsService.sendOrderEditPriceNotice(user.getPhone(), existOrder.getOrderId(), request.getPrice());
+            }
+        }
+
+        return execute;
+    }
+
+    /**
+     * 改价
+     * @param orderNo 订单编号
+     * @param price 修改后的价格
+     */
+    private Boolean orderEditPrice(String orderNo, BigDecimal price) {
+        LambdaUpdateWrapper<StoreOrder> luw = new LambdaUpdateWrapper<>();
+        luw.set(StoreOrder::getPayPrice, price);
+        luw.eq(StoreOrder::getOrderId, orderNo);
+        luw.eq(StoreOrder::getPaid, false);
+        return update(luw);
     }
 
     /**
@@ -1113,7 +1256,179 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         return response;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////// 以下为自定义方法
+    /**
+     * 获取用户当天的秒杀数量
+     *
+     * @param storeOrder 订单查询参数
+     * @return 用户当天的秒杀商品订单数量
+     */
+    @Override
+    public List<StoreOrder> getUserCurrentDaySecKillOrders(StoreOrder storeOrder) {
+        String dayStart = DateUtil.nowDateTime(Constants.DATE_FORMAT_START);
+        String dayEnd = DateUtil.nowDateTime(Constants.DATE_FORMAT_END);
+        LambdaQueryWrapper<StoreOrder> lqw = Wrappers.lambdaQuery();
+        lqw.eq(StoreOrder::getUid,storeOrder.getUid()).eq(StoreOrder::getSeckillId,storeOrder.getSeckillId())
+                .between(StoreOrder::getCreateTime,dayStart,dayEnd);
+        lqw.eq(StoreOrder::getIsDel, false);
+        return dao.selectList(lqw);
+    }
+
+    /**
+     * 获取用户当前的砍价订单数量
+     * @param storeOrder    订单查询参数
+     * @return
+     */
+    @Override
+    public List<StoreOrder> getUserCurrentBargainOrders(StoreOrder storeOrder) {
+        LambdaQueryWrapper<StoreOrder> lqw = Wrappers.lambdaQuery();
+        lqw.eq(StoreOrder::getUid,storeOrder.getUid()).eq(StoreOrder::getBargainId,storeOrder.getBargainId());
+        lqw.eq(StoreOrder::getIsDel, false);
+        return dao.selectList(lqw);
+    }
+
+    /**
+     * 获取砍价商品订单数量（销量）
+     * 用户砍价成功支付订单数量
+     * @param bargainId 砍价商品编号
+     * @return
+     */
+    @Override
+    public Integer getCountByBargainId(Integer bargainId) {
+        LambdaQueryWrapper<StoreOrder> lqw = Wrappers.lambdaQuery();
+        lqw.eq(StoreOrder::getBargainId, bargainId);
+        lqw.eq(StoreOrder::getPaid, true);
+        lqw.eq(StoreOrder::getRefundStatus, 0);
+        return dao.selectCount(lqw);
+    }
+
+    /**
+     * 获取砍价商品订单数量（销量）
+     * 用户砍价成功支付订单数量
+     * @param bargainId 砍价商品编号
+     * @return
+     */
+    @Override
+    public Integer getCountByBargainIdAndUid(Integer bargainId, Integer uid) {
+        LambdaQueryWrapper<StoreOrder> lqw = Wrappers.lambdaQuery();
+        lqw.eq(StoreOrder::getBargainId, bargainId);
+        lqw.eq(StoreOrder::getUid, uid);
+        lqw.eq(StoreOrder::getPaid, true);
+        lqw.eq(StoreOrder::getRefundStatus, 0);
+        return dao.selectCount(lqw);
+    }
+
+    @Override
+    public StoreOrder getByOderId(String orderId) {
+        LambdaQueryWrapper<StoreOrder> lqw = Wrappers.lambdaQuery();
+        lqw.eq(StoreOrder::getOrderId, orderId);
+        return dao.selectOne(lqw);
+    }
+
+    /**
+     * 获取面单默认配置信息
+     * @return
+     */
+    @Override
+    public ExpressSheetVo getDeliveryInfo() {
+        return systemConfigService.getDeliveryInfo();
+    }
+
+    @Override
+    public PageInfo<StoreOrder> findListByUserIdsForRetailShop(List<Integer> userIds, RetailShopStairUserRequest request, PageParamRequest pageParamRequest) {
+        Page<StoreOrder> storeOrderPage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
+        LambdaQueryWrapper<StoreOrder> lqw = new LambdaQueryWrapper<>();
+        lqw.in(StoreOrder::getUid, userIds);
+        lqw.ge(StoreOrder::getPaid, 1);
+        lqw.ge(StoreOrder::getRefundStatus, 0);
+        if(StrUtil.isNotBlank(request.getDateLimit())){
+            dateLimitUtilVo dateLimit = DateUtil.getDateLimit(request.getDateLimit());
+            lqw.between(StoreOrder::getCreateTime, dateLimit.getStartTime(), dateLimit.getEndTime());
+        }
+        if(StrUtil.isNotBlank(request.getNickName())){
+            lqw.eq(StoreOrder::getOrderId, request.getNickName());
+        }
+        lqw.orderByDesc(StoreOrder::getId);
+        return CommonPage.copyPageInfo(storeOrderPage, dao.selectList(lqw));
+    }
+
+    /**
+     * 更新支付结果
+     * @param orderNo 订单编号
+     * @return Boolean
+     */
+    @Override
+    public Boolean updatePaid(String orderNo) {
+        LambdaUpdateWrapper<StoreOrder> lqw = new LambdaUpdateWrapper<>();
+        lqw.set(StoreOrder::getPaid, true);
+        lqw.set(StoreOrder::getPayTime, DateUtil.nowDateTime());
+        lqw.eq(StoreOrder::getOrderId, orderNo);
+        lqw.eq(StoreOrder::getPaid,false);
+        return update(lqw);
+    }
+
+    @Override
+    public Map<String, StoreOrder> getMapInOrderNo(List<String> orderNoList) {
+        Map<String, StoreOrder> map = CollUtil.newHashMap();
+        LambdaUpdateWrapper<StoreOrder> lqw = new LambdaUpdateWrapper<>();
+        lqw.in(StoreOrder::getOrderId, orderNoList);
+        List<StoreOrder> orderList = dao.selectList(lqw);
+        orderList.forEach(order -> {
+            map.put(order.getOrderId(), order);
+        });
+        return map;
+    }
+
+    /**
+     * 获取推广订单总金额
+     * @param orderNoList 订单编号列表
+     * @return
+     */
+    @Override
+    public BigDecimal getSpreadOrderTotalPriceByOrderList(List<String> orderNoList) {
+        LambdaQueryWrapper<StoreOrder> lqw = new LambdaQueryWrapper<>();
+        lqw.select(StoreOrder::getPayPrice);
+        lqw.in(StoreOrder::getOrderId, orderNoList);
+        List<StoreOrder> orderList = dao.selectList(lqw);
+        return orderList.stream().map(StoreOrder::getPayPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    /**
+     * 获取所有收货订单id集合
+     * @return
+     */
+    @Override
+    public List<StoreOrder> findIdAndUidListByReceipt() {
+        LambdaQueryWrapper<StoreOrder> lqw = new LambdaQueryWrapper<>();
+        lqw.select(StoreOrder::getId, StoreOrder::getUid);
+        lqw.eq(StoreOrder::getStatus, 2);
+        lqw.eq(StoreOrder::getRefundStatus, 0);
+        lqw.eq(StoreOrder::getIsDel, false);
+        List<StoreOrder> orderList = dao.selectList(lqw);
+        if (CollUtil.isEmpty(orderList)) {
+            return CollUtil.newArrayList();
+        }
+        return orderList;
+    }
+
+    /**
+     *
+     * @param userId 用户uid
+     * @param pageParamRequest 分页参数
+     * @return List
+     */
+    @Override
+    public List<StoreOrder> findPaidListByUid(Integer userId, PageParamRequest pageParamRequest) {
+        Page<StoreOrder> orderPage = pageInfo = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
+        LambdaQueryWrapper<StoreOrder> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(StoreOrder::getUid, userId);
+        lqw.eq(StoreOrder::getPaid, true);
+        lqw.eq(StoreOrder::getIsDel, false);
+//        lqw.in(StoreOrder::getRefundStatus, 0, 1);
+        lqw.orderByDesc(StoreOrder::getId);
+        return dao.selectList(lqw);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////// 以下为自定义方法
 
     /**
      * 根据时间参数获取有效订单
@@ -1154,7 +1469,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
                 }
                 BigDecimal price;
                 if(category.equals(Constants.USER_BILL_CATEGORY_INTEGRAL)){
-                    price = user.getIntegral();
+                    price = new BigDecimal(user.getIntegral());
                 }else{
                     price = user.getBrokeragePrice();
                 }
@@ -1202,33 +1517,174 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
      * @since 2020-06-10
      */
     private void express(StoreOrderSendRequest request, StoreOrder storeOrder) {
-        try{
-            //快递信息
-            Express express = expressService.info(Integer.parseInt(request.getExpressId()));
-            storeOrder.setDeliveryName(express.getName());
-            storeOrder.setDeliveryId(request.getExpressCode());
-            storeOrder.setStatus(1);
-            storeOrder.setDeliveryType("express");
-            updateById(storeOrder);
-
-            //订单记录增加
-            String message = Constants.ORDER_LOG_MESSAGE_EXPRESS.replace("{deliveryName}", express.getName()).replace("{deliveryCode}", request.getExpressCode());
-            storeOrderStatusService.createLog(request.getId(), Constants.ORDER_LOG_EXPRESS, message);
-
-            //微信模板消息发送
-            HashMap<String, String> map = new HashMap<>();
-            map.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "订单发货提醒");
-            map.put("keyword1", storeOrder.getOrderId());
-            map.put("keyword2", storeOrder.getDeliveryName());
-            map.put("keyword3", storeOrder.getDeliveryId());
-            map.put(Constants.WE_CHAT_TEMP_KEY_END, "欢迎再次购买！");
-
-            templateMessageService.push(Constants.WE_CHAT_TEMP_KEY_EXPRESS, map, storeOrder.getUid(), Constants.PAY_TYPE_WE_CHAT_FROM_PUBLIC);
-
-        }catch (Exception e){
-            throw new CrmebException("快递发货失败！" + e.getMessage());
+        // 校验快递发货参数
+        validateExpressSend(request);
+        //快递公司信息
+        Express express = expressService.getByCode(request.getExpressCode());
+        if (request.getExpressRecordType().equals("1")) { // 正常发货
+            deliverGoods(request, storeOrder, express);
+        }
+        if (request.getExpressRecordType().equals("2")) { // 电子面单
+            request.setExpressName(express.getName());
+            expressDump(request, storeOrder, express);
         }
 
+        storeOrder.setDeliveryCode(express.getCode());
+        storeOrder.setDeliveryName(express.getName());
+        storeOrder.setStatus(1);
+        storeOrder.setDeliveryType("express");
+
+        String message = Constants.ORDER_LOG_MESSAGE_EXPRESS.replace("{deliveryName}", express.getName()).replace("{deliveryCode}", storeOrder.getDeliveryId());
+
+        Boolean execute = transactionTemplate.execute(i -> {
+            updateById(storeOrder);
+            //订单记录增加
+            storeOrderStatusService.createLog(request.getId(), Constants.ORDER_LOG_EXPRESS, message);
+            return Boolean.TRUE;
+        });
+
+        if (!execute) throw new CrmebException("快递发货失败！");
+        User user = userService.getById(storeOrder.getUid());
+        if (StrUtil.isNotBlank(user.getPhone())) {
+            // 发货短信提醒
+            String smsSwitch = systemConfigService.getValueByKey(SmsConstants.SMS_CONFIG_DELIVER_GOODS_SWITCH);
+            if (StrUtil.isNotBlank(smsSwitch) && smsSwitch.equals("1")) {
+                String proName = "";
+                List<StoreOrderInfoVo> voList = storeOrderInfoService.getOrderListByOrderId(storeOrder.getId());
+                proName = voList.get(0).getInfo().getProductInfo().getStoreName();
+                if (voList.size() > 1) {
+                    proName = proName.concat("等");
+                }
+                smsService.sendOrderDeliverNotice(user.getPhone(), user.getNickname(), proName, storeOrder.getOrderId());
+            }
+        }
+
+        // 发送消息通知
+        pushMessageOrder(storeOrder, user);
+
+//        //微信模板消息发送
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "订单发货提醒");
+//        map.put("keyword1", storeOrder.getOrderId());
+//        map.put("keyword2", storeOrder.getDeliveryName());
+//        map.put("keyword3", storeOrder.getDeliveryId());
+//        map.put(Constants.WE_CHAT_TEMP_KEY_END, "欢迎再次购买！");
+//        templateMessageService.push(Constants.WE_CHAT_TEMP_KEY_EXPRESS, map, storeOrder.getUid(), Constants.PAY_TYPE_WE_CHAT_FROM_PUBLIC);
+    }
+
+    /**
+     * 发送消息通知
+     * 根据用户类型发送
+     * 公众号模板消息
+     * 小程序订阅消息
+     */
+    private void pushMessageOrder(StoreOrder storeOrder, User user) {
+        if (user.getUserType().equals(UserConstants.USER_TYPE_H5)) {
+            return;
+        }
+        UserToken userToken;
+        HashMap<String, String> temMap = new HashMap<>();
+        // 公众号
+        if (user.getUserType().equals(UserConstants.USER_TYPE_WECHAT)) {
+            userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_WECHAT);
+            if (ObjectUtil.isNull(userToken)) {
+                return ;
+            }
+            // 发送微信模板消息
+            temMap.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "订单发货提醒");
+            temMap.put("keyword1", storeOrder.getOrderId());
+            temMap.put("keyword2", storeOrder.getDeliveryName());
+            temMap.put("keyword3", storeOrder.getDeliveryId());
+            temMap.put(Constants.WE_CHAT_TEMP_KEY_END, "欢迎再次购买！");
+            templateMessageService.pushTemplateMessage(Constants.WE_CHAT_TEMP_KEY_EXPRESS, temMap, userToken.getToken());
+            return;
+        }
+        // 小程序发送订阅消息
+        userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_ROUTINE);
+        if (ObjectUtil.isNull(userToken)) {
+            return ;
+        }
+        // 组装数据
+        temMap.put("character_string1", storeOrder.getOrderId());
+        temMap.put("name3", storeOrder.getDeliveryName());
+        temMap.put("character_string4", storeOrder.getDeliveryId());
+        temMap.put("thing7", "您的订单已发货");
+        templateMessageService.pushMiniTemplateMessage(Constants.WE_CHAT_PROGRAM_TEMP_KEY_EXPRESS, temMap, userToken.getToken());
+    }
+
+    /**
+     * 电子面单
+     * @param request
+     * @param storeOrder
+     * @param express
+     */
+    private void expressDump(StoreOrderSendRequest request, StoreOrder storeOrder, Express express) {
+        String configExportOpen = systemConfigService.getValueByKeyException("config_export_open");
+        if (!configExportOpen.equals("1")) {// 电子面单未开启
+            throw new CrmebException("请先开启电子面单");
+        }
+        MyRecord record = new MyRecord();
+        record.set("com", express.getCode());// 快递公司编码
+        record.set("to_name", storeOrder.getRealName());// 收件人
+        record.set("to_tel", storeOrder.getUserPhone());// 收件人电话
+        record.set("to_addr", storeOrder.getUserAddress());// 收件人详细地址
+        record.set("from_name", request.getToName());// 寄件人
+        record.set("from_tel", request.getToTel());// 寄件人电话
+        record.set("from_addr", request.getToAddr());// 寄件人详细地址
+        record.set("temp_id", request.getExpressTempId());// 电子面单模板ID
+        String siid = systemConfigService.getValueByKeyException("config_export_siid");
+        record.set("siid", siid);// 云打印机编号
+        record.set("count", storeOrder.getTotalNum());// 商品数量
+
+        //获取购买商品名称
+        List<Integer> orderIdList = new ArrayList<>();
+        orderIdList.add(storeOrder.getId());
+        HashMap<Integer, List<StoreOrderInfoVo>> orderInfoMap = StoreOrderInfoService.getMapInId(orderIdList);
+        if(orderInfoMap.isEmpty() || !orderInfoMap.containsKey(storeOrder.getId())){
+            throw new CrmebException("没有找到购买的商品信息");
+        }
+        List<String> productNameList = new ArrayList<>();
+        for (StoreOrderInfoVo storeOrderInfoVo : orderInfoMap.get(storeOrder.getId())) {
+            productNameList.add(storeOrderInfoVo.getInfo().getProductInfo().getStoreName());
+        }
+
+        record.set("cargo", String.join(",", productNameList));// 物品名称
+        if (express.getPartnerId()) {
+            record.set("partner_id", express.getAccount());// 电子面单月结账号(部分快递公司必选)
+        }
+        if (express.getPartnerKey()) {
+            record.set("partner_key", express.getPassword());// 电子面单密码(部分快递公司必选)
+        }
+        if (express.getNet()) {
+            record.set("net", express.getNetName());// 收件网点名称(部分快递公司必选)
+        }
+
+        MyRecord myRecord = onePassService.expressDump(record);
+        storeOrder.setDeliveryId(myRecord.getStr("kuaidinum"));
+    }
+
+    /**
+     * 正常发货
+     */
+    private void deliverGoods(StoreOrderSendRequest request, StoreOrder storeOrder, Express express) {
+        storeOrder.setDeliveryId(request.getExpressNumber());
+    }
+
+    /**
+     * 校验快递发货参数
+     */
+    private void validateExpressSend(StoreOrderSendRequest request) {
+        if (request.getExpressRecordType().equals("1")) {
+            if (StrUtil.isBlank(request.getExpressNumber())) throw new CrmebException("请填写快递单号");
+            return;
+        }
+//        if (StrUtil.isBlank(request.getExpressName())) throw new CrmebException("请选择快递公司");
+        if (StrUtil.isBlank(request.getExpressCode())) throw new CrmebException("请选择快递公司");
+        if (StrUtil.isBlank(request.getExpressRecordType())) throw new CrmebException("请选择发货记录类型");
+        if (StrUtil.isBlank(request.getExpressTempId())) throw new CrmebException("请选择电子面单");
+        if (StrUtil.isBlank(request.getToName())) throw new CrmebException("请填写寄件人姓名");
+        if (StrUtil.isBlank(request.getToTel())) throw new CrmebException("请填写寄件人电话");
+        if (StrUtil.isBlank(request.getToAddr())) throw new CrmebException("请填写寄件人地址");
     }
 
     /** 送货上门
@@ -1238,51 +1694,100 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
      * @since 2020-06-10
      */
     private void delivery(StoreOrderSendRequest request, StoreOrder storeOrder) {
-        ValidateFormUtil.isPhone(request.getExpressCode(), "收货人联系方式");
+        if (StrUtil.isBlank(request.getDeliveryName())) throw new CrmebException("请输入送货人姓名");
+        if (StrUtil.isBlank(request.getDeliveryTel())) throw new CrmebException("请输入送货人电话号码");
+        ValidateFormUtil.isPhone(request.getDeliveryTel(), "送货人联系方式");
 
-        try{
-            //送货信息
-            storeOrder.setDeliveryName(request.getExpressId());
-            storeOrder.setDeliveryId(request.getExpressCode());
-            storeOrder.setStatus(1);
-            storeOrder.setDeliveryType("send");
+        //送货信息
+        storeOrder.setDeliveryName(request.getDeliveryName());
+        storeOrder.setDeliveryId(request.getDeliveryTel());
+        storeOrder.setStatus(1);
+        storeOrder.setDeliveryType("send");
+
+        //获取购买商品名称
+        List<Integer> orderIdList = new ArrayList<>();
+        orderIdList.add(storeOrder.getId());
+        HashMap<Integer, List<StoreOrderInfoVo>> orderInfoMap = StoreOrderInfoService.getMapInId(orderIdList);
+        if(orderInfoMap.isEmpty() || !orderInfoMap.containsKey(storeOrder.getId())){
+            throw new CrmebException("没有找到购买的商品信息");
+        }
+        List<String> productNameList = new ArrayList<>();
+        for (StoreOrderInfoVo storeOrderInfoVo : orderInfoMap.get(storeOrder.getId())) {
+            productNameList.add(storeOrderInfoVo.getInfo().getProductInfo().getStoreName());
+        }
+
+        String message = Constants.ORDER_LOG_MESSAGE_DELIVERY.replace("{deliveryName}", request.getDeliveryName()).replace("{deliveryCode}", request.getDeliveryTel());
+
+        Boolean execute = transactionTemplate.execute(i -> {
+            // 更新订单
             updateById(storeOrder);
-
-            //获取购买商品名称
-            List<Integer> orderIdList = new ArrayList<>();
-            orderIdList.add(storeOrder.getId());
-
-            HashMap<Integer, List<StoreOrderInfoVo>> orderInfoMap = StoreOrderInfoService.getMapInId(orderIdList);
-            if(orderInfoMap.isEmpty() || !orderInfoMap.containsKey(storeOrder.getId())){
-                throw new CrmebException("没有找到购买的商品信息");
-            }
-            List<String> productNameList = new ArrayList<>();
-            for (StoreOrderInfoVo storeOrderInfoVo : orderInfoMap.get(storeOrder.getId())) {
-//                productNameList.add(storeOrderInfoVo.getInfo().getJSONObject("productInfo").getString("store_name"));
-                productNameList.add(storeOrderInfoVo.getInfo().getProductInfo().getStoreName());
-            }
-
-
-            //订单记录增加
-            String message = Constants.ORDER_LOG_MESSAGE_DELIVERY.replace("{deliveryName}", request.getExpressId()).replace("{deliveryCode}", request.getExpressCode());
+            // 订单记录增加
             storeOrderStatusService.createLog(request.getId(), Constants.ORDER_LOG_DELIVERY, message);
+            return Boolean.TRUE;
+        });
+        if (!execute) throw new CrmebException("订单更新送货失败");
 
-            //微信模板消息发送
-            HashMap<String, String> map = new HashMap<>();
-            map.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "订单发货提醒");
-            map.put("keyword1", StringUtils.join(productNameList, "|"));
+        User user = userService.getById(storeOrder.getUid());
+        // 发送消息通知
+        pushMessageDeliveryOrder(storeOrder, user, request, productNameList);
+    }
+
+    /**
+     * 发送消息通知
+     * 根据用户类型发送
+     * 公众号模板消息
+     * 小程序订阅消息
+     */
+    private void pushMessageDeliveryOrder(StoreOrder storeOrder, User user, StoreOrderSendRequest request, List<String> productNameList) {
+        if (user.getUserType().equals(UserConstants.USER_TYPE_H5)) {
+            return;
+        }
+        UserToken userToken;
+        HashMap<String, String> map = new HashMap<>();
+        String proName = "";
+        if (CollUtil.isNotEmpty(productNameList)) {
+            proName = StringUtils.join(productNameList, "|");
+        }
+        // 公众号
+        if (user.getUserType().equals(UserConstants.USER_TYPE_WECHAT)) {
+            userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_WECHAT);
+            if (ObjectUtil.isNull(userToken)) {
+                return ;
+            }
+            map.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "订单配送提醒");
+            map.put("keyword1", storeOrder.getOrderId());
             map.put("keyword2", DateUtil.dateToStr(storeOrder.getCreateTime(), Constants.DATE_FORMAT));
             map.put("keyword3", storeOrder.getUserAddress());
-            map.put("keyword4", request.getExpressId());
-            map.put("keyword5", request.getExpressCode());
+            map.put("keyword4", request.getDeliveryName());
+            map.put("keyword5", request.getDeliveryTel());
             map.put(Constants.WE_CHAT_TEMP_KEY_END, "欢迎再次购买！");
-
-            templateMessageService.push(Constants.WE_CHAT_TEMP_KEY_DELIVERY, map, storeOrder.getUid() , Constants.PAY_TYPE_WE_CHAT_FROM_PUBLIC);
-
-        }catch (Exception e){
-            throw new CrmebException("送货上门发货失败！");
+            // 发送微信模板消息
+            templateMessageService.pushTemplateMessage(Constants.WE_CHAT_TEMP_KEY_DELIVERY, map, userToken.getToken());
+            return;
         }
+        // 小程序发送订阅消息
+        userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_ROUTINE);
+        if (ObjectUtil.isNull(userToken)) {
+            return ;
+        }
+
+        if (proName.length() > 20) {
+            proName = proName.substring(0, 15) + "***";
+        }
+        map.put("thing8", proName);
+        map.put("character_string1", storeOrder.getOrderId());
+        map.put("name4", request.getDeliveryName());
+        map.put("phone_number10", request.getDeliveryTel());
+        templateMessageService.pushMiniTemplateMessage(Constants.WE_CHAT_PROGRAM_TEMP_KEY_DELIVERY, map, userToken.getToken());
+//        String storeNameAndCarNumString = orderUtils.getStoreNameAndCarNumString(storeOrder.getId());
+//        if(StringUtils.isNotBlank(storeNameAndCarNumString)){
+//            WechatSendMessageForPaySuccess paySuccess = new WechatSendMessageForPaySuccess(
+//                    storeOrder.getId()+"",storeOrder.getPayPrice()+"",storeOrder.getPayTime()+"","暂无",
+//                    storeOrder.getTotalPrice()+"",storeNameAndCarNumString);
+//            orderUtils.sendWeiChatMiniMessageForPaySuccess(paySuccess, userService.getById(storeOrder).getUid());
+//        }
     }
+
     /** 虚拟
      * @param request StoreOrderSendRequest 发货参数
      * @param storeOrder StoreOrder 订单信息
@@ -1290,22 +1795,18 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
      * @since 2020-06-10
      */
     private void virtual(StoreOrderSendRequest request, StoreOrder storeOrder) {
-        try{
-            //快递信息
-            storeOrder.setDeliveryType("fictitious");
-            storeOrder.setStatus(1);
-            updateById(storeOrder);
+        //快递信息
+        storeOrder.setDeliveryType("fictitious");
+        storeOrder.setStatus(1);
 
+        Boolean execute = transactionTemplate.execute(i -> {
+            updateById(storeOrder);
             //订单记录增加
             storeOrderStatusService.createLog(request.getId(), Constants.ORDER_LOG_DELIVERY_VI, Constants.ORDER_LOG_DELIVERY_VI);
-
-            //微信模板消息发送
-        }catch (Exception e){
-            e.printStackTrace();
-            throw new CrmebException("虚拟物品发货失败");
-        }
-
-
+            return Boolean.TRUE;
+        });
+        if (!execute) throw new CrmebException("虚拟物品发货失败");
+        //微信模板消息发送
     }
     /**
      * 支付成功操作
@@ -1315,7 +1816,6 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
      * @return 成功处理结果
      */
     public boolean paySuccess(StoreOrder storeOrder,User currentUser, String formId){
-        // todo 秒杀团购拼团
         // 更新订单为已支付状态
         StoreOrder storeOrderUpdate = new StoreOrder();
         storeOrderUpdate.setOrderId(storeOrder.getOrderId());
@@ -1340,8 +1840,8 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         userBill.setMark("支付" + storeOrder.getPayPrice() + "元购买商品");
         boolean saveUserbillResult = userBillService.save(userBill);
         if(storeOrder.getUseIntegral() > 0){
-            BigDecimal useIntegral = BigDecimal.valueOf(storeOrder.getUseIntegral(),0);
-            currentUser.setIntegral(currentUser.getIntegral().subtract(useIntegral));
+            Integer useIntegral = storeOrder.getUseIntegral();
+            currentUser.setIntegral(currentUser.getIntegral() - useIntegral);
             userService.updateBase(currentUser);
         }
         userService.userPayCountPlus(currentUser);
@@ -1457,103 +1957,61 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         if(null == status){
             return;
         }
-        Integer orderStatus = null; //订单状态
-        Integer paidStatus = null; //支付状态
-        Integer refundStatus = null; //退款状态
-        Integer deleteStatus = null; //删除状态
-        Integer systemDeleteStatus = null; //系统删除
-        Integer shippingType = null; //配送方式
         switch (status){
             case Constants.ORDER_STATUS_UNPAID: //未支付
-                paidStatus = 0; //支付状态
-                orderStatus = 0; //订单状态
-                refundStatus = 0; //退款状态
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 0);//支付状态
+                queryWrapper.eq("status", 0); //订单状态
+                queryWrapper.eq("is_del", 0);//删除状态
                 break;
             case Constants.ORDER_STATUS_NOT_SHIPPED: //未发货
-                paidStatus = 1; //支付状态
-                orderStatus = 0; //订单状态
-                refundStatus = 0; //退款状态
-                shippingType = 1; //配送方式
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 1);
+                queryWrapper.eq("status", 0);
+                queryWrapper.eq("refund_status", 0);
+                queryWrapper.eq("shipping_type", 1);//配送方式
+                queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_SPIKE: //待收货
-                paidStatus = 1; //支付状态
-                orderStatus = 1; //订单状态
-                refundStatus = 0; //退款状态
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 1);
+                queryWrapper.eq("status", 1);
+                queryWrapper.eq("refund_status", 0);
+                queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_BARGAIN: //待评价
-                paidStatus = 1; //支付状态
-                orderStatus = 2; //订单状态
-                refundStatus = 0; //退款状态
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 1);
+                queryWrapper.eq("status", 2);
+                queryWrapper.eq("refund_status", 0);
+                queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_COMPLETE: //交易完成
-                paidStatus = 1; //支付状态
-                orderStatus = 3; //订单状态
-                refundStatus = 0; //退款状态
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 1);
+                queryWrapper.eq("status", 3);
+                queryWrapper.eq("refund_status", 0);
+                queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_TOBE_WRITTEN_OFF: //待核销
-                paidStatus = 1; //支付状态
-                orderStatus = 0; //订单状态
-                refundStatus = 0; //退款状态
-                shippingType = 2; //配送方式
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 1);
+                queryWrapper.eq("status", 0);
+                queryWrapper.eq("refund_status", 0);
+                queryWrapper.eq("shipping_type", 2);//配送方式
+                queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_REFUNDING: //退款中
-                paidStatus = 1; //支付状态
-                refundStatus = 1; //退款状态
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 1);
+                queryWrapper.in("refund_status", 1,3);
+                queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_REFUNDED: //已退款
-                paidStatus = 1; //支付状态
-                refundStatus = 2; //退款状态
-                deleteStatus = 0; //删除状态
-                systemDeleteStatus = 0; //系统删除
+                queryWrapper.eq("paid", 1);
+                queryWrapper.eq("refund_status", 2);
+                queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_DELETED: //已删除
-                deleteStatus = 1; //删除状态
-                systemDeleteStatus = 1; //系统删除,  未付款超时自动删除
+                queryWrapper.eq("is_del", 1);
                 break;
             default:
                 break;
         }
-        if(paidStatus != null){
-            queryWrapper.eq("paid", paidStatus);
-        }
-
-        if(orderStatus != null){
-            queryWrapper.eq("status", orderStatus);
-        }
-
-        if(refundStatus != null){
-            queryWrapper.eq("refund_status", refundStatus);
-        }
-
-        if(shippingType != null){
-            queryWrapper.eq("shipping_type", shippingType);
-        }
-
-        if(deleteStatus != null){
-            if(deleteStatus == 1 && systemDeleteStatus == 1){
-                queryWrapper.and(i -> i.or().eq("is_del", 1).or().eq("is_system_del", 1));
-            }else{
-                queryWrapper.eq("is_del", deleteStatus);
-            }
-        }
-
-
-
-
+        queryWrapper.eq("is_system_del", 0);
     }
 
     /**
@@ -1633,9 +2091,19 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             return map;
         }
 
-        //退款中
+        //申请退款
         if(storeOrder.getPaid()
                 && storeOrder.getRefundStatus() == 1
+                && !storeOrder.getIsDel()
+                && !storeOrder.getIsSystemDel()){
+            map.put("key", Constants.ORDER_STATUS_APPLY_REFUNDING);
+            map.put("value", Constants.ORDER_STATUS_STR_APPLY_REFUNDING);
+            return map;
+        }
+
+        //退款中
+        if(storeOrder.getPaid()
+                && storeOrder.getRefundStatus() == 3
                 && !storeOrder.getIsDel()
                 && !storeOrder.getIsSystemDel()){
             map.put("key", Constants.ORDER_STATUS_REFUNDING);
@@ -1652,32 +2120,32 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             map.put("value", Constants.ORDER_STATUS_STR_REFUNDED);
         }
 
-        //未发货
-        if(storeOrder.getPaid()
-                && storeOrder.getStatus() == 0
-                && !storeOrder.getIsDel()
-                && !storeOrder.getIsSystemDel()){
-            map.put("key", Constants.ORDER_STATUS_NOT_SHIPPED);
-            map.put("value", Constants.ORDER_STATUS_STR_NOT_SHIPPED);
-        }
+//        //未发货
+//        if(storeOrder.getPaid()
+//                && storeOrder.getStatus() == 0
+//                && !storeOrder.getIsDel()
+//                && !storeOrder.getIsSystemDel()){
+//            map.put("key", Constants.ORDER_STATUS_NOT_SHIPPED);
+//            map.put("value", Constants.ORDER_STATUS_STR_NOT_SHIPPED);
+//        }
 
-        //待收货
-        if(storeOrder.getPaid()
-                && storeOrder.getStatus() == 1
-                && !storeOrder.getIsDel()
-                && !storeOrder.getIsSystemDel()){
-            map.put("key", Constants.ORDER_STATUS_SPIKE);
-            map.put("value", Constants.ORDER_STATUS_STR_SPIKE);
-        }
+//        //待收货
+//        if(storeOrder.getPaid()
+//                && storeOrder.getStatus() == 1
+//                && !storeOrder.getIsDel()
+//                && !storeOrder.getIsSystemDel()){
+//            map.put("key", Constants.ORDER_STATUS_SPIKE);
+//            map.put("value", Constants.ORDER_STATUS_STR_SPIKE);
+//        }
 
-        //用户已收货
-        if(storeOrder.getPaid()
-                && storeOrder.getStatus() == 2
-                && !storeOrder.getIsDel()
-                && !storeOrder.getIsSystemDel()){
-            map.put("key", Constants.ORDER_STATUS_COMPLETE);
-            map.put("value", Constants.ORDER_STATUS_STR_TAKE);
-        }
+//        //用户已收货
+//        if(storeOrder.getPaid()
+//                && storeOrder.getStatus() == 2
+//                && !storeOrder.getIsDel()
+//                && !storeOrder.getIsSystemDel()){
+//            map.put("key", Constants.ORDER_STATUS_COMPLETE);
+//            map.put("value", Constants.ORDER_STATUS_STR_TAKE);
+//        }
 
 
         //已删除

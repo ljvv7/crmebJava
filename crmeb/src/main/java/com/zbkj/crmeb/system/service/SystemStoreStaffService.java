@@ -1,20 +1,27 @@
 package com.zbkj.crmeb.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.common.PageParamRequest;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.crmeb.system.model.SystemStoreStaff;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.crmeb.system.model.SystemStoreStaffResponse;
 import com.zbkj.crmeb.system.request.SystemStoreStaffRequest;
+import com.zbkj.crmeb.system.response.SystemStoreStaffResponse;
 
 import java.util.HashMap;
 import java.util.List;
 
 /**
-* @author Mr.Zhang
-* @Description SystemStoreStaffService 接口
-* @since 2020-04-17
-*/
+ * SystemStoreStaffService 接口
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 public interface SystemStoreStaffService extends IService<SystemStoreStaff> {
 
     PageInfo<SystemStoreStaffResponse> getList(Integer storeId, PageParamRequest pageParamRequest);

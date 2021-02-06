@@ -3,6 +3,22 @@ package com.common;
 import com.exception.ExceptionCodeEnum;
 import com.exception.ExceptionHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 公共返回对象
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 public class CommonResult<T> {
     private long code;
     private String message;
@@ -38,6 +54,28 @@ public class CommonResult<T> {
      */
     public static <T> CommonResult<T> success(T data) {
         return new CommonResult<T>(ExceptionCodeEnum.SUCCESS.getCode(), ExceptionCodeEnum.SUCCESS.getMessage(), data);
+    }
+
+    /**
+     * 成功返回结果
+     *
+     * @param record 获取的数据
+     */
+    public static CommonResult<Map<String, Object>> success(MyRecord record) {
+        return new CommonResult<>(ExceptionCodeEnum.SUCCESS.getCode(), ExceptionCodeEnum.SUCCESS.getMessage(), record.getColumns());
+    }
+
+    /**
+     * 成功返回结果
+     *
+     * @param recordList 获取的数据
+     */
+    public static CommonResult<List<Map<String, Object>>> success(List<MyRecord> recordList) {
+        List<Map<String, Object>> list = new ArrayList<>();
+        recordList.forEach(i -> {
+             list.add(i.getColumns());
+        });
+        return new CommonResult<>(ExceptionCodeEnum.SUCCESS.getCode(), ExceptionCodeEnum.SUCCESS.getMessage(), list);
     }
 
     /**

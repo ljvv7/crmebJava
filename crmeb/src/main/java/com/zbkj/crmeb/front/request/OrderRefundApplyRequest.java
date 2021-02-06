@@ -13,11 +13,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author stivepeim
- * @title: StoreCartRequest
- * @projectName crmeb
- * @description: 添加购物车参数
- * @date 2020/7/4
+ * 添加购物车参数Request对象
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,14 +36,17 @@ public class OrderRefundApplyRequest {
     private String text;
 
     @ApiModelProperty(value = "订单id", required = true)
-    @NotBlank(message = "请选择订单")
     private Integer id;
 
-    @ApiModelProperty(value = "退款凭证(多个图片请用,(英文逗号)隔开)")
+    @ApiModelProperty(value = "退款凭证图片(多个图片请用,(英文逗号)隔开)")
     @JsonProperty("refund_reason_wap_img")
     private String reasonImage;
 
     @ApiModelProperty(value = "备注说明")
     @JsonProperty("refund_reason_wap_explain")
     private String explain;
+
+    @ApiModelProperty(value = "待退款订单")
+    @NotNull(message = "待退款订单 不能为空")
+    private String  uni;
 }

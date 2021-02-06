@@ -1,10 +1,18 @@
 package com.zbkj.crmeb.store.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.common.CommonPage;
+import com.common.MyRecord;
 import com.common.PageParamRequest;
 import com.constants.Constants;
 import com.exception.CrmebException;
@@ -14,12 +22,15 @@ import com.github.pagehelper.PageInfo;
 import com.utils.CrmebUtil;
 import com.utils.DateUtil;
 import com.utils.RedisUtil;
-import com.utils.UrlUtil;
+import com.zbkj.crmeb.bargain.service.StoreBargainService;
 import com.zbkj.crmeb.category.model.Category;
 import com.zbkj.crmeb.category.service.CategoryService;
+import com.zbkj.crmeb.combination.service.StoreCombinationService;
 import com.zbkj.crmeb.front.request.IndexStoreProductSearchRequest;
 import com.zbkj.crmeb.marketing.model.StoreCoupon;
 import com.zbkj.crmeb.marketing.service.StoreCouponService;
+import com.zbkj.crmeb.pass.service.OnePassService;
+import com.zbkj.crmeb.seckill.service.StoreSeckillService;
 import com.zbkj.crmeb.store.dao.StoreProductDao;
 import com.zbkj.crmeb.store.model.*;
 import com.zbkj.crmeb.store.request.StoreProductAttrValueRequest;
@@ -30,33 +41,34 @@ import com.zbkj.crmeb.store.response.StoreProductAttrValueResponse;
 import com.zbkj.crmeb.store.response.StoreProductResponse;
 import com.zbkj.crmeb.store.response.StoreProductTabsHeader;
 import com.zbkj.crmeb.store.service.*;
+import com.zbkj.crmeb.store.utilService.ProductUtils;
 import com.zbkj.crmeb.system.service.SystemAttachmentService;
 import com.zbkj.crmeb.system.service.SystemConfigService;
-import com.zbkj.crmeb.task.order.OrderRefundByUser;
+import com.zbkj.crmeb.task.order.OrderRefundTask;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import java.io.*;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
-* @author Mr.Zhang
-* @description StoreProductServiceImpl 接口实现
-* @date 2020-05-27
-*/
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreProduct>
         implements StoreProductService {
@@ -100,7 +112,28 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
     @Autowired
     private StoreCouponService storeCouponService;
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderRefundByUser.class);
+    @Autowired
+    private ProductUtils productUtils;
+
+    @Autowired
+    private StoreBargainService storeBargainService;
+
+    @Autowired
+    private StoreCombinationService storeCombinationService;
+
+    @Autowired
+    private StoreSeckillService storeSeckillService;
+
+    @Autowired
+    private OnePassService onePassService;
+
+    @Autowired
+    private StoreCartService storeCartService;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+
+    private static final Logger logger = LoggerFactory.getLogger(OrderRefundTask.class);
 
     /**
      * H5端使用
@@ -205,7 +238,12 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
         for (StoreProduct product : storeProducts) {
             StoreProductResponse storeProductResponse = new StoreProductResponse();
             BeanUtils.copyProperties(product, storeProductResponse);
-            List<StoreProductAttr> attrs = attrService.getByProductId(product.getId());
+//            List<StoreProductAttr> attrs = attrService.getByProductId(product.getId());
+            StoreProductAttr storeProductAttrPram = new StoreProductAttr();
+            storeProductAttrPram.setProductId(product.getId()).setType(Constants.PRODUCT_TYPE_NORMAL);
+            List<StoreProductAttr> attrs = attrService.getByEntity(storeProductAttrPram);
+
+
             if(attrs.size() > 0){
                 storeProductResponse.setAttr(attrs);
             }
@@ -213,7 +251,11 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
 //            if(null != spResult){
 //                if(StringUtils.isNotBlank(spResult.getResult())){
             List<StoreProductAttrValueResponse> storeProductAttrValueResponse = new ArrayList<>();
-            List<StoreProductAttrValue> storeProductAttrValues = storeProductAttrValueService.getListByProductId(product.getId());
+//            List<StoreProductAttrValue> storeProductAttrValues = storeProductAttrValueService.getListByProductId(product.getId());
+
+            StoreProductAttrValue storeProductAttrValuePram = new StoreProductAttrValue();
+            storeProductAttrValuePram.setProductId(product.getId()).setType(Constants.PRODUCT_TYPE_NORMAL);
+            List<StoreProductAttrValue> storeProductAttrValues = storeProductAttrValueService.getByEntity(storeProductAttrValuePram);
             storeProductAttrValues.stream().map(e->{
                 StoreProductAttrValueResponse response = new StoreProductAttrValueResponse();
                 BeanUtils.copyProperties(e,response);
@@ -225,19 +267,23 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
                 // 处理富文本
                 StoreProductDescription sd = storeProductDescriptionService.getOne(
                         new LambdaQueryWrapper<StoreProductDescription>()
-                                .eq(StoreProductDescription::getProductId, product.getId()));
-//                                .eq(StoreProductDescription::getType, spResult.getType()));
+                                .eq(StoreProductDescription::getProductId, product.getId())
+                                .eq(StoreProductDescription::getType, Constants.PRODUCT_TYPE_NORMAL));
                 if(null != sd){
                     storeProductResponse.setContent(null == sd.getDescription()?"":sd.getDescription());
                 }
 //            }
             // 处理分类中文
             List<Category> cg = categoryService.getByIds(CrmebUtil.stringToArray(product.getCateId()));
-            StringBuilder sb = new StringBuilder();
-            for (Category category : cg) {
-                sb.append(sb.length() == 0 ? category.getName(): category.getName()+",");
+//            StringBuilder sb = new StringBuilder();
+//            for (Category category : cg) {
+//                sb.append(sb.length() == 0 ? category.getName(): category.getName()+",");
+//            }
+            if (CollUtil.isEmpty(cg)) {
+                storeProductResponse.setCateValues("");
+            } else {
+                storeProductResponse.setCateValues(cg.stream().map(Category::getName).collect(Collectors.joining(",")));
             }
-            storeProductResponse.setCateValues(sb.toString());
 
             storeProductResponse.setCollectCount(
                     storeProductRelationService.getList(product.getId(),"collect").size());
@@ -278,6 +324,16 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
      */
     @Override
     public boolean save(StoreProductRequest storeProductRequest) {
+        // 判断产品价格必须大于0
+        List<StoreProductAttrValueRequest> attrValue = storeProductRequest.getAttrValue();
+        if (attrValue.size() > 0) {
+            for (StoreProductAttrValueRequest attr : attrValue) {
+                if (attr.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
+                    new CrmebException("商品价格必须大于0");
+                }
+            }
+        }
+
         StoreProduct storeProduct = new StoreProduct();
         BeanUtils.copyProperties(storeProductRequest, storeProduct);
         storeProduct.setAddTime(DateUtil.getNowTime());
@@ -292,7 +348,7 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
 //        List<StoreProductAttrValueRequest> storeProductAttrValuesRequest = getStoreProductAttrValueRequests(storeProductRequest);
 
         //计算价格
-        calcPriceForAttrValues(storeProductRequest, storeProduct);
+        productUtils.calcPriceForAttrValues(storeProductRequest, storeProduct);
 
         //保存数据
         boolean save = save(storeProduct);
@@ -300,12 +356,13 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
             storeProductRequest.getAttr().forEach(e->{
                 e.setProductId(storeProduct.getId());
                 e.setAttrValues(StringUtils.strip(e.getAttrValues().replace("\"",""),"[]"));
+                e.setType(Constants.PRODUCT_TYPE_NORMAL);
             });
             boolean attrAddResult = attrService.saveOrUpdateBatch(storeProductRequest.getAttr());
             if (!attrAddResult) throw new CrmebException("新增属性名失败");
         }else{ // 单属性
             StoreProductAttr singleAttr = new StoreProductAttr();
-            singleAttr.setProductId(storeProduct.getId()).setAttrName("规格").setAttrValues("默认").setType(0);
+            singleAttr.setProductId(storeProduct.getId()).setAttrName("规格").setAttrValues("默认").setType(Constants.PRODUCT_TYPE_NORMAL);
             boolean attrAddResult = attrService.save(singleAttr);
             if (!attrAddResult) throw new CrmebException("新增属性名失败");
             StoreProductAttrValue singleAttrValue = new StoreProductAttrValue();
@@ -322,7 +379,8 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
                     .setSales(storeProduct.getSales()).setPrice(storeProduct.getPrice())
                     .setImage(systemAttachmentService.clearPrefix(storeProduct.getImage()))
                     .setCost(storeProduct.getCost()).setBarCode(storeProduct.getBarCode())
-                    .setOtPrice(storeProduct.getOtPrice()).setBrokerage(commissionL1).setBrokerageTwo(commissionL2);
+                    .setOtPrice(storeProduct.getOtPrice()).setBrokerage(commissionL1).setBrokerageTwo(commissionL2)
+                    .setType(Constants.PRODUCT_TYPE_NORMAL);
             boolean saveOrUpdateResult = storeProductAttrValueService.save(singleAttrValue);
             if(!saveOrUpdateResult) throw new CrmebException("新增属性详情失败");
         }
@@ -347,6 +405,7 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
                 }
                 spav.setImage(systemAttachmentService.clearPrefix(spav.getImage()));
                 spav.setAttrValue(JSON.toJSONString(attrValuesRequest.getAttrValue()));
+                spav.setType(Constants.PRODUCT_TYPE_NORMAL);
                 storeProductAttrValues.add(spav);
             }
             // 保存属性
@@ -364,12 +423,12 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
         // 处理富文本
         StoreProductDescription spd = new StoreProductDescription(
                 storeProduct.getId(),  storeProductRequest.getContent().length() > 0
-                ? systemAttachmentService.clearPrefix(storeProductRequest.getContent()):storeProductRequest.getContent());
-        storeProductDescriptionService.deleteByProductId(spd.getProductId());
+                ? systemAttachmentService.clearPrefix(storeProductRequest.getContent()):"",Constants.PRODUCT_TYPE_NORMAL);
+        storeProductDescriptionService.deleteByProductId(spd.getProductId(),Constants.PRODUCT_TYPE_NORMAL);
         storeProductDescriptionService.save(spd);
 
         // 处理优惠券关联信息
-        shipProductCoupons(storeProductRequest, storeProduct);
+        productUtils.shipProductCoupons(storeProductRequest, storeProduct);
         return save;
     }
 
@@ -381,8 +440,21 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
      */
     @Override
     public boolean update(StoreProductRequest storeProductRequest) {
+        // 判断产品价格必须大于0
+        List<StoreProductAttrValueRequest> attrValue = storeProductRequest.getAttrValue();
+        if (attrValue.size() > 0) {
+            for (StoreProductAttrValueRequest attr : attrValue) {
+                if (attr.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
+                    new CrmebException("商品价格必须大于0");
+                }
+            }
+        }
+
         StoreProduct storeProduct = new StoreProduct();
         BeanUtils.copyProperties(storeProductRequest, storeProduct);
+        // 设置Acticity活动
+        productUtils.setProductActivity(storeProductRequest, storeProduct);
+
         storeProduct.setAddTime(DateUtil.getNowTime());
 
         //主图
@@ -393,15 +465,16 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
 
 //        List<StoreProductAttrValueRequest> storeProductAttrValuesRequest = getStoreProductAttrValueRequests(storeProductRequest);
 
-        calcPriceForAttrValues(storeProductRequest, storeProduct);
+        productUtils.calcPriceForAttrValues(storeProductRequest, storeProduct);
         int saveCount = dao.updateById(storeProduct);
         // 对attr表做全量更新，删除原有数据保存现有数据
-        attrService.removeByProductId(storeProduct.getId());
-        storeProductAttrValueService.removeByProductId(storeProduct.getId());
+        attrService.removeByProductId(storeProduct.getId(),Constants.PRODUCT_TYPE_NORMAL);
+        storeProductAttrValueService.removeByProductId(storeProduct.getId(),Constants.PRODUCT_TYPE_NORMAL);
         if(storeProductRequest.getSpecType()) {
             storeProductRequest.getAttr().forEach(e->{
                 e.setProductId(storeProductRequest.getId());
                 e.setAttrValues(StringUtils.strip(e.getAttrValues().replace("\"",""),"[]"));
+                e.setType(Constants.PRODUCT_TYPE_NORMAL);
             });
             attrService.saveOrUpdateBatch(storeProductRequest.getAttr());
             if(null != storeProductRequest.getAttrValue() && storeProductRequest.getAttrValue().size() > 0){
@@ -423,11 +496,12 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
                     }
                     spav.setAttrValue(JSON.toJSONString(attrValuesRequest.getAttrValue()));
                     spav.setImage(systemAttachmentService.clearPrefix(spav.getImage()));
+                    spav.setType(Constants.PRODUCT_TYPE_NORMAL);
                     storeProductAttrValues.add(spav);
                 }
                 boolean saveOrUpdateResult = storeProductAttrValueService.saveOrUpdateBatch(storeProductAttrValues);
                 // attrResult整存整取，不做更新
-                storeProductAttrResultService.deleteByProductId(storeProduct.getId());
+                storeProductAttrResultService.deleteByProductId(storeProduct.getId(),Constants.PRODUCT_TYPE_NORMAL);
                 StoreProductAttrResult attrResult = new StoreProductAttrResult(
                         0,
                         storeProduct.getId(),
@@ -440,6 +514,7 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
         }else{
             StoreProductAttr singleAttr = new StoreProductAttr();
             singleAttr.setProductId(storeProduct.getId()).setAttrName("规格").setAttrValues("默认").setType(0);
+
             boolean attrAddResult = attrService.save(singleAttr);
             if (!attrAddResult) throw new CrmebException("新增属性名失败");
             StoreProductAttrValue singleAttrValue = new StoreProductAttrValue();
@@ -449,35 +524,37 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
             singleAttrValue.setProductId(storeProduct.getId());
             singleAttrValue.setSuk("默认");
             singleAttrValue.setImage(systemAttachmentService.clearPrefix(singleAttrValue.getImage()));
+            singleAttrValue.setType(Constants.PRODUCT_TYPE_NORMAL);
             boolean saveOrUpdateResult = storeProductAttrValueService.save(singleAttrValue);
             if(!saveOrUpdateResult) throw new CrmebException("新增属性详情失败");
         }
 
         // 处理分类辅助表
-        if(null != storeProductRequest.getCateIds()){
-            for (int i = 0; i < storeProductRequest.getCateIds().size(); i++) {
-                Integer cateid = storeProductRequest.getCateIds().get(i);
-                StoreProductCate storeProductCate =
-                        new StoreProductCate(storeProduct.getId(),cateid, DateUtil.getNowTime());
-                LambdaUpdateWrapper<StoreProductCate> luw = new LambdaUpdateWrapper<>();
-                luw.set(StoreProductCate::getProductId, storeProductCate.getProductId());
-                luw.set(StoreProductCate::getCateId, storeProductCate.getCateId());
-                luw.set(StoreProductCate::getAddTime, storeProductCate.getAddTime());
-                boolean updateResult = storeProductCateService.update(luw);
-                if(!updateResult) throw new CrmebException("编辑产品分类辅助失败");
-            }
-        }
+//        if(null != storeProductRequest.getCateIds()){
+//            for (int i = 0; i < storeProductRequest.getCateIds().size(); i++) {
+//                Integer cateid = storeProductRequest.getCateIds().get(i);
+//                StoreProductCate storeProductCate =
+//                        new StoreProductCate(storeProduct.getId(),cateid, DateUtil.getNowTime());
+//                LambdaUpdateWrapper<StoreProductCate> luw = new LambdaUpdateWrapper<>();
+//                luw.set(StoreProductCate::getProductId, storeProductCate.getProductId());
+//                luw.set(StoreProductCate::getCateId, storeProductCate.getCateId());
+//                luw.set(StoreProductCate::getAddTime, storeProductCate.getAddTime());
+//                boolean updateResult = storeProductCateService.update(luw);
+//                if(!updateResult) throw new CrmebException("编辑产品分类辅助失败");
+//            }
+//        }
 
         // 处理富文本
         StoreProductDescription spd = new StoreProductDescription(
                 storeProduct.getId(),
                 storeProductRequest.getContent().length() > 0
-                        ? systemAttachmentService.clearPrefix(storeProductRequest.getContent()):storeProductRequest.getContent());
-        storeProductDescriptionService.deleteByProductId(spd.getProductId());
+                        ? systemAttachmentService.clearPrefix(storeProductRequest.getContent()):storeProductRequest.getContent()
+                ,Constants.PRODUCT_TYPE_NORMAL);
+        storeProductDescriptionService.deleteByProductId(spd.getProductId(),Constants.PRODUCT_TYPE_NORMAL);
         storeProductDescriptionService.save(spd);
 
         // 处理优惠券关联信息
-        shipProductCoupons(storeProductRequest, storeProduct);
+        productUtils.shipProductCoupons(storeProductRequest, storeProduct);
         return saveCount > 0;
     }
 
@@ -493,46 +570,60 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
         StoreProductResponse storeProductResponse = new StoreProductResponse();
         BeanUtils.copyProperties(storeProduct, storeProductResponse);
 //        if(storeProduct.getSpecType()){
-            storeProductResponse.setAttr(attrService.getByProductId(storeProduct.getId()));
+//            storeProductResponse.setAttr(attrService.getByProductId(storeProduct.getId()));
+        StoreProductAttr spaPram = new StoreProductAttr();
+        spaPram.setProductId(storeProduct.getId()).setType(Constants.PRODUCT_TYPE_NORMAL);
+        storeProductResponse.setAttr(attrService.getByEntity(spaPram));
+
+        // 设置商品所参与的活动
+        storeProductResponse.setActivityH5(productUtils.getProductCurrentActivity(storeProduct));
 //        }else{
 //            storeProductResponse.setAttr(new ArrayList<>());
 //        }
-        List<StoreProductAttrValue> storeProductAttrValues = storeProductAttrValueService.getListByProductId(storeProduct.getId());
+//        List<StoreProductAttrValue> storeProductAttrValues = storeProductAttrValueService.getListByProductId(storeProduct.getId());
+        StoreProductAttrValue spavPram = new StoreProductAttrValue();
+        spavPram.setProductId(id).setType(Constants.PRODUCT_TYPE_NORMAL);
+        List<StoreProductAttrValue> storeProductAttrValues = storeProductAttrValueService.getByEntity(spavPram);
         // 根据attrValue生成前端所需的数据
         List<HashMap<String, Object>> attrValues = new ArrayList<>();
 
         if(storeProduct.getSpecType()){
             // 后端多属性用于编辑
-            StoreProductAttrResult attrResult = storeProductAttrResultService.getByProductId(storeProduct.getId());
+//            StoreProductAttrResult attrResult = storeProductAttrResultService.getByProductId(storeProduct.getId());
+            StoreProductAttrResult sparPram = new StoreProductAttrResult();
+            sparPram.setProductId(storeProduct.getId()).setType(Constants.PRODUCT_TYPE_NORMAL);
+            List<StoreProductAttrResult> attrResults = storeProductAttrResultService.getByEntity(sparPram);
+            if(null == attrResults || attrResults.size() == 0){
+                throw new CrmebException("未找到对应属性值");
+            }
+            StoreProductAttrResult attrResult = attrResults.get(0);
             //PC 端生成skuAttrInfo
             List<StoreProductAttrValueRequest> storeProductAttrValueRequests =
                     com.alibaba.fastjson.JSONObject.parseArray(attrResult.getResult(), StoreProductAttrValueRequest.class);
             if(null != storeProductAttrValueRequests){
                 for (int i = 0; i < storeProductAttrValueRequests.size(); i++) {
-                    StoreProductAttrValueRequest storeProductAttrValueRequest = storeProductAttrValueRequests.get(i);
+//                    StoreProductAttrValueRequest storeProductAttrValueRequest = storeProductAttrValueRequests.get(i);
                     HashMap<String, Object> attrValue = new HashMap<>();
-                    attrValue.put("image", storeProductAttrValueRequest.getImage());
-                    attrValue.put("cost", storeProductAttrValueRequest.getCost());
-                    attrValue.put("price", storeProductAttrValueRequest.getPrice());
-                    attrValue.put("otPrice", storeProductAttrValueRequest.getOtPrice());
-                    attrValue.put("stock", storeProductAttrValueRequest.getStock());
-                    attrValue.put("barCode", storeProductAttrValueRequest.getBarCode());
-                    attrValue.put("weight", storeProductAttrValueRequest.getWeight());
-                    attrValue.put("volume", storeProductAttrValueRequest.getVolume());
-                    attrValue.put("suk", storeProductAttrValues.get(i).getSuk());
-//                com.alibaba.fastjson.JSONObject jsonAttr =  JSON.parseObject(storeProductAttrValues.get(i).getAttrValue());
-//                com.alibaba.fastjson.JSONArray jsonAttrs = jsonAttr.getJSONArray("attrValue");
-//                com.alibaba.fastjson.JSONObject attrO = JSON.parseObject(jsonAttrs.get(i).toString());
-//                attrValue.put("attrValue", attrO.getJSONObject("attrValue"));
-                    attrValue.put("attrValue", JSON.parse(storeProductAttrValues.get(i).getAttrValue()));
-                    attrValue.put("brokerage", storeProductAttrValueRequest.getBrokerage());
-                    attrValue.put("brokerage_two", storeProductAttrValueRequest.getBrokerageTwo());
-                    Iterator<Map.Entry<String, String>> iterator = storeProductAttrValueRequest.getAttrValue().entrySet().iterator();
-                    int j = 0;
-                    while (iterator.hasNext()){
-                        Map.Entry<String, String> entry = iterator.next();
-                        attrValue.put("value"+j, entry.getValue());
-                        j += 1;
+                    String currentSku = storeProductAttrValues.get(i).getSuk();
+                    List<StoreProductAttrValue> hasCurrentSku =
+                            storeProductAttrValues.stream().filter(e -> e.getSuk().equals(currentSku)).collect(Collectors.toList());
+                    StoreProductAttrValue currentAttrValue = hasCurrentSku.get(0);
+                    attrValue.put("id", hasCurrentSku.size() > 0 ? hasCurrentSku.get(0).getId():0);
+                    attrValue.put("image", currentAttrValue.getImage());
+                    attrValue.put("cost", currentAttrValue.getCost());
+                    attrValue.put("price", currentAttrValue.getPrice());
+                    attrValue.put("otPrice", currentAttrValue.getOtPrice());
+                    attrValue.put("stock", currentAttrValue.getStock());
+                    attrValue.put("barCode", currentAttrValue.getBarCode());
+                    attrValue.put("weight", currentAttrValue.getWeight());
+                    attrValue.put("volume", currentAttrValue.getVolume());
+                    attrValue.put("suk", currentSku);
+                    attrValue.put("attrValue", JSON.parseObject(storeProductAttrValues.get(i).getAttrValue(), Feature.OrderedField));
+                    attrValue.put("brokerage", currentAttrValue.getBrokerage());
+                    attrValue.put("brokerageTwo", currentAttrValue.getBrokerageTwo());
+                    String[] skus = currentSku.split(",");
+                    for (int k = 0; k < skus.length; k++) {
+                        attrValue.put("value"+k,skus[k]);
                     }
                     attrValues.add(attrValue);
                 }
@@ -552,8 +643,8 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
 //        if(null != storeProductAttrResult){
             StoreProductDescription sd = storeProductDescriptionService.getOne(
                     new LambdaQueryWrapper<StoreProductDescription>()
-                            .eq(StoreProductDescription::getProductId, storeProduct.getId()));
-//                            .eq(StoreProductDescription::getType, storeProductAttrResult.getType()));
+                            .eq(StoreProductDescription::getProductId, storeProduct.getId())
+                            .eq(StoreProductDescription::getType, Constants.PRODUCT_TYPE_NORMAL));
             if(null != sd){
                 storeProductResponse.setContent(null == sd.getDescription()?"":sd.getDescription());
             }
@@ -571,14 +662,14 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
 
     /**
      * 产品列表
-     * @param request
-     * @param pageParamRequest
-     * @return
+     * @param request 商品查询参数
+     * @param pageParamRequest  分页参数
+     * @return  商品查询结果
      */
     @Override
     public List<StoreProduct> getList(IndexStoreProductSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
-        LambdaQueryWrapper<StoreProduct> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<StoreProduct> lambdaQueryWrapper = Wrappers.lambdaQuery();
         if(request.getIsBest() != null){
             lambdaQueryWrapper.eq(StoreProduct::getIsBest, request.getIsBest());
         }
@@ -699,10 +790,14 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
      */
     @Override
     public boolean stockAddRedis(StoreProductStockRequest request) {
-        redisUtil.lPush(Constants.PRODUCT_STOCK_UPDATE, JSON.toJSONString(request));
+        String _productString = JSON.toJSONString(request);
+        redisUtil.lPush(Constants.PRODUCT_STOCK_UPDATE, _productString);
         return true;
     }
 
+    /**
+     * 后台任务批量操作库存
+     */
     @Override
     public void consumeProductStock() {
         String redisKey = Constants.PRODUCT_STOCK_UPDATE;
@@ -734,24 +829,22 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
      * 扣减库存添加销量
      * @param productId 产品id
      * @param num 商品数量
-     * @param type 是否限购 0=不限购
+     * @param type 是否限购
      * @return 扣减结果
      */
     @Override
     public boolean decProductStock(Integer productId, Integer num, Integer attrValueId, Integer type) {
         // 因为attrvalue表中unique使用Id代替，更新前先查询此表是否存在
         // 不存在=但属性 存在则是多属性
-        StoreProductAttrValue productsInAttrValue =
-                storeProductAttrValueService.getById(attrValueId);
+        StoreProductAttrValue productsInAttrValue = storeProductAttrValueService.getById(attrValueId);
         StoreProduct storeProduct = getById(productId);
-        boolean result = false;
-        if(null != productsInAttrValue){
-            result = storeProductAttrValueService.decProductAttrStock(productId,attrValueId,num,type);
-        }
+        boolean result = storeProductAttrValueService.decProductAttrStock(productId,attrValueId,num,type);
+        if (!result) return result;
         LambdaUpdateWrapper<StoreProduct> lqwuper = new LambdaUpdateWrapper<>();
-        lqwuper.eq(StoreProduct::getId, productId);
         lqwuper.set(StoreProduct::getStock, storeProduct.getStock()-num);
         lqwuper.set(StoreProduct::getSales, storeProduct.getSales()+num);
+        lqwuper.eq(StoreProduct::getId, productId);
+        lqwuper.apply(StrUtil.format(" (stock - {} >= 0) ", num));
         result = update(lqwuper);
         if(result){ //判断库存警戒值
             Integer alterNumI=0;
@@ -828,458 +921,25 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
         try {
             switch (tag){
                 case 1:
-                    productRequest = getTaobaoProductInfo(url,tag);
+                    productRequest = productUtils.getTaobaoProductInfo(url,tag);
                     break;
                 case 2:
-                    productRequest = getJDProductInfo(url,tag);
+                    productRequest = productUtils.getJDProductInfo(url,tag);
                     break;
                 case 3:
-                    productRequest = getSuningProductInfo(url,tag);
+                    productRequest = productUtils.getSuningProductInfo(url,tag);
                     break;
                 case 4:
-                    productRequest = getPddProductInfo(url,tag);
+                    productRequest = productUtils.getPddProductInfo(url,tag);
                     break;
                 case 5:
-                    productRequest = getTmallProductInfo(url,tag);
+                    productRequest = productUtils.getTmallProductInfo(url,tag);
                     break;
             }
         }catch (Exception e){
             throw new CrmebException("确认URL和平台是否正确，以及平台费用是否足额"+e.getMessage());
         }
         return productRequest;
-    }
-
-    private String baseUrl;
-
-    String rightUrl;
-
-
-    /**
-     * 设置优惠券信息
-     * @param storeProductRequest 商品request信息
-     * @param storeProduct 商品信息
-     */
-    private void shipProductCoupons(StoreProductRequest storeProductRequest, StoreProduct storeProduct) {
-        if(null != storeProductRequest.getCouponIds() && storeProductRequest.getCouponIds().size() > 0){
-            storeProductCouponService.deleteByProductId(storeProduct.getId());
-            List<StoreProductCoupon> spcs = new ArrayList<>();
-            for (Integer couponId : storeProductRequest.getCouponIds()) {
-                StoreProductCoupon spc = new StoreProductCoupon(storeProduct.getId(), couponId, DateUtil.getNowTime());
-                spcs.add(spc);
-            }
-            storeProductCouponService.saveCoupons(spcs);
-        }
-    }
-
-    /**
-     * 解析淘宝产品数据
-     * @param url
-     * @param tag
-     * @throws IOException
-     * @throws JSONException
-     */
-    public StoreProductRequest getTaobaoProductInfo(String url, int tag) throws JSONException, IOException {
-        setConfig(url, tag);
-        JSONObject tbJsonData = getRequestFromUrl(baseUrl + rightUrl);
-//        JSONObject tbJsonData = new JSONObject(JSONExample.tbJson); // just Test
-        JSONObject data = tbJsonData.getJSONObject("data");
-        if (null == data) throw new CrmebException("复制商品失败--返回数据格式错误--未找到data");
-        JSONObject item = data.getJSONObject("item");
-        if (null == item) throw new CrmebException("复制商品失败--返回数据格式错误--未找到item");
-
-        StoreProductRequest productRequest = new StoreProductRequest();
-        StoreProduct product = new StoreProduct();
-        product.setStoreName(item.getString("title"));
-        product.setStoreInfo(item.getString("title"));
-        product.setSliderImage(item.getString("images"));
-        product.setImage(item.getString("images").split(",")[0]
-                .replace("[", "").replace("\"", ""));
-        product.setKeyword(item.getString("title"));
-        BeanUtils.copyProperties(product, productRequest);
-        productRequest.setContent(item.getString("desc"));
-
-        JSONArray props = item.getJSONArray("props");
-        if (null == props) throw new CrmebException("复制商品失败--返回数据格式错误--未找到props");
-        if (props.length() > 0) {
-            List<StoreProductAttr> spaAttes = new ArrayList<>();
-            for (int i = 0; i < props.length(); i++) {
-                JSONObject pItem = props.getJSONObject(i);
-                StoreProductAttr spattr = new StoreProductAttr();
-                spattr.setAttrName(pItem.getString("name"));
-                JSONArray values = pItem.getJSONArray("values");
-                List<String> attrValues = new ArrayList<>();
-                for (int j = 0; j < values.length(); j++) {
-                    JSONObject value = values.getJSONObject(j);
-                    attrValues.add(value.getString("name"));
-                }
-                spattr.setAttrValues(attrValues.toString());
-                spaAttes.add(spattr);
-            }
-            productRequest.setAttr(spaAttes);
-        }
-        return productRequest;
-    }
-
-    /**
-     * 解析京东产品数据
-     * @param url
-     * @param tag
-     * @return
-     * @throws JSONException
-     */
-    public StoreProductRequest getJDProductInfo(String url, int tag) throws JSONException, IOException {
-        setConfig(url,tag);
-        JSONObject tbJsonData = getRequestFromUrl(baseUrl + rightUrl);
-//        JSONObject tbJsonData = new JSONObject(JSONExample.jdJson); // just Test
-        JSONObject data = tbJsonData.getJSONObject("data");
-        if (null == data) throw new CrmebException("复制商品失败--返回数据格式错误--未找到data");
-        JSONObject item = data.getJSONObject("item");
-        if (null == item) throw new CrmebException("复制商品失败--返回数据格式错误--未找到item");
-
-        StoreProductRequest productRequest = new StoreProductRequest();
-        StoreProduct product = new StoreProduct();
-        product.setStoreName(item.getString("name"));
-        product.setStoreInfo(item.getString("name"));
-        product.setSliderImage(item.getString("images"));
-        product.setImage(item.getString("images").split(",")[0]
-                .replace("[", "").replace("\"", ""));
-        product.setPrice(BigDecimal.valueOf(item.getDouble("price")));
-        BeanUtils.copyProperties(product, productRequest);
-        productRequest.setContent(item.getString("desc"));
-
-        JSONObject props = item.getJSONObject("skuProps");
-        if (null == props) throw new CrmebException("复制商品失败--返回数据格式错误--未找到props");
-        List<StoreProductAttr> spaAttes = new ArrayList<>();
-        JSONObject saleJson = item.getJSONObject("saleProp");
-        int attrValueIsNullCount = 0;
-        Iterator<String> saleProps = saleJson.keys();
-        while (saleProps.hasNext()) {
-            StoreProductAttr spattr = new StoreProductAttr();
-            String stepkey = saleProps.next();
-            String stepValue = props.getString(stepkey);
-            String stepValueValidLength = stepValue.replace("[","").replace("]","").replace("\"","");
-            if(stepValueValidLength.length() > 0){
-                com.alibaba.fastjson.JSONArray stepValues = JSON.parseArray(stepValue);
-                int c = stepValues.get(0).toString().length();
-                attrValueIsNullCount += c == 0 ? 1 : 0;
-                spattr.setAttrName(saleJson.getString(stepkey));
-                spattr.setAttrValues(props.getString(stepkey));
-                spaAttes.add(spattr);
-                productRequest.setAttr(spaAttes);
-            }else{
-                attrValueIsNullCount += 1;
-            }
-        }
-        // 判断是否单属性
-        productRequest.setSpecType(spaAttes.size() != attrValueIsNullCount);
-        return productRequest;
-    }
-
-    /**
-     * 解析天猫产品数据
-     * @param url
-     * @param tag
-     * @return
-     * @throws JSONException
-     */
-    public StoreProductRequest getTmallProductInfo(String url, int tag) throws JSONException, IOException {
-        setConfig(url, tag);
-        JSONObject tbJsonData = getRequestFromUrl(baseUrl + rightUrl);
-//        JSONObject tbJsonData = new JSONObject(JSONExample.tmallJson); // just Test
-        JSONObject data = tbJsonData.getJSONObject("data");
-        if (null == data) throw new CrmebException("复制商品失败--返回数据格式错误--未找到data");
-        JSONObject item = data.getJSONObject("item");
-        if (null == item) throw new CrmebException("复制商品失败--返回数据格式错误--未找到item");
-
-        StoreProductRequest productRequest = new StoreProductRequest();
-        StoreProduct product = new StoreProduct();
-        product.setStoreName(item.getString("title"));
-        product.setStoreInfo(item.getString("subTitle"));
-        product.setSliderImage(item.getString("images"));
-        product.setImage(item.getString("images").split(",")[0]
-                .replace("[", "").replace("\"", ""));
-        product.setKeyword(item.getString("title"));
-        BeanUtils.copyProperties(product, productRequest);
-        productRequest.setContent(item.getString("desc"));
-
-        JSONArray props = item.getJSONArray("props");
-        if (null == props) throw new CrmebException("复制商品失败--返回数据格式错误--未找到props");
-        if (props.length() > 0) {
-            List<StoreProductAttr> spaAttes = new ArrayList<>();
-            for (int i = 0; i < props.length(); i++) {
-                JSONObject pItem = props.getJSONObject(i);
-                StoreProductAttr spattr = new StoreProductAttr();
-                spattr.setAttrName(pItem.getString("name"));
-                JSONArray values = pItem.getJSONArray("values");
-                List<String> attrValues = new ArrayList<>();
-                for (int j = 0; j < values.length(); j++) {
-                    JSONObject value = values.getJSONObject(j);
-                    attrValues.add(value.getString("name"));
-                }
-                spattr.setAttrValues(attrValues.toString());
-                spaAttes.add(spattr);
-            }
-            productRequest.setAttr(spaAttes);
-        }
-        return productRequest;
-    }
-
-    /**
-     * 解析拼多多产品数据
-     * @param url
-     * @param tag
-     * @return
-     * @throws JSONException
-     */
-    public StoreProductRequest getPddProductInfo(String url, int tag) throws JSONException, IOException {
-        setConfig(url, tag);
-        JSONObject tbJsonData = getRequestFromUrl(baseUrl + rightUrl);
-//        JSONObject tbJsonData = new JSONObject(JSONExample.pddJson); // just Test
-        JSONObject data = tbJsonData.getJSONObject("data");
-        if (null == data) throw new CrmebException("复制商品失败--返回数据格式错误--未找到data");
-        JSONObject item = data.getJSONObject("item");
-        if (null == item) throw new CrmebException("复制商品失败--返回数据格式错误--未找到item");
-
-        StoreProductRequest productRequest = new StoreProductRequest();
-        StoreProduct product = new StoreProduct();
-        product.setStoreName(item.getString("goodsName"));
-        product.setStoreInfo(item.getString("goodsDesc"));
-        product.setSliderImage(item.getString("thumbUrl"));
-        product.setImage(item.getString("banner"));
-        product.setVideoLink(item.getJSONArray("video").getJSONObject(0).getString("videoUrl"));
-        product.setPrice(BigDecimal.valueOf(item.getDouble("maxNormalPrice")));
-        product.setOtPrice(BigDecimal.valueOf(item.getDouble("marketPrice")));
-        BeanUtils.copyProperties(product, productRequest);
-
-        JSONArray props = item.getJSONArray("skus");
-        if (null == props) throw new CrmebException("复制商品失败--返回数据格式错误--未找到props");
-        if (props.length() > 0) {
-            List<StoreProductAttr> spaAttes = new ArrayList<>();
-            HashMap<String,List<String>> tempAttr = new HashMap<>();
-            for (int i = 0; i < props.length(); i++) {
-                JSONObject pItem = props.getJSONObject(i);
-                JSONArray specArray = pItem.getJSONArray("specs");
-                for (int j = 0; j < specArray.length(); j++) {
-                    JSONObject specItem = specArray.getJSONObject(j);
-                    String keyTemp = specItem.getString("spec_key");
-                    String valueTemp = specItem.getString("spec_value");
-                    if(tempAttr.containsKey(keyTemp)){
-                        if(!tempAttr.get(keyTemp).contains(valueTemp)){
-                            tempAttr.get(keyTemp).add(valueTemp);
-                        }
-                    }else{
-                        List<String> tempList = new ArrayList<>();
-                        tempList.add(valueTemp);
-                        tempAttr.put(keyTemp, tempList);
-                    }
-                }
-
-            }
-            Iterator iterator = tempAttr.keySet().iterator();
-            while (iterator.hasNext()){
-                String key = (String)iterator.next();
-                StoreProductAttr spattr = new StoreProductAttr();
-                spattr.setAttrName(key);
-                spattr.setAttrValues(tempAttr.get(key).toString());
-                spaAttes.add(spattr);
-            }
-            productRequest.setAttr(spaAttes);
-        }
-        return productRequest;
-    }
-
-    /** TODO 苏宁返回的数据不一致，暂放
-     * 解析苏宁产品数据
-     * @param url
-     * @param tag
-     * @return
-     * @throws JSONException
-     */
-    public StoreProductRequest getSuningProductInfo(String url, int tag) throws JSONException, IOException {
-        setConfig(url,tag);
-        JSONObject tbJsonData = getRequestFromUrl(baseUrl + rightUrl);
-        System.out.println("tbJsonData:"+tbJsonData);
-//        JSONObject tbJsonData = new JSONObject(JSONExample.snJson); // just Test
-        JSONObject data = tbJsonData.getJSONObject("data");
-        if (null == data) throw new CrmebException("复制商品失败--返回数据格式错误--未找到data");
-
-        StoreProductRequest productRequest = new StoreProductRequest();
-        StoreProduct product = new StoreProduct();
-        product.setStoreName(data.getString("title"));
-        product.setStoreInfo(data.getString("title"));
-        product.setSliderImage(data.getString("images"));
-        product.setImage(data.getString("images").split(",")[0]
-                .replace("[", "").replace("\"", ""));
-        Long priceS = data.getLong("price");
-        product.setPrice(BigDecimal.valueOf(priceS));
-        BeanUtils.copyProperties(product, productRequest);
-        productRequest.setContent(data.getString("desc"));
-        if(null == data.optJSONArray("passSubList")){
-            return productRequest;
-        }
-        JSONArray props = data.getJSONArray("passSubList");
-        if (null == props){
-            return productRequest;
-        }
-        if (props.length() > 0) {
-            List<StoreProductAttr> spaAttes = new ArrayList<>();
-            for (int i = 0; i < props.length(); i++) {
-                JSONObject pItem = props.getJSONObject(i);
-                Iterator it = pItem.keys();
-                while (it.hasNext()){
-                    String key = (String)it.next();
-                    JSONArray skuItems = pItem.getJSONArray(key);
-                    List<String> attrValues = new ArrayList<>();
-                    StoreProductAttr spattr = new StoreProductAttr();
-                    for (int j = 0; j < skuItems.length(); j++) {
-                        JSONObject skuItem = skuItems.getJSONObject(j);
-                        if(null != skuItem.optString("characterValueDisplayName"))
-                        attrValues.add(skuItem.getString("characterValueDisplayName"));
-                    }
-                    spattr.setAttrName(key);
-                    spattr.setAttrValues(attrValues.toString());
-                    spaAttes.add(spattr);
-                }
-                productRequest.setAttr(spaAttes);
-            }
-        }
-        return productRequest;
-    }
-
-    /**
-     * 设置配置数据
-     * @param tag
-     */
-    private void setConfig(String url, int tag){
-        String rightEndUrl = "&itemid=";
-        switch (tag){ // 导入平台1=淘宝，2=京东，3=苏宁，4=拼多多， 5=天猫
-            case 1:
-                baseUrl = systemConfigService.getValueByKey("importProductTB");
-                rightEndUrl += UrlUtil.getParamsByKey(url, "id");
-                break;
-            case 2:
-                baseUrl = systemConfigService.getValueByKey("importProductJD");
-                rightEndUrl += url.substring(url.lastIndexOf("/")+1).replace(".html","");
-                break;
-            case 3:
-                baseUrl = systemConfigService.getValueByKey("importProductSN");
-                int start = url.indexOf(".com/") + 5;
-                int end = url.indexOf(".html");
-                String sp = url.substring(start,end);
-                String[] shopProduct = sp.split("/");
-                rightEndUrl += shopProduct[1]+"&shopid="+shopProduct[0];
-                break;
-            case 4:
-                rightEndUrl += UrlUtil.getParamsByKey(url, "goods_id");
-                baseUrl = systemConfigService.getValueByKey("importProductPDD");
-                break;
-            case 5:
-                rightEndUrl += UrlUtil.getParamsByKey(url, "id");
-                baseUrl = systemConfigService.getValueByKey("importProductTM");
-                break;
-        }
-        String token = systemConfigService.getValueByKey("importProductToken");
-        if(StringUtils.isBlank(token)){
-            throw new CrmebException("请配置复制产品平台的Token -- www.99api.com");
-        }
-        if(StringUtils.isBlank(baseUrl)){
-            throw new CrmebException("请配置复制产品平台的Url-- www.99api.com");
-        }
-        rightUrl = "?apikey="+systemConfigService.getValueByKey("importProductToken")+rightEndUrl;
-
-    }
-
-    /**
-     * 99api产品复制工具方法
-     * @param rd
-     * @return
-     * @throws IOException
-     */
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 根据url访问99api后返回对应的平台的产品json数据 带有body参数，暂时无用
-     * @param url
-     * @param body
-     * @return
-     * @throws IOException
-     * @throws JSONException
-     */
-    public JSONObject postRequestFromUrl(String url, String body) throws IOException, JSONException {
-        URL realUrl = new URL(url);
-        URLConnection conn = realUrl.openConnection();
-        conn.setDoOutput(true);
-        conn.setDoInput(true);
-        PrintWriter out = new PrintWriter(conn.getOutputStream());
-        out.print(body);
-        out.flush();
-        InputStream instream = conn.getInputStream();
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(instream, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            instream.close();
-        }
-    }
-
-    /**
-     * 根据url访问99api后返回对应的平台的产品json数据
-     * @param url
-     * @return
-     * @throws IOException
-     * @throws JSONException
-     */
-    public static JSONObject getRequestFromUrl(String url) throws IOException, JSONException {
-        URL realUrl = new URL(url);
-        URLConnection conn = realUrl.openConnection();
-        InputStream instream = conn.getInputStream();
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(instream, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            instream.close();
-        }
-    }
-
-    /**
-     * 计算产品属性之中最大和最小的价格，新增和编辑使用
-     * @param storeProductRequest 分析的参数
-     * @param storeProduct 当前操作的产品
-     */
-    private void calcPriceForAttrValues(StoreProductRequest storeProductRequest, StoreProduct storeProduct) {
-        // 设置商品成本价和市场价，2020-8-28日更 商品本身价钱取sku列表中最低的价格
-//        BigDecimal costPrice = storeProductRequest.getAttrValue()
-//                    .stream().map(e->e.getCost()).reduce(BigDecimal.ZERO,BigDecimal::add);
-        List<StoreProductAttrValueRequest> attrValuesSortAsc = storeProductRequest.getAttrValue().stream()
-                .sorted(Comparator.comparing(StoreProductAttrValueRequest::getPrice))
-                .collect(Collectors.toList());
-
-//        int costPrice = storeProductRequest.getAttrValue()
-//                .stream().mapToInt(e->e.getCost().intValue()).min().getAsInt();
-////        BigDecimal sellPrice = storeProductRequest.getAttrValue()
-////                    .stream().map(e->e.getOtPrice()).reduce(BigDecimal.ZERO,BigDecimal::add);
-//        int sellPrice = storeProductRequest.getAttrValue()
-//                .stream().mapToInt(e->e.getOtPrice().intValue()).min().getAsInt();
-
-//        int stock = storeProductRequest.getAttrValue()
-//                    .stream().mapToInt(e->e.getStock()).sum();
-        if(attrValuesSortAsc.size() == 0){
-            return;
-        }
-        storeProduct.setPrice(attrValuesSortAsc.get(0).getPrice());
-        storeProduct.setOtPrice(attrValuesSortAsc.get(0).getOtPrice());
-        storeProduct.setStock(attrValuesSortAsc.get(0).getStock());
     }
 
 
@@ -1292,7 +952,10 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
     public List<StoreProduct> getRecommendStoreProduct(Integer limit) {
         if(limit <0 || limit > 20) throw new CrmebException("获取推荐商品数量不合法 limit > 0 || limit < 20");
         LambdaQueryWrapper<StoreProduct> lambdaQueryWrapper = new LambdaQueryWrapper<StoreProduct>();
-        lambdaQueryWrapper.eq(StoreProduct::getIsGood,false);
+        lambdaQueryWrapper.eq(StoreProduct::getIsGood,1);
+        lambdaQueryWrapper.eq(StoreProduct::getIsShow,1);
+        lambdaQueryWrapper.eq(StoreProduct::getIsDel,false);
+
         lambdaQueryWrapper.orderByDesc(StoreProduct::getSort).orderByDesc(StoreProduct::getId);
         return dao.selectList(lambdaQueryWrapper);
     }
@@ -1300,14 +963,54 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
     /**
      *
      * @param productId 商品id
+     * @param type 类型：recycle——回收站 delete——彻底删除
      * @return
      */
     @Override
-    public boolean deleteProduct(Integer productId) {
+    public boolean deleteProduct(Integer productId, String type) {
+        StoreProduct product = getById(productId);
+        if (ObjectUtil.isNull(product)) {
+            throw new CrmebException("商品不存在");
+        }
+        if (StrUtil.isNotBlank(type) && "recycle".equals(type) && product.getIsDel()) {
+            throw new CrmebException("商品已存在回收站");
+        }
+
         LambdaUpdateWrapper<StoreProduct> lambdaUpdateWrapper = new LambdaUpdateWrapper<>();
+        if (StrUtil.isNotBlank(type) && "delete".equals(type)) {
+            // 判断商品活动状态(秒杀、砍价、拼团)
+            isExistActivity(productId);
+
+            lambdaUpdateWrapper.eq(StoreProduct::getId, productId);
+            int delete = dao.delete(lambdaUpdateWrapper);
+            return delete > 0;
+        }
         lambdaUpdateWrapper.eq(StoreProduct::getId, productId);
         lambdaUpdateWrapper.set(StoreProduct::getIsDel, true);
         return update(lambdaUpdateWrapper);
+    }
+
+    /**
+     * 判断商品活动状态(秒杀、砍价、拼团)
+     * @param productId
+     */
+    private void isExistActivity(Integer productId) {
+        Boolean existActivity = false;
+        // 秒杀活动判断
+        existActivity = storeSeckillService.isExistActivity(productId);
+        if (existActivity) {
+            throw new CrmebException("有商品关联的秒杀商品活动开启中，不能删除");
+        }
+        // 砍价活动判断
+        existActivity = storeBargainService.isExistActivity(productId);
+        if (existActivity) {
+            throw new CrmebException("有商品关联的砍价商品活动开启中，不能删除");
+        }
+        // 拼团活动判断
+        existActivity = storeCombinationService.isExistActivity(productId);
+        if (existActivity) {
+            throw new CrmebException("有商品关联的拼团商品活动开启中，不能删除");
+        }
     }
 
     /**
@@ -1325,78 +1028,154 @@ public class StoreProductServiceImpl extends ServiceImpl<StoreProductDao, StoreP
 
     ///////////////////////////////////////////自定义方法
 
-    // 操作库存
-    private boolean doProductStock(StoreProductStockRequest storeProductStockRequest){
+    /**
+     * 扣减库存任务操作
+     * @param storeProductStockRequest 扣减库存参数
+     * @return 执行结果
+     */
+    @Override
+    public boolean doProductStock(StoreProductStockRequest storeProductStockRequest){
+        // 获取商品本身信息
         StoreProduct existProduct = getById(storeProductStockRequest.getProductId());
         List<StoreProductAttrValue> existAttr =
-                storeProductAttrValueService.getListByProductIdAndAttrId(storeProductStockRequest.getProductId(), storeProductStockRequest.getAttrId().toString());
-        if(null == existProduct || null == existAttr){ // 为找到商品
+                storeProductAttrValueService.getListByProductIdAndAttrId(
+                        storeProductStockRequest.getProductId(),
+                        storeProductStockRequest.getAttrId().toString(),
+                        storeProductStockRequest.getType());
+        if(null == existProduct || null == existAttr){ // 未找到商品
             logger.info("库存修改任务未获取到商品信息"+JSON.toJSONString(storeProductStockRequest));
             return true;
         }
-        boolean isPlus = storeProductStockRequest.getType().equals("add");
+
+        // 回滚商品库存/销量 并更新
+        boolean isPlus = storeProductStockRequest.getOperationType().equals("add");
         int productStock = isPlus ? existProduct.getStock() + storeProductStockRequest.getNum() : existProduct.getStock() - storeProductStockRequest.getNum();
         existProduct.setStock(productStock);
+        existProduct.setSales(existProduct.getSales() - storeProductStockRequest.getNum());
         updateById(existProduct);
+
+        // 回滚sku库存
         for (StoreProductAttrValue attrValue : existAttr) {
             int productAttrStock = isPlus ? attrValue.getStock() + storeProductStockRequest.getNum() : attrValue.getStock() - storeProductStockRequest.getNum();
             attrValue.setStock(productAttrStock);
+            attrValue.setSales(attrValue.getSales()-storeProductStockRequest.getNum());
             storeProductAttrValueService.updateById(attrValue);
         }
         return true;
     }
 
-
     /**
-     * 解析json字符串 返回对应对象的数据
-     * @param storeProductRequest
-     * @return
+     * 获取复制商品配置
+     * @return copyType 复制类型：1：一号通
+     *         copyNum 复制条数(一号通类型下有值)
      */
-//    private List<StoreProductAttrValueRequest> getStoreProductAttrValueRequests(StoreProductRequest storeProductRequest) {
-//        List<StoreProductAttrValueRequest> storeProductAttrValuesRequest = new ArrayList<>();
-//        com.alibaba.fastjson.JSONArray attrJSONArray = com.alibaba.fastjson.JSONArray.parseArray(storeProductRequest.getAttrValue());
-//        for (int i = 0; i < attrJSONArray.size(); i++) {
-//            com.alibaba.fastjson.JSONObject jsonObject = attrJSONArray.getJSONObject(i);
-//            StoreProductAttrValueRequest attrValueRequest =
-//                    com.alibaba.fastjson.JSONObject.parseObject(String.valueOf(jsonObject), StoreProductAttrValueRequest.class);
-//            storeProductAttrValuesRequest.add(attrValueRequest);
-//        }
-//        return storeProductAttrValuesRequest;
-//    }
-
-    /**
-     * 产品保存和更新时设置attr和attrValues属性
-     * @param storeProductRequest 产品属性
-     * @return 设置后的数据对象
-     */
-    private HashMap<String, Object> setAttrValueByRequest(StoreProductRequest storeProductRequest) {
-        HashMap<String, Object> attrValues = new HashMap<>();
-        attrValues.put("attr", storeProductRequest.getAttr());
-        attrValues.put("attrValue", storeProductRequest.getAttrValue());
-        return attrValues;
+    @Override
+    public MyRecord copyConfig() {
+        String copyType = systemConfigService.getValueByKey("system_product_copy_type");
+        if (StrUtil.isBlank(copyType)) {
+            throw new CrmebException("请先进行采集商品配置");
+        }
+        int copyNum = 0;
+        if (copyType.equals("1")) {// 一号通
+            JSONObject info = onePassService.info();
+            copyNum = Optional.ofNullable(info.getJSONObject("copy").getInteger("num")).orElse(0);
+        }
+        MyRecord record = new MyRecord();
+        record.set("copyType", copyType);
+        record.set("copyNum", copyNum);
+        return record;
     }
-    //    public static void main(String[] args) throws IOException, JSONException {
-//        // 请求示例 url 默认请求参数已经做URL编码
-//        // 淘宝API
-//        String tbUrl = "https://api03.6bqb.com/taobao/detail?apikey=A5E94A9B7EBEBE9BB305680C0EE23885&itemid=16793826526";
-//        // 京东
-//        String jdUrl = "https://api03.6bqb.com/jd/detail?apikey=A5E94A9B7EBEBE9BB305680C0EE23885&itemid=10000017776";
-//        // 苏宁
-//        String snUrl = "https://api03.6bqb.com/suning/detail?apikey=A5E94A9B7EBEBE9BB305680C0EE23885&itemid=10750373914&shopid=0070088010";
-//        // 拼多多
-//        String pddUrl = "https://api03.6bqb.com/pdd/detail?apikey=A5E94A9B7EBEBE9BB305680C0EE23885&itemid=5914165983";
-//        CopyProduct cp = new CopyProduct();
-////        JSONObject tbJson = cp.getRequestFromUrl(tbUrl);
-////        System.out.println("淘宝产品"+tbJson.toString());
-////        JSONObject jdJson = cp.getRequestFromUrl(jdUrl);
-////        System.out.println("京东产品"+jdJson.toString());
-////        JSONObject snJson = cp.getRequestFromUrl(snUrl);
-////        System.out.println("苏宁产品"+snJson.toString());
-//        JSONObject pddJson = cp.getRequestFromUrl(pddUrl);
-//
-//        System.out.println("拼多多产品"+pddJson.toString());
-//
-//        cp.getTaobaoProductInfo("",0);
-//    }
+
+    /**
+     * 复制平台商品
+     * @param url 商品链接
+     * @return MyRecord
+     */
+    @Override
+    public MyRecord copyProduct(String url) {
+        JSONObject jsonObject = onePassService.copyGoods(url);
+        StoreProductRequest storeProductRequest = ProductUtils.onePassCopyTransition(jsonObject);
+        MyRecord record = new MyRecord();
+        return record.set("info", storeProductRequest);
+    }
+
+    /**
+     * 添加/扣减库存
+     * @param id 商品id
+     * @param num 数量
+     * @param type 类型：add—添加，sub—扣减
+     */
+    @Override
+    public Boolean operationStock(Integer id, Integer num, String type) {
+        UpdateWrapper<StoreProduct> updateWrapper = new UpdateWrapper<>();
+        if (type.equals("add")) {
+            updateWrapper.setSql(StrUtil.format("stock = stock + {}", num));
+            updateWrapper.setSql(StrUtil.format("sales = sales - {}", num));
+        }
+        if (type.equals("sub")) {
+            updateWrapper.setSql(StrUtil.format("stock = stock - {}", num));
+            updateWrapper.setSql(StrUtil.format("sales = sales + {}", num));
+            // 扣减时加乐观锁保证库存不为负
+            updateWrapper.last(StrUtil.format(" and (stock - {} >= 0)", num));
+        }
+        updateWrapper.eq("id", id);
+        return update(updateWrapper);
+    }
+
+    /**
+     * 下架
+     * @param id 商品id
+     */
+    @Override
+    public Boolean offShelf(Integer id) {
+        StoreProduct storeProduct = getById(id);
+        if (ObjectUtil.isNull(storeProduct)) {
+            throw new CrmebException("商品不存在");
+        }
+        if (!storeProduct.getIsShow()) {
+            return true;
+        }
+
+        storeProduct.setIsShow(false);
+        Boolean execute = transactionTemplate.execute(e -> {
+            dao.updateById(storeProduct);
+            storeCartService.productStatusNotEnable(id);
+            return Boolean.TRUE;
+        });
+
+        return execute;
+    }
+
+    /**
+     * 上架
+     * @param id 商品id
+     * @return Boolean
+     */
+    @Override
+    public Boolean putOnShelf(Integer id) {
+        StoreProduct storeProduct = getById(id);
+        if (ObjectUtil.isNull(storeProduct)) {
+            throw new CrmebException("商品不存在");
+        }
+        if (storeProduct.getIsShow()) {
+            return true;
+        }
+
+        // 获取商品skuid
+        StoreProductAttrValue tempSku = new StoreProductAttrValue();
+        tempSku.setProductId(id);
+        tempSku.setType(Constants.PRODUCT_TYPE_NORMAL);
+        List<StoreProductAttrValue> skuList = storeProductAttrValueService.getByEntity(tempSku);
+        List<Integer> skuIdList = skuList.stream().map(StoreProductAttrValue::getId).collect(Collectors.toList());
+
+        storeProduct.setIsShow(true);
+        Boolean execute = transactionTemplate.execute(e -> {
+            dao.updateById(storeProduct);
+            storeCartService.productStatusNoEnable(skuIdList);
+            return Boolean.TRUE;
+        });
+        return execute;
+    }
+
 }
 

@@ -12,10 +12,16 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @Classname RetailShopUserResponse
- * @Description 分销用户列表
- * @Date 2020/6/22 3:28 下午
- * @Created by stivepeim
+ * 分销用户列表
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 public class RetailShopUserResponse {
@@ -23,7 +29,7 @@ public class RetailShopUserResponse {
     public RetailShopUserResponse() {
     }
 
-    public RetailShopUserResponse(Integer uid, String account, String pwd, String realName, String birthday, String cardId, String mark, Integer partnerId, Integer groupId, String groupName, String tagName, String nickname, String avatar, String phone, String addIp, String lastIp, BigDecimal nowMoney, BigDecimal brokeragePrice, BigDecimal integral, Integer experience, Integer signNum, Boolean status, Integer level, Integer spreadUid, Date spreadTime, String spreadNickname, String userType, Boolean isPromoter, Integer payCount, Integer spreadCount, String addres, Integer adminid, String loginType, Date updateTime, Date createTime, Date lastLoginTime, Date cleanTime, UserExtractResponse userExtractResponse, RetailShopOrderDataResponse retailShopOrderDataResponse) {
+    public RetailShopUserResponse(Integer uid, String account, String pwd, String realName, String birthday, String cardId, String mark, Integer partnerId, Integer groupId, String groupName, String tagName, String nickname, String avatar, String phone, String addIp, String lastIp, BigDecimal nowMoney, BigDecimal brokeragePrice, Integer integral, Integer experience, Integer signNum, Boolean status, Integer level, Integer spreadUid, Date spreadTime, String spreadNickname, String userType, Boolean isPromoter, Integer payCount, Integer spreadCount, String addres, Integer adminid, String loginType, Date updateTime, Date createTime, Date lastLoginTime, Date cleanTime, UserExtractResponse userExtractResponse, RetailShopOrderDataResponse retailShopOrderDataResponse) {
         this.uid = uid;
         this.account = account;
         this.pwd = pwd;
@@ -122,7 +128,7 @@ public class RetailShopUserResponse {
     private BigDecimal brokeragePrice;
 
     @ApiModelProperty(value = "用户剩余积分")
-    private BigDecimal integral;
+    private Integer integral;
 
     @ApiModelProperty(value = "用户剩余经验")
     private Integer experience;

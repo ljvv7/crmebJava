@@ -1,5 +1,6 @@
 package com.utils;
 
+import cn.hutool.core.util.ReUtil;
 import com.constants.RegularConstants;
 import com.exception.CrmebException;
 import com.zbkj.crmeb.system.model.SystemConfig;
@@ -8,11 +9,18 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.*;
 import java.util.regex.Pattern;
 
-/** 表单验证类
- * @author Mr.zhang
- * @Description 表单验证类
- * @since 2020-05-11
- **/
+/**
+ * 表单验证类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 public class ValidateFormUtil {
     /**
      * 检测类型
@@ -184,5 +192,29 @@ public class ValidateFormUtil {
         isRequire(value, info);
         Pattern pattern = Pattern.compile(regular);
         return pattern.matcher(value).matches();
+    }
+
+    /**
+     * 校验是否是手机号，不是则抛出异常
+     * @param phone 手机号
+     * @param errMsg 异常内容
+     */
+    public static void isPhoneException(String phone, String errMsg) {
+        boolean match = ReUtil.isMatch(RegularConstants.PHONE_TWO, phone);
+        if (!match) {
+            throw new CrmebException(errMsg);
+        }
+    }
+
+    /**
+     * 校验是否是手机号，不是则抛出异常
+     * @param phone 手机号
+     * @param errMsg 异常内容
+     */
+    public static void isPhoneException(String phone) {
+        boolean match = ReUtil.isMatch(RegularConstants.PHONE_TWO, phone);
+        if (!match) {
+            throw new CrmebException("请输入正确的手机号");
+        }
     }
 }

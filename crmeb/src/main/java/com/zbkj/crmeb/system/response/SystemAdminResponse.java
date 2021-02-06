@@ -8,11 +8,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author stivepeim
- * @title: SystemAdminResponse
- * @projectName crmeb
- * @Description: TODO
- * @since 2020/4/1417:36
+ * 系统管理员Response对象
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 public class SystemAdminResponse implements Serializable {
@@ -44,4 +49,10 @@ public class SystemAdminResponse implements Serializable {
 //    private Boolean isDel;
 
     private String Token;
+
+    @ApiModelProperty(value = "手机号码")
+    private String phone;
+
+    @ApiModelProperty(value = "是否接收短信")
+    private Boolean isSms;
 }

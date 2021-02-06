@@ -31,8 +31,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /** excel操作类
- * @author Mr.zhang
- * @since 2020-04-17
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  **/
 public class ExcelUtil {
     private final static Logger log = LoggerFactory.getLogger(ExcelUtil.class);
@@ -274,11 +281,11 @@ public class ExcelUtil {
 
                 CellStyle cellStyle = wb.createCellStyle();
                 cellStyle.setFillForegroundColor(IndexedColors.WHITE.getIndex());
-                cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-                cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+//                cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+//                cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
 
                 Font font = wb.createFont();
-                font.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+//                font.setBoldweight(Font.BOLDWEIGHT_NORMAL);
                 cellStyle.setFont(font);
                 cell.setCellStyle(cellStyle);
                 cell.setCellValue(columnName);

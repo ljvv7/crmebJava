@@ -5,7 +5,7 @@ import com.common.CommonPage;
 import com.common.CommonResult;
 import com.common.PageParamRequest;
 import com.constants.Constants;
-import com.exception.CrmebException;
+import com.github.pagehelper.PageInfo;
 import com.zbkj.crmeb.finance.request.UserExtractRequest;
 import com.zbkj.crmeb.front.request.PasswordRequest;
 import com.zbkj.crmeb.front.request.UserBindingRequest;
@@ -23,7 +23,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +34,15 @@ import java.util.Map;
 
 /**
  * 用户 -- 用户中心
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController("FrontUserController")
@@ -137,16 +145,26 @@ public class UserController {
         return CommonResult.success(userCenterService.getCommission());
     }
 
+//    /**
+//     * 推广佣金明细
+//     * @author Mr.Zhang
+//     * @since 2020-06-08
+//     */
+//    @ApiOperation(value = "推广佣金明细")
+//    @RequestMapping(value = "/spread/commission/{type}", method = RequestMethod.GET)
+//    @ApiImplicitParam(name = "type", value = "类型 佣金类型|0=全部,1=消费,2=充值,3=返佣,4=提现", allowableValues = "range[0,1,2,3，4]", dataType = "int")
+//    public CommonResult<CommonPage<UserSpreadCommissionResponse>> getSpreadCommissionByType(@PathVariable int type, @Validated PageParamRequest pageParamRequest){
+//        return CommonResult.success(CommonPage.restPage(userCenterService.getSpreadCommissionByType(type, pageParamRequest)));
+//    }
+
     /**
      * 推广佣金明细
-     * @author Mr.Zhang
-     * @since 2020-06-08
      */
     @ApiOperation(value = "推广佣金明细")
-    @RequestMapping(value = "/spread/commission/{type}", method = RequestMethod.GET)
-    @ApiImplicitParam(name = "type", value = "类型 佣金类型|0=全部,1=支出,2=收入,3=佣金明细", allowableValues = "range[0,1,2,3]", dataType = "int")
-    public CommonResult<CommonPage<UserSpreadCommissionResponse>> getSpreadCommissionByType(@PathVariable int type, @Validated PageParamRequest pageParamRequest){
-        return CommonResult.success(CommonPage.restPage(userCenterService.getSpreadCommissionByType(type, pageParamRequest)));
+    @RequestMapping(value = "/spread/commission/detail", method = RequestMethod.GET)
+    public CommonResult<CommonPage<SpreadCommissionDetailResponse>> getSpreadCommissionDetail(@Validated PageParamRequest pageParamRequest){
+        PageInfo<SpreadCommissionDetailResponse> commissionDetail = userCenterService.getSpreadCommissionDetail(pageParamRequest);
+        return CommonResult.success(CommonPage.restPage(commissionDetail));
     }
 
     /**
@@ -171,37 +189,33 @@ public class UserController {
     @ApiOperation(value = "提现申请")
     @RequestMapping(value = "/extract/cash", method = RequestMethod.POST)
     public CommonResult<Boolean> extractCash(@RequestBody @Validated UserExtractRequest request){
-        switch (request.getExtractType()){
-            case "weixin":
-                if(StringUtils.isBlank(request.getWechat())){
-                    throw new  CrmebException("请填写微信号！");
-                }
-                request.setAlipayCode(null);
-                request.setBankCode(null);
-                request.setBankname(null);
-                break;
-            case "alipay":
-                if(StringUtils.isBlank(request.getAlipayCode())){
-                    throw new  CrmebException("请填写支付宝账号！");
-                }
-                request.setWechat(null);
-                request.setBankCode(null);
-                request.setBankname(null);
-                break;
-            case "bank":
-                if(StringUtils.isBlank(request.getBankname())){
-                    throw new  CrmebException("请填写银行名称！");
-                }
-                if(StringUtils.isBlank(request.getBankCode())){
-                    throw new  CrmebException("请填写银行卡号！");
-                }
-                request.setWechat(null);
-                request.setAlipayCode(null);
-                break;
-            default:
-               throw new  CrmebException("请选择支付方式");
-        }
         return CommonResult.success(userCenterService.extractCash(request));
+    }
+
+    /**
+     * 提现记录
+     * @author HZW
+     * @since 2020-10-27
+     * @return
+     */
+    @ApiOperation(value = "提现记录")
+    @RequestMapping(value = "/extract/record", method = RequestMethod.GET)
+    public CommonResult<CommonPage<UserExtractRecordResponse>> getExtractRecord(@Validated PageParamRequest pageParamRequest){
+        return CommonResult.success(CommonPage.restPage(userCenterService.getExtractRecord(pageParamRequest)));
+    }
+
+    /**
+     * 提现总金额
+     * @author HZW
+     * @since 2020-10-27
+     * @return
+     */
+    @ApiOperation(value = "提现总金额")
+    @RequestMapping(value = "/extract/totalMoney", method = RequestMethod.GET)
+    public CommonResult<Map<String, BigDecimal>> getTotalMoney(){
+        Map<String, BigDecimal> map = new HashMap<>();
+        map.put("count", userCenterService.getExtractTotalMoney());
+        return CommonResult.success(map);
     }
 
     /**
@@ -287,7 +301,7 @@ public class UserController {
      */
     @ApiOperation(value = "推广人排行")
     @RequestMapping(value = "rank", method = RequestMethod.GET)
-    public CommonResult<List<User>> getTopSpreadPeopleListByDate(@RequestParam String type, @Validated PageParamRequest pageParamRequest){
+    public CommonResult<List<User>> getTopSpreadPeopleListByDate(@RequestParam(required = false) String type, @Validated PageParamRequest pageParamRequest){
         return CommonResult.success(userCenterService.getTopSpreadPeopleListByDate(type, pageParamRequest));
     }
 

@@ -6,16 +6,21 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author stivepeim
- * @title: OrderAgainRequest
- * @projectName crmeb
- * @description: TODO
- * @date 2020/7/1515:00
+ *  OrderAgainRequest
+ * +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 @Data
 public class OrderAgainRequest {
 
-    @ApiModelProperty(value = "订单id")
-    @NotNull(message = "uni参数不能为空")
-    private String nui;
+    @ApiModelProperty(value = "订单编号")
+    @NotNull(message = "订单编号不能为空")
+    private String orderNo;
 }

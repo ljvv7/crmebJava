@@ -13,7 +13,7 @@ import com.github.pagehelper.PageInfo;
 import com.zbkj.crmeb.system.dao.SystemStoreStaffDao;
 import com.zbkj.crmeb.system.model.SystemStore;
 import com.zbkj.crmeb.system.model.SystemStoreStaff;
-import com.zbkj.crmeb.system.model.SystemStoreStaffResponse;
+import com.zbkj.crmeb.system.response.SystemStoreStaffResponse;
 import com.zbkj.crmeb.system.request.SystemStoreStaffRequest;
 import com.zbkj.crmeb.system.service.SystemStoreService;
 import com.zbkj.crmeb.system.service.SystemStoreStaffService;
@@ -30,10 +30,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-* @author Mr.Zhang
-* @Description SystemStoreStaffServiceImpl 接口实现
-* @since 2020-04-17
-*/
+ * SystemStoreStaffServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class SystemStoreStaffServiceImpl extends ServiceImpl<SystemStoreStaffDao, SystemStoreStaff> implements SystemStoreStaffService {
 

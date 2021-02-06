@@ -10,12 +10,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * <p>
  * 用户表
- * </p>
- *
- * @author Mr.Zhang
- * @since 2020-04-10
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -38,7 +42,7 @@ public class UserSignInfoResponse implements Serializable {
     private BigDecimal nowMoney;
 
     @ApiModelProperty(value = "用户剩余积分")
-    private BigDecimal integral;
+    private Integer integral;
 
     @ApiModelProperty(value = "连续签到天数")
     private Integer signNum;

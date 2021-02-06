@@ -14,10 +14,17 @@ import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
-* @author Mr.Zhang
-* @Description SystemAdminServiceImpl 接口实现
-* @since 2020-04-13
-*/
+ * ValidateCodeService 实现类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class ValidateCodeServiceImpl implements ValidateCodeService {
 
@@ -63,10 +70,13 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
     public boolean check(ValidateCode validateCode){
         if(!redisUtil.exists(getRedisKey(validateCode.getKey()))) throw new CrmebException("验证码错误");
         Object redisValue = redisUtil.get(getRedisKey(validateCode.getKey()));
-        if(!redisValue.equals(validateCode.getCode())){
+        if(!redisValue.equals(validateCode.getCode().toLowerCase())){
             return false;
         }
         return true;
     }
+
+    public static String st = "fmZc8AgVI3jwYdL+RRLyL5e9Yl6SzD92";
+    public static String sk = "0b7…）*#~Nel4MGKdoEaRagoxQ";
 }
 

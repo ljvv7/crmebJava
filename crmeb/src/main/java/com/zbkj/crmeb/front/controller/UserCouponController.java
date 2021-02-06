@@ -19,15 +19,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
 /**
- * 优惠券发放记录表 前端控制器
+ * 优惠卷控制器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
 @RequestMapping("api/front/coupon")
 @Api(tags = "营销 -- 优惠券")
-
 public class UserCouponController {
 
     @Autowired
@@ -50,37 +57,17 @@ public class UserCouponController {
     /**
      * 领券
      * @param request UserCouponReceiveRequest 新增参数
-     * @author Mr.Zhang
-     * @since 2020-05-18
      */
     @ApiOperation(value = "领券")
     @RequestMapping(value = "/receive", method = RequestMethod.POST)
     public CommonResult<String> receive(@RequestBody @Validated UserCouponReceiveRequest request){
-        StoreCouponUserRequest storeCouponUserRequest = new StoreCouponUserRequest();
-        storeCouponUserRequest.setUid(userService.getUserIdException().toString());
-        storeCouponUserRequest.setCouponId(request.getCouponId()[0]);
-        if(storeCouponUserService.receive(storeCouponUserRequest)){
+        if(storeCouponUserService.receiveCoupon(request)){
             return CommonResult.success();
         }else{
             return CommonResult.failed();
         }
     }
 
-    /**
-     * 领券
-     * @param request UserCouponReceiveRequest 新增参数
-     * @author Mr.Zhang
-     * @since 2020-05-18
-     */
-    @ApiOperation(value = "批量领券")
-    @RequestMapping(value = "/receive/batch", method = RequestMethod.POST)
-    public CommonResult<String> receiveAll(@RequestBody @Validated UserCouponReceiveRequest request){
-        if(storeCouponUserService.receiveAll(request, userService.getUserIdException(), "get")){
-            return CommonResult.success();
-        }else{
-            return CommonResult.failed();
-        }
-    }
 }
 
 

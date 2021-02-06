@@ -15,12 +15,16 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * <p>
  * 订单表
- * </p>
- *
- * @author Mr.Zhang
- * @since 2020-05-28
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -89,13 +93,10 @@ public class StoreOrder implements Serializable {
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-//    @ApiModelProperty(value = "创建时间") todo ZL
-//    private String day;
-
-    @ApiModelProperty(value = "订单状态（-1 : 申请退款 -2 : 退货成功 0：待发货；1：待收货；2：已收货，待评价；3：已完成；）")
+    @ApiModelProperty(value = "订单状态（0：待发货；1：待收货；2：已收货，待评价；3：已完成；）")
     private Integer status;
 
-    @ApiModelProperty(value = "0 未退款 1 申请中 2 已退款")
+    @ApiModelProperty(value = "0 未退款 1 申请中 2 已退款 3 退款中")
     private Integer refundStatus;
 
     @ApiModelProperty(value = "退款图片")
@@ -104,14 +105,14 @@ public class StoreOrder implements Serializable {
     @ApiModelProperty(value = "退款用户说明")
     private String refundReasonWapExplain;
 
-    @ApiModelProperty(value = "退款时间")
-    private Date refundReasonTime;
-
     @ApiModelProperty(value = "前台退款原因")
     private String refundReasonWap;
 
     @ApiModelProperty(value = "不退款的理由")
     private String refundReason;
+
+    @ApiModelProperty(value = "退款时间")
+    private Date refundReasonTime;
 
     @ApiModelProperty(value = "退款金额")
     private BigDecimal refundPrice;
@@ -179,12 +180,18 @@ public class StoreOrder implements Serializable {
     @ApiModelProperty(value = "店员id")
     private Integer clerkId;
 
-    @ApiModelProperty(value = "支付渠道(0微信公众号1微信小程序)")
-    private int isChannel;
+    @ApiModelProperty(value = "支付渠道(0-微信公众号,1-微信小程序,2-H5,3-余额)")
+    private Integer isChannel;
 
     @ApiModelProperty(value = "消息提醒")
     private Boolean isRemind;
 
     @ApiModelProperty(value = "后台是否删除")
     private Boolean isSystemDel;
+
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
+
+    @ApiModelProperty(value = "快递公司简称")
+    private String deliveryCode;
 }

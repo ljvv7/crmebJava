@@ -15,12 +15,16 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
  * 商品表
- * </p>
- *
- * @author Mr.Zhang
- * @since 2020-05-27
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -115,7 +119,7 @@ public class StoreProduct implements Serializable {
     private Boolean merUse;
 
     @ApiModelProperty(value = "获得积分")
-    private BigDecimal giveIntegral;
+    private Integer giveIntegral;
 
     @ApiModelProperty(value = "成本价")
     private BigDecimal cost;
@@ -153,7 +157,7 @@ public class StoreProduct implements Serializable {
     @ApiModelProperty(value = "规格 0单 1多")
     private Boolean specType;
 
-    @ApiModelProperty(value = "活动显示排序1=秒杀，2=砍价，3=拼团")
+    @ApiModelProperty(value = "活动显示排序0=默认，1=秒杀，2=砍价，3=拼团")
     private String activity;
 
 }

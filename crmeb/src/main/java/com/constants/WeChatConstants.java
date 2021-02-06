@@ -1,11 +1,15 @@
 package com.constants;
 
-/**
- * @author stivepeim
- * @title: Constants
- * @projectName crmeb
- * @Description: 微信配置
- * @since 2020/4/1415:46
+/** 微信配置
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 public class WeChatConstants {
     //------------------------------------------------公众号------------------------------------------------
@@ -201,6 +205,8 @@ public class WeChatConstants {
     public static final String PAY_API_URL = "https://api.mch.weixin.qq.com/";
     public static final String PAY_API_URI = "pay/unifiedorder";
     public static final String PAY_NOTIFY_API_URI_WECHAT = "/api/admin/payment/callback/wechat";
+    // 公共号退款
+    public static final String PAY_REFUND_API_URI_WECHAT = "secapi/pay/refund";
 
     public static final String PAY_TYPE_JS = "JSAPI";
     public static final String PAY_TYPE_H5 = "MWEB";

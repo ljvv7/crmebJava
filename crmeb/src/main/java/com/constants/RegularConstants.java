@@ -1,10 +1,17 @@
 package com.constants;
 
 /**
- * @author Mr.zhang
- * @Description 正则表达式类
- * @since 2020-05-11
- **/
+ *  正则表达式类
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
+ */
 public class RegularConstants {
     //数字
     public static final String NUMBER = "^-?[0-9]+";
@@ -14,6 +21,9 @@ public class RegularConstants {
 
     //手机
     public static final String PHONE = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$";
+
+    //只校验手机为11位
+    public static final String PHONE_TWO = "^1\\d{10}$";
 
     //整数或者小数：
     public static final String INTEGER_OR_FLOAT = "^[0-9]+=\\.{0,1}[0-9]{0,2}$";

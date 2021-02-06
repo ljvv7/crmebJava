@@ -12,11 +12,16 @@ import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 /**
- * @author stivepeim
- * @title: StoreOrderStatusRequest
- * @projectName crmeb
- * @Description: TODO
- * @since 020-06-12
+ * 订单退款表
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,9 +37,5 @@ public class StoreOrderRefundRequest {
     @ApiModelProperty(value = "退款金额")
     @DecimalMin(value = "0.00", message = "退款金额不能少于0.00")
     private BigDecimal amount;
-
-    @ApiModelProperty(value = "status 1 = 直接退款, 2 = 退款后,返回原状态", allowableValues = "range[1,2]")
-    @Range(min = 1, max = 2, message = "请选择退款状态 1 = 直接退款, 2 = 退款后,返回原状态")
-    private int type;
 
 }

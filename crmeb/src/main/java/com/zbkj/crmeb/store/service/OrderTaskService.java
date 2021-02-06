@@ -1,11 +1,17 @@
 package com.zbkj.crmeb.store.service;
 
 
- /**
- * 订单任务服务
- * @author Mr.Zhang
- * @description StoreOrderService 接口
- * @date 2020-05-28
+/**
+ * 订单任务服务 StoreOrderService 接口
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
  public interface OrderTaskService{
 
@@ -18,4 +24,21 @@ package com.zbkj.crmeb.store.service;
      void takeByUser();
 
      void deleteByUser();
- }
+
+    void orderPaySuccessAfter();
+
+    /**
+     * 自动取消未支付订单
+     */
+    void autoCancel();
+
+    /**
+     * 订单收货
+     */
+    void orderReceiving();
+
+    /**
+     * 订单自动完成
+     */
+    void autoComplete();
+}

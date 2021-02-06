@@ -1,5 +1,6 @@
 package com.zbkj.crmeb.front.service;
 
+import com.common.MyRecord;
 import com.common.PageParamRequest;
 import com.zbkj.crmeb.front.request.*;
 import com.zbkj.crmeb.front.response.ConfirmOrderResponse;
@@ -18,28 +19,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * @Classname StoreOrderService
- * @Description H5端订单操作
- * @Date 2020/7/4 11:16 上午
- * @Created by stivepeim
+ * H5端订单操作
+ *  +----------------------------------------------------------------------
+ *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ *  +----------------------------------------------------------------------
+ *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ *  +----------------------------------------------------------------------
+ *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ *  +----------------------------------------------------------------------
+ *  | Author: CRMEB Team <admin@crmeb.com>
+ *  +----------------------------------------------------------------------
  */
 public interface OrderService {
     /**
      * 订单确认
-     * @param cartIds 购物车id集合
-     * @return 确认订单信息
+     * @return  确认订单信息
      */
-    ConfirmOrderResponse confirmOrder(List<Integer> cartIds, boolean isNew, boolean addAgain);
+    ConfirmOrderResponse confirmOrder(ConfirmOrderRequest request);
 
 
     /**
      * 创建订单
      * @param request 创建订单参数
      * @param key 订单key
-     * @return payResponse
+     * @return MyRecord
      */
-    OrderPayResponse createOrder(OrderCreateRequest request, String key, String ip);
-
+    MyRecord createOrder(OrderCreateRequest request, String key);
 
     /**
      * 再次下单
@@ -100,10 +105,11 @@ public interface OrderService {
     boolean refundApply(OrderRefundApplyRequest request);
 
     /**
-     * 订单退款前验证
-     * @param request 退款参数
+     * 订单退款申请Task使用
+     * @param applyList
+     * @return
      */
-    boolean refundVerify(OrderRefundVerifyRequest request);
+    Boolean refundApplyTask(List<OrderRefundApplyRequest> applyList);
 
     /**
      * 订单物流查看

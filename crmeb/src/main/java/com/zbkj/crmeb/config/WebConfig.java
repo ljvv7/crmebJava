@@ -16,8 +16,18 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.MappedInterceptor;
 
-//token验证拦截器
-
+/**
+ * token验证拦截器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -68,6 +78,8 @@ public class WebConfig implements WebMvcConfigurer {
                 excludePathPatterns("/api/admin/wechat/config").
                 excludePathPatterns("/api/admin/authorize/login").
                 excludePathPatterns("/api/admin/payment/callback/**").
+//                excludePathPatterns("/api/admin/system/role/menu").
+                excludePathPatterns("/api/admin/system/role/info").
                 excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
 
         //后台权限规则
@@ -100,7 +112,11 @@ public class WebConfig implements WebMvcConfigurer {
                 excludePathPatterns("/api/front/logistics").
                 excludePathPatterns("/api/front/groom/list/**").
                 excludePathPatterns("/api/front/index").
+                excludePathPatterns("/api/front/config").
                 excludePathPatterns("/api/front/category").
+                excludePathPatterns("/api/front/seckill/*").
+                excludePathPatterns("/api/front/seckill/list/*").
+                excludePathPatterns("/api/front/seckill/detail/*").
 //                excludePathPatterns("/api/front/cart/count").
                 excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
     }
@@ -108,7 +124,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("swagger-ui.html")
+        registry.addResourceHandler("doc.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
@@ -127,7 +143,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     @ConditionalOnProperty(name = "swagger.basic.enable", havingValue = "true")
     public MappedInterceptor getMappedInterceptor() {
-        return new MappedInterceptor(new String[]{"/swagger-ui.html", "/webjars/**"}, new SwaggerInterceptor(username, password, check));
+
+        return new MappedInterceptor(new String[]{"/doc.html", "/webjars/**"}, new SwaggerInterceptor(username, password, check));
     }
     // 验证参数是否完全匹配
 //    @Override

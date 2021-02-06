@@ -13,12 +13,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * <p>
  * 用户提现表
- * </p>
- *
- * @author Mr.Zhang
- * @since 2020-05-11
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,7 +38,7 @@ public class UserExtractRequest implements Serializable {
     private String realName;
 
     @ApiModelProperty(value = "提现方式| alipay=支付宝,bank=银行卡,weixin=微信", allowableValues = "range[alipay,weixin,bank]")
-    @NotBlank(message = "请选择提现方式， 支付宝|者微信|银行卡")
+    @NotBlank(message = "请选择提现方式， 支付宝|微信|银行卡")
     private String extractType;
 
     @ApiModelProperty(value = "银行卡")
@@ -42,7 +46,7 @@ public class UserExtractRequest implements Serializable {
     private String bankCode;
 
     @ApiModelProperty(value = "提现银行名称")
-    private String bankname;
+    private String bankName;
 
     @ApiModelProperty(value = "支付宝账号")
     private String alipayCode;
@@ -55,5 +59,9 @@ public class UserExtractRequest implements Serializable {
     @ApiModelProperty(value = "微信号")
     private String wechat;
 
+    @ApiModelProperty(value = "备注")
+    private String mark;
 
+    @ApiModelProperty(value = "微信收款码")
+    private String qrcodeUrl;
 }

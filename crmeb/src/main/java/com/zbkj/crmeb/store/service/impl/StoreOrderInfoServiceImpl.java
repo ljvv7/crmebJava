@@ -2,6 +2,7 @@ package com.zbkj.crmeb.store.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.common.PageParamRequest;
 import com.github.pagehelper.PageHelper;
 
@@ -26,10 +27,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
-* @author Mr.Zhang
-* @description StoreOrderInfoServiceImpl 接口实现
-* @date 2020-05-28
-*/
+ * StoreOrderInfoServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, StoreOrderInfo>
         implements StoreOrderInfoService {
@@ -74,7 +82,7 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
         if(orderList.size() < 1){
             return map;
         }
-        LambdaQueryWrapper<StoreOrderInfo> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<StoreOrderInfo> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.in(StoreOrderInfo::getOrderId, orderList);
         List<StoreOrderInfo> systemStoreStaffList = dao.selectList(lambdaQueryWrapper);
         if(systemStoreStaffList.size() < 1){
@@ -115,13 +123,13 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
         List<StoreOrderInfoVo> storeOrderInfoVoList = new ArrayList<>();
         for (StoreOrderInfo storeOrderInfo : systemStoreStaffList) {
             //解析商品详情JSON
-            StoreOrderInfoVo StoreOrderInfoVo = new StoreOrderInfoVo();
-            BeanUtils.copyProperties(storeOrderInfo, StoreOrderInfoVo, "info");
-            StoreOrderInfoVo.setInfo(JSON.parseObject(storeOrderInfo.getInfo(),StoreCartResponse.class));
-            StoreOrderInfoVo.getInfo().setIsReply(
-                    storeProductReplyService.isReply(StoreOrderInfoVo.getUnique(),"product",StoreOrderInfoVo.getOrderId()).size()
+            StoreOrderInfoVo storeOrderInfoVo = new StoreOrderInfoVo();
+            BeanUtils.copyProperties(storeOrderInfo, storeOrderInfoVo, "info");
+            storeOrderInfoVo.setInfo(JSON.parseObject(storeOrderInfo.getInfo(),StoreCartResponse.class));
+            storeOrderInfoVo.getInfo().setIsReply(
+                    storeProductReplyService.isReply(storeOrderInfoVo.getUnique(), storeOrderInfoVo.getOrderId()) ? 1 : 0
             );
-            storeOrderInfoVoList.add(StoreOrderInfoVo);
+            storeOrderInfoVoList.add(storeOrderInfoVo);
         }
         return storeOrderInfoVoList;
     }

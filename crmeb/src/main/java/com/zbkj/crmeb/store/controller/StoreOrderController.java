@@ -3,6 +3,7 @@ package com.zbkj.crmeb.store.controller;
 import com.common.CommonResult;
 import com.common.PageParamRequest;
 import com.exception.CrmebException;
+import com.zbkj.crmeb.express.vo.ExpressSheetVo;
 import com.zbkj.crmeb.express.vo.LogisticsResultVo;
 import com.zbkj.crmeb.store.model.StoreOrder;
 import com.zbkj.crmeb.store.request.*;
@@ -12,8 +13,10 @@ import com.zbkj.crmeb.store.response.StoreStaffDetail;
 import com.zbkj.crmeb.store.response.StoreStaffTopDetail;
 import com.zbkj.crmeb.store.service.StoreOrderService;
 import com.zbkj.crmeb.store.service.StoreOrderVerification;
-import io.swagger.annotations.*;
-import io.swagger.models.auth.In;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -24,15 +27,22 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-
 /**
  * 订单表 前端控制器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
 @RequestMapping("api/admin/store/order")
 @Api(tags = "订单") //配合swagger使用
-
 public class StoreOrderController {
 
     @Autowired
@@ -137,19 +147,10 @@ public class StoreOrderController {
      * @since 2020-05-28
      */
     @ApiOperation(value = "发送货")
-    @RequestMapping(value = "/send", method = RequestMethod.GET)
-    public CommonResult<Boolean> send(@Validated StoreOrderSendRequest request){
-        if(!request.getType().equals("3")){
-            if(StringUtils.isBlank(request.getExpressId())){
-                throw new CrmebException("请选择快递公司/填写收货人");
-            }
-
-            if(StringUtils.isBlank(request.getExpressCode())){
-                throw new CrmebException("请填写快递单号/收货人手机号码");
-            }
-        }
-
-        return CommonResult.success(storeOrderService.send(request));
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public CommonResult<Boolean> send(@RequestBody @Validated StoreOrderSendRequest request){
+        storeOrderService.send(request);
+        return CommonResult.success();
     }
 
     /**
@@ -165,19 +166,20 @@ public class StoreOrderController {
     }
 
     /**
-     * 退款
+     * 拒绝退款
      * @param id Integer 订单id
      * @param reason String 原因
-     * @author Mr.Zhang
-     * @since 2020-05-28
      */
     @ApiOperation(value = "拒绝退款")
     @RequestMapping(value = "/refund/refuse", method = RequestMethod.GET)
-    public CommonResult<Boolean> refundRefuse(@RequestParam Integer id, @RequestParam String reason){
+    public CommonResult<Object> refundRefuse(@RequestParam Integer id, @RequestParam String reason){
         if(StringUtils.isBlank(reason)){
             CommonResult.validateFailed("请填写退款原因");
         }
-        return CommonResult.success(storeOrderService.refundRefuse(id, reason));
+        if (storeOrderService.refundRefuse(id, reason)) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 
     /**
@@ -204,7 +206,7 @@ public class StoreOrderController {
     }
 
     /**
-     * 核销订单头部数据
+     * 核销订单 月列表数据
      * @author stivepeim
      * @since 2020-08-29
      */
@@ -228,7 +230,7 @@ public class StoreOrderController {
     }
 
     /**
-     * 核销码核销订单
+     * 核销码查询待核销订单
      * @author stivepeim
      * @since 2020-09-01
      */
@@ -245,15 +247,9 @@ public class StoreOrderController {
      * @since 2020-09-01
      */
     @ApiOperation(value = "一键改价")
-    @RequestMapping(value = "/editPrice", method = RequestMethod.GET)
-    public CommonResult<Object> editOrderPrice(
-            @RequestParam String orderId, @RequestParam(required = true,defaultValue = "0") BigDecimal price){
-        try {
-            if(price.compareTo(BigDecimal.ZERO) < 0) throw new CrmebException("请输入合法参数");
-        }catch (Exception e){
-            throw new CrmebException("价格参数错误");
-        }
-        return CommonResult.success(storeOrderService.editPrice(orderId,price));
+    @RequestMapping(value = "/editPrice", method = RequestMethod.POST)
+    public CommonResult<Object> editOrderPrice(@RequestBody @Validated StoreOrderEditPriceRequest request){
+        return CommonResult.success(storeOrderService.editPrice(request));
     }
 
     /**
@@ -273,6 +269,15 @@ public class StoreOrderController {
         return CommonResult.success(storeOrderService.orderStatisticsByTime(dateLimit,type));
     }
 
+    /**
+     * 获取面单默认配置信息
+     * @return
+     */
+    @ApiOperation(value = "获取面单默认配置信息")
+    @RequestMapping(value = "/sheet/info", method = RequestMethod.GET)
+    public CommonResult<ExpressSheetVo> getDeliveryInfo() {
+        return CommonResult.success(storeOrderService.getDeliveryInfo());
+    }
 }
 
 
