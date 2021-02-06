@@ -2,10 +2,22 @@
 branches: {
   }
 fileChange:
-  /.gitignore:
-    newFile: !uuid '217523cb608b3e0d6c719fea77e09b82caec5588'
-    oldFile: !uuid '9f11b755a17d8192c60f61cb17b8902dffbd9f23'
-gitCommitId: !uuid 'c948dfdcb382a2cd7a99f4c5055bbc3e360509e7'
+  /crmeb:
+    newFile: !uuid '88a07393abd128cde1de3a39ec45d0ab10c234e6'
+    oldFile: !uuid '83903de84440b208ce837e84d414447625df9647'
+  /crmeb/sql:
+    newFile: !uuid '3a9311fa99c0c10f9a20ed5caee53556df101692'
+    oldFile: !uuid 'd53270bb92e5ff878fcffafb5b0b224cb1fbc3e3'
+  /crmeb/sql/crmeb_java_v1.3.1.sql:
+    newFile: !uuid 'b79d25c81ed52f7623450fb60e703c621d187f31'
+    oldFile: !uuid 'a428baf33be25fa07abba06aaf42b8dc4c755746'
+  /crmeb/sql/crmeb_java_v1.3.2.sql:
+    newFile: !uuid '8c69d09a3608cbd6565f3738c265008d6e4408ad'
+    oldFile: null
+  /crmeb/sql/crmeb_java_v1.3.2_part.sql:
+    newFile: !uuid '2755aa80e8a5f890db4f52669e79e39ef1c6dc43'
+    oldFile: null
+gitCommitId: !uuid '74ead4e3fcc6ff692f7c501bc31a85808e1f259f'
 renames: {
   }
-revisionId: 151
+revisionId: 152
