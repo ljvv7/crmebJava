@@ -16,35 +16,10 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <springfox.version>2.9.2</springfox.version>
+        <swagger-models.version>1.5.22</swagger-models.version>
+        <swagger-bootstrap-ui.version>1.9.3</swagger-bootstrap-ui.version>
     </properties>
-
-<!--    <profiles>-->
-<!--        <profile>-->
-<!--            <id>dev</id>-->
-<!--            <properties>-->
-<!--                <springProfilesActive>dev</springProfilesActive>-->
-<!--            </properties>-->
-<!--            &lt;!&ndash; 是否默认 true表示默认&ndash;&gt;-->
-<!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
-<!--        </profile>-->
-<!--        <profile>-->
-<!--            &lt;!&ndash;测试环境&ndash;&gt;-->
-<!--            <id>beta</id>-->
-<!--            <properties>-->
-<!--                <springProfilesActive>beta</springProfilesActive>-->
-<!--            </properties>-->
-<!--        </profile>-->
-
-<!--        <profile>-->
-<!--            &lt;!&ndash; 生产环境 &ndash;&gt;-->
-<!--            <id>prod</id>-->
-<!--            <properties>-->
-<!--                <springProfilesActive>prod</springProfilesActive>-->
-<!--            </properties>-->
-<!--        </profile>-->
-<!--    </profiles>-->
 
     <dependencies>
         <dependency>
@@ -161,29 +136,27 @@
             <version>1.5.21</version>
         </dependency>
 
-        <!--swagger-->
-        <!-- swagger-ui -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-
-        <!-- swagger2 -->
+        <!-- doc -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${springfox.version}</version>
             <exclusions>
-                <exclusion>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-annotations</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>io.swagger</groupId>
                     <artifactId>swagger-models</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>${swagger-models.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>${swagger-bootstrap-ui.version}</version>
         </dependency>
 
 
@@ -293,12 +266,12 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.13</version>
+            <version>3.17</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.13</version>
+            <version>3.17</version>
         </dependency>
 
         <!-- Apache Commons FileUpload -->
