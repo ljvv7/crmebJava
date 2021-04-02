@@ -1,3 +1,4 @@
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0402/124436_92cd75a0_892944.png "QQ20210402-124353@2x.png")
 <h1 align="center"> CRMEB客户管理+电商营销系统Java版</h1> 
 <p align="center">
     <a href="http://www.crmeb.com">
