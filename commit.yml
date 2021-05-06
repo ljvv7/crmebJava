@@ -3,33 +3,15 @@ branches: {
   }
 fileChange:
   /app:
-    newFile: !uuid '76d3e4476f5bf4fa6b37192b7d759da5528248d8'
-    oldFile: !uuid 'c30dc8ec8b2c4cff85bb52c3a61e12f3ade08797'
+    newFile: !uuid 'e6ef5a2b259b38ebc2b8a115612c40eb2f7269ad'
+    oldFile: !uuid '76d3e4476f5bf4fa6b37192b7d759da5528248d8'
   /app/libs:
-    newFile: !uuid '6b784191c5cd64a9be62477e6c455ed3ef66bdab'
-    oldFile: !uuid '76c665d738594558a656140bc5629961bcd1531b'
+    newFile: !uuid '28b4d1e63f2daba8b994958c3f31e6c6808fecb3'
+    oldFile: !uuid '6b784191c5cd64a9be62477e6c455ed3ef66bdab'
   /app/libs/routine.js:
-    newFile: !uuid '620b91d3b1a6e0bbe34c928598722c7680c05e44'
-    oldFile: !uuid '17a1b36aaaa844f018b0d0b831e9bfaeaea24507'
-  /app/pages:
-    newFile: !uuid '313e2333def5641d8f4ccac03e868ae92da96a9f'
-    oldFile: !uuid '255a07058b90235777317db29426715efae8f166'
-  /app/pages/users:
-    newFile: !uuid '407b90535061e949764be23391b8197bcd78de34'
-    oldFile: !uuid '6b763451fb74cb2c54dfae071023030ddb43db3e'
-  /app/pages/users/login:
-    newFile: !uuid '1eb2c431b63a32236410b82c7ef812567e5885c0'
-    oldFile: !uuid '1a3497e456735a7b95b5550aaf247d310434a266'
-  /app/pages/users/login/index.vue:
-    newFile: !uuid '228106bec6cf34a35c37c0220e7c7ea402b16089'
-    oldFile: !uuid '7d68acf50bb341404c8de9925086a7bdbae34416'
-  /app/pages/users/wechat_login:
-    newFile: !uuid 'bca2898e189e37f8349e407008f6202ff1e7b9d7'
-    oldFile: !uuid '0d52c00e749eeed91c7d0afc2ea5ed163bcaaa5d'
-  /app/pages/users/wechat_login/index.vue:
-    newFile: !uuid '7acc99c92272d90712bae43f46eb6b7da7224fd1'
-    oldFile: !uuid '638054e37eec46957e8cd2d4e84445258b1a35eb'
-gitCommitId: !uuid '737161dd78128e26e0b21e53d3cde075879b4606'
+    newFile: !uuid '8130e82c2052c0902c4a62453cde9670647cb496'
+    oldFile: !uuid '620b91d3b1a6e0bbe34c928598722c7680c05e44'
+gitCommitId: !uuid 'def5b52eabfab68901ba788dbf0dbc1639a78880'
 renames: {
   }
-revisionId: 163
+revisionId: 164
