@@ -3,15 +3,27 @@ branches: {
   }
 fileChange:
   /app:
-    newFile: !uuid 'e6ef5a2b259b38ebc2b8a115612c40eb2f7269ad'
-    oldFile: !uuid '76d3e4476f5bf4fa6b37192b7d759da5528248d8'
+    newFile: !uuid '5c3f5c4a7224a576e791bc1f544b9090d78735ef'
+    oldFile: !uuid 'e6ef5a2b259b38ebc2b8a115612c40eb2f7269ad'
   /app/libs:
-    newFile: !uuid '28b4d1e63f2daba8b994958c3f31e6c6808fecb3'
-    oldFile: !uuid '6b784191c5cd64a9be62477e6c455ed3ef66bdab'
+    newFile: !uuid '04d8a8b8e7c2b0c1f985d3e6454c0a9f01c50ce5'
+    oldFile: !uuid '28b4d1e63f2daba8b994958c3f31e6c6808fecb3'
   /app/libs/routine.js:
-    newFile: !uuid '8130e82c2052c0902c4a62453cde9670647cb496'
-    oldFile: !uuid '620b91d3b1a6e0bbe34c928598722c7680c05e44'
-gitCommitId: !uuid 'def5b52eabfab68901ba788dbf0dbc1639a78880'
+    newFile: !uuid 'e1c1734aa07476a1704ec0e1e61e37a135899f67'
+    oldFile: !uuid '8130e82c2052c0902c4a62453cde9670647cb496'
+  /app/pages:
+    newFile: !uuid 'b4c3f92a04bf96975fc0e68f814942c99c49fcb1'
+    oldFile: !uuid '313e2333def5641d8f4ccac03e868ae92da96a9f'
+  /app/pages/users:
+    newFile: !uuid 'c0fdc9d36dea9e94116222b0575ebe0109e13d19'
+    oldFile: !uuid '407b90535061e949764be23391b8197bcd78de34'
+  /app/pages/users/wechat_login:
+    newFile: !uuid 'cd09f339d198bf63492fe211defb432df3b05ec5'
+    oldFile: !uuid 'bca2898e189e37f8349e407008f6202ff1e7b9d7'
+  /app/pages/users/wechat_login/index.vue:
+    newFile: !uuid 'fac04bb4e24ae3bf155451a9d97fbc309fe835c4'
+    oldFile: !uuid '7acc99c92272d90712bae43f46eb6b7da7224fd1'
+gitCommitId: !uuid '0f6fe1eb6beba2067f7ef9a5b17070b97c8d7974'
 renames: {
   }
-revisionId: 164
+revisionId: 165
