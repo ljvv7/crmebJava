@@ -2,19 +2,16 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid '7a7781cd8fa241cb037f932790895712bc74651b'
-    oldFile: !uuid '13fd7f4505cca6a0c74435b700311fbb71c090bf'
-  /crmeb:
-    newFile: !uuid '99d427e8494409d5bccbd1cad925c6e0b7944952'
-    oldFile: !uuid 'f8c5f360615a3c3345224ef8a1b0c54331f2d3f1'
-  /crmeb/sql:
-    newFile: !uuid 'd8695cba248a1bab9e896e5ac7401967b0bebe7d'
-    oldFile: !uuid '15f24f9b5c8fa4ba2c2c1c5d84557b9aad6884e5'
-  /crmeb/sql/重置admin.sql:
-    newFile: !uuid '5b74e34cf39b151c0636a0fcd013da90bb86b6e9'
-    oldFile: !uuid 'c0f88c5fff50054126ddcef0c9dafb5eaaa7b2d2'
-gitCommitId: !uuid '8826aca173c55fcab41791bfe3aa5ebedd1554c1'
+  /app:
+    newFile: !uuid '2c053e5d8cb4d84ec639b301339cc1f40e2dfb55'
+    oldFile: !uuid '261f040126c1b1ba2137c6c34bd28aef2b43c5bc'
+  /app/libs:
+    newFile: !uuid 'dbb6e55e11f19f6de6d7832b3601d42744ee04a5'
+    oldFile: !uuid 'c02e81088a5e775ccf8031ee368f93325ad3f124'
+  /app/libs/wechat.js:
+    newFile: !uuid '213c26e331d575ecb08093f6b2f9c3304209c81d'
+    oldFile: !uuid '9c802d1145bc393127bf2a4d9b0bb7d0f57d2fc2'
+gitCommitId: !uuid 'c7ac6d4ac7e5ff5d9eb20dad6dcdbb4d5a5ad8a5'
 renames: {
   }
-revisionId: 168
+revisionId: 169
