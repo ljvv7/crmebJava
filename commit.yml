@@ -3,15 +3,51 @@ branches: {
   }
 fileChange:
   /app:
-    newFile: !uuid '2c053e5d8cb4d84ec639b301339cc1f40e2dfb55'
-    oldFile: !uuid '261f040126c1b1ba2137c6c34bd28aef2b43c5bc'
+    newFile: !uuid '55690654177fb6646990f7ebe5f6e15ffe27d2a8'
+    oldFile: !uuid '2c053e5d8cb4d84ec639b301339cc1f40e2dfb55'
+  /app/config:
+    newFile: !uuid '07f962105edec6dd438825e2eed02ddf49d38101'
+    oldFile: !uuid 'a4bbb5aa93d86a310e2aa2c88c7de964f4b80a0e'
+  /app/config/app.js:
+    newFile: !uuid '5ac953b2da8bb6183bcf34014e6000511370f8cb'
+    oldFile: !uuid 'b78f8070b8b6ddfd196764f6179e5074b543ac9f'
   /app/libs:
-    newFile: !uuid 'dbb6e55e11f19f6de6d7832b3601d42744ee04a5'
-    oldFile: !uuid 'c02e81088a5e775ccf8031ee368f93325ad3f124'
+    newFile: !uuid '2bc8e9bde48d6fcbb8f538be95207ede2747c9c4'
+    oldFile: !uuid 'dbb6e55e11f19f6de6d7832b3601d42744ee04a5'
   /app/libs/wechat.js:
-    newFile: !uuid '213c26e331d575ecb08093f6b2f9c3304209c81d'
-    oldFile: !uuid '9c802d1145bc393127bf2a4d9b0bb7d0f57d2fc2'
-gitCommitId: !uuid 'c7ac6d4ac7e5ff5d9eb20dad6dcdbb4d5a5ad8a5'
+    newFile: !uuid '65cf3f5adf08c1ae64c67cec257dfd438bd6ccc4'
+    oldFile: !uuid '213c26e331d575ecb08093f6b2f9c3304209c81d'
+  /crmeb:
+    newFile: !uuid '13e18b4fbd0e755fcdda0acf62072a1a1fa7673d'
+    oldFile: !uuid '99d427e8494409d5bccbd1cad925c6e0b7944952'
+  /crmeb/sql:
+    newFile: !uuid '39cd42a14df9a8362860a59aa78e4b06741408f5'
+    oldFile: !uuid 'd8695cba248a1bab9e896e5ac7401967b0bebe7d'
+  /crmeb/sql/crmeb_java_v1.3.3.sql:
+    newFile: !uuid 'ec373ab1d1677f7bfbf89df43e458ef922f70161'
+    oldFile: !uuid '6a1f2c4e97b5ef315684b8d86cc9b1e715b4ce95'
+  /crmeb/sql/reset_formConfig.sql:
+    newFile: null
+    oldFile: !uuid 'b16609e8e98451768ad3125467fd6a455d79e4af'
+  /crmeb/src:
+    newFile: !uuid '497c47f2d7c8519c2a8b91da407eb0d0c2245809'
+    oldFile: !uuid '1ce694be7cae0567ca62723f38084853bc9ccd25'
+  /crmeb/src/main:
+    newFile: !uuid '0006c2d4bc6999be1eb7754a0106734cb84c4afe'
+    oldFile: !uuid '820872f238100a68a09ef2b4caf14530602ff2da'
+  /crmeb/src/main/java:
+    newFile: !uuid '5a48ccb049c3f0465f79fd09649d37803899d2cc'
+    oldFile: !uuid 'e17776fccf94be8357bd01a622eaa33134679707'
+  /crmeb/src/main/java/com:
+    newFile: !uuid '74b2bf79a57b7e2e4d3b48e26a063b4a45bc87a6'
+    oldFile: !uuid '1cf7ada3e16a5da2d41f5f71f206b7ea4ea34025'
+  /crmeb/src/main/java/com/utils:
+    newFile: !uuid '741a105e35fe3a62f7d9770d477e23a6c9589ad8'
+    oldFile: !uuid 'ca1a5891a77ad2441a16d9989e3b2dda37104136'
+  /crmeb/src/main/java/com/utils/CrmebUtil.java:
+    newFile: !uuid '70192807ab55d8c1d956db027421af69bd1c9135'
+    oldFile: !uuid '0427b8b64e7572f60c9ece8aa0a9a1cd526c7198'
+gitCommitId: !uuid '3bb6ec74c41e97d1404a90dd0dccaf891f84e1e9'
 renames: {
   }
-revisionId: 169
+revisionId: 170
