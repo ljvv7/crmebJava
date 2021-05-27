@@ -4,9 +4,9 @@ server:
   domain: #配合swagger使用 # 待部署域名
   version: CRMEB-JAVA-v1.3.3 # 当前代码版本
   wechat-api-url:  #请求微信接口中专服务器 仅仅调试时使用
-  wechat-js-api-debug: false #微信js api系列是否开启调试模式
+  wechat-js-api-debug: true #微信js api系列是否开启调试模式
   wechat-js-api-beta: true #微信js api是否是beta版本
-  asyncConfig: false #是否同步config表数据到redis
+  asyncConfig: true #是否同步config表数据到redis
   asyncWeChatProgramTempList: false #是否同步小程序公共模板库
 
 spring:
@@ -19,7 +19,7 @@ spring:
       max-file-size: 50MB #设置单个文件大小
       max-request-size: 50MB #设置单次请求文件的总大小
   application:
-    name: cemrb #这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name
+    name: nslemons #这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name
   jackson:
     locale: zh_CN
     time-zone: GMT+8
@@ -37,7 +37,7 @@ spring:
   redis:
     host: 127.0.0.1 #地址
     port: 6379 #端口
-    password: password
+    password:
     timeout: 1000 # 连接超时时间（毫秒）
     database: 0 #默认数据库
     jedis:
