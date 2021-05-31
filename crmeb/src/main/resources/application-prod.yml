@@ -23,7 +23,7 @@ spring:
   redis:
     host: 127.0.0.1 #地址
     port: 6379 #端口
-    password: foobared
+    password:
     timeout: 1000 # 连接超时时间（毫秒）
     database: 0 #默认数据库
     jedis:
