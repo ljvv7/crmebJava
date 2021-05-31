@@ -20,6 +20,7 @@ import appSettingRouter from './modules/appSetting'
 import maintainRouter from './modules/maintain'
 import mobileRouter from './modules/mobile'
 import companyRouter from './modules/company'
+import craneRouter from './modules/crane'
 
 
 /**
@@ -72,9 +73,11 @@ export const constantRoutes = [
   maintainRouter,
   //移动端管理
   mobileRouter,
-  // 数据
-  companyRouter,
   //公司
+  companyRouter,
+  //车辆
+  craneRouter,
+  //数据
   {
     path: '/datas',
     component: Layout,
