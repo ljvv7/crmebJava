@@ -6,7 +6,7 @@ import SettingMer from '@/utils/settingMer'
 import { isPhone } from "@/libs/wechat";
 const service = axios.create({
   baseURL: SettingMer.apiBaseURL,
-  timeout: 20000 // 过期时间
+  timeout: 5000 // 过期时间
 })
 
 // request interceptor

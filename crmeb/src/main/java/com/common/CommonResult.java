@@ -188,4 +188,5 @@ public class CommonResult<T> {
     public void setData(T data) {
         this.data = data;
     }
+
 }

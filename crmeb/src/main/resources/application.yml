@@ -1,6 +1,6 @@
 # 配置端口
 server:
-  port: 8080
+  port: 8101
   domain: #配合swagger使用 # 待部署域名
   version: CRMEB-JAVA-v1.3.3 # 当前代码版本
   wechat-api-url:  #请求微信接口中专服务器 仅仅调试时使用
@@ -37,7 +37,7 @@ spring:
   redis:
     host: 127.0.0.1 #地址
     port: 6379 #端口
-    password: password
+    password: foobared
     timeout: 1000 # 连接超时时间（毫秒）
     database: 0 #默认数据库
     jedis:
@@ -78,3 +78,4 @@ swagger:
     check: false #是否打开验证
     username: #访问swagger的账号
     password: #访问swagger的密码
+

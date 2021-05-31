@@ -1,6 +1,6 @@
 # 配置端口
 server:
-  port: 20000
+  port: 8102
   domain:  #配合swagger使用 # 待部署域名
   version: CRMEB-JAVA-v1.3.3 # 当前代码版本
   wechat-api-url:
@@ -17,13 +17,13 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/crmeb_java?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
-    username: root
-    password: password
+    url: jdbc:mysql://nslemons.com:3306/crmeb_java?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
+    username: crmeb_java
+    password: rnEi5YDE7aF6sEHB
   redis:
     host: 127.0.0.1 #地址
     port: 6379 #端口
-    password: password
+    password: foobared
     timeout: 1000 # 连接超时时间（毫秒）
     database: 0 #默认数据库
     jedis:

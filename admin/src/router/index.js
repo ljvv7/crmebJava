@@ -19,6 +19,7 @@ import operationRouter from './modules/operation'
 import appSettingRouter from './modules/appSetting'
 import maintainRouter from './modules/maintain'
 import mobileRouter from './modules/mobile'
+import companyRouter from './modules/company'
 
 
 /**
@@ -48,6 +49,7 @@ import mobileRouter from './modules/mobile'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  // componentsRouter,
   // 商品
   storeRouter,
   // 订单
@@ -71,6 +73,8 @@ export const constantRoutes = [
   //移动端管理
   mobileRouter,
   // 数据
+  companyRouter,
+  //公司
   {
     path: '/datas',
     component: Layout,
