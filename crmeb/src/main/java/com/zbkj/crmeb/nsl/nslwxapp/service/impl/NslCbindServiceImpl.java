@@ -6,6 +6,8 @@ import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 公司车辆绑定表 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class NslCbindServiceImpl extends ServiceImpl<NslCbindMapper, NslCbind> implements NslCbindService {
 
+    @Override
+    public List getCompanyIdsByCraneId(int craneid) {
+        return baseMapper.getCompanyIdsByCraneId(craneid);
+    }
 }

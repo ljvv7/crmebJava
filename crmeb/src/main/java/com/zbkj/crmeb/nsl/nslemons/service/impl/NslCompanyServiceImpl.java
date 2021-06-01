@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbkj.crmeb.nsl.nslemons.dao.NslCompanyMapper;
 import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -18,4 +21,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class NslCompanyServiceImpl extends ServiceImpl<NslCompanyMapper, NslCompany> implements NslCompanyService {
 
+    @Override
+    public List<NslCompany> getCompanyListByIds(@Param("ids") List ids, long pageindex, long pagesize) {
+        return baseMapper.getCompanyListByIds(ids,pageindex,pagesize);
+    }
 }

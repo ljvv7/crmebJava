@@ -98,7 +98,8 @@
 <script>
 
 // import { getAallCompanyApi,productExcelApi} from '@/api/company'
-import company from '@/api/company'
+// import company from '@/api/company'
+import crane from '@/api/crane'
 export default {
   name: 'ProductList',
   data() {
@@ -110,10 +111,10 @@ export default {
         total: 0
       },
       tableFrom: {
-        page: 1,
-        limit: 20,
+        pageindex: 0,
+        pagesize: 20,
         cateId: '',
-        keywords: '',
+        craneid: 1,
         type: '1'
       },
       categoryList: [],
@@ -131,7 +132,7 @@ export default {
 
     getList() {
       this.listLoading = true
-      company.getAallCompanyApi(this.tableFrom).then(res => {
+      crane.getAallCompanyApi(this.tableFrom).then(res => {
         this.tableData.data = res.list
         this.tableData.total = res.total
         this.listLoading = false
