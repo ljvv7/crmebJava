@@ -67,12 +67,13 @@
           min-width="70"
         />
         <el-table-column label="操作" min-width="150" fixed="right" align="center">
-          <template slot-scope="scope">
-            <router-link :to="{path: '/store/list/creatProduct/' + scope.row.id}">
+          <!-- <template slot-scope="scope"> -->
+            <el-button type="primary" @click="chakan">查看</el-button>
+            <!-- <router-link :to="{path: '/store/list/creatProduct/' + scope.row.id}">
               <el-button type="text" size="small" class="mr10" v-if="tableFrom.type !== '5'">查看</el-button>
-            </router-link>
+            </router-link> -->
             <!-- <el-button type="text" size="small" @click="handleDelete(scope.row.id, tableFrom.type)">{{ tableFrom.type === '5' ? '查看' : '加入回收站' }}</el-button> -->
-          </template>
+          <!-- </template> -->
         </el-table-column>
       </el-table>
       <div class="block">
@@ -123,6 +124,16 @@ export default {
   },
 
   methods: {
+
+    chakan(){
+        company.testWXAppApi().then(
+          res => {
+            this.tableData.data = res.map
+          }
+        ).catch(res =>{
+          
+        })
+    },
     
     getList() {
       this.listLoading = true

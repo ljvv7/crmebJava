@@ -16,9 +16,16 @@ export default {
 
   productExcelApi(params) {
     return request({
-      url: `/admin/export/excel/product`,
+      url: '/admin/export/excel/product',
       method: 'get',
       params
+    })
+  },
+
+  testWXAppApi(){
+    return request({
+      url: '/admin/nsl/index',
+      method: 'post',
     })
   }
 }
