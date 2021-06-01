@@ -6,7 +6,7 @@ const companyRouter = {
   redirect: '/company/index',
   name: 'company',
   meta: {
-    title: '公司列表',
+    title: '公司管理',
     icon: 'clipboard'
   },
   children: [

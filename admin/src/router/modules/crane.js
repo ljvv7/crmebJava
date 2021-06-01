@@ -1,12 +1,12 @@
 import Layout from '@/layout'
 
 const craneRouter = {
-  path: '/cranePro',
+  path: '/crane',
   component: Layout,
   redirect: '/crane/index',
-  name: 'cranePro',
+  name: 'crane',
   meta: {
-    title: '吊臂项目',
+    title: '车辆管理',
     icon: 'clipboard'
   },
   children: [
