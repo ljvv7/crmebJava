@@ -8,7 +8,7 @@ export default {
 
   getAallCompanyApi(tableFrom){
     return request({
-      url: '/admin/company/getAllCompany',
+      url: '/admin/nsl/company/getAllCompany',
       method: 'post',
       data: tableFrom
     })

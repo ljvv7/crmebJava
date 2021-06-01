@@ -25,12 +25,11 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
-
-
   #  数据库配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/crmeb_java?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
     url: jdbc:mysql://nslemons.com:3306/crmeb_java?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
     username: crmeb_java
     password: rnEi5YDE7aF6sEHB
@@ -76,6 +75,6 @@ swagger:
   basic:
     enable: true #是否开启
     check: false #是否打开验证
-    username: #访问swagger的账号
-    password: #访问swagger的密码
+    username: nslapidb
+    password: mfzeAtjDBTbBGbyA
 

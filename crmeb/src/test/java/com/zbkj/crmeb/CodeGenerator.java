@@ -53,11 +53,11 @@ public class CodeGenerator {
         // 4、包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("com.zbkj.crmeb");
-        pc.setModuleName("nsls"); //模块名
+        pc.setModuleName("nsl"); //模块名
         pc.setController("controller");
         pc.setEntity("model");
         pc.setService("service");
-        pc.setMapper("mapper");
+        pc.setMapper("dao");
         mpg.setPackageInfo(pc);
 
         // 5、策略配置
@@ -65,7 +65,7 @@ public class CodeGenerator {
 //      表名
 //        strategy.setInclude("edu_teacher");
 //        strategy.setInclude("edu_subject");
-        strategy.setInclude("nsl_company");
+        strategy.setInclude("eb_system_group_data");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 

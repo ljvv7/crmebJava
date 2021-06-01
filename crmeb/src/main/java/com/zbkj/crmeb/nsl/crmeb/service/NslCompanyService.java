@@ -1,7 +1,8 @@
-package com.zbkj.crmeb.nsl.service;
+package com.zbkj.crmeb.nsl.crmeb.service;
 
-import com.zbkj.crmeb.nsl.model.NslCompany;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zbkj.crmeb.nsl.crmeb.model.NslCompany;
 
 /**
  * <p>

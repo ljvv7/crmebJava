@@ -55,5 +55,5 @@ swagger:
   basic:
     enable: true #是否开启界面
     check: true #是否打开验证
-    username: crmeb #访问swagger的账号
-    password: ZeypRDYBfM #访问swagger的密码
+    username: nslapidb #访问swagger的账号
+    password: mfzeAtjDBTbBGbyA #访问swagger的密码

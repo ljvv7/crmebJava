@@ -1,7 +1,8 @@
-package com.zbkj.crmeb.nsl.dao;
+package com.zbkj.crmeb.nsl.crmeb.dao;
+
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zbkj.crmeb.nsl.model.NslCompany;
+import com.zbkj.crmeb.nsl.crmeb.model.NslCompany;
 
 /**
  * <p>

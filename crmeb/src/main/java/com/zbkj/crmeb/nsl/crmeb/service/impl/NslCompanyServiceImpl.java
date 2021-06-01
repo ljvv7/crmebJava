@@ -1,10 +1,10 @@
-package com.zbkj.crmeb.nsl.service.impl;
+package com.zbkj.crmeb.nsl.crmeb.service.impl;
 
-import com.zbkj.crmeb.nsl.model.NslCompany;
-import com.zbkj.crmeb.nsl.dao.NslCompanyMapper;
-import com.zbkj.crmeb.nsl.service.NslCompanyService;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zbkj.crmeb.nsl.crmeb.dao.NslCompanyMapper;
+import com.zbkj.crmeb.nsl.crmeb.model.NslCompany;
+import com.zbkj.crmeb.nsl.crmeb.service.NslCompanyService;
 import org.springframework.stereotype.Service;
 
 /**

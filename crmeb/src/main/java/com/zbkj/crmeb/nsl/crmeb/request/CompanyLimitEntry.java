@@ -1,4 +1,4 @@
-package com.zbkj.crmeb.nsl.request;
+package com.zbkj.crmeb.nsl.crmeb.request;
 
 import lombok.Data;
 
