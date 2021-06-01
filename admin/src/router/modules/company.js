@@ -1,12 +1,12 @@
 import Layout from '@/layout'
 
 const companyRouter = {
-  path: '/cranePro',
+  path: '/company',
   component: Layout,
   redirect: '/company/index',
-  name: 'cranePro',
+  name: 'company',
   meta: {
-    title: '吊臂项目',
+    title: '公司列表',
     icon: 'clipboard'
   },
   children: [
