@@ -16,6 +16,6 @@ import java.util.List;
 public interface NslCbrandsService extends IService<NslCbrands> {
 
     //获取品牌列表
-    List getBrandList();
+    List<NslCbrands> getBrandList();
 
 }

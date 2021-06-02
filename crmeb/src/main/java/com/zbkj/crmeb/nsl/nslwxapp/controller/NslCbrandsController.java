@@ -2,6 +2,7 @@ package com.zbkj.crmeb.nsl.nslwxapp.controller;
 
 
 import com.common.CommonResult;
+import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbrandsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,9 +31,9 @@ public class NslCbrandsController {
     public CommonResult getBrandsList(){
 
         //获取品牌列表
-        List brandList = nslCbrandsService.getBrandList();
+        List<NslCbrands> brandList = nslCbrandsService.getBrandList();
 
-        return null;
+        return CommonResult.success(brandList);
     }
 }
 

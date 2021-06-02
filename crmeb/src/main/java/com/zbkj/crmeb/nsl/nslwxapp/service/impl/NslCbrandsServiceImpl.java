@@ -25,7 +25,7 @@ public class NslCbrandsServiceImpl extends ServiceImpl<NslCbrandsMapper, NslCbra
      * @return
      */
     @Override
-    public List getBrandList() {
+    public List<NslCbrands> getBrandList() {
         return baseMapper.getBrandList();
     }
 }
