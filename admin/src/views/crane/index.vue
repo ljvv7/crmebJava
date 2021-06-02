@@ -96,9 +96,6 @@
 </template>
 
 <script>
-
-// import { getAallCompanyApi,productExcelApi} from '@/api/company'
-// import company from '@/api/company'
 import crane from '@/api/crane'
 export default {
   name: 'ProductList',

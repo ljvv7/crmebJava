@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.CommonPage;
 import com.common.CommonResult;
+import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
 import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,17 @@ public class NslCompanyController {
     @Autowired
     private NslCompanyService nslCompanyService;
 
+    /**
+     * 获取公司列表
+     * @param tableFrom
+     * @return
+     */
     @PostMapping("/getAllCompany")
     public CommonResult getAllCompany(@RequestBody(required = false) CompanyLimitEntry tableFrom){
 
-        Long limit = tableFrom.getLimit();
-        Long page = tableFrom.getPage();
-        String companyName = tableFrom.getKeywords();
+        Long limit = tableFrom.getPagesize();
+        Long page = tableFrom.getPageindex();
+        String companyName = tableFrom.getCode();
 
         Page pageCourse = new Page(limit, page);
         QueryWrapper queryWrapper = new QueryWrapper();
@@ -61,6 +67,17 @@ public class NslCompanyController {
         commonPage.setList(records);;
 
         return CommonResult.success(commonPage);
+    }
+
+    /**
+     * 根据公司Id获取公司详情
+     */
+    @PostMapping("/getdetail")
+    public CommonResult getCompanyById(@RequestBody(required = false) CompanyLimitEntry tableFrom){
+        Integer companyid = tableFrom.getCompanyid();
+        NslCompany byId = nslCompanyService.getById(companyid);
+
+        return CommonResult.success(byId);
     }
 
 }

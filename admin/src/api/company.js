@@ -22,6 +22,14 @@ export default {
     })
   },
 
+  getCompanyById(tableFrom){
+    return request({
+      url: '/admin/nsl/company/getdetail',
+      method: 'post',
+      data: tableFrom
+    })
+  },
+
   testWXAppApi(){
     return request({
       url: '/admin/nsl/index',

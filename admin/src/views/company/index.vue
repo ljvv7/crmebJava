@@ -5,7 +5,7 @@
         <div class="container">
           <el-form inline size="small">
             <el-form-item label="公司搜索：">
-              <el-input v-model="tableFrom.keywords" placeholder="请输入公司名称或者手机号" class="selWidth" size="small" clearable>
+              <el-input v-model="tableFrom.code" placeholder="请输入公司名称或者手机号" class="selWidth" size="small" clearable>
                 <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/>
               </el-input>
             </el-form-item>
@@ -69,6 +69,7 @@
         <el-table-column label="操作" min-width="150" fixed="right" align="center">
           <!-- <template slot-scope="scope"> -->
             <el-button type="primary" @click="chakan">查看</el-button>
+            <el-button type="primary" @click="xiangqing">公司详情</el-button>
             <!-- <router-link :to="{path: '/store/list/creatProduct/' + scope.row.id}">
               <el-button type="text" size="small" class="mr10" v-if="tableFrom.type !== '5'">查看</el-button>
             </router-link> -->
@@ -79,8 +80,8 @@
       <div class="block">
         <el-pagination
           :page-sizes="[20, 40, 60, 80]"
-          :page-size="tableFrom.limit"
-          :current-page="tableFrom.page"
+          :page-size="tableFrom.pagesize"
+          :current-page="tableFrom.pageindex"
           layout="total, sizes, prev, pager, next, jumper"
           :total="tableData.total"
           @size-change="handleSizeChange"
@@ -95,6 +96,7 @@
 
 // import { getAallCompanyApi,productExcelApi} from '@/api/company'
 import company from '@/api/company'
+import router from '@/router'
 export default {
   name: 'ProductList',
   data() {
@@ -106,10 +108,10 @@ export default {
         total: 0
       },
       tableFrom: {
-        page: 1,
-        limit: 20,
+        pageindex: 1,
+        pagesize: 20,
         cateId: '',
-        keywords: '',
+        code: '',
         type: '1'
       },
       categoryList: [],
@@ -126,13 +128,18 @@ export default {
   methods: {
 
     chakan(){
-        company.testWXAppApi().then(
+        company.testWXAppApi()
+        .then(
           res => {
             this.tableData.data = res.map
           }
         ).catch(res =>{
-          
+
         })
+    },
+
+    xiangqing(){
+        this.$router.push('@/views/company/Edit')
     },
     
     getList() {
@@ -146,7 +153,7 @@ export default {
       })
     },
     seachList() {
-      this.tableFrom.page = 1
+      this.tableFrom.pageindex = 1
       this.getList()
     },
     // 复制
@@ -161,8 +168,8 @@ export default {
     //  window.open(this.objectUrl + 'admin/export/excel/product?type=1&Authori-zation=' + getToken())
     },
 
-    pageChange(page) {
-      this.tableFrom.page = page
+    pageChange(pageindex) {
+      this.tableFrom.pageindex = pageindex
       this.getList()
     },
     handleSizeChange(val) {
