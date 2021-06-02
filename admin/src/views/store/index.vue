@@ -245,7 +245,6 @@ export default {
     // 列表
     getList() {
       this.listLoading = true
-      debugger
       productLstApi(this.tableFrom).then(res => {
         this.tableData.data = res.list
         this.tableData.total = res.total

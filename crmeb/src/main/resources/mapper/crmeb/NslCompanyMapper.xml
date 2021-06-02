@@ -11,4 +11,10 @@
         </foreach>
         ) limit #{pageindex},#{pagesize};
     </select>
+
+    <select id="getAuthmsgv1" resultType="java.lang.String">
+        select value
+        from `eb_system_config`
+        where name = 'companyauthcoft'
+    </select>
 </mapper>

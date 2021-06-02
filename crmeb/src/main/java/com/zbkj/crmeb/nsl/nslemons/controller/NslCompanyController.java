@@ -7,6 +7,7 @@ import com.common.CommonResult;
 import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
 import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
+import com.zbkj.crmeb.nsl.nslwxapp.request.AddCompanyEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,34 @@ public class NslCompanyController {
         map.put("companylist",allCraneByCompanyId);
         return CommonResult.success(map);
     }
+
+    /**
+     * 公司入驻
+     */
+    @PostMapping("add")
+    public CommonResult addCompany(@RequestBody NslCompany tableFrom){
+        boolean save = nslCompanyService.save(tableFrom);
+        return CommonResult.success(save);
+
+    }
+
+    /**
+     * 公司认证提示
+     */
+    @PostMapping("authmsgv1")
+    public CommonResult authmsgv1(){
+
+        String authmsgv1 = nslCompanyService.getAuthmsgv1();
+
+        return CommonResult.success(authmsgv1);
+
+    }
+
+    /**
+     * 公司车辆关系解除
+     */
+
+
 
 }
 

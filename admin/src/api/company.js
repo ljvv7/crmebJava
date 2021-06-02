@@ -30,10 +30,34 @@ export default {
     })
   },
 
+  /**
+   * 微信小程序首页
+   * @returns 
+   */
   testWXAppApi(){
     return request({
       url: '/admin/nsl/index',
       method: 'post',
     })
+  },
+
+  wxappAddCompanyApi(tableFrom){
+    return request({
+      url: '/admin/nsl/company/add',
+      method: 'post',
+      data: tableFrom
+    }) 
+  },
+  getdCompanyAuthmsgApi(){
+    return request({
+      url: '/admin/nsl/company/authmsgv1',
+      method: 'post'
+    }) 
+  },
+  getAdmin(adminId){
+    return request({
+      url: `/admin/nsl/user/index/${adminId}`,
+      method: 'post',
+    }) 
   }
 }

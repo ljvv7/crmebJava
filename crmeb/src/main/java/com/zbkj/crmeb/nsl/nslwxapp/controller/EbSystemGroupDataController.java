@@ -6,10 +6,11 @@ import com.zbkj.crmeb.nsl.nslwxapp.response.CannerCbrandsEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.response.EbSystemGroup;
 import com.zbkj.crmeb.nsl.nslwxapp.service.EbSystemGroupDataService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
+import com.zbkj.crmeb.user.model.User;
+import com.zbkj.crmeb.user.model.UserBill;
+import com.zbkj.crmeb.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,10 @@ public class EbSystemGroupDataController {
 
     @Autowired
     private NslCraneService nslCraneService;
+
+
+    @Autowired
+    private UserService userService;
 
 
     @PostMapping("/index")
@@ -64,6 +69,15 @@ public class EbSystemGroupDataController {
         map.put("newcrane",newCraneList);
         return CommonResult.success(map);
 
+    }
+
+    /**
+     * 我的
+     */
+    @PostMapping("/user/index/{userId}")
+    public CommonResult<User> info(@PathVariable  int userId){
+        User user = userService.getById(userId);
+        return CommonResult.success(user);
     }
 
 }
