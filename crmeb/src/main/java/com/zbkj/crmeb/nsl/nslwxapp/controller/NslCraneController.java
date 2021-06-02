@@ -7,6 +7,7 @@ import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
 import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
+import com.zbkj.crmeb.nsl.nslwxapp.request.LimitEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,7 @@ public class NslCraneController {
     private NslCompanyService nslCompanyService;
 
     @PostMapping("/getdetail")
-    public CommonResult getDetail(@RequestBody CompanyLimitEntry tableFrom
-                                  ){
-
+    public CommonResult getDetail(@RequestBody LimitEntry tableFrom){
 
         QueryWrapper craneQW = new QueryWrapper();
         craneQW.ne("kbn","9");
@@ -49,10 +48,10 @@ public class NslCraneController {
         List companyIds = nslCbindService.getCompanyIdsByCraneId(tableFrom.getCraneid());
 
 
-        long pageindex1 = Long.valueOf(tableFrom.getPageindex());
-        long pagesize1 = Long.valueOf(tableFrom.getPagesize());
+        long pageindex = Long.valueOf(tableFrom.getPageindex());
+        long pagesize = Long.valueOf(tableFrom.getPagesize());
 
-        List<NslCompany> companyList = nslCompanyService.getCompanyListByIds(companyIds, pageindex1, pagesize1);
+        List<NslCompany> companyList = nslCompanyService.getCompanyListByIds(companyIds, pageindex, pagesize);
 
         Map returnMap = new HashMap();
         returnMap.put("cranedetail",cranedetail);
