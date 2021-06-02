@@ -182,7 +182,7 @@ export default {
 
 <style scoped lang="scss">
   .taoBaoModal{
-  //  z-index: 3333 !important;
+   z-index: 3333 !important;
   }
   .demo-table-expand{
     /deep/ label{
