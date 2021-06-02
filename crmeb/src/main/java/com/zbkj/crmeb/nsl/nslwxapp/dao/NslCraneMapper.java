@@ -19,5 +19,10 @@ public interface NslCraneMapper extends BaseMapper<NslCrane> {
 
     List getAllCraneByCompanyId(@Param("ids") List ids, long pageindex, long pagesize);
 
+    //根据品牌id获取车辆信息
+    List<NslCrane> getCraneListByBrandId(int cbrandid);
+
+    //根据品牌id、车辆id获取车辆信息
+    List<NslCrane> getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
 
 }

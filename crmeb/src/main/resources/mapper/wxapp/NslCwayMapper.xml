@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbkj.crmeb.nsl.nslwxapp.dao.NslCwayMapper">
+
+    <select id="getCwayListBycwId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCway">
+        select id,weightid,radius,primary_length,minor_length,weight,way,legtype,craneid
+        from `nsl_cway`
+        where kbn!=9 and craneid = #{craneid} and weightid = #{cweightid}
+        limit #{pageindex},#{pagesize};
+    </select>
+
+</mapper>

@@ -11,4 +11,18 @@
         </foreach>
         ) limit #{pageindex},#{pagesize};
     </select>
+
+    <select id="getCraneListByBrandId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes
+        from `nsl_crane`
+        where kbn != 9 and cbrands = #{cbrandid};
+    </select>
+
+    <select id="getCraneListByCbrId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes
+        from `nsl_crane`
+        where kbn != 9 and cbrands = #{cbrandid} and id = #{craneid}
+        limit #{pageindex},#{pagesize};
+    </select>
+    
 </mapper>

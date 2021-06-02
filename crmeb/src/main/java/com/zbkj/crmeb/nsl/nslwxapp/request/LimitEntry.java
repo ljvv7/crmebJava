@@ -17,4 +17,10 @@ public class LimitEntry {
 
     private Integer companyid;
 
+    private Integer cbrandid;
+
+    private Integer cweightid;
+
+    private Integer cwayid;
+
 }

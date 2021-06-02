@@ -24,16 +24,5 @@ import java.util.List;
 @RequestMapping("/api/admin/nsl/crane")
 public class NslCbrandsController {
 
-    @Autowired
-    private NslCbrandsService nslCbrandsService;
-
-    @PostMapping("/brandlist")
-    public CommonResult getBrandsList(){
-
-        //获取品牌列表
-        List<NslCbrands> brandList = nslCbrandsService.getBrandList();
-
-        return CommonResult.success(brandList);
-    }
 }
 
