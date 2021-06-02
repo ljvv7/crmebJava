@@ -16,4 +16,7 @@ import java.util.List;
 public interface NslCbindMapper extends BaseMapper<NslCbind> {
     //根据车辆id查询公司id
     List getCompanyIdsByCraneId(int craneid);
+
+    //根据功能公司id 查找车辆
+    List getCraneIdByCompanyId(int companyid);
 }

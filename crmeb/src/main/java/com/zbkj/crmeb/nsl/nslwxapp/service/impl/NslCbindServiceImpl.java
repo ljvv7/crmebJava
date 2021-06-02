@@ -23,4 +23,9 @@ public class NslCbindServiceImpl extends ServiceImpl<NslCbindMapper, NslCbind> i
     public List getCompanyIdsByCraneId(int craneid) {
         return baseMapper.getCompanyIdsByCraneId(craneid);
     }
+
+    @Override
+    public List getCraneIdByCompanyId(int companyid) {
+        return baseMapper.getCraneIdByCompanyId(companyid);
+    }
 }

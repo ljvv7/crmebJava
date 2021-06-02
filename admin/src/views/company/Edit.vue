@@ -1,49 +1,99 @@
 <template>
-<el-form ref="form" :model="form" label-width="80px">
-  <el-form-item label="活动名称">
-    <el-input v-model="form.name"></el-input>
-  </el-form-item>
-  <el-form-item label="活动区域">
-    <el-select v-model="form.region" placeholder="请选择活动区域">
-      <el-option label="区域一" value="shanghai"></el-option>
-      <el-option label="区域二" value="beijing"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="活动时间">
-    <el-col :span="11">
-      <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="即时配送">
-    <el-switch v-model="form.delivery"></el-switch>
-  </el-form-item>
-  <el-form-item label="活动性质">
-    <el-checkbox-group v-model="form.type">
-      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-      <el-checkbox label="地推活动" name="type"></el-checkbox>
-      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-    </el-checkbox-group>
-  </el-form-item>
-  <el-form-item label="特殊资源">
-    <el-radio-group v-model="form.resource">
-      <el-radio label="线上品牌商赞助"></el-radio>
-      <el-radio label="线下场地免费"></el-radio>
-    </el-radio-group>
-  </el-form-item>
-  <el-form-item label="活动形式">
-    <el-input type="textarea" v-model="form.desc"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">立即创建</el-button>
-    <el-button>取消</el-button>
-  </el-form-item>
-</el-form>
-  
+  <div class="divBox">
+    <el-card class="box-card">
+      
+        <el-tabs v-model="activeName" @tab-click="seachList">
+            <el-tab-pane label="公司信息" name="first">
+              <el-form ref="form" :model="Companyform" label-width="80px">
+            <el-form-item label="公司ID">
+              <el-input v-model="Companyform.id"></el-input>
+            </el-form-item>
+            <el-form-item label="公司名称">
+              <el-input v-model="Companyform.name"></el-input>
+            </el-form-item>
+            <el-form-item label="省-市-区">
+              <el-input v-model="Companyform.area"></el-input>
+            </el-form-item>
+            <el-form-item label="公司地址">
+              <el-input v-model="Companyform.adds"></el-input>
+            </el-form-item>
+            <el-form-item label="联系人">
+              <el-input v-model="Companyform.atten"></el-input>
+            </el-form-item>
+            <el-form-item label="联系电话">
+              <el-input v-model="Companyform.phone"></el-input>
+            </el-form-item>
+
+            <el-form-item label="公司状态">
+              <el-select v-model="Companyform.status" placeholder="请选择活动区域">
+                <el-option label="已审核" value="yishenhe"></el-option>
+                <el-option label="待审核" value="daishenhe"></el-option>
+                <el-option label="已下架" value="yixiajia"></el-option>
+                <el-option label="待下架" value="daixiajia"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="公司简介">
+              <el-input type="textarea" v-model="Companyform.introduce"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="onSubmit">保存</el-button>
+            </el-form-item>
+          </el-form>
+            </el-tab-pane>
+              <el-tab-pane label="车辆信息" name="second">
+                <el-table
+                  :data="companyList"
+                  style="width: 100%"
+                  max-height="250">
+                  <el-table-column
+                    fixed
+                    prop="id"
+                    label="ID"
+                    width="150">
+                  </el-table-column>
+                  <el-table-column
+                    prop="cbrands"
+                    label="车辆品牌"
+                    width="120">
+                  </el-table-column>
+                  <el-table-column
+                    prop="name"
+                    label="车辆型号"
+                    width="120">
+                  </el-table-column>
+                  <el-table-column
+                    prop="maxweight"
+                    label="最大轻重量"
+                    width="120">
+                  </el-table-column>
+                  <el-table-column
+                    prop="images"
+                    label="车辆图片"
+                    width="300">
+                  </el-table-column>
+                  <el-table-column
+                    prop="introduce"
+                    label="车辆简介"
+                    width="120">
+                  </el-table-column>
+                  <el-table-column
+                    fixed="right"
+                    label="操作"
+                    width="120">
+                    <template slot-scope="scope">
+                      <el-button
+                        @click.native.prevent="deleteRow(scope.$index, tableData)"
+                        type="text"
+                        size="small">
+                        移除
+                      </el-button>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </el-tab-pane>
+            </el-tabs>
+    </el-card>
+  </div>
 </template>
 
 
@@ -54,24 +104,33 @@ import { param } from '@/utils'
   export default {
     data() {
       return {
-        form: {
+        Companyform: {
+          in: '',
           name: '',
+          area: '',
+          adds: '',
+          atten: '',
+          phone: '',
+          status:'',
+          introduce: '',
           region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: '',
-
-          
         },
         tableFrom: {
-          companyid: 1
+          companyid: 1,
+          pageindex: 0,
+          pagesize: 20
         },
+        companyList: [{
+          id: '',
+          cbrands: '',
+          name: '',
+          maxweight: '',
+          images: '',
+          introduce: ''
+        }],
+        activeName: 'first'
       }
     },
-
 
     created(){
         this.getList()
@@ -80,13 +139,29 @@ import { param } from '@/utils'
     methods: {
       getList(){
           this.listLoading = true
-           alert(this.tableFrom)
           company.getCompanyById(this.tableFrom).then(res =>{
-            alert(this.tableFrom)
+            // debugger
            this.listLoading = false
-        }).catch(res => {
-        this.listLoading = false
-      })
+           this.Companyform = res.cranedetail
+
+           this.companyList = res.companylist
+           if(res.cranedetail.status=='10'){
+            this.Companyform.status = 'yishenhe'
+           }else if(res.cranedetail.status == '20'){
+              this.Companyform.status = 'yixiajia'
+           }
+           
+           }).catch(res => {
+            this.listLoading = false
+          })
+      },
+      seachList(tab, event){
+          this.tableFrom.page = 1
+          this.getList()
+      },
+
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
       },
       
       onSubmit() {

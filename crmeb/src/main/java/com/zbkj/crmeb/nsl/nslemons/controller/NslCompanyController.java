@@ -7,11 +7,15 @@ import com.common.CommonResult;
 import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
 import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
+import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
+import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +34,11 @@ public class NslCompanyController {
 
     @Autowired
     private NslCompanyService nslCompanyService;
+
+    @Autowired
+    private NslCbindService nslCbindService;
+    @Autowired
+    private NslCraneService craneService;
 
     /**
      * 获取公司列表
@@ -54,7 +63,7 @@ public class NslCompanyController {
                 queryWrapper.like("name",companyName);
             }
         }
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByAsc("id");
         nslCompanyService.page(pageCourse, queryWrapper);
         //总数
         long total = pageCourse.getTotal();
@@ -75,9 +84,18 @@ public class NslCompanyController {
     @PostMapping("/getdetail")
     public CommonResult getCompanyById(@RequestBody(required = false) CompanyLimitEntry tableFrom){
         Integer companyid = tableFrom.getCompanyid();
+        Long pagesize = tableFrom.getPagesize();
+        Long pageindex = tableFrom.getPageindex();
+        //获取公司详情
         NslCompany byId = nslCompanyService.getById(companyid);
-
-        return CommonResult.success(byId);
+        //根据公司查找车辆
+        List list = nslCbindService.getCraneIdByCompanyId(companyid);
+        //获取公司下所有车辆
+        List allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
+        Map map = new HashMap();
+        map.put("cranedetail",byId);
+        map.put("companylist",allCraneByCompanyId);
+        return CommonResult.success(map);
     }
 
 }

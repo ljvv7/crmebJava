@@ -108,7 +108,7 @@ export default {
         total: 0
       },
       tableFrom: {
-        pageindex: 1,
+        pageindex: 0,
         pagesize: 20,
         cateId: '',
         code: '',

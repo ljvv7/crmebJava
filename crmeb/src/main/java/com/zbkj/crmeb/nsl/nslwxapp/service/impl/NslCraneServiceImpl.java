@@ -56,5 +56,10 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
         return null;
     }
 
+    @Override
+    public List getAllCraneByCompanyId(List ids, long pageindex, long pagesize) {
+        return baseMapper.getAllCraneByCompanyId(ids,pageindex,pagesize);
+    }
+
 
 }

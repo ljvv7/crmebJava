@@ -7,4 +7,10 @@
         from `nsl_cbind`
         where `kbn`!=9 and craneid = #{craneid};
     </select>
+
+    <select id="getCraneIdByCompanyId" parameterType="int" resultType="int">
+        select craneid
+        from `nsl_cbind`
+        where `kbn`!=9 and craneid = #{companyid};
+    </select>
 </mapper>
