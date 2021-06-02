@@ -45,6 +45,6 @@ public interface NslCraneService extends IService<NslCrane> {
      * @param craneid
      * @return
      */
-    List<NslCrane> getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
+    NslCrane getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
 
 }

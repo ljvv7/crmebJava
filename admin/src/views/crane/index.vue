@@ -111,8 +111,10 @@ export default {
         pageindex: 0,
         pagesize: 20,
         cateId: '',
-        craneid: 1,
-        type: '1'
+        craneid: 8,
+        cbrandid: 18,
+        cweightid: 15
+
       },
       categoryList: [],
       merCateList: [],
@@ -123,9 +125,22 @@ export default {
 
   created() {   //页面渲染之前执行
     this.getList()
+    this.getBrandList()
+    this.getCraneList()
   },
 
   methods: {
+    getBrandList(){
+      crane.getBrandList().then(res =>{
+
+      })
+    },
+
+    getCraneList(){
+      crane.getcraneList(this.tableFrom).then(res =>{
+
+      })
+    },
 
     getList() {
       this.listLoading = true

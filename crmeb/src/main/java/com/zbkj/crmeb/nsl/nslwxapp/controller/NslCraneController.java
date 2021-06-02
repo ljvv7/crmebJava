@@ -95,7 +95,12 @@ public class NslCraneController {
         long pagesize = Long.valueOf(tableFrom.getPagesize());
 
         //查出车辆信息
-        List<NslCrane> craneList = nslCraneService.getCraneListByCbrId(cbrandid, craneid,pageindex,pagesize);
+        QueryWrapper craneQW = new QueryWrapper();
+        craneQW.ne("kbn","9");
+        craneQW.eq("id",craneid);
+        craneQW.eq("cbrands",cbrandid);
+
+        NslCrane craneInfo = nslCraneService.getOne(craneQW);
 
         //根据车辆id查出配重信息
         List<NslCweight> cweightList = nslCweightService.getCweightListByCraneId(craneid,pageindex,pagesize);
@@ -104,7 +109,7 @@ public class NslCraneController {
         List<NslCway> cwayList = nslCwayService.getCwayListBycwId(craneid, cweightid,pageindex,pagesize);
 
         Map map = new HashMap();
-        map.put("craneList",craneList);
+        map.put("craneInfo",craneInfo);
         map.put("cweightList",cweightList);
         map.put("cwayList",cwayList);
 
