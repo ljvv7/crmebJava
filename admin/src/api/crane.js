@@ -14,18 +14,18 @@ export default {
     })
   },
 
-  productExcelApi(params) {
+  getBrandList(){
     return request({
-      url: '/admin/export/excel/product',
-      method: 'get',
-      params
+      url: 'admin/nsl/crane/brandlist',
+      method: 'post'
     })
   },
-
-  testWXAppApi(){
+  getcraneList(tableFrom){
     return request({
-      url: '/admin/nsl/index',
+      url: 'admin/nsl/crane/cranelist',
       method: 'post',
+      data: tableFrom
     })
   }
+
 }
