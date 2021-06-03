@@ -5,7 +5,7 @@
     <select id="getAllCraneByCompanyId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
         select id,name,cbrands,maxweight,introduce,images,expdbcodes
         from `nsl_crane`
-        where kbn != 9 and cbrands in (
+        where kbn != 9 and id in (
         <foreach collection="ids" item="ids" separator=",">
             #{ids}
         </foreach>

@@ -29,6 +29,14 @@ export default {
       data: tableFrom
     })
   },
+  //更新公司
+  updateCompanyById(tableFrom){
+    return request({
+      url: '/admin/nsl/company/updateCompanyById',
+      method: 'post',
+      data: tableFrom
+    })
+  },
 
   /**
    * 微信小程序首页
@@ -54,9 +62,16 @@ export default {
       method: 'post'
     }) 
   },
-  getAdmin(adminId){
+  getAdmin(userId){
     return request({
-      url: `/admin/nsl/user/index/${adminId}`,
+      url: `/admin/nsl/user/index/${userId}`,
+      method: 'post',
+    }) 
+  },
+
+  deleteCompanyAndCrane(craneId,companyId){
+    return request({
+      url: `/admin/nsl/company/deleteCompanyAndCrane/${companyId}/${craneId}`,
       method: 'post',
     }) 
   }

@@ -24,11 +24,13 @@
             </el-form-item>
 
             <el-form-item label="公司状态">
-              <el-select v-model="Companyform.status" placeholder="请选择活动区域">
-                <el-option label="已审核" value="yishenhe"></el-option>
-                <el-option label="待审核" value="daishenhe"></el-option>
-                <el-option label="已下架" value="yixiajia"></el-option>
-                <el-option label="待下架" value="daixiajia"></el-option>
+              <el-select v-model="value" placeholder="请选择状态">
+                 <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="公司简介">
@@ -89,12 +91,12 @@
                 label="操作"
                 width="120">
                   <template slot-scope="scope">
-                      <el-button
-                        @click.native.prevent="deleteRow(scope.$index, tableData)"
-                        type="text"
-                        size="small">
-                        移除
-                      </el-button>
+                  <el-button type="danger" round
+                    @click="deleteRow(scope.row.id)"
+                   
+                    size="small">
+                     移除
+                  </el-button>
                   </template>
               </el-table-column>
           </el-table>
@@ -120,7 +122,7 @@ import { param } from '@/utils'
           adds: '',
           atten: '',
           phone: '',
-          status:'',
+          statu:'',
           introduce: '',
           region: '',
         },
@@ -140,7 +142,23 @@ import { param } from '@/utils'
         activeName: 'first',
         url: this.images,
         srcList: this.images,
+
+        options: [{
+          value: 'yishenhe',
+          label: '已审核'
+        }, {
+          value: 'daishenhe',
+          label: '待审核'
+        }, {
+          value: 'yixiajia',
+          label: '已下架'
+        }, {
+          value: 'xiajia',
+          label: '下架'
+        }],
+        value: 'yishenhe'
       }
+
     },
 
     created(){
@@ -158,9 +176,9 @@ import { param } from '@/utils'
            this.companyList = res.companylist
            this.url = this.companyList.images
            if(res.cranedetail.status=='10'){
-            this.Companyform.status = 'yishenhe'
+            this.value = 'yishenhe'
            }else if(res.cranedetail.status == '20'){
-              this.Companyform.status = 'yixiajia'
+              this.Companyform.statu = 'yixiajia'
            }
            
            }).catch(res => {
@@ -172,11 +190,18 @@ import { param } from '@/utils'
           this.getList()
       },
 
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
+      deleteRow(id) {
+        alert(id)
+        alert(this.Companyform.id)
+        company.deleteCompanyAndCrane(id,this.Companyform.id).then(res =>{
+
+        })
       },
       
       onSubmit() {
+        company.updateCompanyById(this.Companyform).then(res =>{
+
+        })
         console.log('submit!');
       },
       /**
@@ -201,10 +226,7 @@ import { param } from '@/utils'
       //我的
       admin(){
         const userId = 1
-        alert(adminId)
           company.getAdmin(userId).then(res => {
-
-          }).catch(res => {
 
           })
       }

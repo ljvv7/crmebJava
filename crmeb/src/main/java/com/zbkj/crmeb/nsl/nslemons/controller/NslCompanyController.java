@@ -80,22 +80,25 @@ public class NslCompanyController {
     }
 
     /**
-     * 根据公司Id获取公司详情
+     * 根据公司Id获取车辆详情
      */
     @PostMapping("/getdetail")
     public CommonResult getCompanyById(@RequestBody(required = false) CompanyLimitEntry tableFrom){
         Integer companyid = tableFrom.getCompanyid();
         Long pagesize = tableFrom.getPagesize();
         Long pageindex = tableFrom.getPageindex();
+        Map map = new HashMap();
         //获取公司详情
         NslCompany byId = nslCompanyService.getById(companyid);
         //根据公司查找车辆
         List list = nslCbindService.getCraneIdByCompanyId(companyid);
         //获取公司下所有车辆
-        List allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
-        Map map = new HashMap();
+        if(list.size()>0){
+            List allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
+            map.put("companylist",allCraneByCompanyId);
+        }
         map.put("cranedetail",byId);
-        map.put("companylist",allCraneByCompanyId);
+
         return CommonResult.success(map);
     }
 
@@ -124,6 +127,29 @@ public class NslCompanyController {
     /**
      * 公司车辆关系解除
      */
+
+    @PostMapping("deleteCompanyAndCrane/{companyId}/{craneId}")
+    public CommonResult deleteCompanyAndCrane(@PathVariable int companyId,
+                                              @PathVariable int craneId){
+
+        QueryWrapper queryWrapper= new QueryWrapper();
+        queryWrapper.eq("companyid",companyId);
+        queryWrapper.eq("craneid",craneId);
+        boolean remove = nslCbindService.remove(queryWrapper);
+
+        return CommonResult.success(remove);
+    }
+
+    /**
+     * 更新公司信息
+     */
+    @PostMapping("updateCompanyById")
+    public CommonResult updateCompanyById(@RequestBody NslCompany tableFrom){
+        System.out.println("tableForm == "+tableFrom);
+        boolean save = nslCompanyService.updateById(tableFrom);
+        return CommonResult.success(save);
+    }
+
 
 
 
