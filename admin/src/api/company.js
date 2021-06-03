@@ -74,5 +74,12 @@ export default {
       url: `/admin/nsl/company/deleteCompanyAndCrane/${companyId}/${craneId}`,
       method: 'post',
     }) 
+  },
+  //收藏
+  getAllConnection(userId){
+    return request({
+      url: `/admin/nsl/collectlist/${userId}`,
+      method: 'post',
+    }) 
   }
 }

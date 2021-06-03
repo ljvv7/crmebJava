@@ -35,4 +35,6 @@ public interface SystemGroupDataService extends IService<SystemGroupData> {
     List<HashMap<String, Object>> getListMapByGid(Integer gid);
 
     <T> T getNormalInfo(Integer groupDataId, Class<T> cls);
+
+    List<SystemGroupData> getSystemByGidId(Integer gid);
 }

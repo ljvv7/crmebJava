@@ -41,6 +41,7 @@
               <el-button type="primary" @click="onadd">新增</el-button>
                <el-button type="primary" @click="authmsg">获取公司认证提示</el-button>
                 <el-button type="primary" @click="admin">我的</el-button>
+                <el-button type="primary" @click="shoucang">收藏</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -229,6 +230,12 @@ import { param } from '@/utils'
           company.getAdmin(userId).then(res => {
 
           })
+      },
+      shoucang(){
+        const userId = 1
+        company.getAllConnection(userId).then(res =>{
+
+        })
       }
     }
   }
