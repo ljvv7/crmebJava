@@ -4,9 +4,11 @@ package com.zbkj.crmeb.nsl.nslwxapp.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.CommonResult;
+import com.zbkj.crmeb.nsl.nslwxapp.model.NslCollection;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CannerCbrandsEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.response.EbSystemGroup;
 import com.zbkj.crmeb.nsl.nslwxapp.service.EbSystemGroupDataService;
+import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCollectionService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import com.zbkj.crmeb.system.model.SystemGroupData;
@@ -15,6 +17,7 @@ import com.zbkj.crmeb.system.service.SystemGroupService;
 import com.zbkj.crmeb.user.model.User;
 import com.zbkj.crmeb.user.model.UserBill;
 import com.zbkj.crmeb.user.service.UserService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +48,8 @@ public class EbSystemGroupDataController {
     private UserService userService;
     @Autowired
     private SystemGroupDataService systemGroupDataService;
+    @Autowired
+    private NslCbindService nslCbindService;
 
 
     @PostMapping("/index")
@@ -117,6 +122,27 @@ public class EbSystemGroupDataController {
         map.put("connection",page);
         map.put("allCraneByCompany",allCraneByCompanyId);
         return CommonResult.success(map);
+    }
+
+    /**
+     * 车辆收藏
+     */
+    @PostMapping("addCollection/{userid}/{craneid}")
+    public CommonResult addCollection(@PathVariable Integer userid,
+                                      @PathVariable Integer craneid){
+
+        NslCollection collection = new NslCollection();
+        List cbind  =  nslCbindService.selectUserAndCrane(userid,craneid);
+        if(cbind.size() == 0){
+            collection.setIsconnection("0");
+        }else {
+            collection.setIsconnection("1");
+        }
+        collection.setCraneid(craneid);
+        collection.setUserid(userid);
+        collection.setType("0");
+        boolean save = collectionService.save(collection);
+        return CommonResult.success(save);
     }
 
 }

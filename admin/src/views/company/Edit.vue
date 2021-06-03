@@ -39,9 +39,10 @@
             <el-form-item>
               <el-button type="primary" @click="onSubmit">保存</el-button>
               <el-button type="primary" @click="onadd">新增</el-button>
-               <el-button type="primary" @click="authmsg">获取公司认证提示</el-button>
-                <el-button type="primary" @click="admin">我的</el-button>
-                <el-button type="primary" @click="shoucang">收藏</el-button>
+              <el-button type="primary" @click="authmsg">获取公司认证提示</el-button>
+              <el-button type="primary" @click="admin">我的</el-button>
+              <el-button type="primary" @click="shoucang">收藏</el-button>
+              <el-button type="primary" @click="addshoucang">添加收藏</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -231,9 +232,18 @@ import { param } from '@/utils'
 
           })
       },
+      //收藏
       shoucang(){
         const userId = 1
         company.getAllConnection(userId).then(res =>{
+
+        })
+      },
+      //添加收藏
+      addshoucang(){
+        const userid = 2
+        const craneid = 1
+        company.addCollection(userid,craneid).then(res =>{
 
         })
       }

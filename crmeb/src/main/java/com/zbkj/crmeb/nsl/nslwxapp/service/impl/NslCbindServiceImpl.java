@@ -40,4 +40,9 @@ public class NslCbindServiceImpl extends ServiceImpl<NslCbindMapper, NslCbind> i
     public int addCompBindCrane(int companyid, int userid, int craneid) {
         return baseMapper.addCompBindCrane(companyid,userid,craneid);
     }
+
+    @Override
+    public List selectUserAndCrane(Integer userid, Integer craneid) {
+        return baseMapper.selectUserAndCrane(userid,craneid);
+    }
 }

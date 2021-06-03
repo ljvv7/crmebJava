@@ -22,4 +22,6 @@ public interface NslCbindService extends IService<NslCbind> {
 
     //添加信息到绑定表
     int addCompBindCrane(int companyid,int userid,int craneid);
+
+    List selectUserAndCrane(Integer userid, Integer craneid);
 }

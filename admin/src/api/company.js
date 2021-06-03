@@ -81,5 +81,12 @@ export default {
       url: `/admin/nsl/collectlist/${userId}`,
       method: 'post',
     }) 
+  },
+  //添加收藏
+  addCollection(userid,craneid){
+    return request({
+      url: `/admin/nsl/addCollection/${userid}/${craneid}`,
+      method: 'post',
+    }) 
   }
 }
