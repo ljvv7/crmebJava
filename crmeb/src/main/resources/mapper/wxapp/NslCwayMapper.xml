@@ -5,7 +5,7 @@
     <select id="getCwayListBycwId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCway">
         select id,weightid,radius,primary_length,minor_length,weight,way,legtype,craneid
         from `nsl_cway`
-        where craneid = #{craneid} and weightid = #{cweightid}
+        where kbn != 9 and craneid = #{craneid} and weightid = #{cweightid}
         limit #{pageindex},#{pagesize};
     </select>
 

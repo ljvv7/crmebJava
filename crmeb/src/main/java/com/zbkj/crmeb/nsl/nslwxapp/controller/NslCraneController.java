@@ -73,7 +73,7 @@ public class NslCraneController {
     }
 
     /**
-     * 车辆品牌列表
+     * 品牌列表
      * @return
      */
     @PostMapping("/brandlist")
@@ -85,6 +85,11 @@ public class NslCraneController {
         return CommonResult.success(brandList);
     }
 
+    /**
+     * 车型查找-品牌/型号
+     * @param tableFrom
+     * @return
+     */
     @PostMapping("/cranelist")
     public CommonResult getCraneList(@RequestBody LimitEntry tableFrom){
 
@@ -94,18 +99,17 @@ public class NslCraneController {
         long pageindex = Long.valueOf(tableFrom.getPageindex());
         long pagesize = Long.valueOf(tableFrom.getPagesize());
 
-        //查出车辆信息
+        //按品牌和型号查找车辆
         QueryWrapper craneQW = new QueryWrapper();
         craneQW.ne("kbn","9");
         craneQW.eq("id",craneid);
         craneQW.eq("cbrands",cbrandid);
-
         NslCrane craneInfo = nslCraneService.getOne(craneQW);
 
-        //根据车辆id查出配重信息
+        //根据车辆id查出相关配重信息
         List<NslCweight> cweightList = nslCweightService.getCweightListByCraneId(craneid,pageindex,pagesize);
 
-        //根据车辆id和配重id查出车辆的配重组合方式信息
+        //根据车辆id和配重id查出相关组合方式信息
         List<NslCway> cwayList = nslCwayService.getCwayListBycwId(craneid, cweightid,pageindex,pagesize);
 
         Map map = new HashMap();
@@ -115,6 +119,45 @@ public class NslCraneController {
 
         return CommonResult.success(map);
     }
+
+    /**
+     * 根据车辆id查出配重列表
+     * @param tableFrom
+     * @return
+     */
+    @PostMapping("/weightlist")
+    public CommonResult getWeightList(@RequestBody LimitEntry tableFrom){
+
+        Integer craneid = tableFrom.getCraneid();
+        long pageindex = Long.valueOf(tableFrom.getPageindex());
+        long pagesize = Long.valueOf(tableFrom.getPagesize());
+
+        List<NslCweight> weightList = nslCweightService.getCweightListByCraneId(craneid,pageindex,pagesize);
+
+        return CommonResult.success(weightList);
+    }
+
+    /**
+     * 根据车辆id和配重id查出车辆的组合方式列表
+     * @param tableFrom
+     * @return
+     */
+    @PostMapping("/waylist")
+    public CommonResult getWayList(@RequestBody LimitEntry tableFrom){
+
+        Integer craneid = tableFrom.getCraneid();
+        Integer cweightid = tableFrom.getCweightid();
+        long pageindex = Long.valueOf(tableFrom.getPageindex());
+        long pagesize = Long.valueOf(tableFrom.getPagesize());
+
+        List<NslCway> wayList = nslCwayService.getCwayListBycwId(craneid, cweightid,pageindex,pagesize);
+
+        return CommonResult.success(wayList);
+    }
+
+//    public CommonResult
+
+
 
 }
 
