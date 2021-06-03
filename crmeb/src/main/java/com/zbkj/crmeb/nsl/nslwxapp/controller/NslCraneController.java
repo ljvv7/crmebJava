@@ -4,7 +4,6 @@ package com.zbkj.crmeb.nsl.nslwxapp.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.common.CommonResult;
 import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
-import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
@@ -58,11 +57,12 @@ public class NslCraneController {
 
         NslCrane cranedetail = nslCraneService.getOne(craneQW);
 
+        //根据车辆id查询公司ids
         List companyIds = nslCbindService.getCompanyIdsByCraneId(tableFrom.getCraneid());
 
 
-        long pageindex = Long.valueOf(tableFrom.getPageindex());
-        long pagesize = Long.valueOf(tableFrom.getPagesize());
+        Integer pageindex = tableFrom.getPageindex();
+        Integer pagesize = tableFrom.getPagesize();
 
         List<NslCompany> companyList = nslCompanyService.getCompanyListByIds(companyIds, pageindex, pagesize);
 
@@ -96,8 +96,11 @@ public class NslCraneController {
         Integer cbrandid = tableFrom.getCbrandid();
         Integer craneid = tableFrom.getCraneid();
         Integer cweightid = tableFrom.getCweightid();
-        long pageindex = Long.valueOf(tableFrom.getPageindex());
-        long pagesize = Long.valueOf(tableFrom.getPagesize());
+        Integer pageindex = tableFrom.getPageindex();
+        Integer pagesize = tableFrom.getPagesize();
+
+        //根据品牌id查找车辆信息
+        List<NslCrane> craneList = nslCraneService.getCraneListByBrandId(cbrandid, pageindex, pagesize);
 
         //按品牌和型号查找车辆
         QueryWrapper craneQW = new QueryWrapper();
@@ -113,6 +116,7 @@ public class NslCraneController {
         List<NslCway> cwayList = nslCwayService.getCwayListBycwId(craneid, cweightid,pageindex,pagesize);
 
         Map map = new HashMap();
+        map.put("craneListByBrandId",craneList);
         map.put("craneInfo",craneInfo);
         map.put("cweightList",cweightList);
         map.put("cwayList",cwayList);
@@ -129,8 +133,8 @@ public class NslCraneController {
     public CommonResult getWeightList(@RequestBody LimitEntry tableFrom){
 
         Integer craneid = tableFrom.getCraneid();
-        long pageindex = Long.valueOf(tableFrom.getPageindex());
-        long pagesize = Long.valueOf(tableFrom.getPagesize());
+        Integer pageindex = tableFrom.getPageindex();
+        Integer pagesize = tableFrom.getPagesize();
 
         List<NslCweight> weightList = nslCweightService.getCweightListByCraneId(craneid,pageindex,pagesize);
 
@@ -147,8 +151,8 @@ public class NslCraneController {
 
         Integer craneid = tableFrom.getCraneid();
         Integer cweightid = tableFrom.getCweightid();
-        long pageindex = Long.valueOf(tableFrom.getPageindex());
-        long pagesize = Long.valueOf(tableFrom.getPagesize());
+        Integer pageindex = tableFrom.getPageindex();
+        Integer pagesize = tableFrom.getPagesize();
 
         List<NslCway> wayList = nslCwayService.getCwayListBycwId(craneid, cweightid,pageindex,pagesize);
 

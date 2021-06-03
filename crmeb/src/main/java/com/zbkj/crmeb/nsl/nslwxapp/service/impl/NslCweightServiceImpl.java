@@ -25,7 +25,7 @@ public class NslCweightServiceImpl extends ServiceImpl<NslCweightMapper, NslCwei
      * @return
      */
     @Override
-    public List<NslCweight> getCweightListByCraneId(int craneid,long pageindex,long pagesize) {
+    public List<NslCweight> getCweightListByCraneId(int craneid,int pageindex,int pagesize) {
         return baseMapper.getCweightListByCraneId(craneid,pageindex,pagesize);
     }
 }

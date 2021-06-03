@@ -19,7 +19,7 @@ import java.util.List;
 public interface NslCompanyMapper extends BaseMapper<NslCompany> {
 
     //根据公司id查询对应的公司信息
-    List<NslCompany> getCompanyListByIds(@Param("ids") List ids, long pageindex, long pagesize);
+    List<NslCompany> getCompanyListByIds(@Param("ids") List ids, int pageindex, int pagesize);
 
     /**
      * 公司认证提示

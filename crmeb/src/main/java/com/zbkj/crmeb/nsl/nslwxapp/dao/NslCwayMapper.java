@@ -16,6 +16,6 @@ import java.util.List;
 public interface NslCwayMapper extends BaseMapper<NslCway> {
 
     //根据车辆id和配重id查询组合方式信息
-    List<NslCway> getCwayListBycwId(int craneid,int cweightid,long pageindex,long pagesize);
+    List<NslCway> getCwayListBycwId(int craneid,int cweightid,int pageindex,int pagesize);
 
 }

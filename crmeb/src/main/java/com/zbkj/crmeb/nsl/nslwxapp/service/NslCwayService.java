@@ -21,6 +21,6 @@ public interface NslCwayService extends IService<NslCway> {
      * @param cweightid
      * @return
      */
-    List<NslCway> getCwayListBycwId(int craneid,int cweightid,long pageindex,long pagesize);
+    List<NslCway> getCwayListBycwId(int craneid,int cweightid,int pageindex,int pagesize);
 
 }
