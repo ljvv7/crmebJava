@@ -28,4 +28,16 @@ public class NslCbindServiceImpl extends ServiceImpl<NslCbindMapper, NslCbind> i
     public List getCraneIdByCompanyId(int companyid) {
         return baseMapper.getCraneIdByCompanyId(companyid);
     }
+
+    /**
+     * 添加信息到绑定表
+     * @param companyid
+     * @param userid
+     * @param craneid
+     * @return
+     */
+    @Override
+    public int addCompBindCrane(int companyid, int userid, int craneid) {
+        return baseMapper.addCompBindCrane(companyid,userid,craneid);
+    }
 }

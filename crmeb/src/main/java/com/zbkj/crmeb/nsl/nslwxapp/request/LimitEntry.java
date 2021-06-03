@@ -23,4 +23,6 @@ public class LimitEntry {
 
     private Integer cwayid;
 
+    private Integer userid;
+
 }

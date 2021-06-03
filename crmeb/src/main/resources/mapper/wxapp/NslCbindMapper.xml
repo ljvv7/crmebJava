@@ -15,4 +15,9 @@
         where `kbn`!=9 and companyid = #{companyid}
         group by craneid;
     </select>
+    
+    <insert id="addCompBindCrane">
+        insert into `nsl_cbind` (companyid,userid,craneid)
+        values (#{companyid},#{userid},#{craneid});
+    </insert>
 </mapper>

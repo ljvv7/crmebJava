@@ -155,9 +155,24 @@ public class NslCraneController {
         return CommonResult.success(wayList);
     }
 
-//    public CommonResult
+    /**
+     * 车辆添加绑定
+     * @param tableFrom
+     * @return
+     */
+    @PostMapping("/compbandcrane")
+    public CommonResult addCompBandCrane(@RequestBody LimitEntry tableFrom){
+        Integer craneid = tableFrom.getCraneid();
+        Integer companyid = tableFrom.getCompanyid();
+        Integer userid = tableFrom.getUserid();
 
+        int count = nslCbindService.addCompBindCrane(companyid, userid, craneid);
+        if(count == 0){
+            return CommonResult.failed("添加失败！");
+        }
+        return CommonResult.success("添加成功！");
 
+    }
 
 }
 
