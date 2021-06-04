@@ -13,6 +13,8 @@ import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import com.zbkj.crmeb.system.service.SystemGroupDataService;
 import com.zbkj.crmeb.user.model.User;
 import com.zbkj.crmeb.user.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +30,10 @@ import java.util.Map;
  * @author testjava
  * @since 2021-06-01
  */
+
 @RestController
 @RequestMapping("api/admin/nsl")
+@Api(tags = "首页")
 public class EbSystemGroupDataController {
 
     @Autowired
@@ -46,8 +50,8 @@ public class EbSystemGroupDataController {
     @Autowired
     private NslCbindService nslCbindService;
 
-
-    @PostMapping("/index")
+    @ApiOperation(value = "首页导航图")
+    @GetMapping("/index")
     public CommonResult getAll(){
 
         /**
