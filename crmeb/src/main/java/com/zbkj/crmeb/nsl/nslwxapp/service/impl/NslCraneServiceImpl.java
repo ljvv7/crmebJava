@@ -69,7 +69,7 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
      * @return
      */
     @Override
-    public List<NslCrane> getCraneListByBrandId(int cbrandid,int pageindex,int pagesize) {
+    public List<NslCrane> getCraneListByBrandId(int cbrandid,long pageindex,long pagesize) {
         return baseMapper.getCraneListByBrandId(cbrandid,pageindex,pagesize);
     }
 
@@ -82,7 +82,7 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
      * @return
      */
     @Override
-    public NslCrane getCraneListByCbrId(int cbrandid, int craneid,int pageindex, int pagesize) {
+    public NslCrane getCraneListByCbrId(int cbrandid, int craneid,long pageindex, long pagesize) {
         return baseMapper.getCraneListByCbrId(cbrandid,craneid,pageindex,pagesize);
     }
 

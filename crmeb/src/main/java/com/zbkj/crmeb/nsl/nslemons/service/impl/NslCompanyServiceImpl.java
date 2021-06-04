@@ -23,7 +23,7 @@ import java.util.List;
 public class NslCompanyServiceImpl extends ServiceImpl<NslCompanyMapper, NslCompany> implements NslCompanyService {
 
     @Override
-    public List<NslCompany> getCompanyListByIds(@Param("ids") List ids, int pageindex, int pagesize) {
+    public List<NslCompany> getCompanyListByIds(@Param("ids") List ids, long pageindex, long pagesize) {
         return baseMapper.getCompanyListByIds(ids,pageindex,pagesize);
     }
 

@@ -20,6 +20,6 @@ public interface NslCweightService extends IService<NslCweight> {
      * @param craneid
      * @return
      */
-    List<NslCweight> getCweightListByCraneId(int craneid,int pageindex,int pagesize);
+    List<NslCweight> getCweightListByCraneId(int craneid,long pageindex,long pagesize);
 
 }

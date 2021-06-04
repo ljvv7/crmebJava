@@ -37,7 +37,7 @@ public interface NslCraneService extends IService<NslCrane> {
      * @param cbrandid
      * @return
      */
-    List<NslCrane> getCraneListByBrandId(int cbrandid,int pageindex,int pagesize);
+    List<NslCrane> getCraneListByBrandId(int cbrandid,long pageindex,long pagesize);
 
     /**
      * 根据品牌id、车辆id获取车辆信息
@@ -45,6 +45,6 @@ public interface NslCraneService extends IService<NslCrane> {
      * @param craneid
      * @return
      */
-    NslCrane getCraneListByCbrId(int cbrandid,int craneid,int pageindex, int pagesize);
+    NslCrane getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
 
 }

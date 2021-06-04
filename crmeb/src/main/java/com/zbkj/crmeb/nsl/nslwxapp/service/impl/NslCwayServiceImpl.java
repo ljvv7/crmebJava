@@ -27,7 +27,7 @@ public class NslCwayServiceImpl extends ServiceImpl<NslCwayMapper, NslCway> impl
      * @return
      */
     @Override
-    public List<NslCway> getCwayListBycwId(int craneid, int cweightid,int pageindex,int pagesize) {
+    public List<NslCway> getCwayListBycwId(int craneid, int cweightid,long pageindex,long pagesize) {
         return baseMapper.getCwayListBycwId(craneid,cweightid,pageindex,pagesize);
     }
 }

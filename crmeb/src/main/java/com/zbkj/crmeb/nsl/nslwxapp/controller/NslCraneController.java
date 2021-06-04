@@ -49,7 +49,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/getdetail")
-    public CommonResult getDetail(@RequestBody LimitEntry tableFrom){
+    public CommonResult getDetail(@RequestBody(required = false) LimitEntry tableFrom){
 
         QueryWrapper craneQW = new QueryWrapper();
         craneQW.ne("kbn","9");
@@ -61,8 +61,8 @@ public class NslCraneController {
         List companyIds = nslCbindService.getCompanyIdsByCraneId(tableFrom.getCraneid());
 
 
-        Integer pageindex = tableFrom.getPageindex();
-        Integer pagesize = tableFrom.getPagesize();
+        long pageindex = tableFrom.getPageindex();
+        long pagesize = tableFrom.getPagesize();
 
         List<NslCompany> companyList = nslCompanyService.getCompanyListByIds(companyIds, pageindex, pagesize);
 
@@ -91,13 +91,13 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/cranelist")
-    public CommonResult getCraneList(@RequestBody LimitEntry tableFrom){
+    public CommonResult getCraneList(@RequestBody(required = false) LimitEntry tableFrom){
 
         Integer cbrandid = tableFrom.getCbrandid();
         Integer craneid = tableFrom.getCraneid();
         Integer cweightid = tableFrom.getCweightid();
-        Integer pageindex = tableFrom.getPageindex();
-        Integer pagesize = tableFrom.getPagesize();
+        long pageindex = tableFrom.getPageindex();
+        long pagesize = tableFrom.getPagesize();
 
         //根据品牌id查找车辆信息
         List<NslCrane> craneList = nslCraneService.getCraneListByBrandId(cbrandid, pageindex, pagesize);
@@ -130,11 +130,11 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/weightlist")
-    public CommonResult getWeightList(@RequestBody LimitEntry tableFrom){
+    public CommonResult getWeightList(@RequestBody(required = false) LimitEntry tableFrom){
 
         Integer craneid = tableFrom.getCraneid();
-        Integer pageindex = tableFrom.getPageindex();
-        Integer pagesize = tableFrom.getPagesize();
+        long pageindex = tableFrom.getPageindex();
+        long pagesize = tableFrom.getPagesize();
 
         List<NslCweight> weightList = nslCweightService.getCweightListByCraneId(craneid,pageindex,pagesize);
 
@@ -147,12 +147,12 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/waylist")
-    public CommonResult getWayList(@RequestBody LimitEntry tableFrom){
+    public CommonResult getWayList(@RequestBody(required = false) LimitEntry tableFrom){
 
         Integer craneid = tableFrom.getCraneid();
         Integer cweightid = tableFrom.getCweightid();
-        Integer pageindex = tableFrom.getPageindex();
-        Integer pagesize = tableFrom.getPagesize();
+        long pageindex = tableFrom.getPageindex();
+        long pagesize = tableFrom.getPagesize();
 
         List<NslCway> wayList = nslCwayService.getCwayListBycwId(craneid, cweightid,pageindex,pagesize);
 
@@ -165,7 +165,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/compbandcrane")
-    public CommonResult addCompBandCrane(@RequestBody LimitEntry tableFrom){
+    public CommonResult addCompBandCrane(@RequestBody(required = false) LimitEntry tableFrom){
         Integer craneid = tableFrom.getCraneid();
         Integer companyid = tableFrom.getCompanyid();
         Integer userid = tableFrom.getUserid();

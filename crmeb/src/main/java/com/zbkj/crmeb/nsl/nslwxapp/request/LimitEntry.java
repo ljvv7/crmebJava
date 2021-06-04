@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class LimitEntry {
 
-    private Integer pageindex;
+    private long pageindex;
 
-    private Integer pagesize;
+    private long pagesize;
 
     private String code;
 
