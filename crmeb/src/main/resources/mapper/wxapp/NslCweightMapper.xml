@@ -4,7 +4,7 @@
     <select id="getCweightListByCraneId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight">
         select id,craneid,legtype,legway,equipweight,workextent
         from `nsl_cweight`
-        where `kbn`!=9 and craneid = #{craneid}
+        where `kbn`!='9' and craneid = #{craneid}
         limit #{pageindex},#{pagesize};
     </select>
 </mapper>

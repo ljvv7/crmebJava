@@ -5,7 +5,7 @@
     <select id="getBrandList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands">
         select id, name,remarks
         from `nsl_cbrands`
-        where kbn!=9;
+        where kbn!='9';
     </select>
 
 </mapper>

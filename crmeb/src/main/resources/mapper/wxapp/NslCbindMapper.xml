@@ -5,14 +5,14 @@
     <select id="getCompanyIdsByCraneId" parameterType="int" resultType="int">
         select companyid
         from `nsl_cbind`
-        where `kbn`!=9 and craneid = #{craneid}
+        where `kbn`!='9' and craneid = #{craneid}
         group by companyid;
     </select>
 
     <select id="getCraneIdByCompanyId" parameterType="int" resultType="int">
         select craneid
         from `nsl_cbind`
-        where `kbn`!=9 and companyid = #{companyid}
+        where `kbn`!='9' and companyid = #{companyid}
         group by craneid;
     </select>
     
