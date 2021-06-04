@@ -225,5 +225,10 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
         return t;
     }
 
+    @Override
+    public List<SystemGroupData> getSystemByGidId(Integer gid) {
+        return baseMapper.getSystemByGidId(gid);
+    }
+
 }
 

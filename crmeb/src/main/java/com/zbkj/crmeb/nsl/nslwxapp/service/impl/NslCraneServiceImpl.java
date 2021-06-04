@@ -56,5 +56,35 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
         return null;
     }
 
+    @Override
+    public List getAllCraneByCompanyId(List ids, long pageindex, long pagesize) {
+        return baseMapper.getAllCraneByCompanyId(ids,pageindex,pagesize);
+    }
+
+    /**
+     * 根据品牌id获取车辆信息
+     * @param cbrandid
+     * @param pageindex
+     * @param pagesize
+     * @return
+     */
+    @Override
+    public List<NslCrane> getCraneListByBrandId(int cbrandid,long pageindex,long pagesize) {
+        return baseMapper.getCraneListByBrandId(cbrandid,pageindex,pagesize);
+    }
+
+    /**
+     * 根据品牌id、车辆id获取车辆信息
+     * @param cbrandid
+     * @param craneid
+     * @param pageindex
+     * @param pagesize
+     * @return
+     */
+    @Override
+    public NslCrane getCraneListByCbrId(int cbrandid, int craneid,long pageindex, long pagesize) {
+        return baseMapper.getCraneListByCbrId(cbrandid,craneid,pageindex,pagesize);
+    }
+
 
 }

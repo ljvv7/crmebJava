@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.crmeb.nsl.nslwxapp.dao.NslCraneMapper">
 
+    <select id="getAllCraneByCompanyId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes
+        from `nsl_crane`
+        where kbn != '9' and id in (
+        <foreach collection="ids" item="ids" separator=",">
+            #{ids}
+        </foreach>
+        ) limit #{pageindex},#{pagesize};
+    </select>
+
+    <select id="getCraneListByBrandId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes
+        from `nsl_crane`
+        where kbn != '9' and cbrands = #{cbrandid}
+        limit #{pageindex},#{pagesize};
+    </select>
+
+    <select id="getCraneListByCbrId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes
+        from `nsl_crane`
+        where kbn != '9' and cbrands = #{cbrandid} and id = #{craneid}
+        limit #{pageindex},#{pagesize};
+    </select>
+    
 </mapper>

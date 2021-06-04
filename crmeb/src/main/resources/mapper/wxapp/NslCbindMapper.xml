@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.crmeb.nsl.nslwxapp.dao.NslCbindMapper">
 
+    <select id="getCompanyIdsByCraneId" parameterType="int" resultType="int">
+        select companyid
+        from `nsl_cbind`
+        where `kbn`!='9' and craneid = #{craneid}
+        group by companyid;
+    </select>
+
+    <select id="getCraneIdByCompanyId" parameterType="int" resultType="int">
+        select craneid
+        from `nsl_cbind`
+        where `kbn`!='9' and companyid = #{companyid}
+        group by craneid;
+    </select>
+    
+    <insert id="addCompBindCrane">
+        insert into `nsl_cbind` (companyid,userid,craneid)
+        values (#{companyid},#{userid},#{craneid});
+    </insert>
+
+    <select id="selectUserAndCrane" resultType="int">
+         select id
+        from `nsl_cbind`
+        where craneid = #{craneid} and userid = #{userid}
+    </select>
 </mapper>

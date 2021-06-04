@@ -15,6 +15,12 @@ const companyRouter = {
       component: () => import('@/views/company/index'),
       name: 'CompanyIndex',
       meta: { title: '公司列表', icon: '' }
+    },
+    {
+      path: 'companyDetails',
+      component: () => import('@/views/company/Edit'),
+      name: 'CompanyIndex',
+      meta: { title: '公司列表', icon: '' }
     }
   ]
 }

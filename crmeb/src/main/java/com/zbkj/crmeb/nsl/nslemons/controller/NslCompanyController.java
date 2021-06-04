@@ -4,13 +4,21 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.CommonPage;
 import com.common.CommonResult;
+import com.github.pagehelper.PageHelper;
+import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
 import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
+import com.zbkj.crmeb.nsl.nslwxapp.request.AddCompanyEntry;
+import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
+import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,38 +38,106 @@ public class NslCompanyController {
     @Autowired
     private NslCompanyService nslCompanyService;
 
+    @Autowired
+    private NslCbindService nslCbindService;
+    @Autowired
+    private NslCraneService craneService;
+
+    /**
+     * 获取公司列表
+     * @param tableFrom
+     * @return
+     */
     @PostMapping("/getAllCompany")
     public CommonResult getAllCompany(@RequestBody(required = false) CompanyLimitEntry tableFrom){
 
-        Long limit = tableFrom.getLimit();
-        Long page = tableFrom.getPage();
-        String companyName = tableFrom.getKeywords();
+        int limit = tableFrom.getPagesize();
+        int page = tableFrom.getPageindex();
+        String companyName = tableFrom.getCode();
 
-        Page pageCourse = new Page(limit, page);
-        QueryWrapper queryWrapper = new QueryWrapper();
+       Map map = new HashMap();
         if(!StringUtils.isEmpty(companyName)){
-            Pattern pattern = Pattern.compile("[0-9]*");
-            Matcher matcher = pattern.matcher(companyName);
-            if(matcher.matches()){
-                queryWrapper.like("phone",companyName);
-            }else {
-                queryWrapper.like("name",companyName);
-            }
+            map = nslCompanyService.getAllCompanyLimit(page,limit,companyName);
+        }else {
+            map = nslCompanyService.getAllCompany(page,limit);
         }
-        queryWrapper.orderByDesc("id");
-        nslCompanyService.page(pageCourse, queryWrapper);
-        //总数
-        long total = pageCourse.getTotal();
-        List records = pageCourse.getRecords();
-        CommonPage commonPage = new CommonPage();
-        commonPage.setPage(page.intValue());
-        commonPage.setLimit(limit.intValue());
 
-        commonPage.setTotal(Long.valueOf(records.size()));
-        commonPage.setList(records);;
-
-        return CommonResult.success(commonPage);
+        return CommonResult.success(map);
     }
+
+    /**
+     * 根据公司Id获取车辆详情
+     */
+    @PostMapping("/getdetail")
+    public CommonResult getCompanyById(@RequestBody(required = false) CompanyLimitEntry tableFrom){
+        Integer companyid = tableFrom.getCompanyid();
+        int pagesize = tableFrom.getPagesize();
+        int pageindex = tableFrom.getPageindex();
+        Map map = new HashMap();
+        //获取公司详情
+        NslCompany byId = nslCompanyService.getById(companyid);
+        //根据公司查找车辆
+        List list = nslCbindService.getCraneIdByCompanyId(companyid);
+        //获取公司下所有车辆
+        if(list.size()>0){
+            List allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
+            map.put("companylist",allCraneByCompanyId);
+        }
+        map.put("cranedetail",byId);
+
+        return CommonResult.success(map);
+    }
+
+    /**
+     * 公司入驻
+     */
+    @PostMapping("add")
+    public CommonResult addCompany(@RequestBody NslCompany tableFrom){
+        boolean save = nslCompanyService.save(tableFrom);
+        return CommonResult.success(save);
+
+    }
+
+    /**
+     * 公司认证提示
+     */
+    @PostMapping("authmsgv1")
+    public CommonResult authmsgv1(){
+
+        String authmsgv1 = nslCompanyService.getAuthmsgv1();
+
+        return CommonResult.success(authmsgv1);
+
+    }
+
+    /**
+     * 公司车辆关系解除
+     */
+
+    @PostMapping("deleteCompanyAndCrane/{companyId}/{craneId}")
+    public CommonResult deleteCompanyAndCrane(@PathVariable int companyId,
+                                              @PathVariable int craneId){
+
+        QueryWrapper queryWrapper= new QueryWrapper();
+        queryWrapper.eq("companyid",companyId);
+        queryWrapper.eq("craneid",craneId);
+        boolean remove = nslCbindService.remove(queryWrapper);
+
+        return CommonResult.success(remove);
+    }
+
+    /**
+     * 更新公司信息
+     */
+    @PostMapping("updateCompanyById")
+    public CommonResult updateCompanyById(@RequestBody NslCompany tableFrom){
+        System.out.println("tableForm == "+tableFrom);
+        boolean save = nslCompanyService.updateById(tableFrom);
+        return CommonResult.success(save);
+    }
+
+
+
 
 }
 

@@ -26,4 +26,25 @@ public interface NslCraneService extends IService<NslCrane> {
      */
     List<CannerCbrandsEntry> getNewCraneList();
 
+    /**
+     * 根据公司id查找所有车辆
+     * @return
+     */
+    List getAllCraneByCompanyId(List ids,long pageindex,  long pagesize);
+
+    /**
+     * 根据品牌id获取车辆信息
+     * @param cbrandid
+     * @return
+     */
+    List<NslCrane> getCraneListByBrandId(int cbrandid,long pageindex,long pagesize);
+
+    /**
+     * 根据品牌id、车辆id获取车辆信息
+     * @param cbrandid
+     * @param craneid
+     * @return
+     */
+    NslCrane getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
+
 }
