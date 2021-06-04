@@ -1,6 +1,5 @@
 package com.zbkj.crmeb.nsl.nslwxapp.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.common.CommonResult;
@@ -11,13 +10,9 @@ import com.zbkj.crmeb.nsl.nslwxapp.service.EbSystemGroupDataService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCollectionService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
-import com.zbkj.crmeb.system.model.SystemGroupData;
 import com.zbkj.crmeb.system.service.SystemGroupDataService;
-import com.zbkj.crmeb.system.service.SystemGroupService;
 import com.zbkj.crmeb.user.model.User;
-import com.zbkj.crmeb.user.model.UserBill;
 import com.zbkj.crmeb.user.service.UserService;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

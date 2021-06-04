@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 public class CompanyLimitEntry {
 
-    private long pageindex;
+    private int pageindex;
 
-    private long pagesize;
+    private int pagesize;
     private String code;
 
     private String keywords;
