@@ -13,8 +13,14 @@ const craneRouter = {
     {
       path: 'craneQuery',
       component: () => import('@/views/crane/index'),
-      name: 'CraneIndex',
+      name: 'index',
       meta: { title: '车辆列表', icon: '' }
+    },
+    {
+      path: 'craneDetails',
+      component: () => import('@/views/crane/detail'),
+      name: 'detail',
+      meta: { title: '车辆详情', icon: '' }
     }
   ]
 }

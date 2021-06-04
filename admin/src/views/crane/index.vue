@@ -5,7 +5,7 @@
         <div class="container">
           <el-form inline size="small">
             <el-form-item label="品牌搜索：">
-              <el-select v-model="brandList.name" placeholder="请选择">
+              <el-select v-model="brandList.name" placeholder="请选择" @change="getOListById">
                 <el-option
                   v-for="item in brandList"
                   :key="item.id"
@@ -141,9 +141,13 @@ export default {
       }).catch(res => {
         this.listLoading = false
       })
-      
     },
 
+    getOListById(cbrandid){
+      this.tableFrom.cbrandid = cbrandid
+      this.getCraneListByCbrandId()
+    },
+    
     getAllCraneList(){
       this.listLoading = true
       crane.getCraneList(this.tableFrom).then(res =>{
@@ -165,6 +169,18 @@ export default {
         this.listLoading = false
       })
     },
+
+    getCraneListByCbrandId(){
+      this.listLoading = true
+      crane.getCraneList(this.tableFrom).then(res => {
+        this.tableData.data = res.craneListByBrandId
+        this.tableData.total = res.craneListByBrandId.size
+        this.listLoading = false
+      }).catch(res => {
+        this.listLoading = false
+      })
+    },
+
     seachList() {
       // this.tableFrom.page = 1
       this.getCraneListByName()
