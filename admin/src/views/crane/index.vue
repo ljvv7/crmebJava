@@ -5,20 +5,22 @@
         <div class="container">
           <el-form inline size="small">
             <el-form-item label="品牌搜索：">
-              <el-select v-model="value" placeholder="请选择">
+              <el-select v-model="brandList.name" placeholder="请选择">
                 <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
+                  v-for="item in brandList"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="车型搜索：">
-              <el-input v-model="tableFrom.keywords" placeholder="请输入车辆型号，关键字" class="selWidth" size="small" clearable/>
+              <el-input v-model="tableFrom.keywords" placeholder="请输入车辆型号" class="selWidth" size="small" clearable>
+                <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/>
+              </el-input>
             </el-form-item>
             <el-form-item>
-              <el-button size="small" @click="seachList">搜索</el-button>
+              <!-- <el-button size="small" @click="seachList">搜索</el-button> -->
               <el-button size="small" @click="add">新增</el-button>
               <el-button size="small" @click="exports">导出</el-button>
               <!-- <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/> -->
@@ -41,17 +43,17 @@
           min-width="50"
         />
         <el-table-column
-          prop="name"
+          prop="cbrands"
           label="车辆品牌"
           min-width="150"
         />
         <el-table-column
-          prop="area"
+          prop="name"
           label="车辆型号"
           min-width="90"
         />
         <el-table-column
-          prop="adds"
+          prop="maxweight"
           label="最大起重量"
           min-width="150"
         />
@@ -67,7 +69,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="atten"
+          prop="remarks"
           label="车辆简介"
           min-width="150"
         />
@@ -107,14 +109,15 @@ export default {
         data: [],
         total: 0
       },
+      brandList: [],
       tableFrom: {
         pageindex: 0,
         pagesize: 20,
         cateId: '',
         craneid: 8,
         cbrandid: 18,
-        cweightid: 15
-
+        cweightid: 15,
+        keywords: ''
       },
       categoryList: [],
       merCateList: [],
@@ -124,37 +127,47 @@ export default {
   },
 
   created() {   //页面渲染之前执行
-    this.getList()
+    // this.getList()
     this.getBrandList()
-    this.getCraneList()
+    this.getAllCraneList()
   },
 
   methods: {
     getBrandList(){
-      crane.getBrandList().then(res =>{
-
-      })
-    },
-
-    getCraneList(){
-      crane.getcraneList(this.tableFrom).then(res =>{
-
-      })
-    },
-
-    getList() {
       this.listLoading = true
-      crane.getAallCompanyApi(this.tableFrom).then(res => {
-        this.tableData.data = res.list
-        this.tableData.total = res.total
+      crane.getBrandList().then(res =>{
+        this.brandList = res
+        this.listLoading = true
+      }).catch(res => {
+        this.listLoading = false
+      })
+      
+    },
+
+    getAllCraneList(){
+      this.listLoading = true
+      crane.getCraneList(this.tableFrom).then(res =>{
+        this.tableData.data = res.allCraneList.list
+        this.tableData.total = res.allCraneList.total
+        this.listLoading = false
+      }).catch(res => {
+        this.listLoading = false
+      })
+    },
+
+    getCraneListByName() {
+      this.listLoading = true
+      crane.getCraneList(this.tableFrom).then(res => {
+        this.tableData.data = res.craneListByName.list
+        this.tableData.total = res.craneListByName.total
         this.listLoading = false
       }).catch(res => {
         this.listLoading = false
       })
     },
     seachList() {
-      this.tableFrom.page = 1
-      this.getList()
+      // this.tableFrom.page = 1
+      this.getCraneListByName()
     },
     // 复制
     onCopy(){

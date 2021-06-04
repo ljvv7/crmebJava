@@ -23,4 +23,13 @@ public interface NslCwayService extends IService<NslCway> {
      */
     List<NslCway> getCwayListBycwId(int craneid,int cweightid,long pageindex,long pagesize);
 
+    /**
+     * 根据车辆id、配重id和组合方式id查询某条组合方式
+     * @param craneid
+     * @param cweightid
+     * @param cwayid
+     * @return
+     */
+    NslCway getCwayInfo(int craneid,int cweightid,int cwayid);
+
 }

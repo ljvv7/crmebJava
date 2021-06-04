@@ -6,21 +6,13 @@ import request from '@/utils/request'
  */
 export default {
 
-  getAallCompanyApi(tableFrom){
-    return request({
-      url: 'admin/nsl/crane/getdetail',
-      method: 'post',
-      data: tableFrom
-    })
-  },
-
   getBrandList(){
     return request({
       url: 'admin/nsl/crane/brandlist',
       method: 'post'
     })
   },
-  getcraneList(tableFrom){
+  getCraneList(tableFrom){
     return request({
       url: 'admin/nsl/crane/cranelist',
       method: 'post',

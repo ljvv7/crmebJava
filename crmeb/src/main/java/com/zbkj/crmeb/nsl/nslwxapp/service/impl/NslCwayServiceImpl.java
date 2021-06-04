@@ -30,4 +30,16 @@ public class NslCwayServiceImpl extends ServiceImpl<NslCwayMapper, NslCway> impl
     public List<NslCway> getCwayListBycwId(int craneid, int cweightid,long pageindex,long pagesize) {
         return baseMapper.getCwayListBycwId(craneid,cweightid,pageindex,pagesize);
     }
+
+    /**
+     * 根据车辆id、配重id和组合方式id查询某条组合方式
+     * @param craneid
+     * @param cweightid
+     * @param cwayid
+     * @return
+     */
+    @Override
+    public NslCway getCwayInfo(int craneid, int cweightid, int cwayid) {
+        return baseMapper.getCwayInfo(craneid,cweightid,cwayid);
+    }
 }

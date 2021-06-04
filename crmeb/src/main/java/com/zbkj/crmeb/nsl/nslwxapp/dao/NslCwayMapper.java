@@ -18,4 +18,7 @@ public interface NslCwayMapper extends BaseMapper<NslCway> {
     //根据车辆id和配重id查询组合方式信息
     List<NslCway> getCwayListBycwId(int craneid,int cweightid,long pageindex,long pagesize);
 
+    //根据车辆id、配重id和组合方式id查询某条组合方式
+    NslCway getCwayInfo(int craneid,int cweightid,int cwayid);
+
 }
