@@ -7,6 +7,7 @@ import com.zbkj.crmeb.nsl.nslwxapp.request.AddCompanyEntry;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,4 +27,8 @@ public interface NslCompanyService extends IService<NslCompany> {
      * 公司认证提示
      */
     String getAuthmsgv1();
+
+    Map getAllCompanyLimit(int page, int limit, String companyName);
+
+    Map getAllCompany(int page, int limit);
 }

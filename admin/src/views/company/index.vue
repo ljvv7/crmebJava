@@ -102,7 +102,7 @@ export default {
         total: 0
       },
       tableFrom: {
-        pageindex: 0,
+        pageindex: 1,
         pagesize: 20,
         cateId: '',
         code: '',
@@ -111,7 +111,7 @@ export default {
       categoryList: [],
       merCateList: [],
       objectUrl: process.env.VUE_APP_BASE_API,
-      dialogVisible: false
+      dialogVisible: false,
     }
   },
 
@@ -135,7 +135,7 @@ export default {
     xiangqing(){
         this.$router.push('@/views/company/Edit')
     },
-    
+
     getList() {
       this.listLoading = true
       company.getAallCompanyApi(this.tableFrom).then(res => {
@@ -163,13 +163,15 @@ export default {
     },
 
     pageChange(pageindex) {
+      // this.changePageCoreRecordData()
       this.tableFrom.pageindex = pageindex
       this.getList()
     },
     handleSizeChange(val) {
-      this.tableFrom.limit = val
+      // this.changePageCoreRecordData()
+      this.tableFrom.pagesize = val
       this.getList()
-    },
+    }
   }
 }
 </script>
