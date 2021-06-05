@@ -25,5 +25,17 @@
         where kbn != '9' and cbrands = #{cbrandid} and id = #{craneid}
         limit #{pageindex},#{pagesize};
     </select>
-    
+
+    <select id="getcollectAndCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList">
+       SELECT  t.userid,t.code,cra.name craneName, cra.introduce,cra.images,cbr.name cbrandName from (
+        SELECT (CASE WHEN  ISNULL(cb.userid) THEN 'WBD' ELSE 'BD' END )as  code, coll.userid,coll.craneid from nsl_collection coll
+        LEFT join nsl_cbind cb
+        on cb.userid = coll.userid
+        and cb.userid = coll.userid
+        and cb.craneid = coll.craneid where coll.userid = #{userid} ) t
+        LEFT join nsl_crane cra
+        on cra.id = t.craneid
+        left join nsl_cbrands cbr
+        on cbr.id = cra.cbrands
+    </select>
 </mapper>

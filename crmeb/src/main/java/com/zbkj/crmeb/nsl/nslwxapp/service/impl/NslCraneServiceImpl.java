@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.zbkj.crmeb.nsl.nslwxapp.dao.NslCraneMapper;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CannerCbrandsEntry;
+import com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,11 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
     @Override
     public NslCrane getCraneListByCbrId(int cbrandid, int craneid,long pageindex, long pagesize) {
         return baseMapper.getCraneListByCbrId(cbrandid,craneid,pageindex,pagesize);
+    }
+
+    @Override
+    public List<CollectAndCraneList> getcollectAndCraneList(Integer userId) {
+        return baseMapper.getcollectAndCraneList(userId);
     }
 
 

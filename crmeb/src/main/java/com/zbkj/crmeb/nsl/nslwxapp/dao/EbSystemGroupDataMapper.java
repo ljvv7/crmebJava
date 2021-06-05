@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface EbSystemGroupDataMapper extends BaseMapper<EbSystemGroupData> {
 
-    List<EbSystemGroup> getPublishCourseInfo();
+    List<EbSystemGroupData> getPublishCourseInfo();
 
-    List<EbSystemGroup> getPublishIconInfo();
+    List<EbSystemGroupData> getPublishIconInfo();
 }

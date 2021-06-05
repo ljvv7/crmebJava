@@ -3,6 +3,7 @@ package com.zbkj.crmeb.nsl.nslwxapp.service;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CannerCbrandsEntry;
+import com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList;
 
 import java.util.List;
 
@@ -47,4 +48,5 @@ public interface NslCraneService extends IService<NslCrane> {
      */
     NslCrane getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
 
+    List<CollectAndCraneList> getcollectAndCraneList(Integer userId);
 }
