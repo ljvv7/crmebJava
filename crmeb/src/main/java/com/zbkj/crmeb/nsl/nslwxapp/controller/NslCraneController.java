@@ -13,6 +13,8 @@ import com.zbkj.crmeb.nsl.nslwxapp.model.NslCway;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
 import com.zbkj.crmeb.nsl.nslwxapp.request.LimitEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.*;
+import io.swagger.annotations.Api;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,7 @@ import java.util.regex.Pattern;
  */
 @RestController
 @RequestMapping("api/admin/nsl/crane")
+@Api(tags = "nsl-车辆接口")
 public class NslCraneController {
 
     @Autowired
@@ -50,31 +53,31 @@ public class NslCraneController {
 
     /**
      * 车辆详情
-     * @param tableFrom
+     * @param craneid
+     * @param pageindex
+     * @param pagesize
      * @return
      */
     @PostMapping("/getdetail")
-    public CommonResult getDetail(@RequestBody(required = false) LimitEntry tableFrom){
+    public CommonResult getDetail(Integer craneid,Long pageindex,Long pagesize){
 
-        QueryWrapper craneQW = new QueryWrapper();
-        craneQW.ne("kbn","9");
-        craneQW.eq("id",tableFrom.getCraneid());
-
-        NslCrane cranedetail = nslCraneService.getOne(craneQW);
+        //根据车辆id获取车辆信息
+        NslCrane cranedetail = nslCraneService.getCraneDetailById(craneid);
 
         //根据车辆id查询公司ids
-        List companyIds = nslCbindService.getCompanyIdsByCraneId(tableFrom.getCraneid());
+        List companyIds = nslCbindService.getCompanyIdsByCraneId(craneid);
 
+        //根据公司ids查询公司的信息
+        List<NslCompany> companyList = nslCompanyService.getCompanyList(companyIds, ((pageindex-1)*pagesize), pagesize);
+        //查询公司信息总条数
+        Integer companyListCount = nslCompanyService.getCompanyListCount(companyIds);
 
-        long pageindex = tableFrom.getPageindex();
-        long pagesize = tableFrom.getPagesize();
+        Map map = new HashMap();
+        map.put("cranedetail",cranedetail);
+        map.put("companylist",companyList);
+        map.put("count",companyListCount);
 
-        List<NslCompany> companyList = nslCompanyService.getCompanyListByIds(companyIds, pageindex, pagesize);
-
-        Map returnMap = new HashMap();
-        returnMap.put("cranedetail",cranedetail);
-        returnMap.put("companylist",companyList);
-        return CommonResult.success(returnMap);
+        return CommonResult.success(map);
     }
 
     /**
@@ -91,118 +94,80 @@ public class NslCraneController {
     }
 
     /**
-     * 车型查找-品牌/型号
-     * @param tableFrom
+     * 车型查找-型号
+     * @param cbrandid
+     * @param craneid
+     * @param pageindex
+     * @param pagesize
      * @return
      */
     @PostMapping("/cranelist")
-    public CommonResult getCraneList(@RequestBody(required = false) LimitEntry tableFrom){
+    public CommonResult getCraneList( Integer cbrandid,Integer craneid,Long pageindex,Long pagesize){
 
-        Integer cbrandid = tableFrom.getCbrandid();
-        Integer craneid = tableFrom.getCraneid();
-        Integer cweightid = tableFrom.getCweightid();
-        Long pageindex = tableFrom.getPageindex();
-        Long pagesize = tableFrom.getPagesize();
-        String craneName = tableFrom.getKeywords();
-
-        //查询所有的车辆信息，返回allCP对象
-        Page allPage = new Page(pageindex,pagesize);
-        QueryWrapper allCraneQW = new QueryWrapper();
-        allCraneQW.ne("kbn","9");
-        nslCraneService.page(allPage,allCraneQW);
-        List allPageRecords = allPage.getRecords();
-        CommonPage allCP = new CommonPage();
-        allCP.setPage(pageindex.intValue());
-        allCP.setLimit(pagesize.intValue());
-        allCP.setTotal(Long.valueOf(allPageRecords.size()));
-        allCP.setList(allPageRecords);
-
-        //根据车辆型号name模糊查询，返回nameCP对象
-        Page namePage = new Page(pageindex, pagesize);
-        QueryWrapper nameCraneQW = new QueryWrapper();
-        if(!StringUtils.isEmpty(craneName)) {
-            nameCraneQW.like("name",craneName);
-        }
-        nameCraneQW.ne("kbn","9");
-        nslCraneService.page(namePage,nameCraneQW);
-        List namePageRecords = namePage.getRecords();
-        CommonPage nameCP = new CommonPage();
-        nameCP.setPage(pageindex.intValue());
-        nameCP.setLimit(pagesize.intValue());
-        nameCP.setTotal(Long.valueOf(namePageRecords.size()));
-        nameCP.setList(namePageRecords);
-
-
-        //根据品牌id查找车辆列表
-        List<NslCrane> craneList = nslCraneService.getCraneListByBrandId(cbrandid, pageindex, pagesize);
-
-        Map map = new HashMap();
-        map.put("craneListByName",nameCP);
-        map.put("allCraneList",allCP);
-        map.put("craneListByBrandId",craneList);
-
-        return CommonResult.success(map);
+        List<NslCrane> craneList = nslCraneService.getCraneList(cbrandid, craneid, ((pageindex-1)*pagesize), pagesize);
+        Integer craneListCount = nslCraneService.getCraneListCount(cbrandid, craneid);
+        Map craneMap = new HashMap();
+        craneMap.put("count",craneListCount);
+        craneMap.put("craneList",craneList);
+        return CommonResult.success(craneMap);
     }
 
     /**
      * 根据车辆id查出配重列表
-     * @param tableFrom
+     * @param craneid
+     * @param pageindex
+     * @param pagesize
      * @return
      */
     @PostMapping("/weightlist")
-    public CommonResult getWeightList(@RequestBody(required = false) LimitEntry tableFrom){
+    public CommonResult getWeightList(Integer craneid,Long pageindex,Long pagesize){
 
-        Integer craneid = tableFrom.getCraneid();
-        long pageindex = tableFrom.getPageindex();
-        long pagesize = tableFrom.getPagesize();
-
-        List<NslCweight> weightList = nslCweightService.getCweightListByCraneId(craneid,pageindex,pagesize);
-
-        return CommonResult.success(weightList);
+        List<NslCweight> weightList = nslCweightService.getWeightList(craneid,((pageindex-1)*pagesize),pagesize);
+        Integer weightListCount = nslCweightService.getWeightListCount(craneid);
+        Map weightMap = new HashMap();
+        weightMap.put("count",weightListCount);
+        weightMap.put("weightList",weightList);
+        return CommonResult.success(weightMap);
     }
 
     /**
-     * 根据车辆id和配重id查出车辆的组合方式列表
-     * @param tableFrom
+     * 组合方式列表
+     * @param craneid
+     * @param cweightid
+     * @param cwayid
+     * @param pageindex
+     * @param pagesize
      * @return
      */
     @PostMapping("/waylist")
-    public CommonResult getWayList(@RequestBody(required = false) LimitEntry tableFrom){
+    public CommonResult getWayList(Integer craneid,Integer cweightid,Integer cwayid,Long pageindex,Long pagesize){
 
-        Integer craneid = tableFrom.getCraneid();
-        Integer cweightid = tableFrom.getCweightid();
-        Integer cwayid = tableFrom.getCwayid();
-        long pageindex = tableFrom.getPageindex();
-        long pagesize = tableFrom.getPagesize();
+        List<NslCway> wayList = nslCwayService.getWayList(craneid, cweightid, cwayid, ((pageindex-1)*pagesize), pagesize);
+        Integer wayListCount = nslCwayService.getWayListCount(craneid, cweightid, cwayid);
+        Map wayMap = new HashMap();
+        wayMap.put("count",wayListCount);
+        wayMap.put("wayList",wayList);
 
-        Map map = new HashMap();
-        if (cwayid==null) {
-            List<NslCway> wayList = nslCwayService.getCwayListBycwId(craneid, cweightid, pageindex, pagesize);
-            map.put("wayList",wayList);
-        }else{
-            NslCway wayInfo = nslCwayService.getCwayInfo(craneid, cweightid, cwayid);
-            map.put("wayInfo",wayInfo);
-        }
-        return CommonResult.success(map);
+        return CommonResult.success(wayMap);
+
     }
 
     /**
      * 车辆添加绑定
-     * @param tableFrom
+     * @param companyid
+     * @param userid
+     * @param craneid
      * @return
      */
     @PostMapping("/compbandcrane")
-    public CommonResult addCompBandCrane(@RequestBody(required = false) LimitEntry tableFrom){
-        Integer craneid = tableFrom.getCraneid();
-        Integer companyid = tableFrom.getCompanyid();
-        Integer userid = tableFrom.getUserid();
+    public CommonResult addCompBandCrane(Integer companyid,Integer userid,Integer craneid){
 
-        int count = nslCbindService.addCompBindCrane(companyid, userid, craneid);
-        if(count == 0){
-            return CommonResult.failed("添加失败！");
+        Integer isBindedCount = nslCbindService.queryIsBinded(companyid, userid, craneid);
+        if (isBindedCount>0){
+            return CommonResult.failed("车辆和公司已经存在绑定关系！！！");
         }
+        nslCbindService.addCompBindCrane(companyid, userid, craneid);
         return CommonResult.success("添加成功！");
-
     }
 
 }

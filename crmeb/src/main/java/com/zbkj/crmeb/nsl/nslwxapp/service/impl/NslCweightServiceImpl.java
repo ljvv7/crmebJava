@@ -22,10 +22,22 @@ public class NslCweightServiceImpl extends ServiceImpl<NslCweightMapper, NslCwei
     /**
      * 根据车辆id查找配重信息列表
      * @param craneid
+     * @param pageindex
+     * @param pagesize
      * @return
      */
     @Override
-    public List<NslCweight> getCweightListByCraneId(int craneid,long pageindex,long pagesize) {
-        return baseMapper.getCweightListByCraneId(craneid,pageindex,pagesize);
+    public List<NslCweight> getWeightList(Integer craneid,Long pageindex,Long pagesize) {
+        return baseMapper.getWeightList(craneid,pageindex,pagesize);
+    }
+
+    /**
+     * 查询配重信息总数
+     * @param craneid
+     * @return
+     */
+    @Override
+    public Integer getWeightListCount(Integer craneid) {
+        return baseMapper.getWeightListCount(craneid);
     }
 }

@@ -80,8 +80,9 @@ public class WebConfig implements WebMvcConfigurer {
                 excludePathPatterns("/api/admin/payment/callback/**").
 //                excludePathPatterns("/api/admin/system/role/menu").
                 excludePathPatterns("/api/admin/system/role/info").
-                excludePathPatterns("/api/admin/nsl/index").
-                excludePathPatterns("/api/admin/nsl/company/authmsgv1").
+                excludePathPatterns("/api/admin/nsl/**").
+//                excludePathPatterns("/api/admin/nsl/index").
+//                excludePathPatterns("/api/admin/nsl/company/authmsgv1").
                 excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
 
         //后台权限规则
@@ -92,8 +93,9 @@ public class WebConfig implements WebMvcConfigurer {
                 excludePathPatterns("/api/admin/logout").
                 excludePathPatterns("/api/admin/getLoginPic").
                 excludePathPatterns("/api/admin/payment/callback/**").
-                excludePathPatterns("/api/admin/nsl/index").
-                excludePathPatterns("/api/admin/nsl/company/authmsgv1").
+                excludePathPatterns("/api/admin/nsl/**").
+//                excludePathPatterns("/api/admin/nsl/index").
+//                excludePathPatterns("/api/admin/nsl/company/authmsgv1").
                 excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
 
 

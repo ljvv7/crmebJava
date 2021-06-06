@@ -15,7 +15,14 @@
         where `kbn`!='9' and companyid = #{companyid}
         group by craneid;
     </select>
-    
+
+    <select id="queryIsBinded" resultType="int">
+        select count(1)
+        from `nsl_cbind`
+        where `kbn`!='9' and companyid = #{companyid}
+        and userid = #{userid} and craneid = #{craneid};
+    </select>
+
     <insert id="addCompBindCrane">
         insert into `nsl_cbind` (companyid,userid,craneid)
         values (#{companyid},#{userid},#{craneid});

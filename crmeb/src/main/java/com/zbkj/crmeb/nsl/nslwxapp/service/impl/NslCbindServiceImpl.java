@@ -30,16 +30,29 @@ public class NslCbindServiceImpl extends ServiceImpl<NslCbindMapper, NslCbind> i
     }
 
     /**
-     * 添加信息到绑定表
+     * 查询是否绑定
      * @param companyid
      * @param userid
      * @param craneid
      * @return
      */
     @Override
-    public int addCompBindCrane(int companyid, int userid, int craneid) {
-        return baseMapper.addCompBindCrane(companyid,userid,craneid);
+    public Integer queryIsBinded(Integer companyid, Integer userid, Integer craneid) {
+        return baseMapper.queryIsBinded(companyid, userid, craneid);
     }
+
+    /**
+     * 添加公司车辆绑定
+     * @param companyid
+     * @param userid
+     * @param craneid
+     * @return
+     */
+    @Override
+    public Integer addCompBindCrane(Integer companyid, Integer userid, Integer craneid) {
+        return baseMapper.addCompBindCrane(companyid, userid, craneid);
+    }
+
 
     @Override
     public List selectUserAndCrane(Integer userid, Integer craneid) {

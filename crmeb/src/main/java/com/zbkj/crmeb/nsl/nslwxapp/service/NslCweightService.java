@@ -18,8 +18,17 @@ public interface NslCweightService extends IService<NslCweight> {
     /**
      * 根据车辆id查找配重信息列表
      * @param craneid
+     * @param pageindex
+     * @param pagesize
      * @return
      */
-    List<NslCweight> getCweightListByCraneId(int craneid,long pageindex,long pagesize);
+    List<NslCweight> getWeightList(Integer craneid,Long pageindex,Long pagesize);
+
+    /**
+     * 查询配重信息总数
+     * @param craneid
+     * @return
+     */
+    Integer getWeightListCount(Integer craneid);
 
 }

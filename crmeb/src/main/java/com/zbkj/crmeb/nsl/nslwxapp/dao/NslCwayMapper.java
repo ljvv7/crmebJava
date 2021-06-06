@@ -15,10 +15,10 @@ import java.util.List;
  */
 public interface NslCwayMapper extends BaseMapper<NslCway> {
 
-    //根据车辆id和配重id查询组合方式信息
-    List<NslCway> getCwayListBycwId(int craneid,int cweightid,long pageindex,long pagesize);
+    //查询组合方式列表
+    List<NslCway> getWayList(Integer craneid,Integer cweightid,Integer cwayid,Long pageindex,Long pagesize);
 
-    //根据车辆id、配重id和组合方式id查询某条组合方式
-    NslCway getCwayInfo(int craneid,int cweightid,int cwayid);
+    //查询组合方式总数
+    Integer getWayListCount(Integer craneid,Integer cweightid,Integer cwayid);
 
 }

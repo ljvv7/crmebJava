@@ -57,25 +57,18 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
         return null;
     }
 
-    @Override
-    public List getAllCraneByCompanyId(List ids, long pageindex, long pagesize) {
-        return baseMapper.getAllCraneByCompanyId(ids,pageindex,pagesize);
-    }
-
     /**
-     * 根据品牌id获取车辆信息
-     * @param cbrandid
-     * @param pageindex
-     * @param pagesize
+     * 根据车辆id获取车辆信息
+     * @param craneid
      * @return
      */
     @Override
-    public List<NslCrane> getCraneListByBrandId(int cbrandid,long pageindex,long pagesize) {
-        return baseMapper.getCraneListByBrandId(cbrandid,pageindex,pagesize);
+    public NslCrane getCraneDetailById(Integer craneid) {
+        return baseMapper.getCraneDetailById(craneid);
     }
 
     /**
-     * 根据品牌id、车辆id获取车辆信息
+     * 查询车辆列表
      * @param cbrandid
      * @param craneid
      * @param pageindex
@@ -83,8 +76,25 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
      * @return
      */
     @Override
-    public NslCrane getCraneListByCbrId(int cbrandid, int craneid,long pageindex, long pagesize) {
-        return baseMapper.getCraneListByCbrId(cbrandid,craneid,pageindex,pagesize);
+    public List<NslCrane> getCraneList(Integer cbrandid,Integer craneid,Long pageindex,Long pagesize) {
+        return baseMapper.getCraneList(cbrandid,craneid,pageindex,pagesize);
+    }
+
+    /**
+     * 查询车辆信息总条数
+     * @param cbrandid
+     * @param craneid
+     * @return
+     */
+    @Override
+    public Integer getCraneListCount(Integer cbrandid, Integer craneid) {
+        return baseMapper.getCraneListCount(cbrandid, craneid);
+    }
+
+
+    @Override
+    public List getAllCraneByCompanyId(List ids, long pageindex, long pagesize) {
+        return baseMapper.getAllCraneByCompanyId(ids,pageindex,pagesize);
     }
 
     @Override
