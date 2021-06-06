@@ -29,7 +29,7 @@ import java.util.Map;
  * @since 2021-05-29
  */
 @RestController
-@RequestMapping("/nsl/company")
+@RequestMapping("/api/admin/nsl/company")
 @Api(tags = "nsl-公司接口")
 @CrossOrigin
 public class NslCompanyController {

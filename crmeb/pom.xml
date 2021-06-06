@@ -383,7 +383,7 @@
 
     <build>
         <!--打包配置-->
-        <finalName>Crmeb</finalName>
+        <finalName>apidb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
