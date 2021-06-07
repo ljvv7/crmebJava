@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +62,9 @@ public class NslCraneController {
      */
     @PostMapping("/getdetail")
     @ApiOperation(value = "车辆详情")
-    public CommonResult getDetail(Integer craneid,Long pageindex,Long pagesize){
+    public CommonResult getDetail(@RequestParam Integer craneid,
+                                  @RequestParam Long pageindex,
+                                  @RequestParam Long pagesize){
 
         //根据车辆id获取车辆信息
         NslCrane cranedetail = nslCraneService.getCraneDetailById(craneid);
@@ -106,7 +109,10 @@ public class NslCraneController {
      */
     @PostMapping("/cranelist")
     @ApiOperation(value = "车辆列表")
-    public CommonResult getCraneList( Integer cbrandid,Integer craneid,Long pageindex,Long pagesize){
+    public CommonResult getCraneList(@RequestParam(required = false) Integer cbrandid,
+                                     @RequestParam(required = false) Integer craneid,
+                                     @RequestParam Long pageindex,
+                                     @RequestParam Long pagesize){
 
         List<NslCrane> craneList = nslCraneService.getCraneList(cbrandid, craneid, ((pageindex-1)*pagesize), pagesize);
         Integer craneListCount = nslCraneService.getCraneListCount(cbrandid, craneid);
@@ -125,7 +131,9 @@ public class NslCraneController {
      */
     @PostMapping("/weightlist")
     @ApiOperation(value = "车辆配重列表")
-    public CommonResult getWeightList(Integer craneid,Long pageindex,Long pagesize){
+    public CommonResult getWeightList(@RequestParam Integer craneid,
+                                      @RequestParam Long pageindex,
+                                      @RequestParam Long pagesize){
 
         List<NslCweight> weightList = nslCweightService.getWeightList(craneid,((pageindex-1)*pagesize),pagesize);
         Integer weightListCount = nslCweightService.getWeightListCount(craneid);
@@ -146,7 +154,11 @@ public class NslCraneController {
      */
     @PostMapping("/waylist")
     @ApiOperation(value = "车辆组合方式列表")
-    public CommonResult getWayList(Integer craneid,Integer cweightid,Integer cwayid,Long pageindex,Long pagesize){
+    public CommonResult getWayList(@RequestParam Integer craneid,
+                                   @RequestParam Integer cweightid,
+                                   @RequestParam(required = false) Integer cwayid,
+                                   @RequestParam Long pageindex,
+                                   @RequestParam Long pagesize){
 
         List<NslCway> wayList = nslCwayService.getWayList(craneid, cweightid, cwayid, ((pageindex-1)*pagesize), pagesize);
         Integer wayListCount = nslCwayService.getWayListCount(craneid, cweightid, cwayid);
@@ -167,14 +179,21 @@ public class NslCraneController {
      */
     @PostMapping("/compbindcrane")
     @ApiOperation(value = "车辆添加绑定")
-    public CommonResult addCompBandCrane(Integer companyid,Integer userid,Integer craneid){
+    public List addCompBandCrane(@RequestParam Integer companyid,
+                                 @RequestParam Integer userid,
+                                 @RequestParam Integer craneid){
 
+        List list = new ArrayList();
         Integer isBindedCount = nslCbindService.queryIsBinded(companyid, userid, craneid);
         if (isBindedCount>0){
-            return CommonResult.failed("车辆和公司已经存在绑定关系！！！");
+            String msg = "车辆和公司已经存在绑定关系!";
+            list.add(msg);
+        }else {
+            nslCbindService.addCompBindCrane(companyid, userid, craneid);
+            String msg = "绑定成功!";
+            list.add(msg);
         }
-        nslCbindService.addCompBindCrane(companyid, userid, craneid);
-        return CommonResult.success("添加成功！");
+        return list;
     }
 
 }
