@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
 /**
- * @param tableFrom 
- * @returns 
+ * @param tableFrom
+ * @returns
  */
 export default {
 
@@ -40,7 +40,7 @@ export default {
 
   /**
    * 微信小程序首页
-   * @returns 
+   * @returns
    */
   testWXAppApi(){
     return request({
@@ -54,50 +54,50 @@ export default {
       url: '/admin/nsl/company/add',
       method: 'post',
       data: tableFrom
-    }) 
+    })
   },
   getdCompanyAuthmsgApi(){
     return request({
       url: '/admin/nsl/company/authmsgv1',
       method: 'post'
-    }) 
+    })
   },
   getAdmin(userId){
     return request({
       url: `/admin/nsl/user/index/${userId}`,
       method: 'post',
-    }) 
+    })
   },
 
   deleteCompanyAndCrane(craneId,companyId){
     return request({
       url: `/admin/nsl/company/deleteCompanyAndCrane/${companyId}/${craneId}`,
       method: 'post',
-    }) 
+    })
   },
   //收藏
   getAllConnection(userId){
     return request({
       url: `/admin/nsl/collectlist/${userId}`,
       method: 'post',
-    }) 
+    })
   },
   //添加收藏
   addCollection(userid,craneid){
     return request({
       url: `/admin/nsl/addCollection/${userid}/${craneid}`,
       method: 'post',
-    }) 
+    })
   },
   //删除公司
   deleteCompanyById(id){
     return request({
       url: `/admin/nsl/company/deleteCompanyById/${id}`,
       method: 'get',
-    }) 
+    })
   },
   //根据公司id 修改状态
-  updateStatusByid(tableFrom){
+  updateStatusByid(id,status){
     return request({
       url: `/admin/nsl/company/updateStatusByid/${id}/${status}`,
       method: 'get'
