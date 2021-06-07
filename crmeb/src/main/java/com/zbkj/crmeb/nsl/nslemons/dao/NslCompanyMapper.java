@@ -28,4 +28,8 @@ public interface NslCompanyMapper extends BaseMapper<NslCompany> {
      * 公司认证提示
      */
     String getAuthmsgv1();
+
+    void deleteCompanyKbn(int id);
+
+    void updateStatusByid(int id, String status);
 }

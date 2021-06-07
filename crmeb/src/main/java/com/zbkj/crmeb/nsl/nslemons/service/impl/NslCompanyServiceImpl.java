@@ -87,5 +87,15 @@ public class NslCompanyServiceImpl extends ServiceImpl<NslCompanyMapper, NslComp
         return map;
     }
 
+    @Override
+    public void deleteCompanyKbn(int id) {
+        baseMapper.deleteCompanyKbn(id);
+    }
+
+    @Override
+    public void updateStatusByid(int id, String status) {
+        baseMapper.updateStatusByid(id,status);
+    }
+
 
 }

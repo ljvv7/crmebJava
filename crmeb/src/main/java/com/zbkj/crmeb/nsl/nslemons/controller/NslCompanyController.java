@@ -3,7 +3,6 @@ package com.zbkj.crmeb.nsl.nslemons.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.common.CommonResult;
 import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
-import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
 import com.zbkj.crmeb.nsl.nslemons.request.GetAllComapnyEntry;
 import com.zbkj.crmeb.nsl.nslemons.request.GetAllCompanyByIdEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
@@ -61,7 +60,6 @@ public class NslCompanyController {
         }else {
             map = nslCompanyService.getAllCompany(page,limit);
         }
-
         return CommonResult.success(map);
     }
 
@@ -76,7 +74,6 @@ public class NslCompanyController {
         int pageindex = tableFrom.getPageindex();
         Map map = new HashMap();
         //获取公司详情
-
         NslCompany byId = nslCompanyService.getById(companyid);
         //根据公司查找车辆
         List list = nslCbindService.getCraneIdByCompanyId(companyid);
@@ -151,8 +148,22 @@ public class NslCompanyController {
         return CommonResult.success(save);
     }
 
+    /**
+     * 根据公司id删除公司  (逻辑删除)
+     */
+    @GetMapping("deleteCompanyById/{id}")
+    public void deleteCompanyById(@PathVariable int id){
+        nslCompanyService.deleteCompanyKbn(id);
+    }
 
+    /**
+     * 根据公司id设置公司状态
+     */
+    @GetMapping("updateStatusByid/{id}/{status}")
+    public void updateStatusByid (@PathVariable int id,
+                                               @PathVariable String status){
+        nslCompanyService.updateStatusByid(id,status);
 
-
+    }
 }
 

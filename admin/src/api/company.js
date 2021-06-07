@@ -88,5 +88,19 @@ export default {
       url: `/admin/nsl/addCollection/${userid}/${craneid}`,
       method: 'post',
     }) 
+  },
+  //删除公司
+  deleteCompanyById(id){
+    return request({
+      url: `/admin/nsl/company/deleteCompanyById/${id}`,
+      method: 'get',
+    }) 
+  },
+  //根据公司id 修改状态
+  updateStatusByid(tableFrom){
+    return request({
+      url: `/admin/nsl/company/updateStatusByid/${id}/${status}`,
+      method: 'get'
+    })
   }
 }

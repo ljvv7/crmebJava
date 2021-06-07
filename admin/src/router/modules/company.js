@@ -20,7 +20,7 @@ const companyRouter = {
       path: 'companyDetails',
       component: () => import('@/views/company/Edit'),
       name: 'CompanyIndex',
-      meta: { title: '公司列表', icon: '' }
+      meta: { title: '公司详情', icon: '' }
     }
   ]
 }

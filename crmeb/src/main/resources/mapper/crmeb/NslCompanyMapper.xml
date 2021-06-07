@@ -28,4 +28,14 @@
         from `eb_system_config`
         where name = 'companyauthcoft'
     </select>
+
+    <select id="deleteCompanyKbn" parameterType="int">
+       update `nsl_company` set kbn = "9"
+       where id = #{id}
+    </select>
+
+    <select id="updateStatusByid">
+       update `nsl_company` set status = #{status}
+       where id = #{id}
+    </select>
 </mapper>
