@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbkj.crmeb.nsl.nslemons.dao.AdminCraneMapper">
+
+    <select id="getAdmCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes,visits,remarks
+        from `nsl_crane`
+        where kbn != '9'
+        <if test="cbrandid!=null and cbrandid!=''">
+            and cbrands = #{cbrandid}
+        </if>
+        <if test="craneid!=null and craneid!=''">
+            and id = #{craneid}
+        </if>
+        <if test="craneName!=null and craneName!=''">
+            and name like "%"#{craneName,jdbcType=VARCHAR}"%"
+        </if>
+        limit #{pageindex},#{pagesize};
+    </select>
+
+    <select id="getAdmCraneListCount" resultType="int">
+        select count(1)
+        from `nsl_crane`
+        where kbn != '9'
+        <if test="cbrandid!=null and cbrandid!=''">
+            and cbrands = #{cbrandid}
+        </if>
+        <if test="craneid!=null and craneid!=''">
+            and id = #{craneid}
+        </if>
+        <if test="craneName!=null and craneName!=''">
+            and name like "%"#{craneName,jdbcType=VARCHAR}"%"
+        </if>
+        ;
+    </select>
+
+</mapper>

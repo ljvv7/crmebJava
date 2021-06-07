@@ -15,7 +15,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="车型搜索：">
-              <el-input v-model="tableFrom.keywords" placeholder="请输入车辆型号" class="selWidth" size="small" clearable>
+              <el-input v-model="tableFrom.craneName" placeholder="请输入车辆型号" class="selWidth" size="small" clearable>
                 <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/>
               </el-input>
             </el-form-item>
@@ -39,25 +39,25 @@
       >
         <el-table-column
           prop="id"
-          label="ID"
-          min-width="50"
+          label="车辆ID"
+          min-width="100"
         />
         <el-table-column
           prop="cbrands"
-          label="车辆品牌"
-          min-width="150"
+          label="品牌ID"
+          min-width="100"
         />
         <el-table-column
           prop="name"
           label="车辆型号"
-          min-width="90"
+          min-width="100"
         />
         <el-table-column
           prop="maxweight"
           label="最大起重量"
-          min-width="150"
+          min-width="100"
         />
-        <el-table-column label="车型图片" min-width="80">
+        <el-table-column label="车型图片" min-width="100">
           <template slot-scope="scope">
             <div class="demo-image__preview">
               <el-image
@@ -73,10 +73,18 @@
           label="车辆简介"
           min-width="150"
         />
-        <el-table-column label="操作" min-width="150" fixed="right" align="center">
+        <el-table-column label="查看" min-width="100" fixed="right" align="center">
           <template slot-scope="scope">
             <router-link :to="{path: '/store/list/creatProduct/' + scope.row.id}">
-              <el-button type="text" size="small" class="mr10" v-if="tableFrom.type !== '5'">查看</el-button>
+              <el-button type="text" size="small" class="mr10" v-if="tableFrom.type !== '5'">详情</el-button>
+            </router-link>
+            <!-- <el-button type="text" size="small" @click="handleDelete(scope.row.id, tableFrom.type)">{{ tableFrom.type === '5' ? '查看' : '加入回收站' }}</el-button> -->
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" min-width="100" fixed="right" align="center">
+          <template slot-scope="scope">
+            <router-link :to="{path: '/store/list/creatProduct/' + scope.row.id}">
+              <el-button type="text" size="small" class="mr10" v-if="tableFrom.type !== '5'">移除</el-button>
             </router-link>
             <!-- <el-button type="text" size="small" @click="handleDelete(scope.row.id, tableFrom.type)">{{ tableFrom.type === '5' ? '查看' : '加入回收站' }}</el-button> -->
           </template>
@@ -84,7 +92,7 @@
       </el-table>
       <div class="block">
         <el-pagination
-          :page-sizes="[20, 40, 60, 80]"
+          :page-sizes="[5, 10, 15, 20]"
           :page-size="tableFrom.limit"
           :current-page="tableFrom.page"
           layout="total, sizes, prev, pager, next, jumper"
@@ -100,7 +108,7 @@
 <script>
 import crane from '@/api/crane'
 export default {
-  name: 'ProductList',
+  name: 'CraneList',
   data() {
     return {
       // roterPre: roterPre,
@@ -111,13 +119,11 @@ export default {
       },
       brandList: [],
       tableFrom: {
-        pageindex: 0,
-        pagesize: 20,
-        cateId: '',
-        craneid: 8,
-        cbrandid: 18,
-        cweightid: 15,
-        keywords: ''
+        cbrandid: null,
+        craneid: null,
+        craneName: '',
+        page: 1,
+        limit: 10
       },
       categoryList: [],
       merCateList: [],
@@ -148,33 +154,11 @@ export default {
       this.getCraneListByCbrandId()
     },
     
-    getAllCraneList(){
+    getAdmCraneList(){
       this.listLoading = true
       crane.getCraneList(this.tableFrom).then(res =>{
-        this.tableData.data = res.allCraneList.list
-        this.tableData.total = res.allCraneList.total
-        this.listLoading = false
-      }).catch(res => {
-        this.listLoading = false
-      })
-    },
-
-    getCraneListByName() {
-      this.listLoading = true
-      crane.getCraneList(this.tableFrom).then(res => {
-        this.tableData.data = res.craneListByName.list
-        this.tableData.total = res.craneListByName.total
-        this.listLoading = false
-      }).catch(res => {
-        this.listLoading = false
-      })
-    },
-
-    getCraneListByCbrandId(){
-      this.listLoading = true
-      crane.getCraneList(this.tableFrom).then(res => {
-        this.tableData.data = res.craneListByBrandId
-        this.tableData.total = res.craneListByBrandId.size
+        this.tableData.data = res.admCraneList
+        this.tableData.total = res.count
         this.listLoading = false
       }).catch(res => {
         this.listLoading = false
@@ -183,7 +167,7 @@ export default {
 
     seachList() {
       // this.tableFrom.page = 1
-      this.getCraneListByName()
+      this.getAdmCraneList()
     },
     // 复制
     onCopy(){
@@ -199,11 +183,11 @@ export default {
 
     pageChange(page) {
       this.tableFrom.page = page
-      this.getList()
+      this.getAdmCraneList()
     },
     handleSizeChange(val) {
       this.tableFrom.limit = val
-      this.getList()
+      this.getAdmCraneList()
     },
   }
 }
