@@ -159,7 +159,7 @@ public class NslCraneController {
      * @param craneid
      * @return
      */
-    @PostMapping("/compbandcrane")
+    @PostMapping("/compbindcrane")
     public CommonResult addCompBandCrane(Integer companyid,Integer userid,Integer craneid){
 
         Integer isBindedCount = nslCbindService.queryIsBinded(companyid, userid, craneid);
