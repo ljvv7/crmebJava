@@ -30,8 +30,13 @@ import java.util.regex.Pattern;
 public class NslCompanyServiceImpl extends ServiceImpl<NslCompanyMapper, NslCompany> implements NslCompanyService {
 
     @Override
-    public List<NslCompany> getCompanyListByIds(@Param("ids") List ids, long pageindex, long pagesize) {
-        return baseMapper.getCompanyListByIds(ids,pageindex,pagesize);
+    public List<NslCompany> getCompanyList(@Param("ids") List ids, Long pageindex, Long pagesize) {
+        return baseMapper.getCompanyList(ids,pageindex,pagesize);
+    }
+
+    @Override
+    public Integer getCompanyListCount(List cpids) {
+        return baseMapper.getCompanyListCount(cpids);
     }
 
     @Override
@@ -80,6 +85,16 @@ public class NslCompanyServiceImpl extends ServiceImpl<NslCompanyMapper, NslComp
         map.put("list",list);
 
         return map;
+    }
+
+    @Override
+    public void deleteCompanyKbn(int id) {
+        baseMapper.deleteCompanyKbn(id);
+    }
+
+    @Override
+    public void updateStatusByid(int id, String status) {
+        baseMapper.updateStatusByid(id,status);
     }
 
 

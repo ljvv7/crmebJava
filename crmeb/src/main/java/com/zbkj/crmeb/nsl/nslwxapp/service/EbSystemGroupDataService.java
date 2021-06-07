@@ -3,6 +3,7 @@ package com.zbkj.crmeb.nsl.nslwxapp.service;
 import com.zbkj.crmeb.nsl.nslwxapp.response.EbSystemGroup;
 import com.zbkj.crmeb.nsl.nslwxapp.model.EbSystemGroupData;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zbkj.crmeb.system.model.SystemGroupData;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public interface EbSystemGroupDataService extends IService<EbSystemGroupData> {
      * 获取首页banner滚动图
      * @return
      */
-    List<EbSystemGroup> PublishCourseInfo();
+    List<EbSystemGroupData> PublishCourseInfo();
 
     /**
      * 获取首页icon
      */
-    List<EbSystemGroup> getIcon();
+    List<EbSystemGroupData> getIcon();
 }

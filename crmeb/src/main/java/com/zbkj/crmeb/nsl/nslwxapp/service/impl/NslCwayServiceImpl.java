@@ -19,27 +19,29 @@ import java.util.List;
 @Service
 public class NslCwayServiceImpl extends ServiceImpl<NslCwayMapper, NslCway> implements NslCwayService {
 
-
     /**
-     * 根据车辆id和配重id查询组合方式信息
+     * 查询组合方式列表
      * @param craneid
      * @param cweightid
+     * @param cwayid
+     * @param pageindex
+     * @param pagesize
      * @return
      */
     @Override
-    public List<NslCway> getCwayListBycwId(int craneid, int cweightid,long pageindex,long pagesize) {
-        return baseMapper.getCwayListBycwId(craneid,cweightid,pageindex,pagesize);
+    public List<NslCway> getWayList(Integer craneid, Integer cweightid, Integer cwayid, Long pageindex, Long pagesize) {
+        return baseMapper.getWayList(craneid, cweightid, cwayid, pageindex, pagesize);
     }
 
     /**
-     * 根据车辆id、配重id和组合方式id查询某条组合方式
+     * 查询组合方式总数
      * @param craneid
      * @param cweightid
      * @param cwayid
      * @return
      */
     @Override
-    public NslCway getCwayInfo(int craneid, int cweightid, int cwayid) {
-        return baseMapper.getCwayInfo(craneid,cweightid,cwayid);
+    public Integer getWayListCount(Integer craneid, Integer cweightid, Integer cwayid) {
+        return baseMapper.getWayListCount(craneid, cweightid, cwayid);
     }
 }

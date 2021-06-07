@@ -129,7 +129,7 @@ import { param } from '@/utils'
           region: '',
         },
         tableFrom: {
-          companyid: 1,
+          code: this.$route.query.id,
           pageindex: 0,
           pagesize: 20
         },
@@ -158,23 +158,24 @@ import { param } from '@/utils'
           value: 'xiajia',
           label: '下架'
         }],
-        value: 'yishenhe'
+        value: 'yishenhe',
+        tableID: this.$route.query.id
       }
 
     },
 
     created(){
-        this.getList()
+        this.getList(this.tableID)
         
     },
     methods: {
-      getList(){
+      getList(tableID){
           this.listLoading = true
+          this.tableFrom.code = tableID
+          alert(this.tableFrom.code)
           company.getCompanyById(this.tableFrom).then(res =>{
-            // debugger
            this.listLoading = false
            this.Companyform = res.cranedetail
-
            this.companyList = res.companylist
            this.url = this.companyList.images
            if(res.cranedetail.status=='10'){

@@ -20,8 +20,11 @@ public interface NslCbindMapper extends BaseMapper<NslCbind> {
     //根据功能公司id 查找车辆
     List getCraneIdByCompanyId(int companyid);
 
-    //添加信息到绑定表
-    int addCompBindCrane(int companyid,int userid,int craneid);
+    //查询是否绑定
+    Integer queryIsBinded(Integer companyid,Integer userid,Integer craneid);
+
+    //添加公司车辆绑定
+    Integer addCompBindCrane(Integer companyid,Integer userid,Integer craneid);
 
     List selectUserAndCrane(Integer userid, Integer craneid);
 }

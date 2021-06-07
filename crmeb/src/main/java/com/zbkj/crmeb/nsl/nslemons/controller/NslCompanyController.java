@@ -1,16 +1,15 @@
 package com.zbkj.crmeb.nsl.nslemons.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.common.CommonPage;
 import com.common.CommonResult;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
-import com.zbkj.crmeb.nsl.nslemons.request.CompanyLimitEntry;
+import com.zbkj.crmeb.nsl.nslemons.request.GetAllComapnyEntry;
+import com.zbkj.crmeb.nsl.nslemons.request.GetAllCompanyByIdEntry;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
-import com.zbkj.crmeb.nsl.nslwxapp.request.AddCompanyEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbindService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -31,7 +28,8 @@ import java.util.regex.Pattern;
  * @since 2021-05-29
  */
 @RestController
-@RequestMapping("api/admin/nsl/company")
+@RequestMapping("/api/admin/nsl/company")
+@Api(tags = "nsl-公司接口")
 @CrossOrigin
 public class NslCompanyController {
 
@@ -49,7 +47,8 @@ public class NslCompanyController {
      * @return
      */
     @PostMapping("/getAllCompany")
-    public CommonResult getAllCompany(@RequestBody(required = false) CompanyLimitEntry tableFrom){
+    @ApiOperation(value = "获取公司列表")
+    public CommonResult getAllCompany(@RequestBody(required = false) GetAllComapnyEntry tableFrom){
 
         int limit = tableFrom.getPagesize();
         int page = tableFrom.getPageindex();
@@ -61,7 +60,6 @@ public class NslCompanyController {
         }else {
             map = nslCompanyService.getAllCompany(page,limit);
         }
-
         return CommonResult.success(map);
     }
 
@@ -69,8 +67,9 @@ public class NslCompanyController {
      * 根据公司Id获取车辆详情
      */
     @PostMapping("/getdetail")
-    public CommonResult getCompanyById(@RequestBody(required = false) CompanyLimitEntry tableFrom){
-        Integer companyid = tableFrom.getCompanyid();
+    @ApiOperation(value = "根据公司获取车辆")
+    public CommonResult getCompanyById(@RequestBody(required = false) GetAllCompanyByIdEntry tableFrom){
+        Integer companyid = tableFrom.getCode();
         int pagesize = tableFrom.getPagesize();
         int pageindex = tableFrom.getPageindex();
         Map map = new HashMap();
@@ -92,16 +91,29 @@ public class NslCompanyController {
      * 公司入驻
      */
     @PostMapping("add")
-    public CommonResult addCompany(@RequestBody NslCompany tableFrom){
-        boolean save = nslCompanyService.save(tableFrom);
-        return CommonResult.success(save);
-
+    @ApiOperation(value = "公司入驻")
+    public List addCompany(@RequestBody NslCompany tableFrom){
+        String userid = tableFrom.getUserid();
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("userid",userid);
+        List list = new ArrayList();
+        if(nslCompanyService.list(queryWrapper).size()>0){
+            String msg = "用户只能入驻一个公司!";
+            list.add(msg);
+        }else {
+            boolean save = nslCompanyService.save(tableFrom);
+            if(save == true){
+                list.add("入驻成功");
+            }
+        }
+        return list;
     }
 
     /**
      * 公司认证提示
      */
     @PostMapping("authmsgv1")
+    @ApiOperation(value = "公司认证提示")
     public CommonResult authmsgv1(){
 
         String authmsgv1 = nslCompanyService.getAuthmsgv1();
@@ -136,8 +148,22 @@ public class NslCompanyController {
         return CommonResult.success(save);
     }
 
+    /**
+     * 根据公司id删除公司  (逻辑删除)
+     */
+    @GetMapping("deleteCompanyById/{id}")
+    public void deleteCompanyById(@PathVariable int id){
+        nslCompanyService.deleteCompanyKbn(id);
+    }
 
+    /**
+     * 根据公司id设置公司状态
+     */
+    @GetMapping("updateStatusByid/{id}/{status}")
+    public void updateStatusByid (@PathVariable int id,
+                                               @PathVariable String status){
+        nslCompanyService.updateStatusByid(id,status);
 
-
+    }
 }
 

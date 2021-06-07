@@ -55,20 +55,20 @@ public class NslCrane implements Serializable {
     @ApiModelProperty(value = "分录备注")
     private String remarks;
 
-    @ApiModelProperty(value = "默认传入0；   0：新增；1修改；9删除")
-    private String kbn;
-
-    @ApiModelProperty(value = "不传；默认当前日期")
-    private Date createDate;
-
-    @ApiModelProperty(value = "传入数据姓名；")
-    private String createUser;
-
-    @ApiModelProperty(value = "不传；默认当前日期")
-    private Date updateDate;
-
-    @ApiModelProperty(value = "传入数据姓名；")
-    private String updateUser;
+//    @ApiModelProperty(value = "默认传入0；   0：新增；1修改；9删除")
+//    private String kbn;
+//
+//    @ApiModelProperty(value = "不传；默认当前日期")
+//    private Date createDate;
+//
+//    @ApiModelProperty(value = "传入数据姓名；")
+//    private String createUser;
+//
+//    @ApiModelProperty(value = "不传；默认当前日期")
+//    private Date updateDate;
+//
+//    @ApiModelProperty(value = "传入数据姓名；")
+//    private String updateUser;
 
 
 }

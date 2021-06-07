@@ -44,9 +44,6 @@ public class NslCollection implements Serializable {
     @ApiModelProperty(value = "绑定路径")
     private String path;
 
-    @ApiModelProperty(value = "默认传入0；   0：未绑定；1绑定")
-    private String isconnection;
-
     @ApiModelProperty(value = "默认传入0；   0：新增；1修改；9删除")
     private String kbn;
 

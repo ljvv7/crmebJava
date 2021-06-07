@@ -3,6 +3,7 @@ package com.zbkj.crmeb.nsl.nslwxapp.service;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CannerCbrandsEntry;
+import com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList;
 
 import java.util.List;
 
@@ -27,24 +28,35 @@ public interface NslCraneService extends IService<NslCrane> {
     List<CannerCbrandsEntry> getNewCraneList();
 
     /**
+     * 根据车辆id获取车辆信息
+     * @param craneid
+     * @return
+     */
+    NslCrane getCraneDetailById(Integer craneid);
+
+    /**
+     * 查询车辆列表
+     * @param cbrandid
+     * @param craneid
+     * @param pageindex
+     * @param pagesize
+     * @return
+     */
+    List<NslCrane> getCraneList(Integer cbrandid,Integer craneid,Long pageindex,Long pagesize);
+
+    /**
+     * 查询车辆信息总条数
+     * @param cbrandid
+     * @param craneid
+     * @return
+     */
+    Integer getCraneListCount(Integer cbrandid,Integer craneid);
+
+    /**
      * 根据公司id查找所有车辆
      * @return
      */
     List getAllCraneByCompanyId(List ids,long pageindex,  long pagesize);
 
-    /**
-     * 根据品牌id获取车辆信息
-     * @param cbrandid
-     * @return
-     */
-    List<NslCrane> getCraneListByBrandId(int cbrandid,long pageindex,long pagesize);
-
-    /**
-     * 根据品牌id、车辆id获取车辆信息
-     * @param cbrandid
-     * @param craneid
-     * @return
-     */
-    NslCrane getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
-
+    List<CollectAndCraneList> getcollectAndCraneList(Integer userId);
 }

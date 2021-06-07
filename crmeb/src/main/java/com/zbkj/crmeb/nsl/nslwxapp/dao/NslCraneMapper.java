@@ -2,6 +2,7 @@ package com.zbkj.crmeb.nsl.nslwxapp.dao;
 
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -19,10 +20,14 @@ public interface NslCraneMapper extends BaseMapper<NslCrane> {
 
     List getAllCraneByCompanyId(@Param("ids") List ids, long pageindex, long pagesize);
 
-    //根据品牌id获取车辆信息
-    List<NslCrane> getCraneListByBrandId(int cbrandid,long pageindex, long pagesize);
+    //根据车辆id获取车辆信息
+    NslCrane getCraneDetailById(Integer craneid);
 
-    //根据品牌id、车辆id获取车辆信息
-    NslCrane getCraneListByCbrId(int cbrandid,int craneid,long pageindex, long pagesize);
+    //查询车辆列表
+    List<NslCrane> getCraneList(Integer cbrandid,Integer craneid,Long pageindex,Long pagesize);
 
+    //查询车辆信息总条数
+    Integer getCraneListCount(Integer cbrandid,Integer craneid);
+
+    List<CollectAndCraneList> getcollectAndCraneList(Integer userId);
 }

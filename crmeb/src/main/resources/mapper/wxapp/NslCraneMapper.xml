@@ -2,6 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.crmeb.nsl.nslwxapp.dao.NslCraneMapper">
 
+    <select id="getCraneDetailById" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes,visits,remarks
+        from nsl_crane
+        where kbn!='9' and id = #{craneid};
+    </select>
+
+    <select id="getCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,expdbcodes,visits,remarks
+        from `nsl_crane`
+        where kbn != '9'
+        <if test="cbrandid!=null and cbrandid!=''">
+            and cbrands = #{cbrandid}
+        </if>
+        <if test="craneid!=null and craneid!=''">
+            and id = #{craneid}
+        </if>
+        limit #{pageindex},#{pagesize};
+    </select>
+
+    <select id="getCraneListCount" resultType="int">
+        select count(1)
+        from `nsl_crane`
+        where kbn != '9'
+        <if test="cbrandid!=null and cbrandid!=''">
+            and cbrands = #{cbrandid}
+        </if>
+        <if test="craneid!=null and craneid!=''">
+            and id = #{craneid}
+        </if>
+        ;
+    </select>
+    
     <select id="getAllCraneByCompanyId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
         select id,name,cbrands,maxweight,introduce,images,expdbcodes
         from `nsl_crane`
@@ -12,18 +44,16 @@
         ) limit #{pageindex},#{pagesize};
     </select>
 
-    <select id="getCraneListByBrandId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
-        select id,name,cbrands,maxweight,introduce,images,expdbcodes
-        from `nsl_crane`
-        where kbn != '9' and cbrands = #{cbrandid}
-        limit #{pageindex},#{pagesize};
+    <select id="getcollectAndCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList">
+       SELECT  t.userid,t.code,cra.name craneName, cra.introduce,cra.images,cbr.name cbrandName from (
+        SELECT (CASE WHEN  ISNULL(cb.userid) THEN 'WBD' ELSE 'BD' END )as  code, coll.userid,coll.craneid from nsl_collection coll
+        LEFT join nsl_cbind cb
+        on cb.userid = coll.userid
+        and cb.userid = coll.userid
+        and cb.craneid = coll.craneid where coll.userid = #{userid} ) t
+        LEFT join nsl_crane cra
+        on cra.id = t.craneid
+        left join nsl_cbrands cbr
+        on cbr.id = cra.cbrands
     </select>
-
-    <select id="getCraneListByCbrId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
-        select id,name,cbrands,maxweight,introduce,images,expdbcodes
-        from `nsl_crane`
-        where kbn != '9' and cbrands = #{cbrandid} and id = #{craneid}
-        limit #{pageindex},#{pagesize};
-    </select>
-    
 </mapper>

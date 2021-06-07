@@ -2,17 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.crmeb.nsl.nslwxapp.dao.NslCwayMapper">
 
-    <select id="getCwayListBycwId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCway">
+    <select id="getWayList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCway">
         select id,weightid,radius,primary_length,minor_length,weight,way,legtype,craneid
         from `nsl_cway`
-        where kbn != '9' and craneid = #{craneid} and weightid = #{cweightid}
+        where kbn != '9'
+        and craneid = #{craneid} and weightid = #{cweightid}
+        <if test="cwayid != null and cwayid != ''">
+            and id = #{cwayid}
+        </if>
         limit #{pageindex},#{pagesize};
     </select>
 
-    <select id="getCwayInfo" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCway">
-        select id,weightid,radius,primary_length,minor_length,weight,way,legtype,craneid
+    <select id="getWayListCount" resultType="int">
+        select count(1)
         from `nsl_cway`
-        where kbn != '9' and id = #{cwayid} and craneid = #{craneid} and weightid = #{cweightid};
+        where kbn != '9'
+        and craneid = #{craneid} and weightid = #{cweightid}
+        <if test="cwayid != null and cwayid != ''">
+            and id = #{cwayid}
+        </if>
+        ;
     </select>
+
 
 </mapper>

@@ -67,10 +67,41 @@
           min-width="70"
         />
         <el-table-column label="操作" min-width="150" fixed="right" align="center">
-            <el-button type="primary" @click="chakan">查看</el-button>
-            <el-button type="primary" @click="xiangqing">公司详情</el-button>
+          <template slot-scope="scope">
+              <el-button type="primary" @click="chakan(scope.row.id)">查看</el-button>
+              <!-- <el-button type="primary" @click="xiangqing">公司详情</el-button>  -->
+               <el-select v-model="value" placeholder="更多" min-width="150" @change="selectEditAndRemove(scope.row.id)">
+                 <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+               </el-option>
+              </el-select>   
+          </template>
         </el-table-column>
       </el-table>
+      
+      
+      <el-dialog
+        title="状态编辑"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose">
+
+        <template>
+          <el-radio-group v-model="radio">
+            <el-radio :label="20">已审核</el-radio>
+            <el-radio :label="40">上架</el-radio>
+            <el-radio :label="30">下架</el-radio>
+          </el-radio-group>
+        </template>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+      </el-dialog>
+
       <div class="block">
         <el-pagination
           :page-sizes="[20, 40, 60, 80]"
@@ -104,14 +135,29 @@ export default {
       tableFrom: {
         pageindex: 1,
         pagesize: 20,
-        cateId: '',
         code: '',
-        type: '1'
       },
       categoryList: [],
       merCateList: [],
       objectUrl: process.env.VUE_APP_BASE_API,
       dialogVisible: false,
+
+      options: [{
+          value: 'yishenhe',
+          label: '更多'
+        }, {
+          value: 'zhuangtaishenzhi',
+          label: '状态设置'
+        }, {
+          value: 'bianji',
+          label: '编辑'
+        }, {
+          value: 'delete',
+          label: '删除'
+        }],
+        value: 'yishenhe',
+        dialogVisible: false,
+        radio: 20
     }
   },
 
@@ -121,15 +167,56 @@ export default {
 
   methods: {
 
-    chakan(){
-        company.testWXAppApi()
-        .then(
-          res => {
-            this.tableData.data = res.map
-          }
-        ).catch(res =>{
-
+    chakan(id){
+        this.$router.push({
+          path: 'companyDetails',
+          query: {
+		      	id: id
+		      }
         })
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    selectEditAndRemove(id){
+        if(this.value == 'zhuangtaishenzhi'){
+          this.dialogVisible = true
+          const status = this.radio
+          this.company.updateStatusByid(id,status).then(res =>{
+          })
+        }else if(this.value == 'bianji'){
+          this.$router.push({
+            path: 'companyDetails',
+            query : {
+              id: id
+            }
+          })
+        }else if(this.value == 'delete'){
+            this.$confirm('删除公司后将不可恢复, 请慎重操作?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          company.deleteCompanyById(id).then(res =>{
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            this.getList()
+          }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });  
+          this.getList()        
+        });
+        
+        })
+        }
     },
 
     xiangqing(){
