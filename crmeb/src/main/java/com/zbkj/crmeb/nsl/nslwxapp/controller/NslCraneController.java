@@ -14,6 +14,7 @@ import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
 import com.zbkj.crmeb.nsl.nslwxapp.request.LimitEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.*;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -59,6 +60,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/getdetail")
+    @ApiOperation(value = "车辆详情")
     public CommonResult getDetail(Integer craneid,Long pageindex,Long pagesize){
 
         //根据车辆id获取车辆信息
@@ -85,6 +87,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/brandlist")
+    @ApiOperation(value = "品牌列表")
     public CommonResult getBrandsList(){
 
         //获取品牌列表
@@ -102,6 +105,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/cranelist")
+    @ApiOperation(value = "车辆列表")
     public CommonResult getCraneList( Integer cbrandid,Integer craneid,Long pageindex,Long pagesize){
 
         List<NslCrane> craneList = nslCraneService.getCraneList(cbrandid, craneid, ((pageindex-1)*pagesize), pagesize);
@@ -120,6 +124,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/weightlist")
+    @ApiOperation(value = "车辆配重列表")
     public CommonResult getWeightList(Integer craneid,Long pageindex,Long pagesize){
 
         List<NslCweight> weightList = nslCweightService.getWeightList(craneid,((pageindex-1)*pagesize),pagesize);
@@ -140,6 +145,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/waylist")
+    @ApiOperation(value = "车辆组合方式列表")
     public CommonResult getWayList(Integer craneid,Integer cweightid,Integer cwayid,Long pageindex,Long pagesize){
 
         List<NslCway> wayList = nslCwayService.getWayList(craneid, cweightid, cwayid, ((pageindex-1)*pagesize), pagesize);
@@ -160,6 +166,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/compbindcrane")
+    @ApiOperation(value = "车辆添加绑定")
     public CommonResult addCompBandCrane(Integer companyid,Integer userid,Integer craneid){
 
         Integer isBindedCount = nslCbindService.queryIsBinded(companyid, userid, craneid);
