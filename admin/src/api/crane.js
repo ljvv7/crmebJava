@@ -18,6 +18,13 @@ export default {
       method: 'post',
       data: tableFrom
     })
+  },
+  getWeightList(tableFrom){
+    return request({
+      url: 'admin/nsl/adminCrane/admWeightList',
+      method: 'post',
+      data: tableFrom
+    })
   }
 
 }

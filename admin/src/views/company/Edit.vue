@@ -55,25 +55,25 @@
               <el-table-column
                 fixed
                 prop="id"
-                label="ID"
-                width="150">
+                label="车辆ID"
+                width="100">
               </el-table-column>
               <el-table-column
                 prop="cbrands"
-                label="车辆品牌"
-                width="120">
+                label="品牌ID"
+                width="100">
               </el-table-column>
               <el-table-column
                 prop="name"
                 label="车辆型号"
-                width="180">
+                width="100">
               </el-table-column>
               <el-table-column
                 prop="maxweight"
-                label="最大轻重量"
-                width="120">
+                label="最大起重量"
+                width="100">
               </el-table-column>
-              <el-table-column label="公司图片" min-width="80" prop="images">
+              <el-table-column label="车型图片" min-width="100" prop="images">
                 <div class="demo-image__preview">
                   <el-image 
                     style="width: 50px; height: 50px"
@@ -85,7 +85,7 @@
               <el-table-column
                 prop="introduce"
                 label="车辆简介"
-                width="300"
+                width="200"
                 >
               </el-table-column>
               <el-table-column

@@ -2,10 +2,13 @@ package com.zbkj.crmeb.nsl.nslemons.controller;
 
 import com.common.CommonResult;
 import com.zbkj.crmeb.nsl.nslemons.request.AdmCraneListReqParam;
+import com.zbkj.crmeb.nsl.nslemons.request.AdmWeightListReqParam;
 import com.zbkj.crmeb.nsl.nslemons.service.AdminCraneService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
+import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbrandsService;
+import com.zbkj.crmeb.nsl.nslwxapp.service.NslCweightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +28,9 @@ public class AdminCraneController {
 
     @Autowired
     private NslCbrandsService nslCbrandsService;
+
+    @Autowired
+    private NslCweightService nslCweightService;
 
     /**
      * 后台车辆列表
@@ -60,6 +66,20 @@ public class AdminCraneController {
         List<NslCbrands> brandList = nslCbrandsService.getBrandList();
 
         return CommonResult.success(brandList);
+    }
+
+    @PostMapping("/admWeightList")
+    public CommonResult getAdmWeightList(@RequestBody(required = false) AdmWeightListReqParam tableFrom){
+        Integer craneid = tableFrom.getCraneid();
+        Long pageindex = tableFrom.getPage();
+        Long pagesize = tableFrom.getLimit();
+        List<NslCweight> admWeightList = nslCweightService.getWeightList(craneid, (pageindex - 1) * pagesize, pagesize);
+        Integer admWeightListCount = nslCweightService.getWeightListCount(craneid);
+        Map map = new HashMap();
+        map.put("admWeightList",admWeightList);
+        map.put("count",admWeightListCount);
+
+        return CommonResult.success(map);
     }
 
 }

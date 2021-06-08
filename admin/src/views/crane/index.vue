@@ -166,10 +166,11 @@ export default {
 
     seeDetail(id) {
       this.$router.push({
-        path: 'craneDetails'
+        path: 'craneDetails',
+        query: {
+          id: id
+		    }
       })
-      this.tableFrom.craneid = id
-      this.getAdmCraneList()
     },
 
     // 复制
