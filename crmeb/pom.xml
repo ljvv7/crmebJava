@@ -383,7 +383,7 @@
 
     <build>
         <!--打包配置-->
-        <finalName>apidb</finalName>
+        <finalName>dbapiserver</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
