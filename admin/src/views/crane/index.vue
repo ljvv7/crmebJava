@@ -75,18 +75,12 @@
         />
         <el-table-column label="查看" min-width="100" fixed="right" align="center">
           <template slot-scope="scope">
-            <router-link :to="{path: '/store/list/creatProduct/' + scope.row.id}">
-              <el-button type="text" size="small" class="mr10" v-if="tableFrom.type !== '5'">详情</el-button>
-            </router-link>
-            <!-- <el-button type="text" size="small" @click="handleDelete(scope.row.id, tableFrom.type)">{{ tableFrom.type === '5' ? '查看' : '加入回收站' }}</el-button> -->
+              <el-button type="text" size="small" class="mr10" @click="seeDetail(scope.row.id)">详情</el-button>
           </template>
         </el-table-column>
         <el-table-column label="操作" min-width="100" fixed="right" align="center">
           <template slot-scope="scope">
-            <router-link :to="{path: '/store/list/creatProduct/' + scope.row.id}">
-              <el-button type="text" size="small" class="mr10" v-if="tableFrom.type !== '5'">移除</el-button>
-            </router-link>
-            <!-- <el-button type="text" size="small" @click="handleDelete(scope.row.id, tableFrom.type)">{{ tableFrom.type === '5' ? '查看' : '加入回收站' }}</el-button> -->
+              <el-button type="text" size="small" class="mr10" @click="rmdelete(scope.row.id)">移除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -135,7 +129,7 @@ export default {
   created() {   //页面渲染之前执行
     // this.getList()
     this.getBrandList()
-    this.getAllCraneList()
+    this.getAdmCraneList()
   },
 
   methods: {
@@ -151,7 +145,7 @@ export default {
 
     getOListById(cbrandid){
       this.tableFrom.cbrandid = cbrandid
-      this.getCraneListByCbrandId()
+      this.getAdmCraneList()
     },
     
     getAdmCraneList(){
@@ -169,6 +163,15 @@ export default {
       // this.tableFrom.page = 1
       this.getAdmCraneList()
     },
+
+    seeDetail(id) {
+      this.$router.push({
+        path: 'craneDetails'
+      })
+      this.tableFrom.craneid = id
+      this.getAdmCraneList()
+    },
+
     // 复制
     onCopy(){
       this.dialogVisible = true

@@ -8,13 +8,13 @@ export default {
 
   getBrandList(){
     return request({
-      url: 'admin/nsl/crane/brandlist',
+      url: 'admin/nsl/adminCrane/admBrandList',
       method: 'post'
     })
   },
   getCraneList(tableFrom){
     return request({
-      url: 'admin/nsl/crane/cranelist',
+      url: 'admin/nsl/adminCrane/admCraneList',
       method: 'post',
       data: tableFrom
     })
