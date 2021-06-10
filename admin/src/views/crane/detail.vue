@@ -1,5 +1,5 @@
 <template>
-  <div class="divBox">
+  <div class="div-box">
     <el-card class="box-card">
       <el-tabs v-model="activeName" @tab-click="seachList">
         <el-tab-pane label="车辆信息" name="first">
@@ -74,7 +74,7 @@
               </el-table-column>
               <el-table-column label="性能参数" min-width="100" fixed="right" align="center">
                 <template slot-scope="scope">
-                  <el-button type="text" size="small" class="mr10" @click="seeDetail(scope.row.id)">详情</el-button>
+                  <el-button type="text" size="small" class="mr10" @click="seeWay(scope.row.id)">详情</el-button>
                 </template>
               </el-table-column>
               <el-table-column label="操作" min-width="100" fixed="right" align="center">
@@ -83,20 +83,65 @@
                 </template>
               </el-table-column>
           </el-table>
-          <!-- <div class="block">
-            <el-pagination
-              :page-sizes="[5, 10, 15, 20]"
-              :page-size="tableFrom.limit"
-              :current-page="tableFrom.page"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="tableData.total"
-              @size-change="handleSizeChange"
-              @current-change="pageChange"
-            />
-          </div> -->
         </el-tab-pane>
-      </el-tabs>
 
+        <el-tab-pane label="组合方式" name="third">
+          <el-table
+            :data="wayData.data"
+            style="width: 100%"
+            max-height="700">
+              <el-table-column
+                fixed
+                prop="id"
+                label="组合ID"
+                width="100">
+              </el-table-column>
+              <el-table-column
+                prop="weightid"
+                label="配重ID"
+                width="100">
+              </el-table-column>
+              <el-table-column
+                prop="craneid"
+                label="车辆ID"
+                width="100">
+              </el-table-column>
+              <el-table-column
+                prop="radius"
+                label="工作范围"
+                width="150">
+              </el-table-column>
+              <el-table-column
+                prop="primaryLength"
+                label="主臂长度"
+                width="150">
+              </el-table-column>
+              <el-table-column
+                prop="minorLength"
+                label="次臂长度"
+                width="150">
+              </el-table-column>
+              <el-table-column
+                prop="weight"
+                label="起重量"
+                width="150"
+                >
+              </el-table-column>
+              <el-table-column
+                prop="way"
+                label="伸缩方式"
+                width="150"
+                >
+              </el-table-column>
+              <el-table-column
+                prop="legtype"
+                label="组合方式"
+                width="100"
+                >
+              </el-table-column>
+          </el-table>
+        </el-tab-pane>
+      </el-tabs>                                          
     </el-card>
   </div>
 </template>
@@ -111,9 +156,16 @@ import { param } from '@/utils'
       return {
         detailInfo: {},
         tableFrom: {
-          cbrandid: null,
+          // cbrandid: null,
           craneid: this.$route.query.id,
-          craneName: '',
+          // craneName: '',
+          page: 1,
+          limit: 10
+        },
+        wayTableFrom:{
+          craneid: this.$route.query.id,
+          cweightid : null,
+          cwayid: null,
           page: 1,
           limit: 10
         },
@@ -121,18 +173,13 @@ import { param } from '@/utils'
           data: [],
           total: 0
         },
-        companyList: [{
-          id: '',
-          cbrands: '',
-          name: '',
-          maxweight: '',
-          images: '',
-          introduce: ''
-        }],
+        wayData: {
+          data: [],
+          total: 0
+        },
         activeName: 'first',
         url: this.images,
         srcList: this.images,
-        tableID: this.$route.query.id
       }
 
     },
@@ -158,9 +205,23 @@ import { param } from '@/utils'
         })
       },
 
+      getWayList(){
+        this.listLoading = true
+        crane.getWayList(this.wayTableFrom).then(res=>{
+          this.wayData.data = res.admWayList
+          this.wayData.total = res.count
+        })
+      },
+
       seachList(tab, event){
-          this.tableFrom.page = 1
-          this.getList()
+        this.tableFrom.page = 1
+        // this.getDetail()
+      },
+
+      seeWay(id) {
+        this.wayTableFrom.cweightid = id
+        this.getWayList()
+        this.activeName = 'third'
       },
 
       deleteRow(id) {
@@ -176,48 +237,8 @@ import { param } from '@/utils'
 
         })
         console.log('submit!');
-      },
-      /**
-       * 新增公司
-       */
-      onadd(){
-        this.Companyform.status = 10
-        company.wxappAddCompanyApi(this.Companyform).then(res => {
-
-        }).catch(res => {
-
-        })
-      },
-      //获取公司认证提示
-      authmsg(){
-        company.getdCompanyAuthmsgApi().then(res => {
-
-        }).catch(res => {
-
-        })
-      },
-      //我的
-      admin(){
-        const userId = 1
-          company.getAdmin(userId).then(res => {
-
-          })
-      },
-      //收藏
-      shoucang(){
-        const userId = 1
-        company.getAllConnection(userId).then(res =>{
-
-        })
-      },
-      //添加收藏
-      addshoucang(){
-        const userid = 2
-        const craneid = 1
-        company.addCollection(userid,craneid).then(res =>{
-
-        })
       }
+      
     }
   }
 </script>

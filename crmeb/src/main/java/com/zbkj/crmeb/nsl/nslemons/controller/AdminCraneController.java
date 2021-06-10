@@ -2,12 +2,15 @@ package com.zbkj.crmeb.nsl.nslemons.controller;
 
 import com.common.CommonResult;
 import com.zbkj.crmeb.nsl.nslemons.request.AdmCraneListReqParam;
+import com.zbkj.crmeb.nsl.nslemons.request.AdmWayListReqParam;
 import com.zbkj.crmeb.nsl.nslemons.request.AdmWeightListReqParam;
 import com.zbkj.crmeb.nsl.nslemons.service.AdminCraneService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
+import com.zbkj.crmeb.nsl.nslwxapp.model.NslCway;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbrandsService;
+import com.zbkj.crmeb.nsl.nslwxapp.service.NslCwayService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCweightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +34,9 @@ public class AdminCraneController {
 
     @Autowired
     private NslCweightService nslCweightService;
+
+    @Autowired
+    private NslCwayService nslCwayService;
 
     /**
      * 后台车辆列表
@@ -57,7 +63,7 @@ public class AdminCraneController {
     }
 
     /**
-     * 后端品牌列表
+     * 后台品牌列表
      * @return
      */
     @PostMapping("/admBrandList")
@@ -68,6 +74,11 @@ public class AdminCraneController {
         return CommonResult.success(brandList);
     }
 
+    /**
+     * 后台配重列表
+     * @param tableFrom
+     * @return
+     */
     @PostMapping("/admWeightList")
     public CommonResult getAdmWeightList(@RequestBody(required = false) AdmWeightListReqParam tableFrom){
         Integer craneid = tableFrom.getCraneid();
@@ -79,6 +90,22 @@ public class AdminCraneController {
         map.put("admWeightList",admWeightList);
         map.put("count",admWeightListCount);
 
+        return CommonResult.success(map);
+    }
+
+    @PostMapping("/admWayList")
+    public CommonResult getAdmWayList(@RequestBody(required = false) AdmWayListReqParam tableFrom){
+        Integer craneid = tableFrom.getCraneid();
+        Integer cweightid = tableFrom.getCweightid();
+        Integer cwayid = tableFrom.getCwayid();
+        Long pageindex = tableFrom.getPage();
+        Long pagesize = tableFrom.getLimit();
+
+        List<NslCway> wayList = nslCwayService.getWayList(craneid, cweightid, cwayid, (pageindex - 1) * pagesize, pagesize);
+        Integer wayListCount = nslCwayService.getWayListCount(craneid, cweightid, cwayid);
+        Map map = new HashMap();
+        map.put("admWayList",wayList);
+        map.put("count",wayListCount);
         return CommonResult.success(map);
     }
 

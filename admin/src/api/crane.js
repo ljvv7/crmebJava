@@ -25,6 +25,13 @@ export default {
       method: 'post',
       data: tableFrom
     })
+  },
+  getWayList(wayTableFrom){
+    return request({
+      url: 'admin/nsl/adminCrane/admWayList',
+      method: 'post',
+      data: wayTableFrom
+    })
   }
 
 }
