@@ -37,7 +37,7 @@ export default {
           blankTarget: true
         }
       ],
-      copyright: 'Copyright © 2020 西安众邦网络科技有限公司'
+      copyright: 'Copyright © 2021 陕西恒守信息科技有限公司(西安九星柠檬软件技术有限公司提供技术支持)'
     }
   },
   computed: {

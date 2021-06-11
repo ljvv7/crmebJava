@@ -3,8 +3,8 @@
     <el-row :gutter="24" class="baseInfo">
       <el-col v-bind="grid" class="ivu-mb">
         <el-card :bordered="false" dis-hover :padding="12">
-          <div>
-            <span>销售额</span>
+          <div class="acea-row row-between-wrapper">
+            <span class="content-time">销售额</span>
             <span>{{sales}} 元</span>
           </div>
           <!-- <div slot="header" class="acea-row row-between-wrapper">
@@ -47,8 +47,8 @@
       </el-col> -->
       <el-col v-bind="grid" class="ivu-mb">
         <el-card :bordered="false" dis-hover :padding="12">
-          <div>
-            <span>会员数量</span>
+          <div class="acea-row row-between-wrapper">
+            <span class="content-time">会员数量</span>
             <span>{{ order }} 名</span>
           </div>
           <!-- <div slot="header" class="acea-row row-between-wrapper">
