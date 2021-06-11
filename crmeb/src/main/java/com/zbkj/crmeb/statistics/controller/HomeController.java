@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -45,36 +46,22 @@ public class HomeController {
      * @author Mr.Zhang
      * @since 2020-05-16
      */
-//    @ApiOperation(value = "销售额")
-//    @RequestMapping(value = "/sales", method = RequestMethod.GET)
-//    public CommonResult<HomeRateResponse> sales(){
-//        return CommonResult.success(homeService.sales());
-//    }
     @ApiOperation(value = "销售额")
     @RequestMapping(value = "/sales", method = RequestMethod.GET)
-    public CommonResult sales(){
-        BigDecimal sumMoney = userService.getSumMoney();
-        return CommonResult.success(sumMoney);
+    public CommonResult<HomeRateResponse> sales(){
+        return CommonResult.success(homeService.sales());
     }
-
 
     /**
      * 订单量
      * @author Mr.Zhang
      * @since 2020-05-16
      */
-//    @ApiOperation(value = "订单量")
-//    @RequestMapping(value = "/order", method = RequestMethod.GET)
-//    public CommonResult<HomeRateResponse> order(){
-//        return CommonResult.success(homeService.order());
-//    }
     @ApiOperation(value = "订单量")
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public CommonResult order(){
-        Integer userCount = userService.getUserCount();
-        return CommonResult.success(userCount);
+    public CommonResult<HomeRateResponse> order(){
+        return CommonResult.success(homeService.order());
     }
-
 
     /**
      * 新增用户
@@ -83,8 +70,15 @@ public class HomeController {
      */
     @ApiOperation(value = "新增用户")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public CommonResult<HomeRateResponse> user(){
-        return CommonResult.success(homeService.user());
+    public CommonResult user(){
+        Integer sumPayCount = userService.getSumPayCount();
+        BigDecimal sumMoney = userService.getSumMoney();
+        HomeRateResponse user = homeService.user();
+        Map map = new HashMap();
+        map.put("sumPayCount",sumPayCount);
+        map.put("sumMoney",sumMoney);
+        map.put("userData",user);
+        return CommonResult.success(map);
     }
 
     /**

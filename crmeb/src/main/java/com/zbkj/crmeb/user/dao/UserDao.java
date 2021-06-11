@@ -26,6 +26,6 @@ public interface UserDao extends BaseMapper<User> {
 
     List<UserSpreadPeopleItemResponse> getSpreadPeopleList(Map<String, Object> map);
 
-    Integer getUserCount();
     BigDecimal getSumMoney();
+    Integer getSumPayCount();
 }

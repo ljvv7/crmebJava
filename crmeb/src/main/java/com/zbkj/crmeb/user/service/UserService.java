@@ -35,8 +35,8 @@ import java.util.Map;
  * +----------------------------------------------------------------------
  */
 public interface UserService extends IService<User> {
-    Integer getUserCount();
     BigDecimal getSumMoney();
+    Integer getSumPayCount();
 
     PageInfo<UserResponse> getList(UserSearchRequest request, PageParamRequest pageParamRequest);
 
