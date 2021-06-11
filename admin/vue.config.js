@@ -26,7 +26,7 @@ module.exports = {
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
   transpileDependencies: ['element-ui', 'vuex', 'js-cookie', '@babel', 'resize-detector'],
-  publicPath: './',
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'production',

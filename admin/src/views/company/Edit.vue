@@ -172,7 +172,6 @@ import { param } from '@/utils'
       getList(tableID){
           this.listLoading = true
           this.tableFrom.code = tableID
-          alert(this.tableFrom.code)
           company.getCompanyById(this.tableFrom).then(res =>{
            this.listLoading = false
            this.Companyform = res.cranedetail
@@ -194,8 +193,6 @@ import { param } from '@/utils'
       },
 
       deleteRow(id) {
-        alert(id)
-        alert(this.Companyform.id)
         company.deleteCompanyAndCrane(id,this.Companyform.id).then(res =>{
 
         })
