@@ -35,6 +35,9 @@ import java.util.Map;
  * +----------------------------------------------------------------------
  */
 public interface UserService extends IService<User> {
+    Integer getUserCount();
+    BigDecimal getSumMoney();
+
     PageInfo<UserResponse> getList(UserSearchRequest request, PageParamRequest pageParamRequest);
 
     boolean updateFounds(UserOperateFundsRequest request, boolean isSaveBill);

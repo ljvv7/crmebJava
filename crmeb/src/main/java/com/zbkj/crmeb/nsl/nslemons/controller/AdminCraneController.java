@@ -12,6 +12,7 @@ import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbrandsService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCwayService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCweightService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/admin/nsl/adminCrane")
+@Api(tags = "Admin后台车辆接口")
 public class AdminCraneController {
 
     @Autowired

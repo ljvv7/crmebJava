@@ -17,7 +17,7 @@
                 </router-link>
             </el-card>
         </el-col>
-        <el-col v-bind="grid" class="ivu-mb">
+        <!-- <el-col v-bind="grid" class="ivu-mb">
             <el-card :bordered="false">
                 <router-link :to="{path:'/store/index'}">
                     <i class="el-icon-goods" style="color:#ff9c6e" />
@@ -48,7 +48,7 @@
                     <p>文章管理</p>
                 </router-link>
             </el-card>
-        </el-col>
+        </el-col> -->
         <el-col v-bind="grid" class="ivu-mb">
             <el-card :bordered="false">
                 <router-link :to="{path:'/distribution/index'}">
@@ -57,14 +57,14 @@
                 </router-link>
             </el-card>
         </el-col>
-        <el-col v-bind="grid" class="ivu-mb">
+        <!-- <el-col v-bind="grid" class="ivu-mb">
             <el-card :bordered="false">
                 <router-link :to="{path:'/marketing/coupon/list'}">
                     <i class="el-icon-s-ticket" style="color:#ffc069" />
                     <p>优惠券</p>
                 </router-link>
             </el-card>
-        </el-col>
+        </el-col> -->
     </el-row>
   </div>
 </template>

@@ -22,4 +22,12 @@
         </if>
         ORDER BY ${sortKey} ${sortValue}
     </select>
+
+    <select id="getUserCount" resultType="int">
+        select count(1) from eb_user;
+    </select>
+
+    <select id="getSumMoney" resultType="java.math.BigDecimal">
+        select sum(now_money) from eb_user;
+    </select>
 </mapper>

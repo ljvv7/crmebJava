@@ -3,6 +3,7 @@ package com.zbkj.crmeb.statistics.controller;
 import com.common.CommonResult;
 import com.zbkj.crmeb.statistics.response.*;
 import com.zbkj.crmeb.statistics.service.HomeService;
+import com.zbkj.crmeb.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 
@@ -35,26 +37,42 @@ public class HomeController {
     @Autowired
     private HomeService homeService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 销售额
      * @author Mr.Zhang
      * @since 2020-05-16
      */
+//    @ApiOperation(value = "销售额")
+//    @RequestMapping(value = "/sales", method = RequestMethod.GET)
+//    public CommonResult<HomeRateResponse> sales(){
+//        return CommonResult.success(homeService.sales());
+//    }
     @ApiOperation(value = "销售额")
     @RequestMapping(value = "/sales", method = RequestMethod.GET)
-    public CommonResult<HomeRateResponse> sales(){
-        return CommonResult.success(homeService.sales());
+    public CommonResult sales(){
+        BigDecimal sumMoney = userService.getSumMoney();
+        return CommonResult.success(sumMoney);
     }
+
 
     /**
      * 订单量
      * @author Mr.Zhang
      * @since 2020-05-16
      */
+//    @ApiOperation(value = "订单量")
+//    @RequestMapping(value = "/order", method = RequestMethod.GET)
+//    public CommonResult<HomeRateResponse> order(){
+//        return CommonResult.success(homeService.order());
+//    }
     @ApiOperation(value = "订单量")
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public CommonResult<HomeRateResponse> order(){
-        return CommonResult.success(homeService.order());
+    public CommonResult order(){
+        Integer userCount = userService.getUserCount();
+        return CommonResult.success(userCount);
     }
 
 

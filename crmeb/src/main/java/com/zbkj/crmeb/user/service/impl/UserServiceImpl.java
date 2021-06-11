@@ -132,6 +132,16 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Autowired
     private userUtil userUtil;
 
+    @Override
+    public Integer getUserCount() {
+        return baseMapper.getUserCount();
+    }
+
+    @Override
+    public BigDecimal getSumMoney() {
+        return baseMapper.getSumMoney();
+    }
+
     /**
      * 分页显示用户表
      *

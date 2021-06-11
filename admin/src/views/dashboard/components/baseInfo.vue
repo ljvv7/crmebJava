@@ -3,7 +3,11 @@
     <el-row :gutter="24" class="baseInfo">
       <el-col v-bind="grid" class="ivu-mb">
         <el-card :bordered="false" dis-hover :padding="12">
-          <div slot="header" class="acea-row row-between-wrapper">
+          <div>
+            <span>销售额</span>
+            <span>{{sales}} 元</span>
+          </div>
+          <!-- <div slot="header" class="acea-row row-between-wrapper">
             <span>销售额</span>
             <el-tag type="success">昨日</el-tag>
           </div>
@@ -18,10 +22,10 @@
               <span class="content-time">总销售额</span>
               <span>{{sales.total}} 元</span>
             </div>
-          </div>
+          </div> -->
         </el-card>
       </el-col>
-      <el-col v-bind="grid" class="ivu-mb">
+      <!-- <el-col v-bind="grid" class="ivu-mb">
         <el-card :bordered="false" dis-hover :padding="12">
           <div slot="header" class="acea-row row-between-wrapper">
             <span>用户量访问</span>
@@ -40,10 +44,14 @@
             </div>
           </div>
         </el-card>
-      </el-col>
+      </el-col> -->
       <el-col v-bind="grid" class="ivu-mb">
         <el-card :bordered="false" dis-hover :padding="12">
-          <div slot="header" class="acea-row row-between-wrapper">
+          <div>
+            <span>会员数量</span>
+            <span>{{ order }} 名</span>
+          </div>
+          <!-- <div slot="header" class="acea-row row-between-wrapper">
             <span>订单量</span>
             <el-tag type="success">昨日</el-tag>
           </div>
@@ -58,10 +66,10 @@
               <span class="content-time">总订单量</span>
               <span>{{ order.total }} 单</span>
             </div>
-          </div>
+          </div> -->
         </el-card>
       </el-col>
-      <el-col v-bind="grid" class="ivu-mb">
+      <!-- <el-col v-bind="grid" class="ivu-mb">
         <el-card :bordered="false" dis-hover :padding="12">
           <div slot="header" class="acea-row row-between-wrapper">
             <span>新增用户</span>
@@ -80,7 +88,7 @@
             </div>
           </div>
         </el-card>
-      </el-col>
+      </el-col> -->
     </el-row>
   </div>
 </template>
