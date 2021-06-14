@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.crmeb.nsl.nslemons.dao.AdminCraneMapper">
 
-    <select id="getAdmCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
-        select id,name,cbrands,maxweight,introduce,images,expdbcodes,visits,remarks
-        from `nsl_crane`
-        where kbn != '9'
+    <select id="getAdmCraneList" resultType="map">
+        select A.id,A.name,A.cbrands,B.name brand_name,A.maxweight,A.introduce,A.images,A.expdbcodes,A.visits,A.remarks
+        from `nsl_crane` A
+        left join `nsl_cbrands` B on A.cbrands = B.id
+        where A.kbn != '9'
         <if test="cbrandid!=null and cbrandid!=''">
-            and cbrands = #{cbrandid}
+            and A.cbrands = #{cbrandid}
         </if>
         <if test="craneid!=null and craneid!=''">
-            and id = #{craneid}
+            and A.id = #{craneid}
         </if>
         <if test="craneName!=null and craneName!=''">
             and name like "%"#{craneName,jdbcType=VARCHAR}"%"
