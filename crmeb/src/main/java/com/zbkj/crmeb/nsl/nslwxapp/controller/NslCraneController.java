@@ -1,31 +1,23 @@
 package com.zbkj.crmeb.nsl.nslwxapp.controller;
 
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.common.CommonPage;
 import com.common.CommonResult;
+import com.zbkj.crmeb.nsl.commountils.DistanceUtil;
 import com.zbkj.crmeb.nsl.nslemons.model.NslCompany;
 import com.zbkj.crmeb.nsl.nslemons.service.NslCompanyService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCway;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
-import com.zbkj.crmeb.nsl.nslwxapp.request.LimitEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -105,6 +97,8 @@ public class NslCraneController {
      * @param craneid
      * @param pageindex
      * @param pagesize
+     * @param lot
+     * @param lat
      * @return
      */
     @PostMapping("/cranelist")
@@ -112,11 +106,21 @@ public class NslCraneController {
     public CommonResult getCraneList(@RequestParam(required = false) Integer cbrandid,
                                      @RequestParam(required = false) Integer craneid,
                                      @RequestParam Long pageindex,
-                                     @RequestParam Long pagesize){
+                                     @RequestParam Long pagesize,
+                                     @RequestParam(required = false) Double lot,
+                                     @RequestParam(required = false) Double lat){
+
+        Map craneMap = new HashMap();
 
         List<NslCrane> craneList = nslCraneService.getCraneList(cbrandid, craneid, ((pageindex-1)*pagesize), pagesize);
+        if (craneid!=null){
+            Double longitude = craneList.get(0).getLongitude();
+            Double latitude = craneList.get(0).getLatitude();
+            double distance = DistanceUtil.getDistance(lot, lat, longitude, latitude);
+            craneMap.put("distance",distance);
+        }
         Integer craneListCount = nslCraneService.getCraneListCount(cbrandid, craneid);
-        Map craneMap = new HashMap();
+
         craneMap.put("count",craneListCount);
         craneMap.put("craneList",craneList);
         return CommonResult.success(craneMap);

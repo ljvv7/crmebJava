@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.crmeb.nsl.nslemons.dao.AdminCraneMapper">
 
-    <select id="getAdmCraneList" resultType="map">
-        select A.id,A.name,A.cbrands,B.name brand_name,A.maxweight,A.introduce,A.images,A.expdbcodes,A.visits,A.remarks
+    <select id="getAdmCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select A.id,A.name,A.cbrands,B.name brand_name,A.maxweight,A.introduce,A.images,
+                A.expdbcodes,A.guide_price,A.iscollected,A.longitude,A.latitude,A.visits,A.remarks
         from `nsl_crane` A
         left join `nsl_cbrands` B on A.cbrands = B.id
         where A.kbn != '9'

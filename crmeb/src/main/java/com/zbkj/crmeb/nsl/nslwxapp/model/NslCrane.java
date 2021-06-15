@@ -37,6 +37,8 @@ public class NslCrane implements Serializable {
     @ApiModelProperty(value = "品牌ID")
     private Integer cbrands;
 
+    private String brandName;
+
     @ApiModelProperty(value = "最大起重量")
     private BigDecimal maxweight;
 
@@ -48,6 +50,18 @@ public class NslCrane implements Serializable {
 
     @ApiModelProperty(value = "导出图片")
     private String expdbcodes;
+
+    @ApiModelProperty(value = "指导价格")
+    private BigDecimal guidePrice;
+
+    @ApiModelProperty(value = "是否被收藏；1：被收藏，0：未被收藏")
+    private String iscollected;
+
+    @ApiModelProperty(value = "经度")
+    private Double longitude;
+
+    @ApiModelProperty(value = "纬度")
+    private Double latitude;
 
     @ApiModelProperty(value = "访问量")
     private Integer visits;
