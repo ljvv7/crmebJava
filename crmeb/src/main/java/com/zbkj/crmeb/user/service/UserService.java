@@ -41,7 +41,7 @@ public interface UserService extends IService<User> {
 
     PageInfo<UserResponse> getList(UserSearchRequest request, PageParamRequest pageParamRequest);
 
-    boolean updateFounds(UserOperateFundsRequest request, boolean isSaveBill);
+//    boolean updateFounds(UserOperateFundsRequest request, boolean isSaveBill);
 
     boolean updateIntegralMoney(UserOperateIntegralMoneyRequest request);
 
@@ -80,7 +80,7 @@ public interface UserService extends IService<User> {
 
     User getInfo();
 
-    User getUserPromoter();
+//    User getUserPromoter();
 
     User getInfoException();
 
@@ -140,7 +140,7 @@ public interface UserService extends IService<User> {
 
     boolean clearSpread(Integer userId);
 
-    boolean checkIsPromoter(BigDecimal price);
+//    boolean checkIsPromoter(BigDecimal price);
 
     List<User> getTopSpreadPeopleListByDate(String type, PageParamRequest pageParamRequest);
 
