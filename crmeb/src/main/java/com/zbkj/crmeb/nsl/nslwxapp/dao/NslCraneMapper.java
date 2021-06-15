@@ -3,6 +3,7 @@ package com.zbkj.crmeb.nsl.nslwxapp.dao;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList;
+import com.zbkj.crmeb.nsl.nslwxapp.response.HotOrNewCraneEntry;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -30,4 +31,10 @@ public interface NslCraneMapper extends BaseMapper<NslCrane> {
     Integer getCraneListCount(Integer cbrandid,Integer craneid);
 
     List<CollectAndCraneList> getcollectAndCraneList(Integer userId);
+
+    //获取最火车型
+    List<HotOrNewCraneEntry> getHotCraneList();
+
+    //获取最新车型
+    List<HotOrNewCraneEntry> getNewCraneList();
 }

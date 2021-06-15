@@ -53,12 +53,14 @@ public class NslCompanyController {
         int limit = tableFrom.getPagesize();
         int page = tableFrom.getPageindex();
         String companyName = tableFrom.getCode();
+        double longitude = tableFrom.getLongitude();
+        double latitude = tableFrom.getLatitude();
 
-       Map map = new HashMap();
+        Map map = new HashMap();
         if(!StringUtils.isEmpty(companyName)){
-            map = nslCompanyService.getAllCompanyLimit(page,limit,companyName);
+            map = nslCompanyService.getAllCompanyLimit(page,limit,companyName,longitude,latitude);
         }else {
-            map = nslCompanyService.getAllCompany(page,limit);
+            map = nslCompanyService.getAllCompany(page,limit,longitude,latitude);
         }
         return CommonResult.success(map);
     }
@@ -77,12 +79,18 @@ public class NslCompanyController {
         NslCompany byId = nslCompanyService.getById(companyid);
         //根据公司查找车辆
         List list = nslCbindService.getCraneIdByCompanyId(companyid);
+        List list1 = new ArrayList();
+        if(null == (byId)){
+
+        }else {
+            list1.add(byId);
+        }
         //获取公司下所有车辆
         if(list.size()>0){
             List allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
-            map.put("companylist",allCraneByCompanyId);
+            map.put("cranedetaillist",allCraneByCompanyId);
         }
-        map.put("cranedetail",byId);
+        map.put("companyById",list1);
 
         return CommonResult.success(map);
     }

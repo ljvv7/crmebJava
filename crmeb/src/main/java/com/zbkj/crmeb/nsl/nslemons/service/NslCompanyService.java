@@ -31,9 +31,9 @@ public interface NslCompanyService extends IService<NslCompany> {
      */
     String getAuthmsgv1();
 
-    Map getAllCompanyLimit(int page, int limit, String companyName);
+    Map getAllCompanyLimit(int page, int limit, String companyName,double longitude,double latitude);
 
-    Map getAllCompany(int page, int limit);
+    Map getAllCompany(int page, int limit,double longitude,double latitude);
 
     void deleteCompanyKbn(int id);
 

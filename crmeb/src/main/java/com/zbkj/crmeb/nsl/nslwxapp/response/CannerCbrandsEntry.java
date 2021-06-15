@@ -9,7 +9,6 @@ public class CannerCbrandsEntry {
 
     private String name;
     private Integer cbrands;
-
     private String maxweight;
     private String introduce;
     private String images;

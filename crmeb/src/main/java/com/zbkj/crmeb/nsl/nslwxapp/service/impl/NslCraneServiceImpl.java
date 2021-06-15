@@ -2,6 +2,7 @@ package com.zbkj.crmeb.nsl.nslwxapp.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.zbkj.crmeb.nsl.nslwxapp.dao.NslCraneMapper;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CannerCbrandsEntry;
@@ -30,31 +31,15 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
 
     @Override
     public List<CannerCbrandsEntry> getHotCraneList() {
-
-        long page = 1;
-        long limit =5;
-
-        Page pageCourse = new Page(page,limit);
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.ne("kbn","9");
-        queryWrapper.orderByDesc("visits");
-        nslCraneService.page(pageCourse,queryWrapper);
-        List records = pageCourse.getRecords();
+        List records = baseMapper.getHotCraneList();
         return records;
     }
 
     @Override
     public List<CannerCbrandsEntry> getNewCraneList() {
-        long page = 1;
-        long limit =5;
-        Page pageCourse = new Page(page,limit);
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.ne("kbn","9");
-        queryWrapper.orderByDesc("update_date");
-        nslCraneService.page(pageCourse,queryWrapper);
-        List records = pageCourse.getRecords();
+        List records = baseMapper.getNewCraneList();
 
-        return null;
+        return records;
     }
 
     /**

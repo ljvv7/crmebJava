@@ -52,4 +52,17 @@
         left join nsl_cbrands cbr
         on cbr.id = cra.cbrands
     </select>
+
+    <select id="getHotCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.response.HotOrNewCraneEntry">
+
+        select id,name,maxweight,introduce,images,guide_price,visits,update_date from `nsl_crane` where kbn != '9'
+        order by visits desc limit 0,5
+    </select>
+
+    <select id="getNewCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.response.HotOrNewCraneEntry">
+
+        select id,name,maxweight,introduce,images,guide_price,visits,update_date from `nsl_crane` where kbn != '9'
+        order by update_date desc limit 0,5
+    </select>
+
 </mapper>

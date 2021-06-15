@@ -10,5 +10,7 @@ public class GetAllComapnyEntry {
     private int pagesize;
 
     private String code;
+    private double  longitude;
+    private double  latitude;
 
 }
