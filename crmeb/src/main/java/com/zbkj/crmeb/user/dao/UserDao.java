@@ -5,6 +5,7 @@ import com.zbkj.crmeb.front.response.UserSpreadPeopleItemResponse;
 import com.zbkj.crmeb.user.model.User;
 import com.zbkj.crmeb.user.vo.UserOperateFundsVo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
