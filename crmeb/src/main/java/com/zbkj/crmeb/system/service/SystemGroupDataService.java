@@ -37,4 +37,10 @@ public interface SystemGroupDataService extends IService<SystemGroupData> {
     <T> T getNormalInfo(Integer groupDataId, Class<T> cls);
 
     List<SystemGroupData> getSystemByGidId(Integer gid);
+
+    /**
+     * 获取个人中心菜单
+     * @return HashMap<String, Object>
+     */
+    HashMap<String, Object> getMenuUser();
 }

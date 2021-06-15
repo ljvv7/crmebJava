@@ -93,8 +93,22 @@ public interface UserService extends IService<User> {
 
     Map<Object, Object> getAddUserCountGroupDate(String date);
 
-    boolean bind(UserBindingRequest request);
+    boolean bind(UserBindingPhoneUpdateRequest request);
 
+    /**
+     * 换绑手机号校验
+     */
+    Boolean updatePhoneVerify(UserBindingPhoneUpdateRequest request);
+
+    /**
+     * 换绑手机号
+     */
+    Boolean updatePhone(UserBindingPhoneUpdateRequest request);
+
+    /**
+     * 个人中心-用户信息
+     * @return UserCenterResponse
+     */
     UserCenterResponse getUserCenter();
 
     HashMap<Integer, User> getMapListInUid(List<Integer> uidList);
@@ -111,7 +125,7 @@ public interface UserService extends IService<User> {
 
     TopDetail getTopDetail(Integer userId);
 
-    User registerByThird(RegisterThirdUserRequest thirdUserRequest, String type);
+    User registerByThird(RegisterThirdUserRequest thirdUserRequest);
 
     String token(User user) throws Exception;
 
@@ -121,7 +135,7 @@ public interface UserService extends IService<User> {
 
     PageInfo<User> getUserListBySpreadLevel(RetailShopStairUserRequest request, PageParamRequest pageParamRequest);
 
-    PageInfo<StoreOrder> getOrderListBySpreadLevel(RetailShopStairUserRequest request, PageParamRequest pageParamRequest);
+    PageInfo<SpreadOrderResponse> getOrderListBySpreadLevel(RetailShopStairUserRequest request, PageParamRequest pageParamRequest);
 
     boolean clearSpread(Integer userId);
 
@@ -131,16 +145,18 @@ public interface UserService extends IService<User> {
 
     Integer getCountByPayCount(int minPayCount, int maxPayCount);
 
-    void consumeAfterUpdateUserFounds(Integer uid, BigDecimal price, String type);
+    /**
+     * 绑定推广关系（登录状态）
+     * @param spreadUid 推广人id
+     */
+    void bindSpread(Integer spreadUid);
 
-    void bindSpread(User user, Integer spreadPid);
-
-    boolean upadteBrokeragePrice(User user, BigDecimal newBrokeragePrice);
+    boolean updateBrokeragePrice(User user, BigDecimal newBrokeragePrice);
 
     /**
      * 更新推广人
-     * @param request
-     * @return
+     * @param request 请求参数
+     * @return Boolean
      */
     Boolean editSpread(UserUpdateSpreadRequest request);
 
@@ -165,7 +181,7 @@ public interface UserService extends IService<User> {
      * 获取发展会员人数
      * @param ids       推广人id集合
      * @param dateLimit 时间参数
-     * @return
+     * @return Integer
      */
     Integer getDevelopDistributionPeopleNum(List<Integer> ids, String dateLimit);
 
@@ -175,10 +191,9 @@ public interface UserService extends IService<User> {
      * 手机号注册用户
      * @param phone 手机号
      * @param spreadUid 推广人编号
-     * @param clientIp ip
-     * @return
+     * @return User
      */
-    User registerPhone(String phone, Integer spreadUid, String clientIp);
+    User registerPhone(String phone, Integer spreadUid);
 
     /**
      * 检测能否绑定关系
@@ -244,5 +259,27 @@ public interface UserService extends IService<User> {
      * 更新用户
      * @param userRequest 用户参数
      */
-    Boolean updateUser(UserRequest userRequest);
+    Boolean updateUser(UserUpdateRequest userRequest);
+
+    /**
+     * 根据手机号查询用户
+     * @param phone 用户手机号
+     * @return 用户信息
+     */
+    User getByPhone(String phone);
+
+    /**
+     * 后台修改用户手机号
+     * @param id 用户uid
+     * @param phone 手机号
+     * @return Boolean
+     */
+    Boolean updateUserPhone(Integer id, String phone);
+
+    /**
+     * 根据昵称匹配用户，返回id集合
+     * @param nikeName 需要匹配得昵称
+     * @return List
+     */
+    List<Integer> findIdListLikeName(String nikeName);
 }

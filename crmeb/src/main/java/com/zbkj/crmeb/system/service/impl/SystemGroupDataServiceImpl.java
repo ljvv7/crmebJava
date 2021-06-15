@@ -250,5 +250,17 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
         return arrayList;
     }
 
+    /**
+     * 获取个人中心菜单
+     * @return HashMap<String, Object>
+     */
+    @Override
+    public HashMap<String, Object> getMenuUser() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("routine_my_menus", getListMapByGid(SysGroupDataConstants.GROUP_DATA_ID_USER_CENTER_MENU));
+        map.put("routine_my_banner", getListMapByGid(SysGroupDataConstants.GROUP_DATA_ID_USER_CENTER_BANNER));
+        return map;
+    }
+
 }
 
