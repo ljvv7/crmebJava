@@ -8,7 +8,7 @@
               <el-input v-model="detailInfo.id"></el-input>
             </el-form-item>
             <el-form-item label="品牌名称">
-              <el-input v-model="detailInfo.brand_name"></el-input>
+              <el-input v-model="detailInfo.brandName"></el-input>
             </el-form-item>
             <el-form-item label="车辆型号">
               <el-input v-model="detailInfo.name"></el-input>

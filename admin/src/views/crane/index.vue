@@ -43,7 +43,7 @@
           min-width="100"
         />
         <el-table-column
-          prop="brand_name"
+          prop="cbrands"
           label="品牌名称"
           min-width="100"
         />
