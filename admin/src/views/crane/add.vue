@@ -3,27 +3,35 @@
     <el-card class="box-card">
       <el-tabs v-model="activeName" @tab-click="seachList">
         <el-tab-pane label="车辆信息" name="first">
-          <el-form ref="form" :model="detailInfo" label-width="100px">
-            <el-form-item label="车辆ID">
-              <el-input v-model="detailInfo.id"></el-input>
-            </el-form-item>
+          <el-form ref="form" :model="craneInfo" label-width="100px">
             <el-form-item label="品牌名称">
-              <el-input v-model="detailInfo.brandName"></el-input>
+              <el-select v-model="craneInfo.cbrands" placeholder="请选择" @change="getOListById">
+                <el-option
+                  v-for="item in brandList"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+                </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="车辆型号">
-              <el-input v-model="detailInfo.name"></el-input>
+              <el-input v-model="craneInfo.name"></el-input>
             </el-form-item>
             <el-form-item label="最大起重量">
-              <el-input v-model="detailInfo.maxweight"></el-input>
+              <el-input v-model="craneInfo.maxweight"></el-input>
+            </el-form-item>
+            <el-form-item label="指导价格">
+              <el-input v-model="craneInfo.guidePrice"></el-input>
             </el-form-item>
             <el-form-item label="车型图片">
-              <el-image style="width: 100px; height: 100px" :src="detailInfo.image"/>
+              <el-input v-model="craneInfo.images"></el-input>
             </el-form-item>
             <el-form-item label="车辆简介">
-              <el-input type="textarea" :rows="3" v-model="detailInfo.introduce"></el-input>
+              <el-input v-model="craneInfo.introduce"></el-input>
             </el-form-item>
+
             <el-form-item>
-              <el-button type="primary" @click="onSubmit">保存</el-button>
+              <el-button type="primary" :plain="true" @click="onSubmit">保存</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -153,16 +161,17 @@ import { param } from '@/utils'
   export default {
     data() {
       return {
-        detailInfo: {},
+        craneInfo: {},
+        brandList: [],
         tableFrom: {
           // cbrandid: null,
-          craneid: this.$route.query.id,
+          craneid: null,
           // craneName: '',
           page: 1,
           limit: 10
         },
         wayTableFrom:{
-          craneid: this.$route.query.id,
+          craneid: null,
           cweightid : null,
           cwayid: null,
           page: 1,
@@ -184,32 +193,21 @@ import { param } from '@/utils'
     },
 
     created(){
-        this.getDetail()
-        this.getWeightList()
+        this.getBrandList()
     },
     methods: {
 
-      getDetail(){
+      getBrandList(){
         this.listLoading = true
-        crane.getCraneList(this.tableFrom).then(res=>{
-          this.detailInfo = res.admCraneList[0]
+        crane.getBrandList().then(res =>{
+          this.brandList = res
+          this.listLoading = true
+        }).catch(res => {
+          this.listLoading = false
         })
       },
-
-      getWeightList(){
-        this.listLoading = true
-        crane.getWeightList(this.tableFrom).then(res=>{
-          this.weightData.data = res.admWeightList
-          this.weightData.total = res.count
-        })
-      },
-
-      getWayList(){
-        this.listLoading = true
-        crane.getWayList(this.wayTableFrom).then(res=>{
-          this.wayData.data = res.admWayList
-          this.wayData.total = res.count
-        })
+      getOListById(cbrandid){
+        this.craneInfo.cbrands = cbrandid
       },
 
       seachList(tab, event){
@@ -217,25 +215,17 @@ import { param } from '@/utils'
         // this.getDetail()
       },
 
-      seeWay(id) {
-        this.wayTableFrom.cweightid = id
-        this.getWayList()
-        this.activeName = 'third'
-      },
-
-      deleteRow(id) {
-        alert(id)
-        alert(this.Companyform.id)
-        company.deleteCompanyAndCrane(id,this.Companyform.id).then(res =>{
-
-        })
-      },
-      
       onSubmit() {
-        company.updateCompanyById(this.Companyform).then(res =>{
-
+        crane.addCrane(this.craneInfo).then(res=>{
+          console.log(res);
+          this.$message({
+            message: '车辆新增成功!',
+            type: 'success'
+          });
         })
-        console.log('submit!');
+        this.$router.push({
+          path: 'craneQuery'
+        })
       }
       
     }

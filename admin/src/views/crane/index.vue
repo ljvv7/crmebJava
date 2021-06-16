@@ -41,23 +41,27 @@
           prop="id"
           label="车辆ID"
           min-width="100"
+          align="center"
         />
         <el-table-column
-          prop="cbrands"
+          prop="brandName"
           label="品牌名称"
           min-width="100"
+          align="center"
         />
         <el-table-column
           prop="name"
           label="车辆型号"
           min-width="100"
+          align="center"
         />
         <el-table-column
           prop="maxweight"
           label="最大起重量"
           min-width="100"
+          align="center"
         />
-        <el-table-column label="车型图片" min-width="100">
+        <el-table-column label="车型图片" min-width="100" align="center">
           <template slot-scope="scope">
             <div class="demo-image__preview">
               <el-image
@@ -69,9 +73,11 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="remarks"
+          prop="introduce"
           label="车辆简介"
           min-width="150"
+          align="center"
+          :show-overflow-tooltip="true"
         />
         <el-table-column label="查看" min-width="100" fixed="right" align="center">
           <template slot-scope="scope">
@@ -150,6 +156,7 @@ export default {
     
     getAdmCraneList(){
       this.listLoading = true
+      // debugger
       crane.getCraneList(this.tableFrom).then(res =>{
         this.tableData.data = res.admCraneList
         this.tableData.total = res.count
@@ -164,6 +171,12 @@ export default {
       this.getAdmCraneList()
     },
 
+    add(){
+      this.$router.push({
+        path: 'addCrane',
+      })
+    },
+
     seeDetail(id) {
       this.$router.push({
         path: 'craneDetails',
@@ -171,6 +184,16 @@ export default {
           id: id
 		    }
       })
+    },
+
+    rmdelete(id){
+      crane.removeCrane(id).then(res=>{  
+        this.$message({
+          message: '车辆移除成功!',
+          type: 'success'
+        })
+      });
+      this.getAdmCraneList();
     },
 
     // 复制

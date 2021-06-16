@@ -32,6 +32,19 @@ export default {
       method: 'post',
       data: wayTableFrom
     })
+  },
+  addCrane(craneInfo){
+    return request({
+      url: 'admin/nsl/adminCrane/addCrane',
+      method: 'post',
+      data: craneInfo
+    })
+  },
+  removeCrane(id){
+    return request({
+      url: `admin/nsl/adminCrane/removeCrane/${id}`,
+      method: 'get'
+    })
   }
 
 }

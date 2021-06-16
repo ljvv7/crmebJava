@@ -21,7 +21,13 @@ const craneRouter = {
       component: () => import('@/views/crane/detail'),
       name: 'detail',
       meta: { title: '车辆详情', icon: '' }
-    }
+    },
+    {
+      path: 'addCrane',
+      component: () => import('@/views/crane/add'),
+      name: 'add',
+      meta: { title: '车辆新增', icon: '' }
+    },
   ]
 }
 

@@ -1,6 +1,7 @@
 package com.zbkj.crmeb.nsl.nslemons.controller;
 
 import com.common.CommonResult;
+import com.zbkj.crmeb.nsl.nslemons.request.AdmAddCraneReqParam;
 import com.zbkj.crmeb.nsl.nslemons.request.AdmCraneListReqParam;
 import com.zbkj.crmeb.nsl.nslemons.request.AdmWayListReqParam;
 import com.zbkj.crmeb.nsl.nslemons.request.AdmWeightListReqParam;
@@ -14,11 +15,9 @@ import com.zbkj.crmeb.nsl.nslwxapp.service.NslCwayService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCweightService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +94,11 @@ public class AdminCraneController {
         return CommonResult.success(map);
     }
 
+    /**
+     * 组合方式
+     * @param tableFrom
+     * @return
+     */
     @PostMapping("/admWayList")
     public CommonResult getAdmWayList(@RequestBody(required = false) AdmWayListReqParam tableFrom){
         Integer craneid = tableFrom.getCraneid();
@@ -109,6 +113,37 @@ public class AdminCraneController {
         map.put("admWayList",wayList);
         map.put("count",wayListCount);
         return CommonResult.success(map);
+    }
+
+    @PostMapping("/addCrane")
+    public CommonResult addCrane(@RequestBody(required = false) AdmAddCraneReqParam craneInfo){
+        Integer cbrands = craneInfo.getCbrands();
+        String name = craneInfo.getName();
+        BigDecimal maxweight = craneInfo.getMaxweight();
+        BigDecimal guidePrice = craneInfo.getGuidePrice();
+        String images = craneInfo.getImages();
+        String introduce = craneInfo.getIntroduce();
+
+        Integer flag = adminCraneService.addCrane(name, cbrands, maxweight, introduce, images, guidePrice);
+        String msg = null;
+        if (flag>0){
+            msg = "车辆新增成功!";
+        }else{
+            msg = "车辆新增失败!";
+        }
+        return CommonResult.success(msg);
+    }
+
+    @GetMapping("/removeCrane/{id}")
+    public CommonResult removeCrane(@PathVariable Integer id){
+        Integer flag = adminCraneService.removeCrane(id);
+        String msg = null;
+        if (flag>0){
+            msg = "车辆移除成功!";
+        }else{
+            msg = "车辆移除失败!";
+        }
+        return CommonResult.success(msg);
     }
 
 }

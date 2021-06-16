@@ -2,10 +2,12 @@ package com.zbkj.crmeb.nsl.nslemons.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbkj.crmeb.nsl.nslemons.dao.AdminCraneMapper;
+import com.zbkj.crmeb.nsl.nslemons.request.AdmAddCraneReqParam;
 import com.zbkj.crmeb.nsl.nslemons.service.AdminCraneService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -35,5 +37,26 @@ public class AdminCraneServiceImpl extends ServiceImpl<AdminCraneMapper, NslCran
     @Override
     public Integer getAdmCraneListCount(Integer cbrandid, Integer craneid, String craneName) {
         return baseMapper.getAdmCraneListCount(cbrandid, craneid, craneName);
+    }
+
+    /**
+     * 新增车辆
+     * @param
+     * @return
+     */
+    @Override
+    public Integer addCrane(String name, Integer cbrands, BigDecimal maxweight,
+                            String introduce, String images, BigDecimal guidePrice) {
+        return baseMapper.addCrane(name, cbrands, maxweight, introduce, images, guidePrice);
+    }
+
+    /**
+     * 移除车辆
+     * @param id
+     * @return
+     */
+    @Override
+    public Integer removeCrane(Integer id) {
+        return baseMapper.removeCrane(id);
     }
 }

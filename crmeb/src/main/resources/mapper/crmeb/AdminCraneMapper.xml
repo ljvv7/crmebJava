@@ -35,5 +35,16 @@
         </if>
         ;
     </select>
+    
+    <insert id="addCrane">
+        insert into nsl_crane (name, cbrands, maxweight, introduce, images, guide_price)
+        values (#{name},#{cbrands},#{maxweight},#{introduce},#{images},#{guidePrice});
+    </insert>
+
+    <update id="removeCrane" parameterType="int">
+        update nsl_crane
+        set kbn = '9'
+        where id = #{id};
+    </update>
 
 </mapper>
