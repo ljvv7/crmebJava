@@ -15,7 +15,7 @@
             and A.id = #{craneid}
         </if>
         <if test="craneName!=null and craneName!=''">
-            and name like "%"#{craneName,jdbcType=VARCHAR}"%"
+            and A.name like "%"#{craneName,jdbcType=VARCHAR}"%"
         </if>
         limit #{pageindex},#{pagesize};
     </select>
@@ -45,6 +45,19 @@
         update nsl_crane
         set kbn = '9'
         where id = #{id};
+    </update>
+
+    <update id="removeWeight" parameterType="int">
+        update nsl_cweight
+        set kbn = '9'
+        where id = #{id};
+    </update>
+
+    <update id="editCrane">
+        update nsl_crane
+        set name = #{name},maxweight = #{maxweight},introduce = #{introduce},
+            images = #{images},guide_price = #{guidePrice}
+        where id = #{craneid};
     </update>
 
 </mapper>

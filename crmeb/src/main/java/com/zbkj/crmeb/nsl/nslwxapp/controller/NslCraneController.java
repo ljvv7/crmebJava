@@ -56,10 +56,18 @@ public class NslCraneController {
     @ApiOperation(value = "车辆详情")
     public CommonResult getDetail(@RequestParam Integer craneid,
                                   @RequestParam Long pageindex,
-                                  @RequestParam Long pagesize){
+                                  @RequestParam Long pagesize,
+                                  @RequestParam Double lot,
+                                  @RequestParam Double lat){
 
+        Map map = new HashMap();
         //根据车辆id获取车辆信息
         NslCrane cranedetail = nslCraneService.getCraneDetailById(craneid);
+
+        Double longitude = cranedetail.getLongitude();
+        Double latitude = cranedetail.getLatitude();
+        double distance = DistanceUtil.getDistance(lot, lat, longitude, latitude);
+        map.put("distance",distance);
 
         //根据车辆id查询公司ids
         List companyIds = nslCbindService.getCompanyIdsByCraneId(craneid);
@@ -69,7 +77,7 @@ public class NslCraneController {
         //查询公司信息总条数
         Integer companyListCount = nslCompanyService.getCompanyListCount(companyIds);
 
-        Map map = new HashMap();
+
         map.put("cranedetail",cranedetail);
         map.put("companylist",companyList);
         map.put("count",companyListCount);
@@ -97,8 +105,6 @@ public class NslCraneController {
      * @param craneid
      * @param pageindex
      * @param pagesize
-     * @param lot
-     * @param lat
      * @return
      */
     @PostMapping("/cranelist")
@@ -106,19 +112,12 @@ public class NslCraneController {
     public CommonResult getCraneList(@RequestParam(required = false) Integer cbrandid,
                                      @RequestParam(required = false) Integer craneid,
                                      @RequestParam Long pageindex,
-                                     @RequestParam Long pagesize,
-                                     @RequestParam(required = false) Double lot,
-                                     @RequestParam(required = false) Double lat){
+                                     @RequestParam Long pagesize){
 
         Map craneMap = new HashMap();
 
         List<NslCrane> craneList = nslCraneService.getCraneList(cbrandid, craneid, ((pageindex-1)*pagesize), pagesize);
-        if (craneid!=null){
-            Double longitude = craneList.get(0).getLongitude();
-            Double latitude = craneList.get(0).getLatitude();
-            double distance = DistanceUtil.getDistance(lot, lat, longitude, latitude);
-            craneMap.put("distance",distance);
-        }
+
         Integer craneListCount = nslCraneService.getCraneListCount(cbrandid, craneid);
 
         craneMap.put("count",craneListCount);

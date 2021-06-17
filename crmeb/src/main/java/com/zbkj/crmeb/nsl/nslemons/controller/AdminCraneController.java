@@ -115,6 +115,11 @@ public class AdminCraneController {
         return CommonResult.success(map);
     }
 
+    /**
+     * 车辆新增
+     * @param craneInfo
+     * @return
+     */
     @PostMapping("/addCrane")
     public CommonResult addCrane(@RequestBody(required = false) AdmAddCraneReqParam craneInfo){
         Integer cbrands = craneInfo.getCbrands();
@@ -134,6 +139,30 @@ public class AdminCraneController {
         return CommonResult.success(msg);
     }
 
+    @PostMapping("/editCrane")
+    public CommonResult editCrane(@RequestBody(required = false) AdmAddCraneReqParam detailInfo){
+        Integer craneid = detailInfo.getId();
+        String name = detailInfo.getName();
+        BigDecimal maxweight = detailInfo.getMaxweight();
+        BigDecimal guidePrice = detailInfo.getGuidePrice();
+        String introduce = detailInfo.getIntroduce();
+        String images = detailInfo.getImages();
+        Integer flag = adminCraneService.editCrane(craneid, name, maxweight, introduce, images,guidePrice);
+
+        String msg = null;
+        if (flag>0){
+            msg = "车辆信息修改成功!";
+        }else{
+            msg = "车辆信息修改失败!";
+        }
+        return CommonResult.success(msg);
+    }
+
+    /**
+     * 车辆移除
+     * @param id
+     * @return
+     */
     @GetMapping("/removeCrane/{id}")
     public CommonResult removeCrane(@PathVariable Integer id){
         Integer flag = adminCraneService.removeCrane(id);
@@ -142,6 +171,23 @@ public class AdminCraneController {
             msg = "车辆移除成功!";
         }else{
             msg = "车辆移除失败!";
+        }
+        return CommonResult.success(msg);
+    }
+
+    /**
+     * 配重移除
+     * @param id
+     * @return
+     */
+    @GetMapping("/removeWeight/{id}")
+    public CommonResult removeWeight(@PathVariable Integer id){
+        Integer flag = adminCraneService.removeWeight(id);
+        String msg = null;
+        if (flag>0){
+            msg = "配重移除成功!";
+        }else{
+            msg = "配重移除失败!";
         }
         return CommonResult.success(msg);
     }

@@ -5,7 +5,7 @@
         <div class="container">
           <el-form inline size="small">
             <el-form-item label="品牌搜索：">
-              <el-select v-model="brandList.name" placeholder="请选择" @change="getOListById">
+              <el-select v-model="brandList.name" placeholder="全选" @change="getOListById">
                 <el-option
                   v-for="item in brandList"
                   :key="item.id"
@@ -16,14 +16,13 @@
             </el-form-item>
             <el-form-item label="车型搜索：">
               <el-input v-model="tableFrom.craneName" placeholder="请输入车辆型号" class="selWidth" size="small" clearable>
-                <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/>
+                <!-- <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/> -->
               </el-input>
             </el-form-item>
             <el-form-item>
-              <!-- <el-button size="small" @click="seachList">搜索</el-button> -->
-              <el-button size="small" @click="add">新增</el-button>
+              <el-button size="small" type="primary" @click="seachList">搜索</el-button>
+              <el-button size="small" type="primary" @click="add">新增</el-button>
               <el-button size="small" @click="exports">导出</el-button>
-              <!-- <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/> -->
             </el-form-item>
 
           </el-form>

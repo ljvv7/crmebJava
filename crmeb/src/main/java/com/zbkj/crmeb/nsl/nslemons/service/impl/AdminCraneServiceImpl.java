@@ -59,4 +59,29 @@ public class AdminCraneServiceImpl extends ServiceImpl<AdminCraneMapper, NslCran
     public Integer removeCrane(Integer id) {
         return baseMapper.removeCrane(id);
     }
+
+    /**
+     * 移除配重
+     * @param id
+     * @return
+     */
+    @Override
+    public Integer removeWeight(Integer id) {
+        return baseMapper.removeWeight(id);
+    }
+
+    /**
+     * 修改车辆
+     * @param craneid
+     * @param name
+     * @param maxweight
+     * @param introduce
+     * @param guidePrice
+     * @return
+     */
+    @Override
+    public Integer editCrane(Integer craneid, String name, BigDecimal maxweight,
+                             String introduce, String images, BigDecimal guidePrice) {
+        return baseMapper.editCrane(craneid, name, maxweight, introduce, images, guidePrice);
+    }
 }

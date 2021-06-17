@@ -29,6 +29,13 @@
         </if>
         ;
     </select>
+
+    <select id="getCraneDetailById" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select id,name,cbrands,maxweight,introduce,images,
+               expdbcodes,guide_price,iscollected,longitude,latitude,visits,remarks
+        from `nsl_crane`
+        where id = #{craneid};
+    </select>
     
     <select id="getAllCraneByCompanyId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
         select id,name,cbrands,maxweight,introduce,images,expdbcodes

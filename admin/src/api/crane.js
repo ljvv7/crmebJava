@@ -40,9 +40,22 @@ export default {
       data: craneInfo
     })
   },
+  editCrane(detailInfo){
+    return request({
+      url: 'admin/nsl/adminCrane/editCrane',
+      method: 'post',
+      data: detailInfo
+    })
+  },
   removeCrane(id){
     return request({
       url: `admin/nsl/adminCrane/removeCrane/${id}`,
+      method: 'get'
+    })
+  },
+  removeWeight(id){
+    return request({
+      url: `admin/nsl/adminCrane/removeWeight/${id}`,
       method: 'get'
     })
   }

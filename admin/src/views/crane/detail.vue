@@ -5,10 +5,13 @@
         <el-tab-pane label="车辆信息" name="first">
           <el-form ref="form" :model="detailInfo" label-width="100px">
             <el-form-item label="车辆ID">
-              <el-input v-model="detailInfo.id"></el-input>
+              <el-input v-model="detailInfo.id" disabled></el-input>
             </el-form-item>
             <el-form-item label="品牌名称">
-              <el-input v-model="detailInfo.brandName"></el-input>
+              <el-input v-model="detailInfo.brandName" disabled></el-input>
+            </el-form-item>
+            <el-form-item label="车型图片">
+              <el-image style="width: 100px; height: 100px" :src="detailInfo.image"/>
             </el-form-item>
             <el-form-item label="车辆型号">
               <el-input v-model="detailInfo.name"></el-input>
@@ -16,20 +19,22 @@
             <el-form-item label="最大起重量">
               <el-input v-model="detailInfo.maxweight"></el-input>
             </el-form-item>
-            <el-form-item label="车型图片">
-              <el-image style="width: 100px; height: 100px" :src="detailInfo.image"/>
+            <el-form-item label="指导价格">
+              <el-input v-model="detailInfo.guidePrice"></el-input>
             </el-form-item>
             <el-form-item label="车辆简介">
               <el-input type="textarea" :rows="3" v-model="detailInfo.introduce"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="onSubmit">保存</el-button>
+              <el-button type="primary" :plain="true" @click="onSubmit">保存</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
 
         <el-tab-pane label="配重列表" name="second">
+          <el-button size="small" type="primary" @click="addWeight">新增配重</el-button>
           <el-table
+            v-loading="listLoading"
             :data="weightData.data"
             style="width: 100%"
             max-height="700">
@@ -149,15 +154,14 @@
 <script>
 import crane from '@/api/crane'
 import { param } from '@/utils'
+import addWeightVue from './addWeight.vue'
 
   export default {
     data() {
       return {
         detailInfo: {},
         tableFrom: {
-          // cbrandid: null,
           craneid: this.$route.query.id,
-          // craneName: '',
           page: 1,
           limit: 10
         },
@@ -176,6 +180,7 @@ import { param } from '@/utils'
           data: [],
           total: 0
         },
+        listLoading: true,
         activeName: 'first',
         url: this.images,
         srcList: this.images,
@@ -201,6 +206,7 @@ import { param } from '@/utils'
         crane.getWeightList(this.tableFrom).then(res=>{
           this.weightData.data = res.admWeightList
           this.weightData.total = res.count
+          this.listLoading = false
         })
       },
 
@@ -214,7 +220,6 @@ import { param } from '@/utils'
 
       seachList(tab, event){
         this.tableFrom.page = 1
-        // this.getDetail()
       },
 
       seeWay(id) {
@@ -223,19 +228,35 @@ import { param } from '@/utils'
         this.activeName = 'third'
       },
 
-      deleteRow(id) {
-        alert(id)
-        alert(this.Companyform.id)
-        company.deleteCompanyAndCrane(id,this.Companyform.id).then(res =>{
-
-        })
+      rmdelete(id){
+        crane.removeWeight(id).then(res=>{  
+          this.$message({
+            message: '配重移除成功!',
+            type: 'success'
+          })
+        });
+        this.getWeightList();
       },
       
       onSubmit() {
-        company.updateCompanyById(this.Companyform).then(res =>{
-
+        crane.editCrane(this.detailInfo).then(res =>{
+          this.$message({
+            message: '车辆信息修改成功!',
+            type: 'success'
+          });
         })
-        console.log('submit!');
+        this.$router.push({
+          path: 'craneQuery'
+        })
+      },
+
+      addWeight(){
+        this.$router.push({
+          path: 'addWeight',
+          weight: {
+            cid: this.detailInfo.id
+          }
+        })
       }
       
     }

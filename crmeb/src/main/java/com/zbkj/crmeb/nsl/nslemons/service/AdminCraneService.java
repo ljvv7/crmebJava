@@ -23,4 +23,11 @@ public interface AdminCraneService extends IService<NslCrane> {
     //移除车辆
     Integer removeCrane(Integer id);
 
+    //移除配重
+    Integer removeWeight(Integer id);
+
+    //修改车辆
+    Integer editCrane(Integer craneid,String name,BigDecimal maxweight,
+                      String introduce,String images,BigDecimal guidePrice);
+
 }

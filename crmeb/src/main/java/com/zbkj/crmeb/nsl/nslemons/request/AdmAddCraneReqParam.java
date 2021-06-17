@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 @Data
 public class AdmAddCraneReqParam {
+    private Integer id;
     private Integer cbrands;
     private String name;
     private BigDecimal maxweight;
