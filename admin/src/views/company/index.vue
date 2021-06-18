@@ -11,11 +11,12 @@
             </el-form-item>
           </el-form>
         </div>
-         <el-button size="small" @click="exports">导出</el-button>
+         <el-button size="small" @click="exportExcel">导出</el-button>
       </div>
       <el-table
         v-loading="listLoading"
         :data="tableData.data"
+        id="outTable"
         style="width: 100%"
         size="mini"
         highlight-current-row
@@ -121,6 +122,8 @@
 
 // import { getAallCompanyApi,productExcelApi} from '@/api/company'
 import company from '@/api/company'
+import FileSaver from 'file-saver';
+import XLSX from 'xlsx';
 import router from '@/router'
 export default {
   name: 'ProductList',
@@ -242,11 +245,23 @@ export default {
       this.dialogVisible = true
     },
     // 导出
-    exports () {
-      company.productExcelApi({cateId:this.tableFrom.cateId,keywords: this.tableFrom.keywords, type:this.tableFrom.type}).then((res) => {
-        window.open(res.fileName)
-      })
-    //  window.open(this.objectUrl + 'admin/export/excel/product?type=1&Authori-zation=' + getToken())
+    exportExcel() {
+      var xlsxParam = { raw: true };//转换成excel时，使用原始的格式
+      var wb = XLSX.utils.table_to_book(document.querySelector("#outTable"),xlsxParam);//outTable为列表id
+      var wbout = XLSX.write(wb, {
+          bookType: "xlsx",
+          bookSST: true,
+          type: "array"
+      });
+      try {
+          FileSaver.saveAs(
+          new Blob([wbout], { type: "application/octet-stream;charset=utf-8" }),
+          "companyList.xlsx"
+          );
+      } catch (e) {
+          if (typeof console !== "undefined") console.log(e, wbout);
+      }
+      return wbout;
     },
 
     pageChange(pageindex) {

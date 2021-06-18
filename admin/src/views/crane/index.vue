@@ -22,7 +22,7 @@
             <el-form-item>
               <el-button size="small" type="primary" @click="seachList">搜索</el-button>
               <el-button size="small" type="primary" @click="add">新增</el-button>
-              <el-button size="small" @click="exports">导出</el-button>
+              <el-button size="small" @click="exportExcel">导出</el-button>
             </el-form-item>
 
           </el-form>
@@ -32,6 +32,7 @@
       <el-table
         v-loading="listLoading"
         :data="tableData.data"
+        id="outTable"
         style="width: 100%"
         size="mini"
         highlight-current-row
@@ -91,7 +92,7 @@
       </el-table>
       <div class="block">
         <el-pagination
-          :page-sizes="[5, 10, 15, 20]"
+          :page-sizes="[10, 20, 30, 40]"
           :page-size="tableFrom.limit"
           :current-page="tableFrom.page"
           layout="total, sizes, prev, pager, next, jumper"
@@ -106,6 +107,8 @@
 
 <script>
 import crane from '@/api/crane'
+import FileSaver from 'file-saver';
+import XLSX from 'xlsx';
 export default {
   name: 'CraneList',
   data() {
@@ -124,10 +127,7 @@ export default {
         page: 1,
         limit: 10
       },
-      categoryList: [],
-      merCateList: [],
       objectUrl: process.env.VUE_APP_BASE_API,
-      dialogVisible: false
     }
   },
 
@@ -195,16 +195,24 @@ export default {
       this.getAdmCraneList();
     },
 
-    // 复制
-    onCopy(){
-      this.dialogVisible = true
-    },
-    // 导出
-    exports () {
-      company.productExcelApi({cateId:this.tableFrom.cateId,keywords: this.tableFrom.keywords, type:this.tableFrom.type}).then((res) => {
-        window.open(res.fileName)
-      })
-    //  window.open(this.objectUrl + 'admin/export/excel/product?type=1&Authori-zation=' + getToken())
+    // 导出到本地
+    exportExcel() {
+      var xlsxParam = { raw: true };//转换成excel时，使用原始的格式
+      var wb = XLSX.utils.table_to_book(document.querySelector("#outTable"),xlsxParam);//outTable为列表id
+      var wbout = XLSX.write(wb, {
+          bookType: "xlsx",
+          bookSST: true,
+          type: "array"
+      });
+      try {
+          FileSaver.saveAs(
+          new Blob([wbout], { type: "application/octet-stream;charset=utf-8" }),
+          "craneList.xlsx"
+          );
+      } catch (e) {
+          if (typeof console !== "undefined") console.log(e, wbout);
+      }
+      return wbout;
     },
 
     pageChange(page) {
