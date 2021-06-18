@@ -8,7 +8,7 @@
               <el-input v-model="weightInfo.craneid" disabled></el-input>
             </el-form-item>
             <el-form-item label="组合方式">
-              <el-input v-model="weightInfo.legtype"></el-input>
+              <el-input v-model="weightInfo.legtype" placeholder="1:仅主臂,2:主臂+副臂,3:主臂+横臂,4:超起"></el-input>
             </el-form-item>
             <el-form-item label="支腿方式">
               <el-input v-model="weightInfo.legway"></el-input>
@@ -48,7 +48,7 @@ import { param } from '@/utils'
     },
 
     created(){
-      this.weightInfo.craneid = this.$route.weight.cid
+      this.weightInfo.craneid = this.$route.query.id
     },
     methods: {
 
@@ -58,15 +58,13 @@ import { param } from '@/utils'
       },
 
       onSubmit() {
-        crane.addCrane(this.craneInfo).then(res=>{
+        crane.addWeight(this.weightInfo).then(res=>{
           this.$message({
-            message: '车辆新增成功!',
+            message: '配重新增成功!',
             type: 'success'
           });
         })
-        this.$router.push({
-          
-        })
+        this.$router.back(-1);
       }
       
     }

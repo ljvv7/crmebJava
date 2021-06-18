@@ -30,4 +30,9 @@ public interface AdminCraneService extends IService<NslCrane> {
     Integer editCrane(Integer craneid,String name,BigDecimal maxweight,
                       String introduce,String images,BigDecimal guidePrice);
 
+    //新增配重
+    Integer addWeight(Integer craneid,String legtype,String legway,
+                      BigDecimal equipweight,Integer workextent,String remarks);
+
+
 }

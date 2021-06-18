@@ -190,7 +190,7 @@ import addWeightVue from './addWeight.vue'
 
     created(){
         this.getDetail()
-        this.getWeightList()
+        // this.getWeightList()
     },
     methods: {
 
@@ -220,6 +220,9 @@ import addWeightVue from './addWeight.vue'
 
       seachList(tab, event){
         this.tableFrom.page = 1
+        if(this.activeName = 'second'){
+          this.getWeightList()
+        }
       },
 
       seeWay(id) {
@@ -253,8 +256,8 @@ import addWeightVue from './addWeight.vue'
       addWeight(){
         this.$router.push({
           path: 'addWeight',
-          weight: {
-            cid: this.detailInfo.id
+          query: {
+            id: this.detailInfo.id
           }
         })
       }

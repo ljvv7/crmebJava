@@ -84,4 +84,19 @@ public class AdminCraneServiceImpl extends ServiceImpl<AdminCraneMapper, NslCran
                              String introduce, String images, BigDecimal guidePrice) {
         return baseMapper.editCrane(craneid, name, maxweight, introduce, images, guidePrice);
     }
+
+    /**
+     * 新增配重
+     * @param craneid
+     * @param legtype
+     * @param legway
+     * @param equipweight
+     * @param workextent
+     * @param remarks
+     * @return
+     */
+    @Override
+    public Integer addWeight(Integer craneid, String legtype, String legway, BigDecimal equipweight, Integer workextent, String remarks) {
+        return baseMapper.addWeight(craneid, legtype, legway, equipweight, workextent, remarks);
+    }
 }

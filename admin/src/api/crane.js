@@ -58,6 +58,13 @@ export default {
       url: `admin/nsl/adminCrane/removeWeight/${id}`,
       method: 'get'
     })
-  }
+  },
+  addWeight(weightInfo){
+    return request({
+      url: 'admin/nsl/adminCrane/addWeight',
+      method: 'post',
+      data: weightInfo
+    })
+  },
 
 }

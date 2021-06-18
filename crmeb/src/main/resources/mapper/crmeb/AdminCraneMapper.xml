@@ -59,5 +59,10 @@
             images = #{images},guide_price = #{guidePrice}
         where id = #{craneid};
     </update>
+    
+    <insert id="addWeight">
+        insert into nsl_cweight (craneid,legtype,legway,equipweight,workextent,remarks)
+        values (#{craneid},#{legtype},#{legway},#{equipweight},#{workextent},#{remarks});
+    </insert>
 
 </mapper>

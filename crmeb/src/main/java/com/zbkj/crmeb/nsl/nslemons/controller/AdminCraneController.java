@@ -1,10 +1,7 @@
 package com.zbkj.crmeb.nsl.nslemons.controller;
 
 import com.common.CommonResult;
-import com.zbkj.crmeb.nsl.nslemons.request.AdmAddCraneReqParam;
-import com.zbkj.crmeb.nsl.nslemons.request.AdmCraneListReqParam;
-import com.zbkj.crmeb.nsl.nslemons.request.AdmWayListReqParam;
-import com.zbkj.crmeb.nsl.nslemons.request.AdmWeightListReqParam;
+import com.zbkj.crmeb.nsl.nslemons.request.*;
 import com.zbkj.crmeb.nsl.nslemons.service.AdminCraneService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
@@ -139,6 +136,11 @@ public class AdminCraneController {
         return CommonResult.success(msg);
     }
 
+    /**
+     * 车辆信息修改
+     * @param detailInfo
+     * @return
+     */
     @PostMapping("/editCrane")
     public CommonResult editCrane(@RequestBody(required = false) AdmAddCraneReqParam detailInfo){
         Integer craneid = detailInfo.getId();
@@ -188,6 +190,30 @@ public class AdminCraneController {
             msg = "配重移除成功!";
         }else{
             msg = "配重移除失败!";
+        }
+        return CommonResult.success(msg);
+    }
+
+    /**
+     * 配重新增
+     * @param weightInfo
+     * @return
+     */
+    @PostMapping("/addWeight")
+    public CommonResult addWeight(@RequestBody(required = false) AdmAddWeightReqParam weightInfo){
+        Integer craneid = weightInfo.getCraneid();
+        String legtype = weightInfo.getLegtype();
+        String legway = weightInfo.getLegway();
+        BigDecimal equipweight = weightInfo.getEquipweight();
+        Integer workextent = weightInfo.getWorkextent();
+        String remarks = weightInfo.getRemarks();
+
+        Integer flag = adminCraneService.addWeight(craneid, legtype, legway, equipweight, workextent, remarks);
+        String msg = null;
+        if (flag>0){
+            msg = "新增配重成功!";
+        }else{
+            msg = "新增配重失败!";
         }
         return CommonResult.success(msg);
     }
