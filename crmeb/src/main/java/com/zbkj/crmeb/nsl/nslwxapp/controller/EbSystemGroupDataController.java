@@ -92,7 +92,7 @@ public class EbSystemGroupDataController {
     public CommonResult info(@PathVariable  int userId){
 
         User byId = userService.getById(userId);
-        List listByGid = systemGroupDataService.getSystemByGidId(73);
+        List listByGid = systemGroupDataService.getSystemByGidId(54);
         List listByGids = systemGroupDataService.getSystemByGidId(74);
 
         Map map = new HashMap();
