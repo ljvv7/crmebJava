@@ -17,6 +17,12 @@ public class HotOrNewCraneEntry {
     @ApiModelProperty(value = "车辆型号名称")
     private String name;
 
+    @ApiModelProperty(value = "品牌ID")
+    private Integer cbrands;
+
+    @ApiModelProperty(value = "品牌名称")
+    private String brandName;
+
     @ApiModelProperty(value = "最大起重量")
     private BigDecimal maxweight;
 

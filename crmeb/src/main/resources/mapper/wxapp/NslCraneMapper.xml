@@ -31,10 +31,11 @@
     </select>
 
     <select id="getCraneDetailById" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
-        select id,name,cbrands,maxweight,introduce,images,
-               expdbcodes,guide_price,iscollected,longitude,latitude,visits,remarks
-        from `nsl_crane`
-        where id = #{craneid};
+        select A.id,A.name,A.cbrands,B.name brand_name,A.maxweight,A.introduce,A.images,
+               A.expdbcodes,A.guide_price,A.iscollected,A.longitude,A.latitude,A.visits,A.remarks
+        from `nsl_crane` A
+        left join `nsl_cbrands` B on A.cbrands = B.id
+        where A.id = #{craneid};
     </select>
     
     <select id="getAllCraneByCompanyId" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
@@ -62,14 +63,22 @@
 
     <select id="getHotCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.response.HotOrNewCraneEntry">
 
-        select id,name,maxweight,introduce,images,guide_price,visits,update_date from `nsl_crane` where kbn != '9'
-        order by visits desc limit 0,5
+        select A.id,A.name,A.cbrands,B.name brand_name,A.maxweight,A.introduce,A.images,
+               A.guide_price,A.visits,A.update_date
+        from `nsl_crane` A
+        left join `nsl_cbrands` B on A.cbrands = B.id
+        where A.kbn != '9'
+        order by A.visits desc limit 0,5
     </select>
 
     <select id="getNewCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.response.HotOrNewCraneEntry">
 
-        select id,name,maxweight,introduce,images,guide_price,visits,update_date from `nsl_crane` where kbn != '9'
-        order by update_date desc limit 0,5
+        select A.id,A.name,A.cbrands,B.name brand_name,A.maxweight,A.introduce,A.images,
+               A.guide_price,A.visits,A.update_date
+        from `nsl_crane` A
+        left join `nsl_cbrands` B on A.cbrands = B.id
+        where A.kbn != '9'
+        order by A.update_date desc limit 0,5
     </select>
 
 </mapper>
