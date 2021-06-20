@@ -23,7 +23,7 @@ import java.util.*;
  * @since 2021-05-29
  */
 @RestController
-@RequestMapping("/api/wxapp/nsl/company")
+@RequestMapping("/api/admin/nsl/wxappcompany")
 @Api(tags = "nsl-wechat小程序公司接口")
 @CrossOrigin
 public class NsWxapplCompanyController {
@@ -46,14 +46,8 @@ public class NsWxapplCompanyController {
     public CommonResult getAllCompany(@RequestParam (required = false) String code,
                                       @RequestParam (required = true)  int page,
                                       @RequestParam (required = true) int limit,
-                                      @RequestParam (required = true) long longitude,
-                                      @RequestParam (required = true) long latitude){
-
-//        int limit = tableFrom.getPagesize();
-//        int page = tableFrom.getPageindex();
-//        String companyName = tableFrom.getCode();
-//        double longitude = tableFrom.getLongitude();
-//        double latitude = tableFrom.getLatitude();
+                                      @RequestParam (required = true) double longitude,
+                                      @RequestParam (required = true) double latitude){
 
         Map map = new HashMap();
         if(!StringUtils.isEmpty(code)){
@@ -69,12 +63,9 @@ public class NsWxapplCompanyController {
      */
     @PostMapping("/getdetail")
     @ApiOperation(value = "wechat-根据公司获取车辆")
-    public CommonResult getCompanyById(@RequestParam (required = false) int code,
+    public CommonResult getCompanyById(@RequestParam (required = true) int code,
                                        @RequestParam (required = true)  int pageindex,
                                        @RequestParam (required = true) int pagesize){
-//        Integer companyid = tableFrom.getCode();
-//        int pagesize = tableFrom.getPagesize();
-//        int pageindex = tableFrom.getPageindex();
         Map map = new HashMap();
         //获取公司详情
         NslCompany byId = nslCompanyService.getById(code);
@@ -87,10 +78,12 @@ public class NsWxapplCompanyController {
             list1.add(byId);
         }
         //获取公司下所有车辆
+        List allCraneByCompanyId = new ArrayList();
         if(list.size()>0){
-            List allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
-            map.put("cranedetaillist",allCraneByCompanyId);
+            allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
+
         }
+        map.put("cranedetaillist",allCraneByCompanyId);
         map.put("companyById",list1);
 
         return CommonResult.success(map);
@@ -147,48 +140,6 @@ public class NsWxapplCompanyController {
         return list;
     }
 
-    /**
-     * 公司车辆关系解除
-     */
 
-    @PostMapping("deleteCompanyAndCrane/{companyId}/{craneId}")
-    public CommonResult deleteCompanyAndCrane(@PathVariable int companyId,
-                                              @PathVariable int craneId){
-
-        QueryWrapper queryWrapper= new QueryWrapper();
-        queryWrapper.eq("companyid",companyId);
-        queryWrapper.eq("craneid",craneId);
-        boolean remove = nslCbindService.remove(queryWrapper);
-
-        return CommonResult.success(remove);
-    }
-
-    /**
-     * 更新公司信息
-     */
-    @PostMapping("updateCompanyById")
-    public CommonResult updateCompanyById(@RequestBody NslCompany tableFrom){
-        System.out.println("tableForm == "+tableFrom);
-        boolean save = nslCompanyService.updateById(tableFrom);
-        return CommonResult.success(save);
-    }
-
-    /**
-     * 根据公司id删除公司  (逻辑删除)
-     */
-    @GetMapping("deleteCompanyById/{id}")
-    public void deleteCompanyById(@PathVariable int id){
-        nslCompanyService.deleteCompanyKbn(id);
-    }
-
-    /**
-     * 根据公司id设置公司状态
-     */
-    @GetMapping("updateStatusByid/{id}/{status}")
-    public void updateStatusByid (@PathVariable int id,
-                                               @PathVariable String status){
-        nslCompanyService.updateStatusByid(id,status);
-
-    }
 }
 
