@@ -140,6 +140,19 @@ public class NsWxapplCompanyController {
         return list;
     }
 
+    /**
+     * 公司认证提示
+     */
+    @PostMapping("authmsgv1")
+    @ApiOperation(value = "公司认证提示")
+    public CommonResult authmsgv1(){
+
+        String authmsgv1 = nslCompanyService.getAuthmsgv1();
+
+        return CommonResult.success(authmsgv1);
+
+    }
+
 
 }
 
