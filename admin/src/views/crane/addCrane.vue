@@ -29,7 +29,7 @@
                   <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
-              <el-input v-model="craneInfo.images" hidden></el-input>
+              <!-- <el-input v-model="craneInfo.images" hidden></el-input> -->
             </el-form-item>
             <el-form-item label="车辆简介">
               <el-input v-model="craneInfo.introduce"></el-input>
@@ -54,7 +54,14 @@ import { param } from '@/utils'
     data() {
       return {
         isDisabled: this.$route.params.isDisabled==='1'?true:false,
-        craneInfo: {},
+        craneInfo: {
+          cbrands: null,
+          name: null,
+          maxweight: null,
+          guidePrice: null,
+          images: null,
+          introduce: null
+        },
         brandList: [],
         activeName: 'first',
       }
@@ -101,8 +108,7 @@ import { param } from '@/utils'
         if(_this.isDisabled) return;
         this.$modalUpload(function(img) {
           if(tit==='1'&& !num){
-            _this.formValidate.image = img[0].sattDir
-            _this.OneattrValue[0].image = img[0].sattDir
+            _this.craneInfo.images = img[0].sattDir
           }
         },tit, 'content')
       },

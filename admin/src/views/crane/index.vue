@@ -15,9 +15,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="车型搜索：">
-              <el-input v-model="tableFrom.craneName" placeholder="请输入车辆型号" class="selWidth" size="small" clearable>
-                <!-- <el-button slot="append" icon="el-icon-search" @click="seachList" size="small"/> -->
-              </el-input>
+              <el-input v-model="tableFrom.craneName" placeholder="请输入车辆型号" class="selWidth" size="small" clearable></el-input>
             </el-form-item>
             <el-form-item>
               <el-button size="small" type="primary" @click="seachList">搜索</el-button>

@@ -11,7 +11,10 @@
               <el-input v-model="detailInfo.brandName" disabled></el-input>
             </el-form-item>
             <el-form-item label="车型图片">
-              <el-image style="width: 100px; height: 100px" :src="detailInfo.image"/>
+              <div @click="modalPicTap('1')" :disabled="isDisabled">
+                <el-image style="width: 100px; height: 100px" :src="detailInfo.image"/>
+              </div>
+              <!-- <el-image style="width: 100px; height: 100px" :src="detailInfo.image"/> -->
             </el-form-item>
             <el-form-item label="车辆型号">
               <el-input v-model="detailInfo.name"></el-input>
@@ -213,6 +216,7 @@ import addWeightVue from './addWeight.vue'
       return {
         dialogFormVisible: false,
         dialogTableVisible: false,
+        isDisabled: this.$route.params.isDisabled==='1'?true:false,
         weightInfo: {},
         detailInfo: {},
         tableFrom: {
@@ -325,7 +329,17 @@ import addWeightVue from './addWeight.vue'
           })
           .catch(_ => {});
         this.getWeightList()  
-      }
+      },
+
+      modalPicTap (tit, num, i) {
+        const _this = this;
+        if(_this.isDisabled) return;
+        this.$modalUpload(function(img) {
+          if(tit==='1'&& !num){
+            _this.detailInfo.images = img[0].sattDir
+          }
+        },tit, 'content')
+      },
       
     }
   }
