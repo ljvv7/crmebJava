@@ -46,6 +46,15 @@ public class NslCweight implements Serializable {
     @ApiModelProperty(value = "工作范围")
     private Integer workextent;
 
+    @ApiModelProperty(value = "是否超起; 1:超起；0为超起")
+    private String issuperweight;
+
+    @ApiModelProperty(value = "超起配重")
+    private BigDecimal superweight;
+
+    @ApiModelProperty(value = "后移")
+    private BigDecimal backmove;
+
     @ApiModelProperty(value = "分录备注")
     private String remarks;
 

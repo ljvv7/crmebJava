@@ -31,8 +31,8 @@ public interface AdminCraneService extends IService<NslCrane> {
                       String introduce,String images,BigDecimal guidePrice);
 
     //新增配重
-    Integer addWeight(Integer craneid,String legtype,String legway,
-                      BigDecimal equipweight,Integer workextent,String remarks);
+    Integer addWeight(Integer craneid,String legtype,String legway,BigDecimal equipweight,Integer workextent,
+                      String issuperweight, BigDecimal superweight, BigDecimal backmove,String remarks);
 
 
 }

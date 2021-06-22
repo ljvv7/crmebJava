@@ -23,8 +23,13 @@
             <el-form-item label="指导价格">
               <el-input v-model="craneInfo.guidePrice"></el-input>
             </el-form-item>
-            <el-form-item label="车型图片">
-              <el-input v-model="craneInfo.images"></el-input>
+            <el-form-item label="车型图片" >
+              <div class="upLoadPicBox" @click="modalPicTap('1')" :disabled="isDisabled">
+                <div class="upLoad">
+                  <i class="el-icon-camera cameraIconfont" />
+                </div>
+              </div>
+              <el-input v-model="craneInfo.images" hidden></el-input>
             </el-form-item>
             <el-form-item label="车辆简介">
               <el-input v-model="craneInfo.introduce"></el-input>
@@ -48,6 +53,7 @@ import { param } from '@/utils'
   export default {
     data() {
       return {
+        isDisabled: this.$route.params.isDisabled==='1'?true:false,
         craneInfo: {},
         brandList: [],
         activeName: 'first',
@@ -88,7 +94,18 @@ import { param } from '@/utils'
         this.$router.push({
           path: 'craneQuery'
         })
-      }
+      },
+
+      modalPicTap (tit, num, i) {
+        const _this = this;
+        if(_this.isDisabled) return;
+        this.$modalUpload(function(img) {
+          if(tit==='1'&& !num){
+            _this.formValidate.image = img[0].sattDir
+            _this.OneattrValue[0].image = img[0].sattDir
+          }
+        },tit, 'content')
+      },
       
     }
   }

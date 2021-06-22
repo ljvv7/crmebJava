@@ -11,5 +11,8 @@ public class AdmAddWeightReqParam {
     private String legway;
     private BigDecimal equipweight;
     private Integer workextent;
+    private String issuperweight;
+    private BigDecimal superweight;
+    private BigDecimal backmove;
     private String remarks;
 }

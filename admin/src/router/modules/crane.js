@@ -28,12 +28,7 @@ const craneRouter = {
       name: 'addCrane',
       meta: { title: '车辆新增', icon: '' }
     },
-    {
-      path: 'addWeight',
-      component: () => import('@/views/crane/addWeight'),
-      name: 'addWeight',
-      meta: { title: '配重新增', icon: '' }
-    },
+    
   ]
 }
 

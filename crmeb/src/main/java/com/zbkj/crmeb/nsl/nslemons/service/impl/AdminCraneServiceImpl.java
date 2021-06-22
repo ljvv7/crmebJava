@@ -96,7 +96,8 @@ public class AdminCraneServiceImpl extends ServiceImpl<AdminCraneMapper, NslCran
      * @return
      */
     @Override
-    public Integer addWeight(Integer craneid, String legtype, String legway, BigDecimal equipweight, Integer workextent, String remarks) {
-        return baseMapper.addWeight(craneid, legtype, legway, equipweight, workextent, remarks);
+    public Integer addWeight(Integer craneid, String legtype, String legway, BigDecimal equipweight, Integer workextent,
+                             String issuperweight, BigDecimal superweight, BigDecimal backmove,String remarks) {
+        return baseMapper.addWeight(craneid, legtype, legway, equipweight, workextent, issuperweight, superweight, backmove, remarks);
     }
 }

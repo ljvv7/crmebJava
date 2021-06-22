@@ -45,7 +45,7 @@
         />
         <el-table-column
           prop="brandName"
-          label="品牌名称"
+          label="车辆品牌"
           min-width="100"
           align="center"
         />

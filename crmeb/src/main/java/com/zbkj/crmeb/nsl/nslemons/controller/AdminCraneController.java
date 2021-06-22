@@ -206,9 +206,13 @@ public class AdminCraneController {
         String legway = weightInfo.getLegway();
         BigDecimal equipweight = weightInfo.getEquipweight();
         Integer workextent = weightInfo.getWorkextent();
+        String issuperweight = weightInfo.getIssuperweight();
+        BigDecimal superweight = weightInfo.getSuperweight();
+        BigDecimal backmove = weightInfo.getBackmove();
         String remarks = weightInfo.getRemarks();
 
-        Integer flag = adminCraneService.addWeight(craneid, legtype, legway, equipweight, workextent, remarks);
+        Integer flag = adminCraneService.addWeight(craneid, legtype, legway, equipweight, workextent,
+                                                    issuperweight, superweight, backmove, remarks);
         String msg = null;
         if (flag>0){
             msg = "新增配重成功!";

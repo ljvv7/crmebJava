@@ -19,12 +19,21 @@
             <el-form-item label="工作范围">
               <el-input v-model="weightInfo.workextent"></el-input>
             </el-form-item>
+            <el-form-item label="是否超起">
+              <el-input v-model="weightInfo.issuperweight" placeholder="0:未超起,1:超起"></el-input>
+            </el-form-item>
+            <el-form-item label="超起配重">
+              <el-input v-model="weightInfo.superweight"></el-input>
+            </el-form-item>
+            <el-form-item label="后移">
+              <el-input v-model="weightInfo.backmove"></el-input>
+            </el-form-item>
             <el-form-item label="备注">
               <el-input v-model="weightInfo.remarks"></el-input>
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" :plain="true" @click="onSubmit">保存</el-button>
+              <el-button type="primary" :plain="true" @click="onSubmitWeight">保存</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -41,6 +50,7 @@ import { param } from '@/utils'
   export default {
     data() {
       return {
+        dialogVisible: false,
         weightInfo: {},
         activeName: 'first',
       }
@@ -57,7 +67,7 @@ import { param } from '@/utils'
         // this.getDetail()
       },
 
-      onSubmit() {
+      onSubmitWeight() {
         crane.addWeight(this.weightInfo).then(res=>{
           this.$message({
             message: '配重新增成功!',
