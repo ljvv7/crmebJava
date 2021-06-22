@@ -209,7 +209,6 @@
 <script>
 import crane from '@/api/crane'
 import { param } from '@/utils'
-import addWeightVue from './addWeight.vue'
 
   export default {
     data() {
