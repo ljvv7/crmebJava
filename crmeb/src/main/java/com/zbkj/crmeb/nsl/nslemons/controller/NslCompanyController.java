@@ -79,18 +79,20 @@ public class NslCompanyController {
         NslCompany byId = nslCompanyService.getById(companyid);
         //根据公司查找车辆
         List list = nslCbindService.getCraneIdByCompanyId(companyid);
-        List list1 = new ArrayList();
-        if(null == (byId)){
-
-        }else {
-            list1.add(byId);
-        }
+//        List list1 = new ArrayList();
+//        if(null == (byId)){
+//
+//        }else {
+//            list1.add(byId);
+//        }
         //获取公司下所有车辆
+        List allCraneByCompanyId = new ArrayList();
         if(list.size()>0){
-            List allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
-            map.put("cranedetaillist",allCraneByCompanyId);
+            allCraneByCompanyId = craneService.getAllCraneByCompanyId(list, pageindex, pagesize);
+
         }
-        map.put("companyById",list1);
+        map.put("cranedetaillist",allCraneByCompanyId);
+        map.put("companyById",byId);
 
         return CommonResult.success(map);
     }
@@ -160,18 +162,19 @@ public class NslCompanyController {
      * 根据公司id删除公司  (逻辑删除)
      */
     @GetMapping("deleteCompanyById/{id}")
-    public void deleteCompanyById(@PathVariable int id){
-        nslCompanyService.deleteCompanyKbn(id);
+    public CommonResult deleteCompanyById(@PathVariable int id){
+         nslCompanyService.deleteCompanyKbn(id);
+        return CommonResult.success("删除成功");
     }
 
     /**
      * 根据公司id设置公司状态
      */
     @GetMapping("updateStatusByid/{id}/{status}")
-    public void updateStatusByid (@PathVariable int id,
+    public CommonResult updateStatusByid (@PathVariable int id,
                                                @PathVariable String status){
         nslCompanyService.updateStatusByid(id,status);
-
+        return CommonResult.success("设置成功");
     }
 }
 

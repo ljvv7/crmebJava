@@ -113,7 +113,7 @@ public class NslCompanyServiceImpl extends ServiceImpl<NslCompanyMapper, NslComp
 
     @Override
     public void deleteCompanyKbn(int id) {
-        baseMapper.deleteCompanyKbn(id);
+         baseMapper.deleteCompanyKbn(id);
     }
 
     @Override

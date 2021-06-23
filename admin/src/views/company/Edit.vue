@@ -47,7 +47,7 @@
           </el-form>
         </el-tab-pane>
 
-        <el-tab-pane label="车辆信息" name="second">
+        <el-tab-pane label="车辆信息" name="second" max-height = "1000">
           <el-table
             :data="companyList"
             style="width: 100%"
@@ -102,9 +102,11 @@
                   </template>
               </el-table-column>
           </el-table>
+
+          
         </el-tab-pane>
       </el-tabs>
-
+      
     </el-card>
   </div>
 </template>
@@ -174,8 +176,8 @@ import { param } from '@/utils'
           this.tableFrom.code = tableID
           company.getCompanyById(this.tableFrom).then(res =>{
            this.listLoading = false
-           this.Companyform = res.cranedetail
-           this.companyList = res.companylist
+           this.Companyform = res.companyById
+           this.companyList = res.cranedetaillist
            this.url = this.companyList.images
            if(res.cranedetail.status=='10'){
             this.value = 'yishenhe'

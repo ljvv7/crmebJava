@@ -82,8 +82,6 @@
           </template>
         </el-table-column>
       </el-table>
-      
-      
       <el-dialog
         title="状态编辑"
         :visible.sync="dialogVisible"
@@ -99,7 +97,8 @@
         </template>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          <!-- <el-button type="primary" @click="dialogVisible = false">确 定</el-button> -->
+          <el-button type="primary" @click=updateradio()>确 定</el-button>
         </span>
       </el-dialog>
 
@@ -127,8 +126,14 @@ import XLSX from 'xlsx';
 import router from '@/router'
 export default {
   name: 'ProductList',
+    provide () {    //父组件中通过provide来提供变量，在子组件中通过inject来注入变量。                                             
+      return {
+        reload: this.reload                                              
+      }
+  },
   data() {
     return {
+      isRouterAlive: true ,                   //控制视图是否显示的变量
       // roterPre: roterPre,
       listLoading: true,
       tableData: {
@@ -140,11 +145,12 @@ export default {
         pagesize: 20,
         code: '',
       },
+      companyId: '',
       categoryList: [],
       merCateList: [],
       objectUrl: process.env.VUE_APP_BASE_API,
       dialogVisible: false,
-
+      radio: 20,
       options: [{
           value: 'yishenhe',
           label: '更多'
@@ -158,18 +164,23 @@ export default {
           value: 'delete',
           label: '删除'
         }],
-        value: 'yishenhe',
-        dialogVisible: false,
-        radio: 20
+        value: 'yishenhe'
+        
     }
   },
+
 
   created() {   //页面渲染之前执行
     this.getList()
   },
 
   methods: {
-
+    reload () {
+      this.isRouterAlive = false;            //先关闭，
+      this.$nextTick(function () {
+      this.isRouterAlive = true;         //再打开
+      }) 
+    },
     chakan(id){
         this.$router.push({
           path: 'companyDetails',
@@ -185,12 +196,20 @@ export default {
         })
         .catch(_ => {});
     },
+
+    updateradio(){
+        this.dialogVisible = false
+        const status = this.radio
+        
+        company.updateStatusByid(this.companyId,status).then(res =>{
+        })
+
+        this.value = 'yishenhe'
+    },
     selectEditAndRemove(id){
         if(this.value == 'zhuangtaishenzhi'){
+          this.companyId = id
           this.dialogVisible = true
-          const status = this.radio
-          this.company.updateStatusByid(id,status).then(res =>{
-          })
         }else if(this.value == 'bianji'){
           this.$router.push({
             path: 'companyDetails',
@@ -200,24 +219,26 @@ export default {
           })
         }else if(this.value == 'delete'){
             this.$confirm('删除公司后将不可恢复, 请慎重操作?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          company.deleteCompanyById(id).then(res =>{
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
-            this.getList()
-          }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });  
-          this.getList()        
-        });
-        
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+            }).then(() => {
+              // debugger
+              company.deleteCompanyById(id).then(res =>{
+                this.$message({
+                  type: 'success',
+                  message: '删除成功!'
+                })
+                this.getList()
+                 this.value = 'yishenhe'
+            }).catch(() => {
+              this.$message({
+              type: 'info',
+              message: '已取消删除'
+              });  
+              this.getList()        
+          });
+         this.reload()
         })
         }
     },
