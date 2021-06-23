@@ -63,6 +63,19 @@
               <el-form-item label="后移">
                 <el-input v-model="weightInfo.backmove"></el-input>
               </el-form-item>
+              <el-form-item label="性能参数上传">
+                <el-upload
+                  class="upload"
+                  :show-file-list="false"
+                  action=""
+                  :multiple="false"
+                  accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  :on-change="importExcel"
+                  :limit="1"
+                >
+                  <el-button size="small" type="primary">上传</el-button>
+                </el-upload>
+              </el-form-item>
               <el-form-item label="备注">
                 <el-input v-model="weightInfo.remarks"></el-input>
               </el-form-item>
