@@ -31,8 +31,8 @@
             <div class="demo-image__preview">
               <el-image
                 style="width: 36px; height: 36px"
-                :src="scope.row.image"
-                :preview-src-list="[scope.row.image]"
+                :src="scope.row.logo"
+                :preview-src-list="[scope.row.logo]"
               />
             </div>
           </template>

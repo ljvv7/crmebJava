@@ -12,6 +12,8 @@ import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCbrandsService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCwayService;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCweightService;
+import com.zbkj.crmeb.store.service.StoreProductService;
+import com.zbkj.crmeb.system.service.SystemAttachmentService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +41,9 @@ public class AdminCraneController {
 
     @Autowired
     private NslCwayService nslCwayService;
+
+    @Autowired
+    private SystemAttachmentService systemAttachmentService;
 
     /**
      * 后台车辆列表
@@ -127,7 +132,7 @@ public class AdminCraneController {
         String name = craneInfo.getName();
         BigDecimal maxweight = craneInfo.getMaxweight();
         BigDecimal guidePrice = craneInfo.getGuidePrice();
-        String images = craneInfo.getImages();
+        String images = systemAttachmentService.clearPrefix( craneInfo.getImages()) ;
         String introduce = craneInfo.getIntroduce();
 
         Integer flag = adminCraneService.addCrane(name, cbrands, maxweight, introduce, images, guidePrice);
@@ -152,7 +157,7 @@ public class AdminCraneController {
         BigDecimal maxweight = detailInfo.getMaxweight();
         BigDecimal guidePrice = detailInfo.getGuidePrice();
         String introduce = detailInfo.getIntroduce();
-        String images = detailInfo.getImages();
+        String images = systemAttachmentService.clearPrefix(detailInfo.getImages()) ;
         Integer flag = adminCraneService.editCrane(craneid, name, maxweight, introduce, images,guidePrice);
 
         String msg = null;
