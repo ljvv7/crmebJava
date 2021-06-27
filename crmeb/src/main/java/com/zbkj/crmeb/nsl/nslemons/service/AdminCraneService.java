@@ -3,6 +3,7 @@ package com.zbkj.crmeb.nsl.nslemons.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zbkj.crmeb.nsl.nslemons.request.AdmAddCraneReqParam;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,8 +32,23 @@ public interface AdminCraneService extends IService<NslCrane> {
                       String introduce,String images,BigDecimal guidePrice);
 
     //新增配重
-    Integer addWeight(Integer craneid,String legtype,String legway,BigDecimal equipweight,Integer workextent,
+    Integer addWeight(Integer weightid,Integer craneid,String legtype,String legway,BigDecimal equipweight,Integer workextent,
                       String issuperweight, BigDecimal superweight, BigDecimal backmove,String remarks);
+
+    //修改配重
+    Integer editWeight(Integer weightid, Integer craneid,String legtype,String legway,
+                       BigDecimal equipweight,Integer workextent,String issuperweight,
+                       BigDecimal superweight, BigDecimal backmove,String remarks);
+
+
+    //删除组合方式
+    Integer deleteWay(Integer weightid);
+
+    //新增组合方式
+    Integer addWay(Integer weightid,Integer craneid,@Param("list") List list);
+
+    //查询最大配重ID+1
+    Integer queryMaxWeight();
 
 
 }

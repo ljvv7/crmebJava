@@ -2,7 +2,6 @@ package com.zbkj.crmeb.nsl.nslemons.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbkj.crmeb.nsl.nslemons.dao.AdminCraneMapper;
-import com.zbkj.crmeb.nsl.nslemons.request.AdmAddCraneReqParam;
 import com.zbkj.crmeb.nsl.nslemons.service.AdminCraneService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import org.springframework.stereotype.Service;
@@ -87,17 +86,57 @@ public class AdminCraneServiceImpl extends ServiceImpl<AdminCraneMapper, NslCran
 
     /**
      * 新增配重
-     * @param craneid
-     * @param legtype
-     * @param legway
-     * @param equipweight
-     * @param workextent
-     * @param remarks
      * @return
      */
     @Override
-    public Integer addWeight(Integer craneid, String legtype, String legway, BigDecimal equipweight, Integer workextent,
+    public Integer addWeight(Integer weightid,Integer craneid, String legtype, String legway, BigDecimal equipweight, Integer workextent,
                              String issuperweight, BigDecimal superweight, BigDecimal backmove,String remarks) {
-        return baseMapper.addWeight(craneid, legtype, legway, equipweight, workextent, issuperweight, superweight, backmove, remarks);
+        return baseMapper.addWeight(weightid,craneid, legtype, legway, equipweight, workextent, issuperweight,
+                                    superweight, backmove, remarks);
     }
+
+    /**
+     * 修改配重
+     * @return
+     */
+    @Override
+    public Integer editWeight(Integer weightid, Integer craneid, String legtype, String legway,
+                              BigDecimal equipweight, Integer workextent, String issuperweight,
+                              BigDecimal superweight, BigDecimal backmove, String remarks) {
+
+        return baseMapper.editWeight(weightid, craneid, legtype, legway, equipweight, workextent,
+                                    issuperweight, superweight, backmove, remarks);
+    }
+
+    /**
+     * 删除组合方式
+     * @param weightid
+     * @return
+     */
+    @Override
+    public Integer deleteWay(Integer weightid) {
+        return baseMapper.deleteWay(weightid);
+    }
+
+    /**
+     * 新增组合方式
+     * @param weightid
+     * @param craneid
+     * @param list
+     * @return
+     */
+    @Override
+    public Integer addWay(Integer weightid, Integer craneid, List list) {
+        return baseMapper.addWay(weightid, craneid, list);
+    }
+
+    /**
+     * 查询最大配重ID+1
+     * @return
+     */
+    @Override
+    public Integer queryMaxWeight() {
+        return baseMapper.queryMaxWeight();
+    }
+
 }

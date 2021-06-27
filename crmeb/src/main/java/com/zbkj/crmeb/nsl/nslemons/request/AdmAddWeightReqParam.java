@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class AdmAddWeightReqParam {
+    private Integer id;
     private Integer craneid;
     private String legtype;
     private String legway;

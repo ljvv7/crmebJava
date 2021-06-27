@@ -20,12 +20,10 @@
             <el-form-item>
               <el-button size="small" type="primary" @click="seachList">搜索</el-button>
               <el-button size="small" type="primary" @click="add">新增</el-button>
-              <el-button size="small" @click="exportExcel">导出</el-button>
+              <!-- <el-button size="small" @click="exportExcel">导出</el-button> -->
             </el-form-item>
-
           </el-form>
         </div>
-
       </div>
       <el-table
         v-loading="listLoading"
@@ -64,8 +62,8 @@
             <div class="demo-image__preview">
               <el-image
                 style="width: 36px; height: 36px"
-                :src="scope.row.image"
-                :preview-src-list="[scope.row.image]"
+                :src="scope.row.images"
+                :preview-src-list="[scope.row.images]"
               />
             </div>
           </template>
@@ -156,6 +154,7 @@ export default {
       // debugger
       crane.getCraneList(this.tableFrom).then(res =>{
         this.tableData.data = res.admCraneList
+        // console.log(res.admCraneList)
         this.tableData.total = res.count
         this.listLoading = false
       }).catch(res => {
