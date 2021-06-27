@@ -1,6 +1,8 @@
 package com.zbkj.crmeb.nsl.nslemons.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.common.CommonResult;
+import com.zbkj.crmeb.nsl.commountils.ReadExcelUtils;
 import com.zbkj.crmeb.nsl.nslemons.request.*;
 import com.zbkj.crmeb.nsl.nslemons.service.AdminCraneService;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
@@ -13,7 +15,9 @@ import com.zbkj.crmeb.nsl.nslwxapp.service.NslCweightService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -211,13 +215,91 @@ public class AdminCraneController {
         BigDecimal backmove = weightInfo.getBackmove();
         String remarks = weightInfo.getRemarks();
 
-        Integer flag = adminCraneService.addWeight(craneid, legtype, legway, equipweight, workextent,
+        Integer weightid = adminCraneService.queryMaxWeight();
+
+        Integer flag = adminCraneService.addWeight(weightid,craneid, legtype, legway, equipweight, workextent,
                                                     issuperweight, superweight, backmove, remarks);
         String msg = null;
         if (flag>0){
             msg = "新增配重成功!";
         }else{
             msg = "新增配重失败!";
+        }
+        return CommonResult.success(msg);
+    }
+
+    /**
+     * 配重修改
+     * @param weightDetail
+     * @return
+     */
+    @PostMapping("/editWeight")
+    public CommonResult editWeight(@RequestBody(required = false) AdmAddWeightReqParam weightDetail){
+        Integer weightid = weightDetail.getId();
+        Integer craneid = weightDetail.getCraneid();
+        String legtype = weightDetail.getLegtype();
+        String legway = weightDetail.getLegway();
+        BigDecimal equipweight = weightDetail.getEquipweight();
+        Integer workextent = weightDetail.getWorkextent();
+        String issuperweight = weightDetail.getIssuperweight();
+        BigDecimal superweight = weightDetail.getSuperweight();
+        BigDecimal backmove = weightDetail.getBackmove();
+        String remarks = weightDetail.getRemarks();
+
+        Integer flag = adminCraneService.editWeight(weightid,craneid,legtype,legway,equipweight,workextent,
+                                                    issuperweight,superweight,backmove,remarks);
+        String msg = null;
+        if (flag>0){
+            msg = "配重修改成功!";
+        }else{
+            msg = "新增修改失败!";
+        }
+        return CommonResult.success(msg);
+    }
+
+    /**
+     * 上传excel
+     * @param file
+     * @return
+     */
+    @PostMapping("/importExcel")
+    public CommonResult importExcel(@RequestParam MultipartFile file){
+
+        String filename = file.getOriginalFilename();
+        String fileXlsx = filename.substring(filename.length()-5);       //获取文件的后缀名为xlsx
+        String fileXls = filename.substring(filename.length()-4);
+        Map map = new HashMap();
+        if(!(fileXlsx.equals(".xlsx") || fileXls.equals(".xls"))){   //如果不是excel文件
+            return CommonResult.failed("文件格式错误!");
+        }
+
+        //用ApachePOI做的
+        List<Map> list = ReadExcelUtils.readExcel(file);
+
+        map.put("excelList",list);
+        return CommonResult.success(map);
+    }
+
+    @PostMapping("/addWay")
+    public CommonResult addWay(@RequestBody(required = false) AdmAddWayReqParam addWayParams){
+
+        Integer craneid = addWayParams.getCraneid();
+        Integer weightid = addWayParams.getWeightid();
+        List excelList = addWayParams.getList();
+
+        //判断是不是新增配重是的新增组合方式，是的话从库里把最大配重id查到再添加组合方式
+        if (weightid == null){
+            weightid = adminCraneService.queryMaxWeight();
+        }
+        //先将之前配重ID下面的组合方式删除
+        adminCraneService.deleteWay(weightid);
+        //
+        Integer flag = adminCraneService.addWay(weightid, craneid, excelList);
+        String msg = null;
+        if (flag>0){
+            msg = "组合方式新增成功!";
+        }else{
+            msg = "组合方式新增失败!";
         }
         return CommonResult.success(msg);
     }

@@ -11,6 +11,6 @@
     <select id="getPublishIconInfo" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.EbSystemGroupData">
         SELECT id,gid,value,sort,status,create_time,update_time
          FROM `eb_system_group_data`
-         where `status` =1 and gid = 48
+         where `status` =1 and gid = 75
     </select>
 </mapper>

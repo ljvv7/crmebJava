@@ -25,7 +25,10 @@
             </el-form-item>
             <el-form-item label="车型图片" >
               <div class="upLoadPicBox" @click="modalPicTap('1')" :disabled="isDisabled">
-                <div class="upLoad">
+                <div v-if="craneInfo.images" class="pictrue">
+                  <el-image :src="craneInfo.images"/>
+                </div>
+                <div v-else class="upLoad">
                   <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>

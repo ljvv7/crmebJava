@@ -61,10 +61,36 @@
     </update>
     
     <insert id="addWeight">
-        insert into nsl_cweight (craneid,legtype,legway,equipweight,workextent,
+        insert into nsl_cweight (id,craneid,legtype,legway,equipweight,workextent,
                                  issuperweight,superweight,backmove,remarks)
-        values (#{craneid},#{legtype},#{legway},#{equipweight},#{workextent},
+        values (#{weightid},#{craneid},#{legtype},#{legway},#{equipweight},#{workextent},
                 #{issuperweight},#{superweight},#{backmove},#{remarks});
     </insert>
+
+    <update id="editWeight">
+        update nsl_cweight
+        set craneid = #{craneid},legtype = #{legtype},legway = #{legway},
+            equipweight = #{equipweight},workextent = #{workextent},
+            issuperweight = #{issuperweight},superweight = #{superweight},
+            backmove = #{backmove},remarks = #{remarks}
+        where id = #{weightid};
+    </update>
+
+    <delete id="deleteWay">
+        delete from nsl_cway where weightid = #{weightid};
+    </delete>
+    
+    <insert id="addWay">
+        insert into nsl_cway (weightid, craneid, radius, primary_length, weight, way)
+        values
+            <foreach collection="list" item="item" separator=",">
+                (#{weightid},#{craneid},#{item.radius},#{item.primaryLength},#{item.weight},#{item.way})
+            </foreach>
+        ;
+    </insert>
+
+    <select id="queryMaxWeight" resultType="int">
+        select max(id)+1 from nsl_cweight;
+    </select>
 
 </mapper>

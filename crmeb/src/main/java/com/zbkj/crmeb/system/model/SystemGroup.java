@@ -45,6 +45,9 @@ public class SystemGroup implements Serializable {
     @ApiModelProperty(value = "form 表单 id")
     private Integer formId;
 
+    @ApiModelProperty(value = "标记")
+    private String kbn;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 

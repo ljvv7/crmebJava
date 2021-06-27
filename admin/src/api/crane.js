@@ -66,5 +66,19 @@ export default {
       data: weightInfo
     })
   },
+  editWeight(weightDetail){
+    return request({
+      url: 'admin/nsl/adminCrane/editWeight',
+      method: 'post',
+      data: weightDetail
+    })
+  },
+  addWay(addWayParams){
+    return request({
+      url: 'admin/nsl/adminCrane/addWay',
+      method: 'post',
+      data: addWayParams
+    })
+  },
 
 }
