@@ -50,6 +50,7 @@ public class SystemGroupServiceImpl extends ServiceImpl<SystemGroupDao, SystemGr
         if(!StringUtils.isBlank(request.getKeywords())){
             lambdaQueryWrapper.like(SystemGroup::getName, request.getKeywords());
         }
+        lambdaQueryWrapper.ne(SystemGroup::getKbn,'9');
         lambdaQueryWrapper.orderByDesc(SystemGroup::getId);
         return dao.selectList(lambdaQueryWrapper);
     }

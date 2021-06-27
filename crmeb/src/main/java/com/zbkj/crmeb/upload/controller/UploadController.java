@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +68,7 @@ public class UploadController {
      */
     @ApiOperation(value = "文件上传")
     @RequestMapping(value = "/file", method = RequestMethod.POST)
+    @ConditionalOnProperty(name = "jhipster.cors.allowed-origins")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "model", value = "模块 用户user,商品product,微信wechat,news文章"),
             @ApiImplicitParam(name = "pid", value = "分类ID 0编辑器,1商品图片,2拼团图片,3砍价图片,4秒杀图片,5文章图片,6组合数据图,7前台用户,8微信系列 ", allowableValues = "range[0,1,2,3,4,5,6,7,8]")

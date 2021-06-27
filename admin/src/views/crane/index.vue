@@ -154,7 +154,7 @@ export default {
       // debugger
       crane.getCraneList(this.tableFrom).then(res =>{
         this.tableData.data = res.admCraneList
-        console.log(res.admCraneList)
+        // console.log(res.admCraneList)
         this.tableData.total = res.count
         this.listLoading = false
       }).catch(res => {
