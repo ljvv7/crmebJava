@@ -8,12 +8,14 @@ import com.zbkj.crmeb.nsl.nslwxapp.model.NslCbrands;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCway;
 import com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight;
+import com.zbkj.crmeb.nsl.nslwxapp.response.CraneByWayEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -100,7 +102,7 @@ public class NslCraneController {
     }
 
     /**
-     * 车型查找-型号
+     * 车辆查找-品牌、型号
      * @param cbrandid
      * @param craneid
      * @param pageindex
@@ -108,7 +110,7 @@ public class NslCraneController {
      * @return
      */
     @PostMapping("/cranelist")
-    @ApiOperation(value = "车辆列表")
+    @ApiOperation(value = "按品牌和型号查车辆")
     public CommonResult getCraneList(@RequestParam(required = false) Integer cbrandid,
                                      @RequestParam(required = false) Integer craneid,
                                      @RequestParam Long pageindex,
@@ -122,6 +124,42 @@ public class NslCraneController {
 
         craneMap.put("count",craneListCount);
         craneMap.put("craneList",craneList);
+        return CommonResult.success(craneMap);
+    }
+
+    @PostMapping("/cranelistByWay")
+    @ApiOperation(value = "按参数查车辆")
+    public CommonResult getCraneListByWay(@RequestParam(required = false) Integer legType,
+                                          @RequestParam BigDecimal radius,
+                                          @RequestParam Double weight,
+                                          @RequestParam Double minPercent,
+                                          @RequestParam Double maxPercent,
+                                          @RequestParam(required = false) BigDecimal minPrimary,
+                                          @RequestParam(required = false) BigDecimal maxPrimary,
+                                          @RequestParam(required = false) BigDecimal minMinor,
+                                          @RequestParam(required = false) BigDecimal maxMinor,
+                                          @RequestParam Long pageindex,
+                                          @RequestParam Long pagesize){
+
+
+        Map craneMap = new HashMap();
+        Double minWeight = weight/maxPercent;
+        Double maxWeight = weight/minPercent;
+        List craneWayIds = nslCraneService.getCraneWayIds(legType, radius,minWeight, maxWeight,
+                                            minPrimary, maxPrimary,minMinor, maxMinor);
+        if (craneWayIds.isEmpty()){
+            ArrayList list = new ArrayList();
+            craneMap.put("count",0);
+            craneMap.put("craneList",list);
+            return CommonResult.success(craneMap);
+        }
+
+        List<CraneByWayEntry> craneListByWay = nslCraneService.getCraneListByWay(craneWayIds, ((pageindex-1)*pagesize), pagesize);
+        Integer craneListByWayCount = nslCraneService.getCraneListByWayCount(craneWayIds);
+
+        craneMap.put("count",craneListByWayCount);
+        craneMap.put("craneList",craneListByWay);
+
         return CommonResult.success(craneMap);
     }
 

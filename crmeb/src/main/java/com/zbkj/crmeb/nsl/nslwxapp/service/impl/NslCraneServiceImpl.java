@@ -7,11 +7,13 @@ import com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane;
 import com.zbkj.crmeb.nsl.nslwxapp.dao.NslCraneMapper;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CannerCbrandsEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.response.CollectAndCraneList;
+import com.zbkj.crmeb.nsl.nslwxapp.response.CraneByWayEntry;
 import com.zbkj.crmeb.nsl.nslwxapp.service.NslCraneService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -63,6 +65,48 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
     @Override
     public List<NslCrane> getCraneList(Integer cbrandid,Integer craneid,Long pageindex,Long pagesize) {
         return baseMapper.getCraneList(cbrandid,craneid,pageindex,pagesize);
+    }
+
+    /**
+     * 根据性能参数查询组合方式ids
+     * @param legType
+     * @param radius
+     * @param minWeight
+     * @param maxWeight
+     * @param minPrimary
+     * @param maxPrimary
+     * @param minMinor
+     * @param maxMinor
+     * @return
+     */
+    @Override
+    public List getCraneWayIds(Integer legType, BigDecimal radius,
+                               Double minWeight,Double maxWeight,
+                               BigDecimal minPrimary, BigDecimal maxPrimary,
+                               BigDecimal minMinor, BigDecimal maxMinor) {
+        return baseMapper.getCraneWayIds(legType, radius, minWeight, maxWeight, minPrimary, maxPrimary, minMinor, maxMinor);
+    }
+
+    /**
+     * 根据性能参数查询车辆列表
+     * @param ids
+     * @param pageindex
+     * @param pagesize
+     * @return
+     */
+    @Override
+    public List<CraneByWayEntry> getCraneListByWay(List ids, long pageindex, long pagesize) {
+        return baseMapper.getCraneListByWay(ids, pageindex, pagesize);
+    }
+
+    /**
+     * 根据性能参数查询车辆列表总数
+     * @param ids
+     * @return
+     */
+    @Override
+    public Integer getCraneListByWayCount(List ids) {
+        return baseMapper.getCraneListByWayCount(ids);
     }
 
     /**

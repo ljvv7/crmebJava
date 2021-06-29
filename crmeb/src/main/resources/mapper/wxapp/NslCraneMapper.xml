@@ -17,6 +17,51 @@
         limit #{pageindex},#{pagesize};
     </select>
 
+    <select id="getCraneWayIds" resultType="int">
+        select min(id) as id
+        from nsl_cway
+        where weight between #{minWeight} and #{maxWeight}
+        <if test="minPrimary!=null and minPrimary!='' and maxPrimary!=null and maxPrimary!=''">
+            and primary_length between #{minPrimary} and #{maxPrimary}
+        </if>
+        <if test="minMinor!=null and minMinor!='' and maxMinor!=null and maxMinor!=''">
+            and minor_length between #{minMinor} and #{maxMinor}
+        </if>
+        <if test="legType!=null and legType!=''">
+            and legtype = #{legType}
+        </if>
+        and radius = #{radius}
+        and kbn != '9'
+        group by craneid
+    </select>
+
+    <select id="getCraneListByWay" resultType="com.zbkj.crmeb.nsl.nslwxapp.response.CraneByWayEntry">
+        select B.id id,B.name name,B.cbrands brandId,C.name brandName,B.images image,
+               B.introduce introduce,A.weightid weightid,D.equipweight equipweight,
+               A.radius radius,A.primary_length primaryLength,A.minor_length minorLength,
+               A.weight weight,A.way way,A.legtype legType
+        from nsl_cway A
+        left join nsl_crane B on A.craneid = B.id
+        left join nsl_cbrands C on B.cbrands = C.id
+        left join nsl_cweight D on A.weightid = D.id
+        where A.id in (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+        order by B.maxweight asc
+        limit #{pageindex},#{pagesize};
+    </select>
+    <select id="getCraneListByWayCount" resultType="int">
+        select count(1)
+        from nsl_cway
+        where id in (
+        <foreach collection="list" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </select>
+
     <select id="getCraneListCount" resultType="int">
         select count(1)
         from `nsl_crane`
