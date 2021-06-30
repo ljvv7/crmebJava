@@ -131,7 +131,7 @@ public class NslCraneController {
     @ApiOperation(value = "按参数查车辆")
     public CommonResult getCraneListByWay(@RequestParam(required = false) Integer legType,
                                           @RequestParam BigDecimal radius,
-                                          @RequestParam Double weight,
+                                          @RequestParam BigDecimal weight,
                                           @RequestParam Double minPercent,
                                           @RequestParam Double maxPercent,
                                           @RequestParam(required = false) BigDecimal minPrimary,
@@ -143,19 +143,28 @@ public class NslCraneController {
 
 
         Map craneMap = new HashMap();
-        Double minWeight = weight/maxPercent;
-        Double maxWeight = weight/minPercent;
+        //计算weight范围
+        Double minWeight = weight.doubleValue()/(maxPercent/100);
+        Double maxWeight = weight.doubleValue()/(minPercent/100);
         List craneWayIds = nslCraneService.getCraneWayIds(legType, radius,minWeight, maxWeight,
                                             minPrimary, maxPrimary,minMinor, maxMinor);
+        //craneWayIds为空，则返回空
         if (craneWayIds.isEmpty()){
-            ArrayList list = new ArrayList();
+            List list = new ArrayList();
             craneMap.put("count",0);
             craneMap.put("craneList",list);
             return CommonResult.success(craneMap);
         }
 
+        //拿到查到的craneList
         List<CraneByWayEntry> craneListByWay = nslCraneService.getCraneListByWay(craneWayIds, ((pageindex-1)*pagesize), pagesize);
+        //查询总条数
         Integer craneListByWayCount = nslCraneService.getCraneListByWayCount(craneWayIds);
+
+        //给返回列表每一项percent设置值
+        for (CraneByWayEntry item : craneListByWay) {
+            item.setPercent(Math.floor(weight.doubleValue()/item.getWeight().doubleValue()*100));
+        }
 
         craneMap.put("count",craneListByWayCount);
         craneMap.put("craneList",craneListByWay);

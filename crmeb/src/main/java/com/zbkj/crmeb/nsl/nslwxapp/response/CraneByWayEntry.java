@@ -20,4 +20,5 @@ public class CraneByWayEntry {
     private BigDecimal weight;
     private String way;
     private Integer legType;
+    private Double percent;
 }
