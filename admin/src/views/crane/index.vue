@@ -212,6 +212,7 @@ export default {
       return wbout;
     },
 
+    //分页
     pageChange(page) {
       this.tableFrom.page = page
       this.getAdmCraneList()

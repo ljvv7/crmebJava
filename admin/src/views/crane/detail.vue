@@ -113,6 +113,17 @@
                 </template>
               </el-table-column>
           </el-table>
+          <div class="block">
+            <el-pagination
+              :page-sizes="[10, 20, 30, 40]"
+              :page-size="tableFrom.limit"
+              :current-page="tableFrom.page"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="weightData.total"
+              @size-change="handleSizeChange"
+              @current-change="pageChange"
+            />
+          </div>
 
           <!-- 新增配重弹窗 -->
           <el-dialog title="新增配重信息" :visible.sync="dialogAddVisible">
@@ -121,7 +132,14 @@
                 <el-input v-model="weightInfo.craneid" disabled></el-input>
               </el-form-item>
               <el-form-item label="组合方式">
-                <el-input v-model="weightInfo.legtype" placeholder="1:仅主臂,2:主臂+副臂,3:主臂+横臂,4:超起"></el-input>
+                <el-select v-model="weightInfo.legtype" placeholder="请选择">
+                 <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="支腿方式">
                 <el-input v-model="weightInfo.legway"></el-input>
@@ -210,7 +228,14 @@
                 <el-input v-model="weightDetail.craneid" disabled></el-input>
               </el-form-item>
               <el-form-item label="组合方式">
-                <el-input v-model="weightDetail.legtype" placeholder="1:仅主臂,2:主臂+副臂,3:主臂+横臂,4:超起"></el-input>
+                <el-select v-model="weightDetail.legtype">
+                 <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="支腿方式">
                 <el-input v-model="weightDetail.legway"></el-input>
@@ -395,7 +420,25 @@ import { param } from '@/utils'
         wayData: {
           data: [],
           total: 0
-        }  
+        },
+        options: [
+          {
+            value: '1',
+            label: '仅主臂'
+          }, 
+          {
+            value: '2',
+            label: '主臂+副臂'
+          }, 
+          {
+            value: '3',
+            label: '主臂+横臂'
+          }, 
+          {
+            value: '4',
+            label: '超起'
+          }
+        ],  
       }
 
     },
@@ -482,7 +525,6 @@ import { param } from '@/utils'
         const _this = this;
         if(_this.isDisabled) return;
         this.$modalUpload(function(img) {
-          // console.log(img);
           if(tit==='1'&& !num){
             _this.detailInfo.images = img[0].sattDir
           }
@@ -507,19 +549,19 @@ import { param } from '@/utils'
         })
         
         //新增组合方式
-        this.addWayParams.craneid = this.tableFrom.craneid
-        this.addWayParams.weightid = null
-        this.addWayParams.list = this.excelList
-        crane.addWay(this.addWayParams).then(res=>{
-          this.$message({
-            message: '组合方式新增成功!',
-            type: 'success'
-          });
-        })
-
-        this.getWeightList()
-
+        if(this.excelList.length!=0){
+          this.addWayParams.craneid = this.tableFrom.craneid
+          this.addWayParams.weightid = null
+          this.addWayParams.list = this.excelList
+          crane.addWay(this.addWayParams).then(res=>{
+            this.$message({
+              message: '组合方式新增成功!',
+              type: 'success'
+            });
+          })
+        }
         this.dialogAddVisible = false
+        this.getWeightList()
       },
 
       //编辑配重
@@ -552,9 +594,8 @@ import { param } from '@/utils'
           });
         })
 
-        this.getWeightList()
-
         this.dialogEditVisible = false
+        this.getWeightList()
       },
 
       // 上传excel文件的钩子
@@ -570,7 +611,23 @@ import { param } from '@/utils'
         this.excelListLoading = false
       },
 
+      //分页
+      pageChange(page) {
+        this.tableFrom.page = page
+        this.getWeightList()
+      },
+      handleSizeChange(val) {
+        this.tableFrom.limit = val
+        this.getWeightList()
+      },
+
       
     }
   }
 </script>
+
+<style scoped>
+  .el-pagination {
+    text-align: center;
+  }
+</style>

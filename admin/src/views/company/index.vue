@@ -62,11 +62,15 @@
           label="联系电话"
           min-width="90"
         />
-        <el-table-column
-          prop="status"
-          label="状态"
-          min-width="70"
-        />
+        <el-table-column label="状态" min-width="70">
+          <template slot-scope="scope">
+            <!-- 这里使用===还是==得看返回值是什么类型的-->
+            <span v-if="scope.row.status == '10'">待审核</span>
+            <span v-if="scope.row.status == '20'">已审核</span>
+            <span v-if="scope.row.status == '30'">下架</span>
+            <span v-if="scope.row.status == '40'">上架</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" min-width="150" fixed="right" align="center">
           <template slot-scope="scope">
               <el-button type="primary" @click="chakan(scope.row.id)">查看</el-button>

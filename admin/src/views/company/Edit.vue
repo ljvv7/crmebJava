@@ -56,36 +56,39 @@
                 fixed
                 prop="id"
                 label="车辆ID"
-                width="100">
+                width="150">
               </el-table-column>
               <el-table-column
                 prop="cbrands"
                 label="品牌ID"
-                width="100">
+                width="150">
               </el-table-column>
               <el-table-column
                 prop="name"
                 label="车辆型号"
-                width="100">
+                width="150">
               </el-table-column>
               <el-table-column
                 prop="maxweight"
                 label="最大起重量"
-                width="100">
+                width="150">
               </el-table-column>
-              <el-table-column label="车型图片" min-width="100" prop="images">
-                <div class="demo-image__preview">
-                  <el-image 
-                    style="width: 50px; height: 50px"
-                    :src="url" 
-                    :preview-src-list="srcList">
-                  </el-image>
-                </div>
+              <el-table-column label="车型图片" min-width="100">
+                <template slot-scope="scope">
+                  <div class="demo-image__preview">
+                    <el-image
+                      style="width: 36px; height: 36px"
+                      :src="scope.row.images"
+                      :preview-src-list="[scope.row.images]"
+                    />
+                  </div>
+                </template>
               </el-table-column>
               <el-table-column
                 prop="introduce"
                 label="车辆简介"
-                width="200"
+                min-width="150"
+                :show-overflow-tooltip="true"
                 >
               </el-table-column>
               <el-table-column
