@@ -148,12 +148,13 @@
                 <template>
                   <el-upload
                     class="upload-demo"
-                    action="http://localhost:8101/api/admin/nsl/adminCrane/importExcel"
+                    :action="this.excelUploadUrl"
                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                     :multiple="false"
                     :on-success="handleSuccess"
                     :before-remove="beforeRemove"
                     :on-remove="handleRemove"
+                    :show-file-list="false"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
                     <template #tip>
@@ -236,7 +237,7 @@
                 <template>
                   <el-upload
                     class="upload-demo"
-                    action="http://localhost:8101/api/admin/nsl/adminCrane/importExcel"
+                    :action="this.excelUploadUrl"
                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                     :multiple="false"
                     :on-success="handleSuccess"
@@ -358,6 +359,7 @@ import { param } from '@/utils'
   export default {
     data() {
       return {
+        excelUploadUrl: 'http://localhost:8101/api/admin/nsl/adminCrane/importExcel',
         listLoading: true,
         excelListLoading: false,
         activeName: 'first',
