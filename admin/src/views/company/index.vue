@@ -75,13 +75,13 @@
           <template slot-scope="scope">
               <el-button type="primary" @click="chakan(scope.row.id)">查看</el-button>
               <!-- <el-button type="primary" @click="xiangqing">公司详情</el-button>  -->
-               <el-select v-model="value" placeholder="更多" min-width="150" @change="selectEditAndRemove(scope.row.id)">
+               <el-select v-model="scope.row.value" min-width="150" @change="selectEditAndRemove(scope.row.id,scope.row.value)" placeholder="更多">
                  <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-               </el-option>
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                 </el-option>  
               </el-select>   
           </template>
         </el-table-column>
@@ -208,20 +208,20 @@ export default {
         company.updateStatusByid(this.companyId,status).then(res =>{
         })
 
-        this.value = 'yishenhe'
+        
     },
-    selectEditAndRemove(id){
-        if(this.value == 'zhuangtaishenzhi'){
+    selectEditAndRemove(id,value){
+        if(value == 'zhuangtaishenzhi'){
           this.companyId = id
           this.dialogVisible = true
-        }else if(this.value == 'bianji'){
+        }else if(value == 'bianji'){
           this.$router.push({
             path: 'companyDetails',
             query : {
               id: id
             }
           })
-        }else if(this.value == 'delete'){
+        }else if(value == 'delete'){
             this.$confirm('删除公司后将不可恢复, 请慎重操作?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
@@ -234,7 +234,7 @@ export default {
                   message: '删除成功!'
                 })
                 this.getList()
-                 this.value = 'yishenhe'
+                
             }).catch(() => {
               this.$message({
               type: 'info',
@@ -304,9 +304,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .taoBaoModal{
-  //  z-index: 3333 !important;
-  }
   .demo-table-expand{
     /deep/ label{
       width: 82px;
