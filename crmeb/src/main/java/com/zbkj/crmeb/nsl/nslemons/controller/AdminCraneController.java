@@ -292,7 +292,7 @@ public class AdminCraneController {
         Integer weightid = addWayParams.getWeightid();
         List excelList = addWayParams.getList();
 
-        //判断是不是新增配重是的新增组合方式，是的话从库里把最大配重id查到再添加组合方式
+        //判断是不是新增配重时的新增组合方式，是的话从库里把最大配重id查到再添加组合方式
         if (weightid == null){
             weightid = adminCraneService.queryMaxWeight();
         }

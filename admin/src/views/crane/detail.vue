@@ -127,11 +127,11 @@
 
           <!-- 新增配重弹窗 -->
           <el-dialog title="新增配重信息" :visible.sync="dialogAddVisible">
-            <el-form ref="form" :model="weightInfo" label-width="100px">
+            <el-form ref="form" :model="weightInfo" label-width="100px" :rules="rules">
               <el-form-item label="车辆ID">
                 <el-input v-model="weightInfo.craneid" disabled></el-input>
               </el-form-item>
-              <el-form-item label="组合方式">
+              <el-form-item label="组合方式" prop="legtype">
                 <el-select v-model="weightInfo.legtype" placeholder="请选择">
                  <el-option
                     v-for="item in options"
@@ -141,25 +141,25 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="支腿方式">
+              <el-form-item label="支腿方式" prop="legway">
                 <el-input v-model="weightInfo.legway"></el-input>
               </el-form-item>
-              <el-form-item label="配重">
+              <el-form-item label="配重" prop="equipweight">
                 <el-input v-model="weightInfo.equipweight"></el-input>
               </el-form-item>
-              <el-form-item label="工作范围">
+              <el-form-item label="工作范围" prop="workextent">
                 <el-input v-model="weightInfo.workextent"></el-input>
               </el-form-item>
-              <el-form-item label="是否超起">
+              <el-form-item label="是否超起" prop="issuperweight">
                 <el-input v-model="weightInfo.issuperweight" placeholder="0:未超起,1:超起"></el-input>
               </el-form-item>
-              <el-form-item label="超起配重">
+              <el-form-item label="超起配重" prop="superweight">
                 <el-input v-model="weightInfo.superweight"></el-input>
               </el-form-item>
-              <el-form-item label="后移">
+              <el-form-item label="后移" prop="backmove">
                 <el-input v-model="weightInfo.backmove"></el-input>
               </el-form-item>
-              <el-form-item label="备注">
+              <el-form-item label="备注" prop="remarks">
                 <el-input v-model="weightInfo.remarks"></el-input>
               </el-form-item>
               <el-form-item label="性能参数">
@@ -213,7 +213,7 @@
             <template #footer>
               <span class="dialog-footer">
                 <el-button @click="dialogAddVisible = false">取 消</el-button>
-                <el-button type="primary" @click="onSubmitAddWeight">保 存</el-button>
+                <el-button type="primary" @click="onSubmitAddWeight('form')">保 存</el-button>
               </span>
             </template>
           </el-dialog>
@@ -438,7 +438,35 @@ import { param } from '@/utils'
             value: '4',
             label: '超起'
           }
-        ],  
+        ], 
+        
+        rules: {
+          legtype: [
+            {required: true, message: '请选择组合方式', trigger: 'change'}
+          ],
+          legway: [
+            {required: true, message: '请输入支腿方式', trigger: 'blur'}
+          ],
+          equipweight: [
+            {required: true, message: '请输入配重', trigger: 'blur'}
+          ],
+          workextent: [
+            {required: true, message: '请输入工作范围', trigger: 'blur'}
+          ],
+          issuperweight: [
+            {required: true, message: '请输入是否超起0或1', trigger: 'blur'}
+          ],
+          superweight: [
+            {required: true, message: '请输入超起配重', trigger: 'blur'}
+          ],
+          backmove: [
+            {required: true, message: '请输入后移', trigger: 'blur'}
+          ],
+          remarks: [
+            {required: true, message: '请输入备注', trigger: 'blur'}
+          ],
+        }
+        
       }
 
     },
@@ -539,14 +567,24 @@ import { param } from '@/utils'
       },
 
       //新增配重保存的钩子
-      onSubmitAddWeight() {
-        //新增配重
-        crane.addWeight(this.weightInfo).then(res=>{
-          this.$message({
-            message: '配重新增成功!',
-            type: 'success'
-          });
-        })
+      onSubmitAddWeight(form) {
+        this.$refs[form].validate((valid) => {
+          if (valid) {
+            //新增配重
+            crane.addWeight(this.weightInfo).then(res=>{
+              this.$message({
+                message: '配重新增成功!',
+                type: 'success'
+              });
+            })
+          } else {
+            this.$message({
+              message: '请将配重信息输入完整!',
+              type: 'error'
+            });
+          }
+        });
+        
         
         //新增组合方式
         if(this.excelList.length!=0){
