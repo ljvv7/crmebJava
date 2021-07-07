@@ -213,7 +213,7 @@
             <template #footer>
               <span class="dialog-footer">
                 <el-button @click="dialogAddVisible = false">取 消</el-button>
-                <el-button type="primary" @click="onSubmitAddWeight('form')">保 存</el-button>
+                <el-button type="primary" @click="onSubmitAddWeight">保 存</el-button>
               </span>
             </template>
           </el-dialog>
@@ -567,25 +567,16 @@ import { param } from '@/utils'
       },
 
       //新增配重保存的钩子
-      onSubmitAddWeight(form) {
-        this.$refs[form].validate((valid) => {
-          if (valid) {
-            //新增配重
-            crane.addWeight(this.weightInfo).then(res=>{
-              this.$message({
-                message: '配重新增成功!',
-                type: 'success'
-              });
-            })
-          } else {
-            this.$message({
-              message: '请将配重信息输入完整!',
-              type: 'error'
-            });
-          }
-        });
+      onSubmitAddWeight() {
         
-        
+        //新增配重
+        crane.addWeight(this.weightInfo).then(res=>{
+          this.$message({
+            message: '配重新增成功!',
+            type: 'success'
+          });
+        })
+          
         //新增组合方式
         if(this.excelList.length!=0){
           this.addWayParams.craneid = this.tableFrom.craneid

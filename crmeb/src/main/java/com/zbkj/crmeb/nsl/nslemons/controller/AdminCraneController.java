@@ -16,6 +16,7 @@ import com.zbkj.crmeb.store.service.StoreProductService;
 import com.zbkj.crmeb.system.service.SystemAttachmentService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -127,7 +128,7 @@ public class AdminCraneController {
      * @return
      */
     @PostMapping("/addCrane")
-    public CommonResult addCrane(@RequestBody(required = false) AdmAddCraneReqParam craneInfo){
+    public CommonResult addCrane(@Validated @RequestBody(required = false) AdmAddCraneReqParam craneInfo){
         Integer cbrands = craneInfo.getCbrands();
         String name = craneInfo.getName();
         BigDecimal maxweight = craneInfo.getMaxweight();
@@ -151,7 +152,7 @@ public class AdminCraneController {
      * @return
      */
     @PostMapping("/editCrane")
-    public CommonResult editCrane(@RequestBody(required = false) AdmAddCraneReqParam detailInfo){
+    public CommonResult editCrane(@Validated @RequestBody(required = false) AdmEditCraneReqParam detailInfo){
         Integer craneid = detailInfo.getId();
         String name = detailInfo.getName();
         BigDecimal maxweight = detailInfo.getMaxweight();
@@ -209,7 +210,7 @@ public class AdminCraneController {
      * @return
      */
     @PostMapping("/addWeight")
-    public CommonResult addWeight(@RequestBody(required = false) AdmAddWeightReqParam weightInfo){
+    public CommonResult addWeight(@Validated @RequestBody(required = false) AdmAddWeightReqParam weightInfo){
         Integer craneid = weightInfo.getCraneid();
         String legtype = weightInfo.getLegtype();
         String legway = weightInfo.getLegway();
@@ -239,7 +240,7 @@ public class AdminCraneController {
      * @return
      */
     @PostMapping("/editWeight")
-    public CommonResult editWeight(@RequestBody(required = false) AdmAddWeightReqParam weightDetail){
+    public CommonResult editWeight(@Validated @RequestBody(required = false) AdmEditWeightReqParam weightDetail){
         Integer weightid = weightDetail.getId();
         Integer craneid = weightDetail.getCraneid();
         String legtype = weightDetail.getLegtype();

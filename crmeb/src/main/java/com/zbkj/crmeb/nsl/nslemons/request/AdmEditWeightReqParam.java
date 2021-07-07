@@ -7,10 +7,13 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
- * 新增配重请求参数实体
+ * 编辑配重请求参数实体
  */
 @Data
-public class AdmAddWeightReqParam {
+public class AdmEditWeightReqParam {
+
+    @NotNull(message = "配重id不能为空")
+    private Integer id;
 
     @NotNull(message = "车辆id不能为空")
     private Integer craneid;

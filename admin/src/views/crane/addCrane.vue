@@ -38,7 +38,7 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" :plain="true" @click="onSubmit('ruleForm')">保存</el-button>
+              <el-button type="primary" :plain="true" @click="onSubmit">保存</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -61,7 +61,7 @@ import { param } from '@/utils'
           name: null,
           maxweight: null,
           guidePrice: null,
-          images: '',
+          images: null,
           introduce: null
         },
         rules: {
@@ -77,9 +77,9 @@ import { param } from '@/utils'
           guidePrice: [
             {required: true, message: '请输入指导价格', trigger: 'blur'}
           ],
-          // images: [
-          //   {required: true, message: '请上传图片'}
-          // ],
+          images: [
+            {required: true, message: '请上传图片'}
+          ],
           introduce: [
             {required: true, message: '请输入简介', trigger: 'blur'}
           ]
@@ -91,7 +91,7 @@ import { param } from '@/utils'
     },
 
     created(){
-        this.getBrandList()
+      this.getBrandList()
     },
     methods: {
 
@@ -113,27 +113,37 @@ import { param } from '@/utils'
         // this.getDetail()
       },
 
-      onSubmit(ruleForm) {
-        this.$refs[ruleForm].validate((valid) => {
-          if (valid) {
-            crane.addCrane(this.craneInfo).then(res=>{
-              this.$message({
-                message: '车辆新增成功!',
-                type: 'success'
-              });
-            })
-            this.$router.push({
-              path: 'craneQuery'
-            })
-          } else {
-            this.$message({
-              message: '请将车辆信息输入完整!',
-              type: 'error'
-            });
-          }
-        });
+      // onSubmit(ruleForm) {
+      //   this.$refs[ruleForm].validate((valid) => {
+      //     if (valid) {
+      //       crane.addCrane(this.craneInfo).then(res=>{
+      //         this.$message({
+      //           message: '车辆新增成功!',
+      //           type: 'success'
+      //         });
+      //       })
+      //       this.$router.push({
+      //         path: 'craneQuery'
+      //       })
+      //     } else {
+      //       this.$message({
+      //         message: '请将车辆信息输入完整!',
+      //         type: 'error'
+      //       });
+      //     }
+      //   });
+      // },
 
-        
+      onSubmit(){
+        crane.addCrane(this.craneInfo).then(res=>{
+          this.$message({
+            message: '车辆新增成功!',
+            type: 'success'
+          });
+        })
+        this.$router.push({
+          path: 'craneQuery'
+        })
       },
 
       modalPicTap (tit) {

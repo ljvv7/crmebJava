@@ -7,10 +7,13 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
- * 新增车辆请求参数实体
+ * 编辑车辆请求参数实体
  */
 @Data
-public class AdmAddCraneReqParam {
+public class AdmEditCraneReqParam {
+
+    @NotNull(message = "车辆id不能为空")
+    private Integer id;
 
     @NotNull(message = "品牌id不能为空")
     private Integer cbrands;
