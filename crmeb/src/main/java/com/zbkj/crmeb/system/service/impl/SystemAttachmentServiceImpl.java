@@ -96,7 +96,7 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
     private List<SystemAttachment> getAsyncList() {
         PageHelper.startPage(Constants.DEFAULT_PAGE, Constants.DEFAULT_LIMIT);
         LambdaQueryWrapper<SystemAttachment> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(SystemAttachment::getImageType, 1);
+        lambdaQueryWrapper.eq(SystemAttachment::getImageType, 3);
         lambdaQueryWrapper.isNotNull(SystemAttachment::getAttDir);
         lambdaQueryWrapper.orderByDesc(SystemAttachment::getAttId);
         return dao.selectList(lambdaQueryWrapper);
