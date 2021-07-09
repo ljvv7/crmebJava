@@ -46,7 +46,6 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
 
     /**
      * 根据车辆id获取车辆信息
-     * @param craneid
      * @return
      */
     @Override
@@ -56,10 +55,6 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
 
     /**
      * 查询车辆列表
-     * @param cbrandid
-     * @param craneid
-     * @param pageindex
-     * @param pagesize
      * @return
      */
     @Override
@@ -69,14 +64,6 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
 
     /**
      * 根据性能参数查询组合方式ids
-     * @param legType
-     * @param radius
-     * @param minWeight
-     * @param maxWeight
-     * @param minPrimary
-     * @param maxPrimary
-     * @param minMinor
-     * @param maxMinor
      * @return
      */
     @Override
@@ -89,9 +76,6 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
 
     /**
      * 根据性能参数查询车辆列表
-     * @param ids
-     * @param pageindex
-     * @param pagesize
      * @return
      */
     @Override
@@ -101,7 +85,6 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
 
     /**
      * 根据性能参数查询车辆列表总数
-     * @param ids
      * @return
      */
     @Override
@@ -111,8 +94,6 @@ public class NslCraneServiceImpl extends ServiceImpl<NslCraneMapper, NslCrane> i
 
     /**
      * 查询车辆信息总条数
-     * @param cbrandid
-     * @param craneid
      * @return
      */
     @Override

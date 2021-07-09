@@ -13,8 +13,12 @@ import com.zbkj.crmeb.nsl.nslwxapp.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +34,7 @@ import java.util.Map;
  * @since 2021-06-01
  */
 @RestController
+@Validated
 @RequestMapping("api/admin/nsl/crane")
 @Api(tags = "nsl-车辆接口")
 public class NslCraneController {
@@ -49,16 +54,13 @@ public class NslCraneController {
 
     /**
      * 车辆详情
-     * @param craneid
-     * @param pageindex
-     * @param pagesize
      * @return
      */
     @PostMapping("/getdetail")
     @ApiOperation(value = "车辆详情")
-    public CommonResult getDetail(@RequestParam Integer craneid,
-                                  @RequestParam Long pageindex,
-                                  @RequestParam Long pagesize,
+    public CommonResult getDetail(@RequestParam @NotNull(message = "车辆id不能为空") Integer craneid,
+                                  @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
+                                  @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize,
                                   @RequestParam Double lot,
                                   @RequestParam Double lat){
 
@@ -103,18 +105,14 @@ public class NslCraneController {
 
     /**
      * 车辆查找-品牌、型号
-     * @param cbrandid
-     * @param craneid
-     * @param pageindex
-     * @param pagesize
      * @return
      */
     @PostMapping("/cranelist")
     @ApiOperation(value = "按品牌和型号查车辆")
     public CommonResult getCraneList(@RequestParam(required = false) Integer cbrandid,
                                      @RequestParam(required = false) Integer craneid,
-                                     @RequestParam Long pageindex,
-                                     @RequestParam Long pagesize){
+                                     @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
+                                     @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
 
         Map craneMap = new HashMap();
 
@@ -127,19 +125,23 @@ public class NslCraneController {
         return CommonResult.success(craneMap);
     }
 
+    /**
+     * 车辆查找-参数
+     * @return
+     */
     @PostMapping("/cranelistByWay")
     @ApiOperation(value = "按参数查车辆")
     public CommonResult getCraneListByWay(@RequestParam(required = false) Integer legType,
-                                          @RequestParam BigDecimal radius,
-                                          @RequestParam BigDecimal weight,
-                                          @RequestParam Double minPercent,
-                                          @RequestParam Double maxPercent,
+                                          @RequestParam @NotNull(message = "作业半径不能为空") BigDecimal radius,
+                                          @RequestParam @NotNull(message = "配重不能为空") BigDecimal weight,
+                                          @RequestParam @NotNull(message = "最小百分比不能为空") @Min(value = 1,message = "最小百分比最小值为1") Double minPercent,
+                                          @RequestParam @NotNull(message = "最大百分比不能为空") @Min(value = 1,message = "最大百分比最小值为1") Double maxPercent,
                                           @RequestParam(required = false) BigDecimal minPrimary,
                                           @RequestParam(required = false) BigDecimal maxPrimary,
                                           @RequestParam(required = false) BigDecimal minMinor,
                                           @RequestParam(required = false) BigDecimal maxMinor,
-                                          @RequestParam Long pageindex,
-                                          @RequestParam Long pagesize){
+                                          @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
+                                          @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
 
 
         Map craneMap = new HashMap();
@@ -174,16 +176,13 @@ public class NslCraneController {
 
     /**
      * 根据车辆id查出配重列表
-     * @param craneid
-     * @param pageindex
-     * @param pagesize
      * @return
      */
     @PostMapping("/weightlist")
     @ApiOperation(value = "车辆配重列表")
-    public CommonResult getWeightList(@RequestParam Integer craneid,
-                                      @RequestParam Long pageindex,
-                                      @RequestParam Long pagesize){
+    public CommonResult getWeightList(@RequestParam @NotNull(message = "车辆id不能为空") Integer craneid,
+                                      @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
+                                      @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
 
         List<NslCweight> weightList = nslCweightService.getWeightList(craneid,((pageindex-1)*pagesize),pagesize);
         Integer weightListCount = nslCweightService.getWeightListCount(craneid);
@@ -195,20 +194,15 @@ public class NslCraneController {
 
     /**
      * 组合方式列表
-     * @param craneid
-     * @param cweightid
-     * @param cwayid
-     * @param pageindex
-     * @param pagesize
      * @return
      */
     @PostMapping("/waylist")
     @ApiOperation(value = "车辆组合方式列表")
-    public CommonResult getWayList(@RequestParam Integer craneid,
-                                   @RequestParam Integer cweightid,
+    public CommonResult getWayList(@RequestParam @NotNull(message = "车辆id不能为空") Integer craneid,
+                                   @RequestParam @NotNull(message = "配重id不能为空") Integer cweightid,
                                    @RequestParam(required = false) Integer cwayid,
-                                   @RequestParam Long pageindex,
-                                   @RequestParam Long pagesize){
+                                   @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
+                                   @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
 
         List<NslCway> wayList = nslCwayService.getWayList(craneid, cweightid, cwayid, ((pageindex-1)*pagesize), pagesize);
         Integer wayListCount = nslCwayService.getWayListCount(craneid, cweightid, cwayid);
@@ -222,16 +216,13 @@ public class NslCraneController {
 
     /**
      * 车辆添加绑定
-     * @param companyid
-     * @param userid
-     * @param craneid
      * @return
      */
     @PostMapping("/compbindcrane")
     @ApiOperation(value = "车辆添加绑定")
-    public List addCompBandCrane(@RequestParam Integer companyid,
-                                 @RequestParam Integer userid,
-                                 @RequestParam Integer craneid){
+    public List addCompBandCrane(@RequestParam @NotNull(message = "公司id不能为空") Integer companyid,
+                                 @RequestParam @NotNull(message = "用户id不能为空") Integer userid,
+                                 @RequestParam @NotNull(message = "车辆id不能为空") Integer craneid){
 
         List list = new ArrayList();
         Integer isBindedCount = nslCbindService.queryIsBinded(companyid, userid, craneid);

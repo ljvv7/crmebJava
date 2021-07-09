@@ -32,31 +32,16 @@ public interface NslCraneService extends IService<NslCrane> {
 
     /**
      * 根据车辆id获取车辆信息
-     * @param craneid
-     * @return
      */
     NslCrane getCraneDetailById(Integer craneid);
 
     /**
      * 查询车辆列表
-     * @param cbrandid
-     * @param craneid
-     * @param pageindex
-     * @param pagesize
-     * @return
      */
     List<NslCrane> getCraneList(Integer cbrandid,Integer craneid,Long pageindex,Long pagesize);
 
     /**
      * 根据性能参数查询组合方式ids
-     * @param legType
-     * @param radius
-     * @param minWeight
-     * @param maxWeight
-     * @param minPrimary
-     * @param maxPrimary
-     * @param minMinor
-     * @param maxMinor
      * @return
      */
     List getCraneWayIds(Integer legType, BigDecimal radius,
@@ -66,24 +51,18 @@ public interface NslCraneService extends IService<NslCrane> {
 
     /**
      * 根据性能参数查询车辆列表
-     * @param ids
-     * @param pageindex
-     * @param pagesize
      * @return
      */
     List<CraneByWayEntry> getCraneListByWay(@Param("ids")List ids, long pageindex, long pagesize);
 
     /**
      * 根据性能参数查询车辆列表总数
-     * @param ids
      * @return
      */
     Integer getCraneListByWayCount(@Param("ids")List ids);
 
     /**
      * 查询车辆信息总条数
-     * @param cbrandid
-     * @param craneid
      * @return
      */
     Integer getCraneListCount(Integer cbrandid,Integer craneid);
