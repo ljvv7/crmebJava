@@ -52,7 +52,7 @@ public class AdminCraneController {
      * @return
      */
     @PostMapping("/admCraneList")
-    public CommonResult getAdmCraneList(@RequestBody(required = false) AdmCraneListReqParam tableFrom){
+    public CommonResult getAdmCraneList(@Validated @RequestBody(required = false) AdmCraneListReqParam tableFrom){
 
         Integer cbrandid = tableFrom.getCbrandid();
         Integer craneid = tableFrom.getCraneid();
@@ -88,7 +88,7 @@ public class AdminCraneController {
      * @return
      */
     @PostMapping("/admWeightList")
-    public CommonResult getAdmWeightList(@RequestBody(required = false) AdmWeightListReqParam tableFrom){
+    public CommonResult getAdmWeightList(@Validated @RequestBody(required = false) AdmWeightListReqParam tableFrom){
         Integer craneid = tableFrom.getCraneid();
         Long pageindex = tableFrom.getPage();
         Long pagesize = tableFrom.getLimit();
@@ -107,7 +107,7 @@ public class AdminCraneController {
      * @return
      */
     @PostMapping("/admWayList")
-    public CommonResult getAdmWayList(@RequestBody(required = false) AdmWayListReqParam tableFrom){
+    public CommonResult getAdmWayList(@Validated @RequestBody(required = false) AdmWayListReqParam tableFrom){
         Integer craneid = tableFrom.getCraneid();
         Integer cweightid = tableFrom.getCweightid();
         Integer cwayid = tableFrom.getCwayid();

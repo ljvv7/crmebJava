@@ -59,8 +59,8 @@ public class NslCraneController {
     @PostMapping("/getdetail")
     @ApiOperation(value = "车辆详情")
     public CommonResult getDetail(@RequestParam @NotNull(message = "车辆id不能为空") Integer craneid,
-                                  @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
-                                  @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize,
+                                  @RequestParam @Min(value = 1,message = "当前页最小值为1") Long pageindex,
+                                  @RequestParam @Max(value = 100,message = "每页数量最大值100条") Long pagesize,
                                   @RequestParam Double lot,
                                   @RequestParam Double lat){
 
@@ -111,8 +111,8 @@ public class NslCraneController {
     @ApiOperation(value = "按品牌和型号查车辆")
     public CommonResult getCraneList(@RequestParam(required = false) Integer cbrandid,
                                      @RequestParam(required = false) Integer craneid,
-                                     @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
-                                     @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
+                                     @RequestParam @Min(value = 1,message = "当前页最小值为1") Long pageindex,
+                                     @RequestParam @Max(value = 100,message = "每页数量最大值为100条") Long pagesize){
 
         Map craneMap = new HashMap();
 
@@ -140,8 +140,8 @@ public class NslCraneController {
                                           @RequestParam(required = false) BigDecimal maxPrimary,
                                           @RequestParam(required = false) BigDecimal minMinor,
                                           @RequestParam(required = false) BigDecimal maxMinor,
-                                          @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
-                                          @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
+                                          @RequestParam @Min(value = 1,message = "当前页最小值为1") Long pageindex,
+                                          @RequestParam @Max(value = 100,message = "每页数量最大值为100条") Long pagesize){
 
 
         Map craneMap = new HashMap();
@@ -181,8 +181,8 @@ public class NslCraneController {
     @PostMapping("/weightlist")
     @ApiOperation(value = "车辆配重列表")
     public CommonResult getWeightList(@RequestParam @NotNull(message = "车辆id不能为空") Integer craneid,
-                                      @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
-                                      @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
+                                      @RequestParam @Min(value = 1,message = "当前页最小值为1") Long pageindex,
+                                      @RequestParam @Max(value = 100,message = "每页数量最大值为100条") Long pagesize){
 
         List<NslCweight> weightList = nslCweightService.getWeightList(craneid,((pageindex-1)*pagesize),pagesize);
         Integer weightListCount = nslCweightService.getWeightListCount(craneid);
@@ -201,8 +201,8 @@ public class NslCraneController {
     public CommonResult getWayList(@RequestParam @NotNull(message = "车辆id不能为空") Integer craneid,
                                    @RequestParam @NotNull(message = "配重id不能为空") Integer cweightid,
                                    @RequestParam(required = false) Integer cwayid,
-                                   @RequestParam @Min(value = 1,message = "当前页最小为1") Long pageindex,
-                                   @RequestParam @Max(value = 100,message = "每页数量最多100条") Long pagesize){
+                                   @RequestParam @Min(value = 1,message = "当前页最小值为1") Long pageindex,
+                                   @RequestParam @Max(value = 100,message = "每页数量最大值为100条") Long pagesize){
 
         List<NslCway> wayList = nslCwayService.getWayList(craneid, cweightid, cwayid, ((pageindex-1)*pagesize), pagesize);
         Integer wayListCount = nslCwayService.getWayListCount(craneid, cweightid, cwayid);
