@@ -46,30 +46,30 @@
 				return false;
 			}
 			if (option.query.hasOwnProperty('scene')) {
-				switch(option.scene){
+				switch (option.scene) {
 					case 1047: //扫描小程序码
 					case 1048: //长按图片识别小程序码
 					case 1049: //手机相册选取小程序码
 					case 1001: //直接进入小程序
-					let value = this.$util.getUrlParams(decodeURIComponent(option.query.scene));
-					let values = value.split(',');
-					if(values.length === 2){
-						let v1 = values[0].split(":");
-						if (v1[0] === 'pid') {
-							that.globalData.spid = v1[1];
-						} else{
-							that.globalData.id = v1[1];
+						let value = this.$util.getUrlParams(decodeURIComponent(option.query.scene));
+						let values = value.split(',');
+						if (values.length === 2) {
+							let v1 = values[0].split(":");
+							if (v1[0] === 'pid') {
+								that.globalData.spid = v1[1];
+							} else {
+								that.globalData.id = v1[1];
+							}
+							let v2 = values[1].split(":");
+							if (v2[0] === 'pid') {
+								that.globalData.spid = v2[1];
+							} else {
+								that.globalData.id = v2[1];
+							}
+						} else {
+							that.globalData.spid = values[0].split(":")[1];
 						}
-						let v2 = values[1].split(":");
-						if (v2[0] === 'pid') {
-							that.globalData.spid = v2[1];
-						}else{
-							that.globalData.id = v2[1];
-						}
-					}else{
-						that.globalData.spid = values[0].split(":")[1];
-					}
-					break;
+						break;
 				}
 			}
 			// #endif
@@ -87,7 +87,7 @@
 			// #ifdef H5			
 			let snsapiBase = 'snsapi_base';
 			let urlData = location.pathname + location.search;
-			if (!that.$store.getters.isLogin && Auth.isWeixin()) {
+			if (!that.$store.getters.isLogin && Auth.isWeixin()) { 
 				const {
 					code,
 					state,
@@ -156,10 +156,9 @@
 			// #endif
 		},
 		async mounted() {
-			if(this.$store.getters.isLogin && !this.$Cache.get('USER_INFO'))await this.$store.dispatch('USERINFO');
+			if (this.$store.getters.isLogin && !this.$Cache.get('USER_INFO')) await this.$store.dispatch('USERINFO');
 		},
-		methods: {
-		},
+		methods: {},
 		onShow: function() {
 			// #ifdef H5
 			uni.getSystemInfo({

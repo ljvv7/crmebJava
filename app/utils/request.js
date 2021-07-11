@@ -16,12 +16,19 @@ import store from '../store';
  */
 function baseRequest(url, method, data, {
 	noAuth = false,
-	noVerify = false
+	noVerify = false,
+	isJson = true,
+	isDB = false
 }, params) {
-	let Url = HTTP_REQUEST_URL,header = HEADER
-	if (params != undefined) {
-		header = HEADERPARAMS;
-	}
+	console.log('----store', store);
+	let Url = HTTP_REQUEST_URL;
+	const header = isJson ? {
+		...HEADER,
+		'content-type': 'application/json'
+	} : {
+		...HEADER,
+		'content-type': 'application/x-www-form-urlencoded'
+	};
 	if (!noAuth) {
 		//登录过期自动登录
 		if (!store.state.app.token && !checkLogin()) {
@@ -31,10 +38,11 @@ function baseRequest(url, method, data, {
 			});
 		}
 	}
+	// if (store.state.app.token) header[TOKENNAME] = 'Bearer ' + store.state.app.token;
 	if (store.state.app.token) header[TOKENNAME] = store.state.app.token;
 	return new Promise((reslove, reject) => {
 		uni.request({
-			url: Url + '/api/front/' + url,
+			url: Url + (isDB ? '/api/' : '/api/front/') + url,
 			method: method || 'GET',
 			header: header,
 			data: data || {},

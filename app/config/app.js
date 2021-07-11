@@ -1,5 +1,6 @@
 
-let domain = 'https://apidb.nslemons.com'
+// let domain = 'https://apidb.nslemons.com'
+const domain = 'https://dcserverapi.nslemons.com';
 
 module.exports = {
 	// 请求域名 格式： https://您的域名
