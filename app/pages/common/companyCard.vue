@@ -9,7 +9,7 @@
 				<view class="company-icon" @click="openCompanyDetails">
 					<image class="icon" src="/static/images/crane/certification.png" />认证企业标示
 				</view>
-				<view class="contact">王女士：<text class="tel"
+				<view class="contact">{{data.atten||'暂无'}}：<text class="tel"
 						@click="callPhone(data.phone||'')">{{data.phone||'暂无'}}</text></view>
 			</view>
 			<view class="address-box">

@@ -6,8 +6,8 @@
 			</view>
 			<view class="card-info">
 				<view>
-					<text class="title">车型：{{data.name}}</text>
-					<text class="title">品牌：{{data.brandName}}</text>
+					<text class="title">车型：{{data.name||'无'}}</text>
+					<text class="title">品牌：{{data.brandName||'无'}}</text>
 				</view>
 				<text class="text">{{data.introduce}}</text>
 				<view v-if="isNew" class="price">

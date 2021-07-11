@@ -65,24 +65,28 @@ export function getWeightList({
 		pageindex,
 		pagesize
 	}, {
-		isDB: true
+		isDB: true,
+		isJson: false
 	});
 }
 
 // 组合方式列表
 export function getWayList({
-	craneid,
-	cwayid,
+	craneid = '',
+	cwayid = '',
+	cweightid = '',
 	pageindex = 1,
-	pagesize = 9999
+	pagesize = 9999 
 }) {
 	return request.post('admin/nsl/crane/waylist', {
 		craneid,
 		cwayid,
+		cweightid,
 		pageindex,
 		pagesize
 	}, {
-		isDB: true
+		isDB: true,
+		isJson: false
 	});
 }
 
@@ -100,8 +104,6 @@ export function compbindCrane({
 		isDB: true
 	});
 }
-
-
 
 
 // 公司列表
@@ -143,7 +145,9 @@ export function getCompanyCarList({
 
 // 公司入驻
 export function addCompbind(data) {
-	return request.post('api/nsl/company/add',{data},{
+	return request.post('api/nsl/company/add', {
+		data
+	}, {
 		isDB: true,
 		isJson: true
 	});
@@ -158,6 +162,6 @@ export function addCompanyTips() {
 export function getMeIndex(userId) {
 	return request.post(`admin/nsl/user/index/${userId}`, {}, {
 		isDB: true,
-		isJson: true 
+		isJson: true
 	});
 }

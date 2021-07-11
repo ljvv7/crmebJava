@@ -38,10 +38,18 @@
 		<view class="serviceCard systemService">
 			<view class="title">系统服务</view>
 			<view class="options">
-				<view class="option" v-for="(item,index) in iconsystem" :key="index"
-					@click="navToPage(iconsystem[index].wxappLine)">
-					<image :src="item.icon" />
-					<text>{{item.menuName}}</text>
+				<view class="option" v-for="(item,index) in iconsystem" :key="index">
+					<template v-if="iconsystem[index].wxappLine==='/pages/service/index'">
+						<button open-type='contact'>
+							<image :src="item.pic" />
+							<text>{{item.name}}</text>
+						</button>
+					</template>
+					<template v-else>
+						<image :src="item.pic" @click="navToPage(iconsystem[index].wxappLine)" />
+						<text @click="navToPage(iconsystem[index].wxappLine)">{{item.name}}</text>
+					</template>
+
 				</view>
 			</view>
 		</view>
@@ -58,7 +66,7 @@
 	import {
 		getUserInfo
 	} from "@/api/user";
- 
+
 	export default {
 		components: {
 
@@ -133,6 +141,7 @@
 				});
 			},
 			navToPage: function(url) {
+				console.log(url);
 				goPage({
 					url
 				})
@@ -302,6 +311,29 @@
 					flex: 0 0 163upx;
 					height: 154upx;
 
+					button {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						flex: 0 0 163upx;
+						height: 154upx;
+
+						image {
+							flex: 0 0 80upx;
+							width: 80upx;
+							height: 80upx;
+						}
+
+						text {
+							margin-top: 8upx;
+							line-height: 30upx;
+							height: 22upx;
+							color: #212121;
+							font-size: 22upx;
+						}
+					}
+
 					image {
 						flex: 0 0 80upx;
 						width: 80upx;
@@ -313,6 +345,7 @@
 						line-height: 30upx;
 						height: 22upx;
 						color: #212121;
+						font-size: 22upx;
 					}
 				}
 			}

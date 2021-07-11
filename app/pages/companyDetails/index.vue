@@ -23,7 +23,7 @@
 				</view>
 				<view v-show="current === 2">
 					<view class="credentials">
-						<image src="/static/images/logo2.png"></image>
+						<image :src="data.qualification"></image>
 					</view>
 				</view>
 			</view>
