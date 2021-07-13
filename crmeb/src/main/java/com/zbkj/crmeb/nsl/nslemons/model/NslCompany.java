@@ -85,7 +85,7 @@ public class NslCompany implements Serializable {
     private Integer visits;
 
     @ApiModelProperty(value = "是否认证： 0 未认证，1认证")
-    private char isauthentication;
+    private String isauthentication;
     @ApiModelProperty(value = "直线距离")
     private Double distince;
 

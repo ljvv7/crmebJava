@@ -3,8 +3,8 @@
 <mapper namespace="com.zbkj.crmeb.nsl.nslemons.dao.NslCompanyMapper">
 
     <select id="getCompanyList" resultType="com.zbkj.crmeb.nsl.nslemons.model.NslCompany">
-        select id,name,logo,introduce,qualification,province,city,area,
-                street,adds,longitude,latitude,atten,phone,status,userid,visits
+        select id,name,logo,introduce,qualification,province,city,area,street,adds,
+               longitude,latitude,atten,phone,status,userid,visits,isauthentication,distince
         from `nsl_company`
         where kbn != '9' and id in (
         <foreach collection="ids" item="ids" separator=",">
