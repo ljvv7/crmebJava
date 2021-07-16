@@ -2,10 +2,10 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid 'f01494f19ecb7a9044480b52ccd61c4ec6479616'
-    oldFile: !uuid 'cd8fbeca4936e49a7d58398a150216e193a69ce8'
-gitCommitId: !uuid 'e252a2c6427c367d484346ea59ad7237b5fa786b'
+  /寻找CRMEB开源项目推广大使活动.docx:
+    newFile: !uuid '1438d301ad4f3e61d293c6ae618d49642f10d4ea'
+    oldFile: null
+gitCommitId: !uuid '5653d5dc6fc81c9f200abcea328737c9b8661e75'
 renames: {
   }
-revisionId: 182
+revisionId: 183
