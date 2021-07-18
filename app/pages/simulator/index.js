@@ -383,7 +383,6 @@ Page({
 		}
 	},
 	async resetAll() {
-		console.log('resetAll')
 		clearInterval(this.data.ctxTimer)
 		this.setData({
 			types: JSON.parse(JSON.stringify(types)),

@@ -121,15 +121,19 @@
 	.number-box {
 		flex: 0 0 340upx;
 		width: 340upx;
-		height: 104upx;
-		padding: 24upx 20upx;
+		height: 156upx;
+		padding: 18upx 55upx;
 		margin-bottom: 24upx;
 		background: #FAFAFA;
 		border-radius: 18upx;
 		display: flex;
+		flex-direction: column;
+		overflow: hidden;
 
 		.text {
 			display: block;
+			line-height: 40upx;
+			margin-bottom: 20upx;
 			flex: 1 1 auto;
 			font-size: 24upx;
 			color: #212121;
@@ -142,6 +146,7 @@
 			display: flex;
 			flex: 0 0 230upx;
 			width: 230upx;
+			height: 56upx;
 			align-items: stretch;
 
 			.text {
@@ -150,7 +155,6 @@
 				text-align: center;
 				font-size: 28upx;
 				color: #212121;
-				height: 100%;
 			}
 
 			.btn {

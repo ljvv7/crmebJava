@@ -24,15 +24,19 @@
 				{{wayInfo.name&&wayInfo.name!=='暂无数据'?wayInfo.name:'组合方式'}}
 			</button>
 		</view>
-		<button @click="open">打开弹窗</button>
-		<uni-popup ref="popup" type="bottom">
+		<uni-popup ref="popup" type="bottom" class="popup">
 			<view class="popup-content">
 				<scroll-view scroll-y="true" class="scroll-content">
-					<view class="content">
+					<view v-if="selectList.length" class="content">
 						<view class="label" v-for="(item,key) in selectList" :class="{active:selectedData.id===item.id}"
 							:key="key" @click="selectData(item)">
 							{{item.name}}
 						</view>
+					</view>
+					<view v-else class="content empty">
+						<text class="text">
+							未找到相关数据
+						</text>
 					</view>
 				</scroll-view>
 				<button class="button" type="default" @click="confirm">确认</button>
@@ -57,31 +61,24 @@
 
 		},
 		props: {
-			add: {
-				type: Function
-			},
 		},
 		name: 'headerBox',
 		data() {
 			return {
 				brandList: [],
-				craneList:  [],
-				weightList:  [],
-				wayList:  [],
-				brandInfo: {},
-				brandInfoIndex: 0,
-				craneInfo: {},
-				craneInfoIndex: 0,
-				weightInfo: {},
-				weightInfoIndex: 0,
-				wayInfo: {},
-				wayInfoIndex: 0,
+				craneList: [],
+				weightList: [],
+				wayList: [],
+				brandInfo: null,
+				craneInfo: null,
+				weightInfo: null,
+				wayInfo: null,
 				type: '',
 				selectedData: null
 			}
 		},
 		computed: {
-			selectList: function() {
+			selectList() {
 				switch (this.type) {
 					case brand:
 						return this.brandList
@@ -95,16 +92,15 @@
 			}
 		},
 		async onReady() {
-			this.add('1231');
 			uni.showLoading();
 			await this.getBrandList();
 			uni.hideLoading();
 		},
 		watch: {
-
 			brandInfo(val) { //普通的watch监听
 				const _this = this;
 				if (val && val.id) {
+					console.log(val);
 					_this.getCraneList({
 						cbrandid: val.id
 					})
@@ -126,7 +122,7 @@
 						cweightid: val.id
 					})
 				}
-			}
+			},
 		},
 		methods: {
 			test: function() {
@@ -148,7 +144,7 @@
 					}) => ({
 						id,
 						name
-					})) : defaultList
+					})) : []
 				})
 			},
 			getCraneList: function(params = {}) {
@@ -160,7 +156,7 @@
 					}) => ({
 						id,
 						name
-					})) : defaultList
+					})) : []
 				})
 			},
 			getWeightList: function(params = {}) {
@@ -172,7 +168,7 @@
 					}) => ({
 						id,
 						name: equipweight + 't'
-					})) : defaultList;
+					})) : [];
 				})
 			},
 			getWayList: function(params = {}) {
@@ -185,105 +181,127 @@
 					}) => ({
 						id,
 						name: `${way}-${primaryLength}`
-					})) : defaultList
+					})) : []
 				})
 			},
 			resetAll: function() {
-				this.brandInfo = {};
-				this.craneInfo = {};
-				this.weightInfo = {};
-				this.wayInfo = {};
+				this.brandInfo = null;
+				this.craneInfo = null;
+				this.weightInfo = null;
+				this.wayInfo = null
 				this.craneList = [];
 				this.weightList = [];
 				this.wayList = [];
-				this.brandInfoIndex = 0;
-				this.craneInfoIndex = 0;
-				this.weightInfoIndex = 0;
-				this.wayIndex = 0;
-			},
-			brandChange: function(e) {
-				const _this = this;
-				const index = e.target.value;
-				_this.brandInfoIndex = index;
-				this.craneInfo = {};
-				this.weightInfo = {};
-				this.wayInfo = {};
-				this.craneInfoIndex = 0;
-				this.weightInfoIndex = 0;
-				this.wayIndex = 0;
-				this.craneList = [];
-				this.weightList = [];
-				this.wayList = [];
-				_this.brandInfo = _this.brandList[index];
-			},
-			craneChange: function(e) {
-				const _this = this;
-				const index = e.target.value;
-				_this.craneInfoIndex = index;
-				this.weightInfo = {};
-				this.wayInfo = {};
-				this.weightInfoIndex = 0;
-				this.wayIndex = 0;
-				this.weightList = [];
-				this.wayList = [];
-				_this.craneInfo = _this.craneList[index];
-			},
-			weightChange: function(e) {
-				const _this = this;
-				const index = e.target.value;
-				_this.weightInfoIndex = index;
-				this.wayInfo = {};
-				this.wayIndex = 0;
-				this.wayList = [];
-				_this.weightInfo = _this.weightList[index];
-			},
-			wayChange: function(e) {
-				const _this = this;
-				const index = e.target.value;
-				_this.wayInfoIndex = index;
-				_this.wayInfo = _this.wayList[index];
 			},
 			open(type) {
 				this.type = type;
 				this.selectedData = null;
-				console.log('this.type---',this.type);
-				switch (type) {
+				switch (this.type) {
 					case brand:
-						!this.brandList.length && uni.showToast({
-							title: '暂无数据'
-						})
-						return this.brandList
+						if (this.brandInfo) {
+							this.selectedData = this.brandInfo;
+						}
+						break
 					case crane:
-					console.log('this.type---',this.craneList.length);
-						!this.craneList.length && uni.showToast({
-							title: '请选择品牌'
-						})
-						return this.craneList
+						if (!this.brandInfo) {
+							return uni.showToast({
+								title: '请选择品牌',
+								icon: 'none'
+							})
+						} else {
+							this.selectedData = this.craneInfo;
+						}
+						break
 					case weight:
-						!this.weightList.length && uni.showToast({
-							title: '请选择配重'
-						})
-						return this.weightList
+						if (!this.craneInfo) {
+							return uni.showToast({
+								title: '请选择车型',
+								icon: 'none'
+							})
+						} else {
+							this.selectedData = this.weightInfo;
+						}
+						break
 					case way:
-						!this.wayList.length && uni.showToast({
-							title: '暂无数据'
-						})
-						return this.wayList
+						if (!this.weightInfo) {
+							return uni.showToast({
+								title: '请选择配重',
+								icon: 'none'
+							})
+						} else {
+							this.selectedData = this.wayInfo;
+						}
+						break
 				}
-
 				this.$refs.popup.open('bottom')
 			},
 			confirm: function() {
-				console.log('confirm---');
-				if (this.selectedData) {
-					return uni.showToast({
-						title: '请选择数据'
-					})
+				console.log('selectData---', this.selectedData);
+				if (this.selectList.length) {
+					if (!this.selectedData) {
+						return uni.showToast({
+							title: '请选择数据',
+							icon: 'none'
+						})
+					}
+					switch (this.type) {
+						case brand:
+							if (!(this.brandInfo && this.brandInfo.id === this.selectedData.id)) {
+								this.brandInfo = this.selectedData;
+								this.craneInfo = null;
+								this.weightInfo = null;
+								this.wayInfo = null;
+								this.craneList = [];
+								this.weightList = [];
+								this.wayList = [];
+							}
+							break;
+						case crane:
+							if (!this.brandInfo) {
+								return uni.showToast({
+									title: '请选择数据',
+									icon: 'none'
+								})
+							}
+							if (!(this.craneInfo && this.craneInfo.id === this.selectedData.id)) {
+								this.craneInfo = this.selectedData;
+								this.weightInfo = null;
+								this.wayInfo = null;
+								this.weightList = [];
+								this.wayList = [];
+							}
+							break
+						case weight:
+							if (!this.craneInfo) {
+								return uni.showToast({
+									title: '请选择数据',
+									icon: 'none'
+								})
+							}
+							if (!(this.weightInfo && this.weightInfo.id === this.selectedData.id)) {
+								this.weightInfo = this.selectedData;
+								this.wayInfo = null;
+								this.wayList = [];
+							}
+							break
+						case way:
+							if (!this.weightInfo) {
+								return uni.showToast({
+									title: '请选择数据',
+									icon: 'none'
+								})
+							}
+							if (!(this.wayInfo && this.wayInfo.id === this.selectedData.id)) {
+								this.wayInfo = this.selectedData;
+							}
+							break
+					}
 				}
+
 				this.$refs.popup.close()
+
 			},
 			selectData: function(data) {
-				console.log('selectData---', data);
 				this.selectedData = data;
 			}
 		}
@@ -347,25 +365,41 @@
 				color: #212121;
 			}
 		}
-
+		.popup{
+			position: fixed;
+			width: 0;
+			height: 0;
+			z-index: 999;
+		}
 		.popup-content {
 			overflow: hidden;
 			background-color: #FFFFFF;
 			padding: 20upx 20upx 0;
 
 			.scroll-content {
-				height: 300upx;
+				height: 180upx;
 				margin-bottom: 20upx;
 
 				.content {
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: space-between;
+					min-height: 100%;
+
+					&.empty {
+						justify-content: center;
+						align-items: center;
+
+						.text {
+							font-size: 24upx;
+							color: #666;
+						}
+					}
 
 					.label {
-						height: 62upx;
-						margin-bottom: 12upx;
-						line-height: 62upx;
+						height: 46upx;
+						margin-bottom: 8upx;
+						line-height: 44upx;
 						border-radius: 8upx;
 						font-size: 24upx;
 

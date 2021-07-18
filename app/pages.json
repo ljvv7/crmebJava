@@ -1342,7 +1342,7 @@
 				"selectedIconPath": "/static/images/crane/tabNav/indexActive.png"
 			},
 			{
-				"pagePath": "pages/crane/index",
+				"pagePath": "pages/simulator/index",
 				"text": "模拟器",
 				"iconPath": "/static/images/crane/tabNav/sim.png", 
 				"selectedIconPath": "/static/images/crane/tabNav/simActive.png"
