@@ -1,7 +1,7 @@
 <!-- pages/simulator/simulator.wxml -->
 <template>
 	<view class="simulator">
-		<headerBox />
+		<headerBox :types="types" />
 		<canvas type="2d" id="diaoche" canvas-id="diaoche" class="canvas">
 			<cover-view class="dcboard">
 				<cover-view class="dcboard-content">
@@ -331,6 +331,7 @@
 			},
 			//计算并绘画
 			calc: function() {
+				console.log(this.types);
 				const _this = this;
 				const ctx = _this.canvas.getContext('2d'),
 					canvas = _this.canvas,
@@ -832,7 +833,7 @@
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
-		padding: 40upx 24upx;
+		padding: 40upx 24upx 0;
 		box-sizing: border-box;
 		overflow: hidden;
 

@@ -383,7 +383,6 @@ Page({
 		}
 	},
 	async resetAll() {
-		console.log('resetAll')
 		clearInterval(this.data.ctxTimer)
 		this.setData({
 			types: JSON.parse(JSON.stringify(types)),
@@ -817,7 +816,7 @@ Page({
 	},
 	inputChange(e) {
 		const target = e.target.dataset.inputtype,
-			inputvalue = e.detail.value;
+			inputvalue = e.detail.value
 		// console.log(target, inputvalue)
 		this.drawDC('short', target, inputvalue)
 		this.calc()
@@ -991,7 +990,6 @@ Page({
 			[setkeyIndex]: pindex
 		})
 	},
-	
 	//计算并绘画
 	calc() {
 		const ctx = this.data.canvas.getContext('2d'),
@@ -1454,17 +1452,6 @@ Page({
 		let primary = [],
 			minor = [],
 			angle = [];
-			// angle: null
-			// craneid: 29
-			// id: 46869
-			// legtype: 1
-			// minorLength: "0.00"
-			// origin: null
-			// primaryLength: "10.80"
-			// radius: "3.00"
-			// way: "0000"
-			// weight: "25.00"
-			// weightid: 100
 		ways.forEach(sv => {
 			if (primary.indexOf(sv.primary_length) === -1) {
 				primary.push(sv.primary_length);
@@ -1576,3 +1563,23 @@ Page({
 	}
 })
 
+
+
+export default {
+	data() {
+		return {
+
+		}
+	},
+	onLoad() {},
+	onShow(){},
+	computed: {},
+	methods: {
+		changeWeight:function(){
+			
+		},
+		changeCraneWay:function(){
+			
+		}
+	}
+}

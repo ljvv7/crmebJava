@@ -126,7 +126,7 @@
 					'obstacle.vx': this.obstacleParam.distance
 				});
 				this.$parent.calc();
-			}
+			},
 		}
 	}
 </script>
