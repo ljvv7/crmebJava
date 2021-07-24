@@ -1454,6 +1454,17 @@ Page({
 		let primary = [],
 			minor = [],
 			angle = [];
+			// angle: null
+			// craneid: 29
+			// id: 46869
+			// legtype: 1
+			// minorLength: "0.00"
+			// origin: null
+			// primaryLength: "10.80"
+			// radius: "3.00"
+			// way: "0000"
+			// weight: "25.00"
+			// weightid: 100
 		ways.forEach(sv => {
 			if (primary.indexOf(sv.primary_length) === -1) {
 				primary.push(sv.primary_length);

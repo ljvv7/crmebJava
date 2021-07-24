@@ -21,7 +21,7 @@
 				{{weightInfo.name&&weightInfo.name!=='暂无数据'?weightInfo.name:'配重'}}
 			</button>
 			<button type="default" @click="open('way')" class="button select">
-				{{wayInfo.name&&wayInfo.name!=='暂无数据'?wayInfo.name:'组合方式'}}
+				{{wayInfo.name&&wayInfo.name!=='暂无数据'?wayInfo.way:'组合方式'}}
 			</button>
 		</view>
 		<uni-popup ref="popup" type="bottom" class="popup">
@@ -63,6 +63,9 @@
 		props: {
 			types: {
 				type: Array
+			},
+			selectedInfo: {
+				types: Function
 			}
 		},
 		name: 'headerBox',
@@ -77,7 +80,7 @@
 				weightInfo: null,
 				wayInfo: null,
 				type: '',
-				selectedData: null
+				selectedData: null,
 			}
 		},
 		computed: {
@@ -103,7 +106,6 @@
 			brandInfo(val) { //普通的watch监听
 				const _this = this;
 				if (val && val.id) {
-					console.log(val);
 					_this.getCraneList({
 						cbrandid: val.id
 					})
@@ -143,10 +145,12 @@
 				return getBrandList(params).then(res => {
 					_this.brandList = res.data.length ? res.data.map(({
 						id,
-						name
+						name,
+						...rest
 					}) => ({
+						...rest,
 						id,
-						name
+						name,
 					})) : []
 				})
 			},
@@ -155,10 +159,12 @@
 				getCraneList(params).then(res => {
 					_this.craneList = res.data.craneList.length ? res.data.craneList.map(({
 						id,
-						name
+						name,
+						...rest
 					}) => ({
+						...rest,
 						id,
-						name
+						name,
 					})) : []
 				})
 			},
@@ -170,9 +176,10 @@
 						equipweight,
 						...rest
 					}) => ({
+						...rest,
 						id,
+						equipweight,
 						name: equipweight + 't',
-						...rest
 					})) : [];
 				})
 			},
@@ -185,10 +192,12 @@
 						way,
 						...rest
 					}) => ({
+						...rest,
 						id,
+						primaryLength,
+						way,
 						name: `${way}-${primaryLength}`,
-						...rest
-					})) : []
+					})) : [];
 				})
 			},
 			resetAll: function() {
@@ -236,6 +245,7 @@
 								icon: 'none'
 							})
 						} else {
+							console.log('wayInfo====', this.wayInfo);
 							this.selectedData = this.wayInfo;
 						}
 						break
@@ -306,6 +316,12 @@
 							this.$nextTick(() => {
 								this.changeCraneWay();
 							})
+							this.selectedInfo && this.wayInfo && this.selectedInfo({
+								brandInfo: this.brandInfo,
+								craneInfo: this.craneInfo,
+								weightInfo: this.weightInfo,
+								wayInfo: this.wayInfo
+							});
 							break
 					}
 				}
@@ -325,8 +341,8 @@
 				}) {
 					return id === weightInfo.id;
 				});
-				console.log('weightData---',weightData);
-				
+				console.log('weightData---', weightData);
+
 				// this.$parent.setData({
 				// 	currentWeight: weightInfo['id'],
 				// 	currentWeightKey: weightInfo['key'],
@@ -346,8 +362,7 @@
 				}) {
 					return id === wayInfo.id;
 				});
-				console.log('wayData---',weightData);
-				
+
 				// let angle = Number((Math.acos(wayInfo.radius / wayInfo.primaryLength) / Math.PI * 180).toFixed(1));
 				// // 判断臂长，设置臂长
 				// this.$parent.setData({

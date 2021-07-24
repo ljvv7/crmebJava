@@ -12,7 +12,7 @@ export function getIndex() {
 export function getCraneDetail({
 	craneid,
 	pageindex = 1,
-	pagesize = 9999,
+	pagesize = 100,
 	lat,
 	lot
 }) {
@@ -41,7 +41,7 @@ export function getCraneList({
 	cbrandid = '',
 	craneid = '',
 	pageindex = 1,
-	pagesize = 9999
+	pagesize = 100
 }) {
 	return request.post('admin/nsl/crane/cranelist', {
 		cbrandid,
@@ -58,7 +58,7 @@ export function getCraneList({
 export function getWeightList({
 	craneid,
 	pageindex = 1,
-	pagesize = 9999
+	pagesize = 100
 }) {
 	return request.post('admin/nsl/crane/weightlist', {
 		craneid,
@@ -76,7 +76,7 @@ export function getWayList({
 	cwayid = '',
 	cweightid = '',
 	pageindex = 1,
-	pagesize = 9999 
+	pagesize = 100 
 }) {
 	return request.post('admin/nsl/crane/waylist', {
 		craneid,
@@ -112,7 +112,7 @@ export function getCompanyList({
 	latitude,
 	longitude,
 	pageindex = 1,
-	pagesize = 999
+	pagesize = 100
 }) {
 	return request.post('admin/nsl/company/getAllCompany', {
 		code,
@@ -130,7 +130,7 @@ export function getCompanyList({
 export function getCompanyCarList({
 	code = "",
 	pageindex = 1,
-	pagesize = 9999
+	pagesize = 100
 }) {
 	return request.post(
 		`admin/nsl/company/getdetail`, {

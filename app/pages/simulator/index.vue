@@ -1,10 +1,9 @@
 <!-- pages/simulator/simulator.wxml -->
 <template>
 	<view class="simulator">
-		<headerBox :add='childrenClick' />
-		<canvas<!-- type="2d" id="diaoche" canvas-id="diaoche" class="canvas">
+		<headerBox :types="types" />
+		<canvas type="2d" id="diaoche" canvas-id="diaoche" class="canvas">
 			<cover-view class="dcboard">
-				<!-- <cover-view class="dcboard-title">测量结果</cover-view> -->
 				<cover-view class="dcboard-content">
 					<cover-view class="dcboard-content-item">
 						<span>高度:</span><span>{{sheight}}m</span>
@@ -12,10 +11,10 @@
 					<cover-view class="dcboard-content-item">
 						<span>工作半径:</span><span>{{sradius}}m</span>
 					</cover-view>
-					<cover-view v-if="!obstacleSetting" class="dcboard-content-item">
+					<cover-view v-if="obstacleSetting" class="dcboard-content-item">
 						<span>跨障碍距离:</span><span>{{sobstacleX}}m</span>
 					</cover-view>
-					<cover-view v-if="!obstacleSetting" class="dcboard-content-item">
+					<cover-view v-if="obstacleSetting" class="dcboard-content-item">
 						<span>吊臂与障碍物距离:</span><span>{{sobstacleY}}m</span>
 					</cover-view>
 					<cover-view v-if="!searched" class="dcboard-content-item">
@@ -30,11 +29,8 @@
 					</cover-view>
 				</cover-view>
 			</cover-view>
-		</canvas> -->
+		</canvas>
 		<footerBox :legtypes="legtypes" :types="types" />
-		<button type="default" @click="gridShow(0)">1</button>
-		<button type="default" @click="gridShow(1)">2</button>
-		<button type="default" @click="gridShow(2)">3</button>
 	</view>
 </template>
 <script>
@@ -225,6 +221,7 @@
 		},
 		computed: {},
 		methods: {
+			//  变化网格数量
 			gridShow(index) {
 				const grid = this.grids[index];
 				const searchgrid = grid.name;
@@ -244,7 +241,7 @@
 
 			},
 			childrenClick: function(str) {
-				console.log('childrenClick----');
+
 			},
 			initCanvas: function() {
 				const _this = this;
@@ -334,6 +331,7 @@
 			},
 			//计算并绘画
 			calc: function() {
+				console.log(this.types);
 				const _this = this;
 				const ctx = _this.canvas.getContext('2d'),
 					canvas = _this.canvas,
@@ -348,7 +346,6 @@
 				_this.tk._scaleratio = scaleRatio.ratio;
 				_this.obstacle._scaleratio = scaleRatio.ratio;
 				_this.canvas._scaleratio = scaleRatio.ratio;
-
 
 				_this.car.render(ctx, {
 					_scaleratio: scaleRatio.ratio
@@ -833,12 +830,18 @@
 
 <style lang="scss" scoped>
 	.simulator {
-		padding: 40upx 24upx;
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		padding: 40upx 24upx 0;
+		box-sizing: border-box;
+		overflow: hidden;
 
 		.canvas {
 			background-color: #FAFAFA;
 			width: 100%;
 			height: 688upx;
+			flex: 0 0 688upx;
 
 			.dcboard {
 				background: rgba(0, 0, 0, 0.50);
@@ -853,6 +856,7 @@
 					.dcboard-content-item {
 						display: flex;
 						justify-content: space-between;
+
 						span {
 							line-height: 40upx;
 							font-size: 20upx;
@@ -861,6 +865,10 @@
 					}
 				}
 			}
+		}
+
+		footer-box {
+			flex: 1 0 auto;
 		}
 	}
 </style>
