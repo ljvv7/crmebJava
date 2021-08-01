@@ -12,7 +12,7 @@ export function getIndex() {
 export function getCraneDetail({
 	craneid,
 	pageindex = 1,
-	pagesize = 100,
+	pagesize = 9999,
 	lat,
 	lot
 }) {
@@ -41,7 +41,7 @@ export function getCraneList({
 	cbrandid = '',
 	craneid = '',
 	pageindex = 1,
-	pagesize = 100
+	pagesize = 9999
 }) {
 	return request.post('admin/nsl/crane/cranelist', {
 		cbrandid,
@@ -58,7 +58,7 @@ export function getCraneList({
 export function getWeightList({
 	craneid,
 	pageindex = 1,
-	pagesize = 100
+	pagesize = 9999
 }) {
 	return request.post('admin/nsl/crane/weightlist', {
 		craneid,
@@ -76,7 +76,7 @@ export function getWayList({
 	cwayid = '',
 	cweightid = '',
 	pageindex = 1,
-	pagesize = 100 
+	pagesize = 9999 
 }) {
 	return request.post('admin/nsl/crane/waylist', {
 		craneid,
@@ -105,6 +105,20 @@ export function compbindCrane({
 	});
 }
 
+// 收藏车辆 
+export function addCollection({
+	companyid,
+	craneid,
+	userid
+}) {
+	return request.post(`admin/nsl/addCollection/${userid}/${craneid}`, {
+		craneid,
+		userid
+	}, {
+		isDB: true
+	});
+}
+
 
 // 公司列表
 export function getCompanyList({
@@ -112,7 +126,7 @@ export function getCompanyList({
 	latitude,
 	longitude,
 	pageindex = 1,
-	pagesize = 100
+	pagesize = 9999
 }) {
 	return request.post('admin/nsl/company/getAllCompany', {
 		code,
@@ -130,7 +144,7 @@ export function getCompanyList({
 export function getCompanyCarList({
 	code = "",
 	pageindex = 1,
-	pagesize = 100
+	pagesize = 9999
 }) {
 	return request.post(
 		`admin/nsl/company/getdetail`, {
@@ -145,9 +159,7 @@ export function getCompanyCarList({
 
 // 公司入驻
 export function addCompbind(data) {
-	return request.post('api/nsl/company/add', {
-		data
-	}, {
+	return request.post('admin/nsl/company/add',data, {
 		isDB: true,
 		isJson: true
 	});

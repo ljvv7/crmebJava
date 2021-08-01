@@ -1,27 +1,27 @@
 <!-- pages/simulator/simulator.wxml -->
 <template>
 	<view class="simulator">
-		<headerBox :types="types" />
+		<headerBox :types="types" :selectedInfo="selectedInfo" />
 		<canvas type="2d" id="diaoche" canvas-id="diaoche" class="canvas">
 			<cover-view class="dcboard">
 				<cover-view class="dcboard-content">
 					<cover-view class="dcboard-content-item">
-						<span>高度:</span><span>{{sheight}}m</span>
+						<cover-view class="text">高度:</cover-view><cover-view class="text">{{sheight}}m</cover-view>
 					</cover-view>
 					<cover-view class="dcboard-content-item">
-						<span>工作半径:</span><span>{{sradius}}m</span>
+						<cover-view class="text">工作半径:</cover-view><cover-view class="text">{{sradius}}m</cover-view>
 					</cover-view>
 					<cover-view v-if="obstacleSetting" class="dcboard-content-item">
-						<span>跨障碍距离:</span><span>{{sobstacleX}}m</span>
+						<cover-view class="text">跨障碍距离:</cover-view><cover-view class="text">{{sobstacleX}}m</cover-view>
 					</cover-view>
 					<cover-view v-if="obstacleSetting" class="dcboard-content-item">
-						<span>吊臂与障碍物距离:</span><span>{{sobstacleY}}m</span>
+						<cover-view class="text">吊臂与障碍物距离:</cover-view><cover-view class="text">{{sobstacleY}}m</cover-view>
 					</cover-view>
 					<cover-view v-if="!searched" class="dcboard-content-item">
-						<span>额定起重量:</span><span>{{sweight}}m</span>
+						<cover-view class="text">额定起重量:</cover-view><cover-view class="text">{{sweight}}m</cover-view>
 					</cover-view>
 					<cover-view v-if="!searched" class="dcboard-content-item">
-						<span>力矩百分比:</span><span>{{sratio}}%</span>
+						<cover-view class="text">力矩百分比:</cover-view><cover-view class="text">{{sratio}}%</cover-view>
 						<cover-view class="sratiobox outweight-tips"
 							:class="{ 'ratio-green': sratiogreen,'ratio-yellow': sratioyellow,'ratio-red': sratiored }">
 						</cover-view>
@@ -45,6 +45,7 @@
 		drawGraduation,
 		animation,
 	} from './utils/index.js'
+	const app = getApp();
 
 	const scaleRatio = {
 		ratio: 0
@@ -214,10 +215,25 @@
 				obstacleSetting: false,
 				obstacleSetting: false,
 				legtypeid: 1,
+				currentSearchParam: {
+					brandId: 0,
+					craneId: 0,
+					primaryLength: 0,
+					radius: 0,
+					minorLength: 0,
+					weightId: 0,
+					way: '',
+					legType: 0,
+				}
 			}
 		},
-		async onLoad() {
-			this.initCanvas();
+		async onLoad(options) {
+			setTimeout(()=>{
+				this.initCanvas();
+			},300)
+		},
+		onShow: function() {
+			console.log('options---', app.globalData.carInfo);
 		},
 		computed: {},
 		methods: {
@@ -823,6 +839,99 @@
 				// console.log(id, opt, params)
 				this.calc()
 			},
+			selectedInfo: function({
+				brandInfo,
+				craneInfo,
+				weightInfo,
+				wayInfo
+			}) {
+				console.log('selectedInfo-----');
+				const _this = this.$parent;
+				if (wayInfo) {
+					console.log('更改组合方式', wayInfo);
+					_this.currentSearchParam = {
+						brandId: brandInfo.id,
+						craneId: craneInfo.id,
+						primaryLength: wayInfo.primaryLength,
+						radius: wayInfo.radius,
+						minorLength: wayInfo.minorLength,
+						weightId: weightInfo.id,
+						way: wayInfo.way,
+						legType: wayInfo.legtype,
+					}
+
+					let primary = [],
+						minor = [],
+						angle = [];
+					if (primary.indexOf(wayInfo.primaryLength) === -1) {
+						primary.push(wayInfo.primaryLength);
+					}
+
+					if (wayInfo.minorLength != 0 && minor.indexOf(wayInfo.minorLength) === -1) {
+						minor.push(wayInfo.minorLength);
+					}
+
+					if (wayInfo.hasOwnProperty('angle') && angle && angle.indexOf(wayInfo.angle) === -1) {
+						angle.push(wayInfo.angle)
+					}
+					// console.log(primary, minor, angle, 666);
+					if (_this.currentSearchParam.primaryLength) {
+						let angle = Number((Math.acos(_this.currentSearchParam.radius / _this.currentSearchParam
+							.primaryLength) / Math.PI * 180).toFixed(1));
+
+						// 判断臂长，设置臂长
+						_this.setData({
+							'arm.jib': _this.currentSearchParam.primaryLength,
+							'arm.arc': angle,
+							'jib.arc': angle,
+							'types.armlength.index': _this.types.armlength.args.indexOf(_this
+								.currentSearchParam.primaryLength),
+							'types.armlength.value': _this.currentSearchParam.primaryLength,
+							'types.armangle.value': angle,
+						});
+					}
+
+					minor = minor.sort((a, b) => {
+						return a - b
+					});
+					angle = angle.sort((a, b) => {
+						return a - b
+					});
+
+					_this.setParam(_this.legtypeid, {
+						primary,
+						minor,
+						angle
+					})
+				} else if (weightInfo && !wayInfo) {
+					let legtypeid = weightInfo['legtype']
+
+					let legtypes = _this.legtypes.map(legtype => {
+						legtype.selected = legtype.id == legtypeid ? true : false;
+						legtype.visable = legtype.id == legtypeid
+						return legtype
+					});
+
+					let primary = [],
+						minor = [],
+						angle = [];
+
+					_this.setData({
+						currentWeight: weightInfo.id,
+						legtypes,
+						legtypeid,
+						alldetails: [
+							weightInfo
+						]
+					});
+					_this.setParam(_this.legtypeid, {
+						primary,
+						minor,
+						angle
+					});
+				}
+
+			}
 		}
 	}
 </script>
@@ -857,7 +966,7 @@
 						display: flex;
 						justify-content: space-between;
 
-						span {
+						.text {
 							line-height: 40upx;
 							font-size: 20upx;
 							color: #FFFFFF;

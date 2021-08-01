@@ -1,6 +1,6 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		
+
 		{
 			"path": "pages/crane/index",
 			"style": {
@@ -11,21 +11,22 @@
 		{
 			"path": "pages/me/index",
 			"style": {
-				"navigationBarTitleText": "首页",
+				"navigationBarTitleText": "我的",
 				"navigationStyle": "custom"
+			}
+		},
+		
+		{
+			"path": "pages/simulator/index",
+			"style": {
+				"navigationBarTitleText": "模拟器"
+				// "navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/barSimulator/index",
 			"style": {
-				"navigationBarTitleText": "首页"
-				// "navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/simulator/index",
-			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "插销模拟"
 				// "navigationStyle": "custom"
 			}
 		},

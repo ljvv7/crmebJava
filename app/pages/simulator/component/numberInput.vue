@@ -4,9 +4,9 @@
 			{{label}}
 		</view>
 		<view class="btn-box">
-			<button class="btn plus" @click="plus"></button>
+			<button class="btn plus" @tap="plus" @longpress="longPress('plus')" @touchend="clearTimer"></button>
 			<input class="text" type="number" v-model="val" @blur="blur"></input>
-			<button class="btn minus" @click="minus" @longpress="minus"></button>
+			<button class="btn minus" @tap="minus" @longpress="longPress('minus')" @touchend="clearTimer"></button>
 		</view>
 	</view>
 </template>
@@ -21,6 +21,10 @@
 				default: 1
 			},
 			initialVal: {
+				type: Number,
+				default: 0
+			},
+			value:{
 				type: Number,
 				default: 0
 			},
@@ -48,7 +52,8 @@
 		name: 'numberInput',
 		data() {
 			return {
-				val: this.min
+				val: this.min,
+				timer: null
 			}
 		},
 		async onReady() {},
@@ -64,18 +69,29 @@
 					return this.minToast();
 				}
 				this.onChange && this.onChange(val, this.index)
+			},
+			value(val){
+				this.val = val;
 			}
 		},
+		unmounted: function() {
+			this.clearTimer();
+		},
 		methods: {
+			longPress: function(type) {
+				this.timer = setInterval(() => {
+					type === 'plus' ? this.plus() : this.minus();
+				}, 100);
+			},
 			plus: function() {
 				this.val += this.step;
 			},
 			minus: function() {
 				this.val -= this.step;
 			},
-			blur:function(){
+			blur: function() {
 				const val = parseInt(this.val);
-				if(isNaN(val)){
+				if (isNaN(val)) {
 					this.val = this.min
 				}
 				if (val >= this.max) {
@@ -84,7 +100,10 @@
 				if (val <= this.min) {
 					this.val = this.min;
 				}
-			}
+			},
+			clearTimer: function() {
+				this.timer && clearInterval(this.timer);
+			},
 		}
 	}
 </script>

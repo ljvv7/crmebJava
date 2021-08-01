@@ -22,7 +22,7 @@
 			</view>
 			<view class="input-container">
 				<template v-for="(item,key) in typesData">
-					<numberInput v-if="item.visable" :initialVal="item.value" :step="1" :label="item.name"
+					<numberInput v-if="item.visable" :initialVal="item.value" :value="item.value" :step="1" :label="item.name"
 						:onChange="inputChange" :index="key" :key="key" :min="item.limitMin" :max="item.limitMax"
 						:maxToast="maxToast" :minToast="minToast" />
 				</template>
@@ -52,13 +52,14 @@
 		data() {
 			return {
 				text: defaultText,
-				typesData: this.types,
+				typesData: this.$parent.types,
 				obstacle: false,
 				obstacleParam: {
 					distance: 20,
 					height: 5
 				},
-				scrollHeight: 0
+				scrollHeight: 0,
+				currentIndex: 0
 			}
 		},
 		async onReady() {
@@ -71,7 +72,11 @@
 		},
 		computed: {},
 		watch: {
-
+			types(val) {
+				this.$nextTick(()=>{
+					this.typesData = this.$parent.types;
+				})
+			}
 		},
 		methods: {
 			init: function() {
@@ -86,9 +91,9 @@
 			onPickerChange: function(e) {
 				const index = e.target.value;
 				this.handleTypes(index);
+				this.currentIndex = index;
 			},
 			handleTypes: function(index) {
-				console.log(this);
 				const id = this.legtypes[index].id;
 				this.$parent.setParam(id);
 				this.text = this.legtypes[index].name;
@@ -168,7 +173,7 @@
 			display: flex;
 			justify-content: space-between;
 			flex-wrap: wrap;
-			padding-bottom: 60upx;
+			padding-bottom: 300upx;
 		}
 
 		.operate-container {

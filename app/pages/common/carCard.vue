@@ -24,8 +24,13 @@
 
 <script>
 	import {
+		compbindCrane,
+		addCollection
+	} from '@/api/crane.js'
+	import {
 		goPage
 	} from '@/utils/crane'
+	const app = getApp();
 	export default {
 		props: {
 			topLine: {
@@ -67,11 +72,14 @@
 				}, {
 					text: '参数表',
 					active: false
-				}]
+				}],
+				userid: ''
 			};
 		},
 		watch: {},
-		onReady() {},
+		onReady() {
+			this.userid = this.$store.state.app.uid;
+		},
 		methods: {
 			onOperate: function(type) {
 				const TYPE = {
@@ -97,6 +105,17 @@
 			},
 			operateAdd: function() {
 				if (!this.buttons[0].active) {
+					// todo 暂时接口有问题
+					// compbindCrane,
+					// addCollection
+					// console.log('data----',this.data);
+					// addCollection({
+					// 	companyid,
+					// 	craneid,
+					// 	userid
+					// }).then(res=>{
+
+					// })
 					this.buttons[0] = {
 						text: '已添加',
 						active: true
@@ -124,7 +143,18 @@
 				this.buttons = [...this.buttons];
 			},
 			operateSim: function() {
-				console.log('参数模拟');
+				app.globalData.carInfo = {
+					brandName: this.data.brandName,
+					cbrands: this.data.cbrands,
+					id: this.data.id,
+					maxweight: this.data.maxweight,
+					name: this.data.name
+				}
+				goPage({
+					url: '/pages/simulator/index',
+					type: 'tab'
+				})
+
 			},
 			operateArg: function() {
 				console.log('参数表');
@@ -140,7 +170,7 @@
 						isNew
 					}
 				})
-			}
+			},
 		}
 	};
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<view class="hot-card-list">
 		<view class="title-bar">
-			热门车型<button class="more" type="default" @click="moreInfo">更多</button>
+			新车推荐<button class="more" type="default" @click="moreInfo">更多</button>
 		</view>
 		<car-card v-for="(item,index) in list" :topLine="index!==0" :data='item'  :isNew="true" :key="index"/>
 	</view>

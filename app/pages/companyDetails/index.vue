@@ -1,5 +1,6 @@
 <template>
-	<scroll-view scroll-y="true" class="index">
+	<scroll-view scroll-y="true" class="index" lower-threshold='200'
+		:style="{height:pageHeight==='auto'?'auto':pageHeight+'px'}" @scrolltolower="lower">
 		<view class="companyBox">
 			<company-card :data="data" :topLine="false" :isDetails="true" />
 		</view>
@@ -19,6 +20,7 @@
 					<view class="carShowList">
 						<car-card v-for="(item,index) in craneList" :data="item" :topLine="index!==0" :hasOperate="true"
 							:isDetails="true" :key="index"></car-card>
+							<view v-if="noMore" class="noMore">没有更多了</view>
 					</view>
 				</view>
 				<view v-show="current === 2">
@@ -46,14 +48,23 @@
 			return {
 				data: {},
 				current: 0,
-				craneList: []
+				craneList: [],
+				pageindex: 1,
+				pagesize: 20,
+				noMore: false,
+				pageHeight: 'auto',
+				loading: false
 			};
 		},
 		async onLoad(options) {
-			uni.showLoading();
+			const _this = this;
 			this.data = JSON.parse(options.data);
-			await this.getCompanyCarList(this.data.id);
-			uni.hideLoading();
+			uni.getSystemInfo({
+				success: function(e) {
+					_this.pageHeight = e.windowHeight;
+				}
+			});
+			this.getCompanyCarList(this.data.id);
 		},
 		watch: {
 
@@ -72,11 +83,35 @@
 			},
 			getCompanyCarList: function(code) {
 				const _this = this;
+				if (_this.loading) {
+					return
+				}
+				this.pageindex === 1 && uni.showLoading({
+					title: '加载中···'
+				});
+				_this.loading = true;
 				return getCompanyCarList({
-					code
+					code,
+					pageindex: _this.pageindex,
+					pagesize: _this.pagesize
 				}).then(res => {
-					_this.craneList = res.data.cranedetaillist;
+					_this.craneList = [..._this.craneList, ...res.data.cranedetaillist];
+					if (res.data.cranedetaillist.length < this.pagesize) {
+						_this.noMore = true;
+					}
+				}).finally(() => {
+					uni.hideLoading();
+					setTimeout(() => {
+						_this.loading = false;
+					}, 500)
 				})
+			},
+			lower: function() {
+				if (this.loading) {
+					return
+				}
+				this.pageindex += 1;
+				this.getCompanyCarList(this.data.id);
 			}
 		}
 	}
@@ -86,6 +121,14 @@
 	.index {
 		box-sizing: border-box;
 		background: #F4F5F6;
+		height: 100%;
+
+		.noMore {
+			margin: 30upx 0;
+			text-align: center;
+			font-size: 24upx;
+			color: #999999;
+		}
 
 		.companyBox {
 			padding: 10upx 0 6upx;

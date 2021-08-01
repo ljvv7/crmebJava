@@ -29,7 +29,7 @@
 				}, {
 					text: '插销模拟',
 					icon: '/static/images/crane/navSimulation.png',
-					url: '/pages/searchCar/index',
+					url: '/pages/barSimulator/index',
 					type: 'tab'
 				}, {
 					text: '模拟教程',

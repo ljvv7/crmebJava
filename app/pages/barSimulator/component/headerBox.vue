@@ -43,7 +43,6 @@
 			</view>
 		</uni-popup>
 	</view>
-
 </template>
 <script>
 	import {
@@ -208,6 +207,12 @@
 				this.craneList = [];
 				this.weightList = [];
 				this.wayList = [];
+				this.selectedInfo && this.selectedInfo({
+					brandInfo: null,
+					craneInfo: null,
+					weightInfo: null,
+					wayInfo: null,
+				});
 			},
 			open(type) {
 				this.type = type;
@@ -245,7 +250,6 @@
 								icon: 'none'
 							})
 						} else {
-							console.log('wayInfo====', this.wayInfo);
 							this.selectedData = this.wayInfo;
 						}
 						break
@@ -271,6 +275,12 @@
 								this.weightList = [];
 								this.wayList = [];
 							}
+							this.selectedInfo && this.selectedInfo({
+								brandInfo: this.brandInfo,
+								craneInfo: this.craneInfo,
+								weightInfo: this.weightInfo,
+								wayInfo: this.wayInfo
+							});
 							break;
 						case crane:
 							if (!this.brandInfo) {
@@ -286,6 +296,12 @@
 								this.weightList = [];
 								this.wayList = [];
 							}
+							this.selectedInfo && this.selectedInfo({
+								brandInfo: this.brandInfo,
+								craneInfo: this.craneInfo,
+								weightInfo: this.weightInfo,
+								wayInfo: this.wayInfo
+							});
 							break
 						case weight:
 							if (!this.craneInfo) {
@@ -301,7 +317,13 @@
 							}
 							this.$nextTick(() => {
 								this.changeWeight();
-							})
+							});
+							this.selectedInfo && this.selectedInfo({
+								brandInfo: this.brandInfo,
+								craneInfo: this.craneInfo,
+								weightInfo: this.weightInfo,
+								wayInfo: this.wayInfo
+							});
 							break
 						case way:
 							if (!this.weightInfo) {
@@ -316,11 +338,11 @@
 							this.$nextTick(() => {
 								this.changeCraneWay();
 							})
-							this.selectedInfo && this.wayInfo && this.selectedInfo({
+							this.selectedInfo && this.selectedInfo({
 								brandInfo: this.brandInfo,
 								craneInfo: this.craneInfo,
 								weightInfo: this.weightInfo,
-								wayInfo: this.wayInfo
+								wayInfo: this.wayInfo 
 							});
 							break
 					}
@@ -457,12 +479,10 @@
 				.content {
 					display: flex;
 					flex-wrap: wrap;
-					justify-content: space-between;
 					min-height: 100%;
 
 					&.empty {
 						justify-content: center;
-						align-items: center;
 
 						.text {
 							font-size: 24upx;
@@ -476,12 +496,16 @@
 						line-height: 44upx;
 						border-radius: 8upx;
 						font-size: 24upx;
-
 						flex: 0 0 220upx;
 						text-align: center;
 						color: #333;
 						background-color: #FFFFFF;
 						border: 1px solid #01A1ED;
+						margin-right: 25upx;
+
+						&:nth-of-type(3n) {
+							margin-right: 0;
+						}
 
 						&.active {
 							background-color: #01A1ED;

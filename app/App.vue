@@ -20,7 +20,14 @@
 			userInfo: {},
 			MyMenus: [],
 			windowHeight: 0,
-			id: 0
+			id: 0,
+			carInfo: {
+				brandName: '',
+				cbrands: '',
+				id: '',
+				maxweight: '',
+				name: ''
+			}
 		},
 		onLaunch: function(option) {
 			let that = this;
@@ -87,7 +94,7 @@
 			// #ifdef H5			
 			let snsapiBase = 'snsapi_base';
 			let urlData = location.pathname + location.search;
-			if (!that.$store.getters.isLogin && Auth.isWeixin()) { 
+			if (!that.$store.getters.isLogin && Auth.isWeixin()) {
 				const {
 					code,
 					state,

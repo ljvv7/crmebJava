@@ -7,7 +7,7 @@ export const goPage = ({
 	const realUrl = query ?
 		`${url}?${Object.keys(query).reduce((ret,key)=>{return `${ret}${ret&&'&'}${key}=${query[key]}`},'')}` :
 		url;
-	
+
 	if (type === 'page') {
 		uni.navigateTo({
 			url: realUrl,

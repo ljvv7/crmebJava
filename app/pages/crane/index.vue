@@ -125,7 +125,7 @@
 
 	.index {
 		box-sizing: border-box;
-		padding: 0;
+		padding: 0 20upx;
 		background: #F4F5F6;
 	}
 </style>

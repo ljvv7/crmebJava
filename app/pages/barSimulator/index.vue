@@ -1,82 +1,84 @@
 <template>
 	<view class="simulator">
 		<headerBox :selectedInfo="selectedInfo" />
-		<view class="bar-box">
-			<view v-if="!bixiaoSwitch&&!isBixiaoRed" class="top green long"/>
-			<view v-if="isBixiaoRed" class="top red middle"/>
-			<view v-if="bixiaoSwitch && !isBixiaoRed " class="top green short"/>
-			<view class="box">
-				<view v-if="!gangxiaoSwitch&& !isGangxiaoRed" class="left green long" />
-				<view v-if="isGangxiaoRed" class="left red middle" />
-				<view v-if="gangxiaoSwitch && !isGangxiaoRed" class="left green short" />
-				<view v-if="!gangxiaoSwitch&& !isGangxiaoRed" class="right green long" />
-				<view v-if="isGangxiaoRed" class="right red middle" />
-				<view v-if="gangxiaoSwitch && !isGangxiaoRed" class="right green short" />
-			</view>
-			<view class="text">
-				{{ currentLength < 0 ? 0 : currentLength }}
-			</view>
-		</view>
-		<view class="process-box">
-			<progress :percent="percent" activeColor="#33ADFF" border-radius='4' stroke-width="7" />
-			<view class="label">
-				<text>0</text>
-				<text>46%</text>
-				<text>92%</text>
-			</view>
-		</view>
-		<view class="table" id="table">
-			<view class="row">
-				<view class="item"
-					v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }" />
-				<view class="item" :class="{active:chooseWayDrawIndex - 1 == index}"
-					v-for="(item,index) in chooseWayDraw" :key="index"
-					v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
-					T{{ index + 2 }}
+		<template v-if="currentWayChoose">
+			<view class="bar-box">
+				<view v-if="!bixiaoSwitch&&!isBixiaoRed" class="top green long" />
+				<view v-if="isBixiaoRed" class="top red middle" />
+				<view v-if="bixiaoSwitch && !isBixiaoRed " class="top green short" />
+				<view class="box">
+					<view v-if="!gangxiaoSwitch&& !isGangxiaoRed" class="left green long" />
+					<view v-if="isGangxiaoRed" class="left red middle" />
+					<view v-if="gangxiaoSwitch && !isGangxiaoRed" class="left green short" />
+					<view v-if="!gangxiaoSwitch&& !isGangxiaoRed" class="right green long" />
+					<view v-if="isGangxiaoRed" class="right red middle" />
+					<view v-if="gangxiaoSwitch && !isGangxiaoRed" class="right green short" />
+				</view>
+				<view class="text">
+					{{ currentLength < 0 ? 0 : currentLength }}
 				</view>
 			</view>
-			<view class="row">
-				<view class="item"
-					v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
-					Act
-				</view>
-				<view class="item" v-for="(item,index) in chooseWayDraw" :key="index"
-					v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
-					{{ chooseWayDraw[index] == 1 ? 46 : chooseWayDraw[index] == 2 ? 92 : chooseWayDraw[index] == 3 ? 100 : 0 }}
+			<view class="process-box">
+				<progress :percent="percent" activeColor="#33ADFF" border-radius='4' stroke-width="7" />
+				<view class="label">
+					<text>0</text>
+					<text>46%</text>
+					<text>92%</text>
 				</view>
 			</view>
-			<view class="row">
-				<view class="item"
-					v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
-					Aim
+			<view class="table" id="table">
+				<view class="row">
+					<view class="item"
+						v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }" />
+					<view class="item" :class="{active:chooseWayDrawIndex - 1 == index}"
+						v-for="(item,index) in chooseWayDraw" :key="index"
+						v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
+						T{{ index + 2 }}
+					</view>
 				</view>
-				<view class="item" v-for="(item,index) in chooseWayDraw" :key="index"
-					v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
-					{{ calcResult[index] ? calcResult[index] : 0 }}
+				<view class="row">
+					<view class="item"
+						v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
+						Act
+					</view>
+					<view class="item" v-for="(item,index) in chooseWayDraw" :key="index"
+						v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
+						{{ chooseWayDraw[index] == 1 ? 46 : chooseWayDraw[index] == 2 ? 92 : chooseWayDraw[index] == 3 ? 100 : 0 }}
+					</view>
+				</view>
+				<view class="row">
+					<view class="item"
+						v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
+						Aim
+					</view>
+					<view class="item" v-for="(item,index) in chooseWayDraw" :key="index"
+						v-bind:style="{width:boxWidth?boxWidth + 'px':'auto',flex:boxWidth?'1 0 '+boxWidth+'px':'1 0 auto' }">
+						{{ calcResult[index] ? calcResult[index] : 0 }}
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="operate-box">
-			<view class="operate-btn">
-				<button class="btn plus" @tap="plusMinus('plus')" @longpress="longPress('plus')"
-					@touchend="clearTimer" />
-				<text>臂销/杠杆增加</text>
-				<button class="btn minus" @tap="plusMinus('minus')" @longpress="longPress('minus')"
-					@touchend="clearTimer" />
-			</view>
-			<view class="switch-container">
-				<view class="switch-box" :class="{off:!bixiaoSwitch}">
-					<text>臂销开关</text>
-					<switch :checked="bixiaoSwitch" :disabled="isGangxiaoRed" color="#33ADFF"
-						@change="switchChange(1,$event)" />
+			<view class="operate-box">
+				<view class="operate-btn">
+					<button class="btn plus" @tap="plusMinus('plus')" @longpress="longPress('plus')"
+						@touchend="clearTimer" />
+					<text>臂销/杠杆增加</text>
+					<button class="btn minus" @tap="plusMinus('minus')" @longpress="longPress('minus')"
+						@touchend="clearTimer" />
 				</view>
-				<view class="switch-box" :class="{off:!gangxiaoSwitch}">
-					<text>杠销开关</text>
-					<switch :checked="gangxiaoSwitch" :disabled="isBixiaoRed" color="#33ADFF"
-						@change="switchChange(2,$event)" />
+				<view class="switch-container">
+					<view class="switch-box" :class="{off:!bixiaoSwitch}">
+						<text>臂销开关</text>
+						<switch :checked="bixiaoSwitch" :disabled="isGangxiaoRed" color="#33ADFF"
+							@change="switchChange(1,$event)" />
+					</view>
+					<view class="switch-box" :class="{off:!gangxiaoSwitch}">
+						<text>杠销开关</text>
+						<switch :checked="gangxiaoSwitch" :disabled="isBixiaoRed" color="#33ADFF"
+							@change="switchChange(2,$event)" />
+					</view>
 				</view>
 			</view>
-		</view>
+		</template>
 	</view>
 </template>
 <script>
@@ -108,7 +110,7 @@
 			}
 		},
 		async onLoad() {
-			this.calcWidth();
+
 		},
 		computed: {},
 		unmounted: function() {
@@ -116,24 +118,23 @@
 		},
 		methods: {
 			selectedInfo: function(data) {
-				console.log('selectedInfo---', data);
-				// angle: null
-				// craneid: 92
-				// id: 192077
-				// legtype: 1
-				// minorLength: "0.00"
-				// name: "11211-17.41"
-				// origin: null
-				// primaryLength: "17.41"
-				// radius: "6.00"
-				// way: "11211"
-				// weight: "54.00"
-				// weightid: 441
+				if(!data.wayInfo){
+					return
+				}
+				this.$parent.currentWayChoose = data.wayInfo;
+				this.$parent.way = data.wayInfo.way;
+				this.$parent.primaryLength = data.wayInfo.primaryLength;
+				this.$parent.currentLength = data.wayInfo.way.length;
+				this.$parent.setData({
+					chooseWayDraw: data.wayInfo.way.split(''),
+					chooseWayDrawIndex: data.wayInfo.way.length,
+					primaryLength: data.wayInfo.primaryLength * 100,
+					currentLength: data.wayInfo.way.length * 20,
+				})
+				setTimeout(() => {
+					this.$parent.calcWidth()
+				}, 100);
 
-				this.currentWayChoose = this.wayInfo;
-				this.way = this.wayInfo.way;
-				this.primaryLength = this.wayInfo.primaryLength;
-				this.currentLength = this.wayInfo.way.length;
 			},
 			calcWidth: function() {
 				const query = uni.createSelectorQuery().in(this);
@@ -158,7 +159,7 @@
 			longPress: function(type) {
 				this.timer = setInterval(() => {
 					this.plusMinus(type);
-				}, 100);
+				}, 20);
 			},
 			plusMinus: function(type) {
 				if (type === 'plus') {
@@ -167,7 +168,7 @@
 					this.calc(-this.currentStep)
 				}
 			},
-			calc(step = 2) {
+			calc(step = 4) {
 				this.step = step;
 				let index = this.chooseWayDrawIndex;
 				let oldIndex = index;
@@ -176,6 +177,8 @@
 				let currentLength = this.currentLength;
 				let percent = a == 1 ? 46 : a == 2 ? 92 : a == 3 ? 100 : 0;
 				let currentPercent = this.percent;
+				console.log(percent, currentPercent);
+
 				let changeLength = currentLength;
 				let allIsZero = true;
 				this.calcResult.forEach(v => {
@@ -202,8 +205,6 @@
 					}
 				}
 				let showDrawIndex = true;
-				console.log('gangxiaoSwitch', this.gangxiaoSwitch);
-				console.log('bixiaoSwitch', this.bixiaoSwitch);
 				if (step > 0) {
 					if (this.gangxiaoSwitch) {
 						if (this.calcResult.length != 0 && this.calcResult[this.chooseWayDrawIndex -
@@ -570,13 +571,16 @@
 				&.red {
 					background-color: #FF0000;
 				}
-				&.short{
+
+				&.short {
 					height: 19upx;
 				}
-				&.middle{
+
+				&.middle {
 					height: 29upx;
 				}
-				&.long{
+
+				&.long {
 					height: 48upx;
 				}
 
@@ -585,7 +589,8 @@
 					position: absolute;
 					height: 28upx;
 					top: 50%;
-					margin-top: -14upx;;
+					margin-top: -14upx;
+					;
 
 					&.green {
 						background-color: #48C589;
@@ -594,20 +599,25 @@
 					&.red {
 						background-color: #FF0000;
 					}
-					&.short{
+
+					&.short {
 						width: 46upx;
 					}
-					&.middle{
+
+					&.middle {
 						width: 69upx;
 					}
-					&.long{
+
+					&.long {
 						width: 116upx;
 					}
 				}
-				.left{
-					left:0 ;
+
+				.left {
+					left: 0;
 					transform: translateX(-100%);
 				}
+
 				.right {
 					right: 0;
 					transform: translateX(100%);
@@ -630,6 +640,7 @@
 				display: flex;
 				justify-content: space-between;
 				margin-top: 8upx;
+				padding-right: 30upx;
 
 				text {
 					line-height: 30upx;
