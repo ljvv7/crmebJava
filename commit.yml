@@ -2,10 +2,40 @@
 branches: {
   }
 fileChange:
-  /寻找CRMEB开源项目推广大使活动.docx:
-    newFile: !uuid '1438d301ad4f3e61d293c6ae618d49642f10d4ea'
-    oldFile: null
-gitCommitId: !uuid '5653d5dc6fc81c9f200abcea328737c9b8661e75'
+  /crmeb:
+    newFile: !uuid '96b1e484d21ab2b70fe93c68ad0d219b588e1c4c'
+    oldFile: !uuid '4dc11e4d2aa5d572c5b94cae04aa31dba05292d3'
+  /crmeb/src:
+    newFile: !uuid '56c36d1bb1dd7002cfc412563873e512b2e2139e'
+    oldFile: !uuid 'da3eaa43c51435ee1d85bda95f51ba6340b733bf'
+  /crmeb/src/main:
+    newFile: !uuid 'aa1310fc1047f75a96b4ab047eb3a367554698c1'
+    oldFile: !uuid 'f28eebeeef9bb360d770bfb49a8cdc3873bee66b'
+  /crmeb/src/main/java:
+    newFile: !uuid '8476b5c93f63e00100d2fa2bb09f16a94b0b5686'
+    oldFile: !uuid '198dde3313589fedb3bddeb64e6392ff2be9a721'
+  /crmeb/src/main/java/com:
+    newFile: !uuid '50ef7ad36dc530ea9b6e5aafbedcb3a4dbfb6ed4'
+    oldFile: !uuid '1ab98d9367e75bca447f452e0ee1fbf4e77ecde6'
+  /crmeb/src/main/java/com/zbkj:
+    newFile: !uuid 'de9d4ae3a3305c884dddb72dac1dbf32b5a2c2f8'
+    oldFile: !uuid 'c137056c75f4d0fdade2198debe85d657a103b31'
+  /crmeb/src/main/java/com/zbkj/crmeb:
+    newFile: !uuid '5f5eda5d70321b77b75466ad35c7597a86f3105a'
+    oldFile: !uuid '3a53ba7a68ac5b2aeb1f491f914c8561e051be72'
+  /crmeb/src/main/java/com/zbkj/crmeb/front:
+    newFile: !uuid '929aa821fc23bcf15febcee5512401dc99d5fed9'
+    oldFile: !uuid '6721e11b8a287f8265bdd052e0b4a3455b3652e4'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service:
+    newFile: !uuid 'a87c1c81eb426e091ff6c8e0dfa97c92a21d8d0a'
+    oldFile: !uuid '042f468e63127aac176ad1923a1587af8681ab2a'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl:
+    newFile: !uuid '3fb2ec9e0d32c1666375956eee71f58d5dbec0d9'
+    oldFile: !uuid '3a6429156849c783a5c5654c0b61a2078c9f8cce'
+  /crmeb/src/main/java/com/zbkj/crmeb/front/service/impl/UserCenterServiceImpl.java:
+    newFile: !uuid '86a43e93459bf882ae217082583c3606fd55d480'
+    oldFile: !uuid 'e4aa575ea722667d6d40576b861fc431415e00a8'
+gitCommitId: !uuid '2fad57e9b392bc7e15f26cd903c8d1e6e24e17b0'
 renames: {
   }
-revisionId: 183
+revisionId: 184
