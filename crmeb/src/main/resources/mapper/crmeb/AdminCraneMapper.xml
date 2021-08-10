@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbkj.crmeb.nsl.nslemons.dao.AdminCraneMapper">
+
+    <select id="getAdmCraneList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCrane">
+        select A.id,A.name,A.cbrands,B.name brand_name,A.maxweight,A.introduce,A.images,
+                A.expdbcodes,A.guide_price,A.iscollected,A.longitude,A.latitude,A.visits,A.remarks
+        from `nsl_crane` A
+        left join `nsl_cbrands` B on A.cbrands = B.id
+        where A.kbn != '9'
+        <if test="cbrandid!=null and cbrandid!=''">
+            and A.cbrands = #{cbrandid}
+        </if>
+        <if test="craneid!=null and craneid!=''">
+            and A.id = #{craneid}
+        </if>
+        <if test="craneName!=null and craneName!=''">
+            and A.name like "%"#{craneName,jdbcType=VARCHAR}"%"
+        </if>
+        limit #{pageindex},#{pagesize};
+    </select>
+
+    <select id="getAdmCraneListCount" resultType="int">
+        select count(1)
+        from `nsl_crane`
+        where kbn != '9'
+        <if test="cbrandid!=null and cbrandid!=''">
+            and cbrands = #{cbrandid}
+        </if>
+        <if test="craneid!=null and craneid!=''">
+            and id = #{craneid}
+        </if>
+        <if test="craneName!=null and craneName!=''">
+            and name like "%"#{craneName,jdbcType=VARCHAR}"%"
+        </if>
+        ;
+    </select>
+    
+    <insert id="addCrane">
+        insert into nsl_crane (name, cbrands, maxweight, introduce, images, guide_price)
+        values (#{name},#{cbrands},#{maxweight},#{introduce},#{images},#{guidePrice});
+    </insert>
+
+    <update id="removeCrane" parameterType="int">
+        update nsl_crane
+        set kbn = '9'
+        where id = #{id};
+    </update>
+
+    <update id="removeWeight" parameterType="int">
+        update nsl_cweight
+        set kbn = '9'
+        where id = #{id};
+    </update>
+
+    <update id="editCrane">
+        update nsl_crane
+        set name = #{name},maxweight = #{maxweight},introduce = #{introduce},
+            images = #{images},guide_price = #{guidePrice}
+        where id = #{craneid};
+    </update>
+    
+    <insert id="addWeight">
+        insert into nsl_cweight (id,craneid,legtype,legway,equipweight,workextent,
+                                 issuperweight,superweight,backmove,remarks)
+        values (#{weightid},#{craneid},#{legtype},#{legway},#{equipweight},#{workextent},
+                #{issuperweight},#{superweight},#{backmove},#{remarks});
+    </insert>
+
+    <update id="editWeight">
+        update nsl_cweight
+        set craneid = #{craneid},legtype = #{legtype},legway = #{legway},
+            equipweight = #{equipweight},workextent = #{workextent},
+            issuperweight = #{issuperweight},superweight = #{superweight},
+            backmove = #{backmove},remarks = #{remarks}
+        where id = #{weightid};
+    </update>
+
+    <delete id="deleteWay">
+        delete from nsl_cway where weightid = #{weightid};
+    </delete>
+    
+    <insert id="addWay">
+        insert into nsl_cway (weightid, craneid, radius, primary_length, weight, way)
+        values
+            <foreach collection="list" item="item" separator=",">
+                (#{weightid},#{craneid},#{item.radius},#{item.primaryLength},#{item.weight},#{item.way})
+            </foreach>
+        ;
+    </insert>
+
+    <select id="queryMaxWeight" resultType="int">
+        select max(id)+1 from nsl_cweight;
+    </select>
+
+</mapper>

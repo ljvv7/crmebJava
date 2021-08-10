@@ -29,10 +29,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class) //去掉数据源
 @ComponentScan(basePackages={"com.utils",
         "com.zbkj.crmeb",
+        "com.zbkj.crmeb.nsl",
         "com.exception",
         "com.common",
         "com.aop"}) //扫描utils包和父包
-@MapperScan(basePackages = {"com.zbkj.crmeb.*.dao", "com.zbkj.crmeb.*.*.dao"})
+@MapperScan({"com.zbkj.crmeb.*.dao","com.zbkj.crmeb.nsl.*.dao"})
 public class CrmebApplication{
     public static void main(String[] args) {
         SpringApplication.run(CrmebApplication.class, args);

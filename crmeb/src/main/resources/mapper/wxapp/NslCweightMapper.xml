@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbkj.crmeb.nsl.nslwxapp.dao.NslCweightMapper">
+    <select id="getWeightList" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.NslCweight">
+        select id,craneid,legtype,legway,equipweight,workextent,issuperweight,superweight,backmove,remarks
+        from `nsl_cweight`
+        where `kbn`!='9' and craneid = #{craneid}
+        limit #{pageindex},#{pagesize};
+    </select>
+    <select id="getWeightListCount" resultType="int">
+        select count(1)
+        from `nsl_cweight`
+        where `kbn`!='9' and craneid = #{craneid};
+    </select>
+</mapper>

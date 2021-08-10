@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.crmeb.system.dao.SystemGroupDataDao">
 
+    <select id="getSystemByGidId" resultType="com.zbkj.crmeb.system.model.SystemGroupData">
+        SELECT id,gid,value,sort,status,create_time,update_time
+         FROM `eb_system_group_data`
+         where `status` =1 and gid = #{gid}
+    </select>
 </mapper>

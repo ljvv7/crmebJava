@@ -91,6 +91,19 @@ export function getUserPhone(data){
 }
 
 /**
+ * 静默授权
+ * @param {Object} data
+ */
+export function silenceAuth(data) {
+	console.log('silenceAuth----', data);
+	//#ifdef MP
+	return request.get("v2/wechat/silence_auth", data, {
+		noAuth: true
+	})
+	//#endif
+}
+
+/**
  * APP微信登录
  * @param {Object} data
  */

@@ -136,6 +136,13 @@
             <version>1.5.21</version>
         </dependency>
 
+        <!-- 模板引擎 -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.0</version>
+        </dependency>
+
         <!-- doc -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -260,6 +267,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.2.6</version>
         </dependency>
 
         <!--导出excel-->
@@ -388,7 +401,7 @@
 
     <build>
         <!--打包配置-->
-        <finalName>Crmeb</finalName>
+        <finalName>dcapiserver</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbkj.crmeb.nsl.nslemons.dao.NslCompanyMapper">
+
+    <select id="getCompanyList" resultType="com.zbkj.crmeb.nsl.nslemons.model.NslCompany">
+        select id,name,logo,introduce,qualification,province,city,area,street,adds,
+               longitude,latitude,atten,phone,status,userid,visits,isauthentication,distince
+        from `nsl_company`
+        where kbn != '9' and id in (
+        <foreach collection="ids" item="ids" separator=",">
+            #{ids}
+        </foreach>
+        ) limit #{pageindex},#{pagesize};
+    </select>
+
+    <select id="getCompanyListCount" resultType="int">
+        select count(1)
+        from `nsl_company`
+        where kbn != '9' and id in (
+        <foreach collection="list" item="cpids" separator=",">
+            #{cpids}
+        </foreach>
+        );
+    </select>
+
+    <select id="getAuthmsgv1" resultType="java.lang.String">
+        select value
+        from `eb_system_config`
+        where name = 'companyauthcoft'
+    </select>
+
+    <select id="deleteCompanyKbn" parameterType="int">
+       update `nsl_company` set kbn = "9"
+       where id = #{id}
+    </select>
+
+    <select id="updateStatusByid">
+       update `nsl_company` set status = #{status}
+       where id = #{id}
+    </select>
+</mapper>

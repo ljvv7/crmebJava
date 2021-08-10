@@ -10,6 +10,7 @@ import com.zbkj.crmeb.front.request.UserBindingPhoneUpdateRequest;
 import com.zbkj.crmeb.front.response.LoginResponse;
 import com.zbkj.crmeb.front.response.UserCenterResponse;
 import com.zbkj.crmeb.front.response.UserSpreadPeopleItemResponse;
+import com.zbkj.crmeb.store.model.StoreOrder;
 import com.zbkj.crmeb.store.request.RetailShopStairUserRequest;
 import com.zbkj.crmeb.store.response.SpreadOrderResponse;
 import com.zbkj.crmeb.user.model.User;
@@ -35,8 +36,12 @@ import java.util.Map;
  * +----------------------------------------------------------------------
  */
 public interface UserService extends IService<User> {
+    BigDecimal getSumMoney();
+    Integer getSumPayCount();
 
     PageInfo<UserResponse> getList(UserSearchRequest request, PageParamRequest pageParamRequest);
+
+//    boolean updateFounds(UserOperateFundsRequest request, boolean isSaveBill);
 
     boolean updateIntegralMoney(UserOperateIntegralMoneyRequest request);
 
@@ -65,11 +70,17 @@ public interface UserService extends IService<User> {
      */
     boolean group(String id, String groupId);
 
+//    LoginResponse register(RegisterRequest loginRequest, String ip) throws Exception;
+//
+//    LoginResponse login(LoginRequest loginRequest) throws Exception;
+
     boolean password(PasswordRequest request);
 
     void loginOut(String token);
 
     User getInfo();
+
+//    User getUserPromoter();
 
     User getInfoException();
 
@@ -128,6 +139,8 @@ public interface UserService extends IService<User> {
     PageInfo<SpreadOrderResponse> getOrderListBySpreadLevel(RetailShopStairUserRequest request, PageParamRequest pageParamRequest);
 
     boolean clearSpread(Integer userId);
+
+//    boolean checkIsPromoter(BigDecimal price);
 
     List<User> getTopSpreadPeopleListByDate(String type, PageParamRequest pageParamRequest);
 

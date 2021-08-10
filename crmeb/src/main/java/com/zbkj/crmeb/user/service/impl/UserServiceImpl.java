@@ -128,6 +128,17 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Autowired
     private StoreProductRelationService storeProductRelationService;
 
+
+    @Override
+    public BigDecimal getSumMoney() {
+        return baseMapper.getSumMoney();
+    }
+
+    @Override
+    public Integer getSumPayCount() {
+        return baseMapper.getSumPayCount();
+    }
+
     /**
      * 分页显示用户表
      *

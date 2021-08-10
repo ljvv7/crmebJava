@@ -3,6 +3,8 @@ package com.zbkj.crmeb.system.dao;
 import com.zbkj.crmeb.system.model.SystemGroupData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * 组合数据详情表 Mapper 接口
  * +----------------------------------------------------------------------
@@ -16,5 +18,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * +----------------------------------------------------------------------
  */
 public interface SystemGroupDataDao extends BaseMapper<SystemGroupData> {
+
+    List<SystemGroupData> getSystemByGidId(Integer gid);
 
 }

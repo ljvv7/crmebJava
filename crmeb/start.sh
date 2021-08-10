@@ -4,11 +4,12 @@
 startTime=`date +'%Y-%m-%d %H:%M:%S'`
 
 #接口项目站点路径（目录按照各自配置）
-APP_PATH=/www/wwwroot/api.java.crmeb.net
+#APP_PATH=/www/wwwroot/api.java.crmeb.net
+APP_PATH=/www/wwwroot/apidb.nslemons.com
 #APP_PATH=/Library/WebServer/Documents/zhongbang/java/crmeb/target
 
 #jar包文件名称
-APP_NAME=$APP_PATH/Crmeb.jar
+APP_NAME=$APP_PATH/apidb.jar
 
 #日志文件名称
 LOG_FILE=$APP_PATH/crmeb_out.log

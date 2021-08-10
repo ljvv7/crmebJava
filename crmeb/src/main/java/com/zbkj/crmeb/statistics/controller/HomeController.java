@@ -3,6 +3,7 @@ package com.zbkj.crmeb.statistics.controller;
 import com.common.CommonResult;
 import com.zbkj.crmeb.statistics.response.*;
 import com.zbkj.crmeb.statistics.service.HomeService;
+import com.zbkj.crmeb.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -35,6 +38,9 @@ public class HomeController {
     @Autowired
     private HomeService homeService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 销售额
      * @author Mr.Zhang
@@ -57,7 +63,6 @@ public class HomeController {
         return CommonResult.success(homeService.order());
     }
 
-
     /**
      * 新增用户
      * @author Mr.Zhang
@@ -65,8 +70,15 @@ public class HomeController {
      */
     @ApiOperation(value = "新增用户")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public CommonResult<HomeRateResponse> user(){
-        return CommonResult.success(homeService.user());
+    public CommonResult user(){
+        Integer sumPayCount = userService.getSumPayCount();
+        BigDecimal sumMoney = userService.getSumMoney();
+        HomeRateResponse user = homeService.user();
+        Map map = new HashMap();
+        map.put("sumPayCount",sumPayCount);
+        map.put("sumMoney",sumMoney);
+        map.put("userData",user);
+        return CommonResult.success(map);
     }
 
     /**

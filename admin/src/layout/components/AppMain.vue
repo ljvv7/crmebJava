@@ -6,7 +6,7 @@
       </keep-alive>
     </transition>
     <div class="footers">
-      <el-link v-for="item in links" :key="item.key" :href="item.href" target="_blank" class="mr15 mb20">{{item.title}}</el-link>
+      <!-- <el-link v-for="item in links" :key="item.key" :href="item.href" target="_blank" class="mr15 mb20">{{item.title}}</el-link> -->
       <div class="title mb15" v-text="copyright"></div>
     </div>
   </section>
@@ -37,7 +37,7 @@ export default {
           blankTarget: true
         }
       ],
-      copyright: 'Copyright © 2020 西安众邦网络科技有限公司'
+      copyright: 'Copyright © 2021 陕西恒守信息科技有限公司(西安九星柠檬软件技术有限公司提供技术支持)'
     }
   },
   computed: {

@@ -129,8 +129,8 @@ public class SwaggerConfig{
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Crmeb Java")
-                .description("Crmeb")
+                .title("DB API Java")
+                .description("DBAPI")
                 .termsOfServiceUrl("http://host:port")
                 .version("1.0.0").build();
     }

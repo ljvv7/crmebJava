@@ -48,6 +48,8 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
     @Autowired
     private SystemAttachmentService systemAttachmentService;
 
+
+
     /**
     * 列表
     * @param request 请求参数
@@ -222,6 +224,31 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
         t = CrmebUtil.mapToObj(map, cls);
 
         return t;
+    }
+
+    @Override
+    public List getSystemByGidId(Integer gid) {
+        List<SystemGroupData> list = baseMapper.getSystemByGidId(gid);
+
+        List<HashMap<String, Object>> arrayList = new ArrayList<>();
+        if (list.size() < 1) {
+            return null;
+        }
+
+        for (SystemGroupData systemGroupData : list) {
+            JSONObject jsonObject = JSONObject.parseObject(systemGroupData.getValue());
+            List<SystemFormItemCheckRequest> systemFormItemCheckRequestList = CrmebUtil.jsonToListClass(jsonObject.getString("fields"), SystemFormItemCheckRequest.class);
+            if (systemFormItemCheckRequestList.size() < 1) {
+                continue;
+            }
+            HashMap<String, Object> map = new HashMap<>();
+            for (SystemFormItemCheckRequest systemFormItemCheckRequest : systemFormItemCheckRequestList) {
+                map.put(systemFormItemCheckRequest.getName(), systemFormItemCheckRequest.getValue());
+            }
+            map.put("id", systemGroupData.getId());
+            arrayList.add(map);
+        }
+        return arrayList;
     }
 
     /**

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbkj.crmeb.nsl.nslwxapp.dao.EbSystemGroupDataMapper">
+
+    <select id="getPublishCourseInfo" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.EbSystemGroupData">
+        SELECT id,gid,value,sort,status,create_time,update_time
+         FROM `eb_system_group_data`
+         where `status` =1 and gid = 48
+    </select>
+
+    <select id="getPublishIconInfo" resultType="com.zbkj.crmeb.nsl.nslwxapp.model.EbSystemGroupData">
+        SELECT id,gid,value,sort,status,create_time,update_time
+         FROM `eb_system_group_data`
+         where `status` =1 and gid = 75
+    </select>
+</mapper>

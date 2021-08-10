@@ -59,7 +59,7 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
         systemAttachment.setSattDir(file.getUrl());
         systemAttachment.setAttSize(file.getFileSize().toString());
         systemAttachment.setAttType(file.getType());
-        systemAttachment.setImageType(1);   //图片上传类型 1本地 2七牛云 3OSS 4COS, 默认本地，任务轮询数据库放入云服务
+        systemAttachment.setImageType(3);   //图片上传类型 1本地 2七牛云 3OSS 4COS, 默认本地，任务轮询数据库放入云服务
         systemAttachment.setAttDir(file.getServerPath()); // 服务器上存储的绝对地址， 上传到云的时候使用
         systemAttachment.setPid(pid);
         save(systemAttachment);
@@ -96,7 +96,7 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
     private List<SystemAttachment> getAsyncList() {
         PageHelper.startPage(Constants.DEFAULT_PAGE, Constants.DEFAULT_LIMIT);
         LambdaQueryWrapper<SystemAttachment> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(SystemAttachment::getImageType, 1);
+        lambdaQueryWrapper.eq(SystemAttachment::getImageType, 3);
         lambdaQueryWrapper.isNotNull(SystemAttachment::getAttDir);
         lambdaQueryWrapper.orderByDesc(SystemAttachment::getAttId);
         return dao.selectList(lambdaQueryWrapper);
