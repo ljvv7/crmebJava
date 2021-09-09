@@ -3,15 +3,18 @@ branches: {
   }
 fileChange:
   /crmeb:
-    newFile: !uuid 'a8c38bc7022f4ed6fc0ba7d18ef3fd12642161f7'
-    oldFile: !uuid '96b1e484d21ab2b70fe93c68ad0d219b588e1c4c'
+    newFile: !uuid '9ac2a014463ecb83c481246b53587dc70d36e6b5'
+    oldFile: !uuid 'a8c38bc7022f4ed6fc0ba7d18ef3fd12642161f7'
   /crmeb/sql:
-    newFile: !uuid 'c0ae2a8c1e4f40bde370855bebbd0cdb15cedca5'
-    oldFile: !uuid 'cfa83df3a6b1cfd4b5f956bbc6362f6777d955c1'
+    newFile: !uuid '1e5e18f3900806c91c96bdd031250882d2fc7a88'
+    oldFile: !uuid 'c0ae2a8c1e4f40bde370855bebbd0cdb15cedca5'
   /crmeb/sql/crmeb_1.3.3.1.sql:
-    newFile: !uuid 'd4c942c14f17fb39383873859ad4dc0fee4bb5f2'
-    oldFile: !uuid '7b015f873140b88176cc2b7447b69a3c5acd3c64'
-gitCommitId: !uuid '89bc4a3802322c126cdde2ff538b42bc4a852040'
+    newFile: !uuid '2a0efd225f374ebe7b83315f665ca6e07ff5ebba'
+    oldFile: !uuid 'd4c942c14f17fb39383873859ad4dc0fee4bb5f2'
+  /crmeb/sql/重置admin.sql:
+    newFile: !uuid 'a6e2c0c0a10b5f03134ae6581f80ef2af55b6366'
+    oldFile: !uuid '5b74e34cf39b151c0636a0fcd013da90bb86b6e9'
+gitCommitId: !uuid '8deec94856065185e2373414b51243646352a7e1'
 renames: {
   }
-revisionId: 185
+revisionId: 186
