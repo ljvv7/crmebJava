@@ -2,52 +2,13 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid '46290dc1eb5b7a8a9ad4ef730bab5fd5ffa39e5c'
-    oldFile: !uuid 'f4403443daa896c465990615a3dba3dad2e0aac3'
   /crmeb:
-    newFile: !uuid '13f3d2a48a3b3421afa55294cbb4de051ccd5a8f'
-    oldFile: !uuid '0fdaf3ada5146ed308d26944998f9951b75fed5f'
-  /crmeb/src:
-    newFile: !uuid '70d8bf7908d08c85fa402f29af4a5313b0975f2c'
-    oldFile: !uuid 'd8cd2fac5c392f817d79d09ab85e3159d7cf712b'
-  /crmeb/src/main:
-    newFile: !uuid 'ec754bfe71440de92ac8c6aefceec79d45529eb0'
-    oldFile: !uuid 'be08278a713336df7e0356d6fa19790bfe495717'
-  /crmeb/src/main/java:
-    newFile: !uuid '8186095098a3a76994dc888992c45b078011ff01'
-    oldFile: !uuid '905cb52ffb667ca15fcd55b9a483f76c159b072d'
-  /crmeb/src/main/java/com:
-    newFile: !uuid '10d75b3f5787ff6d871bfa3183f90e70a7df8716'
-    oldFile: !uuid 'abfcaccd32a47744ead7b1fcbb7b36977bdb9b52'
-  /crmeb/src/main/java/com/zbkj:
-    newFile: !uuid 'f7d84c00034bc018b0f5b3ca980a2a04b290d6cd'
-    oldFile: !uuid 'af13cb1ec5d186ca29211452af1e7e80c3178ede'
-  /crmeb/src/main/java/com/zbkj/crmeb:
-    newFile: !uuid '94f75b17c683a14e07dc98d32dc918dc1365d345'
-    oldFile: !uuid '020b0c6173821fc6dacff0c5159317f77dd05c98'
-  /crmeb/src/main/java/com/zbkj/crmeb/front:
-    newFile: !uuid 'b39e55f1cb5a5120296157308aa1c4f22effc270'
-    oldFile: !uuid '929aa821fc23bcf15febcee5512401dc99d5fed9'
-  /crmeb/src/main/java/com/zbkj/crmeb/front/response:
-    newFile: !uuid 'f018c87b5176f47473b5888bb72fb9aa03f1f2dd'
-    oldFile: !uuid 'cfbce7ed18a11d3083ecb8621f948f7c2caf0737'
-  /crmeb/src/main/java/com/zbkj/crmeb/front/response/SecKillDetailH5Response.java:
-    newFile: !uuid '658513ac77c32456bb0bcb3c4149dbc36818e163'
-    oldFile: !uuid '202d2226b3559ac9dc3c0cae1322648753b6b192'
-  /crmeb/src/main/java/com/zbkj/crmeb/seckill:
-    newFile: !uuid '28b5ec242c3210b7de0bda3a3a95d57413a17e47'
-    oldFile: !uuid '1fc47d1625931c7ff77322b64271456677b8cfc8'
-  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service:
-    newFile: !uuid 'fbfc74855a20b8c74e184cea332255f76c614974'
-    oldFile: !uuid '126e218ef86504fead0571721876016d3aa0be18'
-  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/impl:
-    newFile: !uuid '056a06c9f28bd0b4661a14267f1d931b1dd83335'
-    oldFile: !uuid 'd166ee4903853f6dde03c4c6a9f039b3d99611e7'
-  /crmeb/src/main/java/com/zbkj/crmeb/seckill/service/impl/StoreSeckillServiceImpl.java:
-    newFile: !uuid '5279336d240e90de5606e05a70ece43a84b10619'
-    oldFile: !uuid '062445e698441b7dff4f9eb67c5127ccc4c82daa'
-gitCommitId: !uuid 'af1d82b8ddd60143362696d9e5ad0b221e0671cd'
+    newFile: !uuid '3137c69400e54d687b02dbee1a1fd681064808e1'
+    oldFile: !uuid '13f3d2a48a3b3421afa55294cbb4de051ccd5a8f'
+  /crmeb/start.sh:
+    newFile: !uuid '54a0f248f0906041d598762d4a051cbfeba4d508'
+    oldFile: !uuid '57a6af6904d737df2276cc2153a4d2042986844f'
+gitCommitId: !uuid '98e8c6b3eb429a04fdbb737a09462c448d0083f4'
 renames: {
   }
-revisionId: 192
+revisionId: 193
