@@ -2,10 +2,25 @@
 branches: {
   }
 fileChange:
-  /.gitignore:
-    newFile: !uuid '5945855736117567ba8835a3a130d429a65a0210'
-    oldFile: !uuid '447d249288074bc67f9517290abdf5ca9320d8d2'
-gitCommitId: !uuid 'c0491d58f464655c64a93eeb333f800b48e7e906'
+  /app:
+    newFile: !uuid 'bbfdaf8802f0767e9087effb5b5ec03986a47312'
+    oldFile: !uuid 'e21c381720fc62157788c5e321db273d77e94d29'
+  /app/config:
+    newFile: !uuid 'f750e0b2da6273452bf7ab2a0e39a5689a5b281f'
+    oldFile: !uuid 'b8181c900bbee325600641d80f2af9eb437c7662'
+  /app/config/app.js:
+    newFile: !uuid '752d35e4aa8052624a29361ad262b145c85eaca5'
+    oldFile: !uuid 'dfef6ad2ad9652387cdc67fa7494321cea5689ae'
+  /app/pages:
+    newFile: !uuid '946e946edc4a5a062ccfc054d4807362aae613c7'
+    oldFile: !uuid '9ab8540cd5b1d258fc76512c680cfc674483aa92'
+  /app/pages/user:
+    newFile: !uuid '7aa17de6d7e9a3b0de00817d4037f2ed7b968142'
+    oldFile: !uuid 'c7b9818c86405c6878911637a2617beb681ae178'
+  /app/pages/user/index.vue:
+    newFile: !uuid '59793d2ef72711bf0e0f0675a60a2cba6ba1a014'
+    oldFile: !uuid '8628b73c37f131183dd1023be8beeec0e7a2313c'
+gitCommitId: !uuid 'ce4ec543a52898e9f6af369a361480dca42024db'
 renames: {
   }
-revisionId: 204
+revisionId: 205
