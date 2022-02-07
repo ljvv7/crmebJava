@@ -3,225 +3,48 @@ branches: {
   }
 fileChange:
   /admin:
-    newFile: !uuid '32672eb0b1445293f7e94dbebc0bfd30530aa744'
-    oldFile: !uuid '76de33f3b7d5e6f50980647992036fcef18c3b40'
-  /admin/public:
-    newFile: !uuid '67ffb76a022dfc854ee0670e710fcf3b3201ed8d'
-    oldFile: !uuid '7b44336478d61e0cc726798914310e04e83e82c9'
-  /admin/public/index.html:
-    newFile: !uuid '518ca51aa307c03601f253b2d7ec2c1de3b42c4f'
-    oldFile: !uuid '68b1bfd5a425a8c169c54f905af40f513d0a41f1'
-  /admin/public/static:
-    newFile: !uuid 'f636f09f88d6c3c32946283f5ef1c9c2f5685826'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5:
-    newFile: !uuid 'bdb2380d3fc04976cec3652472dc93d87f8b438f'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/langs:
-    newFile: !uuid 'f998a61e4c1af81f8e0fd5d57ac63253c6fcfba3'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/langs/zh_CN.js:
-    newFile: !uuid 'e11f322cc4c83cd1ea797638870a2588fd2040c1'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins:
-    newFile: !uuid '613a7c98cb45f8b3ee33feeb80235c972d034fec'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/codesample:
-    newFile: !uuid '21a48e2e88dc6a3bb8574fcc6f7f4f251d65ba3e'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/codesample/css:
-    newFile: !uuid '8580f2be93669d52136b67dead0c0d602266c27a'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/codesample/css/prism.css:
-    newFile: !uuid '128237fba354799ec2afb054062a261e2590d7ad'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons:
-    newFile: !uuid 'f5a23296cfe4295b8af5ed77d935bbf65970a611'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img:
-    newFile: !uuid '5bfb47dc10763ed92c03ba09eadc60316d3117a3'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-cool.gif:
-    newFile: !uuid 'ba90cc36fb0415d0273d1cd206bff63fd9c91fde'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-cry.gif:
-    newFile: !uuid '74d897a4f6d22e814e2b054e98b8a75fb464b4be'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-embarassed.gif:
-    newFile: !uuid '963a96b8a7593b1d8bcbab073abe5ee4e539dbf6'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-foot-in-mouth.gif:
-    newFile: !uuid 'c7cf1011dad0e7500e29a278b0d395b253871109'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-frown.gif:
-    newFile: !uuid '716f55e161bfebb1c3d34f0b0f40c177fc82c30b'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-innocent.gif:
-    newFile: !uuid '334d49e0e60f2997c9ba24071764f95d9e08a5cc'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-kiss.gif:
-    newFile: !uuid '4efd549ed31c44b1faac17ed34bb67abeb42baf8'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-laughing.gif:
-    newFile: !uuid '82c5b182e61d32bd394acae551eff180f1eebd26'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-money-mouth.gif:
-    newFile: !uuid 'ca2451e102722e12e131ae53ea76989acbf191e2'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-sealed.gif:
-    newFile: !uuid 'fe66220c24b4da4526818a5d68f75a06d9985a29'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-smile.gif:
-    newFile: !uuid 'fd27edfaaa29a70a8c4563c0eab9f18c74d374fd'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-surprised.gif:
-    newFile: !uuid '0cc9bb71cca4cdeafbb248ce7e07c3708c1cbd64'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-tongue-out.gif:
-    newFile: !uuid '2075dc16058f1f17912167675ce5cfb9986fc71d'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-undecided.gif:
-    newFile: !uuid 'bef7e257303f8243c89787e7a7f9955dd1f112e2'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-wink.gif:
-    newFile: !uuid '0631c7616ec8624ddeee02b633326f697ee72f80'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/emoticons/img/smiley-yell.gif:
-    newFile: !uuid '648e6e879123fe49beebbc1f3635141864a79a9c'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/visualblocks:
-    newFile: !uuid '50d7681832de8dca67166e6451e5062e60414f7d'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/visualblocks/css:
-    newFile: !uuid '6c5723d245adfc0fa5bbebf79d2d6ae45d90fa4d'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/plugins/visualblocks/css/visualblocks.css:
-    newFile: !uuid '96e4d7c5de9bed87aac1174723a916360b865cbe'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins:
-    newFile: !uuid '53c187cbf889a4f1ed92b30cad548ef081dfaeda'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray:
-    newFile: !uuid '133914fee738abf225d2280a84558d66b49eede6'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/content.inline.min.css:
-    newFile: !uuid '7b45d339714c1f9652edd565b9b499dbdee39c10'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/content.min.css:
-    newFile: !uuid 'bad168cfe279f34ec873629b8b9da523dfe1eee6'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts:
-    newFile: !uuid '5c0a2f15a5980fbbad88800bcced2113e0feb297'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-mobile.woff:
-    newFile: !uuid '1e3be038a607cb7c2544ed8ae3d6621f77bf4c38'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.eot:
-    newFile: !uuid 'b144ba0bd949de3c0f87abdd78b517067169884f'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.svg:
-    newFile: !uuid 'b4ee6f4088b2a4de25918f2df2a72f16d805eeaa'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.ttf:
-    newFile: !uuid 'a983e2dc4cb30880fffe00e1f0879be4d95eb4cc'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce-small.woff:
-    newFile: !uuid 'd8962df76e50488c6520c0dadf3220080aaae9fb'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.eot:
-    newFile: !uuid '5336c38ff5206392d145d4feb00cd19b10e5614d'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.svg:
-    newFile: !uuid '9fa215f3d665293db860a299fe0ad0903d734f66'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.ttf:
-    newFile: !uuid '61a48a511c224a81c89a7fb1d8101f9f16fbfd13'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/fonts/tinymce.woff:
-    newFile: !uuid 'aace5d9c5c14e60c934cdb1a146fe468730eb4e3'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/img:
-    newFile: !uuid '29a6cf87d4c8ec86fba46d4eb352b05bfece5151'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/img/anchor.gif:
-    newFile: !uuid '606348c7f53dba169a9aca7279a2a973f4b07bdb'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/img/loader.gif:
-    newFile: !uuid 'c69e937232b24ea30f01c68bbd2ebc798dcecfcb'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/img/object.gif:
-    newFile: !uuid 'cccd7f023fb80908cb33bb7d9604236cd21b7ae7'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/img/trans.gif:
-    newFile: !uuid '388486517fa8da13ebd150e8f65d5096c3e10c3a'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/skin.min.css:
-    newFile: !uuid '4ad815bf554d66f063dc416d0517beca91326df3'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/skins/lightgray/skin.min.css.map:
-    newFile: !uuid 'c8763dcc3b57e7a24121713c45872edff9b65a02'
-    oldFile: null
-  /admin/public/static/tinymce4.7.5/tinymce.min.js:
-    newFile: !uuid 'd7fcac80b026bf853e9716ae331bf34178c9c408'
-    oldFile: null
-  /admin/src:
-    newFile: !uuid '2473bbe706cd83c682cf5f384aec51089ddcae74'
-    oldFile: !uuid '1dde58e79ab64bd2f7e04b952a7fccd1d1941798'
-  /admin/src/components:
-    newFile: !uuid '0aa59e0707e7130d9cf17aef8fd428cd29d35a84'
-    oldFile: !uuid 'e2286125c63b577184e153205862ad8b3fd62946'
-  /admin/src/components/Tinymce:
-    newFile: !uuid 'df323a2f09c2211ca5edd603111834f31aa2619f'
-    oldFile: !uuid 'b9b9c3f91e5434d9e051a8764681c90f6bc8c01d'
-  /admin/src/components/Tinymce/index.vue:
-    newFile: !uuid '2e6e8bbaf54b392391c46b148ecf8062f46d2368'
-    oldFile: !uuid 'f39bc7a6752df553dbc84dd372ab27e6a316b173'
-  /app:
-    newFile: !uuid '1bf35a1e49a477914e04acbf1a2fa442effb2a5f'
-    oldFile: !uuid 'e21c381720fc62157788c5e321db273d77e94d29'
-  /app/api:
-    newFile: !uuid 'f0f1cab80d23398cf4c14de99f016a5d0ded60a0'
-    oldFile: !uuid '7c3f699325cef0724e2f2038d65c40a14c621b09'
-  /app/api/user.js:
-    newFile: !uuid 'fb270a34aa12057cc8171638e15da391e935f372'
-    oldFile: !uuid 'f929d1667e2bb91b03c6965e9c459ef013057be3'
-  /app/config:
-    newFile: !uuid 'f750e0b2da6273452bf7ab2a0e39a5689a5b281f'
-    oldFile: !uuid 'b8181c900bbee325600641d80f2af9eb437c7662'
-  /app/config/app.js:
-    newFile: !uuid '752d35e4aa8052624a29361ad262b145c85eaca5'
-    oldFile: !uuid 'dfef6ad2ad9652387cdc67fa7494321cea5689ae'
-  /app/pages:
-    newFile: !uuid 'df528f2daa89ba7f2197166b358a3c599beab861'
-    oldFile: !uuid '9ab8540cd5b1d258fc76512c680cfc674483aa92'
-  /app/pages/goods_details:
-    newFile: !uuid '8484b6d538e378173251f1320570b75b3c754ffb'
-    oldFile: !uuid 'd68bfd2bbe0f758d7b55afc25b54e9b5171745be'
-  /app/pages/goods_details/index.vue:
-    newFile: !uuid 'f4a88e32d52dbe9350eaa751e7dc0a82ad066b74'
-    oldFile: !uuid '71dc31a7900150c0f1ae127a380e66157424683a'
-  /app/pages/user:
-    newFile: !uuid '7aa17de6d7e9a3b0de00817d4037f2ed7b968142'
-    oldFile: !uuid 'c7b9818c86405c6878911637a2617beb681ae178'
-  /app/pages/user/index.vue:
-    newFile: !uuid '59793d2ef72711bf0e0f0675a60a2cba6ba1a014'
-    oldFile: !uuid '8628b73c37f131183dd1023be8beeec0e7a2313c'
-  /app/static:
-    newFile: !uuid '66b7f0d25ba7601afe96675c76a2373ce0aa907b'
-    oldFile: !uuid 'eb7313bc981c1c2ef9fb11d1fbe191e60c4b802d'
-  /app/static/html:
-    newFile: !uuid '8b6b817f7b43dfec9da2de6b67fd36f6c948d193'
-    oldFile: !uuid '770448e1274c0ca2921d7050e4595039f5c39197'
-  /app/static/html/pc.html:
-    newFile: !uuid 'c272993f452375e2fd30663b215561d7e9e640a3'
-    oldFile: !uuid '7148bd20d78f92fbd81d9ba11e0ad695b41331ac'
-  /app/utils:
-    newFile: !uuid '875a798b0f41744d3371fa1b308257aefe7b1686'
-    oldFile: !uuid '2d120f21c4668923172907ac78bd5ed9ab573271'
-  /app/utils/util.js:
-    newFile: !uuid '4847c0e5d03533838a3714d0c9adbe884634c9e2'
-    oldFile: !uuid '4374d1cf0805f09cde63f28b41e4cf4db7e3fd94'
-gitCommitId: !uuid '31123c724b76c1b72a880bcd9829c95a38d7e62b'
+    newFile: !uuid '4e5e88324274591881b98a0bf60f346aa57e4a4a'
+    oldFile: !uuid '32672eb0b1445293f7e94dbebc0bfd30530aa744'
+  /admin/.env.development:
+    newFile: !uuid '19c551e149370bd31e036a2aefd459793dd01b41'
+    oldFile: !uuid 'c9bde108e40b0e2950375b97712d2142e812942a'
+  /admin/.env.production:
+    newFile: !uuid '6abd122b7bc65ee636b1a023f558e884f760d1c3'
+    oldFile: !uuid 'f0c4087f520d8a5e12ff49aad7de5a745bac03a9'
+  /admin/.env.staging:
+    newFile: !uuid 'b2f28a6fd8a97d78aa675e3124edd655a2d7f264'
+    oldFile: !uuid '25933c56c11f4f2a5b35233c51330108cce2fd38'
+  /admin/mock:
+    newFile: null
+    oldFile: !uuid 'ba10a61a92f3fe4d30239d760cde4c55f4847021'
+  /admin/mock/article.js:
+    newFile: null
+    oldFile: !uuid '50218ae4924ade20df15011e53c869cc22ccd201'
+  /admin/mock/index.js:
+    newFile: null
+    oldFile: !uuid 'b71880cb37c570b33dfcc37c7192292a26b0dd71'
+  /admin/mock/mock-server.js:
+    newFile: null
+    oldFile: !uuid '806fdacc7a3250c0ef03acfb527987ed4be42bae'
+  /admin/mock/remote-search.js:
+    newFile: null
+    oldFile: !uuid '60809cb86f2f60a4f5a34fcf4b6e13fccd8bcfac'
+  /admin/mock/role:
+    newFile: null
+    oldFile: !uuid '51949b37d747572453ff5a55be00d4010fe9e618'
+  /admin/mock/role/index.js:
+    newFile: null
+    oldFile: !uuid 'd957493bf3735d218a8161109d62d6f7bf4c5461'
+  /admin/mock/role/routes.js:
+    newFile: null
+    oldFile: !uuid 'c0581f50a7ad2130e611844789e2886b9d36145a'
+  /admin/mock/user.js:
+    newFile: null
+    oldFile: !uuid '8d33d3fd3df77687ad890ed21fef4bd5818b1a40'
+  /admin/vue.config.js:
+    newFile: !uuid 'c8397dd799ee6ab201e1084b4c4d6f802af42b15'
+    oldFile: !uuid '56f97b417e22ec4575220d69f345529e59c8b7be'
+gitCommitId: !uuid 'c8daa58b788d94ec00d5473d36413851ca894544'
 renames: {
   }
-revisionId: 207
+revisionId: 208
