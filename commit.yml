@@ -2,49 +2,34 @@
 branches: {
   }
 fileChange:
-  /admin:
-    newFile: !uuid '4e5e88324274591881b98a0bf60f346aa57e4a4a'
-    oldFile: !uuid '32672eb0b1445293f7e94dbebc0bfd30530aa744'
-  /admin/.env.development:
-    newFile: !uuid '19c551e149370bd31e036a2aefd459793dd01b41'
-    oldFile: !uuid 'c9bde108e40b0e2950375b97712d2142e812942a'
-  /admin/.env.production:
-    newFile: !uuid '6abd122b7bc65ee636b1a023f558e884f760d1c3'
-    oldFile: !uuid 'f0c4087f520d8a5e12ff49aad7de5a745bac03a9'
-  /admin/.env.staging:
-    newFile: !uuid 'b2f28a6fd8a97d78aa675e3124edd655a2d7f264'
-    oldFile: !uuid '25933c56c11f4f2a5b35233c51330108cce2fd38'
-  /admin/mock:
+  /crmeb:
+    newFile: !uuid '71967fc7eef49904bc7ef6d2d4a7bfb7247b60dc'
+    oldFile: !uuid 'eb7edc1a63ef7239bc93bdfefc2f3182cf495e7b'
+  /crmeb/shell:
+    newFile: !uuid '1b2592609e5d4d4e2be42b65da7e51abad4aafa9'
+    oldFile: null
+  /crmeb/shell/startAdmin.sh:
+    newFile: !uuid 'd5ce12ce66df941fbf3f5f16bbde2d799c3349cd'
+    oldFile: null
+  /crmeb/shell/startFront.sh:
+    newFile: !uuid 'b3fc0b24cfcf743874e487bc51262cb2ed0b817a'
+    oldFile: null
+  /crmeb/shell/stopAdmin.sh:
+    newFile: !uuid '5af391fbaa001704af8325ab80e62ef05dc0e965'
+    oldFile: null
+  /crmeb/shell/stopFront.sh:
+    newFile: !uuid 'd6ef2f10d242315094fa6696f7e9a342e068072a'
+    oldFile: null
+  /crmeb/start.sh:
     newFile: null
-    oldFile: !uuid 'ba10a61a92f3fe4d30239d760cde4c55f4847021'
-  /admin/mock/article.js:
+    oldFile: !uuid '57a6af6904d737df2276cc2153a4d2042986844f'
+  /crmeb/stop.sh:
     newFile: null
-    oldFile: !uuid '50218ae4924ade20df15011e53c869cc22ccd201'
-  /admin/mock/index.js:
-    newFile: null
-    oldFile: !uuid 'b71880cb37c570b33dfcc37c7192292a26b0dd71'
-  /admin/mock/mock-server.js:
-    newFile: null
-    oldFile: !uuid '806fdacc7a3250c0ef03acfb527987ed4be42bae'
-  /admin/mock/remote-search.js:
-    newFile: null
-    oldFile: !uuid '60809cb86f2f60a4f5a34fcf4b6e13fccd8bcfac'
-  /admin/mock/role:
-    newFile: null
-    oldFile: !uuid '51949b37d747572453ff5a55be00d4010fe9e618'
-  /admin/mock/role/index.js:
-    newFile: null
-    oldFile: !uuid 'd957493bf3735d218a8161109d62d6f7bf4c5461'
-  /admin/mock/role/routes.js:
-    newFile: null
-    oldFile: !uuid 'c0581f50a7ad2130e611844789e2886b9d36145a'
-  /admin/mock/user.js:
-    newFile: null
-    oldFile: !uuid '8d33d3fd3df77687ad890ed21fef4bd5818b1a40'
-  /admin/vue.config.js:
-    newFile: !uuid 'c8397dd799ee6ab201e1084b4c4d6f802af42b15'
-    oldFile: !uuid '56f97b417e22ec4575220d69f345529e59c8b7be'
-gitCommitId: !uuid 'c8daa58b788d94ec00d5473d36413851ca894544'
-renames: {
-  }
-revisionId: 208
+    oldFile: !uuid 'a765cf419e82eabb28dab393627f2ae77c89ff88'
+gitCommitId: !uuid '26f0c0d48e8dc994cdef2b64627aebe1b20aae1a'
+renames:
+  /crmeb/shell/startAdmin.sh: /crmeb/start.sh
+  /crmeb/shell/startFront.sh: /crmeb/start.sh
+  /crmeb/shell/stopAdmin.sh: /crmeb/stop.sh
+  /crmeb/shell/stopFront.sh: /crmeb/stop.sh
+revisionId: 209
