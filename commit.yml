@@ -2,34 +2,19 @@
 branches: {
   }
 fileChange:
-  /crmeb:
-    newFile: !uuid '71967fc7eef49904bc7ef6d2d4a7bfb7247b60dc'
-    oldFile: !uuid 'eb7edc1a63ef7239bc93bdfefc2f3182cf495e7b'
-  /crmeb/shell:
-    newFile: !uuid '1b2592609e5d4d4e2be42b65da7e51abad4aafa9'
-    oldFile: null
-  /crmeb/shell/startAdmin.sh:
-    newFile: !uuid 'd5ce12ce66df941fbf3f5f16bbde2d799c3349cd'
-    oldFile: null
-  /crmeb/shell/startFront.sh:
-    newFile: !uuid 'b3fc0b24cfcf743874e487bc51262cb2ed0b817a'
-    oldFile: null
-  /crmeb/shell/stopAdmin.sh:
-    newFile: !uuid '5af391fbaa001704af8325ab80e62ef05dc0e965'
-    oldFile: null
-  /crmeb/shell/stopFront.sh:
-    newFile: !uuid 'd6ef2f10d242315094fa6696f7e9a342e068072a'
-    oldFile: null
-  /crmeb/start.sh:
+  /admin:
+    newFile: !uuid '5b23d9a87874ec3ed5e0dfcd35dbb2eb1732df0f'
+    oldFile: !uuid '4e5e88324274591881b98a0bf60f346aa57e4a4a'
+  /admin/src:
+    newFile: !uuid 'bc1fcda992fd780325d43a67e9584bf8eafd62c5'
+    oldFile: !uuid '2473bbe706cd83c682cf5f384aec51089ddcae74'
+  /admin/src/main.js:
+    newFile: !uuid '9c291f3b2073cd79ea99989d37afd83cf56e6c1d'
+    oldFile: !uuid '28b9f97d6e9cc499c7a4752b886d7b615dba8c56'
+  /domain.json:
     newFile: null
-    oldFile: !uuid '57a6af6904d737df2276cc2153a4d2042986844f'
-  /crmeb/stop.sh:
-    newFile: null
-    oldFile: !uuid 'a765cf419e82eabb28dab393627f2ae77c89ff88'
-gitCommitId: !uuid '26f0c0d48e8dc994cdef2b64627aebe1b20aae1a'
-renames:
-  /crmeb/shell/startAdmin.sh: /crmeb/start.sh
-  /crmeb/shell/startFront.sh: /crmeb/start.sh
-  /crmeb/shell/stopAdmin.sh: /crmeb/stop.sh
-  /crmeb/shell/stopFront.sh: /crmeb/stop.sh
-revisionId: 209
+    oldFile: !uuid 'd24c9981ef0e269d7570c2c5f6ee95809a3a5b59'
+gitCommitId: !uuid 'e0150ddd109b5ae246271b1400e54b1051156699'
+renames: {
+  }
+revisionId: 210
