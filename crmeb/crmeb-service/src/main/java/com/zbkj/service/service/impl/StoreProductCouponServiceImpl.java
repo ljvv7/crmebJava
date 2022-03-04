@@ -28,8 +28,8 @@ public class StoreProductCouponServiceImpl extends ServiceImpl<StoreProductCoupo
 
     @Resource
     private StoreProductCouponDao dao;
+
     /**
-     *
      * @param productId 产品id
      */
     @Override
@@ -41,6 +41,7 @@ public class StoreProductCouponServiceImpl extends ServiceImpl<StoreProductCoupo
 
     /**
      * 根据商品id获取已关联优惠券信息
+     *
      * @param productId 商品id
      * @return 已关联优惠券
      */

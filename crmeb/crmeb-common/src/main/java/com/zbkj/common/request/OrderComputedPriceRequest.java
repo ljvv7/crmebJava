@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OrderComputedPriceRequest对象", description="计算订单价格请求对象")
+@ApiModel(value = "OrderComputedPriceRequest对象", description = "计算订单价格请求对象")
 public class OrderComputedPriceRequest {
 
     @ApiModelProperty(value = "预下单订单号")

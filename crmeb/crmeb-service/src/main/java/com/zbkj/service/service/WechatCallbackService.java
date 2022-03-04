@@ -19,6 +19,7 @@ public interface WechatCallbackService extends IService<WechatCallback> {
 
     /**
      * 微信回调
+     *
      * @param request request
      * @return String
      */

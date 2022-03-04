@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="WechatProgramMyTempSearchRequest对象", description="小程序我的模板")
+@ApiModel(value = "WechatProgramMyTempSearchRequest对象", description = "小程序我的模板")
 public class WechatProgramMyTempSearchRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "模版标题")
     private String title;

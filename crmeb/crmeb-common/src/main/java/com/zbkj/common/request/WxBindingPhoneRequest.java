@@ -26,10 +26,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="WxBindingPhoneRequest", description="微信绑定手机号请求对象")
+@ApiModel(value = "WxBindingPhoneRequest", description = "微信绑定手机号请求对象")
 public class WxBindingPhoneRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "手机号", required = true)
     @Pattern(regexp = RegularConstants.PHONE_TWO, message = "请输入正确的手机号")

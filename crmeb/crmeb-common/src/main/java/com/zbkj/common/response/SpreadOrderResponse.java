@@ -1,7 +1,5 @@
 package com.zbkj.common.response;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -26,7 +24,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SpreadOrderResponse对象", description="推广订单响应体")
+@ApiModel(value = "SpreadOrderResponse对象", description = "推广订单响应体")
 public class SpreadOrderResponse {
 
     @ApiModelProperty(value = "订单ID")

@@ -22,15 +22,15 @@ import java.util.HashMap;
 
 /**
  * Excel导出 前端控制器
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
@@ -43,6 +43,7 @@ public class ExcelController {
 
     /**
      * 商品导出
+     *
      * @param request 搜索条件
      */
     @PreAuthorize("hasAuthority('admin:export:excel:product')")
@@ -57,6 +58,7 @@ public class ExcelController {
 
     /**
      * 砍价商品导出
+     *
      * @param request 搜索条件
      */
     @PreAuthorize("hasAuthority('admin:export:excel:bargain')")
@@ -71,6 +73,7 @@ public class ExcelController {
 
     /**
      * 拼团商品导出
+     *
      * @param request 搜索条件
      */
     @PreAuthorize("hasAuthority('admin:export:excel:combiantion')")
@@ -85,12 +88,13 @@ public class ExcelController {
 
     /**
      * 订单导出
+     *
      * @param request 搜索条件
      */
     @PreAuthorize("hasAuthority('admin:export:excel:order')")
     @ApiOperation(value = "订单导出")
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public CommonResult<HashMap<String, String>> exportOrder(@Validated StoreOrderSearchRequest request){
+    public CommonResult<HashMap<String, String>> exportOrder(@Validated StoreOrderSearchRequest request) {
         String fileName = excelService.exportOrder(request);
         HashMap<String, String> map = CollUtil.newHashMap();
         map.put("fileName", fileName);

@@ -1,9 +1,9 @@
 package com.zbkj.front.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.PageParamRequest;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.common.model.combination.StoreCombination;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StorePinkRequest;
 import com.zbkj.common.response.*;
 import com.zbkj.service.service.StoreCombinationService;
@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 拼团商品
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
@@ -74,6 +74,7 @@ public class CombinationController {
 
     /**
      * 去拼团
+     *
      * @param pinkId 拼团团长单id
      */
     @ApiOperation(value = "去拼团")

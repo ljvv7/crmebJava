@@ -33,9 +33,11 @@ public class RedisUtil {
 //    private static RedisTemplate<String, Object> redisTemplate = SpringUtil.getBean("redisTemplate", RedisTemplate.class);
 
     // =============== common ==========================
+
     /**
      * 指定缓存失效时间
-     * @param key 键
+     *
+     * @param key  键
      * @param time 时间(秒)
      * @return boolean
      */
@@ -53,6 +55,7 @@ public class RedisUtil {
 
     /**
      * 根据key 获取过期时间
+     *
      * @param key 键 不能为null
      * @return 时间(秒) 返回0代表为永久有效 失效时间为负数，说明该主键未设置失效时间（失效时间默认为-1）
      */
@@ -62,10 +65,11 @@ public class RedisUtil {
 
     /**
      * 判断key是否存在
+     *
      * @param key 键
      * @return true 存在 false 不存在
      */
-    public boolean exists(String key){
+    public boolean exists(String key) {
         try {
             return redisTemplate.hasKey(key);
         } catch (Exception e) {
@@ -76,6 +80,7 @@ public class RedisUtil {
 
     /**
      * 删除对应的value
+     *
      * @param key string key
      */
     public void delete(String key) {
@@ -85,9 +90,11 @@ public class RedisUtil {
     }
 
     // =============== string ==========================
+
     /**
      * 写入缓存
-     * @param key string key
+     *
+     * @param key   string key
      * @param value string value
      */
     public boolean set(String key, Object value) {
@@ -102,8 +109,9 @@ public class RedisUtil {
 
     /**
      * 写入缓存带有效期(默认时间单位:秒)
-     * @param key string key
-     * @param value string value
+     *
+     * @param key        string key
+     * @param value      string value
      * @param expireTime Long 过期时间
      * @return boolean
      */
@@ -123,10 +131,11 @@ public class RedisUtil {
 
     /**
      * 写入缓存带有效期
-     * @param key string key
-     * @param value string value
+     *
+     * @param key        string key
+     * @param value      string value
      * @param expireTime Long 过期时间
-     * @param timeUnit TimeUnit 时间格式
+     * @param timeUnit   TimeUnit 时间格式
      * @return boolean
      */
     public boolean set(String key, Object value, Long expireTime, TimeUnit timeUnit) {
@@ -141,6 +150,7 @@ public class RedisUtil {
 
     /**
      * 读取缓存
+     *
      * @param key string key
      * @return T
      */
@@ -151,9 +161,10 @@ public class RedisUtil {
 
     /**
      * 哈希添加
-     * @param key string key
+     *
+     * @param key     string key
      * @param hashKey Object hashKey
-     * @param value Object value
+     * @param value   Object value
      */
 
     public void hmSet(String key, Object hashKey, Object value) {
@@ -162,7 +173,8 @@ public class RedisUtil {
 
     /**
      * 哈希删除
-     * @param key string key
+     *
+     * @param key     string key
      * @param hashKey Object hashKey
      */
 
@@ -172,7 +184,8 @@ public class RedisUtil {
 
     /**
      * 哈希获取数据
-     * @param key string key
+     *
+     * @param key     string key
      * @param hashKey Object hashKey
      */
     public Object hmGet(String key, Object hashKey) {
@@ -181,6 +194,7 @@ public class RedisUtil {
 
     /**
      * 哈希数量
+     *
      * @param key string key
      */
     public Long getHashSize(String key) {
@@ -189,6 +203,7 @@ public class RedisUtil {
 
     /**
      * 列表添加左边添加
+     *
      * @param k string key
      * @param v Object v
      * @author Mr.Zhang
@@ -201,15 +216,17 @@ public class RedisUtil {
 
     /**
      * 从右边拿出来一个
+     *
      * @param k string key
      * @param t Long 超时秒数
      */
-    public Object getRightPop(String k, Long t){
+    public Object getRightPop(String k, Long t) {
         return redisTemplate.opsForList().rightPop(k, t, TimeUnit.SECONDS);
     }
 
     /**
      * 列表获取数量
+     *
      * @param k string key
      * @return Long
      */
@@ -219,8 +236,9 @@ public class RedisUtil {
 
     /**
      * 列表获取
-     * @param k string key
-     * @param l long l
+     *
+     * @param k  string key
+     * @param l  long l
      * @param l1 long l1
      * @return List<Object>
      */
@@ -231,7 +249,8 @@ public class RedisUtil {
 
     /**
      * 集合添加
-     * @param key string key
+     *
+     * @param key   string key
      * @param value Object value
      */
     public void add(String key, Object value) {
@@ -241,6 +260,7 @@ public class RedisUtil {
 
     /**
      * 集合获取
+     *
      * @param key string key
      * @return Set<Object>
      */
@@ -251,7 +271,8 @@ public class RedisUtil {
 
     /**
      * 有序集合添加    排行榜使用
-     * @param key string key
+     *
+     * @param key   string key
      * @param value Object value
      * @param score double scoure
      */
@@ -263,7 +284,8 @@ public class RedisUtil {
 
     /**
      * 有序集合获取    排行榜使用
-     * @param key string key
+     *
+     * @param key   string key
      * @param score double scoure
      * @return Set<Object>
      */
@@ -274,10 +296,11 @@ public class RedisUtil {
 
     /**
      * 递增
+     *
      * @param key 键
      * @return long
      */
-    public long incrAndCreate(String key){
+    public long incrAndCreate(String key) {
         if (!exists(key)) {
             set(key, 1);
             return 1;
@@ -287,11 +310,12 @@ public class RedisUtil {
 
     /**
      * 递增
-     * @param key 键
+     *
+     * @param key   键
      * @param delta 要增加几(大于0)
      * @return long
      */
-    public long incr(String key, long delta){
+    public long incr(String key, long delta) {
         if (delta < 0) {
             throw new RuntimeException("递增因子必须大于0");
         }

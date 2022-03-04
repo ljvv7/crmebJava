@@ -3,16 +3,16 @@ package com.zbkj.service.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.system.SystemStore;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreNearRequest;
 import com.zbkj.common.request.SystemStoreRequest;
 import com.zbkj.common.response.StoreNearResponse;
-import com.zbkj.common.vo.SystemStoreNearVo;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.model.system.SystemStore;
+import com.zbkj.common.vo.SystemStoreNearVo;
 import com.zbkj.service.dao.SystemStoreDao;
 import com.zbkj.service.service.SystemAttachmentService;
 import com.zbkj.service.service.SystemConfigService;
@@ -54,7 +54,8 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 分页显示门店
-     * @param keywords 搜索条件
+     *
+     * @param keywords         搜索条件
      * @param pageParamRequest 分页参数
      */
     @Override
@@ -63,7 +64,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
         LambdaQueryWrapper<SystemStore> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         if (status == 1) { // 显示中
             lambdaQueryWrapper.eq(SystemStore::getIsShow, true).eq(SystemStore::getIsDel, false);
-        }else if (status == 2) { // 回收站中
+        } else if (status == 2) { // 回收站中
             lambdaQueryWrapper.eq(SystemStore::getIsDel, true);
         } else { // 隐藏中的
             lambdaQueryWrapper.eq(SystemStore::getIsShow, false).eq(SystemStore::getIsDel, false);
@@ -78,6 +79,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 根据基本参数查询
+     *
      * @param systemStore 基本参数
      * @return 门店结果
      */
@@ -90,7 +92,8 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 修改门店显示状态
-     * @param id integer id
+     *
+     * @param id     integer id
      * @param status 状态
      * @return boolean
      */
@@ -109,6 +112,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 删除门店自提
+     *
      * @param id Integer
      * @return boolean
      */
@@ -123,6 +127,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 数量
+     *
      * @return HashMap<String, Integer>
      */
     @Override
@@ -136,6 +141,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 根据状态获取总数
+     *
      * @return HashMap<String, Integer>
      */
     private Integer getCountByStatus(Integer status) {
@@ -151,6 +157,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 根据id集合查询数据，返回 map
+     *
      * @param storeIdList List<Integer> id集合
      * @return HashMap<Integer, SystemStore>
      */
@@ -174,7 +181,8 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 附近的提货点
-     * @param request StoreNearRequest 经纬度参数
+     *
+     * @param request          StoreNearRequest 经纬度参数
      * @param pageParamRequest PageParamRequest 分页参数
      * @return StoreNearResponse
      */
@@ -204,6 +212,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 新增门店自提
+     *
      * @param request SystemStoreRequest 新增参数
      * @return Boolean
      */
@@ -218,7 +227,8 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 修改门店自提
-     * @param id integer id
+     *
+     * @param id      integer id
      * @param request 修改参数
      * @return Boolean
      */
@@ -234,6 +244,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 彻底删除
+     *
      * @param id 提货点编号
      * @return Boolean
      */
@@ -247,6 +258,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 提货点恢复
+     *
      * @param id 提货点编号
      * @return Boolean
      */
@@ -261,6 +273,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 门店自提详情
+     *
      * @param id Integer
      * @return SystemStore
      */
@@ -276,6 +289,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 去掉图片前缀
+     *
      * @param systemStore SystemStore 新增参数
      */
     private void clearPrefix(SystemStore systemStore) {
@@ -284,6 +298,7 @@ public class SystemStoreServiceImpl extends ServiceImpl<SystemStoreDao, SystemSt
 
     /**
      * 分解经纬度
+     *
      * @param systemStore SystemStore 新增参数
      */
     private void splitLat(SystemStore systemStore) {

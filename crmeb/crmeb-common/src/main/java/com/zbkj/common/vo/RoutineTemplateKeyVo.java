@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RoutineTemplateKeyVo对象", description="微信小程序订阅消息KeyVo对象(从微信获取的)")
+@ApiModel(value = "RoutineTemplateKeyVo对象", description = "微信小程序订阅消息KeyVo对象(从微信获取的)")
 public class RoutineTemplateKeyVo {
 
     @ApiModelProperty(value = "关键词 id，选用模板时需要")

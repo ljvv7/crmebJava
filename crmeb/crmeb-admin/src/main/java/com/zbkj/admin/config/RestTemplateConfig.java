@@ -45,7 +45,7 @@ public class RestTemplateConfig {
 
     //解决微信返回json Content-Type 值却是 text/plain 的问题
     public class WxMappingJackson2HttpMessageConverter extends MappingJackson2HttpMessageConverter {
-        public WxMappingJackson2HttpMessageConverter(){
+        public WxMappingJackson2HttpMessageConverter() {
             List<MediaType> mediaTypes = new ArrayList<>();
             mediaTypes.add(MediaType.TEXT_PLAIN);
             mediaTypes.add(MediaType.TEXT_HTML);

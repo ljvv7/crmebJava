@@ -1,11 +1,11 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.system.SystemFormTemp;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemFormTempRequest;
 import com.zbkj.common.request.SystemFormTempSearchRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.SystemFormTempService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,19 +39,21 @@ public class SystemFormTempController {
 
     /**
      * 分页显示表单模板
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:system:form:list')")
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<SystemFormTemp>>  getList(@Validated SystemFormTempSearchRequest request, @Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<SystemFormTemp>> getList(@Validated SystemFormTempSearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<SystemFormTemp> systemFormTempCommonPage = CommonPage.restPage(systemFormTempService.getList(request, pageParamRequest));
         return CommonResult.success(systemFormTempCommonPage);
     }
 
     /**
      * 新增表单模板
+     *
      * @param systemFormTempRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:system:form:save')")
@@ -66,7 +68,8 @@ public class SystemFormTempController {
 
     /**
      * 修改表单模板
-     * @param id integer id
+     *
+     * @param id                    integer id
      * @param systemFormTempRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:system:form:update')")
@@ -81,6 +84,7 @@ public class SystemFormTempController {
 
     /**
      * 查询表单模板信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:form:info')")
@@ -89,7 +93,7 @@ public class SystemFormTempController {
     public CommonResult<SystemFormTemp> info(@RequestParam(value = "id") Integer id) {
         SystemFormTemp systemFormTemp = systemFormTempService.getById(id);
         return CommonResult.success(systemFormTemp);
-   }
+    }
 }
 
 

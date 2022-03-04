@@ -1,18 +1,18 @@
 package com.zbkj.common.exception;
 
 /**
- *  Exception 拦截
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * Exception 拦截
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
-public enum ExceptionCodeEnum implements ExceptionHandler{
+public enum ExceptionCodeEnum implements ExceptionHandler {
     // 数据操作错误定义
     SUCCESS(200, "操作成功"),
     FAILED(500, "操作失败"),
@@ -27,7 +27,7 @@ public enum ExceptionCodeEnum implements ExceptionHandler{
     private long code;
     private String message;
 
-    private ExceptionCodeEnum(long code, String message){
+    private ExceptionCodeEnum(long code, String message) {
         this.code = code;
         this.message = message;
     }

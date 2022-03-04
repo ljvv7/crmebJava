@@ -1,8 +1,5 @@
 package com.zbkj.common.model.system;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,12 +20,12 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 //@TableName("eb_system_permissions")
-@ApiModel(value="SystemPermissions对象", description="系统权限表")
+@ApiModel(value = "SystemPermissions对象", description = "系统权限表")
 public class SystemPermissions implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-//    @TableId(value = "id", type = IdType.AUTO)
+    //    @TableId(value = "id", type = IdType.AUTO)
     @ApiModelProperty(value = "id")
     private Integer id;
 

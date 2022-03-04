@@ -24,10 +24,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_wechat_callback")
-@ApiModel(value="WechatCallback对象", description="微信回调表")
+@ApiModel(value = "WechatCallback对象", description = "微信回调表")
 public class WechatCallback implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键ID")
     @TableId(value = "id", type = IdType.AUTO)

@@ -29,7 +29,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product")
-@ApiModel(value="StoreProductRequest对象", description="商品请求对象")
+@ApiModel(value = "StoreProductRequest对象", description = "商品请求对象")
 public class StoreProductRequest implements Serializable {
 
     private static final long serialVersionUID = -452373239606480650L;

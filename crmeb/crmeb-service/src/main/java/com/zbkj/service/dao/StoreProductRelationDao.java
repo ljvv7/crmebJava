@@ -22,6 +22,7 @@ public interface StoreProductRelationDao extends BaseMapper<StoreProductRelation
 
     /**
      * 用户收藏列表
+     *
      * @param uid 用户uid
      */
     List<UserRelationResponse> getUserList(Integer uid);

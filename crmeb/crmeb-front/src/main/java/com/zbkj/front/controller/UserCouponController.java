@@ -1,9 +1,9 @@
 package com.zbkj.front.controller;
 
 import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserCouponReceiveRequest;
 import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.response.StoreCouponUserResponse;
 import com.zbkj.service.service.StoreCouponUserService;
 import io.swagger.annotations.Api;
@@ -42,9 +42,9 @@ public class UserCouponController {
     @ApiOperation(value = "我的优惠券")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name="type", value="类型，usable-可用，unusable-不可用", required = true),
-            @ApiImplicitParam(name="page", value="页码", required = true),
-            @ApiImplicitParam(name="limit", value="每页数量", required = true)
+            @ApiImplicitParam(name = "type", value = "类型，usable-可用，unusable-不可用", required = true),
+            @ApiImplicitParam(name = "page", value = "页码", required = true),
+            @ApiImplicitParam(name = "limit", value = "每页数量", required = true)
     })
     public CommonResult<CommonPage<StoreCouponUserResponse>> getList(@RequestParam(value = "type") String type,
                                                                      @Validated PageParamRequest pageParamRequest) {
@@ -53,6 +53,7 @@ public class UserCouponController {
 
     /**
      * 领券
+     *
      * @param request UserCouponReceiveRequest 新增参数
      */
     @ApiOperation(value = "领券")

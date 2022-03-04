@@ -17,6 +17,7 @@ public interface SystemMenuDao extends BaseMapper<SystemMenu> {
 
     /**
      * 通过角色数据获取权限
+     *
      * @param userId 用户id
      * @return List
      */
@@ -24,6 +25,7 @@ public interface SystemMenuDao extends BaseMapper<SystemMenu> {
 
     /**
      * 获取用户路由
+     *
      * @param userId 用户id
      * @return List
      */

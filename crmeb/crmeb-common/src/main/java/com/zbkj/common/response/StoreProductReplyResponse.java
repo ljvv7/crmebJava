@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Data
 public class StoreProductReplyResponse {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "评论ID")
     @TableId(value = "id", type = IdType.AUTO)

@@ -1,9 +1,9 @@
 package com.zbkj.front.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.zbkj.common.page.CommonPage;
 import com.zbkj.common.request.BargainFrontRequest;
 import com.zbkj.common.request.PageParamRequest;
-import com.github.pagehelper.PageInfo;
 import com.zbkj.common.response.*;
 import com.zbkj.service.service.StoreBargainService;
 import com.zbkj.service.service.StoreBargainUserHelpService;
@@ -49,7 +49,7 @@ public class BargainController {
      */
     @ApiOperation(value = "砍价首页信息")
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public CommonResult<BargainIndexResponse> index(){
+    public CommonResult<BargainIndexResponse> index() {
         return CommonResult.success(storeBargainService.getIndexInfo());
     }
 
@@ -58,17 +58,18 @@ public class BargainController {
      */
     @ApiOperation(value = "砍价商品列表header")
     @RequestMapping(value = "/header", method = RequestMethod.GET)
-    public CommonResult<BargainHeaderResponse> header(){
+    public CommonResult<BargainHeaderResponse> header() {
         return CommonResult.success(storeBargainService.getHeader());
     }
 
     /**
      * 砍价商品列表
+     *
      * @return 砍价商品列表
      */
     @ApiOperation(value = "砍价商品列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<PageInfo<StoreBargainDetailResponse>> list(@ModelAttribute PageParamRequest pageParamRequest){
+    public CommonResult<PageInfo<StoreBargainDetailResponse>> list(@ModelAttribute PageParamRequest pageParamRequest) {
         return CommonResult.success(storeBargainService.getH5List(pageParamRequest));
     }
 

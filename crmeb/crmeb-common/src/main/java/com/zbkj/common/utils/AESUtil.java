@@ -12,26 +12,39 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 
 /**
- *  AES加密工具类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * AES加密工具类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 public class AESUtil {
 
     public static boolean initialized = false;
 
+    public static void initialize() {
+        if (initialized)
+            return;
+        Security.addProvider(new BouncyCastleProvider());
+        initialized = true;
+    }
+
+    // 生成iv
+    public static AlgorithmParameters generateIV(byte[] iv) throws Exception {
+        AlgorithmParameters params = AlgorithmParameters.getInstance("AES");
+        params.init(new IvParameterSpec(iv));
+        return params;
+    }
+
     /**
      * AES解密
      *
-     * @param content
-     *            密文
+     * @param content 密文
      * @return
      * @throws InvalidAlgorithmParameterException
      * @throws NoSuchProviderException
@@ -60,19 +73,5 @@ public class AESUtil {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void initialize() {
-        if (initialized)
-            return;
-        Security.addProvider(new BouncyCastleProvider());
-        initialized = true;
-    }
-
-    // 生成iv
-    public static AlgorithmParameters generateIV(byte[] iv) throws Exception {
-        AlgorithmParameters params = AlgorithmParameters.getInstance("AES");
-        params.init(new IvParameterSpec(iv));
-        return params;
     }
 }

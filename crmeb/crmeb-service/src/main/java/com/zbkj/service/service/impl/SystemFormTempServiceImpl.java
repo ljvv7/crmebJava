@@ -3,14 +3,14 @@ package com.zbkj.service.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.system.SystemFormTemp;
 import com.zbkj.common.request.*;
+import com.zbkj.common.utils.ValidateFormUtil;
 import com.zbkj.common.vo.SystemConfigFormItemConfigRegListVo;
 import com.zbkj.common.vo.SystemConfigFormItemVo;
 import com.zbkj.common.vo.SystemConfigFormVo;
-import com.github.pagehelper.PageHelper;
-import com.zbkj.common.utils.ValidateFormUtil;
-import com.zbkj.common.model.system.SystemFormTemp;
 import com.zbkj.service.dao.SystemFormTempDao;
 import com.zbkj.service.service.SystemFormTempService;
 import org.apache.commons.lang3.StringUtils;
@@ -40,18 +40,19 @@ public class SystemFormTempServiceImpl extends ServiceImpl<SystemFormTempDao, Sy
     private SystemFormTempDao dao;
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<SystemFormTemp>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<SystemFormTemp>
+     */
     @Override
     public List<SystemFormTemp> getList(SystemFormTempSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
 
         //带 SystemFormTemp 类的多条件查询
         LambdaQueryWrapper<SystemFormTemp> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(!StringUtils.isBlank(request.getKeywords())) {
+        if (!StringUtils.isBlank(request.getKeywords())) {
             lambdaQueryWrapper.eq(SystemFormTemp::getId, request.getKeywords()).
                     or().like(SystemFormTemp::getName, request.getKeywords()).
                     or().like(SystemFormTemp::getInfo, request.getKeywords());
@@ -62,6 +63,7 @@ public class SystemFormTempServiceImpl extends ServiceImpl<SystemFormTempDao, Sy
 
     /**
      * 验证item规则
+     *
      * @param systemFormCheckRequest SystemFormCheckRequest 表单数据提交
      */
     @Override
@@ -78,7 +80,7 @@ public class SystemFormTempServiceImpl extends ServiceImpl<SystemFormTempDao, Sy
         //解析表单规则进行验证
         SystemConfigFormVo systemConfigFormVo;
         try {
-            systemConfigFormVo =  JSONObject.parseObject(formTemp.getContent(), SystemConfigFormVo.class);
+            systemConfigFormVo = JSONObject.parseObject(formTemp.getContent(), SystemConfigFormVo.class);
         } catch (Exception e) {
             throw new CrmebException("模板表单 【" + formTemp.getName() + "】 的内容不是正确的JSON格式！");
         }
@@ -88,16 +90,17 @@ public class SystemFormTempServiceImpl extends ServiceImpl<SystemFormTempDao, Sy
             systemConfigFormItemVo = JSONObject.parseObject(item, SystemConfigFormItemVo.class);
             String model = systemConfigFormItemVo.get__vModel__(); //字段 name
 
-            if(systemConfigFormItemVo.get__config__().getRequired() && map.get(model).equals("")) {
+            if (systemConfigFormItemVo.get__config__().getRequired() && map.get(model).equals("")) {
                 throw new CrmebException(systemConfigFormItemVo.get__config__().getLabel() + "不能为空！");
             }
             //正则验证
-            checkRule(systemConfigFormItemVo.get__config__().getRegList(), map.get(model),  systemConfigFormItemVo.get__config__().getLabel());
+            checkRule(systemConfigFormItemVo.get__config__().getRegList(), map.get(model), systemConfigFormItemVo.get__config__().getLabel());
         }
     }
 
     /**
      * 新增表单模板
+     *
      * @param systemFormTempRequest 新增参数
      */
     @Override
@@ -115,7 +118,8 @@ public class SystemFormTempServiceImpl extends ServiceImpl<SystemFormTempDao, Sy
 
     /**
      * 修改表单模板
-     * @param id integer id
+     *
+     * @param id                    integer id
      * @param systemFormTempRequest 修改参数
      */
     @Override
@@ -134,16 +138,17 @@ public class SystemFormTempServiceImpl extends ServiceImpl<SystemFormTempDao, Sy
 
     /**
      * 验证item规则
+     *
      * @param regList List<SystemConfigFormItemConfigRegListVo 正则表达式列表
-     * @param value String 验证的值
-     * @param name String 提示语字段名称
+     * @param value   String 验证的值
+     * @param name    String 提示语字段名称
      * @author Mr.Zhang
      * @since 2020-04-16
      */
     private void checkRule(List<SystemConfigFormItemConfigRegListVo> regList, String value, String name) {
-        if(regList.size() > 0) {
+        if (regList.size() > 0) {
             for (SystemConfigFormItemConfigRegListVo systemConfigFormItemConfigRegListVo : regList) {
-                if(!ValidateFormUtil.regular(value, name, systemConfigFormItemConfigRegListVo.getPattern())) {
+                if (!ValidateFormUtil.regular(value, name, systemConfigFormItemConfigRegListVo.getPattern())) {
                     throw new CrmebException(systemConfigFormItemConfigRegListVo.getMessage());
                 }
             }

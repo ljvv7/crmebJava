@@ -1,10 +1,10 @@
 package com.zbkj.admin.controller;
 
 
+import com.zbkj.common.model.user.User;
 import com.zbkj.common.page.CommonPage;
 import com.zbkj.common.request.*;
 import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.model.user.User;
 import com.zbkj.common.response.TopDetail;
 import com.zbkj.common.response.UserResponse;
 import com.zbkj.service.service.UserService;
@@ -47,7 +47,8 @@ public class UserController {
 
     /**
      * 分页显示用户表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:user:list')")
@@ -61,7 +62,8 @@ public class UserController {
 
     /**
      * 修改用户表
-     * @param id integer id
+     *
+     * @param id          integer id
      * @param userRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:user:update')")
@@ -77,7 +79,8 @@ public class UserController {
 
     /**
      * 修改用户手机号
-     * @param id 用户uid
+     *
+     * @param id    用户uid
      * @param phone 手机号
      */
     @PreAuthorize("hasAuthority('admin:user:update:phone')")
@@ -92,6 +95,7 @@ public class UserController {
 
     /**
      * 用户详情
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:user:info')")
@@ -103,22 +107,23 @@ public class UserController {
 
     /**
      * 根据参数类型查询会员对应的信息
-     * @param userId Integer 会员id
-     * @param type int 类型 0=消费记录，1=积分明细，2=签到记录，3=持有优惠券，4=余额变动，5=好友关系
+     *
+     * @param userId           Integer 会员id
+     * @param type             int 类型 0=消费记录，1=积分明细，2=签到记录，3=持有优惠券，4=余额变动，5=好友关系
      * @param pageParamRequest PageParamRequest 分页
      */
     @PreAuthorize("hasAuthority('admin:user:infobycondition')")
-    @ApiOperation(value="会员详情")
+    @ApiOperation(value = "会员详情")
     @RequestMapping(value = "/infobycondition", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId",example = "1", required = true),
-            @ApiImplicitParam(name = "type", value="0=消费记录，1=积分明细，2=签到记录，3=持有优惠券，4=余额变动，5=好友关系", example = "0"
+            @ApiImplicitParam(name = "userId", example = "1", required = true),
+            @ApiImplicitParam(name = "type", value = "0=消费记录，1=积分明细，2=签到记录，3=持有优惠券，4=余额变动，5=好友关系", example = "0"
                     , required = true)
     })
     public CommonResult<CommonPage<T>> infoByCondition(@RequestParam(name = "userId") @Valid Integer userId,
                                                        @RequestParam(name = "type") @Valid @Max(5) @Min(0) int type,
                                                        @ModelAttribute PageParamRequest pageParamRequest) {
-        return CommonResult.success(CommonPage.restPage((List<T>) userService.getInfoByCondition(userId,type,pageParamRequest)));
+        return CommonResult.success(CommonPage.restPage((List<T>) userService.getInfoByCondition(userId, type, pageParamRequest)));
     }
 
     /**
@@ -127,7 +132,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('admin:user:topdetail')")
     @ApiOperation(value = "会员详情页Top数据")
     @RequestMapping(value = "topdetail", method = RequestMethod.GET)
-    public CommonResult<TopDetail> topDetail (@RequestParam @Valid Integer userId) {
+    public CommonResult<TopDetail> topDetail(@RequestParam @Valid Integer userId) {
         return CommonResult.success(userService.getTopDetail(userId));
     }
 
@@ -146,7 +151,8 @@ public class UserController {
 
     /**
      * 会员分组
-     * @param id String id
+     *
+     * @param id      String id
      * @param groupId Integer 分组Id
      */
     @PreAuthorize("hasAuthority('admin:user:group')")
@@ -161,7 +167,8 @@ public class UserController {
 
     /**
      * 会员标签
-     * @param id String id
+     *
+     * @param id    String id
      * @param tagId Integer 标签id
      */
     @PreAuthorize("hasAuthority('admin:user:tag')")

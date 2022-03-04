@@ -1,11 +1,11 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.system.SystemGroupData;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemGroupDataRequest;
 import com.zbkj.common.request.SystemGroupDataSearchRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.SystemGroupDataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,19 +39,21 @@ public class SystemGroupDataController {
 
     /**
      * 分页组合数据详情
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:system:group:data:list')")
     @ApiOperation(value = "分页组合数据详情")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<SystemGroupData>>  getList(@Validated SystemGroupDataSearchRequest request, @Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<SystemGroupData>> getList(@Validated SystemGroupDataSearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<SystemGroupData> systemGroupDataCommonPage = CommonPage.restPage(systemGroupDataService.getList(request, pageParamRequest));
         return CommonResult.success(systemGroupDataCommonPage);
     }
 
     /**
      * 新增组合数据详情
+     *
      * @param systemGroupDataRequest SystemFormCheckRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:system:group:data:save')")
@@ -66,6 +68,7 @@ public class SystemGroupDataController {
 
     /**
      * 删除组合数据详情表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:group:data:delete')")
@@ -80,7 +83,8 @@ public class SystemGroupDataController {
 
     /**
      * 修改组合数据详情表
-     * @param id integer id
+     *
+     * @param id      integer id
      * @param request 修改参数
      */
     @PreAuthorize("hasAuthority('admin:system:group:data:update')")
@@ -95,6 +99,7 @@ public class SystemGroupDataController {
 
     /**
      * 组合数据详情信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:group:data:info')")

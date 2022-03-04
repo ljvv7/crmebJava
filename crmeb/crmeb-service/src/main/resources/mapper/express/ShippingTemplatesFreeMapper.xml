@@ -3,6 +3,10 @@
 <mapper namespace="com.zbkj.service.dao.ShippingTemplatesFreeDao">
 
     <select id="getListGroup" resultType="com.zbkj.common.request.ShippingTemplatesFreeRequest" parameterType="integer">
-                SELECT group_concat(`city_id`) AS city_id, title, `number`, price, uniqid FROM eb_shipping_templates_free where temp_id = #{tempId, jdbcType=INTEGER} GROUP BY `uniqid` ORDER BY id ASC
+        SELECT group_concat(`city_id`) AS city_id, title, `number`, price, uniqid
+        FROM eb_shipping_templates_free
+        where temp_id = #{tempId, jdbcType=INTEGER}
+        GROUP BY `uniqid`
+        ORDER BY id ASC
     </select>
 </mapper>

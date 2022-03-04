@@ -1,10 +1,10 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.user.UserGroup;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserGroupRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.UserGroupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,18 +38,20 @@ public class UserGroupController {
 
     /**
      * 分页显示用户分组表
+     *
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:user:group:list')")
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<UserGroup>>  getList(@Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<UserGroup>> getList(@Validated PageParamRequest pageParamRequest) {
         CommonPage<UserGroup> userGroupCommonPage = CommonPage.restPage(userGroupService.getList(pageParamRequest));
         return CommonResult.success(userGroupCommonPage);
     }
 
     /**
      * 新增用户分组表
+     *
      * @param userGroupRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:user:group:save')")
@@ -64,6 +66,7 @@ public class UserGroupController {
 
     /**
      * 删除用户分组表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:user:group:delete')")
@@ -78,7 +81,8 @@ public class UserGroupController {
 
     /**
      * 修改用户分组表
-     * @param id integer id
+     *
+     * @param id               integer id
      * @param userGroupRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:user:group:update')")
@@ -93,6 +97,7 @@ public class UserGroupController {
 
     /**
      * 查询用户分组表信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:user:group:info')")
@@ -100,7 +105,7 @@ public class UserGroupController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public CommonResult<UserGroup> info(@RequestParam(value = "id") Integer id) {
         return CommonResult.success(userGroupService.getById(id));
-   }
+    }
 }
 
 

@@ -31,6 +31,7 @@ public class WechatPublicServiceImpl implements WechatPublicService {
 
     /**
      * 获取公众号自定义菜单
+     *
      * @return Object
      */
     @Override
@@ -47,6 +48,7 @@ public class WechatPublicServiceImpl implements WechatPublicService {
 
     /**
      * 保存自定义菜单
+     *
      * @param data 菜单json
      * @return Boolean
      */
@@ -65,6 +67,7 @@ public class WechatPublicServiceImpl implements WechatPublicService {
 
     /**
      * 删除自定义菜单
+     *
      * @return Boolean
      */
     @Override

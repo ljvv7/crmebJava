@@ -1,11 +1,11 @@
 package com.zbkj.admin.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.vo.MyRecord;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SmsApplyTempRequest;
 import com.zbkj.common.request.SmsModifySignRequest;
+import com.zbkj.common.response.CommonResult;
+import com.zbkj.common.vo.MyRecord;
 import com.zbkj.service.service.SmsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -83,7 +83,7 @@ public class SmsRecordController {
     @PreAuthorize("hasAuthority('admin:sms:applys')")
     @ApiOperation(value = "模板申请记录")
     @RequestMapping(value = "/applys", method = RequestMethod.POST)
-    @ApiImplicitParam(name="type", value="type (1=验证码 2=通知 3=推广)")
+    @ApiImplicitParam(name = "type", value = "type (1=验证码 2=通知 3=推广)")
     public CommonResult<Map<String, Object>> applys(@RequestParam(name = "type", required = false) Integer type, @ModelAttribute PageParamRequest pageParamRequest) {
         return CommonResult.success(smsService.applys(type, pageParamRequest));
     }

@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="IosBindingPhoneRequest", description="Ios绑定手机号请求对象")
+@ApiModel(value = "IosBindingPhoneRequest", description = "Ios绑定手机号请求对象")
 public class IosBindingPhoneRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "手机号", required = true)
     private String phone;

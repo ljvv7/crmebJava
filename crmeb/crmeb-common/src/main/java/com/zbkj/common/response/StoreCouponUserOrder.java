@@ -29,10 +29,10 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreCouponUserOrder对象", description="下单之前可以使用的优惠券对象")
+@ApiModel(value = "StoreCouponUserOrder对象", description = "下单之前可以使用的优惠券对象")
 public class StoreCouponUserOrder implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)
@@ -69,12 +69,12 @@ public class StoreCouponUserOrder implements Serializable {
     private Date updateTime;
 
     @ApiModelProperty(value = "开始使用时间")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @JsonProperty("useStartTimeStr")
     private Date startTime;
 
     @ApiModelProperty(value = "过期时间")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @JsonProperty("useEndTimeStr")
     private Date endTime;
 

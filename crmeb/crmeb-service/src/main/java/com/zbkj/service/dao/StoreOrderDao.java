@@ -1,7 +1,7 @@
 package com.zbkj.service.dao;
 
-import com.zbkj.common.model.order.StoreOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zbkj.common.model.order.StoreOrder;
 import com.zbkj.common.request.StoreDateRangeSqlPram;
 import com.zbkj.common.request.StoreOrderStaticsticsRequest;
 import com.zbkj.common.response.OrderBrokerageData;
@@ -43,6 +43,7 @@ public interface StoreOrderDao extends BaseMapper<StoreOrder> {
 
     /**
      * 核销详情 月数据
+     *
      * @param request 分页和日期
      * @return 月数据
      */
@@ -50,6 +51,7 @@ public interface StoreOrderDao extends BaseMapper<StoreOrder> {
 
     /**
      * 订单统计详情 price
+     *
      * @param pram 时间区间参数
      * @return 月数据
      */
@@ -57,6 +59,7 @@ public interface StoreOrderDao extends BaseMapper<StoreOrder> {
 
     /**
      * 订单统计详情 订单量
+     *
      * @param pram 时间区间参数
      * @return 月数据
      */
@@ -64,7 +67,8 @@ public interface StoreOrderDao extends BaseMapper<StoreOrder> {
 
     /**
      * 获取佣金相关数据
-     * @param uid 用户uid
+     *
+     * @param uid      用户uid
      * @param spreadId 推广人uid
      */
     OrderBrokerageData getBrokerageData(@Param("uid") Integer uid, @Param("spreadId") Integer spreadId);

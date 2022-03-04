@@ -1,9 +1,9 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.user.UserLevel;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.UserLevelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,12 +39,13 @@ public class UserLevelController {
 
     /**
      * 分页显示用户等级记录表
+     *
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:user:level:list')")
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<UserLevel>>  getList(@Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<UserLevel>> getList(@Validated PageParamRequest pageParamRequest) {
         CommonPage<UserLevel> userLevelCommonPage = CommonPage.restPage(userLevelService.getList(pageParamRequest));
         return CommonResult.success(userLevelCommonPage);
     }

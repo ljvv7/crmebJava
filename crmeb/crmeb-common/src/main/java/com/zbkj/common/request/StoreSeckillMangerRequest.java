@@ -1,8 +1,5 @@
 package com.zbkj.common.request;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +10,6 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 /**
  * 秒杀商品管理Request对象
@@ -30,7 +26,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreSeckillMangerRequest对象", description="")
+@ApiModel(value = "StoreSeckillMangerRequest对象", description = "")
 public class StoreSeckillMangerRequest {
 
     @ApiModelProperty(value = "秒杀配置id")

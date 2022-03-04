@@ -24,10 +24,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="MenuCheckVo对象", description="菜单待选中Vo对象")
+@ApiModel(value = "MenuCheckVo对象", description = "菜单待选中Vo对象")
 public class MenuCheckVo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "菜单ID")
     private Integer id;

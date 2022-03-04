@@ -1,11 +1,11 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.wechat.WechatReply;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.WechatReplyRequest;
 import com.zbkj.common.request.WechatReplySearchRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.WechatReplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,19 +40,21 @@ public class WechatReplyController {
 
     /**
      * 分页显示微信关键字回复表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:wechat:keywords:reply:list')")
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<WechatReply>>  getList(@Validated WechatReplySearchRequest request, @Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<WechatReply>> getList(@Validated WechatReplySearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<WechatReply> wechatReplyCommonPage = CommonPage.restPage(wechatReplyService.getList(request, pageParamRequest));
         return CommonResult.success(wechatReplyCommonPage);
     }
 
     /**
      * 新增微信关键字回复表
+     *
      * @param wechatReplyRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:wechat:keywords:reply:save')")
@@ -63,13 +65,14 @@ public class WechatReplyController {
         BeanUtils.copyProperties(wechatReplyRequest, wechatReply);
         if (wechatReplyService.create(wechatReply)) {
             return CommonResult.success();
-        }else{
+        } else {
             return CommonResult.failed();
         }
     }
 
     /**
      * 删除微信关键字回复表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:wechat:keywords:reply:delete')")
@@ -84,6 +87,7 @@ public class WechatReplyController {
 
     /**
      * 修改微信关键字回复表
+     *
      * @param wechatReplyRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:wechat:keywords:reply:update')")
@@ -98,7 +102,8 @@ public class WechatReplyController {
 
     /**
      * 修改状态
-     * @param id integer id
+     *
+     * @param id     integer id
      * @param status boolean 状态
      */
     @PreAuthorize("hasAuthority('admin:wechat:keywords:reply:status')")
@@ -113,6 +118,7 @@ public class WechatReplyController {
 
     /**
      * 查询微信关键字回复表信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:wechat:keywords:reply:info')")
@@ -121,10 +127,11 @@ public class WechatReplyController {
     public CommonResult<WechatReply> info(@RequestParam(value = "id") Integer id) {
         WechatReply wechatReply = wechatReplyService.getInfo(id);
         return CommonResult.success(wechatReply);
-   }
+    }
 
     /**
      * 根据关键字查询数据
+     *
      * @param keywords String 关键字
      */
     @PreAuthorize("hasAuthority('admin:wechat:keywords:reply:info:keywords')")

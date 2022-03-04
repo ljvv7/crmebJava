@@ -28,6 +28,7 @@ public interface SystemUserLevelService extends IService<SystemUserLevel> {
 
     /**
      * 系统等级新增
+     *
      * @param request request
      * @return Boolean
      */
@@ -35,8 +36,9 @@ public interface SystemUserLevelService extends IService<SystemUserLevel> {
 
     /**
      * 系统等级更新
-     * @param id    等级id
-     * @param request   等级数据
+     *
+     * @param id      等级id
+     * @param request 等级数据
      * @return Boolean
      */
     Boolean update(Integer id, SystemUserLevelRequest request);
@@ -50,6 +52,7 @@ public interface SystemUserLevelService extends IService<SystemUserLevel> {
 
     /**
      * 删除系统等级
+     *
      * @param id 等级id
      * @return Boolean
      */
@@ -57,12 +60,14 @@ public interface SystemUserLevelService extends IService<SystemUserLevel> {
 
     /**
      * 使用/禁用
+     *
      * @param request request
      */
     Boolean updateShow(SystemUserLevelUpdateShowRequest request);
 
     /**
      * 获取可用等级列表
+     *
      * @return List
      */
     List<SystemUserLevel> getUsableList();

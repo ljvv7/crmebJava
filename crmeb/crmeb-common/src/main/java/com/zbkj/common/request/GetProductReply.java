@@ -1,7 +1,6 @@
 package com.zbkj.common.request;
 
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

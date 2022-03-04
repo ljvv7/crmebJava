@@ -27,7 +27,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemFormCheckRequest对象", description="整体保存表单数据")
+@ApiModel(value = "SystemFormCheckRequest对象", description = "整体保存表单数据")
 public class SystemFormCheckRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;

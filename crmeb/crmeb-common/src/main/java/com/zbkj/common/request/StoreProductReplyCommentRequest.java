@@ -25,10 +25,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreProductReplyCommentRequest对象", description="回复商品评论对象")
+@ApiModel(value = "StoreProductReplyCommentRequest对象", description = "回复商品评论对象")
 public class StoreProductReplyCommentRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "评论id", required = true)
     @NotNull(message = "评论id不能为空")

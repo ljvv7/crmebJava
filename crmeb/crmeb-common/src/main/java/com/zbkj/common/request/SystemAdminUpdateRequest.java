@@ -9,9 +9,10 @@ import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 后台管理员修改对象
@@ -28,10 +29,10 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemAdminUpdateRequest对象", description="后台管理员修改对象")
+@ApiModel(value = "SystemAdminUpdateRequest对象", description = "后台管理员修改对象")
 public class SystemAdminUpdateRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "后台管理员表ID")
     @NotNull(message = "管理员id不能为空")

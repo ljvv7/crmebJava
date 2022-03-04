@@ -1,8 +1,5 @@
 package com.zbkj.common.response;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,10 +24,10 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StorePinkDetailResponse对象", description="拼团详情响应对象")
+@ApiModel(value = "StorePinkDetailResponse对象", description = "拼团详情响应对象")
 public class StorePinkDetailResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "拼团ID")
     private Integer id;

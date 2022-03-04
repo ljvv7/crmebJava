@@ -2,10 +2,10 @@ package com.zbkj.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.exception.CrmebException;
 import com.github.pagehelper.PageHelper;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.wechat.WechatReply;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.WechatReplyRequest;
 import com.zbkj.common.request.WechatReplySearchRequest;
 import com.zbkj.service.dao.WechatReplyDao;
@@ -42,11 +42,12 @@ public class WechatReplyServiceImpl extends ServiceImpl<WechatReplyDao, WechatRe
 
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<WechatReply>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<WechatReply>
+     */
     @Override
     public List<WechatReply> getList(WechatReplySearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -65,6 +66,7 @@ public class WechatReplyServiceImpl extends ServiceImpl<WechatReplyDao, WechatRe
 
     /**
      * 新增微信关键字回复表
+     *
      * @param wechatReply 新增参数
      */
     @Override
@@ -80,6 +82,7 @@ public class WechatReplyServiceImpl extends ServiceImpl<WechatReplyDao, WechatRe
 
     /**
      * 修改微信关键字回复表
+     *
      * @param wechatReply 修改参数
      */
     private Boolean updateVo(WechatReply wechatReply) {
@@ -97,6 +100,7 @@ public class WechatReplyServiceImpl extends ServiceImpl<WechatReplyDao, WechatRe
 
     /**
      * 根据关键字查询数据
+     *
      * @param keywords 新增参数
      * @return WechatReply
      */
@@ -110,6 +114,7 @@ public class WechatReplyServiceImpl extends ServiceImpl<WechatReplyDao, WechatRe
 
     /**
      * 根据关键字查询数据
+     *
      * @param id Integer id
      * @return WechatReply
      */
@@ -129,16 +134,18 @@ public class WechatReplyServiceImpl extends ServiceImpl<WechatReplyDao, WechatRe
 
     /**
      * 根据关键字查询数据
+     *
      * @param id Integer id
      * @return WechatReply
      */
     @Override
     public WechatReply getInfo(Integer id) {
-       return getById(id);
+        return getById(id);
     }
 
     /**
      * 修改微信关键字回复表
+     *
      * @param wechatReplyRequest 修改参数
      */
     @Override
@@ -150,7 +157,8 @@ public class WechatReplyServiceImpl extends ServiceImpl<WechatReplyDao, WechatRe
 
     /**
      * 修改状态
-     * @param id integer id
+     *
+     * @param id     integer id
      * @param status boolean 状态
      */
     @Override

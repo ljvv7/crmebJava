@@ -1,9 +1,9 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.model.system.SystemUserLevel;
 import com.zbkj.common.request.SystemUserLevelRequest;
 import com.zbkj.common.request.SystemUserLevelUpdateShowRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.SystemUserLevelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,6 +62,7 @@ public class SystemUserLevelController {
 
     /**
      * 删除等级
+     *
      * @param id 等级id
      */
     @PreAuthorize("hasAuthority('admin:system:user:level:delete')")

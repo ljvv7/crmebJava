@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ProgramTempKeywordsVo对象", description="小程序关键词")
+@ApiModel(value = "ProgramTempKeywordsVo对象", description = "小程序关键词")
 public class ProgramTempKeywordsVo {
     @ApiModelProperty(value = "关键词 id，选用模板时需要")
     private Integer kid;

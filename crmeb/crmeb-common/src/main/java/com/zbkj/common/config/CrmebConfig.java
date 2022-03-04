@@ -1,6 +1,5 @@
 package com.zbkj.common.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,7 +21,7 @@ public class CrmebConfig {
     // 当前代码版本
     private String version;
     // 待部署域名
-    private String  domain;
+    private String domain;
     // #请求微信接口中专服务器
     private String wechatApiUrl;
     // #微信js api系列是否开启调试模式

@@ -7,15 +7,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.constants.OnePassConstants;
 import com.zbkj.common.exception.CrmebException;
-import com.github.pagehelper.PageHelper;
-import com.zbkj.common.utils.RedisUtil;
 import com.zbkj.common.model.express.Express;
 import com.zbkj.common.request.ExpressSearchRequest;
 import com.zbkj.common.request.ExpressUpdateRequest;
 import com.zbkj.common.request.ExpressUpdateShowRequest;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.utils.RedisUtil;
 import com.zbkj.service.dao.ExpressDao;
 import com.zbkj.service.service.ExpressService;
 import com.zbkj.service.util.OnePassUtil;
@@ -34,16 +34,16 @@ import java.util.stream.Collectors;
 
 /**
  * ExpressServiceImpl 接口实现
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class ExpressServiceImpl extends ServiceImpl<ExpressDao, Express> implements ExpressService {
 
@@ -58,7 +58,8 @@ public class ExpressServiceImpl extends ServiceImpl<ExpressDao, Express> impleme
 
     /**
      * 分页显示快递公司表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @Override
@@ -127,6 +128,7 @@ public class ExpressServiceImpl extends ServiceImpl<ExpressDao, Express> impleme
 
     /**
      * 查询全部物流公司
+     *
      * @param type 类型：normal-普通，elec-电子面单
      */
     @Override
@@ -143,6 +145,7 @@ public class ExpressServiceImpl extends ServiceImpl<ExpressDao, Express> impleme
 
     /**
      * 查询物流公司面单模板
+     *
      * @param com 快递公司编号
      */
     @Override
@@ -156,6 +159,7 @@ public class ExpressServiceImpl extends ServiceImpl<ExpressDao, Express> impleme
 
     /**
      * 查询快递公司
+     *
      * @param code 快递公司编号
      */
     @Override
@@ -167,6 +171,7 @@ public class ExpressServiceImpl extends ServiceImpl<ExpressDao, Express> impleme
 
     /**
      * 通过物流公司名称获取
+     *
      * @param name 物流公司名称
      */
     @Override
@@ -179,6 +184,7 @@ public class ExpressServiceImpl extends ServiceImpl<ExpressDao, Express> impleme
 
     /**
      * 获取快递公司详情
+     *
      * @param id 快递公司id
      */
     @Override

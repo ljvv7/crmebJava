@@ -29,6 +29,7 @@ public class UserVisitRecordServiceImpl extends ServiceImpl<UserVisitRecordDao, 
 
     /**
      * 通过日期获取浏览量
+     *
      * @param date 日期
      * @return Integer
      */
@@ -42,8 +43,9 @@ public class UserVisitRecordServiceImpl extends ServiceImpl<UserVisitRecordDao, 
 
     /**
      * 通过时间段获取浏览量
+     *
      * @param startDate 日期
-     * @param endDate 日期
+     * @param endDate   日期
      * @return Integer
      */
     @Override
@@ -56,6 +58,7 @@ public class UserVisitRecordServiceImpl extends ServiceImpl<UserVisitRecordDao, 
 
     /**
      * 通过日期获取活跃用户数
+     *
      * @param date 日期
      * @return Integer
      */
@@ -66,8 +69,9 @@ public class UserVisitRecordServiceImpl extends ServiceImpl<UserVisitRecordDao, 
 
     /**
      * 通过时间段获取活跃用户数
+     *
      * @param startDate 日期
-     * @param endDate 日期
+     * @param endDate   日期
      * @return Integer
      */
     @Override

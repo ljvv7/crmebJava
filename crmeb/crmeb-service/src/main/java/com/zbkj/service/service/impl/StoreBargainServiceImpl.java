@@ -8,27 +8,27 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.*;
-import com.zbkj.common.response.*;
-import com.zbkj.common.vo.MyRecord;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zbkj.common.constants.BargainConstants;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.constants.ProductConstants;
 import com.zbkj.common.exception.CrmebException;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.zbkj.common.utils.DateUtil;
-import com.zbkj.common.utils.RedisUtil;
 import com.zbkj.common.model.bargain.StoreBargain;
 import com.zbkj.common.model.bargain.StoreBargainUser;
-import com.zbkj.common.model.record.UserVisitRecord;
 import com.zbkj.common.model.product.StoreProduct;
 import com.zbkj.common.model.product.StoreProductAttr;
 import com.zbkj.common.model.product.StoreProductAttrValue;
 import com.zbkj.common.model.product.StoreProductDescription;
+import com.zbkj.common.model.record.UserVisitRecord;
 import com.zbkj.common.model.user.User;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.*;
+import com.zbkj.common.response.*;
+import com.zbkj.common.utils.DateUtil;
+import com.zbkj.common.utils.RedisUtil;
+import com.zbkj.common.vo.MyRecord;
 import com.zbkj.service.dao.StoreBargainDao;
 import com.zbkj.service.service.*;
 import org.slf4j.Logger;
@@ -60,55 +60,43 @@ import java.util.stream.Collectors;
 @Service
 public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreBargain> implements StoreBargainService {
 
+    private static final Logger logger = LoggerFactory.getLogger(StoreBargainServiceImpl.class);
     @Resource
     private StoreBargainDao dao;
-
     @Autowired
     private StoreBargainUserService storeBargainUserService;
-
     @Autowired
     private StoreBargainUserHelpService storeBargainUserHelpService;
-
     @Autowired
     private SystemAttachmentService systemAttachmentService;
-
     @Autowired
     private StoreProductAttrService attrService;
-
     @Autowired
     private StoreProductAttrValueService attrValueService;
-
     @Autowired
     private StoreProductAttrResultService storeProductAttrResultService;
-
     @Autowired
     private StoreProductDescriptionService storeProductDescriptionService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private RedisUtil redisUtil;
-
     @Autowired
     private StoreProductService storeProductService;
-
     @Autowired
     private TransactionTemplate transactionTemplate;
-
     @Autowired
     private UserVisitRecordService userVisitRecordService;
 
-    private static final Logger logger = LoggerFactory.getLogger(StoreBargainServiceImpl.class);
-
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @author HZW
-    * @since 2020-11-06
-    * @return List<StoreBargain>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<StoreBargain>
+     * @author HZW
+     * @since 2020-11-06
+     */
     @Override
     public PageInfo<StoreBargainResponse> getList(StoreBargainSearchRequest request, PageParamRequest pageParamRequest) {
         Page<StoreBargain> storeBargainPage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -143,7 +131,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
                 //限量剩余
                 storeBargainResponse.setSurplusQuota(storeBargain.getQuota());
                 storeProductResponses.add(storeBargainResponse);
-                continue ;
+                continue;
             }
             //砍价参与人数
             Integer countPeopleAll = bargainUserList.size();
@@ -164,6 +152,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 删除砍价商品
+     *
      * @param id 砍价商品id
      * @return Boolean
      */
@@ -199,7 +188,8 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 新增砍价商品
-     * @param request   砍价商品result
+     *
+     * @param request 砍价商品result
      * @return 新增结果
      */
     @Override
@@ -280,6 +270,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 编辑砍价商品
+     *
      * @param request 请求参数
      * @return Boolean
      */
@@ -304,7 +295,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
         StoreProductAttrValueAddRequest attrValueRequest = request.getAttrValue().get(0);
 
         // 可砍价的金额
-        BigDecimal tempPrice =attrValueRequest.getPrice().subtract(attrValueRequest.getMinPrice());
+        BigDecimal tempPrice = attrValueRequest.getPrice().subtract(attrValueRequest.getMinPrice());
         // 砍价人数 * 0.01 = 每人砍1分总共钱数
         BigDecimal multiply = new BigDecimal(request.getPeopleNum()).multiply(new BigDecimal("0.01"));
         if (tempPrice.compareTo(multiply) < 0) {
@@ -400,7 +391,8 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 更新砍价商品状态
-     * @param id 砍价商品id
+     *
+     * @param id     砍价商品id
      * @param status 砍价商品状态
      * @return Boolean
      */
@@ -425,6 +417,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 获取砍价商品详情
+     *
      * @param bargainId 砍价商品id
      * @return StoreProductResponse
      */
@@ -441,7 +434,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
         // 查询attr
         List<StoreProductAttr> attrs = attrService.getListByProductIdAndType(storeBargain.getId(), ProductConstants.PRODUCT_TYPE_BARGAIN);
         storeProductResponse.setAttr(attrs);
-        storeProductResponse.setSliderImage(String.join(",",storeBargain.getImages()));
+        storeProductResponse.setSliderImage(String.join(",", storeBargain.getImages()));
 
         boolean specType = false;
         if (attrs.size() > 1) {
@@ -476,7 +469,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
         storeProductResponse.setAttrValue(valueResponseList);
 
         StoreProductDescription sd = storeProductDescriptionService.getByProductIdAndType(bargainId, Constants.PRODUCT_TYPE_BARGAIN);
-        if(ObjectUtil.isNotNull(sd)){
+        if (ObjectUtil.isNotNull(sd)) {
             storeProductResponse.setContent(ObjectUtil.isNull(sd.getDescription()) ? "" : sd.getDescription());
         }
         return storeProductResponse;
@@ -484,6 +477,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * h5 获取砍价商品列表
+     *
      * @param pageParamRequest 分页参数
      * @return PageInfo<StoreBargainDetailResponse>
      */
@@ -513,6 +507,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * H5 砍价商品详情
+     *
      * @param id 砍价商品id
      */
     @Override
@@ -563,6 +558,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 获取当前时间段的砍价商品
+     *
      * @param productId 砍价商品id
      * @return List<StoreBargain>
      */
@@ -572,7 +568,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
         LambdaQueryWrapper<StoreBargain> lqw = new LambdaQueryWrapper<>();
         lqw.eq(StoreBargain::getProductId, productId);
         lqw.eq(StoreBargain::getIsDel, false);
-        lqw.eq(StoreBargain::getStatus,true);
+        lqw.eq(StoreBargain::getStatus, true);
         lqw.le(StoreBargain::getStartTime, timeMillis);
         lqw.ge(StoreBargain::getStopTime, timeMillis);
         lqw.orderByDesc(StoreBargain::getSort, StoreBargain::getId);
@@ -581,6 +577,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 创建砍价活动
+     *
      * @param request 请求参数
      * @return MyRecord
      */
@@ -651,14 +648,14 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
             if (ObjectUtil.isNull(data)) {
                 continue;
             }
-            try{
+            try {
                 StoreProductStockRequest storeProductStockRequest =
                         com.alibaba.fastjson.JSONObject.toJavaObject(com.alibaba.fastjson.JSONObject.parseObject(data.toString()), StoreProductStockRequest.class);
                 boolean result = doProductStock(storeProductStockRequest);
-                if(!result){
+                if (!result) {
                     redisUtil.lPush(redisKey, data);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 redisUtil.lPush(redisKey, data);
             }
         }
@@ -686,7 +683,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
             spavBargainUser.setIsDel(false);
             List<StoreBargainUser> bargainUsers = storeBargainUserService.getByEntity(spavBargainUser);
             if (CollUtil.isEmpty(bargainUsers)) {
-                continue ;
+                continue;
             }
             for (StoreBargainUser bargainUser : bargainUsers) {
                 bargainUser.setStatus(BargainConstants.BARGAIN_USER_STATUS_FAIL);
@@ -702,6 +699,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 商品是否存在砍价活动
+     *
      * @param productId 商品编号
      * @return Boolean
      */
@@ -721,6 +719,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 查询带异常
+     *
      * @param id 砍价商品id
      * @return StoreBargain
      */
@@ -737,8 +736,9 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 添加/扣减库存
-     * @param id 秒杀商品id
-     * @param num 数量
+     *
+     * @param id   秒杀商品id
+     * @param num  数量
      * @param type 类型：add—添加，sub—扣减
      */
     @Override
@@ -767,6 +767,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
     /**
      * 砍价首页信息
      * 砍价商品信息6条
+     *
      * @return BargainIndexResponse
      */
     @Override
@@ -792,6 +793,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 获取砍价列表header
+     *
      * @return BargainHeaderResponse
      */
     @Override
@@ -829,6 +831,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 根据id数组获取砍价商品map
+     *
      * @param bargainIdList 砍价商品id数组
      * @return HashMap<Integer, StoreBargain>
      */
@@ -846,8 +849,9 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 获取砍价商品名称Map
+     *
      * @param bargainIdList 砍价商品id数组
-     * @return List<HashMap<Object, Object>>
+     * @return List<HashMap < Object, Object>>
      */
     private HashMap<Integer, String> getStoreNameMapInId(List<Integer> bargainIdList) {
         LambdaQueryWrapper<StoreBargain> lqw = new LambdaQueryWrapper<>();
@@ -863,6 +867,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
 
     /**
      * 查询活动状态为开启，结束时间小于当前时间的数据
+     *
      * @return List<StoreBargain>
      */
     private List<StoreBargain> getByStatusAndGtStopTime() {
@@ -873,7 +878,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
     }
 
     // 砍价操作库存
-    private boolean doProductStock(StoreProductStockRequest storeProductStockRequest){
+    private boolean doProductStock(StoreProductStockRequest storeProductStockRequest) {
         // 砍价商品信息回滚
         StoreBargain existProduct = getById(storeProductStockRequest.getBargainId());
         List<StoreProductAttrValue> existAttr =
@@ -881,8 +886,8 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
                         storeProductStockRequest.getBargainId(),
                         storeProductStockRequest.getAttrId().toString(),
                         storeProductStockRequest.getType());
-        if(ObjectUtil.isNull(existProduct) || ObjectUtil.isNull(existAttr)){ // 未找到商品
-            logger.info("库存修改任务未获取到商品信息"+JSON.toJSONString(storeProductStockRequest));
+        if (ObjectUtil.isNull(existProduct) || ObjectUtil.isNull(existAttr)) { // 未找到商品
+            logger.info("库存修改任务未获取到商品信息" + JSON.toJSONString(storeProductStockRequest));
             return true;
         }
 
@@ -898,7 +903,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
         for (StoreProductAttrValue attrValue : existAttr) {
             int productAttrStock = isPlus ? attrValue.getStock() + storeProductStockRequest.getNum() : attrValue.getStock() - storeProductStockRequest.getNum();
             attrValue.setStock(productAttrStock);
-            attrValue.setSales(attrValue.getSales()-storeProductStockRequest.getNum());
+            attrValue.setSales(attrValue.getSales() - storeProductStockRequest.getNum());
             attrValue.setQuota(attrValue.getQuota() + storeProductStockRequest.getNum());
             attrValueService.updateById(attrValue);
         }
@@ -907,7 +912,7 @@ public class StoreBargainServiceImpl extends ServiceImpl<StoreBargainDao, StoreB
         // StoreProductStockRequest 创建次对象调用商品扣减库存实现扣减上本本身库存
         StoreProductResponse existProductLinkedSeckill = storeProductService.getByProductId(storeProductStockRequest.getProductId());
         for (StoreProductAttrValueResponse attrValueResponse : existProductLinkedSeckill.getAttrValue()) {
-            if(attrValueResponse.getSuk().equals(storeProductStockRequest.getSuk())){
+            if (attrValueResponse.getSuk().equals(storeProductStockRequest.getSuk())) {
                 StoreProductStockRequest r = new StoreProductStockRequest()
                         .setAttrId(attrValueResponse.getId())
                         .setNum(storeProductStockRequest.getNum())

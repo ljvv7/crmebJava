@@ -1,7 +1,7 @@
 package com.zbkj.service.dao;
 
-import com.zbkj.common.model.system.SystemAdmin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zbkj.common.model.system.SystemAdmin;
 
 /**
  * 后台管理员表 Mapper 接口

@@ -24,7 +24,7 @@ public class UploadUtil {
 
     //服务器存储地址
 //    private static String rootPath  = "/www/wwwroot/upload";
-    private static String rootPath  = "";
+    private static String rootPath = "";
 
     //类型
     private static String type = "/" + Constants.UPLOAD_TYPE_IMAGE;
@@ -82,6 +82,7 @@ public class UploadUtil {
 
     /**
      * 根据文件的绝对路径创建一个文件对象.
+     *
      * @return 返回创建的这个文件对象
      * @author Mr.Zhang
      * @since 2020-05-08
@@ -109,6 +110,7 @@ public class UploadUtil {
 
     /**
      * 生成文件文件名
+     *
      * @param fileName 文件名
      * @author Mr.Zhang
      * @since 2020-05-08
@@ -118,22 +120,24 @@ public class UploadUtil {
         return getServerPath() + fileName;
     }
 
-    public static String fileName(String extName){
+    public static String fileName(String extName) {
         return CrmebUtil.getUuid() + RandomUtil.randomString(10) + "." + extName;
     }
 
     /**
      * 生成文件在的实际的路径
+     *
      * @author Mr.Zhang
      * @since 2020-05-08
      */
     public static String getServerPath() {
         // 文件分隔符转化为当前系统的格式
-        return FilenameUtils.separatorsToSystem( getRootPath() + getWebPath());
+        return FilenameUtils.separatorsToSystem(getRootPath() + getWebPath());
     }
 
     /**
      * web目录可访问的路径
+     *
      * @author Mr.Zhang
      * @since 2020-05-08
      */

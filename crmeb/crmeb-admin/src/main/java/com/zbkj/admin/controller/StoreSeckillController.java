@@ -1,12 +1,12 @@
 package com.zbkj.admin.controller;
 
 import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreSeckillAddRequest;
 import com.zbkj.common.request.StoreSeckillSearchRequest;
-import com.zbkj.common.response.StoreSeckillResponse;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.response.StoreProductInfoResponse;
+import com.zbkj.common.response.StoreSeckillResponse;
 import com.zbkj.service.service.StoreSeckillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,13 +40,14 @@ public class StoreSeckillController {
 
     /**
      * 分页显示商品秒杀产品表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:seckill:list')")
     @ApiOperation(value = "分页列表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<StoreSeckillResponse>>  getList(@Validated StoreSeckillSearchRequest request, @Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<StoreSeckillResponse>> getList(@Validated StoreSeckillSearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<StoreSeckillResponse> storeSeckillCommonPage =
                 CommonPage.restPage(storeSeckillService.getList(request, pageParamRequest));
         return CommonResult.success(storeSeckillCommonPage);
@@ -54,6 +55,7 @@ public class StoreSeckillController {
 
     /**
      * 新增商品秒杀产品表
+     *
      * @param storeSeckillRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:seckill:save')")
@@ -69,6 +71,7 @@ public class StoreSeckillController {
 
     /**
      * 删除商品秒杀产品表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:seckill:delete')")
@@ -84,6 +87,7 @@ public class StoreSeckillController {
 
     /**
      * 修改商品秒杀产品表
+     *
      * @param storeSeckillRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:seckill:update')")
@@ -101,7 +105,7 @@ public class StoreSeckillController {
     @ApiOperation(value = "修改秒杀商品状态")
     @RequestMapping(value = "/update/status", method = RequestMethod.POST)
     public CommonResult<String> updateStatus(@RequestParam @Validated Integer id, @RequestParam @Validated boolean status) {
-        if (storeSeckillService.updateSecKillStatus(id,status)) {
+        if (storeSeckillService.updateSecKillStatus(id, status)) {
             return CommonResult.success();
         } else {
             return CommonResult.failed();
@@ -110,6 +114,7 @@ public class StoreSeckillController {
 
     /**
      * 查询商品秒杀产品表信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:seckill:info')")
@@ -118,7 +123,7 @@ public class StoreSeckillController {
     public CommonResult<StoreProductInfoResponse> info(@RequestParam(value = "id") Integer id) {
         StoreProductInfoResponse storeSeckill = storeSeckillService.getDetailAdmin(id);
         return CommonResult.success(storeSeckill);
-   }
+    }
 }
 
 

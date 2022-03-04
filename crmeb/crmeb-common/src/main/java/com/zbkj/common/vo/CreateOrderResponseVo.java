@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="CreateOrderResponseVo对象", description="统一下单返回对象")
+@ApiModel(value = "CreateOrderResponseVo对象", description = "统一下单返回对象")
 public class CreateOrderResponseVo {
     @ApiModelProperty(value = "调用接口提交的公众账号ID")
     @JsonProperty(value = "appid")

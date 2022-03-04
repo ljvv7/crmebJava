@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zbkj.common.model.order.StoreOrderInfo;
 import com.zbkj.common.vo.OrderInfoDetailVo;
 import com.zbkj.common.vo.StoreOrderInfoOldVo;
 import com.zbkj.common.vo.StoreOrderInfoVo;
-import com.zbkj.common.model.order.StoreOrderInfo;
 import com.zbkj.service.dao.StoreOrderInfoDao;
 import com.zbkj.service.service.StoreOrderInfoService;
 import com.zbkj.service.service.StoreProductReplyService;
@@ -45,21 +45,22 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 根据id集合查询数据，返回 map
+     *
      * @param orderList List<Integer> id集合
+     * @return HashMap<Integer, StoreCart>
      * @author Mr.Zhang
      * @since 2020-04-17
-     * @return HashMap<Integer, StoreCart>
      */
     @Override
-    public HashMap<Integer, List<StoreOrderInfoOldVo>> getMapInId(List<Integer> orderList){
+    public HashMap<Integer, List<StoreOrderInfoOldVo>> getMapInId(List<Integer> orderList) {
         HashMap<Integer, List<StoreOrderInfoOldVo>> map = new HashMap<>();
-        if(orderList.size() < 1){
+        if (orderList.size() < 1) {
             return map;
         }
         LambdaQueryWrapper<StoreOrderInfo> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.in(StoreOrderInfo::getOrderId, orderList);
         List<StoreOrderInfo> systemStoreStaffList = dao.selectList(lambdaQueryWrapper);
-        if(systemStoreStaffList.size() < 1){
+        if (systemStoreStaffList.size() < 1) {
             return map;
         }
         for (StoreOrderInfo storeOrderInfo : systemStoreStaffList) {
@@ -67,9 +68,9 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
             StoreOrderInfoOldVo StoreOrderInfoVo = new StoreOrderInfoOldVo();
             BeanUtils.copyProperties(storeOrderInfo, StoreOrderInfoVo, "info");
             StoreOrderInfoVo.setInfo(JSON.parseObject(storeOrderInfo.getInfo(), OrderInfoDetailVo.class));
-            if(map.containsKey(storeOrderInfo.getOrderId())){
+            if (map.containsKey(storeOrderInfo.getOrderId())) {
                 map.get(storeOrderInfo.getOrderId()).add(StoreOrderInfoVo);
-            }else{
+            } else {
                 List<StoreOrderInfoOldVo> storeOrderInfoVoList = new ArrayList<>();
                 storeOrderInfoVoList.add(StoreOrderInfoVo);
                 map.put(storeOrderInfo.getOrderId(), storeOrderInfoVoList);
@@ -80,17 +81,18 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 根据id集合查询数据，返回 map
+     *
      * @param orderId Integer id
+     * @return HashMap<Integer, StoreCart>
      * @author Mr.Zhang
      * @since 2020-04-17
-     * @return HashMap<Integer, StoreCart>
      */
     @Override
-    public List<StoreOrderInfoOldVo> getOrderListByOrderId(Integer orderId){
+    public List<StoreOrderInfoOldVo> getOrderListByOrderId(Integer orderId) {
         LambdaQueryWrapper<StoreOrderInfo> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(StoreOrderInfo::getOrderId, orderId);
         List<StoreOrderInfo> systemStoreStaffList = dao.selectList(lambdaQueryWrapper);
-        if(systemStoreStaffList.size() < 1){
+        if (systemStoreStaffList.size() < 1) {
             return null;
         }
 
@@ -110,15 +112,16 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 根据id集合查询数据，返回 map
+     *
      * @param orderId 订单id
      * @return HashMap<Integer, StoreCart>
      */
     @Override
-    public List<StoreOrderInfoVo> getVoListByOrderId(Integer orderId){
+    public List<StoreOrderInfoVo> getVoListByOrderId(Integer orderId) {
         LambdaQueryWrapper<StoreOrderInfo> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(StoreOrderInfo::getOrderId, orderId);
         List<StoreOrderInfo> systemStoreStaffList = dao.selectList(lambdaQueryWrapper);
-        if(systemStoreStaffList.size() < 1){
+        if (systemStoreStaffList.size() < 1) {
             return null;
         }
 
@@ -135,6 +138,7 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 获取订单详情-订单编号
+     *
      * @param orderNo 订单编号
      * @return List
      */
@@ -147,7 +151,8 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 根据时间、商品id获取销售件数
-     * @param date 时间，格式'yyyy-MM-dd'
+     *
+     * @param date  时间，格式'yyyy-MM-dd'
      * @param proId 商品id
      * @return Integer
      */
@@ -158,7 +163,8 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 根据时间、商品id获取销售额
-     * @param date 时间，格式'yyyy-MM-dd'
+     *
+     * @param date  时间，格式'yyyy-MM-dd'
      * @param proId 商品id
      * @return BigDecimal
      */
@@ -169,6 +175,7 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 新增订单详情
+     *
      * @param storeOrderInfos 订单详情集合
      * @return 订单新增结果
      */
@@ -179,7 +186,8 @@ public class StoreOrderInfoServiceImpl extends ServiceImpl<StoreOrderInfoDao, St
 
     /**
      * 通过订单编号和规格号查询
-     * @param uni 规格号
+     *
+     * @param uni     规格号
      * @param orderId 订单编号
      * @return StoreOrderInfo
      */

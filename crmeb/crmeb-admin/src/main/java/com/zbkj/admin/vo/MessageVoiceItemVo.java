@@ -21,13 +21,15 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="MessageVoiceItemVo对象", description="微信消息 图片/语音 模板")
-public class MessageVoiceItemVo{
-    public MessageVoiceItemVo() {}
+@ApiModel(value = "MessageVoiceItemVo对象", description = "微信消息 图片/语音 模板")
+public class MessageVoiceItemVo {
+    @ApiModelProperty(value = "通过素材管理中的接口上传多媒体文件，得到的id。")
+    private String MediaId;
+
+    public MessageVoiceItemVo() {
+    }
+
     public MessageVoiceItemVo(String mediaId) {
         MediaId = mediaId;
     }
-
-    @ApiModelProperty(value = "通过素材管理中的接口上传多媒体文件，得到的id。")
-    private String MediaId;
 }

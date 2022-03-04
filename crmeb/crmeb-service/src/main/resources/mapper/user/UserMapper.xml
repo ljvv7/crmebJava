@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.service.dao.UserDao">
 
-    <select id="getSpreadPeopleList" resultType="com.zbkj.common.response.UserSpreadPeopleItemResponse" parameterType="map">
-        SELECT u.uid,u.nickname, u.avatar, DATE_FORMAT(u.spread_time, '%Y-%m-%d %H:%i:%s') AS `time`, u.spread_count AS childCount FROM eb_user AS u
-         where 1 = 1
+    <select id="getSpreadPeopleList" resultType="com.zbkj.common.response.UserSpreadPeopleItemResponse"
+            parameterType="map">
+        SELECT u.uid,u.nickname, u.avatar, DATE_FORMAT(u.spread_time, '%Y-%m-%d %H:%i:%s') AS `time`, u.spread_count AS
+        childCount FROM eb_user AS u
+        where 1 = 1
         <if test="userIdList != null and userIdList !='' ">
             and u.uid in (${userIdList})
         </if>
@@ -29,7 +31,7 @@
         <if test="groupId != null and groupId !='' ">
             and u.group_id in (${groupId})
         </if>
-         <if test="tagIdSql != null and tagIdSql !='' ">
+        <if test="tagIdSql != null and tagIdSql !='' ">
             and ${tagIdSql}
         </if>
         <if test="level != null and level !='' ">
@@ -73,7 +75,8 @@
             </choose>
         </if>
         <if test="keywords != '' and keywords != null ">
-            and ( u.phone like #{keywords, jdbcType=VARCHAR} or u.nickname like "%"#{keywords, jdbcType=VARCHAR}"%" or u.mark like #{keywords, jdbcType=VARCHAR})
+            and ( u.phone like #{keywords, jdbcType=VARCHAR} or u.nickname like "%"#{keywords, jdbcType=VARCHAR}"%" or
+            u.mark like #{keywords, jdbcType=VARCHAR})
         </if>
         ORDER BY u.uid desc
     </select>

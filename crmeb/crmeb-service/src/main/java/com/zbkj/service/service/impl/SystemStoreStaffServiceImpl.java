@@ -5,18 +5,18 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.request.SystemStoreStaffRequest;
-import com.zbkj.common.response.SystemStoreStaffResponse;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.system.SystemStore;
 import com.zbkj.common.model.system.SystemStoreStaff;
 import com.zbkj.common.model.user.User;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.request.SystemStoreStaffRequest;
+import com.zbkj.common.response.SystemStoreStaffResponse;
 import com.zbkj.service.dao.SystemStoreStaffDao;
 import com.zbkj.service.service.SystemStoreService;
 import com.zbkj.service.service.SystemStoreStaffService;
@@ -54,10 +54,11 @@ public class SystemStoreStaffServiceImpl extends ServiceImpl<SystemStoreStaffDao
 
     @Autowired
     private SystemStoreService systemStoreService;
-    
+
     /**
      * 列表
-     * @param storeId 门店id
+     *
+     * @param storeId          门店id
      * @param pageParamRequest 分页类参数
      * @return List<SystemStoreStaff>
      */
@@ -102,6 +103,7 @@ public class SystemStoreStaffServiceImpl extends ServiceImpl<SystemStoreStaffDao
 
     /**
      * 查询核销员列表
+     *
      * @param userIds uidList
      * @return storeList
      */
@@ -123,7 +125,8 @@ public class SystemStoreStaffServiceImpl extends ServiceImpl<SystemStoreStaffDao
         List<Integer> userIds = new ArrayList<>();
         userIds.add(request.getUid());
         List<SystemStoreStaff> existStaffs = getByAdminUserIds(userIds);
-        if (CollUtil.isNotEmpty(existStaffs) && existStaffs.size() > 0) throw new CrmebException(Constants.RESULT_VERIFICATION_USER_EXIST);
+        if (CollUtil.isNotEmpty(existStaffs) && existStaffs.size() > 0)
+            throw new CrmebException(Constants.RESULT_VERIFICATION_USER_EXIST);
         SystemStoreStaff systemStoreStaff = new SystemStoreStaff();
         BeanUtils.copyProperties(request, systemStoreStaff);
         return dao.insert(systemStoreStaff) > 0;
@@ -131,7 +134,8 @@ public class SystemStoreStaffServiceImpl extends ServiceImpl<SystemStoreStaffDao
 
     /**
      * 更新核销员信息
-     * @param id 核销员id
+     *
+     * @param id                      核销员id
      * @param systemStoreStaffRequest 更新参数
      */
     @Override
@@ -144,7 +148,8 @@ public class SystemStoreStaffServiceImpl extends ServiceImpl<SystemStoreStaffDao
 
     /**
      * 修改核销员状态
-     * @param id 核销员id
+     *
+     * @param id     核销员id
      * @param status 状态
      * @return Boolean
      */

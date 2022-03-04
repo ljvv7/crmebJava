@@ -29,10 +29,10 @@ import java.util.Map;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreOrderItemResponse对象", description="核销订单")
+@ApiModel(value = "StoreOrderItemResponse对象", description = "核销订单")
 public class StoreOrderItemResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单ID")
     private Integer id;

@@ -34,7 +34,7 @@ public class CouponOverdueTask {
     private StoreCouponUserService couponUserService;
 
     @Scheduled(fixedDelay = 1000 * 60L) //1分钟同步一次数据
-    public void init(){
+    public void init() {
         logger.info("---CouponOverdueTask task------produce Data with fixed rate task: Execution Time - {}", DateUtil.nowDateTime());
         try {
             couponUserService.overdueTask();

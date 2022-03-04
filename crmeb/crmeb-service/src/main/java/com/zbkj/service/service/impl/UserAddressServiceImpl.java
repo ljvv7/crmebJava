@@ -4,12 +4,12 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.request.UserAddressRequest;
 import com.github.pagehelper.PageHelper;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.system.SystemCity;
 import com.zbkj.common.model.user.UserAddress;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.request.UserAddressRequest;
 import com.zbkj.service.dao.UserAddressDao;
 import com.zbkj.service.service.SystemCityService;
 import com.zbkj.service.service.UserAddressService;
@@ -47,9 +47,10 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
     private UserService userService;
 
     /**
-    * 列表
-    * @return List<UserAddress>
-    */
+     * 列表
+     *
+     * @return List<UserAddress>
+     */
     @Override
     public List<UserAddress> getList(PageParamRequest pageParamRequest) {
         Integer UserId = userService.getUserIdException();
@@ -66,6 +67,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 创建地址
+     *
      * @param request UserAddressRequest 参数
      * @return List<UserAddress>
      */
@@ -103,6 +105,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 设置默认
+     *
      * @param id Integer id
      * @return UserAddress
      */
@@ -119,6 +122,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 删除
+     *
      * @param id Integer id
      * @return UserAddress
      */
@@ -134,6 +138,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 获取默认地址
+     *
      * @return UserAddress
      */
     @Override
@@ -155,6 +160,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 获取地址详情
+     *
      * @param id 地址id
      * @return UserAddress
      */
@@ -172,6 +178,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 获取默认地址
+     *
      * @return UserAddress
      */
     @Override
@@ -184,6 +191,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 检测城市id是否合法
+     *
      * @param cityId Integer 城市id
      */
     private void checkCity(Integer cityId) {
@@ -196,6 +204,7 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressDao, UserAddr
 
     /**
      * 取消默认地址
+     *
      * @param userId Integer 城市id
      */
     private void cancelDefault(Integer userId) {

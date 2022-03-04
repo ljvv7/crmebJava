@@ -23,7 +23,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="UserChannelDataResponse对象", description="用户渠道数据对象")
+@ApiModel(value = "UserChannelDataResponse对象", description = "用户渠道数据对象")
 public class UserChannelDataResponse implements Serializable {
 
     private static final long serialVersionUID = -6004724917253583732L;

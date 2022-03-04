@@ -1,16 +1,16 @@
 package com.zbkj.common.constants;
 
 /**
- *  配置类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * 配置类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 public class Constants {
     public static final long TOKEN_EXPRESS_MINUTES = (60 * 24); //3小时
@@ -112,7 +112,7 @@ public class Constants {
 
     //上传类型
     public static final String UPLOAD_TYPE_FILE = "file";
-//    public static final String UPLOAD_ROOT_PATH_CONFIG_KEY = "upload_root_path";//上传地址
+    //    public static final String UPLOAD_ROOT_PATH_CONFIG_KEY = "upload_root_path";//上传地址
     public static final String UPLOAD_MODEL_PATH_EXCEL = "excel";// excel
 
     //图片上传
@@ -217,7 +217,6 @@ public class Constants {
     public static final String CONFIG_APP_OPEN_UPGRADE = "open_upgrade";
 
 
-
     //分销
     public static final String CONFIG_KEY_STORE_BROKERAGE_LEVEL = "store_brokerage_rate_num"; //返佣比例前缀
     public static final String CONFIG_KEY_STORE_BROKERAGE_RATE_ONE = "store_brokerage_ratio"; //一级返佣比例前缀
@@ -248,13 +247,13 @@ public class Constants {
 
 
     //第三方登录token类型
-    public static final int THIRD_LOGIN_TOKEN_TYPE_PUBLIC  = 1; //公众号
-    public static final int THIRD_LOGIN_TOKEN_TYPE_PROGRAM  = 2; //小程序
-    public static final int THIRD_LOGIN_TOKEN_TYPE_UNION_ID  = 3; //unionid
-    public static final int THIRD_ADMIN_LOGIN_TOKEN_TYPE_PUBLIC  = 4; //后台登录公众号
-    public static final int THIRD_LOGIN_TOKEN_TYPE_IOS_WX  = 5; //ios 微信
+    public static final int THIRD_LOGIN_TOKEN_TYPE_PUBLIC = 1; //公众号
+    public static final int THIRD_LOGIN_TOKEN_TYPE_PROGRAM = 2; //小程序
+    public static final int THIRD_LOGIN_TOKEN_TYPE_UNION_ID = 3; //unionid
+    public static final int THIRD_ADMIN_LOGIN_TOKEN_TYPE_PUBLIC = 4; //后台登录公众号
+    public static final int THIRD_LOGIN_TOKEN_TYPE_IOS_WX = 5; //ios 微信
     public static final int THIRD_LOGIN_TOKEN_TYPE_ANDROID_WX = 6; //android微信
-    public static final int THIRD_LOGIN_TOKEN_TYPE_IOS  = 7; //ios
+    public static final int THIRD_LOGIN_TOKEN_TYPE_IOS = 7; //ios
 
 
     // 商品类型 活动类型 0=商品，1=秒杀，2=砍价，3=拼团 attrResult表用到
@@ -264,13 +263,11 @@ public class Constants {
     public static final String PRODUCT_TYPE_SECKILL_STR = "秒杀";
     public static final Integer PRODUCT_TYPE_BARGAIN = 2;
     public static final String PRODUCT_TYPE_BARGAIN_STR = "砍价";
-    public static final Integer PRODUCT_TYPE_PINGTUAN= 3;
-    public static final String PRODUCT_TYPE_PINGTUAN_STR= "拼团";
-    public static final Integer PRODUCT_TYPE_COMPONENT= 4;
-    public static final String PRODUCT_TYPE_COMPONENT_STR= "组件";
+    public static final Integer PRODUCT_TYPE_PINGTUAN = 3;
+    public static final String PRODUCT_TYPE_PINGTUAN_STR = "拼团";
+    public static final Integer PRODUCT_TYPE_COMPONENT = 4;
+    public static final String PRODUCT_TYPE_COMPONENT_STR = "组件";
     public static final Integer PRODUCT_TYPE_GROUP = 0;
-
-
 
 
     //group gid
@@ -294,7 +291,6 @@ public class Constants {
     public static final Integer GROUP_DATA_ID_INDEX_KEYWORDS = 71; //热门搜索
     public static final Integer GROUP_DATA_ID_ADMIN_LOGIN_BANNER_IMAGE_LIST = 72; //后台登录页面轮播图
     public static final Integer GROUP_DATA_ID_COMBINATION_LIST_BANNNER = 73; //拼团列表banner
-
 
 
     //签到
@@ -433,7 +429,6 @@ public class Constants {
     public static final String ADMIN_LOGIN_TYPE_WE_CHAT_FROM_PUBLIC = "admin_public"; //公众号
 
 
-
     //支付方式
     public static final String PAY_TYPE_STR_WE_CHAT = "微信支付"; //微信支付
     public static final String PAY_TYPE_STR_YUE = "余额支付"; //余额支付
@@ -444,7 +439,6 @@ public class Constants {
     //需要支付的业务类型
     public static final String SERVICE_PAY_TYPE_ORDER = "order"; //订单
     public static final String SERVICE_PAY_TYPE_RECHARGE = "recharge"; //充值
-
 
 
     //订单操作类型
@@ -505,15 +499,27 @@ public class Constants {
     public static final String WE_CHAT_PROGRAM_TEMP_KEY_ORDER_PAY = "516";// 订单支付成功通知
     public static final String WE_CHAT_PROGRAM_TEMP_KEY_ORDER_RECEIVING = "9283";// 订单收货通知
     public static final String WE_CHAT_PROGRAM_TEMP_KEY_RECHARGE = "OPENTM200565260";
-
-
-
+    public static final String FAIL = "FAIL";
+    public static final String SUCCESS = "SUCCESS";
+    // 订单取消Key
+    public static final String ORDER_AUTO_CANCEL_KEY = "order_auto_cancel_key";
+    /**
+     * 公共开关：0关闭
+     */
+    public static final String COMMON_SWITCH_CLOSE = "0";
+    /**
+     * 公共开关：1开启
+     */
+    public static final String COMMON_SWITCH_OPEN = "1";
+    /**
+     * 公共JS配置
+     */
+    // CRMEB chat 统计
+    public static final String JS_CONFIG_CRMEB_CHAT_TONGJI = "crmeb_tongji_js";
     //CND  URL测试用
     public static String CND_URL = "https://wuht-1300909283.cos.ap-chengdu.myqcloud.com";
-
     //物流  https://market.aliyun.com/products/56928004/cmapi021863.html#sku=yuncode15863000015
     public static String LOGISTICS_API_URL = "https://wuliu.market.alicloudapi.com/kdi";
-
     // 订单 基本 操作字样
     public static String RESULT_ORDER_NOTFOUND = "订单号 ${orderCode} 未找到";
     public static String RESULT_ORDER_NOTFOUND_IN_ID = "订单id ${orderId} 未找到";
@@ -521,31 +527,23 @@ public class Constants {
     public static String RESULT_ORDER_EDIT_PRICE_SAME = "修改价格不能和支付价格相同 原价 ${oldPrice} 修改价 ${editPrice}";
     public static String RESULT_ORDER_EDIT_PRICE_SUCCESS = "订单号 ${orderNo} 修改价格 ${price} 成功";
     public static String RESULT_ORDER_EDIT_PRICE_LOGS = "订单价格 ${orderPrice} 修改实际支付金额为 ${price} 元";
-
     // 订单 支付 操作字样
     public static String RESULT_ORDER_PAY_OFFLINE = "订单号 ${orderNo} 现在付款 ${price} 成功";
-
     // 订单核销 返回字样 Order response text info
     public static String RESULT_VERIFICATION_ORDER_NOT_FUND = "核销码 ${vCode} 的订单未找到";
     public static String RESULT_VERIFICATION_ORDER_VED = "核销码 ${vCode} 的订单已核销";
     public static String RESULT_VERIFICATION_NOTAUTH = "没有核销权限";
     public static String RESULT_VERIFICATION_USER_EXIST = "当前用户已经是核销员";
-
-
     // QRcode Response text info
     public static String RESULT_QRCODE_PRAMERROR = "生成二维码参数不合法";
-
     // 砍价计算比例下行
     public static String BARGAIN_TATIO_DOWN = "0.2";
     // 砍价计算比例上行
     public static String BARGAIN_TATIO_UP = "0.8";
-
     // 时间类型开始时间
     public static String DATE_TIME_TYPE_BEGIN = "begin";
-
     // 时间类型结束时间
     public static String DATE_TIME_TYPE_END = "end";
-
     // 商品评论类型——普通商品
     public static String STORE_REPLY_TYPE_PRODUCT = "product";
     // 商品评论类型——秒杀
@@ -554,22 +552,6 @@ public class Constants {
     public static String STORE_REPLY_TYPE_PINTUAN = "pintuan";
     // 商品评论类型——砍价
     public static String STORE_REPLY_TYPE_BARGAIN = "bargain";
-
     // 商品记录Key（pv、uv）用
     public static String PRODUCT_LOG_KEY = "visit_log_key";
-
-    public static final String FAIL     = "FAIL";
-    public static final String SUCCESS  = "SUCCESS";
-
-    // 订单取消Key
-    public static final String ORDER_AUTO_CANCEL_KEY = "order_auto_cancel_key";
-
-    /** 公共开关：0关闭 */
-    public static final String COMMON_SWITCH_CLOSE = "0";
-    /** 公共开关：1开启 */
-    public static final String COMMON_SWITCH_OPEN = "1";
-
-    /** 公共JS配置 */
-    // CRMEB chat 统计
-    public  static final String JS_CONFIG_CRMEB_CHAT_TONGJI="crmeb_tongji_js";
 }

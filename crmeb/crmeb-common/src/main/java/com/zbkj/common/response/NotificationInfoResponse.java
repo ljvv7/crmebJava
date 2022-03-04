@@ -1,6 +1,5 @@
 package com.zbkj.common.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 系统通知详情相应对象
@@ -25,7 +23,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="NotificationInfoResponse对象", description="系统通知详情相应对象")
+@ApiModel(value = "NotificationInfoResponse对象", description = "系统通知详情相应对象")
 public class NotificationInfoResponse implements Serializable {
 
     private static final long serialVersionUID = -3214167698001861141L;

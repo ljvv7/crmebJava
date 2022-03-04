@@ -39,6 +39,7 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 用户曲线图
+     *
      * @author Mr.Zhang
      * @since 2020-05-16
      */
@@ -49,6 +50,7 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 订单量趋势
+     *
      * @author Mr.Zhang
      * @since 2020-05-16
      */
@@ -69,10 +71,11 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 按开始结束时间查询每日新增订单数量
+     *
      * @param list List<StoreOrder> 时间范围
+     * @return HashMap<String, Object>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return HashMap<String, Object>
      */
     private Map<Object, Object> getOrderCountGroupByDate(List<StoreOrder> list) {
         Map<Object, Object> map = new HashMap<>();
@@ -90,10 +93,11 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 按开始结束时间查询每日新增订单销售额
+     *
      * @param list List<StoreOrder> 时间范围
+     * @return HashMap<String, Object>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return HashMap<String, Object>
      */
     private Map<Object, Object> getOrderPriceGroupByDate(List<StoreOrder> list) {
         Map<Object, Object> map = new HashMap<>();
@@ -111,9 +115,10 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 日期和数量格式化
+     *
+     * @return Map<String, Integer>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return Map<String, Integer>
      */
     private Map<Object, Object> dataFormat(Map<Object, Object> countGroupDate, String dateLimit) {
         Map<Object, Object> map = new LinkedHashMap<>();
@@ -130,18 +135,18 @@ public class HomeServiceImpl implements HomeService {
             String key;
 
             //周格式化
-            switch(dateLimit) {
+            switch (dateLimit) {
                 //格式化周
                 case Constants.SEARCH_DATE_WEEK:
                 case Constants.SEARCH_DATE_PRE_WEEK:
                     key = weekList[i];
                     break;
-                    //格式化月
+                //格式化月
                 case Constants.SEARCH_DATE_PRE_MONTH:
                 case Constants.SEARCH_DATE_MONTH:
                     key = i + 1 + "";
                     break;
-                    //默认显示两位日期
+                //默认显示两位日期
                 default:
                     key = date.substring(5, 10);
             }
@@ -153,9 +158,10 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 日期和数量格式化
+     *
+     * @return Map<String, Integer>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return Map<String, Integer>
      */
     private Map<Object, Object> dataFormatYear(Map<Object, Object> countGroupDate, String dateLimit) {
         Map<Object, Object> map = new LinkedHashMap<>();
@@ -179,7 +185,7 @@ public class HomeServiceImpl implements HomeService {
             listDate.add(year + "-" + month);
         }
 
-        String[] monthList = new String[]{"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月" , "十一月", "十二月" };
+        String[] monthList = new String[]{"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
 
         int i = 0;
         for (Object date : listDate) {
@@ -195,6 +201,7 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 用户购买统计
+     *
      * @author Mr.Zhang
      * @since 2020-05-16
      */
@@ -218,9 +225,10 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 周订单量趋势
+     *
+     * @return Map<String, Object>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return Map<String, Object>
      */
     @Override
     public Map<String, Object> chartOrderInWeek() {
@@ -231,9 +239,10 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 月订单量趋势
+     *
+     * @return Map<String, Object>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return Map<String, Object>
      */
     @Override
     public Map<String, Object> chartOrderInMonth() {
@@ -242,9 +251,10 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 年订单量趋势
+     *
+     * @return Map<String, Object>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return Map<String, Object>
      */
     @Override
     public Map<String, Object> chartOrderInYear() {
@@ -280,6 +290,7 @@ public class HomeServiceImpl implements HomeService {
      * 用户访问量
      * 订单量
      * 新增用户
+     *
      * @return HomeRateResponse
      */
     @Override
@@ -300,9 +311,10 @@ public class HomeServiceImpl implements HomeService {
 
     /**
      * 组装订单统计返回数据
+     *
+     * @return Map<String, Object>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return Map<String, Object>
      */
     private Map<String, Object> returnOrderDate(String dateLimit, String preDateLimit, int leftTime) {
         Map<String, Object> map = new HashMap<>();

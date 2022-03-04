@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OrderExcelVo", description = "产品导出")
+@ApiModel(value = "OrderExcelVo", description = "产品导出")
 public class OrderExcelVo implements Serializable {
 
     @ApiModelProperty(value = "订单号")

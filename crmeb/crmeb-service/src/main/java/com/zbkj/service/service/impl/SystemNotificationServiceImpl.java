@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.constants.Constants;
 import com.zbkj.common.constants.NotifyConstants;
 import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.sms.SmsTemplate;
@@ -59,6 +58,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 系统通知列表
+     *
      * @param request 查询对象
      * @return List
      */
@@ -73,6 +73,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 公众号模板开关
+     *
      * @param id 通知id
      * @return Boolean
      */
@@ -90,6 +91,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 小程序订阅模板开关
+     *
      * @param id 通知id
      * @return Boolean
      */
@@ -107,6 +109,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 发送短信开关
+     *
      * @param id 通知id
      * @return Boolean
      */
@@ -124,6 +127,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 通知详情
+     *
      * @param request 详情请求参数
      * @return NotificationInfoResponse
      */
@@ -160,6 +164,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 根据标识查询信息
+     *
      * @param mark 标识
      * @return SystemNotification
      */
@@ -172,6 +177,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 获取微信相关列表
+     *
      * @param type routine-小程序，public-公众号
      */
     @Override
@@ -188,6 +194,7 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 修改通知
+     *
      * @param request 请求参数
      * @return Boolean
      */
@@ -246,21 +253,22 @@ public class SystemNotificationServiceImpl extends ServiceImpl<SystemNotificatio
 
     /**
      * 获取小程序订阅模板编号(小程序端调用)
+     *
      * @param type 场景类型
-     * 支付之前：beforePay
-     * 		支付成功通知
-     * 支付成功：afterPay
-     * 		发货、配送、收货
-     * 申请退款：refundApply
-     * 		退款成功、拒绝退款
-     * 充值之前：beforeRecharge
-     * 		充值成功通知
-     * 创建砍价：createBargain
-     * 		砍价成功、失败通知
-     * 参与拼团：pink
-     * 		拼团成功、失败通知
-     * 取消拼团：cancelPink
-     * 		退款成功、拒绝退款
+     *             支付之前：beforePay
+     *             支付成功通知
+     *             支付成功：afterPay
+     *             发货、配送、收货
+     *             申请退款：refundApply
+     *             退款成功、拒绝退款
+     *             充值之前：beforeRecharge
+     *             充值成功通知
+     *             创建砍价：createBargain
+     *             砍价成功、失败通知
+     *             参与拼团：pink
+     *             拼团成功、失败通知
+     *             取消拼团：cancelPink
+     *             退款成功、拒绝退款
      * @return List
      */
     @Override

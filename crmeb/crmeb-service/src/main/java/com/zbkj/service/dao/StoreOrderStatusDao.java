@@ -1,7 +1,7 @@
 package com.zbkj.service.dao;
 
-import com.zbkj.common.model.order.StoreOrderStatus;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zbkj.common.model.order.StoreOrderStatus;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
@@ -22,6 +22,7 @@ public interface StoreOrderStatusDao extends BaseMapper<StoreOrderStatus> {
 
     /**
      * 通过日期获取订单退款金额
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return BigDecimal
      */

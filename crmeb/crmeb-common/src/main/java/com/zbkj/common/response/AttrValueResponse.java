@@ -1,16 +1,13 @@
 package com.zbkj.common.response;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * 商品属性值响应对象
@@ -27,10 +24,10 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="AttrValueResponse对象", description="商品属性值响应对象")
+@ApiModel(value = "AttrValueResponse对象", description = "商品属性值响应对象")
 public class AttrValueResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "ID")
     private Integer id;
 

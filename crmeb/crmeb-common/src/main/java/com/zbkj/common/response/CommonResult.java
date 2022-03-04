@@ -1,8 +1,8 @@
 package com.zbkj.common.response;
 
-import com.zbkj.common.vo.MyRecord;
 import com.zbkj.common.exception.ExceptionCodeEnum;
 import com.zbkj.common.exception.ExceptionHandler;
+import com.zbkj.common.vo.MyRecord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +74,7 @@ public class CommonResult<T> {
     public static CommonResult<List<Map<String, Object>>> success(List<MyRecord> recordList) {
         List<Map<String, Object>> list = new ArrayList<>();
         recordList.forEach(i -> {
-             list.add(i.getColumns());
+            list.add(i.getColumns());
         });
         return new CommonResult<>(ExceptionCodeEnum.SUCCESS.getCode(), ExceptionCodeEnum.SUCCESS.getMessage(), list);
     }
@@ -82,8 +82,8 @@ public class CommonResult<T> {
     /**
      * 成功返回结果
      *
-     * @param data 获取的数据
-     * @param  message 提示信息
+     * @param data    获取的数据
+     * @param message 提示信息
      */
     public static <T> CommonResult<T> success(T data, String message) {
         return new CommonResult<T>(ExceptionCodeEnum.SUCCESS.getCode(), message, data);
@@ -91,6 +91,7 @@ public class CommonResult<T> {
 
     /**
      * 失败返回结果
+     *
      * @param errorCode 错误码
      */
     public static <T> CommonResult<T> failed(ExceptionHandler errorCode) {
@@ -100,16 +101,18 @@ public class CommonResult<T> {
 
     /**
      * 失败返回结果
+     *
      * @param errorCode 错误码
-     * @param message 错误信息
+     * @param message   错误信息
      */
-    public static <T> CommonResult<T> failed(ExceptionHandler errorCode,String message) {
+    public static <T> CommonResult<T> failed(ExceptionHandler errorCode, String message) {
         System.out.println("errorCode2:" + errorCode);
         return new CommonResult<T>(errorCode.getCode(), message, null);
     }
 
     /**
      * 失败返回结果
+     *
      * @param message 提示信息
      */
     public static <T> CommonResult<T> failed(String message) {
@@ -132,6 +135,7 @@ public class CommonResult<T> {
 
     /**
      * 参数验证失败返回结果
+     *
      * @param message 提示信息
      */
     public static <T> CommonResult<T> validateFailed(String message) {

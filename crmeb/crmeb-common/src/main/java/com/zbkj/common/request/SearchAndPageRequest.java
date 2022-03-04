@@ -22,7 +22,7 @@ public class SearchAndPageRequest {
     @ApiModelProperty(value = "搜索关键字")
     private String keywords;
 
-    @ApiModelProperty(value = "页码", example= Constants.DEFAULT_PAGE + "")
+    @ApiModelProperty(value = "页码", example = Constants.DEFAULT_PAGE + "")
     private int page = Constants.DEFAULT_PAGE;
 
     @ApiModelProperty(value = "每页数量", example = Constants.DEFAULT_LIMIT + "")

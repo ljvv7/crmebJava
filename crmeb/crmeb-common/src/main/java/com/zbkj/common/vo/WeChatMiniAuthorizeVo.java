@@ -24,10 +24,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="WeChatMiniAuthorizeVo对象", description="微信小程序用户授权返回数据")
+@ApiModel(value = "WeChatMiniAuthorizeVo对象", description = "微信小程序用户授权返回数据")
 public class WeChatMiniAuthorizeVo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "会话密钥")
     @TableField(value = "session_key")

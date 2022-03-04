@@ -1,12 +1,8 @@
 package com.zbkj.admin.controller;
 
 import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.*;
 import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.request.StoreCopyProductRequest;
-import com.zbkj.common.request.StoreProductAddRequest;
-import com.zbkj.common.request.StoreProductRequest;
-import com.zbkj.common.request.StoreProductSearchRequest;
 import com.zbkj.common.response.StoreProductInfoResponse;
 import com.zbkj.common.response.StoreProductResponse;
 import com.zbkj.common.response.StoreProductTabsHeader;
@@ -55,7 +51,8 @@ public class StoreProductController {
 
     /**
      * 分页显示商品表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:product:list')")
@@ -68,6 +65,7 @@ public class StoreProductController {
 
     /**
      * 新增商品
+     *
      * @param request 新增参数
      */
     @PreAuthorize("hasAuthority('admin:product:save')")
@@ -83,12 +81,13 @@ public class StoreProductController {
 
     /**
      * 删除商品表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:product:delete')")
     @ApiOperation(value = "删除")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public CommonResult<String> delete(@RequestBody @PathVariable Integer id, @RequestParam(value = "type", required = false, defaultValue = "recycle")String type) {
+    public CommonResult<String> delete(@RequestBody @PathVariable Integer id, @RequestParam(value = "type", required = false, defaultValue = "recycle") String type) {
         if (storeProductService.deleteProduct(id, type)) {
             if (type.equals("recycle")) {
                 storeCartService.productStatusNotEnable(id);
@@ -103,6 +102,7 @@ public class StoreProductController {
 
     /**
      * 恢复已删除商品表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:product:restore')")
@@ -118,6 +118,7 @@ public class StoreProductController {
 
     /**
      * 商品修改
+     *
      * @param storeProductRequest 商品参数
      */
     @PreAuthorize("hasAuthority('admin:product:update')")
@@ -133,6 +134,7 @@ public class StoreProductController {
 
     /**
      * 商品详情
+     *
      * @param id 商品id
      */
     @PreAuthorize("hasAuthority('admin:product:info')")
@@ -140,17 +142,17 @@ public class StoreProductController {
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
     public CommonResult<StoreProductInfoResponse> info(@PathVariable Integer id) {
         return CommonResult.success(storeProductService.getInfo(id));
-   }
+    }
 
     /**
      * 商品tabs表头数据
      */
     @PreAuthorize("hasAuthority('admin:product:tabs:headers')")
-   @ApiOperation(value = "商品表头数量")
-   @RequestMapping(value = "/tabs/headers", method = RequestMethod.GET)
-   public CommonResult<List<StoreProductTabsHeader>> getTabsHeader() {
+    @ApiOperation(value = "商品表头数量")
+    @RequestMapping(value = "/tabs/headers", method = RequestMethod.GET)
+    public CommonResult<List<StoreProductTabsHeader>> getTabsHeader() {
         return CommonResult.success(storeProductService.getTabsHeader());
-   }
+    }
 
 
     /**
@@ -185,7 +187,7 @@ public class StoreProductController {
     @ApiOperation(value = "导入99Api商品")
     @RequestMapping(value = "/importProduct", method = RequestMethod.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "form", value = "导入平台1=淘宝，2=京东，3=苏宁，4=拼多多, 5=天猫", dataType = "int",  required = true),
+            @ApiImplicitParam(name = "form", value = "导入平台1=淘宝，2=京东，3=苏宁，4=拼多多, 5=天猫", dataType = "int", required = true),
             @ApiImplicitParam(name = "url", value = "URL", dataType = "String", required = true),
     })
     public CommonResult<StoreProductRequest> importProduct(

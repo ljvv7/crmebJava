@@ -40,7 +40,8 @@ public class SystemRoleController {
 
     /**
      * 分页显示身份管理表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:system:role:list')")
@@ -53,6 +54,7 @@ public class SystemRoleController {
 
     /**
      * 新增身份
+     *
      * @param systemRoleRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:system:role:save')")
@@ -67,6 +69,7 @@ public class SystemRoleController {
 
     /**
      * 删除身份管理表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:role:delete')")
@@ -81,6 +84,7 @@ public class SystemRoleController {
 
     /**
      * 修改身份管理表
+     *
      * @param systemRoleRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:system:role:update')")
@@ -95,6 +99,7 @@ public class SystemRoleController {
 
     /**
      * 查询身份详情
+     *
      * @param id String
      */
     @PreAuthorize("hasAuthority('admin:system:role:info')")
@@ -102,7 +107,7 @@ public class SystemRoleController {
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
     public CommonResult<RoleInfoResponse> info(@PathVariable Integer id) {
         return CommonResult.success(systemRoleService.getInfo(id));
-   }
+    }
 
     /**
      * 修改身份状态

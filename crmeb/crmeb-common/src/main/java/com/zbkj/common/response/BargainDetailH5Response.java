@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="BargainDetailH5Response对象", description="砍价商品详情响应对象")
+@ApiModel(value = "BargainDetailH5Response对象", description = "砍价商品详情响应对象")
 public class BargainDetailH5Response implements Serializable {
 
     private static final long serialVersionUID = 4177599369617161973L;

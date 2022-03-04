@@ -24,10 +24,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RegisterThirdUserRequest对象", description="三方用户注册对象")
+@ApiModel(value = "RegisterThirdUserRequest对象", description = "三方用户注册对象")
 public class RegisterThirdUserRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户昵称", required = true)
     private String nickName;

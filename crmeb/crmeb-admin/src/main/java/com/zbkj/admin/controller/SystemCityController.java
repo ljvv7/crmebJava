@@ -43,6 +43,7 @@ public class SystemCityController {
 
     /**
      * 分页城市列表
+     *
      * @param request 搜索条件
      */
     @PreAuthorize("hasAuthority('admin:system:city:list')")
@@ -54,7 +55,8 @@ public class SystemCityController {
 
     /**
      * 修改城市
-     * @param id 城市id
+     *
+     * @param id      城市id
      * @param request 修改参数
      */
     @PreAuthorize("hasAuthority('admin:system:city:update')")
@@ -69,7 +71,8 @@ public class SystemCityController {
 
     /**
      * 修改状态
-     * @param id 城市id
+     *
+     * @param id     城市id
      * @param status 状态
      */
     @PreAuthorize("hasAuthority('admin:system:city:update:status')")
@@ -84,6 +87,7 @@ public class SystemCityController {
 
     /**
      * 城市详情
+     *
      * @param id 城市id
      */
     @PreAuthorize("hasAuthority('admin:system:city:info')")

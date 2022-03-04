@@ -3,7 +3,6 @@ package com.zbkj.common.token;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.zbkj.common.constants.Constants;
-import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.user.User;
 import com.zbkj.common.utils.RedisUtil;
 import com.zbkj.common.utils.RequestUtil;
@@ -34,16 +33,13 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class FrontTokenComponent {
 
-    @Resource
-    private RedisUtil redisUtil;
-
     private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
-
     private static final Long MILLIS_MINUTE = 60 * 1000L;
-
     // 令牌有效期（默认30分钟） todo 调试期改为5小时
 //    private static final int expireTime = 30;
     private static final int expireTime = 5 * 60;
+    @Resource
+    private RedisUtil redisUtil;
 
     /**
      * 获取用户身份信息
@@ -99,8 +95,7 @@ public class FrontTokenComponent {
     public void verifyToken(LoginUserVo loginUser) {
         long expireTime = loginUser.getExpireTime();
         long currentTime = System.currentTimeMillis();
-        if (expireTime - currentTime <= MILLIS_MINUTE_TEN)
-        {
+        if (expireTime - currentTime <= MILLIS_MINUTE_TEN) {
             refreshToken(loginUser);
         }
     }
@@ -138,6 +133,7 @@ public class FrontTokenComponent {
 
     /**
      * 推出登录
+     *
      * @param request HttpServletRequest
      */
     public void logout(HttpServletRequest request) {
@@ -180,19 +176,19 @@ public class FrontTokenComponent {
         return ArrayUtils.contains(routerList, uri);
     }
 
-    public Boolean check(String token, HttpServletRequest request){
+    public Boolean check(String token, HttpServletRequest request) {
 
         try {
             boolean exists = redisUtil.exists(getTokenKey(token));
-            if(exists){
+            if (exists) {
                 Integer uid = redisUtil.get(getTokenKey(token));
                 redisUtil.set(getTokenKey(token), uid, Constants.TOKEN_EXPRESS_MINUTES, TimeUnit.MINUTES);
-            }else{
+            } else {
                 //判断路由，部分路由不管用户是否登录/token过期都可以访问
                 exists = checkRouter(RequestUtil.getUri(request));
             }
             return exists;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

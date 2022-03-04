@@ -40,7 +40,7 @@ public class TaskExecutorConfig {
 
     //普通模式
     @Bean("taskExecutor")
-    public ThreadPoolTaskExecutor taskExecutor(){
+    public ThreadPoolTaskExecutor taskExecutor() {
         return initTaskExecutor(
                 getTaskCorePoolSize(),
                 getTaskMaxPoolSize(),
@@ -58,18 +58,17 @@ public class TaskExecutorConfig {
 //    }
 
     /**
-     *
      * 初始化TaskExecutor
-     * @param corePoolSize  int 默认线程数
-     * @param maxPoolSize   int 最大线程数
-     * @param queueCapacity int 缓冲队列长度
-     * @param keepAliveSecond   int 允许空闲时间
-     * @param namePrefix    String  名称的前缀
      *
+     * @param corePoolSize    int 默认线程数
+     * @param maxPoolSize     int 最大线程数
+     * @param queueCapacity   int 缓冲队列长度
+     * @param keepAliveSecond int 允许空闲时间
+     * @param namePrefix      String  名称的前缀
      * @return ThreadPoolTaskExecutor
      */
     private ThreadPoolTaskExecutor initTaskExecutor(int corePoolSize, int maxPoolSize,
-                                                    int queueCapacity, int keepAliveSecond, String namePrefix){
+                                                    int queueCapacity, int keepAliveSecond, String namePrefix) {
         //callrunspolicy：由调度线程(提交任务的线程)处理该任务CallerRunsPolicy
         return initTaskExecutor(corePoolSize, maxPoolSize, queueCapacity, keepAliveSecond, namePrefix,
                 new ThreadPoolExecutor.CallerRunsPolicy());
@@ -77,17 +76,18 @@ public class TaskExecutorConfig {
 
     /**
      * 初始化TaskExecutor
-     * @param corePoolSize  int 默认线程数
-     * @param maxPoolSize   int 最大线程数
-     * @param queueCapacity int 缓冲队列长度
-     * @param keepAliveSecond   int 允许空闲时间
-     * @param namePrefix    String  名称的前缀
-     * @param rejectedExecutionHandler  线程池满的时候如何处理
+     *
+     * @param corePoolSize             int 默认线程数
+     * @param maxPoolSize              int 最大线程数
+     * @param queueCapacity            int 缓冲队列长度
+     * @param keepAliveSecond          int 允许空闲时间
+     * @param namePrefix               String  名称的前缀
+     * @param rejectedExecutionHandler 线程池满的时候如何处理
      * @return ThreadPoolTaskExecutor
      */
     private ThreadPoolTaskExecutor initTaskExecutor(int corePoolSize, int maxPoolSize,
                                                     int queueCapacity, int keepAliveSecond, String namePrefix,
-                                                    RejectedExecutionHandler rejectedExecutionHandler){
+                                                    RejectedExecutionHandler rejectedExecutionHandler) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(corePoolSize);//核心线程数(默认线程数)
         executor.setMaxPoolSize(maxPoolSize);//最大线程数

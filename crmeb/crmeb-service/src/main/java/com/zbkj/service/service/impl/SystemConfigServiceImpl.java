@@ -9,19 +9,18 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbkj.common.config.CrmebConfig;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.system.SystemConfig;
 import com.zbkj.common.request.SystemConfigAdminRequest;
 import com.zbkj.common.request.SystemFormCheckRequest;
 import com.zbkj.common.request.SystemFormItemCheckRequest;
 import com.zbkj.common.utils.RedisUtil;
 import com.zbkj.common.vo.ExpressSheetVo;
-import com.zbkj.common.model.system.SystemConfig;
 import com.zbkj.service.dao.SystemConfigDao;
 import com.zbkj.service.service.SystemAttachmentService;
 import com.zbkj.service.service.SystemConfigService;
 import com.zbkj.service.service.SystemFormTempService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -45,25 +44,21 @@ import java.util.stream.Collectors;
 @Service
 public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, SystemConfig> implements SystemConfigService {
 
+    private static final String redisKey = Constants.CONFIG_LIST;
+    @Autowired
+    CrmebConfig crmebConfig;
     @Resource
     private SystemConfigDao dao;
-
     @Autowired
     private SystemFormTempService systemFormTempService;
-
     @Autowired
     private SystemAttachmentService systemAttachmentService;
-
     @Autowired
     private RedisUtil redisUtil;
 
-    @Autowired
-    CrmebConfig crmebConfig;
-
-    private static final String redisKey = Constants.CONFIG_LIST;
-
     /**
      * 根据menu name 获取 value
+     *
      * @param name menu name
      * @return String
      */
@@ -75,6 +70,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 同时获取多个配置
+     *
      * @param keys 多个配置key
      * @return List<String>
      */
@@ -89,6 +85,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 根据 name 获取 value 找不到抛异常
+     *
      * @param name menu name
      * @return String
      */
@@ -96,7 +93,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
     public String getValueByKeyException(String name) {
         String value = get(name);
         if (null == value) {
-            throw new CrmebException("没有找到"+ name +"数据");
+            throw new CrmebException("没有找到" + name + "数据");
         }
 
         return value;
@@ -104,6 +101,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 整体保存表单数据
+     *
      * @param systemFormCheckRequest SystemFormCheckRequest 数据保存
      * @return boolean
      */
@@ -147,9 +145,9 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
     }
 
 
-
     /**
      * updateStatusByGroupId
+     *
      * @param formId Integer formId
      */
     private void updateStatusByFormId(Integer formId) {
@@ -164,6 +162,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * deleteStatusByGroupId
+     *
      * @param formId Integer formId
      * @author Mr.Zhang
      * @since 2020-04-16
@@ -180,7 +179,8 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 保存或更新配置数据
-     * @param name 菜单名称
+     *
+     * @param name  菜单名称
      * @param value 菜单值
      * @return boolean
      */
@@ -192,7 +192,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
         lambdaQueryWrapper.eq(SystemConfig::getName, name);
         List<SystemConfig> systemConfigs = dao.selectList(lambdaQueryWrapper);
         if (systemConfigs.size() >= 2) {
-            throw new CrmebException("配置名称存在多个请检查配置 eb_system_config 重复数据："+name+"条数："+systemConfigs.size());
+            throw new CrmebException("配置名称存在多个请检查配置 eb_system_config 重复数据：" + name + "条数：" + systemConfigs.size());
         } else if (systemConfigs.size() == 1) {
             systemConfigs.get(0).setValue(value);
             updateById(systemConfigs.get(0));
@@ -208,6 +208,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 根据formId查询数据
+     *
      * @param formId Integer id
      * @return HashMap<String, String>
      */
@@ -229,6 +230,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 根据name查询数据
+     *
      * @param name name
      * @return boolean
      */
@@ -240,6 +242,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 根据key获取配置
+     *
      * @param key key
      * @return List
      */
@@ -252,6 +255,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 获取面单默认配置信息
+     *
      * @return ExpressSheetVo
      */
     @Override
@@ -269,6 +273,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 更新配置信息
+     *
      * @param requestList 请求数组
      * @return Boolean
      */
@@ -284,6 +289,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 获取颜色配置
+     *
      * @return SystemConfig
      */
     @Override
@@ -297,6 +303,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 把数据同步到redis
+     *
      * @param name name
      * @author Mr.Zhang
      * @since 2020-04-16
@@ -316,6 +323,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 把数据同步到redis
+     *
      * @param systemConfigList List<SystemConfig> 需要同步的数据
      */
     private void async(List<SystemConfig> systemConfigList) {
@@ -330,6 +338,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 把数据同步到redis
+     *
      * @param name String
      * @author Mr.Zhang
      * @since 2020-04-16
@@ -344,6 +353,7 @@ public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigDao, System
 
     /**
      * 把数据同步到redis
+     *
      * @param name String
      * @return String
      */

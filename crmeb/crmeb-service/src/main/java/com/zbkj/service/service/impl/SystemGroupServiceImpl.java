@@ -2,11 +2,11 @@ package com.zbkj.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.zbkj.common.model.system.SystemGroup;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemGroupRequest;
 import com.zbkj.common.request.SystemGroupSearchRequest;
-import com.github.pagehelper.PageHelper;
-import com.zbkj.common.model.system.SystemGroup;
 import com.zbkj.service.dao.SystemGroupDao;
 import com.zbkj.service.service.SystemGroupService;
 import com.zbkj.service.service.UserService;
@@ -40,18 +40,19 @@ public class SystemGroupServiceImpl extends ServiceImpl<SystemGroupDao, SystemGr
     private UserService userService;
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<SystemGroup>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<SystemGroup>
+     */
     @Override
     public List<SystemGroup> getList(SystemGroupSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
 
         //带 SystemGroup 类的多条件查询
         LambdaQueryWrapper<SystemGroup> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(!StringUtils.isBlank(request.getKeywords())){
+        if (!StringUtils.isBlank(request.getKeywords())) {
             lambdaQueryWrapper.like(SystemGroup::getName, request.getKeywords());
         }
         lambdaQueryWrapper.orderByDesc(SystemGroup::getId);
@@ -60,6 +61,7 @@ public class SystemGroupServiceImpl extends ServiceImpl<SystemGroupDao, SystemGr
 
     /**
      * 新增组合数据
+     *
      * @param systemGroupRequest 新增参数
      */
     @Override
@@ -71,6 +73,7 @@ public class SystemGroupServiceImpl extends ServiceImpl<SystemGroupDao, SystemGr
 
     /**
      * 删除组合数据表
+     *
      * @param id Integer
      */
     @Override
@@ -85,7 +88,8 @@ public class SystemGroupServiceImpl extends ServiceImpl<SystemGroupDao, SystemGr
 
     /**
      * 修改组合数据表
-     * @param id integer id
+     *
+     * @param id                 integer id
      * @param systemGroupRequest 修改参数
      */
     @Override

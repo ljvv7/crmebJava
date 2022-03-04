@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zbkj.common.model.seckill.StoreSeckillManger;
 
 /**
- *  Mapper 接口
+ * Mapper 接口
  * +----------------------------------------------------------------------
  * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
  * +----------------------------------------------------------------------

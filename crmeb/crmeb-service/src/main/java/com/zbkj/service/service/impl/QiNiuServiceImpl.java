@@ -1,10 +1,10 @@
 package com.zbkj.service.service.impl;
 
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.vo.CloudVo;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
+import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.vo.CloudVo;
 import com.zbkj.service.service.QiNiuService;
 import com.zbkj.service.service.SystemAttachmentService;
 import org.slf4j.Logger;
@@ -39,6 +39,7 @@ public class QiNiuServiceImpl implements QiNiuService {
 
     /**
      * 同步到七牛云
+     *
      * @param cloudVo CloudVo
      * @author Mr.Zhang
      * @since 2020-05-06
@@ -50,8 +51,8 @@ public class QiNiuServiceImpl implements QiNiuService {
             logger.info("上传文件" + id + "开始：" + localFile);
 
             File file = new File(localFile);
-            if(!file.exists()){
-                logger.info("上传文件"+ id + localFile + "不存在：");
+            if (!file.exists()) {
+                logger.info("上传文件" + id + localFile + "不存在：");
                 return;
             }
 
@@ -71,7 +72,7 @@ public class QiNiuServiceImpl implements QiNiuService {
             logger.info("上传文件开始：" + localFile);
 
 //            File file = new File(localFile);
-            if(!file.exists()){
+            if (!file.exists()) {
                 logger.info("上传文件" + localFile + "不存在：");
                 return;
             }

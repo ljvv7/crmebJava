@@ -1,6 +1,5 @@
 package com.zbkj.common.request;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -10,7 +9,6 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -28,10 +26,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SmsApplyTempRequest对象", description="申请短信模板请求对象")
+@ApiModel(value = "SmsApplyTempRequest对象", description = "申请短信模板请求对象")
 public class SmsApplyTempRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "模板标题")
     @NotBlank(message = "模板标题不能为空")

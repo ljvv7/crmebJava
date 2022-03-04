@@ -39,17 +39,19 @@ public class WeChatMessageController {
 
     /**
      * 微信关键字回复
+     *
      * @author Mr.Zhang
      * @since 2020-04-22
      */
     @ApiOperation(value = "接受微信推送过来的消息")
     @RequestMapping(value = "/webHook", method = RequestMethod.POST)
-    public String webHook(HttpServletRequest request){
-       return weChatMessageService.init(request);
+    public String webHook(HttpServletRequest request) {
+        return weChatMessageService.init(request);
     }
 
     /**
      * 微信推送地址验证
+     *
      * @param signature
      * @param timestamp
      * @param nonce
@@ -57,7 +59,7 @@ public class WeChatMessageController {
      * @param response
      * @throws IOException
      */
-    @RequestMapping(value = { "/webHook" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/webHook"}, method = RequestMethod.GET)
     private void webHook(
             @RequestParam(value = "signature", required = false) String signature,
             @RequestParam(value = "timestamp", required = false) String timestamp,

@@ -25,10 +25,10 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="UserFundsMonitor对象", description="佣金")
+@ApiModel(value = "UserFundsMonitor对象", description = "佣金")
 public class UserFundsMonitor implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "充值用户UID")
     private Integer uid;

@@ -13,13 +13,13 @@ package com.zbkj.service.service;
  * | Author: CRMEB Team <admin@crmeb.com>
  * +----------------------------------------------------------------------
  */
- public interface OrderTaskService{
+public interface OrderTaskService {
 
-     void cancelByUser();
+    void cancelByUser();
 
-     void refundApply();
+    void refundApply();
 
-     void complete();
+    void complete();
 
     void orderPaySuccessAfter();
 

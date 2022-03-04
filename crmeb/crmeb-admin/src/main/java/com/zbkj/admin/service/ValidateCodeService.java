@@ -3,8 +3,6 @@ package com.zbkj.admin.service;
 
 import com.zbkj.admin.vo.ValidateCode;
 
-import java.util.HashMap;
-
 /**
  * ValidateCodeService 接口
  * +----------------------------------------------------------------------
@@ -21,6 +19,7 @@ public interface ValidateCodeService {
 
     /**
      * 获取图片验证码
+     *
      * @return CommonResult
      */
     ValidateCode get();

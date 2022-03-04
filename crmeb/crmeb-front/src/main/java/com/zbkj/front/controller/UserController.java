@@ -1,12 +1,12 @@
 package com.zbkj.front.controller;
 
 
-import com.zbkj.common.page.CommonPage;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.common.model.system.SystemUserLevel;
 import com.zbkj.common.model.user.User;
 import com.zbkj.common.model.user.UserExperienceRecord;
 import com.zbkj.common.model.user.UserIntegralRecord;
+import com.zbkj.common.page.CommonPage;
 import com.zbkj.common.request.*;
 import com.zbkj.common.response.*;
 import com.zbkj.front.service.UserCenterService;
@@ -27,15 +27,15 @@ import java.util.Map;
 
 /**
  * 用户 -- 用户中心
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController("FrontUserController")
@@ -190,7 +190,7 @@ public class UserController {
      */
     @ApiOperation(value = "推广人统计")
     @RequestMapping(value = "/spread/people/count", method = RequestMethod.GET)
-    public CommonResult<UserSpreadPeopleResponse>  getSpreadPeopleCount() {
+    public CommonResult<UserSpreadPeopleResponse> getSpreadPeopleCount() {
         return CommonResult.success(userCenterService.getSpreadPeopleCount());
     }
 
@@ -252,6 +252,7 @@ public class UserController {
 
     /**
      * 推广人排行
+     *
      * @return List<User>
      */
     @ApiOperation(value = "推广人排行")
@@ -262,6 +263,7 @@ public class UserController {
 
     /**
      * 佣金排行
+     *
      * @return 优惠券集合
      */
     @ApiOperation(value = "佣金排行")
@@ -284,12 +286,13 @@ public class UserController {
      */
     @ApiOperation(value = "推广海报图")
     @RequestMapping(value = "/user/spread/banner", method = RequestMethod.GET)
-    public CommonResult<List<UserSpreadBannerResponse>>  getSpreadBannerList() {
+    public CommonResult<List<UserSpreadBannerResponse>> getSpreadBannerList() {
         return CommonResult.success(userCenterService.getSpreadBannerList());
     }
 
     /**
      * 绑定推广关系（登录状态）
+     *
      * @param spreadPid 推广id
      * @return 绑定结果
      */

@@ -34,6 +34,56 @@ public class MyRecord implements Serializable {
 
     private Map<String, Object> columns;
 
+    /**
+     * @param o
+     * @return
+     * @desc 获取属性名数组
+     */
+    private static String[] getFiledName(Object o) {
+        Field[] fields = o.getClass().getDeclaredFields();
+        String[] fieldNames = new String[fields.length];
+        for (int i = 0; i < fields.length; i++) {
+            fieldNames[i] = fields[i].getName();
+        }
+        return fieldNames;
+    }
+
+    /**
+     * @param fieldName
+     * @param o
+     * @return
+     * @desc 根据属性名获取属性值
+     */
+    private static Object getFieldValueByName(String fieldName, Object o) {
+        try {
+            String firstLetter = fieldName.substring(0, 1).toUpperCase();
+            String getter = "get" + firstLetter + fieldName.substring(1);
+            Method method = o.getClass().getMethod(getter, new Class[]{});
+            Object value = method.invoke(o, new Object[]{});
+            return value;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("获取属性值失败！" + e, e);
+        }
+        return null;
+    }
+
+    /**
+     * @param fieldName
+     * @param o
+     * @return
+     * @desc 获取属性的数据类型
+     */
+    private static Object getFiledType(String fieldName, Object o) {
+        Field[] fields = o.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            if (Objects.equals(fieldName, field.getName())) {
+                return field.getType();
+            }
+        }
+        return null;
+    }
+
     void setColumnsMap(Map<String, Object> columns) {
         this.columns = columns;
     }
@@ -81,6 +131,7 @@ public class MyRecord implements Serializable {
 
     /**
      * Set columns value with Model object.
+     *
      * @param t
      * @param <T>
      * @return
@@ -92,8 +143,8 @@ public class MyRecord implements Serializable {
 
         for (int i = 0; i < fieldNames.length; i++) {
             String name = fieldNames[i];
-            if (!StringUtils.isEmpty(name) &&"serialVersionUID".equals(name)) {
-                continue ;
+            if (!StringUtils.isEmpty(name) && "serialVersionUID".equals(name)) {
+                continue;
             }
             Object value = getFieldValueByName(name, t);
             if (null != value) {
@@ -197,8 +248,8 @@ public class MyRecord implements Serializable {
     /**
      * Set column to record.
      *
-     * @param column the column name
-     * @param valueList  the value of the column
+     * @param column    the column name
+     * @param valueList the value of the column
      */
     public MyRecord set(String column, List<MyRecord> valueList) {
         List<HashMap<String, Object>> value = new ArrayList<>();
@@ -413,56 +464,6 @@ public class MyRecord implements Serializable {
      */
     public String toJson() {
         return JSON.toJSONString(getColumns());
-    }
-
-    /**
-     * @param o
-     * @return
-     * @desc 获取属性名数组
-     */
-    private static String[] getFiledName(Object o) {
-        Field[] fields = o.getClass().getDeclaredFields();
-        String[] fieldNames = new String[fields.length];
-        for (int i = 0; i < fields.length; i++) {
-            fieldNames[i] = fields[i].getName();
-        }
-        return fieldNames;
-    }
-
-    /**
-     * @param fieldName
-     * @param o
-     * @return
-     * @desc 根据属性名获取属性值
-     */
-    private static Object getFieldValueByName(String fieldName, Object o) {
-        try {
-            String firstLetter = fieldName.substring(0, 1).toUpperCase();
-            String getter = "get" + firstLetter + fieldName.substring(1);
-            Method method = o.getClass().getMethod(getter, new Class[]{});
-            Object value = method.invoke(o, new Object[]{});
-            return value;
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("获取属性值失败！" + e, e);
-        }
-        return null;
-    }
-
-    /**
-     * @param fieldName
-     * @param o
-     * @return
-     * @desc 获取属性的数据类型
-     */
-    private static Object getFiledType(String fieldName, Object o) {
-        Field[] fields = o.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if (Objects.equals(fieldName, field.getName())) {
-                return field.getType();
-            }
-        }
-        return null;
     }
 
 }

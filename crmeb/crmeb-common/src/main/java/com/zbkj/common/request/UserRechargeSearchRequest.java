@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="UserRechargeSearchRequest对象", description="用户充值记录查询对象")
+@ApiModel(value = "UserRechargeSearchRequest对象", description = "用户充值记录查询对象")
 public class UserRechargeSearchRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "搜索关键字")
     private String keywords;

@@ -28,10 +28,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_user_sign")
-@ApiModel(value="UserSign对象", description="签到记录表")
+@ApiModel(value = "UserSign对象", description = "签到记录表")
 public class UserSign implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;

@@ -17,11 +17,11 @@ import lombok.Data;
 @Data
 public class StoreDateRangeSqlPram {
 
+    private String startTime;
+    private String endTime;
+
     public StoreDateRangeSqlPram(String startTime, String endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
-    private String startTime;
-    private String endTime;
 }

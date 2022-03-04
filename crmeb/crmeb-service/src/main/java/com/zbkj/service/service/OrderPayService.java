@@ -16,18 +16,20 @@ import com.zbkj.common.response.OrderPayResultResponse;
  * | Author: CRMEB Team <admin@crmeb.com>
  * +----------------------------------------------------------------------
  */
-public interface OrderPayService{
+public interface OrderPayService {
 
     /**
      * 支付成功处理
+     *
      * @param storeOrder 订单
      */
     Boolean paySuccess(StoreOrder storeOrder);
 
     /**
      * 订单支付
+     *
      * @param orderPayRequest 支付参数
-     * @param ip    ip
+     * @param ip              ip
      * @return OrderPayResultResponse
      */
     OrderPayResultResponse payment(OrderPayRequest orderPayRequest, String ip);

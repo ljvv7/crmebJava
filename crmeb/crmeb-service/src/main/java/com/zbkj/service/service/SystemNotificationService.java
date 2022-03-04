@@ -26,6 +26,7 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 系统通知列表
+     *
      * @param request 查询对象
      * @return List
      */
@@ -33,6 +34,7 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 公众号模板开关
+     *
      * @param id 通知id
      * @return Boolean
      */
@@ -40,6 +42,7 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 小程序订阅模板开关
+     *
      * @param id 通知id
      * @return Boolean
      */
@@ -47,6 +50,7 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 发送短信开关
+     *
      * @param id 通知id
      * @return Boolean
      */
@@ -54,6 +58,7 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 通知详情
+     *
      * @param request 详情请求参数
      * @return NotificationInfoResponse
      */
@@ -61,6 +66,7 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 根据标识查询信息
+     *
      * @param mark 标识
      * @return SystemNotification
      */
@@ -68,12 +74,14 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 获取微信相关列表
+     *
      * @param type routine-小程序，public-公众号
      */
     List<SystemNotification> getListByWechat(String type);
 
     /**
      * 修改通知
+     *
      * @param request 请求参数
      * @return Boolean
      */
@@ -81,6 +89,7 @@ public interface SystemNotificationService extends IService<SystemNotification> 
 
     /**
      * 获取小程序订阅模板编号(小程序端调用)
+     *
      * @param type 场景类型(支付之前：beforePay|支付成功：afterPay|申请退款：refundApply|充值之前：beforeRecharge|创建砍价：createBargain|参与拼团：pink|取消拼团：cancelPink)
      * @return List
      */

@@ -1,8 +1,8 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.admin.service.ValidateCodeService;
 import com.zbkj.admin.vo.ValidateCode;
+import com.zbkj.common.response.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -35,10 +35,11 @@ public class ValidateCodeController {
 
     /**
      * 获取图片验证码
+     *
      * @return CommonResult
      */
 //    @PreAuthorize("hasAuthority('admin:validate:code:get')")
-    @ApiOperation(value="获取验证码")
+    @ApiOperation(value = "获取验证码")
     @GetMapping(value = "/get")
     public CommonResult<ValidateCode> get() {
         ValidateCode validateCode = validateCodeService.get();

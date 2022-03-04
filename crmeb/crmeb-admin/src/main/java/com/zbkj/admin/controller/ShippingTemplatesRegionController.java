@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- *  物流付费前端控制器
- *   +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * 物流付费前端控制器
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
@@ -38,12 +38,13 @@ public class ShippingTemplatesRegionController {
 
     /**
      * 根据模板id查询数据
+     *
      * @param tempId Integer 模板id
      */
     @PreAuthorize("hasAuthority('admin:shipping:templates:region:list')")
     @ApiOperation(value = "根据模板id查询数据")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<List<ShippingTemplatesRegionRequest>> getList(@RequestParam Integer tempId){
+    public CommonResult<List<ShippingTemplatesRegionRequest>> getList(@RequestParam Integer tempId) {
         return CommonResult.success(shippingTemplatesRegionService.getListGroup(tempId));
     }
 }

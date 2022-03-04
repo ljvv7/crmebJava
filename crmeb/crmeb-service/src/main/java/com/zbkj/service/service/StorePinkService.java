@@ -1,9 +1,9 @@
 package com.zbkj.service.service;
 
-import com.zbkj.common.request.PageParamRequest;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.common.model.combination.StorePink;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StorePinkSearchRequest;
 import com.zbkj.common.response.StorePinkAdminListResponse;
 import com.zbkj.common.response.StorePinkDetailResponse;
@@ -26,6 +26,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 获取拼团列表
+     *
      * @param request
      * @param pageParamRequest
      * @return
@@ -34,6 +35,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 获取拼团列表Cid
+     *
      * @param cid 拼团商品id
      * @return
      */
@@ -41,6 +43,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 实体查询
+     *
      * @param storePink
      * @return
      */
@@ -48,6 +51,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * PC拼团详情列表
+     *
      * @param pinkId 团长pinkId
      * @return
      */
@@ -55,6 +59,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 查询拼团列表
+     *
      * @param cid
      * @param kid
      */
@@ -62,6 +67,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 根据团长拼团id获取拼团人数
+     *
      * @param pinkId
      * @return
      */
@@ -74,6 +80,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 拼团成功
+     *
      * @param kid
      * @return
      */
@@ -81,6 +88,7 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 根据订单编号获取
+     *
      * @param orderId
      * @return
      */
@@ -88,12 +96,14 @@ public interface StorePinkService extends IService<StorePink> {
 
     /**
      * 获取最后3个拼团信息（不同用户）
+     *
      * @return List
      */
     List<StorePink> findSizePink(Integer size);
 
     /**
      * 获取拼团参与总人数
+     *
      * @return Integer
      */
     Integer getTotalPeople();

@@ -124,6 +124,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
     /**
      * 获取登录页图片
+     *
      * @return Map
      */
     @Override
@@ -142,6 +143,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
     /**
      * 获取管理员可访问目录
+     *
      * @return List<MenusResponse>
      */
     @Override

@@ -1,4 +1,3 @@
-
 package com.zbkj.common.vo;
 
 import io.swagger.annotations.ApiModel;
@@ -22,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="WxRefundVo", description="调用微信退款所需要的参数")
+@ApiModel(value = "WxRefundVo", description = "调用微信退款所需要的参数")
 public class WxRefundVo {
 
     @ApiModelProperty(value = "appId，公众号名称，由商户传入", required = true)

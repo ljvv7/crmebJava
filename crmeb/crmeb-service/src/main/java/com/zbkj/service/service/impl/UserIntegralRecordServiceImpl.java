@@ -7,20 +7,20 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.AdminIntegralSearchRequest;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.constants.IntegralRecordConstants;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.response.UserIntegralRecordResponse;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zbkj.common.utils.DateUtil;
-import com.zbkj.common.vo.dateLimitUtilVo;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.constants.IntegralRecordConstants;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.user.User;
 import com.zbkj.common.model.user.UserIntegralRecord;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.AdminIntegralSearchRequest;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.response.UserIntegralRecordResponse;
+import com.zbkj.common.utils.DateUtil;
+import com.zbkj.common.vo.dateLimitUtilVo;
 import com.zbkj.service.dao.UserIntegralRecordDao;
 import com.zbkj.service.service.UserIntegralRecordService;
 import com.zbkj.service.service.UserService;
@@ -63,8 +63,9 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
 
     /**
      * 根据订单编号、uid获取记录列表
+     *
      * @param orderNo 订单编号
-     * @param uid 用户uid
+     * @param uid     用户uid
      * @return 记录列表
      */
     @Override
@@ -77,7 +78,7 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
         if (CollUtil.isEmpty(recordList)) {
             return recordList;
         }
-        for (int i = 0; i < recordList.size();) {
+        for (int i = 0; i < recordList.size(); ) {
             UserIntegralRecord record = recordList.get(i);
             if (record.getType().equals(IntegralRecordConstants.INTEGRAL_RECORD_TYPE_ADD)) {
                 if (record.getStatus().equals(IntegralRecordConstants.INTEGRAL_RECORD_STATUS_COMPLETE)) {
@@ -104,7 +105,7 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
             // 查询对应的用户
             User user = userService.getById(record.getUid());
             if (ObjectUtil.isNull(user)) {
-                continue ;
+                continue;
             }
             record.setStatus(IntegralRecordConstants.INTEGRAL_RECORD_STATUS_COMPLETE);
             // 计算积分余额
@@ -126,7 +127,8 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
 
     /**
      * PC后台列表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      * @return 记录列表
      */
@@ -181,9 +183,10 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
 
     /**
      * 根据类型条件计算积分总数
-     * @param uid 用户uid
-     * @param type 类型：1-增加，2-扣减
-     * @param date 日期
+     *
+     * @param uid      用户uid
+     * @param type     类型：1-增加，2-扣减
+     * @param date     日期
      * @param linkType 关联类型
      * @return 积分总数
      */
@@ -210,7 +213,8 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
 
     /**
      * H5用户积分列表
-     * @param uid 用户uid
+     *
+     * @param uid              用户uid
      * @param pageParamRequest 分页参数
      * @return 记录列表
      */
@@ -227,6 +231,7 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
 
     /**
      * 获取用户冻结的积分
+     *
      * @param uid 用户uid
      * @return 积分数量
      */
@@ -247,6 +252,7 @@ public class UserIntegralRecordServiceImpl extends ServiceImpl<UserIntegralRecor
 
     /**
      * 获取需要解冻的记录列表
+     *
      * @return 记录列表
      */
     private List<UserIntegralRecord> findThawList() {

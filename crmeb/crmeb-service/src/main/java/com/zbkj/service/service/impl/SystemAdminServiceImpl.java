@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.system.SystemAdmin;
 import com.zbkj.common.model.system.SystemRole;
@@ -16,7 +17,6 @@ import com.zbkj.common.request.SystemAdminUpdateRequest;
 import com.zbkj.common.response.SystemAdminResponse;
 import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.utils.ValidateFormUtil;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.service.dao.SystemAdminDao;
 import com.zbkj.service.service.SystemAdminService;
 import com.zbkj.service.service.SystemRoleService;
@@ -54,7 +54,8 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 后台管理员列表
-     * @param request 请求参数
+     *
+     * @param request          请求参数
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -89,11 +90,11 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
             List<String> roleNames = new ArrayList<>();
             for (Integer roleId : roleIds) {
                 List<SystemRole> hasRoles = roleList.stream().filter(e -> e.getId().equals(roleId)).collect(Collectors.toList());
-                if (hasRoles.size()> 0) {
+                if (hasRoles.size() > 0) {
                     roleNames.add(hasRoles.stream().map(SystemRole::getRoleName).collect(Collectors.joining(",")));
                 }
             }
-            sar.setRoleNames(StringUtils.join(roleNames,","));
+            sar.setRoleNames(StringUtils.join(roleNames, ","));
             systemAdminResponses.add(sar);
         }
         return systemAdminResponses;
@@ -101,6 +102,7 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 新增管理员
+     *
      * @param systemAdminAddRequest 新增参数
      * @return Boolean
      */
@@ -126,6 +128,7 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 管理员名称唯一校验
+     *
      * @param account 管理员账号
      * @return Integer
      */
@@ -159,7 +162,8 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 校验账号唯一性（管理员更新时）
-     * @param id 管理员id
+     *
+     * @param id      管理员id
      * @param account 管理员账号
      */
     private void verifyAccount(Integer id, String account) {
@@ -174,7 +178,8 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 修改后台管理员状态
-     * @param id 管理员id
+     *
+     * @param id     管理员id
      * @param status 状态
      * @return Boolean
      */
@@ -190,6 +195,7 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 根据idList获取Map
+     *
      * @param adminIdList id数组
      * @return HashMap
      */
@@ -213,6 +219,7 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 修改后台管理员是否接收状态
+     *
      * @param id 管理员id
      * @return Boolean
      */
@@ -228,6 +235,7 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 获取可以接收短信的管理员
+     *
      * @return List
      */
     @Override
@@ -245,6 +253,7 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 管理员详情
+     *
      * @param id 管理员id
      * @return SystemAdmin
      */
@@ -259,6 +268,7 @@ public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminDao, SystemAd
 
     /**
      * 通过用户名获取用户
+     *
      * @param username 用户名
      * @return SystemAdmin
      */

@@ -25,10 +25,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_coupon")
-@ApiModel(value="StoreCouponSearchRequest对象", description="优惠券模板搜索")
+@ApiModel(value = "StoreCouponSearchRequest对象", description = "优惠券模板搜索")
 public class StoreCouponSearchRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "优惠券名称")
     private String name;

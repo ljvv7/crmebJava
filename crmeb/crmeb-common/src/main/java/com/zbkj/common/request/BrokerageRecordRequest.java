@@ -24,7 +24,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="BrokerageRecordRequest对象", description="佣金记录请求对象")
+@ApiModel(value = "BrokerageRecordRequest对象", description = "佣金记录请求对象")
 public class BrokerageRecordRequest implements Serializable {
 
     private static final long serialVersionUID = 3362714265772774491L;

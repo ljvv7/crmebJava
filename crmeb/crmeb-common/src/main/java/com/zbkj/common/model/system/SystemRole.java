@@ -28,10 +28,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_role")
-@ApiModel(value="SystemRole对象", description="身份管理表")
+@ApiModel(value = "SystemRole对象", description = "身份管理表")
 public class SystemRole implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "身份管理id")
     @TableId(value = "id", type = IdType.AUTO)

@@ -1,19 +1,19 @@
 package com.zbkj.service.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.github.pagehelper.PageInfo;
 import com.zbkj.common.config.CrmebConfig;
-import com.zbkj.common.page.CommonPage;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.page.CommonPage;
 import com.zbkj.common.request.*;
+import com.zbkj.common.response.StoreBargainResponse;
+import com.zbkj.common.response.StoreCombinationResponse;
 import com.zbkj.common.response.StoreOrderDetailResponse;
 import com.zbkj.common.response.StoreProductResponse;
-import com.github.pagehelper.PageInfo;
 import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.utils.ExportUtil;
-import com.zbkj.common.response.StoreBargainResponse;
-import com.zbkj.common.response.StoreCombinationResponse;
 import com.zbkj.common.vo.BargainProductExcelVo;
 import com.zbkj.common.vo.CombinationProductExcelVo;
 import com.zbkj.common.vo.OrderExcelVo;
@@ -30,17 +30,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-*  ExcelServiceImpl 接口实现
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * ExcelServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class ExcelServiceImpl implements ExcelService {
 
@@ -67,6 +67,7 @@ public class ExcelServiceImpl implements ExcelService {
 
     /**
      * 导出砍价商品
+     *
      * @param request 请求参数
      * @return 导出地址
      */
@@ -114,6 +115,7 @@ public class ExcelServiceImpl implements ExcelService {
 
     /**
      * 导出拼团商品
+     *
      * @param request 请求参数
      * @return 导出地址
      */
@@ -158,6 +160,7 @@ public class ExcelServiceImpl implements ExcelService {
 
     /**
      * 商品导出
+     *
      * @param request 请求参数
      * @return 导出地址
      */
@@ -168,7 +171,7 @@ public class ExcelServiceImpl implements ExcelService {
         pageParamRequest.setLimit(Constants.EXPORT_MAX_LIMIT);
         PageInfo<StoreProductResponse> storeProductResponsePageInfo = storeProductService.getAdminList(request, pageParamRequest);
         List<StoreProductResponse> list = storeProductResponsePageInfo.getList();
-        if(list.size() < 1){
+        if (list.size() < 1) {
             throw new CrmebException("没有可导出的数据！");
         }
 
@@ -176,13 +179,13 @@ public class ExcelServiceImpl implements ExcelService {
         List<String> cateIdListStr = list.stream().map(StoreProductResponse::getCateId).distinct().collect(Collectors.toList());
 
         HashMap<Integer, String> categoryNameList = new HashMap<Integer, String>();
-        if(cateIdListStr.size() > 0){
+        if (cateIdListStr.size() > 0) {
             String join = StringUtils.join(cateIdListStr, ",");
             List<Integer> cateIdList = CrmebUtil.stringToArray(join);
             categoryNameList = categoryService.getListInId(cateIdList);
         }
         List<ProductExcelVo> voList = CollUtil.newArrayList();
-        for (StoreProductResponse product : list ) {
+        for (StoreProductResponse product : list) {
             ProductExcelVo vo = new ProductExcelVo();
             vo.setStoreName(product.getStoreName());
             vo.setStoreInfo(product.getStoreInfo());
@@ -221,7 +224,7 @@ public class ExcelServiceImpl implements ExcelService {
     /**
      * 订单导出
      *
-     * @param request  查询条件
+     * @param request 查询条件
      * @return 文件名称
      */
     @Override
@@ -231,19 +234,19 @@ public class ExcelServiceImpl implements ExcelService {
         pageParamRequest.setLimit(Constants.EXPORT_MAX_LIMIT);
         CommonPage<StoreOrderDetailResponse> adminList = storeOrderService.getAdminList(request, pageParamRequest);
         List<StoreOrderDetailResponse> list = adminList.getList();
-        if(list.size() < 1){
+        if (list.size() < 1) {
             throw new CrmebException("没有可导出的数据！");
         }
 
         List<OrderExcelVo> voList = CollUtil.newArrayList();
-        for (StoreOrderDetailResponse order: list ) {
+        for (StoreOrderDetailResponse order : list) {
             OrderExcelVo vo = new OrderExcelVo();
             vo.setCreateTime(DateUtil.dateToStr(order.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
             vo.setOrderId(order.getOrderId());
             vo.setOrderType(order.getOrderType());
             vo.setPayPrice(order.getPayPrice().toString());
             vo.setPayTypeStr(order.getPayTypeStr());
-            vo.setProductName(order.getProductList().stream().map(item-> item.getInfo().getProductName()).collect(Collectors.joining(",")));
+            vo.setProductName(order.getProductList().stream().map(item -> item.getInfo().getProductName()).collect(Collectors.joining(",")));
             vo.setRealName(order.getRealName());
             vo.setStatusStr(order.getStatusStr().get("value"));
             voList.add(vo);

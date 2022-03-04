@@ -11,15 +11,15 @@ import com.zbkj.common.constants.Constants;
 import com.zbkj.common.constants.NotifyConstants;
 import com.zbkj.common.constants.UserConstants;
 import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.model.system.SystemNotification;
-import com.zbkj.common.request.BargainFrontRequest;
-import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.model.bargain.StoreBargain;
 import com.zbkj.common.model.bargain.StoreBargainUser;
 import com.zbkj.common.model.bargain.StoreBargainUserHelp;
-import com.zbkj.common.response.StoreBargainUserHelpResponse;
+import com.zbkj.common.model.system.SystemNotification;
 import com.zbkj.common.model.user.User;
 import com.zbkj.common.model.user.UserToken;
+import com.zbkj.common.request.BargainFrontRequest;
+import com.zbkj.common.response.StoreBargainUserHelpResponse;
+import com.zbkj.common.utils.DateUtil;
 import com.zbkj.service.dao.StoreBargainUserHelpDao;
 import com.zbkj.service.service.*;
 import org.springframework.beans.BeanUtils;
@@ -76,6 +76,7 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 列表
+     *
      * @param bargainUserId 砍价活动id
      * @return List<StoreBargainUserHelpResponse>
      */
@@ -102,6 +103,7 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 获取帮助砍价人数
+     *
      * @param bargainId 砍价商品ID
      * @return Long
      */
@@ -115,7 +117,8 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 获取帮助砍价人数
-     * @param bargainId 砍价商品ID
+     *
+     * @param bargainId     砍价商品ID
      * @param bargainUserId 砍价商品发起用户表id
      * @return Long
      */
@@ -130,6 +133,7 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 砍价
+     *
      * @param request 砍价请求参数
      * @return 砍价金额
      */
@@ -248,8 +252,9 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 发送消息通知
+     *
      * @param storeBargain 砍价商品
-     * @param user 发起砍价用户
+     * @param user         发起砍价用户
      */
     private void pushMessageOrder(StoreBargain storeBargain, User user, SystemNotification notification) {
         UserToken userToken;
@@ -271,13 +276,13 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
             // 小程序发送订阅消息
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_ROUTINE);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             // 组装数据
 //        temMap.put("thing6",  storeBargain.getTitle());
 //        temMap.put("amount3", storeBargain.getMinPrice().toString() + "元");
 //        temMap.put("thing7", "好腻害！你的朋友们已经帮你砍到底价了！");
-            temMap.put("thing1",  storeBargain.getTitle());
+            temMap.put("thing1", storeBargain.getTitle());
             temMap.put("amount2", storeBargain.getMinPrice().toString() + "元");
             temMap.put("thing3", "好腻害！你的朋友们已经帮你砍到底价了！");
             templateMessageService.pushMiniTemplateMessage(notification.getRoutineId(), temMap, userToken.getToken());
@@ -286,6 +291,7 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 获取参与砍价总人数（次）
+     *
      * @return Integer
      */
     @Override
@@ -297,6 +303,7 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 获取好友助力列表
+     *
      * @param bargainUserId 砍价用户表id
      * @return List<StoreBargainUserHelp>
      */
@@ -309,8 +316,9 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 是否帮砍过
+     *
      * @param bargainUserId 用户砍价活动id
-     * @param uid 用户uid
+     * @param uid           用户uid
      * @return Boolean
      */
     @Override
@@ -327,8 +335,9 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 获取该砍价商品用户的帮砍次数
-     * @param bargainId 砍价商品id
-     * @param uid 用户uid
+     *
+     * @param bargainId         砍价商品id
+     * @param uid               用户uid
      * @param bargainUserIdList 用户参与砍价活动id数组
      * @return Integer
      */
@@ -344,15 +353,14 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
 
     /**
      * 砍价金额计算
-     * @param storeBargain  砍价商品
-     * @param storeBargainUser 砍价商品用户
-     * @param helpCount     帮助砍价次数
-     * @return
-     * 砍价时在设置好的价格区间内以大于20%小于80%之间随机一个价格后 在总金额中减去,砍价最后一位不可随机价格,直接砍价到设置区间的最低价格为准
      *
+     * @param storeBargain     砍价商品
+     * @param storeBargainUser 砍价商品用户
+     * @param helpCount        帮助砍价次数
+     * @return 砍价时在设置好的价格区间内以大于20%小于80%之间随机一个价格后 在总金额中减去,砍价最后一位不可随机价格,直接砍价到设置区间的最低价格为准
+     * <p>
      * 剩余砍价金额 - 剩余砍价次数 * 0.01 = 可砍价金额
      * 可砍价金额 > 0.01 以大于20%小于80%之间随机一个价格
-     *
      */
     private BigDecimal helpBargain(StoreBargain storeBargain, StoreBargainUser storeBargainUser, Long helpCount) {
         BigDecimal minPrice = storeBargainUser.getBargainPriceMin();//底价
@@ -409,7 +417,8 @@ public class StoreBargainUserHelpServiceImpl extends ServiceImpl<StoreBargainUse
     /**
      * 获取用户帮砍次数
      * 用户对商品砍了几次(不包含自己)
-     * @param uid 用户uid
+     *
+     * @param uid       用户uid
      * @param bargainId 砍价商品id
      * @return Integer
      */

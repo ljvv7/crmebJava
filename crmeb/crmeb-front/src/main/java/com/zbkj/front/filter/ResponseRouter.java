@@ -18,6 +18,10 @@ import com.zbkj.service.service.SystemAttachmentService;
  */
 public class ResponseRouter {
 
+    public static String un() {
+        return "";
+    }
+
     public String filter(String data, String path) {
         boolean result = un().contains(path);
         if (result) {
@@ -29,7 +33,7 @@ public class ResponseRouter {
         }
 
         //根据需要处理返回值
-        if (data.contains(Constants.UPLOAD_TYPE_IMAGE+"/") && !data.contains("data:image/png;base64")) {
+        if (data.contains(Constants.UPLOAD_TYPE_IMAGE + "/") && !data.contains("data:image/png;base64")) {
             data = SpringUtil.getBean(SystemAttachmentService.class).prefixImage(data);
         }
 
@@ -38,9 +42,5 @@ public class ResponseRouter {
         }
 
         return data;
-    }
-
-    public static String un() {
-        return "";
     }
 }

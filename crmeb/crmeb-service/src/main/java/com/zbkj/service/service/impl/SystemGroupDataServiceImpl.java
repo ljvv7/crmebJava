@@ -5,14 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.constants.SysGroupDataConstants;
+import com.zbkj.common.model.system.SystemGroupData;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemFormItemCheckRequest;
 import com.zbkj.common.request.SystemGroupDataRequest;
 import com.zbkj.common.request.SystemGroupDataSearchRequest;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.model.system.SystemGroupData;
 import com.zbkj.service.dao.SystemGroupDataDao;
 import com.zbkj.service.service.SystemAttachmentService;
 import com.zbkj.service.service.SystemFormTempService;
@@ -51,11 +51,12 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
     private SystemAttachmentService systemAttachmentService;
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<SystemGroupData>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<SystemGroupData>
+     */
     @Override
     public List<SystemGroupData> getList(SystemGroupDataSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -71,6 +72,7 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
 
     /**
      * 保存数据
+     *
      * @param systemGroupDataRequest SystemGroupDataRequest 数据保存
      * @return Boolean
      */
@@ -92,7 +94,8 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
 
     /**
      * 修改组合数据详情表
-     * @param id integer id
+     *
+     * @param id      integer id
      * @param request 修改参数
      * @return bool
      */
@@ -115,6 +118,7 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
 
     /**
      * 通过gid获取列表 推荐二开使用
+     *
      * @param gid Integer group id
      * @return List<T>
      */
@@ -150,12 +154,13 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
     }
 
     /**
-      * 通过gid获取列表
-      * @param gid Integer group id
-      * @author Mr.Zhang
-      * @since 2020-05-15
-      * @return List<HashMap<String, Object>>
-      */
+     * 通过gid获取列表
+     *
+     * @param gid Integer group id
+     * @return List<HashMap < String, Object>>
+     * @author Mr.Zhang
+     * @since 2020-05-15
+     */
     @Override
     public List<HashMap<String, Object>> getListMapByGid(Integer gid) {
         SystemGroupDataSearchRequest systemGroupDataSearchRequest = new SystemGroupDataSearchRequest();
@@ -188,6 +193,7 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
 
     /**
      * 通过gid获取列表
+     *
      * @param groupDataId Integer group id
      * @return <T>
      */
@@ -215,6 +221,7 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
 
     /**
      * 获取个人中心菜单
+     *
      * @return HashMap<String, Object>
      */
     @Override
@@ -227,6 +234,7 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
 
     /**
      * 获取列表通过gid
+     *
      * @param gid gid
      * @return 列表
      */
@@ -240,6 +248,7 @@ public class SystemGroupDataServiceImpl extends ServiceImpl<SystemGroupDataDao, 
 
     /**
      * 删除通过gid
+     *
      * @param gid gid
      * @return Boolean
      */

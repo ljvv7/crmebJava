@@ -1,7 +1,7 @@
 package com.zbkj.common.page;
 
-import com.zbkj.common.constants.Constants;
 import com.github.pagehelper.PageInfo;
+import com.zbkj.common.constants.Constants;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -26,7 +26,7 @@ public class CommonPage<T> {
     private Integer page = Constants.DEFAULT_PAGE;
     private Integer limit = Constants.DEFAULT_LIMIT;
     private Integer totalPage = 0;
-    private Long total = 0L ;
+    private Long total = 0L;
     private List<T> list = new ArrayList<>();
 
 
@@ -59,6 +59,7 @@ public class CommonPage<T> {
 
     /**
      * 将PageHelper分页后的 PageInfo 转为分页信息
+     *
      * @return
      */
     public static <T> CommonPage<T> restPage(PageInfo<T> pageInfo) {

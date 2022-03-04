@@ -1,14 +1,14 @@
 package com.zbkj.common.response;
 
-import java.math.BigDecimal;
-import java.io.Serializable;
-
 import com.zbkj.common.page.CommonPage;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 订单表
@@ -25,10 +25,10 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemWriteOffOrderResponse对象", description="核销订单")
+@ApiModel(value = "SystemWriteOffOrderResponse对象", description = "核销订单")
 public class SystemWriteOffOrderResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单总数量")
     private Long total = 0L;

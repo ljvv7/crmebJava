@@ -24,12 +24,12 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OrderInfoResponse对象", description="订单详情响应对象")
+@ApiModel(value = "OrderInfoResponse对象", description = "订单详情响应对象")
 public class OrderInfoResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-//    @ApiModelProperty(value = "订单id")
+    //    @ApiModelProperty(value = "订单id")
 //    private Integer orderId;
     @ApiModelProperty(value = "attrId")
     private Integer attrId;

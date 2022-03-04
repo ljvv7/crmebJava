@@ -30,10 +30,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_coupon")
-@ApiModel(value="StoreCouponRequest对象", description="优惠券表")
+@ApiModel(value = "StoreCouponRequest对象", description = "优惠券表")
 public class StoreCouponRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "优惠券名称", required = true)
     @NotBlank(message = "请填写优惠券名称")

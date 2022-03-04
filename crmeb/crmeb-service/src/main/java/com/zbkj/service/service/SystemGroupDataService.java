@@ -1,8 +1,8 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.system.SystemGroupData;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemGroupDataRequest;
 import com.zbkj.common.request.SystemGroupDataSearchRequest;
 
@@ -25,26 +25,30 @@ public interface SystemGroupDataService extends IService<SystemGroupData> {
 
     /**
      * 分页组合数据详情
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     List<SystemGroupData> getList(SystemGroupDataSearchRequest request, PageParamRequest pageParamRequest);
 
     /**
      * 新增组合数据详情
+     *
      * @param systemGroupDataRequest SystemFormCheckRequest 新增参数
      */
     Boolean create(SystemGroupDataRequest systemGroupDataRequest);
 
     /**
      * 修改组合数据详情表
-     * @param id integer id
+     *
+     * @param id      integer id
      * @param request 修改参数
      */
     Boolean update(Integer id, SystemGroupDataRequest request);
 
     /**
      * 通过gid获取列表 推荐二开使用
+     *
      * @param gid Integer group id
      * @return List<T>
      */
@@ -54,6 +58,7 @@ public interface SystemGroupDataService extends IService<SystemGroupData> {
 
     /**
      * 通过gid获取列表
+     *
      * @param groupDataId Integer group id
      * @return <T>
      */
@@ -61,12 +66,14 @@ public interface SystemGroupDataService extends IService<SystemGroupData> {
 
     /**
      * 获取个人中心菜单
+     *
      * @return HashMap<String, Object>
      */
     HashMap<String, Object> getMenuUser();
 
     /**
      * 获取列表通过gid
+     *
      * @param gid gid
      * @return 列表
      */
@@ -74,6 +81,7 @@ public interface SystemGroupDataService extends IService<SystemGroupData> {
 
     /**
      * 删除通过gid
+     *
      * @param gid gid
      * @return Boolean
      */

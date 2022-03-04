@@ -1,9 +1,9 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.model.system.SystemConfig;
 import com.zbkj.common.request.SystemConfigAdminRequest;
 import com.zbkj.common.request.SystemFormCheckRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.SystemConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,6 +40,7 @@ public class SystemConfigController {
 
     /**
      * 查询配置表信息
+     *
      * @param formId Integer
      */
     @PreAuthorize("hasAuthority('admin:system:config:info')")
@@ -52,6 +53,7 @@ public class SystemConfigController {
 
     /**
      * 整体保存表单数据
+     *
      * @param systemFormCheckRequest SystemFormCheckRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:system:config:save:form')")
@@ -66,6 +68,7 @@ public class SystemConfigController {
 
     /**
      * 检测表单name是否存在
+     *
      * @param name name
      */
     @PreAuthorize("hasAuthority('admin:system:config:check')")
@@ -77,7 +80,8 @@ public class SystemConfigController {
 
     /**
      * 配置表中仅仅存储对应的配置
-     * @param key 配置表中的配置字段
+     *
+     * @param key   配置表中的配置字段
      * @param value 对应的值
      */
     @PreAuthorize("hasAuthority('admin:system:config:saveuniq')")
@@ -89,13 +93,14 @@ public class SystemConfigController {
 
     /**
      * 根据key获取表单配置数据
+     *
      * @param key 配置表的的字段
      */
     @PreAuthorize("hasAuthority('admin:system:config:getuniq')")
     @ApiOperation(value = "表单配置根据key获取")
     @RequestMapping(value = "/getuniq", method = RequestMethod.GET)
     public CommonResult<Object> justGetUniq(@RequestParam String key) {
-        return CommonResult.success(systemConfigService.getValueByKey(key),"success");
+        return CommonResult.success(systemConfigService.getValueByKey(key), "success");
     }
 
     /**

@@ -24,10 +24,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="WeChatAuthorizeLoginGetOpenIdResponse对象", description="微信开放平台获取accessToken对象")
+@ApiModel(value = "WeChatAuthorizeLoginGetOpenIdResponse对象", description = "微信开放平台获取accessToken对象")
 public class WeChatOauthToken implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "accessToken接口调用凭证")
     @TableField(value = "access_token")

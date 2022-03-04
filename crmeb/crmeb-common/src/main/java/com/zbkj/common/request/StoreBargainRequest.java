@@ -27,10 +27,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreBargain对象", description="砍价表")
+@ApiModel(value = "StoreBargain对象", description = "砍价表")
 public class StoreBargainRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "砍价商品id|新增时不填，修改时必填")
     private Integer id;

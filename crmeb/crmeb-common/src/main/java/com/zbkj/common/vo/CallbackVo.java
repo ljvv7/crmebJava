@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="CallbackVo对象", description="微信回调")
+@ApiModel(value = "CallbackVo对象", description = "微信回调")
 public class CallbackVo {
     @ApiModelProperty(value = "调用接口提交的公众账号ID")
     @JsonProperty(value = "appid")

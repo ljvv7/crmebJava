@@ -24,10 +24,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemConfigFormItemVo对象", description="item对象")
+@ApiModel(value = "SystemConfigFormItemVo对象", description = "item对象")
 public class SystemConfigFormItemConfigVo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "")
     private String label;

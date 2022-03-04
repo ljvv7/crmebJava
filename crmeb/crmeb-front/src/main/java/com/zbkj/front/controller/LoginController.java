@@ -20,15 +20,15 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 用户登陆 前端控制器
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController("FrontLoginController")
@@ -66,25 +66,26 @@ public class LoginController {
      */
     @ApiOperation(value = "退出")
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public CommonResult<String> loginOut(HttpServletRequest request){
+    public CommonResult<String> loginOut(HttpServletRequest request) {
         loginService.loginOut(request);
         return CommonResult.success();
     }
 
     /**
      * 发送短信登录验证码
+     *
      * @param phone 手机号码
      * @return 发送是否成功
      */
     @ApiOperation(value = "发送短信登录验证码")
     @RequestMapping(value = "/sendCode", method = RequestMethod.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name="phone", value="手机号码", required = true)
+            @ApiImplicitParam(name = "phone", value = "手机号码", required = true)
     })
-    public CommonResult<Object> sendCode(@RequestParam String phone){
-        if(smsService.sendCommonCode(phone)){
+    public CommonResult<Object> sendCode(@RequestParam String phone) {
+        if (smsService.sendCommonCode(phone)) {
             return CommonResult.success("发送成功");
-        }else{
+        } else {
             return CommonResult.failed("发送失败");
         }
     }

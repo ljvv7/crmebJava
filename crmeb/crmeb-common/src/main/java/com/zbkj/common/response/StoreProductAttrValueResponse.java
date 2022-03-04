@@ -1,8 +1,5 @@
 package com.zbkj.common.response;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,7 +11,6 @@ import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * 商品属性值表
@@ -32,10 +28,10 @@ import java.util.HashMap;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_attr_value")
-@ApiModel(value="StoreProductAttrValue对象", description="商品属性值表")
+@ApiModel(value = "StoreProductAttrValue对象", description = "商品属性值表")
 public class StoreProductAttrValueResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "ID")
     private Integer id;
 

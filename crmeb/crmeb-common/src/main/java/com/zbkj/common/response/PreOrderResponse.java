@@ -24,7 +24,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="PreOrderResponse对象", description="预下单响应对象")
+@ApiModel(value = "PreOrderResponse对象", description = "预下单响应对象")
 public class PreOrderResponse implements Serializable {
 
     private static final long serialVersionUID = 7282892323898493847L;

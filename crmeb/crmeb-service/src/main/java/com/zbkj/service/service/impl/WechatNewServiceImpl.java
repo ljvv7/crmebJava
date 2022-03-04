@@ -39,16 +39,16 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- *  微信公用服务实现类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * 微信公用服务实现类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Service
 public class WechatNewServiceImpl implements WechatNewService {
@@ -100,6 +100,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取小程序accessToken
+     *
      * @return accessToken
      */
     @Override
@@ -128,6 +129,7 @@ public class WechatNewServiceImpl implements WechatNewService {
      * 获取开放平台access_token
      * 通过 code 获取
      * 公众号使用
+     *
      * @return 开放平台accessToken对象
      */
     @Override
@@ -157,9 +159,10 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取开放平台用户信息
+     *
      * @param accessToken 调用凭证
-     * @param openid 普通用户的标识，对当前开发者帐号唯一
-     * 公众号使用
+     * @param openid      普通用户的标识，对当前开发者帐号唯一
+     *                    公众号使用
      * @return 开放平台用户信息对象
      */
     @Override
@@ -181,6 +184,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 小程序登录凭证校验
+     *
      * @return 小程序登录校验对象
      */
     @Override
@@ -210,6 +214,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取微信公众号js配置参数
+     *
      * @return WeChatJsSdkConfigResponse
      */
     @Override
@@ -227,7 +232,7 @@ public class WechatNewServiceImpl implements WechatNewService {
         String ticket = getJsApiTicket();
         String nonceStr = CrmebUtil.getUuid();
         Long timestamp = DateUtil.currentSeconds();
-        String signature = getJsSDKSignature(nonceStr, ticket, timestamp , url);
+        String signature = getJsSDKSignature(nonceStr, ticket, timestamp, url);
 
         WeChatJsSdkConfigResponse response = new WeChatJsSdkConfigResponse();
         response.setUrl(url);
@@ -242,7 +247,8 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 生成小程序码
-     * @param page 必须是已经发布的小程序存在的页面
+     *
+     * @param page  必须是已经发布的小程序存在的页面
      * @param scene 最大32个可见字符，只支持数字，大小写英文以及部分特殊字符：!#$&'()*+,/:;=?@-._~，其它字符请自行编码为合法字符
      * @return 小程序码
      */
@@ -256,8 +262,8 @@ public class WechatNewServiceImpl implements WechatNewService {
         map.put("width", 200);
         byte[] bytes = restTemplateUtil.postJsonDataAndReturnBuffer(url, new JSONObject(map));
         String response = new String(bytes);
-        if (StringUtils.contains(response,"errcode")) {
-            logger.error("微信生成小程序码异常"+response);
+        if (StringUtils.contains(response, "errcode")) {
+            logger.error("微信生成小程序码异常" + response);
             JSONObject data = JSONObject.parseObject(response);
             // 保存到微信异常表
             wxExceptionDispose(data, "微信小程序生成小程序码异常");
@@ -267,8 +273,8 @@ public class WechatNewServiceImpl implements WechatNewService {
                 url = StrUtil.format(WeChatConstants.WECHAT_MINI_QRCODE_UNLIMITED_URL, miniAccessToken);
                 bytes = restTemplateUtil.postJsonDataAndReturnBuffer(url, new JSONObject(map));
                 response = new String(bytes);
-                if (StringUtils.contains(response,"errcode")) {
-                    logger.error("微信生成小程序码重试异常"+response);
+                if (StringUtils.contains(response, "errcode")) {
+                    logger.error("微信生成小程序码重试异常" + response);
                     JSONObject data2 = JSONObject.parseObject(response);
                     // 保存到微信异常表
                     wxExceptionDispose(data2, "微信小程序重试生成小程序码异常");
@@ -293,6 +299,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信预下单接口(统一下单)
+     *
      * @param unifiedorderVo 预下单请求对象
      * @return 微信预下单返回对象
      */
@@ -315,7 +322,7 @@ public class WechatNewServiceImpl implements WechatNewService {
                 wxPayExceptionDispose(map, "微信支付预下单异常");
                 wechatPayInfo.setErrCode(map.get("return_code").toString());
                 wechatPayInfoService.save(wechatPayInfo);
-                throw new CrmebException("微信下单失败1！" +  responseVo.getReturnMsg());
+                throw new CrmebException("微信下单失败1！" + responseVo.getReturnMsg());
             }
 
             if (responseVo.getResultCode().toUpperCase().equals("FAIL")) {
@@ -337,6 +344,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 生成微信订单表对象
+     *
      * @param vo 预下单数据
      * @return WechatPayInfo
      */
@@ -367,6 +375,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信支付查询订单
+     *
      * @return 支付订单查询结果
      */
     @Override
@@ -383,7 +392,7 @@ public class WechatNewServiceImpl implements WechatNewService {
             record.setColums(map);
             if (record.getStr("return_code").toUpperCase().equals("FAIL")) {
                 wxPayQueryExceptionDispose(record, "微信支付查询订单通信异常");
-                throw new CrmebException("微信订单查询失败1！" +  record.getStr("return_msg"));
+                throw new CrmebException("微信订单查询失败1！" + record.getStr("return_msg"));
             }
 
             if (record.getStr("result_code").toUpperCase().equals("FAIL")) {
@@ -404,6 +413,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信公众号发送模板消息
+     *
      * @param templateMessage 模板消息对象
      * @return 是否发送成功
      */
@@ -428,6 +438,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信小程序发送订阅消息
+     *
      * @param templateMessage 消息对象
      * @return 是否发送成功
      */
@@ -469,6 +480,7 @@ public class WechatNewServiceImpl implements WechatNewService {
     /**
      * 获取微信公众号自定义菜单配置
      * （使用本自定义菜单查询接口可以获取默认菜单和全部个性化菜单信息）
+     *
      * @return 公众号自定义菜单
      */
     @Override
@@ -491,6 +503,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 创建微信自定义菜单
+     *
      * @param data 菜单json字符串
      * @return 创建结果
      */
@@ -516,6 +529,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 删除微信自定义菜单
+     *
      * @return 删除结果
      */
     @Override
@@ -539,6 +553,7 @@ public class WechatNewServiceImpl implements WechatNewService {
     /**
      * 企业号上传其他类型永久素材
      * 获取url
+     *
      * @param type 素材类型:图片（image）、语音（voice）、视频（video），普通文件(file)
      */
     @Override
@@ -549,8 +564,9 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信申请退款
+     *
      * @param wxRefundVo 微信申请退款对象
-     * @param path 商户p12证书绝对路径
+     * @param path       商户p12证书绝对路径
      * @return 申请退款结果对象
      */
     @Override
@@ -573,7 +589,7 @@ public class WechatNewServiceImpl implements WechatNewService {
         WxRefundResponseVo responseVo = CrmebUtil.mapToObj(map, WxRefundResponseVo.class);
         if (responseVo.getReturnCode().toUpperCase().equals("FAIL")) {
             wxPayExceptionDispose(map, "微信申请退款异常1");
-            throw new CrmebException("微信申请退款失败1！" +  responseVo.getReturnMsg());
+            throw new CrmebException("微信申请退款失败1！" + responseVo.getReturnMsg());
         }
 
         if (responseVo.getResultCode().toUpperCase().equals("FAIL")) {
@@ -586,6 +602,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取我的公众号模板消息列表
+     *
      * @return List
      */
     @Override
@@ -610,6 +627,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 删除微信公众号模板消息
+     *
      * @param templateId 模板编号
      * @return Boolean
      */
@@ -636,6 +654,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 添加公众号模板消息
+     *
      * @param templateIdShort 模板库中模板的编号，有“TM**”和“OPENTMTM**”等形式
      * @return 公众号模板编号（自己的）
      */
@@ -662,6 +681,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取当前帐号下的个人模板列表
+     *
      * @return List
      */
     @Override
@@ -686,6 +706,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 删除微信小程序订阅消息
+     *
      * @return Boolean
      */
     @Override
@@ -711,6 +732,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取小程序平台上的标准模板
+     *
      * @param tempKey 模板编号
      * @return List
      */
@@ -736,6 +758,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 添加小程序订阅消息
+     *
      * @param tempKey 模板编号
      * @param kidList 小程序订阅消息模板kid数组
      * @return 小程序订阅消息模板编号（自己的）
@@ -765,10 +788,11 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取JS-SDK的签名
-     * @param nonceStr 随机字符串
-     * @param ticket ticket
+     *
+     * @param nonceStr  随机字符串
+     * @param ticket    ticket
      * @param timestamp 时间戳
-     * @param url url
+     * @param url       url
      * @return 签名
      */
     private String getJsSDKSignature(String nonceStr, String ticket, Long timestamp, String url) {
@@ -780,6 +804,7 @@ public class WechatNewServiceImpl implements WechatNewService {
     /**
      * 获取JS-SDK的ticket
      * 用于计算签名
+     *
      * @return ticket
      */
     private String getJsApiTicket() {
@@ -808,9 +833,10 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 获取微信accessToken
-     * @param appId appId
+     *
+     * @param appId  appId
      * @param secret secret
-     * @param type mini-小程序，public-公众号，app-app
+     * @param type   mini-小程序，public-公众号，app-app
      * @return WeChatAccessTokenVo
      */
     private WeChatAccessTokenVo getAccessToken(String appId, String secret, String type) {
@@ -831,8 +857,9 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信异常处理
+     *
      * @param jsonObject 微信返回数据
-     * @param remark 备注
+     * @param remark     备注
      */
     private void wxExceptionDispose(JSONObject jsonObject, String remark) {
         WechatExceptions wechatExceptions = new WechatExceptions();
@@ -847,7 +874,8 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信支付异常处理
-     * @param map 微信返回数据
+     *
+     * @param map    微信返回数据
      * @param remark 备注
      */
     private void wxPayExceptionDispose(HashMap<String, Object> map, String remark) {
@@ -869,6 +897,7 @@ public class WechatNewServiceImpl implements WechatNewService {
 
     /**
      * 微信支付查询异常处理
+     *
      * @param record 微信返回数据
      * @param remark 备注
      */

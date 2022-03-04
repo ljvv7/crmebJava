@@ -34,12 +34,14 @@ public interface AdminLoginService {
 
     /**
      * 获取登录页图片
+     *
      * @return Map
      */
     Map<String, Object> getLoginPic();
 
     /**
      * 获取管理员可访问目录
+     *
      * @return List<MenusResponse>
      */
     List<MenusResponse> getMenus();

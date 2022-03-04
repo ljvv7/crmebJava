@@ -23,7 +23,7 @@ import java.util.List;
 @Data
 public class StoreCombinationResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "拼团商品ID")
     private Integer id;
@@ -152,7 +152,7 @@ public class StoreCombinationResponse implements Serializable {
 
     @ApiModelProperty(value = "商品规格值")
 //    private List<StoreProductAttrValue> productValue;
-    private HashMap<String,Object> productValue;
+    private HashMap<String, Object> productValue;
 
     @ApiModelProperty(value = "商品单双规格")
     private Boolean specType;

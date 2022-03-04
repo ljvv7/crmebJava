@@ -20,29 +20,24 @@ import java.util.Objects;
 @Service
 public class WechatMediaServiceImpl implements WechatMediaService {
 
+    private static final long maxSizeImage = 1024 * 1024 * 10;
+    private static final String suffixNameImage = "bmp,png,jpeg,jpg,gif";
+    private static final long maxSizeVoice = 1024 * 1024 * 2;
+    private static final String suffixNameVoice = "mp3,wma,wav,amr";
     @Autowired
     private WechatNewService wechatNewService;
 
-    private static final long maxSizeImage = 1024 * 1024 * 10;
-
-    private static final String suffixNameImage = "bmp,png,jpeg,jpg,gif";
-
-    private static final long maxSizeVoice = 1024 * 1024 * 2;
-
-    private static final String suffixNameVoice = "mp3,wma,wav,amr";
-
-
-
     /**
      * 上传素材到微信素材库
+     *
      * @param file MultipartFile 上传文件
      * @param type String 类型 媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）
      * @return String
      */
-    public  Map<String, String> upload(MultipartFile file, String type) {
-        try{
+    public Map<String, String> upload(MultipartFile file, String type) {
+        try {
             String[] split = Objects.requireNonNull(file.getOriginalFilename()).split("\\.");
-            String suffixName = split[split.length-1];
+            String suffixName = split[split.length - 1];
             isValidPic(file.getSize(), suffixName, type);
 
             // 需要注意：这个是微信2016年的企业号上传素材接口，企业号在微信的最后维护时间在2016-07-19
@@ -59,7 +54,7 @@ public class WechatMediaServiceImpl implements WechatMediaService {
             map.put("name", file.getOriginalFilename().replace(suffixName, ""));
 
             return map;
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new CrmebException(e.getMessage());
         }
 
@@ -69,7 +64,8 @@ public class WechatMediaServiceImpl implements WechatMediaService {
 
     /**
      * 是否符合微信规范
-     * @param size long 文件大小
+     *
+     * @param size       long 文件大小
      * @param suffixName String 后缀名
      */
     private void isValidPic(long size, String suffixName, String type) {
@@ -91,12 +87,13 @@ public class WechatMediaServiceImpl implements WechatMediaService {
 
     /**
      * 参数配置
+     *
      * @author Mr.Zhang
      */
     private JSONObject getConfig() {
         String data = "{" +
-                "image:{size:\""+maxSizeImage+"\", suffix: \""+suffixNameImage+"\"}, " +
-                "voice:{size:\""+maxSizeVoice+"\", suffix: \""+suffixNameVoice+"\"}" +
+                "image:{size:\"" + maxSizeImage + "\", suffix: \"" + suffixNameImage + "\"}, " +
+                "voice:{size:\"" + maxSizeVoice + "\", suffix: \"" + suffixNameVoice + "\"}" +
                 "}";
         return JSONObject.parseObject(data);
     }

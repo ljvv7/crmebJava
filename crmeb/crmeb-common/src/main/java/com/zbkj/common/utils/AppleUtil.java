@@ -15,15 +15,15 @@ import java.security.PublicKey;
 
 /**
  * 苹果工具类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 public class AppleUtil {
 
@@ -31,6 +31,7 @@ public class AppleUtil {
 
     /**
      * 获取苹果的公钥
+     *
      * @return
      */
     private static JSONArray getAuthKeys() {
@@ -44,18 +45,18 @@ public class AppleUtil {
         return arr;
     }
 
-    public static Boolean verify(String jwt) throws  Exception{
+    public static Boolean verify(String jwt) throws Exception {
         JSONArray arr = getAuthKeys();
-        if(arr == null){
+        if (arr == null) {
             return false;
         }
         JSONObject authKey = null;
 
         //先取苹果第一个key进行校验
         authKey = JSONObject.parseObject(arr.getString(0));
-        if(verifyExc(jwt, authKey)){
+        if (verifyExc(jwt, authKey)) {
             return true;
-        }else{
+        } else {
             //再取第二个key校验
             authKey = JSONObject.parseObject(arr.getString(1));
             return verifyExc(jwt, authKey);
@@ -65,7 +66,8 @@ public class AppleUtil {
 
     /**
      * 对前端传来的identityToken进行验证
-     * @param jwt 对应前端传来的 identityToken
+     *
+     * @param jwt     对应前端传来的 identityToken
      * @param authKey 苹果的公钥 authKey
      * @return
      * @throws Exception
@@ -107,13 +109,14 @@ public class AppleUtil {
     /**
      * 对前端传来的JWT字符串identityToken的第二部分进行解码
      * 主要获取其中的aud和sub，aud大概对应ios前端的包名，sub大概对应当前用户的授权的openID
+     *
      * @param identityToken iosToken
-     * @return  {"aud":"com.xkj.****","sub":"000***.8da764d3f9e34d2183e8da08a1057***.0***","c_hash":"UsKAuEoI-****","email_verified":"true","auth_time":1574673481,"iss":"https://appleid.apple.com","exp":1574674081,"iat":1574673481,"email":"****@qq.com"}
+     * @return {"aud":"com.xkj.****","sub":"000***.8da764d3f9e34d2183e8da08a1057***.0***","c_hash":"UsKAuEoI-****","email_verified":"true","auth_time":1574673481,"iss":"https://appleid.apple.com","exp":1574674081,"iat":1574673481,"email":"****@qq.com"}
      */
-    public static JSONObject parserIdentityToken(String identityToken){
+    public static JSONObject parserIdentityToken(String identityToken) {
         String[] arr = identityToken.split("\\.");
-        String decode = new String (Base64.decodeBase64(arr[1]));
-        String substring = decode.substring(0, decode.indexOf("}")+1);
+        String decode = new String(Base64.decodeBase64(arr[1]));
+        String substring = decode.substring(0, decode.indexOf("}") + 1);
         return JSON.parseObject(substring);
     }
 }

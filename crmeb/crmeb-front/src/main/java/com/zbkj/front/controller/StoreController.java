@@ -1,9 +1,9 @@
 package com.zbkj.front.controller;
 
 
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreNearRequest;
 import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.response.StoreNearResponse;
 import com.zbkj.service.service.SystemStoreService;
 import io.swagger.annotations.Api;
@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 提货点
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController("StoreController")
@@ -40,7 +40,7 @@ public class StoreController {
      */
     @ApiOperation(value = "附近的提货点")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public CommonResult<StoreNearResponse> register(@Validated StoreNearRequest request, @Validated PageParamRequest pageParamRequest){
+    public CommonResult<StoreNearResponse> register(@Validated StoreNearRequest request, @Validated PageParamRequest pageParamRequest) {
         return CommonResult.success(systemStoreService.getNearList(request, pageParamRequest));
     }
 }

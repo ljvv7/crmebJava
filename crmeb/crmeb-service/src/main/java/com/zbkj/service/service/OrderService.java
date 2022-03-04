@@ -9,21 +9,22 @@ import java.util.List;
 
 /**
  * H5端订单操作
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 public interface OrderService {
 
     /**
      * 订单列表
-     * @param type 类型
+     *
+     * @param type        类型
      * @param pageRequest 分页
      * @return 订单集合
      */
@@ -31,24 +32,28 @@ public interface OrderService {
 
     /**
      * 订单详情
+     *
      * @param orderId 订单id
      */
     StoreOrderDetailInfoResponse detailOrder(String orderId);
 
     /**
      * 订单状态数量
+     *
      * @return 订单状态数据量
      */
     OrderDataResponse orderData();
 
     /**
      * 查询退款理由
+     *
      * @return 退款理由集合
      */
     List<String> getRefundReason();
 
     /**
      * 订单删除
+     *
      * @param id 订单id
      * @return Boolean
      */
@@ -56,6 +61,7 @@ public interface OrderService {
 
     /**
      * 创建订单商品评价
+     *
      * @param request 请求参数
      * @return Boolean
      */
@@ -63,6 +69,7 @@ public interface OrderService {
 
     /**
      * 订单收货
+     *
      * @param id 订单id
      * @return Boolean
      */
@@ -70,6 +77,7 @@ public interface OrderService {
 
     /**
      * 订单取消
+     *
      * @param id 订单id
      * @return Boolean
      */
@@ -77,6 +85,7 @@ public interface OrderService {
 
     /**
      * 订单退款申请
+     *
      * @param request 申请参数
      * @return Boolean
      */
@@ -84,6 +93,7 @@ public interface OrderService {
 
     /**
      * 订单退款申请Task使用
+     *
      * @param applyList 退款List
      * @return Boolean
      */
@@ -96,6 +106,7 @@ public interface OrderService {
 
     /**
      * 获取待评价商品信息
+     *
      * @param getProductReply 订单详情参数
      * @return 待评价
      */
@@ -103,6 +114,7 @@ public interface OrderService {
 
     /**
      * 获取申请订单退款信息
+     *
      * @param orderId 订单编号
      * @return ApplyRefundOrderInfoResponse
      */
@@ -110,6 +122,7 @@ public interface OrderService {
 
     /**
      * 订单预下单
+     *
      * @param request 预下单请求参数
      * @return PreOrderResponse
      */
@@ -117,6 +130,7 @@ public interface OrderService {
 
     /**
      * 加载预下单信息
+     *
      * @param preOrderNo 预下单号
      * @return 预下单信息
      */
@@ -124,6 +138,7 @@ public interface OrderService {
 
     /**
      * 计算订单价格
+     *
      * @param request 计算订单价格请求对象
      * @return ComputedOrderPriceResponse
      */
@@ -131,6 +146,7 @@ public interface OrderService {
 
     /**
      * 创建订单
+     *
      * @param orderRequest 创建订单请求参数
      * @return MyRecord 订单编号
      */
@@ -138,6 +154,7 @@ public interface OrderService {
 
     /**
      * 获取支付配置
+     *
      * @return PreOrderResponse
      */
     PreOrderResponse getPayConfig();

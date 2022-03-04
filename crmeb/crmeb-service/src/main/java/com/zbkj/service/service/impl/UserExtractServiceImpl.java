@@ -8,24 +8,24 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.BrokerageRecordConstants;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.response.UserExtractRecordResponse;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zbkj.common.utils.DateUtil;
-import com.zbkj.common.vo.dateLimitUtilVo;
+import com.zbkj.common.constants.BrokerageRecordConstants;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.finance.UserExtract;
+import com.zbkj.common.model.user.User;
+import com.zbkj.common.model.user.UserBrokerageRecord;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserExtractRequest;
 import com.zbkj.common.request.UserExtractSearchRequest;
 import com.zbkj.common.response.BalanceResponse;
+import com.zbkj.common.response.UserExtractRecordResponse;
 import com.zbkj.common.response.UserExtractResponse;
-import com.zbkj.common.model.user.User;
-import com.zbkj.common.model.user.UserBrokerageRecord;
+import com.zbkj.common.utils.DateUtil;
+import com.zbkj.common.vo.dateLimitUtilVo;
 import com.zbkj.service.dao.UserExtractDao;
 import com.zbkj.service.service.*;
 import org.apache.commons.lang3.StringUtils;
@@ -45,17 +45,17 @@ import java.util.stream.Collectors;
 import static java.math.BigDecimal.ZERO;
 
 /**
-*  UserExtractServiceImpl 接口实现
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * UserExtractServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtract> implements UserExtractService {
 
@@ -79,13 +79,14 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @author Mr.Zhang
-    * @since 2020-05-11
-    * @return List<UserExtract>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<UserExtract>
+     * @author Mr.Zhang
+     * @since 2020-05-11
+     */
     @Override
     public List<UserExtract> getList(UserExtractSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -95,11 +96,11 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
         if (!StringUtils.isBlank(request.getKeywords())) {
             lambdaQueryWrapper.and(i -> i.
                     or().like(UserExtract::getWechat, request.getKeywords()).   //微信号
-                    or().like(UserExtract::getRealName, request.getKeywords()). //名称
-                    or().like(UserExtract::getBankCode, request.getKeywords()). //银行卡
-                    or().like(UserExtract::getBankAddress, request.getKeywords()). //开户行
-                    or().like(UserExtract::getAlipayCode, request.getKeywords()). //支付宝
-                    or().like(UserExtract::getFailMsg, request.getKeywords()) //失败原因
+                            or().like(UserExtract::getRealName, request.getKeywords()). //名称
+                            or().like(UserExtract::getBankCode, request.getKeywords()). //银行卡
+                            or().like(UserExtract::getBankAddress, request.getKeywords()). //开户行
+                            or().like(UserExtract::getAlipayCode, request.getKeywords()). //支付宝
+                            or().like(UserExtract::getFailMsg, request.getKeywords()) //失败原因
             );
         }
 
@@ -171,9 +172,10 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 提现总金额
+     *
+     * @return BalanceResponse
      * @author Mr.Zhang
      * @since 2020-05-11
-     * @return BalanceResponse
      */
     @Override
     public BigDecimal getWithdrawn(String startTime, String endTime) {
@@ -182,9 +184,10 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 审核中总金额
+     *
+     * @return BalanceResponse
      * @author Mr.Zhang
      * @since 2020-05-11
-     * @return BalanceResponse
      */
     private BigDecimal getWithdrawning(String startTime, String endTime) {
         return getSum(null, 0, startTime, endTime);
@@ -192,14 +195,15 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 根据状态获取总额
+     *
      * @return BigDecimal
      */
     private BigDecimal getSum(Integer userId, int status, String startTime, String endTime) {
         LambdaQueryWrapper<UserExtract> lqw = Wrappers.lambdaQuery();
         if (null != userId) {
-            lqw.eq(UserExtract::getUid,userId);
+            lqw.eq(UserExtract::getUid, userId);
         }
-        lqw.eq(UserExtract::getStatus,status);
+        lqw.eq(UserExtract::getStatus, status);
         if (StringUtils.isNotBlank(startTime) && StringUtils.isNotBlank(endTime)) {
             lqw.between(UserExtract::getCreateTime, startTime, endTime);
         }
@@ -213,6 +217,7 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 获取用户对应的提现数据
+     *
      * @param userId 用户id
      * @return 提现数据
      */
@@ -221,7 +226,7 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
         QueryWrapper<UserExtract> qw = new QueryWrapper<>();
         qw.select("SUM(extract_price) as extract_price,count(id) as id, uid");
         qw.ge("status", 1);
-        qw.eq("uid",userId);
+        qw.eq("uid", userId);
         qw.groupBy("uid");
         UserExtract ux = dao.selectOne(qw);
         UserExtractResponse uexr = new UserExtractResponse();
@@ -229,7 +234,7 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
         if (null != ux) {
             uexr.setExtractCountNum(ux.getId()); // 这里的id其实是数量，借变量传递
             uexr.setExtractCountPrice(ux.getExtractPrice());
-        }else{
+        } else {
             uexr.setExtractCountNum(0); // 这里的id其实是数量，借变量传递
             uexr.setExtractCountPrice(ZERO);
         }
@@ -311,7 +316,8 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 获取提现记录列表
-     * @param userId 用户uid
+     *
+     * @param userId           用户uid
      * @param pageParamRequest 分页参数
      * @return PageInfo
      */
@@ -347,6 +353,7 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 获取用户提现总金额
+     *
      * @param userId 用户uid
      * @return BigDecimal
      */
@@ -358,6 +365,7 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 提现申请
+     *
      * @return Boolean
      */
     @Override
@@ -420,7 +428,8 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 修改提现申请
-     * @param id 申请id
+     *
+     * @param id                 申请id
      * @param userExtractRequest 具体参数
      */
     @Override
@@ -433,6 +442,7 @@ public class UserExtractServiceImpl extends ServiceImpl<UserExtractDao, UserExtr
 
     /**
      * 提现申请待审核数量
+     *
      * @return Integer
      */
     @Override

@@ -1,9 +1,9 @@
 package com.zbkj.admin.controller;
 
 import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.AdminIntegralSearchRequest;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.response.UserIntegralRecordResponse;
 import com.zbkj.service.service.UserIntegralRecordService;
 import io.swagger.annotations.Api;
@@ -40,7 +40,8 @@ public class UserIntegralController {
 
     /**
      * 积分分页列表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:user:integral:list')")

@@ -1,12 +1,12 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.product.StoreProductReply;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreProductReplyAddRequest;
 import com.zbkj.common.request.StoreProductReplyCommentRequest;
 import com.zbkj.common.request.StoreProductReplySearchRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.response.StoreProductReplyResponse;
 import com.zbkj.service.service.StoreProductReplyService;
 import io.swagger.annotations.Api;
@@ -41,14 +41,15 @@ public class StoreProductReplyController {
 
     /**
      * 分页显示评论表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:product:reply:list')")
     @ApiOperation(value = "分页列表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<StoreProductReplyResponse>>  getList(@Validated StoreProductReplySearchRequest request,
-            @Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<StoreProductReplyResponse>> getList(@Validated StoreProductReplySearchRequest request,
+                                                                       @Validated PageParamRequest pageParamRequest) {
         CommonPage<StoreProductReplyResponse> storeProductReplyCommonPage =
                 CommonPage.restPage(storeProductReplyService.getList(request, pageParamRequest));
         return CommonResult.success(storeProductReplyCommonPage);
@@ -56,6 +57,7 @@ public class StoreProductReplyController {
 
     /**
      * 新增评论表
+     *
      * @param request 新增参数
      */
     @PreAuthorize("hasAuthority('admin:product:reply:save')")
@@ -71,6 +73,7 @@ public class StoreProductReplyController {
 
     /**
      * 删除评论表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:product:reply:delete')")
@@ -86,6 +89,7 @@ public class StoreProductReplyController {
 
     /**
      * 查询评论表信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:product:reply:info')")
@@ -94,21 +98,22 @@ public class StoreProductReplyController {
     public CommonResult<StoreProductReply> info(@PathVariable Integer id) {
         StoreProductReply storeProductReply = storeProductReplyService.getById(id);
         return CommonResult.success(storeProductReply);
-   }
+    }
 
     /**
      * 回复商品评论
-     * @param request  StoreProductReplyCommentRequest 回复参数
+     *
+     * @param request StoreProductReplyCommentRequest 回复参数
      */
     @PreAuthorize("hasAuthority('admin:product:reply:comment')")
-   @ApiOperation(value = "回复")
-   @RequestMapping(value = "/comment", method = RequestMethod.POST)
-   public CommonResult<String> comment(@RequestBody StoreProductReplyCommentRequest request) {
-       if (storeProductReplyService.comment(request)) {
-           return CommonResult.success();
-       }
-       return CommonResult.failed();
-   }
+    @ApiOperation(value = "回复")
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    public CommonResult<String> comment(@RequestBody StoreProductReplyCommentRequest request) {
+        if (storeProductReplyService.comment(request)) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
+    }
 }
 
 

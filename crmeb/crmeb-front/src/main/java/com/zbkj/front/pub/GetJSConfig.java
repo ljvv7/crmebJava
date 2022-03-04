@@ -28,7 +28,7 @@ public class GetJSConfig {
     @PreAuthorize("hasAuthority('public:jsconfig:getcrmebchatconfig')")
     @ApiOperation(value = "CRMEB-chat客服统计")
     @RequestMapping(value = "/getcrmebchatconfig", method = RequestMethod.GET)
-    public String set(){
+    public String set() {
         return systemConfigService.getValueByKey(Constants.JS_CONFIG_CRMEB_CHAT_TONGJI);
     }
 }

@@ -28,7 +28,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreSeckillAddRequest对象", description="秒杀商品添加请求对象")
+@ApiModel(value = "StoreSeckillAddRequest对象", description = "秒杀商品添加请求对象")
 public class StoreSeckillAddRequest {
 
     @ApiModelProperty(value = "商品秒杀产品表id|新增时不填，修改时必填")

@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * 商品ExcelVo对象类
@@ -24,10 +23,10 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ProductExcelVo对象", description = "产品导出")
+@ApiModel(value = "ProductExcelVo对象", description = "产品导出")
 public class ProductExcelVo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "商品名称")
     private String storeName;

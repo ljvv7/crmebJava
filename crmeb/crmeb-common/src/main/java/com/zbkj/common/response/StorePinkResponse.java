@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 @Data
 public class StorePinkResponse {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "拼团ID")
     private Integer id;

@@ -1,7 +1,7 @@
 package com.zbkj.common.request;
 
-import com.zbkj.common.constants.RegularConstants;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zbkj.common.constants.RegularConstants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,10 +27,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="LoginMobileRequest对象", description="手机号注册")
+@ApiModel(value = "LoginMobileRequest对象", description = "手机号注册")
 public class LoginMobileRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "手机号", required = true)
     @NotBlank(message = "手机号不能为空")
@@ -44,7 +44,6 @@ public class LoginMobileRequest implements Serializable {
     @ApiModelProperty(value = "推广人id")
     @JsonProperty(value = "spread_spid")
     private Integer spreadPid;
-
 
 
 }

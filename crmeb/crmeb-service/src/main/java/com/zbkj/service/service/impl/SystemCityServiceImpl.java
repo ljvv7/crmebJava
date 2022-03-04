@@ -49,6 +49,7 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
 
     /**
      * 列表
+     *
      * @param request 请求参数
      * @return List<SystemCity>
      */
@@ -64,10 +65,11 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
 
     /**
      * 根据父级id获取数据
+     *
      * @param parentId integer parentId
+     * @return Object
      * @author Mr.Zhang
      * @since 2020-04-17
-     * @return Object
      */
     private Object getList(Integer parentId) {
         LambdaQueryWrapper<SystemCity> lambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -75,9 +77,11 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
         lambdaQueryWrapper.in(SystemCity::getIsShow, true);
         return dao.selectList(lambdaQueryWrapper);
     }
+
     /**
      * 修改状态
-     * @param id 城市id
+     *
+     * @param id     城市id
      * @param status 状态
      */
     @Override
@@ -94,7 +98,8 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
 
     /**
      * 修改城市
-     * @param id 城市id
+     *
+     * @param id      城市id
      * @param request 修改参数
      */
     @Override
@@ -108,8 +113,10 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
         }
         return result;
     }
+
     /**
      * 获取tree结构的列表
+     *
      * @return Object
      */
     @Override
@@ -123,6 +130,7 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
 
     /**
      * 获取所有城市cityId
+     *
      * @return List<Integer>
      */
     @Override
@@ -157,6 +165,7 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
 
     /**
      * 数据整体刷入redis
+     *
      * @author Mr.Zhang
      * @since 2020-05-18
      */
@@ -166,16 +175,17 @@ public class SystemCityServiceImpl extends ServiceImpl<SystemCityDao, SystemCity
 
     /**
      * 根据城市名称获取城市详细数据
-     * @author 大粽子
+     *
      * @param cityName 城市名称
      * @return 城市数据
+     * @author 大粽子
      */
     @Override
     public SystemCity getCityByCityName(String cityName) {
         LambdaQueryWrapper<SystemCity> systemCityLambdaQueryWrapper = Wrappers.lambdaQuery();
         systemCityLambdaQueryWrapper
-                .eq(SystemCity::getName,cityName)
-                .eq(SystemCity::getIsShow,1)
+                .eq(SystemCity::getName, cityName)
+                .eq(SystemCity::getIsShow, 1)
                 .eq(SystemCity::getLevel, 1);
         return getOne(systemCityLambdaQueryWrapper);
     }

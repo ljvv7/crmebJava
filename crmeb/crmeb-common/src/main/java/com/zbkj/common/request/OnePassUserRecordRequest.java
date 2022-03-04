@@ -33,7 +33,7 @@ public class OnePassUserRecordRequest {
 
     @ApiModelProperty(value = "记录类型:sms,短信;copy,产品复制;expr_query,物流查询;expr_dump,电子面单", required = true)
     @NotBlank(message = "记录类型不能为空")
-    @StringContains(limitValues = {"sms","copy","expr_query","expr_dump"}, message = "未知的记录类型")
+    @StringContains(limitValues = {"sms", "copy", "expr_query", "expr_dump"}, message = "未知的记录类型")
     private String type;
 
     @ApiModelProperty(value = "短信状态(短信类型时必传)：0发送中，1成功，2失败，3全部")

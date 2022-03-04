@@ -75,7 +75,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    public AuthenticationManager authenticationManager() throws Exception {
 //        return new CusAuthenticationManager(customAuthenticationProvider);
 //    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(new CustomAuthenticationProvider(new UserDetailServiceImpl()));
@@ -101,48 +100,48 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // CRSF禁用，因为不使用session
         http.cors().and().csrf().disable()
-            // 认证失败处理类
-            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler())
+                // 认证失败处理类
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler())
                 .accessDeniedHandler(accessDeniedHandler()).and()
-            // 基于token，所以不需要session
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            // 过滤请求
-            .authorizeRequests()
-            // 跨域预检请求
+                // 基于token，所以不需要session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                // 过滤请求
+                .authorizeRequests()
+                // 跨域预检请求
 //            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            // 对于登录login 验证码captchaImage 和其他放行的目录 允许匿名访问"/citylife/front/**"
-            .antMatchers("/api/admin/login", "/api/admin/validate/code/get").permitAll()
-            .antMatchers("/api/admin/getLoginPic").permitAll()
+                // 对于登录login 验证码captchaImage 和其他放行的目录 允许匿名访问"/citylife/front/**"
+                .antMatchers("/api/admin/login", "/api/admin/validate/code/get").permitAll()
+                .antMatchers("/api/admin/getLoginPic").permitAll()
                 // 放行资源路径
-            .antMatchers("/"+ Constants.UPLOAD_TYPE_IMAGE +"/**").anonymous()
+                .antMatchers("/" + Constants.UPLOAD_TYPE_IMAGE + "/**").anonymous()
                 // 放行图片、文件上传
-            .antMatchers("/api/admin/upload/image").permitAll()
-            .antMatchers("/api/admin/upload/file").permitAll()
+                .antMatchers("/api/admin/upload/image").permitAll()
+                .antMatchers("/api/admin/upload/file").permitAll()
 //            .antMatchers("/wx/user/*/login","/citylife/nocheck/**").anonymous()
-            .antMatchers(
-                    HttpMethod.GET,
-                    "/*.html",
-                    "/**/*.html",
-                    "/**/*.css",
-                    "/**/*.js"
-            ).permitAll()
-            .antMatchers("/profile/**").anonymous()
-            .antMatchers("/common/download**").anonymous()
-            .antMatchers("/common/download/resource**").anonymous()
-            .antMatchers("/doc.html").permitAll()
-            .antMatchers("/swagger-resources/**").permitAll()
-            .antMatchers("/webjars/**").permitAll()
-            .antMatchers("/v2/**").permitAll()
-            .antMatchers("/swagger-ui.html/**").permitAll()
-            .antMatchers("/*/api-docs").anonymous()
-            .antMatchers("/druid/**").anonymous()
-            .antMatchers("/captcha/get", "/captcha/check").anonymous()
-            .antMatchers("/api/admin/payment/callback/**").anonymous()
-            .antMatchers("/api/public/**").anonymous()
-            // 除上面外的所有请求全部需要鉴权认证
-            .anyRequest().authenticated()
-            .and()
-            .headers().frameOptions().disable();// 防止iframe 造成跨域
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/*.html",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js"
+                ).permitAll()
+                .antMatchers("/profile/**").anonymous()
+                .antMatchers("/common/download**").anonymous()
+                .antMatchers("/common/download/resource**").anonymous()
+                .antMatchers("/doc.html").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/v2/**").permitAll()
+                .antMatchers("/swagger-ui.html/**").permitAll()
+                .antMatchers("/*/api-docs").anonymous()
+                .antMatchers("/druid/**").anonymous()
+                .antMatchers("/captcha/get", "/captcha/check").anonymous()
+                .antMatchers("/api/admin/payment/callback/**").anonymous()
+                .antMatchers("/api/public/**").anonymous()
+                // 除上面外的所有请求全部需要鉴权认证
+                .anyRequest().authenticated()
+                .and()
+                .headers().frameOptions().disable();// 防止iframe 造成跨域
 //        http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
         // 开启登录认证流程过滤器

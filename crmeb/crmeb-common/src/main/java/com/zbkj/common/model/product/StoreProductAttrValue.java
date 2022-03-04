@@ -1,17 +1,17 @@
 package com.zbkj.common.model.product;
 
-import java.math.BigDecimal;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 商品属性值表
@@ -29,10 +29,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_attr_value")
-@ApiModel(value="StoreProductAttrValue对象", description="商品属性值表")
+@ApiModel(value = "StoreProductAttrValue对象", description = "商品属性值表")
 public class StoreProductAttrValue implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "attrId")
     @TableId(value = "id", type = IdType.AUTO)

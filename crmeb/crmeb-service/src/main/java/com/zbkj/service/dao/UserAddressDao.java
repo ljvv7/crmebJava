@@ -1,7 +1,7 @@
 package com.zbkj.service.dao;
 
-import com.zbkj.common.model.user.UserAddress;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zbkj.common.model.user.UserAddress;
 
 /**
  * 用户地址表 Mapper 接口

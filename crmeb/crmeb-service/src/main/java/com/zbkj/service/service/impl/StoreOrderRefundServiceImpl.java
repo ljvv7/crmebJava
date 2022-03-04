@@ -3,11 +3,11 @@ package com.zbkj.service.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.constants.PayConstants;
+import com.zbkj.common.model.order.StoreOrder;
 import com.zbkj.common.request.StoreOrderRefundRequest;
 import com.zbkj.common.utils.RestTemplateUtil;
 import com.zbkj.common.utils.WxPayUtil;
 import com.zbkj.common.vo.WxRefundVo;
-import com.zbkj.common.model.order.StoreOrder;
 import com.zbkj.service.dao.StoreOrderDao;
 import com.zbkj.service.service.StoreOrderRefundService;
 import com.zbkj.service.service.SystemConfigService;
@@ -42,6 +42,7 @@ public class StoreOrderRefundServiceImpl extends ServiceImpl<StoreOrderDao, Stor
 
     /**
      * 退款 需要优化
+     *
      * @author Mr.Zhang
      * @since 2020-06-03
      */
@@ -52,6 +53,7 @@ public class StoreOrderRefundServiceImpl extends ServiceImpl<StoreOrderDao, Stor
 
     /**
      * 公共号退款
+     *
      * @param request
      * @param storeOrder
      */

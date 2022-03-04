@@ -23,6 +23,7 @@ public interface LoginService {
 
     /**
      * 账号密码登录
+     *
      * @return LoginResponse
      */
     LoginResponse login(LoginRequest loginRequest);
@@ -34,7 +35,8 @@ public interface LoginService {
 
     /**
      * 老绑定分销关系
-     * @param user User 用户user类
+     *
+     * @param user      User 用户user类
      * @param spreadUid Integer 推广人id
      * @return Boolean
      */
@@ -42,6 +44,7 @@ public interface LoginService {
 
     /**
      * 推出登录
+     *
      * @param request HttpServletRequest
      */
     void loginOut(HttpServletRequest request);

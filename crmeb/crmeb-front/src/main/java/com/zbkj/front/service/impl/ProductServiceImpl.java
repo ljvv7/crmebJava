@@ -3,11 +3,9 @@ package com.zbkj.front.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.common.constants.CategoryConstants;
 import com.zbkj.common.constants.Constants;
-import com.zbkj.common.constants.RedisConstatns;
 import com.zbkj.common.constants.SysConfigConstants;
 import com.zbkj.common.model.product.StoreProduct;
 import com.zbkj.common.model.product.StoreProductAttr;
@@ -38,17 +36,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
-* IndexServiceImpl 接口实现
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * IndexServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -93,12 +91,13 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 获取分类
+     *
      * @return List<CategoryTreeVo>
      */
     @Override
     public List<CategoryTreeVo> getCategory() {
         List<CategoryTreeVo> listTree = categoryService.getListTree(CategoryConstants.CATEGORY_TYPE_PRODUCT, 1, "");
-        for (int i = 0; i < listTree.size();) {
+        for (int i = 0; i < listTree.size(); ) {
             CategoryTreeVo categoryTreeVo = listTree.get(i);
             if (!categoryTreeVo.getPid().equals(0)) {
                 listTree.remove(i);
@@ -111,6 +110,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 商品列表
+     *
      * @return CommonPage<IndexProductResponse>
      */
     @Override
@@ -172,7 +172,8 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 获取商品详情
-     * @param id 商品编号
+     *
+     * @param id   商品编号
      * @param type normal-正常，video-视频
      * @return 商品详情信息
      */
@@ -216,7 +217,7 @@ public class ProductServiceImpl implements ProductService {
         if (ObjectUtil.isNotNull(user)) {
             // 查询用户是否收藏收藏
             user = userService.getInfo();
-            productDetailResponse.setUserCollect(storeProductRelationService.getLikeOrCollectByUser(user.getUid(), id,false).size() > 0);
+            productDetailResponse.setUserCollect(storeProductRelationService.getLikeOrCollectByUser(user.getUid(), id, false).size() > 0);
             // 判断是否开启分销
             String brokerageFuncStatus = systemConfigService.getValueByKey(SysConfigConstants.CONFIG_KEY_BROKERAGE_FUNC_STATUS);
             if (brokerageFuncStatus.equals(Constants.COMMON_SWITCH_OPEN)) {// 分销开启
@@ -253,6 +254,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 获取商品SKU详情
+     *
      * @param id 商品编号
      * @return 商品详情信息
      */
@@ -282,7 +284,7 @@ public class ProductServiceImpl implements ProductService {
             BeanUtils.copyProperties(storeProductAttrValue, atr);
             // 设置会员价
             if (ObjectUtil.isNotNull(userLevel)) {
-                BigDecimal vipPrice = atr.getPrice().multiply(new BigDecimal(userLevel.getDiscount())).divide(new BigDecimal(100), 2 ,BigDecimal.ROUND_HALF_UP);
+                BigDecimal vipPrice = atr.getPrice().multiply(new BigDecimal(userLevel.getDiscount())).divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
                 atr.setVipPrice(vipPrice);
             }
             skuMap.put(atr.getSuk(), atr);
@@ -294,8 +296,9 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 商品评论列表
-     * @param proId 商品编号
-     * @param type 评价等级|0=全部,1=好评,2=中评,3=差评
+     *
+     * @param proId            商品编号
+     * @param type             评价等级|0=全部,1=好评,2=中评,3=差评
      * @param pageParamRequest 分页参数
      * @return PageInfo<ProductReplyResponse>
      */
@@ -306,6 +309,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 产品评价数量和好评度
+     *
      * @return StoreProductReplayCountResponse
      */
     @Override
@@ -322,9 +326,10 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 获取商品佣金区间
-     * @param isSub 是否单独计算分佣
+     *
+     * @param isSub         是否单独计算分佣
      * @param attrValueList 商品属性列表
-     * @param isPromoter 是否推荐人
+     * @param isPromoter    是否推荐人
      * @return String 金额区间
      */
     private String getPacketPriceRange(Boolean isSub, List<StoreProductAttrValue> attrValueList, Boolean isPromoter) {
@@ -337,11 +342,11 @@ public class ProductServiceImpl implements ProductService {
         BigDecimal minPrice;
         // 获取佣金比例区间
         if (isSub) { // 是否单独分拥
-            maxPrice = attrValueList.stream().map(StoreProductAttrValue::getBrokerage).reduce(BigDecimal.ZERO,BigDecimal::max);
-            minPrice = attrValueList.stream().map(StoreProductAttrValue::getBrokerage).reduce(BigDecimal.ZERO,BigDecimal::min);
+            maxPrice = attrValueList.stream().map(StoreProductAttrValue::getBrokerage).reduce(BigDecimal.ZERO, BigDecimal::max);
+            minPrice = attrValueList.stream().map(StoreProductAttrValue::getBrokerage).reduce(BigDecimal.ZERO, BigDecimal::min);
         } else {
-            BigDecimal _maxPrice = attrValueList.stream().map(StoreProductAttrValue::getPrice).reduce(BigDecimal.ZERO,BigDecimal::max);
-            BigDecimal _minPrice = attrValueList.stream().map(StoreProductAttrValue::getPrice).reduce(BigDecimal.ZERO,BigDecimal::min);
+            BigDecimal _maxPrice = attrValueList.stream().map(StoreProductAttrValue::getPrice).reduce(BigDecimal.ZERO, BigDecimal::max);
+            BigDecimal _minPrice = attrValueList.stream().map(StoreProductAttrValue::getPrice).reduce(BigDecimal.ZERO, BigDecimal::min);
             maxPrice = BrokerRatio.multiply(_maxPrice).setScale(2, RoundingMode.HALF_UP);
             minPrice = BrokerRatio.multiply(_minPrice).setScale(2, RoundingMode.HALF_UP);
         }
@@ -361,6 +366,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 获取热门推荐商品列表
+     *
      * @param pageRequest 分页参数
      * @return CommonPage<IndexProductResponse>
      */
@@ -423,6 +429,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 商品详情评论
+     *
      * @param id 商品id
      * @return ProductDetailReplyResponse
      * 评论只有一条，图文
@@ -436,6 +443,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 优选商品推荐
+     *
      * @return CommonPage<IndexProductResponse>
      */
     @Override
@@ -499,7 +507,8 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 商品列表(个别分类模型使用)
-     * @param request 列表请求参数
+     *
+     * @param request          列表请求参数
      * @param pageParamRequest 分页参数
      * @return CommonPage
      */
@@ -531,6 +540,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 获取商品排行榜
+     *
      * @return List
      */
     @Override

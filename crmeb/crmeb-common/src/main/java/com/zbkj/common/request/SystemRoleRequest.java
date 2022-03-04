@@ -25,7 +25,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemRoleRequest对象", description="身份管理请求对象")
+@ApiModel(value = "SystemRoleRequest对象", description = "身份管理请求对象")
 public class SystemRoleRequest implements Serializable {
 
     private static final long serialVersionUID = -7616469901068422271L;

@@ -23,7 +23,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ProductListRequest对象", description="商品列表请求对象")
+@ApiModel(value = "ProductListRequest对象", description = "商品列表请求对象")
 public class ProductListRequest implements Serializable {
 
     private static final long serialVersionUID = 3481659942630712958L;

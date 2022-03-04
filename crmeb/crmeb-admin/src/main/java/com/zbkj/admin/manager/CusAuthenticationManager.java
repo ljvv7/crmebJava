@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * 自定义认证管理器
+ *
  * @Author 指缝de阳光
  * @Date 2021/11/17 15:23
  * @Version 1.0
@@ -17,7 +18,7 @@ import java.util.Objects;
 @Component
 public class CusAuthenticationManager implements AuthenticationManager {
 
-//    private final CustomAuthenticationProvider customAuthenticationProvider = new CustomAuthenticationProvider();
+    //    private final CustomAuthenticationProvider customAuthenticationProvider = new CustomAuthenticationProvider();
     private final CustomAuthenticationProvider customAuthenticationProvider;
 
     public CusAuthenticationManager(CustomAuthenticationProvider customAuthenticationProvider) {

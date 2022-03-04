@@ -6,6 +6,9 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.article.Article;
@@ -16,9 +19,6 @@ import com.zbkj.common.request.ArticleSearchRequest;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.response.ArticleResponse;
 import com.zbkj.common.vo.ArticleVo;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.zbkj.service.dao.ArticleDao;
 import com.zbkj.service.service.ArticleService;
 import com.zbkj.service.service.CategoryService;
@@ -37,17 +37,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-* ArticleServiceImpl 接口实现
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * ArticleServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> implements ArticleService {
 
@@ -66,11 +66,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
     private SystemAttachmentService systemAttachmentService;
 
     /**
-    * 列表
-    * @param cid 文章分类id
-    * @param pageParamRequest 分页类参数
-    * @return PageInfo<Article>
-    */
+     * 列表
+     *
+     * @param cid              文章分类id
+     * @param pageParamRequest 分页类参数
+     * @return PageInfo<Article>
+     */
     @Override
     public PageInfo<ArticleResponse> getList(String cid, PageParamRequest pageParamRequest) {
         Page<Article> articlePage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -94,7 +95,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 获取文章列表
-     * @param request 请求参数
+     *
+     * @param request          请求参数
      * @param pageParamRequest 分页参数
      * @return PageInfo
      */
@@ -121,7 +123,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         for (Article article : articleList) {
             ArticleVo articleVo = new ArticleVo();
             BeanUtils.copyProperties(article, articleVo);
-            if (!StrUtil.isBlank(article.getImageInput()) ) {
+            if (!StrUtil.isBlank(article.getImageInput())) {
                 articleVo.setImageInput(article.getImageInput());
             }
             articleVoArrayList.add(articleVo);
@@ -131,6 +133,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 查询文章详情
+     *
      * @param id Integer
      * @return ArticleVo
      */
@@ -157,6 +160,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 获取移动端banner列表
+     *
      * @return List<Article>
      */
     @Override
@@ -177,6 +181,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 获取移动端热门列表
+     *
      * @return List<ArticleResponse>
      */
     @Override
@@ -202,6 +207,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 获取文章分类列表(移动端)
+     *
      * @return List<Category>
      */
     @Override
@@ -211,6 +217,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 文章新增
+     *
      * @param articleRequest 文章新增参数
      * @return Boolean
      */
@@ -226,6 +233,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 文章删除
+     *
      * @param id 文章id
      * @return Boolean
      */
@@ -240,7 +248,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 文章修改
-     * @param id 文章id
+     *
+     * @param id             文章id
      * @param articleRequest 文章修改参数
      */
     @Override
@@ -255,6 +264,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
     /**
      * 获取文章详情
+     *
      * @param id 文章id
      * @return Article
      */

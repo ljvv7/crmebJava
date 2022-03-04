@@ -23,10 +23,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OnePassLogisticsQueryVo对象", description = "一号通物流查询结果对象")
+@ApiModel(value = "OnePassLogisticsQueryVo对象", description = "一号通物流查询结果对象")
 public class OnePassLogisticsQueryVo {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "是否签收")
     private String ischeck;

@@ -1,16 +1,16 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.UserCouponReceiveRequest;
-import com.zbkj.common.vo.MyRecord;
-import com.zbkj.common.request.PageParamRequest;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.common.model.coupon.StoreCouponUser;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreCouponUserRequest;
 import com.zbkj.common.request.StoreCouponUserSearchRequest;
+import com.zbkj.common.request.UserCouponReceiveRequest;
 import com.zbkj.common.response.StoreCouponUserOrder;
 import com.zbkj.common.response.StoreCouponUserResponse;
+import com.zbkj.common.vo.MyRecord;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +31,8 @@ public interface StoreCouponUserService extends IService<StoreCouponUser> {
 
     /**
      * 优惠券发放记录
-     * @param request 查询参数
+     *
+     * @param request          查询参数
      * @param pageParamRequest 分页参数
      * @return PageInfo
      */
@@ -39,6 +40,7 @@ public interface StoreCouponUserService extends IService<StoreCouponUser> {
 
     /**
      * PC领取优惠券
+     *
      * @param storeCouponUserRequest 优惠券参数
      * @return Boolean
      */
@@ -48,6 +50,7 @@ public interface StoreCouponUserService extends IService<StoreCouponUser> {
 
     /**
      * 根据购物车id获取可用优惠券
+     *
      * @param preOrderNo 预下单订单号
      * @return 可用优惠券集合
      */
@@ -65,15 +68,17 @@ public interface StoreCouponUserService extends IService<StoreCouponUser> {
 
     /**
      * 支付成功赠送处理
+     *
      * @param couponId 优惠券编号
-     * @param uid  用户uid
+     * @param uid      用户uid
      * @return MyRecord
      */
     MyRecord paySuccessGiveAway(Integer couponId, Integer uid);
 
     /**
      * 根据uid获取列表
-     * @param uid uid
+     *
+     * @param uid              uid
      * @param pageParamRequest 分页参数
      * @return List<StoreCouponUser>
      */
@@ -81,13 +86,15 @@ public interface StoreCouponUserService extends IService<StoreCouponUser> {
 
     /**
      * 获取可用优惠券数量
+     *
      * @param uid 用户uid
      */
     Integer getUseCount(Integer uid);
 
     /**
      * 我的优惠券列表
-     * @param type 类型，usable-可用，unusable-不可用
+     *
+     * @param type             类型，usable-可用，unusable-不可用
      * @param pageParamRequest 分页参数
      * @return CommonPage<StoreCouponUserResponse>
      */

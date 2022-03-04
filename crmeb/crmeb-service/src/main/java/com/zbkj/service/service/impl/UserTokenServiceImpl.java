@@ -29,8 +29,9 @@ public class UserTokenServiceImpl extends ServiceImpl<UserTokenDao, UserToken> i
 
     /**
      * 检测token是否存在
+     *
      * @param token String openId
-     * @param type int 类型
+     * @param type  int 类型
      * @return UserToken
      */
     @Override
@@ -42,8 +43,9 @@ public class UserTokenServiceImpl extends ServiceImpl<UserTokenDao, UserToken> i
 
     /**
      * 绑定token关系
+     *
      * @param token String token
-     * @param type int 类型
+     * @param type  int 类型
      * @author Mr.Zhang
      * @since 2020-05-25
      */

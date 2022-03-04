@@ -23,9 +23,9 @@ import javax.validation.constraints.NotBlank;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="VideoOrderSendRequest对象", description="视频订单发货对象")
+@ApiModel(value = "VideoOrderSendRequest对象", description = "视频订单发货对象")
 public class VideoOrderSendRequest {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单编号")
     @NotBlank(message = "订单编号不能为空")

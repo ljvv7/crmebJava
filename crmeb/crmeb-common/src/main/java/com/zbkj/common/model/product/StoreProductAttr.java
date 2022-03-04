@@ -3,12 +3,13 @@ package com.zbkj.common.model.product;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 商品属性表
@@ -26,10 +27,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_attr")
-@ApiModel(value="StoreProductAttr对象", description="商品属性表")
+@ApiModel(value = "StoreProductAttr对象", description = "商品属性表")
 public class StoreProductAttr implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "attrId")
     @TableId(value = "id", type = IdType.AUTO)

@@ -15,6 +15,7 @@ package com.zbkj.service.service;
 public interface CallbackService {
     /**
      * 微信支付回调
+     *
      * @param xmlInfo 微信回调json
      * @return String
      */
@@ -22,6 +23,7 @@ public interface CallbackService {
 
     /**
      * 微信退款回调
+     *
      * @param request 微信回调json
      * @return String
      */

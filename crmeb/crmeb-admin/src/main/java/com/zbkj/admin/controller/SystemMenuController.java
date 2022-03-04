@@ -1,9 +1,9 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.model.system.SystemMenu;
 import com.zbkj.common.request.SystemMenuRequest;
 import com.zbkj.common.request.SystemMenuSearchRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.vo.MenuCheckVo;
 import com.zbkj.service.service.SystemMenuService;
 import io.swagger.annotations.Api;
@@ -40,6 +40,7 @@ public class SystemMenuController {
 
     /**
      * 菜单列表
+     *
      * @param request 搜索条件
      */
     @PreAuthorize("hasAuthority('admin:system:menu:list')")
@@ -51,6 +52,7 @@ public class SystemMenuController {
 
     /**
      * 新增菜单
+     *
      * @param systemMenuRequest 新增菜单
      */
     @PreAuthorize("hasAuthority('admin:system:menu:add')")
@@ -65,6 +67,7 @@ public class SystemMenuController {
 
     /**
      * 删除菜单
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:menu:delete')")
@@ -98,7 +101,7 @@ public class SystemMenuController {
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
     public CommonResult<SystemMenu> info(@PathVariable(value = "id") Integer id) {
         return CommonResult.success(systemMenuService.getInfo(id));
-   }
+    }
 
     /**
      * 修改菜单显示状态

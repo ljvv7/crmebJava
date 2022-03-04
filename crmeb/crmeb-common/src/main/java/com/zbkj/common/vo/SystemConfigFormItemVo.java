@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemConfigFormItemVo对象", description="item对象")
+@ApiModel(value = "SystemConfigFormItemVo对象", description = "item对象")
 public class SystemConfigFormItemVo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "配置")
     private SystemConfigFormItemConfigVo __config__;
@@ -48,7 +48,6 @@ public class SystemConfigFormItemVo implements Serializable {
 
     @ApiModelProperty(value = "")
     private String __vModel__;
-
 
 
 }

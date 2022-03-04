@@ -1,7 +1,7 @@
 package com.zbkj.common.request;
 
-import com.zbkj.common.constants.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zbkj.common.constants.Constants;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -19,7 +19,7 @@ import lombok.Data;
  */
 @Data
 public class StoreOrderStaticsticsRequest {
-    @ApiModelProperty(value = "页码", example= Constants.DEFAULT_PAGE + "")
+    @ApiModelProperty(value = "页码", example = Constants.DEFAULT_PAGE + "")
     private int page = Constants.DEFAULT_PAGE;
 
     @ApiModelProperty(value = "每页数量", example = Constants.DEFAULT_LIMIT + "")

@@ -16,7 +16,7 @@ import java.util.Map;
  * | Author: CRMEB Team <admin@crmeb.com>
  * +----------------------------------------------------------------------
  */
-public interface HomeService{
+public interface HomeService {
 
     /**
      * 用户曲线图
@@ -50,6 +50,7 @@ public interface HomeService{
 
     /**
      * 首页数据
+     *
      * @return HomeRateResponse
      */
     HomeRateResponse indexDate();

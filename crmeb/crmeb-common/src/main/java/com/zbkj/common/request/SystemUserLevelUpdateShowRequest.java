@@ -24,10 +24,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemUserLevelUpdateShowRequest对象", description="等级更改显示状态请求")
+@ApiModel(value = "SystemUserLevelUpdateShowRequest对象", description = "等级更改显示状态请求")
 public class SystemUserLevelUpdateShowRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "等级id")
     @NotNull(message = "等级id不能为空")

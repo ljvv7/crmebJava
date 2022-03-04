@@ -3,17 +3,17 @@ package com.zbkj.service.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.request.RetailShopRequest;
-import com.zbkj.common.response.SpreadUserResponse;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zbkj.common.response.UserExtractResponse;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.user.User;
 import com.zbkj.common.model.user.UserBrokerageRecord;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.request.RetailShopRequest;
+import com.zbkj.common.response.SpreadUserResponse;
+import com.zbkj.common.response.UserExtractResponse;
 import com.zbkj.service.dao.UserDao;
 import com.zbkj.service.service.*;
 import org.springframework.beans.BeanUtils;
@@ -57,8 +57,9 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
 
     /**
      * 获取分销列表
-     * @param keywords 搜索参数
-     * @param dateLimit 时间参数
+     *
+     * @param keywords    搜索参数
+     * @param dateLimit   时间参数
      * @param pageRequest 分页参数
      */
     @Override
@@ -124,6 +125,7 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
 
     /**
      * 获取分销配置信息
+     *
      * @return 返回配置信息
      */
     @Override
@@ -135,7 +137,7 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
         response.setStoreBrokerageRatio(Integer.parseInt(systemConfigService.getValueByKey("store_brokerage_ratio")));
         response.setStoreBrokerageTwo(Integer.parseInt(systemConfigService.getValueByKey("store_brokerage_two")));
         response.setUserExtractMinPrice(new BigDecimal(systemConfigService.getValueByKey("user_extract_min_price")));
-        response.setUserExtractBank(systemConfigService.getValueByKey("user_extract_bank").replace("\\n","\n"));
+        response.setUserExtractBank(systemConfigService.getValueByKey("user_extract_bank").replace("\\n", "\n"));
         response.setExtractTime(Integer.parseInt(systemConfigService.getValueByKey("extract_time")));
         response.setStoreBrokerageQuota(Integer.parseInt(systemConfigService.getValueByKey("store_brokerage_quota")));
         response.setStoreBrokerageIsBubble(Integer.parseInt(systemConfigService.getValueByKey("store_brokerage_is_bubble")));
@@ -145,6 +147,7 @@ public class RetailShopServiceImpl extends ServiceImpl<UserDao, User> implements
 
     /**
      * 更新分销配置信息
+     *
      * @param retailShopRequest 待保存数据
      * @return 更新结果
      */

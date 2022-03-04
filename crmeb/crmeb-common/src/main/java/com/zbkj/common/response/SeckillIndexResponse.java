@@ -24,7 +24,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SeckillIndexResponse对象", description="秒杀首页响应对象")
+@ApiModel(value = "SeckillIndexResponse对象", description = "秒杀首页响应对象")
 public class SeckillIndexResponse {
 
     @ApiModelProperty(value = "秒杀时段信息")

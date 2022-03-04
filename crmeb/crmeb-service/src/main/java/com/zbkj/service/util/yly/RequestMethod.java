@@ -6,13 +6,11 @@ import java.util.Map;
 import java.util.UUID;
 
 public class RequestMethod {
-    private static String example = "{\"error\":\"20\",\"error_description\":\"success\",\"body\":\"\"}";
-
+    private static final RequestMethod singleton = new RequestMethod();
     public static String ClientId;
 
     public static String ClientSecret;
-
-    private static final RequestMethod singleton = new RequestMethod();
+    private static String example = "{\"error\":\"20\",\"error_description\":\"success\",\"body\":\"\"}";
 
     public static RequestMethod getInstance() {
         return singleton;
@@ -27,6 +25,42 @@ public class RequestMethod {
         if (ClientId != null && ClientSecret != null && !ClientId.equals("") && !ClientSecret.equals(""))
             return true;
         return false;
+    }
+
+    public static String getAccessToken() throws Exception {
+        if (CCIsNull(ClientId, ClientSecret)) {
+            String timestamp = Utils.getTimestamp();
+            String signMD5 = ClientId + timestamp + ClientSecret;
+            String sign = Utils.getMD5Str(signMD5);
+            Map<String, String> paramMap = new HashMap<>();
+            paramMap.put("client_id", ClientId);
+            paramMap.put("grant_type", "client_credentials");
+            paramMap.put("sign", sign);
+            paramMap.put("scope", "all");
+            paramMap.put("timestamp", timestamp);
+            paramMap.put("id", UUID.randomUUID().toString());
+            return HttpRequest.sendPost(UtilUrl.freeType, paramMap);
+        }
+        return example;
+    }
+
+    public static String picturePrintIndex(String access_token, String machine_code, String picture_url, String origin_id) throws Exception {
+        if (CCIsNull(ClientId, ClientSecret)) {
+            String timestamp = Utils.getTimestamp();
+            String signMD5 = ClientId + timestamp + ClientSecret;
+            String sign = Utils.getMD5Str(signMD5);
+            Map<String, String> paramMap = new HashMap<>();
+            paramMap.put("access_token", access_token);
+            paramMap.put("machine_code", machine_code);
+            paramMap.put("picture_url", URLEncoder.encode(picture_url, "UTF-8"));
+            paramMap.put("origin_id", origin_id);
+            paramMap.put("client_id", ClientId);
+            paramMap.put("timestamp", timestamp);
+            paramMap.put("id", UUID.randomUUID().toString());
+            paramMap.put("sign", sign);
+            return HttpRequest.sendPost(UtilUrl.picturePrintIndex, paramMap);
+        }
+        return example;
     }
 
     public String getCodeOpen(String redirect_uri) {
@@ -45,23 +79,6 @@ public class RequestMethod {
             paramMap.put("grant_type", "authorization_code");
             paramMap.put("sign", sign);
             paramMap.put("code", code);
-            paramMap.put("scope", "all");
-            paramMap.put("timestamp", timestamp);
-            paramMap.put("id", UUID.randomUUID().toString());
-            return HttpRequest.sendPost(UtilUrl.freeType, paramMap);
-        }
-        return example;
-    }
-
-    public static String getAccessToken() throws Exception {
-        if (CCIsNull(ClientId, ClientSecret)) {
-            String timestamp = Utils.getTimestamp();
-            String signMD5 = ClientId + timestamp + ClientSecret;
-            String sign = Utils.getMD5Str(signMD5);
-            Map<String, String> paramMap = new HashMap<>();
-            paramMap.put("client_id", ClientId);
-            paramMap.put("grant_type", "client_credentials");
-            paramMap.put("sign", sign);
             paramMap.put("scope", "all");
             paramMap.put("timestamp", timestamp);
             paramMap.put("id", UUID.randomUUID().toString());
@@ -159,25 +176,6 @@ public class RequestMethod {
             paramMap.put("id", UUID.randomUUID().toString());
             paramMap.put("sign", sign);
             return HttpRequest.sendPost(UtilUrl.printIndex, paramMap);
-        }
-        return example;
-    }
-
-    public static String picturePrintIndex(String access_token, String machine_code, String picture_url, String origin_id) throws Exception {
-        if (CCIsNull(ClientId, ClientSecret)) {
-            String timestamp = Utils.getTimestamp();
-            String signMD5 = ClientId + timestamp + ClientSecret;
-            String sign = Utils.getMD5Str(signMD5);
-            Map<String, String> paramMap = new HashMap<>();
-            paramMap.put("access_token", access_token);
-            paramMap.put("machine_code", machine_code);
-            paramMap.put("picture_url", URLEncoder.encode(picture_url, "UTF-8"));
-            paramMap.put("origin_id", origin_id);
-            paramMap.put("client_id", ClientId);
-            paramMap.put("timestamp", timestamp);
-            paramMap.put("id", UUID.randomUUID().toString());
-            paramMap.put("sign", sign);
-            return HttpRequest.sendPost(UtilUrl.picturePrintIndex, paramMap);
         }
         return example;
     }

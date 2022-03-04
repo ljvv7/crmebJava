@@ -2,11 +2,11 @@ package com.zbkj.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.zbkj.common.model.user.UserGroup;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserGroupRequest;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.model.user.UserGroup;
 import com.zbkj.service.dao.UserGroupDao;
 import com.zbkj.service.service.UserGroupService;
 import org.springframework.beans.BeanUtils;
@@ -35,10 +35,11 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupDao, UserGroup> i
     private UserGroupDao dao;
 
     /**
-    * 列表
-    * @param pageParamRequest 分页类参数
-    * @return List<UserGroup>
-    */
+     * 列表
+     *
+     * @param pageParamRequest 分页类参数
+     * @return List<UserGroup>
+     */
     @Override
     public List<UserGroup> getList(PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -47,6 +48,7 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupDao, UserGroup> i
 
     /**
      * 根据id in，返回字符串拼接
+     *
      * @param groupIdValue String 分组id
      * @return List<UserTag>
      */
@@ -55,7 +57,7 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupDao, UserGroup> i
         LambdaQueryWrapper<UserGroup> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.in(UserGroup::getId, CrmebUtil.stringToArray(groupIdValue)).orderByDesc(UserGroup::getId);
         List<UserGroup> userTags = dao.selectList(lambdaQueryWrapper);
-        if(null == userTags){
+        if (null == userTags) {
             return "无";
         }
 
@@ -64,6 +66,7 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupDao, UserGroup> i
 
     /**
      * 新增用户分组
+     *
      * @param userGroupRequest 分组参数
      */
     @Override
@@ -75,7 +78,8 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupDao, UserGroup> i
 
     /**
      * 修改用户分组
-     * @param id 分组id
+     *
+     * @param id               分组id
      * @param userGroupRequest 修改参数
      */
     @Override

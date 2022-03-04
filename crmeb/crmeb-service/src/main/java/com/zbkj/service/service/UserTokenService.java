@@ -19,8 +19,9 @@ public interface UserTokenService extends IService<UserToken> {
 
     /**
      * 获取UserToken
+     *
      * @param token 微信为openid
-     * @param type 类型
+     * @param type  类型
      * @return UserToken
      */
     UserToken getByOpenidAndType(String token, int type);

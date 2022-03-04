@@ -13,7 +13,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-/** 操作商品库存
+/**
+ * 操作商品库存
  * +----------------------------------------------------------------------
  * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
  * +----------------------------------------------------------------------
@@ -44,7 +45,7 @@ public class ProductStockTask {
     private StoreCombinationService storeCombinationService;
 
     @Scheduled(fixedDelay = 1000 * 60L) //1分钟同步一次数据
-    public void init(){
+    public void init() {
         logger.info("---OrderTakeByUser task------produce Data with fixed rate task: Execution Time - {}", DateUtil.nowDateTime());
         try {
             storeProductService.consumeProductStock(); // 商品本身库存任务
