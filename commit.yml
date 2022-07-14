@@ -3,9 +3,69 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'e30e8c514f89f9e0e7fbc9c15cf51027311e711c'
-    oldFile: !uuid '4c7f685e57f25de4ecc9d32ab12dbbdefec57398'
-gitCommitId: !uuid '3212b31cec7ee607a92adf5cf1a9aba71defced8'
+    newFile: !uuid '8b8c70552820a75cc350bf3711008088db56da18'
+    oldFile: !uuid 'e30e8c514f89f9e0e7fbc9c15cf51027311e711c'
+  /crmeb:
+    newFile: !uuid 'a8ba9a0c132792577991de11c5b4efbff376b33c'
+    oldFile: !uuid 'a4cbbccc91e386dec5b682f24a37a1336ff9f385'
+  /crmeb/crmebimage:
+    newFile: !uuid 'ad63250a568caef9de7958c5181e6e4fee7b4dd5'
+    oldFile: !uuid 'c18ca309f0321bd880234df8d06850b558d8800a'
+  /crmeb/crmebimage/crmebimage:
+    newFile: !uuid '6876a4e559eb08dae3e50e5e277f8b21d06ec4cf'
+    oldFile: !uuid '634f651cee52b395d4019e527fc893320ab47de9'
+  /crmeb/crmebimage/crmebimage/demoimage:
+    newFile: !uuid 'd4ce5916d78889312e6064f4dc040f6d6e8c1a0c'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/01qiyejiangxiang.webp:
+    newFile: !uuid 'cc14e29d161278d99443323839d58072acc73b21'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/02yulan.jpg:
+    newFile: !uuid '1fed00016c302ac37238ca05fd2c9597d0c5bb2e'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/03-mobile-01.png:
+    newFile: !uuid '66c6fd0807e03ebe2038b8209be6ac763d1d1946'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/04-mobile-02.png:
+    newFile: !uuid 'a281c9636ecdc19d29b80f9e6a0b92deaac3aaa6'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/05-mobile-03.png:
+    newFile: !uuid '04099595d6ceeeac9f838e91512419b0a3440c9d'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/06-optionList.jpg:
+    newFile: !uuid '3644786aff7c8a1e93fadfc2ba3840ff774547a9'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/07-pc-01.png:
+    newFile: !uuid 'c378a38e34d8e909e19e7645efa2be131683f730'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/08-pc-02.png:
+    newFile: !uuid '250978fda1a47d8f62f3137d0ea0695bd85c2ce7'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/09-pc-03.png:
+    newFile: !uuid '842de36b46588b7d4153764bb2897cdf7fa21b68'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/10-pc-04.png:
+    newFile: !uuid '05f951c08b9ac579c087b4f74e6e9569b3515aa5'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/11-pc-05.png:
+    newFile: !uuid '76e50fcda45084e16a421d0185d78852a6ad099e'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/12-pc-06.png:
+    newFile: !uuid '317967771c8fdaaff751c6f2c2b1c16b683f85b0'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/13yemiandesiner.gif:
+    newFile: !uuid '30496bacb36807bb7e53b871cf0e0653243c8ff7'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/14yijianhuanse.gif:
+    newFile: !uuid 'c31cf54841fae41e8a65dc0719930ba8c2bcce31'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/15webPCadmin.gif:
+    newFile: !uuid '163468829e7fda52a2d61505686cd0be9c1baec3'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/17lianxikefu.png:
+    newFile: !uuid '40ae42090e05708aade6f2e6e33f0ddb73ffe54c'
+    oldFile: null
+gitCommitId: !uuid '3e80168eac617e6f6e6b79420297a9419cc5f92c'
 renames: {
   }
-revisionId: 212
+revisionId: 213
