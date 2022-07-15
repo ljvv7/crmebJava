@@ -27,10 +27,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreProductReplyAddRequest对象", description="评论添加对象")
+@ApiModel(value = "StoreProductReplyAddRequest对象", description = "评论添加对象")
 public class StoreProductReplyAddRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单编号， 移动端必须传递此参数")
     private String orderNo;

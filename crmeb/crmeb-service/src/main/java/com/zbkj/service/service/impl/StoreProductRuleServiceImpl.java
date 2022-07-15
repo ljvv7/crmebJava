@@ -2,12 +2,12 @@ package com.zbkj.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.product.StoreProductRule;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreProductRuleRequest;
 import com.zbkj.common.request.StoreProductRuleSearchRequest;
-import com.github.pagehelper.PageHelper;
-import com.zbkj.common.model.product.StoreProductRule;
 import com.zbkj.service.dao.StoreProductRuleDao;
 import com.zbkj.service.service.StoreProductRuleService;
 import org.apache.commons.lang3.StringUtils;
@@ -38,18 +38,19 @@ public class StoreProductRuleServiceImpl extends ServiceImpl<StoreProductRuleDao
 
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<StoreProductRule>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<StoreProductRule>
+     */
     @Override
     public List<StoreProductRule> getList(StoreProductRuleSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
 
         //带 StoreProductRule 类的多条件查询
         LambdaQueryWrapper<StoreProductRule> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(null != request.getKeywords()){
+        if (null != request.getKeywords()) {
             lambdaQueryWrapper.like(StoreProductRule::getRuleName, request.getKeywords());
             lambdaQueryWrapper.or().like(StoreProductRule::getRuleValue, request.getKeywords());
         }
@@ -59,12 +60,13 @@ public class StoreProductRuleServiceImpl extends ServiceImpl<StoreProductRuleDao
 
     /**
      * 新增商品规格
+     *
      * @param storeProductRuleRequest 规格参数
      * @return 新增结果
      */
     @Override
     public boolean save(StoreProductRuleRequest storeProductRuleRequest) {
-        if(getListByRuleName(storeProductRuleRequest.getRuleName()).size() > 0){
+        if (getListByRuleName(storeProductRuleRequest.getRuleName()).size() > 0) {
             throw new CrmebException("此规格值已经存在");
         }
         StoreProductRule storeProductRule = new StoreProductRule();
@@ -74,6 +76,7 @@ public class StoreProductRuleServiceImpl extends ServiceImpl<StoreProductRuleDao
 
     /**
      * 修改规格
+     *
      * @param storeProductRuleRequest 规格参数
      * @return Boolean
      */
@@ -87,12 +90,13 @@ public class StoreProductRuleServiceImpl extends ServiceImpl<StoreProductRuleDao
 
     /**
      * 根据规格名称查询同名规格
+     *
      * @param ruleName 规格名称
      * @return 查询到的数据
      */
-    private List<StoreProductRule> getListByRuleName(String ruleName){
+    private List<StoreProductRule> getListByRuleName(String ruleName) {
         LambdaQueryWrapper<StoreProductRule> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(StringUtils.isBlank(ruleName)){
+        if (StringUtils.isBlank(ruleName)) {
             return new ArrayList<>();
         }
         lambdaQueryWrapper.eq(StoreProductRule::getRuleName, ruleName);

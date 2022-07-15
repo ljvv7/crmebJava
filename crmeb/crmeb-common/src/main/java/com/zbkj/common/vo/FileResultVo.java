@@ -1,6 +1,7 @@
 package com.zbkj.common.vo;
 
 import lombok.Data;
+
 /**
  * 文件信息
  * +----------------------------------------------------------------------
@@ -14,7 +15,7 @@ import lombok.Data;
  * +----------------------------------------------------------------------
  */
 @Data
-public class FileResultVo{
+public class FileResultVo {
 
     // 文件名
     private String fileName;

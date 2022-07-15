@@ -1,31 +1,32 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.express.ShippingTemplates;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.ShippingTemplatesRequest;
 import com.zbkj.common.request.ShippingTemplatesSearchRequest;
 
 import java.util.List;
 
 /**
-* ShippingTemplatesService 接口
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * ShippingTemplatesService 接口
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 public interface ShippingTemplatesService extends IService<ShippingTemplates> {
 
     List<ShippingTemplates> getList(ShippingTemplatesSearchRequest request, PageParamRequest pageParamRequest);
 
     /**
      * 新增运费模板
+     *
      * @param request 请求参数
      * @return 新增结果
      */
@@ -35,6 +36,7 @@ public interface ShippingTemplatesService extends IService<ShippingTemplates> {
 
     /**
      * 删除模板
+     *
      * @param id 模板id
      * @return Boolean
      */
@@ -42,6 +44,7 @@ public interface ShippingTemplatesService extends IService<ShippingTemplates> {
 
     /**
      * 获取模板信息
+     *
      * @param id 模板id
      * @return ShippingTemplates
      */

@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Data
 public class StoreCategoryTreeList {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 

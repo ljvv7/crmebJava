@@ -28,10 +28,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_sms_template")
-@ApiModel(value="SmsTemplate对象", description="短信模板表")
+@ApiModel(value = "SmsTemplate对象", description = "短信模板表")
 public class SmsTemplate implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)

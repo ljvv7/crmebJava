@@ -7,19 +7,19 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.exception.CrmebException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zbkj.common.utils.DateUtil;
-import com.zbkj.common.vo.dateLimitUtilVo;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.finance.UserRecharge;
+import com.zbkj.common.model.user.User;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserRechargeSearchRequest;
 import com.zbkj.common.response.UserRechargeResponse;
-import com.zbkj.common.model.user.User;
+import com.zbkj.common.utils.DateUtil;
+import com.zbkj.common.vo.dateLimitUtilVo;
 import com.zbkj.service.dao.UserRechargeDao;
 import com.zbkj.service.service.UserRechargeService;
 import com.zbkj.service.service.UserService;
@@ -34,17 +34,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-* UserRechargeServiceImpl 接口实现
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * UserRechargeServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRecharge> implements UserRechargeService {
 
@@ -56,11 +56,12 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<UserRecharge>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<UserRecharge>
+     */
     @Override
     public PageInfo<UserRechargeResponse> getList(UserRechargeSearchRequest request, PageParamRequest pageParamRequest) {
         Page<UserRecharge> userRechargesList = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -81,7 +82,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
         if (StrUtil.isNotBlank(dateLimit.getStartTime()) && StrUtil.isNotBlank(dateLimit.getEndTime())) {
             //判断时间
             int compareDateResult = DateUtil.compareDate(dateLimit.getEndTime(), dateLimit.getStartTime(), Constants.DATE_FORMAT);
-            if(compareDateResult == -1){
+            if (compareDateResult == -1) {
                 throw new CrmebException("开始时间不能大于结束时间！");
             }
 
@@ -110,6 +111,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 充值总金额
+     *
      * @return HashMap<String, BigDecimal>
      */
     @Override
@@ -117,20 +119,20 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
         HashMap<String, BigDecimal> map = new HashMap<>();
 
         BigDecimal routine = dao.getSumByType("routine");
-        if(null == routine) routine = BigDecimal.ZERO;
+        if (null == routine) routine = BigDecimal.ZERO;
         map.put("routine", routine); //小程序充值
 
 //        BigDecimal weChat = dao.getSumByType("weixin");
         BigDecimal weChat = dao.getSumByType("public");
-        if(null == weChat) weChat = BigDecimal.ZERO;
+        if (null == weChat) weChat = BigDecimal.ZERO;
         map.put("weChat", weChat); //公众号充值
 
         BigDecimal total = dao.getSumByType("");
-        if(null == total) total = BigDecimal.ZERO;
+        if (null == total) total = BigDecimal.ZERO;
         map.put("total", total); //总金额
 
         BigDecimal refund = dao.getSumByRefund();
-        if(null == refund) refund = BigDecimal.ZERO;
+        if (null == refund) refund = BigDecimal.ZERO;
         map.put("refund", refund);
 
         map.put("other", total.subtract(routine).subtract(weChat)); //其他金额
@@ -140,9 +142,10 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 根据对象查询订单
+     *
+     * @return UserRecharge
      * @author Mr.Zhang
      * @since 2020-05-11
-     * @return UserRecharge
      */
     @Override
     public UserRecharge getInfoByEntity(UserRecharge userRecharge) {
@@ -153,6 +156,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 根据日期获取充值订单数量
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return Integer
      */
@@ -167,6 +171,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 根据日期获取充值订单金额
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return BigDecimal
      */
@@ -181,6 +186,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 获取总人数
+     *
      * @return Integer
      */
     @Override
@@ -198,6 +204,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 获取总金额
+     *
      * @return BigDecimal
      */
     @Override
@@ -210,6 +217,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 根据时间获取充值用户数量
+     *
      * @param date 日期
      * @return Integer
      */
@@ -229,8 +237,9 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeDao, UserRe
 
     /**
      * 根据时间获取充值用户数量
+     *
      * @param startDate 日期
-     * @param endDate 日期
+     * @param endDate   日期
      * @return Integer
      */
     @Override

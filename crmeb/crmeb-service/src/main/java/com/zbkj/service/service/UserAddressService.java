@@ -1,8 +1,8 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.user.UserAddress;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserAddressRequest;
 
 import java.util.List;
@@ -23,6 +23,7 @@ public interface UserAddressService extends IService<UserAddress> {
 
     /**
      * 用户地址列表
+     *
      * @param pageParamRequest 分页参数
      * @return List<UserAddress>
      */
@@ -30,6 +31,7 @@ public interface UserAddressService extends IService<UserAddress> {
 
     /**
      * 添加用户地址
+     *
      * @param request 地址请求参数
      * @return UserAddress
      */
@@ -37,6 +39,7 @@ public interface UserAddressService extends IService<UserAddress> {
 
     /**
      * 设置默认地址
+     *
      * @param id 地址id
      * @return Boolean
      */
@@ -44,6 +47,7 @@ public interface UserAddressService extends IService<UserAddress> {
 
     /**
      * 删除用户地址
+     *
      * @param id 地址id
      * @return Boolean
      */
@@ -55,6 +59,7 @@ public interface UserAddressService extends IService<UserAddress> {
 
     /**
      * 获取地址详情
+     *
      * @param id 地址id
      * @return UserAddress
      */
@@ -62,6 +67,7 @@ public interface UserAddressService extends IService<UserAddress> {
 
     /**
      * 获取默认地址
+     *
      * @return UserAddress
      */
     UserAddress getDefaultByUid(Integer uid);

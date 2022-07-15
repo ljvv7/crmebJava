@@ -24,7 +24,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="CombinationHeaderResponse对象", description="拼团商品列表header响应对象")
+@ApiModel(value = "CombinationHeaderResponse对象", description = "拼团商品列表header响应对象")
 public class CombinationHeaderResponse {
 
     @ApiModelProperty(value = "拼团7位用户头像")

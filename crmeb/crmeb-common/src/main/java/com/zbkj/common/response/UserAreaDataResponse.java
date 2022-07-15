@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="UserAreaDataResponse对象", description="用户区域数据对象")
+@ApiModel(value = "UserAreaDataResponse对象", description = "用户区域数据对象")
 public class UserAreaDataResponse implements Serializable {
 
     private static final long serialVersionUID = -6332062115310922579L;

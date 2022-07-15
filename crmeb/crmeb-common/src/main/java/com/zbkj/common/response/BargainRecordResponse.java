@@ -1,7 +1,5 @@
 package com.zbkj.common.response;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -9,8 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * 砍价记录响应对象
@@ -27,7 +23,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="BargainRecordResponse对象", description="砍价记录响应对象")
+@ApiModel(value = "BargainRecordResponse对象", description = "砍价记录响应对象")
 public class BargainRecordResponse {
 
     @ApiModelProperty(value = "砍价商品ID")

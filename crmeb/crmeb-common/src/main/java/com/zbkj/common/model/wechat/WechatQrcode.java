@@ -1,16 +1,16 @@
 package com.zbkj.common.model.wechat;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 微信二维码管理表
@@ -28,10 +28,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_wechat_qrcode")
-@ApiModel(value="WechatQrcode对象", description="微信二维码管理表")
+@ApiModel(value = "WechatQrcode对象", description = "微信二维码管理表")
 public class WechatQrcode implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "微信二维码ID")
     @TableId(value = "id", type = IdType.AUTO)

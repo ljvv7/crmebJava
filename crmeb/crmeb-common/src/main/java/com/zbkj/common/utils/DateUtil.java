@@ -18,16 +18,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *  Date工具类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * Date工具类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  **/
 public final class DateUtil {
 
@@ -119,16 +119,17 @@ public final class DateUtil {
      * @return
      */
     public static Integer getNowTime() {
-        long t = (System.currentTimeMillis()/1000L);
+        long t = (System.currentTimeMillis() / 1000L);
         return Integer.parseInt(String.valueOf(t));
     }
 
     /**
      * 获取当前时间戳（秒级）
+     *
      * @return
      */
     public static Long getTime() {
-        return (System.currentTimeMillis()/1000L);
+        return (System.currentTimeMillis() / 1000L);
     }
 
     /**
@@ -252,7 +253,7 @@ public final class DateUtil {
     /**
      * convert long to date string
      *
-     * @param date 待转换时间戳
+     * @param date        待转换时间戳
      * @param DATE_FORMAT 格式化时间
      * @return 格式化后的时间
      */
@@ -289,6 +290,7 @@ public final class DateUtil {
 
     /**
      * 检查日期格式是否合法
+     *
      * @param date
      * @param style
      * @return
@@ -308,9 +310,10 @@ public final class DateUtil {
 
     /**
      * 计算两个时间之间的天数差
+     *
      * @param beforeDay 开始时间
      * @param afterDay  结束时间
-     * @return  相差天数
+     * @return 相差天数
      */
     public static long getTwoDateDays(Date beforeDay, Date afterDay) {
         SimpleDateFormat sm = new SimpleDateFormat(Constants.DATE_FORMAT_NUM);
@@ -326,29 +329,29 @@ public final class DateUtil {
 
 
     //获取时间戳11位
-    public static int getSecondTimestamp(Date date){
+    public static int getSecondTimestamp(Date date) {
         if (null == date) {
             return 0;
         }
-        String timestamp = String.valueOf(date.getTime()/1000);
+        String timestamp = String.valueOf(date.getTime() / 1000);
         return Integer.parseInt(timestamp);
     }
 
     //获取时间戳11位
-    public static int getSecondTimestamp(String date){
+    public static int getSecondTimestamp(String date) {
         if (null == date) {
             return 0;
         }
         Date date1 = strToDate(date, Constants.DATE_FORMAT);
-        if(date1 == null){
+        if (date1 == null) {
             return 0;
         }
-        String timestamp = String.valueOf(date1.getTime()/1000);
+        String timestamp = String.valueOf(date1.getTime() / 1000);
         return Integer.parseInt(timestamp);
     }
 
     //获取时间戳10位
-    public static int getSecondTimestamp(Long timeMillis){
+    public static int getSecondTimestamp(Long timeMillis) {
         if (null == timeMillis) {
             return 0;
         }
@@ -357,16 +360,18 @@ public final class DateUtil {
     }
 
     //获取时间戳11位
-    public static int getSecondTimestamp(){
+    public static int getSecondTimestamp() {
         Date date = strToDate(nowDateTime(Constants.DATE_FORMAT), Constants.DATE_FORMAT);
         if (null == date) {
             return 0;
         }
-        String timestamp = String.valueOf(date.getTime()/1000);
+        String timestamp = String.valueOf(date.getTime() / 1000);
         return Integer.parseInt(timestamp);
     }
 
-    /** 获得昨天日期:yyyy-MM-dd  HH:mm:ss */
+    /**
+     * 获得昨天日期:yyyy-MM-dd  HH:mm:ss
+     */
     public static String getYesterdayStr() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE, -1);
@@ -374,7 +379,9 @@ public final class DateUtil {
         return startSdf.format(c.getTime());
     }
 
-    /** 获得本周第一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得本周第一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getWeekStartDay() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.WEEK_OF_MONTH, 0);
@@ -383,22 +390,30 @@ public final class DateUtil {
         return startSdf.format(c.getTime());
     }
 
-    /** 获得本周最后一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得本周最后一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getWeekEndDay() {
         return addDay(getWeekStartDay(), 7, Constants.DATE_FORMAT);
     }
 
-    /** 获得上周第一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得上周第一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getLastWeekStartDay() {
         return addDay(getWeekStartDay(), -7, Constants.DATE_FORMAT);
     }
 
-    /** 获得上周最后一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得上周最后一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getLastWeekEndDay() {
         return addDay(getLastWeekStartDay(), 7, Constants.DATE_FORMAT);
     }
 
-    /** 获得本月最后一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得本月最后一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getMonthEndDay() {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -406,7 +421,9 @@ public final class DateUtil {
         return endSdf.format(c.getTime());
     }
 
-    /** 获得上月第一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得上月第一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getLastMonthStartDay() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.MONTH, -1);
@@ -415,7 +432,9 @@ public final class DateUtil {
         return startSdf.format(c.getTime());
     }
 
-    /** 获得上月最后一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得上月最后一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getLastMonthEndDay() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.MONTH, -1);
@@ -424,7 +443,9 @@ public final class DateUtil {
         return endSdf.format(c.getTime());
     }
 
-    /** 获得上年第一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得上年第一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getLastYearStartDay() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.YEAR, -1);
@@ -432,7 +453,9 @@ public final class DateUtil {
         return startSdf.format(c.getTime());
     }
 
-    /** 获得上年最后一天:yyyy-MM-dd HH:mm:ss */
+    /**
+     * 获得上年最后一天:yyyy-MM-dd HH:mm:ss
+     */
     public static String getLastYearEndDay() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.YEAR, -1);
@@ -442,20 +465,21 @@ public final class DateUtil {
 
     /**
      * 计算时间范围
+     *
      * @param data string 类型
+     * @return dateLimitUtilVo
      * @author Mr.Zhang
      * @since 2020-05-06
-     * @return dateLimitUtilVo
      */
-    public static dateLimitUtilVo getDateLimit(String data){
+    public static dateLimitUtilVo getDateLimit(String data) {
         //时间计算
         String startTime = null;
         String endTime = DateUtil.nowDateTime(Constants.DATE_FORMAT);
         String day = DateUtil.nowDateTime(Constants.DATE_FORMAT_START);
         String end = DateUtil.nowDateTime(Constants.DATE_FORMAT_END);
 
-        if(!StringUtils.isBlank(data)){
-            switch (data){
+        if (!StringUtils.isBlank(data)) {
+            switch (data) {
                 case Constants.SEARCH_DATE_DAY:
                     startTime = day;
                     break;
@@ -495,7 +519,7 @@ public final class DateUtil {
                     break;
                 default:
                     List<String> list = CrmebUtil.stringToArrayStr(data);
-                    if(list.size() == 1){
+                    if (list.size() == 1) {
                         throw new CrmebException("选择时间参数格式错误，请在 " +
                                 Constants.SEARCH_DATE_DAY + "|" +
                                 Constants.SEARCH_DATE_YESTERDAY + "|" +
@@ -508,8 +532,8 @@ public final class DateUtil {
                     endTime = list.get(1);
 
 //                    if (startTime.equals(endTime)) {
-                        startTime = DateUtil.appointedDayStrToFormatStr(startTime, Constants.DATE_FORMAT_DATE, Constants.DATE_FORMAT_START);
-                        endTime = DateUtil.appointedDayStrToFormatStr(endTime, Constants.DATE_FORMAT_DATE, Constants.DATE_FORMAT_END);
+                    startTime = DateUtil.appointedDayStrToFormatStr(startTime, Constants.DATE_FORMAT_DATE, Constants.DATE_FORMAT_START);
+                    endTime = DateUtil.appointedDayStrToFormatStr(endTime, Constants.DATE_FORMAT_DATE, Constants.DATE_FORMAT_END);
 //                    }
                     break;
             }
@@ -519,10 +543,11 @@ public final class DateUtil {
 
     /**
      * 获取某一时间段内的时间集合
+     *
      * @param data string 类型
+     * @return List<Date>
      * @author Mr.Zhang
      * @since 2020-05-06
-     * @return List<Date>
      */
     public static List<String> getListDate(String data) {
 
@@ -538,7 +563,7 @@ public final class DateUtil {
         //结束日期
         Date endDate = DateUtil.strToDate(dateLimit.getEndTime(), Constants.DATE_FORMAT);
 
-        while (endDate.after(startDate)){
+        while (endDate.after(startDate)) {
             date.add(DateUtil.dateToStr(startDate, Constants.DATE_FORMAT_DATE)); // 放入集合
             startDate = DateUtil.strToDate(DateUtil.addDay(startDate, 1, Constants.DATE_FORMAT), Constants.DATE_FORMAT); //循环一次 加一天
         }
@@ -547,12 +572,13 @@ public final class DateUtil {
     }
 
     /**
-     *  两个日期之前的相差天数
+     * 两个日期之前的相差天数
+     *
      * @param starDate 开始日期
-     * @param endDate 结束日期
+     * @param endDate  结束日期
      * @return 相差天数
      */
-    public static int daysBetween(Date starDate,Date endDate){
+    public static int daysBetween(Date starDate, Date endDate) {
 
         Calendar cal = Calendar.getInstance();
 
@@ -564,7 +590,7 @@ public final class DateUtil {
 
         long time2 = cal.getTimeInMillis();
 
-        long between_days=(time2-time1)/(1000*3600*24);
+        long between_days = (time2 - time1) / (1000 * 3600 * 24);
 
         return Integer.parseInt(String.valueOf(between_days));
 
@@ -585,15 +611,17 @@ public final class DateUtil {
 
     /**
      * 获取当前时间小时
+     *
      * @return 当前时间小时 默认24小时
      */
-    public static int getCurrentHour(){
+    public static int getCurrentHour() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         return hour;
     }
 
     /**
      * 13位时间戳转字符串
+     *
      * @param timestamp
      * @param dateFormat
      * @return

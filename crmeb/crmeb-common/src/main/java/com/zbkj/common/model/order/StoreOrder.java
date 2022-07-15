@@ -1,7 +1,6 @@
 package com.zbkj.common.model.order;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -30,10 +29,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_order")
-@ApiModel(value="StoreOrder对象", description="订单表")
+@ApiModel(value = "StoreOrder对象", description = "订单表")
 public class StoreOrder implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单ID")
     @TableId(value = "id", type = IdType.AUTO)

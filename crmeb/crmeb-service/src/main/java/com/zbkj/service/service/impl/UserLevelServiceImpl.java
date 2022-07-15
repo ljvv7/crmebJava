@@ -5,13 +5,13 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.Constants;
 import com.github.pagehelper.PageHelper;
-import com.zbkj.common.utils.DateUtil;
+import com.zbkj.common.constants.Constants;
 import com.zbkj.common.model.system.SystemUserLevel;
 import com.zbkj.common.model.user.User;
 import com.zbkj.common.model.user.UserLevel;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.utils.DateUtil;
 import com.zbkj.service.dao.UserLevelDao;
 import com.zbkj.service.service.SystemUserLevelService;
 import com.zbkj.service.service.UserLevelService;
@@ -54,10 +54,11 @@ public class UserLevelServiceImpl extends ServiceImpl<UserLevelDao, UserLevel> i
 
 
     /**
-    * 列表
-    * @param pageParamRequest 分页类参数
-    * @return List<UserLevel>
-    */
+     * 列表
+     *
+     * @param pageParamRequest 分页类参数
+     * @return List<UserLevel>
+     */
     @Override
     public List<UserLevel> getList(PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -66,6 +67,7 @@ public class UserLevelServiceImpl extends ServiceImpl<UserLevelDao, UserLevel> i
 
     /**
      * 用户升级
+     *
      * @param user 用户数据
      * @return Boolean
      */
@@ -80,14 +82,14 @@ public class UserLevelServiceImpl extends ServiceImpl<UserLevelDao, UserLevel> i
 
         SystemUserLevel userLevelConfig = null;
         for (SystemUserLevel systemUserLevel : list) {
-            if(user.getExperience() > systemUserLevel.getExperience()){
+            if (user.getExperience() > systemUserLevel.getExperience()) {
                 userLevelConfig = systemUserLevel;
                 continue;
             }
             break;
         }
 
-        if(ObjectUtil.isNull(userLevelConfig)) {
+        if (ObjectUtil.isNull(userLevelConfig)) {
             log.warn("未找到用户对应的会员等级,uid = " + user.getUid());
             return Boolean.TRUE;
         }
@@ -129,6 +131,7 @@ public class UserLevelServiceImpl extends ServiceImpl<UserLevelDao, UserLevel> i
 
     /**
      * 经验降级
+     *
      * @param user 用户
      * @return Boolean
      */
@@ -143,14 +146,14 @@ public class UserLevelServiceImpl extends ServiceImpl<UserLevelDao, UserLevel> i
 
         SystemUserLevel userLevelConfig = null;
         for (SystemUserLevel systemUserLevel : list) {
-            if(user.getExperience() > systemUserLevel.getExperience()){
+            if (user.getExperience() > systemUserLevel.getExperience()) {
                 userLevelConfig = systemUserLevel;
                 continue;
             }
             break;
         }
 
-        if(ObjectUtil.isNull(userLevelConfig)) {
+        if (ObjectUtil.isNull(userLevelConfig)) {
             log.warn("未找到用户对应的会员等级,uid = " + user.getUid());
             return Boolean.TRUE;
         }
@@ -185,6 +188,7 @@ public class UserLevelServiceImpl extends ServiceImpl<UserLevelDao, UserLevel> i
 
     /**
      * 删除（通过系统等级id）
+     *
      * @param levelId 系统等级id
      * @return Boolean
      */

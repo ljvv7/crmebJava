@@ -39,21 +39,23 @@ public class OnePassController {
 
     /**
      * 获取用户验证码
+     *
      * @param phone 手机号码
      */
     @PreAuthorize("hasAuthority('admin:pass:send:code')")
     @ApiOperation(value = "获取用户验证码")
     @RequestMapping(value = "/sendUserCode", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name="phone", value="手机号"),
-            @ApiImplicitParam(name="types", value="验证码类型1:修改，0:注册")
+            @ApiImplicitParam(name = "phone", value = "手机号"),
+            @ApiImplicitParam(name = "types", value = "验证码类型1:修改，0:注册")
     })
-    public CommonResult<Object> sendUserCode(@RequestParam(name = "phone") String phone,@RequestParam(name = "types", required = false) Integer types) {
+    public CommonResult<Object> sendUserCode(@RequestParam(name = "phone") String phone, @RequestParam(name = "types", required = false) Integer types) {
         return CommonResult.success(onePassService.sendUserCode(phone, types));
     }
 
     /**
      * 账号注册
+     *
      * @param registerRequest 注册参数
      */
     @PreAuthorize("hasAuthority('admin:pass:register')")
@@ -65,6 +67,7 @@ public class OnePassController {
 
     /**
      * 一号通用户登录
+     *
      * @return
      */
     @PreAuthorize("hasAuthority('admin:pass:login')")
@@ -76,6 +79,7 @@ public class OnePassController {
 
     /**
      * 判断是否已经登录
+     *
      * @return
      */
     @PreAuthorize("hasAuthority('admin:pass:is:login')")
@@ -97,6 +101,7 @@ public class OnePassController {
 
     /**
      * 注销当前登录
+     *
      * @return result
      */
     @PreAuthorize("hasAuthority('admin:pass:logout')")
@@ -151,12 +156,13 @@ public class OnePassController {
 
     /**
      * 套餐列表
+     *
      * @param type 套餐类型：sms,短信；expr_query,物流查询；expr_dump,电子面单；copy,产品复制
      */
     @PreAuthorize("hasAuthority('admin:pass:meal:list')")
     @ApiOperation(value = "套餐列表")
     @RequestMapping(value = "/meal/list", method = RequestMethod.GET)
-    @ApiImplicitParam(name="type", value="套餐类型：sms,短信；expr_query,物流查询；expr_dump,电子面单；copy,产品复制")
+    @ApiImplicitParam(name = "type", value = "套餐类型：sms,短信；expr_query,物流查询；expr_dump,电子面单；copy,产品复制")
     public CommonResult<JSONObject> mealList(@Validated @RequestParam String type) {
         return CommonResult.success(onePassService.mealList(type));
     }

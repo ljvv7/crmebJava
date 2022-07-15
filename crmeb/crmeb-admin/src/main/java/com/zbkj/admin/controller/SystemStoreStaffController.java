@@ -1,10 +1,10 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.system.SystemStoreStaff;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemStoreStaffRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.response.SystemStoreStaffResponse;
 import com.zbkj.service.service.SystemStoreStaffService;
 import io.swagger.annotations.Api;
@@ -38,14 +38,15 @@ public class SystemStoreStaffController {
 
     /**
      * 分页显示门店核销员列表
-     * @param storeId 门店id
+     *
+     * @param storeId          门店id
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:system:staff:list')")
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<SystemStoreStaffResponse>>  getList(@RequestParam(name = "storeId", required = false, defaultValue = "0") Integer storeId,
-                                                                       @ModelAttribute PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<SystemStoreStaffResponse>> getList(@RequestParam(name = "storeId", required = false, defaultValue = "0") Integer storeId,
+                                                                      @ModelAttribute PageParamRequest pageParamRequest) {
         CommonPage<SystemStoreStaffResponse> systemStoreStaffCommonPage =
                 CommonPage.restPage(systemStoreStaffService.getList(storeId, pageParamRequest));
         return CommonResult.success(systemStoreStaffCommonPage);
@@ -53,6 +54,7 @@ public class SystemStoreStaffController {
 
     /**
      * 新增门店店员表
+     *
      * @param systemStoreStaffRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:system:staff:save')")
@@ -67,6 +69,7 @@ public class SystemStoreStaffController {
 
     /**
      * 删除门店店员表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:staff:delete')")
@@ -81,7 +84,8 @@ public class SystemStoreStaffController {
 
     /**
      * 修改门店店员表
-     * @param id integer id
+     *
+     * @param id                      integer id
      * @param systemStoreStaffRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:system:staff:update')")
@@ -96,7 +100,8 @@ public class SystemStoreStaffController {
 
     /**
      * 修改门店店员表
-     * @param id integer id
+     *
+     * @param id     integer id
      * @param status 状态
      */
     @PreAuthorize("hasAuthority('admin:system:staff:update:status')")
@@ -111,6 +116,7 @@ public class SystemStoreStaffController {
 
     /**
      * 查询门店店员表信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:staff:info')")
@@ -118,7 +124,7 @@ public class SystemStoreStaffController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public CommonResult<SystemStoreStaff> info(@RequestParam(value = "id") Integer id) {
         return CommonResult.success(systemStoreStaffService.getById(id));
-   }
+    }
 }
 
 

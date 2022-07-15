@@ -1,8 +1,8 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.user.UserExperienceRecord;
+import com.zbkj.common.request.PageParamRequest;
 
 import java.util.List;
 
@@ -22,7 +22,8 @@ public interface UserExperienceRecordService extends IService<UserExperienceReco
 
     /**
      * 获取用户经验列表（移动端）
-     * @param userId 用户id
+     *
+     * @param userId           用户id
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -30,8 +31,9 @@ public interface UserExperienceRecordService extends IService<UserExperienceReco
 
     /**
      * 通过订单编号获取记录
+     *
      * @param orderNo 订单编号
-     * @param uid uid
+     * @param uid     uid
      * @return UserExperienceRecord
      */
     UserExperienceRecord getByOrderNoAndUid(String orderNo, Integer uid);

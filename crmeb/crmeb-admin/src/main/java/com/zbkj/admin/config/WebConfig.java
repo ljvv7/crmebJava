@@ -1,9 +1,9 @@
 package com.zbkj.admin.config;
 
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.interceptor.SwaggerInterceptor;
 import com.zbkj.admin.filter.ResponseFilter;
 import com.zbkj.common.config.CrmebConfig;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.interceptor.SwaggerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,8 +14,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.MappedInterceptor;
-
-import java.io.File;
 
 /**
  * token验证拦截器
@@ -37,10 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     CrmebConfig crmebConfig;
-
-    @Bean
-    public ResponseFilter responseFilter(){ return new ResponseFilter(); }
-
     @Value("${swagger.basic.username}")
     private String username;
     @Value("${swagger.basic.password}")
@@ -48,6 +42,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${swagger.basic.check}")
     private Boolean check;
 
+    @Bean
+    public ResponseFilter responseFilter() {
+        return new ResponseFilter();
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -97,8 +95,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FilterRegistrationBean filterRegister()
-    {
+    public FilterRegistrationBean filterRegister() {
         //注册过滤器
         FilterRegistrationBean registration = new FilterRegistrationBean(responseFilter());
         // 仅仅api前缀的请求才会拦截

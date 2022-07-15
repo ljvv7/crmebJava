@@ -25,10 +25,10 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemGroupDataSignConfigVo对象", description="签到记录")
+@ApiModel(value = "SystemGroupDataSignConfigVo对象", description = "签到记录")
 public class SystemGroupDataRechargeConfigVo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id")
     private Integer id;

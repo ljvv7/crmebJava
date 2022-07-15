@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 商品规则值(规格)表
@@ -28,10 +27,10 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_rule")
-@ApiModel(value="StoreProductRuleRequest对象", description="商品规则值(规格)表")
+@ApiModel(value = "StoreProductRuleRequest对象", description = "商品规则值(规格)表")
 public class StoreProductRuleRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "规则id")
     private Integer id;

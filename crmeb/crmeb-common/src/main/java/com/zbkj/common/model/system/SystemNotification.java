@@ -28,10 +28,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_notification")
-@ApiModel(value="SystemNotification对象", description="通知设置表")
+@ApiModel(value = "SystemNotification对象", description = "通知设置表")
 public class SystemNotification implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)

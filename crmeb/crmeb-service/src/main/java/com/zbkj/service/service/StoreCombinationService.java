@@ -1,9 +1,9 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.github.pagehelper.PageInfo;
 import com.zbkj.common.model.combination.StoreCombination;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreCombinationRequest;
 import com.zbkj.common.request.StoreCombinationSearchRequest;
 import com.zbkj.common.request.StorePinkRequest;
@@ -28,8 +28,9 @@ public interface StoreCombinationService extends IService<StoreCombination> {
 
     /**
      * 分页显示拼团商品表
-     * @param request   搜索条件
-     * @param pageParamRequest  分页参数
+     *
+     * @param request          搜索条件
+     * @param pageParamRequest 分页参数
      */
     PageInfo<StoreCombinationResponse> getList(StoreCombinationSearchRequest request, PageParamRequest pageParamRequest);
 
@@ -50,6 +51,7 @@ public interface StoreCombinationService extends IService<StoreCombination> {
 
     /**
      * 查询拼团商品详情
+     *
      * @return StoreProductInfoResponse
      */
     StoreProductInfoResponse getAdminDetail(Integer id);
@@ -71,12 +73,14 @@ public interface StoreCombinationService extends IService<StoreCombination> {
 
     /**
      * H5拼团商品详情
-     * @param id    拼团商品编号
+     *
+     * @param id 拼团商品编号
      */
     CombinationDetailResponse getH5Detail(Integer id);
 
     /**
      * 去拼团
+     *
      * @param pinkId 拼团团长单ID
      */
     GoPinkResponse goPink(Integer pinkId);
@@ -103,12 +107,14 @@ public interface StoreCombinationService extends IService<StoreCombination> {
 
     /**
      * 商品是否存在拼团活动
+     *
      * @param productId 商品编号
      */
     Boolean isExistActivity(Integer productId);
 
     /**
      * 查询带异常
+     *
      * @param combinationId 拼团商品id
      * @return StoreCombination
      */
@@ -116,20 +122,23 @@ public interface StoreCombinationService extends IService<StoreCombination> {
 
     /**
      * 添加/扣减库存
-     * @param id 秒杀商品id
-     * @param num 数量
+     *
+     * @param id   秒杀商品id
+     * @param num  数量
      * @param type 类型：add—添加，sub—扣减
      */
     Boolean operationStock(Integer id, Integer num, String type);
 
     /**
      * 拼团首页数据
+     *
      * @return CombinationIndexResponse
      */
     CombinationIndexResponse getIndexInfo();
 
     /**
      * 拼团列表header
+     *
      * @return CombinationHeaderResponse
      */
     CombinationHeaderResponse getHeader();

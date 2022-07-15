@@ -28,10 +28,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_relation")
-@ApiModel(value="UserCollectRequest对象", description="商品点赞和收藏表")
+@ApiModel(value = "UserCollectRequest对象", description = "商品点赞和收藏表")
 public class UserCollectRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "商品ID")
     @JsonProperty("id")

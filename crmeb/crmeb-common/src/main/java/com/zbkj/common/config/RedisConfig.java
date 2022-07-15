@@ -102,11 +102,11 @@ public class RedisConfig {
 
     /**
      * redisTemplate相关配置
-     * @param redisConnectionFactory redis链接工厂
      *
+     * @param redisConnectionFactory redis链接工厂
      */
     @Bean
-    public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         //配置redisTemplate
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);

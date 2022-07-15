@@ -1,17 +1,17 @@
 package com.zbkj.common.model.bargain;
 
-import java.math.BigDecimal;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 砍价用户帮助表
@@ -29,10 +29,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_bargain_user_help")
-@ApiModel(value="StoreBargainUserHelp对象", description="砍价用户帮助表")
+@ApiModel(value = "StoreBargainUserHelp对象", description = "砍价用户帮助表")
 public class StoreBargainUserHelp implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "砍价用户帮助表ID")
     @TableId(value = "id", type = IdType.AUTO)

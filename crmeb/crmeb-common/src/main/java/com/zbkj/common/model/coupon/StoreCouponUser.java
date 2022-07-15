@@ -29,10 +29,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_coupon_user")
-@ApiModel(value="StoreCouponUser对象", description="优惠券记录表")
+@ApiModel(value = "StoreCouponUser对象", description = "优惠券记录表")
 public class StoreCouponUser implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)

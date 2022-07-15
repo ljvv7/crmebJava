@@ -14,9 +14,9 @@ server:
   servlet:
     context-path: /         # 访问path
   tomcat:
-      uri-encoding: UTF-8     # 默认编码格式
-      max-threads: 1000       # 最大线程数量 默认200
-      min-spare-threads: 30   # 初始化启动线程数量
+    uri-encoding: UTF-8     # 默认编码格式
+    max-threads: 1000       # 最大线程数量 默认200
+    min-spare-threads: 30   # 初始化启动线程数量
 
 spring:
   profiles:
@@ -30,7 +30,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://121.196.17.222:3306/crmeb_java_beta?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
+    #    url: jdbc:mysql://121.196.17.222:3306/crmeb_java_beta?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
     url: jdbc:mysql://127.0.0.1:3306/crmeb_java_beta?characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8
     username: root
     password: 123456

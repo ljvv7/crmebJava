@@ -1,7 +1,6 @@
 package com.zbkj.common.vo;
 
 import cn.hutool.core.collection.CollUtil;
-import com.zbkj.common.response.MenusResponse;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -29,9 +28,9 @@ public class MenuCheckTree {
     }
 
     //建立树形结构
-    public List<MenuCheckVo> buildTree(){
+    public List<MenuCheckVo> buildTree() {
         List<MenuCheckVo> treeMenus = new ArrayList<MenuCheckVo>();
-        for(MenuCheckVo menuNode : getRootNode()) {
+        for (MenuCheckVo menuNode : getRootNode()) {
             menuNode = buildChildTree(menuNode);
             treeMenus.add(menuNode);
         }
@@ -51,10 +50,10 @@ public class MenuCheckTree {
     }
 
     //递归，建立子树形结构
-    private MenuCheckVo buildChildTree(MenuCheckVo pNode){
+    private MenuCheckVo buildChildTree(MenuCheckVo pNode) {
         List<MenuCheckVo> childMenus = new ArrayList<MenuCheckVo>();
-        for(MenuCheckVo menuNode : menuList) {
-            if(menuNode.getPid().equals(pNode.getId())) {
+        for (MenuCheckVo menuNode : menuList) {
+            if (menuNode.getPid().equals(pNode.getId())) {
                 childMenus.add(buildChildTree(menuNode));
             }
         }
@@ -64,9 +63,9 @@ public class MenuCheckTree {
 
     //获取根节点
     private List<MenuCheckVo> getRootNode() {
-        List<MenuCheckVo> rootMenuLists = new  ArrayList<MenuCheckVo>();
-        for(MenuCheckVo menuNode : menuList) {
-            if(menuNode.getPid().equals(0)) {
+        List<MenuCheckVo> rootMenuLists = new ArrayList<MenuCheckVo>();
+        for (MenuCheckVo menuNode : menuList) {
+            if (menuNode.getPid().equals(0)) {
                 rootMenuLists.add(menuNode);
             }
         }

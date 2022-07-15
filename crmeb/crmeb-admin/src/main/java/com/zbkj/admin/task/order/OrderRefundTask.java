@@ -33,7 +33,7 @@ public class OrderRefundTask {
     private OrderTaskService orderTaskService;
 
     @Scheduled(fixedDelay = 1000 * 60L) //1分钟同步一次数据
-    public void init(){
+    public void init() {
         logger.info("---OrderRefundTask task------produce Data with fixed rate task: Execution Time - {}", DateUtil.nowDateTime());
         try {
             orderTaskService.refundApply();

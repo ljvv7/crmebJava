@@ -48,34 +48,35 @@ public class YlyPrintServiceImpl implements YlyPrintService {
 
     @Autowired
     private YlyUtil ylyUtil;
+
     /**
      * 易联云打印商品信息
      *
      * @param orderId 订单id
-     * @param isAuto 是否自动打印
+     * @param isAuto  是否自动打印
      */
     @Override
-    public void YlyPrint(String orderId,boolean isAuto) {
-        if(ylyUtil.checkYlyPrintStatus()){
+    public void YlyPrint(String orderId, boolean isAuto) {
+        if (ylyUtil.checkYlyPrintStatus()) {
             throw new CrmebException("易联云 未开启打印");
         }
         // 判断是否开启自动打印
-        if(isAuto && ylyUtil.checkYlyPrintAfterPaySuccess()){
+        if (isAuto && ylyUtil.checkYlyPrintAfterPaySuccess()) {
             return;
         }
         StoreOrder exitOrder = storeOrderService.getByOderId(orderId);
-        if(ObjectUtil.isNull(exitOrder)){
+        if (ObjectUtil.isNull(exitOrder)) {
             throw new CrmebException("易联云 打印时未找到 订单信息");
         }
-        if(!exitOrder.getPaid()){
+        if (!exitOrder.getPaid()) {
             throw new CrmebException("易联云 打印时出错， 订单未支付");
         }
         List<StoreOrderInfoOldVo> exitOrderInfo = storeOrderInfoService.getOrderListByOrderId(exitOrder.getId());
         List<YlyPrintRequestGoods> goods = new ArrayList<>();
         for (StoreOrderInfoOldVo storeOrderInfo : exitOrderInfo) {
             goods.add(new YlyPrintRequestGoods(storeOrderInfo.getInfo().getProductName()
-                    ,storeOrderInfo.getInfo().getPrice().toString(),
-                    storeOrderInfo.getInfo().getPayNum()+"",
+                    , storeOrderInfo.getInfo().getPrice().toString(),
+                    storeOrderInfo.getInfo().getPayNum() + "",
                     exitOrder.getPayPrice().toString()));
         }
 

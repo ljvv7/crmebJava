@@ -22,12 +22,14 @@ public interface SystemRoleMenuService extends IService<SystemRoleMenu> {
 
     /**
      * 通过角色id删除
+     *
      * @param rid 角色id
      */
     Boolean deleteByRid(Integer rid);
 
     /**
      * 通过角色id获取菜单列表
+     *
      * @param rid 角色id
      * @return List
      */

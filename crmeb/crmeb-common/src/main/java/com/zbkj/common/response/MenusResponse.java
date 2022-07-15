@@ -24,10 +24,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="MenusResponse对象", description="系统左侧菜单对象")
+@ApiModel(value = "MenusResponse对象", description = "系统左侧菜单对象")
 public class MenusResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "ID")
     private Integer id;

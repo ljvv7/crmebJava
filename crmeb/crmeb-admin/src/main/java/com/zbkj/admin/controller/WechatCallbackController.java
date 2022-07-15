@@ -49,17 +49,18 @@ public class WechatCallbackController {
     @ApiOperation(value = "小程序回调")
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public String webHook(@RequestBody String request) {
-       return wechatCallbackService.callback(request);
+        return wechatCallbackService.callback(request);
     }
 
     /**
      * 微信推送地址验证
+     *
      * @param signature 微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。
      * @param timestamp 时间戳
-     * @param nonce 随机数
-     * @param echostr 随机字符串
+     * @param nonce     随机数
+     * @param echostr   随机字符串
      */
-    @RequestMapping(value = { "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
     private void webHook(
             @RequestParam(value = "signature", required = false) String signature,
             @RequestParam(value = "timestamp", required = false) String timestamp,

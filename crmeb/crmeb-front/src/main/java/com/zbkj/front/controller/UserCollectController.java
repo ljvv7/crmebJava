@@ -1,10 +1,10 @@
 package com.zbkj.front.controller;
 
 import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserCollectAllRequest;
 import com.zbkj.common.request.UserCollectRequest;
 import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.response.UserRelationResponse;
 import com.zbkj.service.service.StoreProductRelationService;
 import io.swagger.annotations.Api;
@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 商品点赞和收藏表 前端控制器
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Slf4j
 @RestController
@@ -47,6 +47,7 @@ public class UserCollectController {
 
     /**
      * 添加收藏产品
+     *
      * @param request StoreProductRelationRequest 新增参数
      */
     @ApiOperation(value = "添加收藏产品")
@@ -61,6 +62,7 @@ public class UserCollectController {
 
     /**
      * 添加收藏产品
+     *
      * @param request UserCollectAllRequest 新增参数
      */
     @ApiOperation(value = "批量收藏")

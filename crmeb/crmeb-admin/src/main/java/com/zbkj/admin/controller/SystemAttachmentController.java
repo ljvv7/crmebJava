@@ -1,12 +1,12 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.model.system.SystemAttachment;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemAttachmentMoveRequest;
 import com.zbkj.common.request.SystemAttachmentRequest;
+import com.zbkj.common.response.CommonResult;
+import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.service.service.SystemAttachmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,12 +39,13 @@ public class SystemAttachmentController {
 
     /**
      * 分页显示附件管理表
+     *
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:system:attachment:list')")
     @ApiOperation(value = "分页列表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<SystemAttachment>>  getList(
+    public CommonResult<CommonPage<SystemAttachment>> getList(
             @RequestParam @Validated Integer pid,
             @RequestParam(
                     value = "attType",
@@ -58,6 +59,7 @@ public class SystemAttachmentController {
 
     /**
      * 新增附件管理表 TODO:未使用的话删除此接口
+     *
      * @param systemAttachmentRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:system:attachment:save')")
@@ -72,6 +74,7 @@ public class SystemAttachmentController {
 
     /**
      * 删除附件管理表
+     *
      * @param ids String
      */
     @PreAuthorize("hasAuthority('admin:system:attachment:delete')")
@@ -86,7 +89,8 @@ public class SystemAttachmentController {
 
     /**
      * 修改附件管理表
-     * @param id integer id
+     *
+     * @param id                      integer id
      * @param systemAttachmentRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:system:attachment:update')")
@@ -103,6 +107,7 @@ public class SystemAttachmentController {
 
     /**
      * 查询附件管理表信息
+     *
      * @param move SystemAttachmentMoveRequest
      */
     @PreAuthorize("hasAuthority('admin:system:attachment:move')")
@@ -117,6 +122,7 @@ public class SystemAttachmentController {
 
     /**
      * 附件详情
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:attachment:info')")
@@ -124,7 +130,7 @@ public class SystemAttachmentController {
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
     public CommonResult<SystemAttachment> info(@PathVariable Integer id) {
         return CommonResult.success(systemAttachmentService.getById(id));
-   }
+    }
 }
 
 

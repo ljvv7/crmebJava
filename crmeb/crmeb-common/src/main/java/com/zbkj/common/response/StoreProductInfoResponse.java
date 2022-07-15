@@ -25,7 +25,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreProductInfoResponse对象", description="商品详情响应对象")
+@ApiModel(value = "StoreProductInfoResponse对象", description = "商品详情响应对象")
 public class StoreProductInfoResponse implements Serializable {
 
     private static final long serialVersionUID = 9215241889318610262L;

@@ -23,7 +23,7 @@ import java.util.HashMap;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SendTemplateMessageVo对象", description="微信模板发送类")
+@ApiModel(value = "SendTemplateMessageVo对象", description = "微信模板发送类")
 public class TemplateMessageVo {
     @ApiModelProperty(value = "OPENID", required = true)
     private String touser;

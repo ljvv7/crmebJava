@@ -27,10 +27,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_wechat_reply")
-@ApiModel(value="WechatReplyRequest对象", description="微信关键字回复表")
+@ApiModel(value = "WechatReplyRequest对象", description = "微信关键字回复表")
 public class WechatReplyRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "关键字id")
     private Integer id;
@@ -39,7 +39,7 @@ public class WechatReplyRequest implements Serializable {
     @NotBlank(message = "请填写关键字, 关注 = subscribe， 默认 = default")
     private String keywords;
 
-    @ApiModelProperty(value = "回复类型 text=文本  image =图片  news =图文  voice =音频"  , example = "text")
+    @ApiModelProperty(value = "回复类型 text=文本  image =图片  news =图文  voice =音频", example = "text")
     @NotBlank(message = "请选择回复类型")
     private String type;
 

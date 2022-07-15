@@ -1,9 +1,9 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.user.User;
 import com.zbkj.common.model.user.UserLevel;
+import com.zbkj.common.request.PageParamRequest;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ public interface UserLevelService extends IService<UserLevel> {
 
     /**
      * 用户等级列表
+     *
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -30,6 +31,7 @@ public interface UserLevelService extends IService<UserLevel> {
 
     /**
      * 经验升级
+     *
      * @param user 用户
      * @return Boolean
      */
@@ -37,6 +39,7 @@ public interface UserLevelService extends IService<UserLevel> {
 
     /**
      * 经验降级
+     *
      * @param user 用户
      * @return Boolean
      */
@@ -44,6 +47,7 @@ public interface UserLevelService extends IService<UserLevel> {
 
     /**
      * 删除（通过系统等级id）
+     *
      * @param levelId 系统等级id
      * @return Boolean
      */

@@ -21,8 +21,8 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="MessageReplyDataVo对象", description="数据存储回复消息内容对象")
-public class MessageReplyDataVo{
+@ApiModel(value = "MessageReplyDataVo对象", description = "数据存储回复消息内容对象")
+public class MessageReplyDataVo {
 
     @ApiModelProperty(value = "文本消息内容")
     private String Content;

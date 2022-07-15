@@ -8,27 +8,27 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.constants.ProductConstants;
+import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.combination.StoreCombination;
+import com.zbkj.common.model.combination.StorePink;
 import com.zbkj.common.model.order.StoreOrder;
 import com.zbkj.common.model.product.StoreProduct;
 import com.zbkj.common.model.product.StoreProductAttr;
 import com.zbkj.common.model.product.StoreProductAttrValue;
 import com.zbkj.common.model.product.StoreProductDescription;
+import com.zbkj.common.model.record.UserVisitRecord;
+import com.zbkj.common.model.user.User;
 import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.constants.ProductConstants;
-import com.zbkj.common.exception.CrmebException;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.zbkj.common.request.*;
 import com.zbkj.common.response.*;
 import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.utils.RedisUtil;
-import com.zbkj.common.model.combination.StoreCombination;
-import com.zbkj.common.model.combination.StorePink;
-import com.zbkj.common.model.record.UserVisitRecord;
-import com.zbkj.common.model.user.User;
 import com.zbkj.service.dao.StoreCombinationDao;
 import com.zbkj.service.service.*;
 import org.slf4j.Logger;
@@ -57,55 +57,39 @@ import java.util.stream.Collectors;
 @Service
 public class StoreCombinationServiceImpl extends ServiceImpl<StoreCombinationDao, StoreCombination> implements StoreCombinationService {
 
+    private static final Logger logger = LoggerFactory.getLogger(StoreCombinationServiceImpl.class);
     @Resource
     private StoreCombinationDao dao;
-
     @Autowired
     private StorePinkService storePinkService;
-
     @Autowired
     private SystemAttachmentService systemAttachmentService;
-
     @Autowired
     private StoreProductAttrService storeProductAttrService;
-
     @Autowired
     private StoreProductAttrValueService storeProductAttrValueService;
-
     @Autowired
     private StoreProductAttrResultService storeProductAttrResultService;
-
     @Autowired
     private StoreProductDescriptionService storeProductDescriptionService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private StoreProductRelationService storeProductRelationService;
-
     @Autowired
     private StoreProductService storeProductService;
-
     @Autowired
     private StoreOrderService storeOrderService;
-
     @Autowired
     private OrderService orderService;
-
     @Autowired
     private RedisUtil redisUtil;
-
     @Autowired
     private SystemGroupDataService systemGroupDataService;
-
     @Autowired
     private TransactionTemplate transactionTemplate;
-
     @Autowired
     private UserVisitRecordService userVisitRecordService;
-
-    private static final Logger logger = LoggerFactory.getLogger(StoreCombinationServiceImpl.class);
 
     /**
      * 分页显示拼团商品表
@@ -481,8 +465,8 @@ public class StoreCombinationServiceImpl extends ServiceImpl<StoreCombinationDao
     public List<StoreCombinationH5Response> getH5List(PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
         LambdaQueryWrapper<StoreCombination> lqw = Wrappers.lambdaQuery();
-        lqw.select(StoreCombination::getId ,StoreCombination::getProductId ,StoreCombination::getImage ,StoreCombination::getTitle
-                ,StoreCombination::getPeople ,StoreCombination::getOtPrice ,StoreCombination::getPrice ,StoreCombination::getStock);
+        lqw.select(StoreCombination::getId, StoreCombination::getProductId, StoreCombination::getImage, StoreCombination::getTitle
+                , StoreCombination::getPeople, StoreCombination::getOtPrice, StoreCombination::getPrice, StoreCombination::getStock);
         lqw.eq(StoreCombination::getIsDel, false);
         lqw.eq(StoreCombination::getIsShow, true);
         long millis = System.currentTimeMillis();
@@ -689,7 +673,7 @@ public class StoreCombinationServiceImpl extends ServiceImpl<StoreCombinationDao
             pinkList.add(storePinkService.getById(teamPink.getKId()));
         }
         //拼团剩余人数
-        int count = teamPink.getPeople() - ( CollUtil.isEmpty(pinkList) ? 0 : pinkList.size() );
+        int count = teamPink.getPeople() - (CollUtil.isEmpty(pinkList) ? 0 : pinkList.size());
 
         if (teamPink.getStatus() == 2) {//已完成
             isOk = 1;
@@ -986,6 +970,7 @@ public class StoreCombinationServiceImpl extends ServiceImpl<StoreCombinationDao
      * 拼团数据 + 拼团商品6个
      * 3个用户头像（最多）
      * 拼团参与总人数
+     *
      * @return CombinationIndexResponse
      */
     @Override
@@ -1028,6 +1013,7 @@ public class StoreCombinationServiceImpl extends ServiceImpl<StoreCombinationDao
 
     /**
      * 拼团列表header
+     *
      * @return CombinationHeaderResponse
      */
     @Override

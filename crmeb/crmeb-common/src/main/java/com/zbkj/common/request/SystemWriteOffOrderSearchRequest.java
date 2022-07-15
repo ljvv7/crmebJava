@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemWriteOffOrderSearchRequest对象", description="核销订单搜索")
+@ApiModel(value = "SystemWriteOffOrderSearchRequest对象", description = "核销订单搜索")
 public class SystemWriteOffOrderSearchRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "核销点ID")
     private Integer storeId;

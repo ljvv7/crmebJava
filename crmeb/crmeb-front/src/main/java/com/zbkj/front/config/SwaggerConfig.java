@@ -1,10 +1,9 @@
 package com.zbkj.front.config;
 
+import com.google.common.base.Predicate;
 import com.zbkj.common.config.CrmebConfig;
 import com.zbkj.common.constants.Constants;
-import com.google.common.base.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +39,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @Configuration
 @EnableSwagger2
 @ConfigurationProperties(prefix = "api.doc")
-public class SwaggerConfig{
+public class SwaggerConfig {
 
     //是否开启swagger，正式环境一般是需要关闭的，可根据springboot的多环境配置进行设置
     Boolean swaggerEnabled = true;

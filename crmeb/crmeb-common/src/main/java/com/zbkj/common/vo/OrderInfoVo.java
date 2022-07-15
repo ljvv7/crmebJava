@@ -24,7 +24,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OrderInfoVo对象", description="预下单Vo对象")
+@ApiModel(value = "OrderInfoVo对象", description = "预下单Vo对象")
 public class OrderInfoVo {
 
     @ApiModelProperty(value = "运费金额")

@@ -27,7 +27,8 @@ public interface SystemAdminService extends IService<SystemAdmin> {
 
     /**
      * 后台管理员列表
-     * @param request 请求参数
+     *
+     * @param request          请求参数
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -45,7 +46,8 @@ public interface SystemAdminService extends IService<SystemAdmin> {
 
     /**
      * 修改后台管理员状态
-     * @param id 管理员id
+     *
+     * @param id     管理员id
      * @param status 状态
      * @return Boolean
      */
@@ -53,6 +55,7 @@ public interface SystemAdminService extends IService<SystemAdmin> {
 
     /**
      * 根据idList获取Map
+     *
      * @param adminIdList id数组
      * @return HashMap
      */
@@ -60,6 +63,7 @@ public interface SystemAdminService extends IService<SystemAdmin> {
 
     /**
      * 修改后台管理员是否接收状态
+     *
      * @param id 管理员id
      * @return Boolean
      */
@@ -72,6 +76,7 @@ public interface SystemAdminService extends IService<SystemAdmin> {
 
     /**
      * 管理员详情
+     *
      * @param id 管理员id
      * @return SystemAdmin
      */
@@ -79,6 +84,7 @@ public interface SystemAdminService extends IService<SystemAdmin> {
 
     /**
      * 通过用户名获取用户
+     *
      * @param username 用户名
      * @return SystemAdmin
      */

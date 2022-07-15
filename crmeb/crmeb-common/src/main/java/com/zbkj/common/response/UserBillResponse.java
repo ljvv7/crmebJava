@@ -30,10 +30,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_user_bill")
-@ApiModel(value="UserBill对象", description="用户账单表")
+@ApiModel(value = "UserBill对象", description = "用户账单表")
 public class UserBillResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户账单id")
     @TableId(value = "id", type = IdType.AUTO)

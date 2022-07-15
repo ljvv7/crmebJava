@@ -1,12 +1,12 @@
 package com.zbkj.admin.controller;
 
+import com.zbkj.admin.service.AdminLoginService;
 import com.zbkj.common.request.SystemAdminLoginRequest;
 import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.response.MenusResponse;
 import com.zbkj.common.response.SystemAdminResponse;
 import com.zbkj.common.response.SystemLoginResponse;
 import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.admin.service.AdminLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class AdminLoginController {
     @Autowired
     private AdminLoginService adminLoginService;
 
-    @ApiOperation(value="PC登录")
+    @ApiOperation(value = "PC登录")
     @PostMapping(value = "/login", produces = "application/json")
     public CommonResult<SystemLoginResponse> SystemAdminLogin(@RequestBody @Validated SystemAdminLoginRequest systemAdminLoginRequest, HttpServletRequest request) {
         String ip = CrmebUtil.getClientIp(request);
@@ -49,7 +49,7 @@ public class AdminLoginController {
     }
 
     @PreAuthorize("hasAuthority('admin:logout')")
-    @ApiOperation(value="PC登出")
+    @ApiOperation(value = "PC登出")
     @GetMapping(value = "/logout")
     public CommonResult<SystemAdminResponse> SystemAdminLogout() {
         adminLoginService.logout();
@@ -57,7 +57,7 @@ public class AdminLoginController {
     }
 
     @PreAuthorize("hasAuthority('admin:info')")
-    @ApiOperation(value="获取用户详情")
+    @ApiOperation(value = "获取用户详情")
     @GetMapping(value = "/getAdminInfoByToken")
     public CommonResult<SystemAdminResponse> getAdminInfo() {
         return CommonResult.success(adminLoginService.getInfoByToken());
@@ -65,6 +65,7 @@ public class AdminLoginController {
 
     /**
      * 获取登录页图片
+     *
      * @return Map<String, Object>
      */
     @ApiOperation(value = "获取登录页图片")

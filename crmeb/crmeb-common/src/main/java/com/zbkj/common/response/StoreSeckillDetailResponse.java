@@ -26,7 +26,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreSeckillDetailResponse对象", description="商品秒杀详情响应对象")
+@ApiModel(value = "StoreSeckillDetailResponse对象", description = "商品秒杀详情响应对象")
 public class StoreSeckillDetailResponse implements Serializable {
 
     private static final long serialVersionUID = -4101548587444327191L;
@@ -35,7 +35,7 @@ public class StoreSeckillDetailResponse implements Serializable {
     private List<StoreProductAttr> productAttr;
 
     @ApiModelProperty(value = "商品属性详情")
-    private HashMap<String,Object> productValue;
+    private HashMap<String, Object> productValue;
 
     @ApiModelProperty(value = "返佣金额区间")
     private String priceName;

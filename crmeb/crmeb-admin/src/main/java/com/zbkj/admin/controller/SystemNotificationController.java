@@ -40,6 +40,7 @@ public class SystemNotificationController {
 
     /**
      * 系统通知列表
+     *
      * @param request ExpressSearchRequest 搜索条件
      */
     @PreAuthorize("hasAuthority('admin:system:notification:list')")

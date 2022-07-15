@@ -67,23 +67,23 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
         String redisKey = Constants.WE_CHAT_MESSAGE_KEY_PUBLIC;
         Long size = redisUtil.getListSize(redisKey);
         logger.info("TemplateMessageServiceImpl.consumePublic | size:" + size);
-        if(size < 1){
+        if (size < 1) {
             return;
         }
         for (int i = 0; i < size; i++) {
             //如果10秒钟拿不到一个数据，那么退出循环
             Object data = redisUtil.getRightPop(redisKey, 10L);
-            if(null == data){
+            if (null == data) {
                 continue;
             }
-            try{
+            try {
                 TemplateMessageVo templateMessage = JSONObject.toJavaObject(JSONObject.parseObject(data.toString()), TemplateMessageVo.class);
                 boolean result = wechatNewService.sendPublicTemplateMessage(templateMessage);
 //                boolean result = weChatService.sendPublicTempMessage(templateMessage);
-                if(!result){
+                if (!result) {
                     redisUtil.lPush(redisKey, data);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 redisUtil.lPush(redisKey, data);
             }
         }
@@ -97,22 +97,22 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
         String redisKey = Constants.WE_CHAT_MESSAGE_KEY_PROGRAM;
         Long size = redisUtil.getListSize(redisKey);
         logger.info("TemplateMessageServiceImpl.consumeProgram | size:" + size);
-        if(size < 1){
+        if (size < 1) {
             return;
         }
         for (int i = 0; i < size; i++) {
             //如果10秒钟拿不到一个数据，那么退出循环
             Object data = redisUtil.getRightPop(redisKey, 10L);
-            if(null == data){
+            if (null == data) {
                 continue;
             }
-            try{
+            try {
                 TemplateMessageVo templateMessage = JSONObject.toJavaObject(JSONObject.parseObject(data.toString()), TemplateMessageVo.class);
                 boolean result = wechatNewService.sendMiniSubscribeMessage(templateMessage);
-                if(!result){
+                if (!result) {
                     redisUtil.lPush(redisKey, data);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 redisUtil.lPush(redisKey, data);
             }
         }
@@ -120,22 +120,23 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 发送模板消息
+     *
      * @param templateId 模板消息编号
-     * @param temMap 内容Map
-     * @param openId 微信用户openid
+     * @param temMap     内容Map
+     * @param openId     微信用户openid
      */
     @Override
     public void pushTemplateMessage(Integer templateId, HashMap<String, String> temMap, String openId) {
         TemplateMessageVo templateMessageVo = new TemplateMessageVo();
 
         TemplateMessage templateMessage = info(templateId);
-        if(ObjectUtil.isNull(templateMessage) || StrUtil.isBlank(templateMessage.getContent())){
+        if (ObjectUtil.isNull(templateMessage) || StrUtil.isBlank(templateMessage.getContent())) {
             return;
         }
         templateMessageVo.setTemplate_id(templateMessage.getTempId());
 
         HashMap<String, SendTemplateMessageItemVo> hashMap = new HashMap<>();
-        for (Map.Entry<String, String> entry : temMap.entrySet()){
+        for (Map.Entry<String, String> entry : temMap.entrySet()) {
             hashMap.put(entry.getKey(), new SendTemplateMessageItemVo(entry.getValue()));
         }
 
@@ -146,14 +147,15 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 发送小程序订阅消息
+     *
      * @param templateId 模板消息编号
-     * @param temMap 内容Map
-     * @param openId 微信用户openId
+     * @param temMap     内容Map
+     * @param openId     微信用户openId
      */
     @Override
     public void pushMiniTemplateMessage(Integer templateId, HashMap<String, String> temMap, String openId) {
         TemplateMessage templateMessage = info(templateId);
-        if(ObjectUtil.isNull(templateMessage) || StrUtil.isBlank(templateMessage.getContent())){
+        if (ObjectUtil.isNull(templateMessage) || StrUtil.isBlank(templateMessage.getContent())) {
             return;
         }
 
@@ -171,7 +173,8 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 修改模板状态
-     * @param id 模板id
+     *
+     * @param id     模板id
      * @param status 状态
      */
     @Override
@@ -186,6 +189,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 公众号模板消息同步
+     *
      * @return Boolean
      */
     @Override
@@ -210,6 +214,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 小程序订阅消息同步
+     *
      * @return Boolean
      */
     @Override
@@ -237,7 +242,8 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 获取小程序订阅消息kidList
-     * @param content 本地保存的内容
+     *
+     * @param content           本地保存的内容
      * @param templateKeyVoList 小程序模板key对象数组
      * @return List
      */
@@ -264,6 +270,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 通过模板编号获取列表
+     *
      * @param idList 模板编号列表
      * @return List
      */
@@ -275,6 +282,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 查询单条数据
+     *
      * @param id Integer id
      */
     @Override
@@ -284,6 +292,7 @@ public class TemplateMessageServiceImpl extends ServiceImpl<TemplateMessageDao, 
 
     /**
      * 获取模板列表
+     *
      * @param tidList id数组
      * @return List
      */

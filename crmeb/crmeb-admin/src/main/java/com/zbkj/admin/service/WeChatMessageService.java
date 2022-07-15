@@ -14,6 +14,6 @@ import javax.servlet.http.HttpServletRequest;
  * | Author: CRMEB Team <admin@crmeb.com>
  * +----------------------------------------------------------------------
  */
-public interface WeChatMessageService{
+public interface WeChatMessageService {
     String init(HttpServletRequest request);
 }

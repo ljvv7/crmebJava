@@ -1,4 +1,5 @@
 package com.zbkj.admin.task.pink;
+
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.service.service.StorePinkService;
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class PinkStatusChangeTask {
     private StorePinkService storePinkService;
 
     @Scheduled(cron = "0 */1 * * * ?") //每分钟执行一次
-    public void init(){
+    public void init() {
         logger.info("---PinkStatusChange------bargain stop status change task: Execution Time - {}", DateUtil.nowDateTime());
         try {
             storePinkService.detectionStatus();

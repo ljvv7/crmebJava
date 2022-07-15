@@ -2,11 +2,11 @@ package com.zbkj.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.zbkj.common.model.user.UserTag;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserTagRequest;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.model.user.UserTag;
 import com.zbkj.service.dao.UserTagDao;
 import com.zbkj.service.service.UserService;
 import com.zbkj.service.service.UserTagService;
@@ -40,10 +40,11 @@ public class UserTagServiceImpl extends ServiceImpl<UserTagDao, UserTag> impleme
     private UserService userService;
 
     /**
-    * 列表
-    * @param pageParamRequest 分页类参数
-    * @return List<UserTag>
-    */
+     * 列表
+     *
+     * @param pageParamRequest 分页类参数
+     * @return List<UserTag>
+     */
     @Override
     public List<UserTag> getList(PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -52,6 +53,7 @@ public class UserTagServiceImpl extends ServiceImpl<UserTagDao, UserTag> impleme
 
     /**
      * 根据id in 返回name字符串
+     *
      * @param tagIdValue String 标签id
      * @return List<UserTag>
      */
@@ -60,7 +62,7 @@ public class UserTagServiceImpl extends ServiceImpl<UserTagDao, UserTag> impleme
         LambdaQueryWrapper<UserTag> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.in(UserTag::getId, CrmebUtil.stringToArray(tagIdValue)).orderByDesc(UserTag::getId);
         List<UserTag> userTags = dao.selectList(lambdaQueryWrapper);
-        if (null == userTags){
+        if (null == userTags) {
             return "无";
         }
 
@@ -69,6 +71,7 @@ public class UserTagServiceImpl extends ServiceImpl<UserTagDao, UserTag> impleme
 
     /**
      * 新增用户标签
+     *
      * @param userTagRequest 标签参数
      */
     @Override
@@ -80,20 +83,22 @@ public class UserTagServiceImpl extends ServiceImpl<UserTagDao, UserTag> impleme
 
     /**
      * 删除用户标签
+     *
      * @param id 标签id
      */
     @Override
     public Boolean delete(Integer id) {
         boolean remove = removeById(id);
         if (remove) {
-            userService.clearGroupByGroupId(id+"");
+            userService.clearGroupByGroupId(id + "");
         }
         return remove;
     }
 
     /**
      * 修改用户标签
-     * @param id 标签id
+     *
+     * @param id             标签id
      * @param userTagRequest 标签参数
      */
     @Override

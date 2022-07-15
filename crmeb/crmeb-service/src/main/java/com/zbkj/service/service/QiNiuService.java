@@ -1,7 +1,7 @@
 package com.zbkj.service.service;
 
-import com.zbkj.common.vo.CloudVo;
 import com.qiniu.storage.UploadManager;
+import com.zbkj.common.vo.CloudVo;
 
 import java.io.File;
 

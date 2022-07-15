@@ -1,18 +1,17 @@
 package com.zbkj.common.model.wechat;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 微信模板
@@ -30,10 +29,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_template_message")
-@ApiModel(value="TemplateMessage对象", description="微信模板")
+@ApiModel(value = "TemplateMessage对象", description = "微信模板")
 public class TemplateMessage implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "模板id")
     @TableId(value = "id", type = IdType.AUTO)

@@ -25,7 +25,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ProductRankingRequest对象", description="商品排行请求对象")
+@ApiModel(value = "ProductRankingRequest对象", description = "商品排行请求对象")
 public class ProductRankingRequest implements Serializable {
 
     private static final long serialVersionUID = 3362714265772774491L;
@@ -38,7 +38,7 @@ public class ProductRankingRequest implements Serializable {
     @NotBlank(message = "请先选择时间")
     private String dateLimit;
 
-    @ApiModelProperty(value = "页码", example= Constants.DEFAULT_PAGE + "")
+    @ApiModelProperty(value = "页码", example = Constants.DEFAULT_PAGE + "")
     private int page = Constants.DEFAULT_PAGE;
 
     @ApiModelProperty(value = "每页数量", example = Constants.DEFAULT_LIMIT + "")

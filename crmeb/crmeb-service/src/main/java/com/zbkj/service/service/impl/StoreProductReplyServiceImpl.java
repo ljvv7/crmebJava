@@ -87,11 +87,12 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<StoreProductReply>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<StoreProductReply>
+     */
     @Override
     public PageInfo<StoreProductReplyResponse> getList(StoreProductReplySearchRequest request, PageParamRequest pageParamRequest) {
         Page<StoreProductReply> pageStoreReply = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -109,7 +110,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
             }
         }
         if (StringUtils.isNotBlank(request.getNickname())) {
-            lambdaQueryWrapper.like(StoreProductReply::getNickname,request.getNickname());
+            lambdaQueryWrapper.like(StoreProductReply::getNickname, request.getNickname());
         }
         if (StringUtils.isNotBlank(request.getDateLimit())) {
             dateLimitUtilVo dateLimit = DateUtil.getDateLimit(request.getDateLimit());
@@ -131,6 +132,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 商品分数
+     *
      * @return Integer
      */
     private Integer getSumStar(Integer productId) {
@@ -153,6 +155,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 创建订单商品评价
+     *
      * @param request 请求参数
      * @return Boolean
      */
@@ -170,8 +173,8 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
         storeProductReply.setAvatar(systemAttachmentService.clearPrefix(user.getAvatar()));
         storeProductReply.setNickname(user.getNickname());
         if (StringUtils.isNotBlank(request.getPics())) {
-            String pics = request.getPics().replace("[\"","").replace("\"]","")
-                    .replace("\"","");
+            String pics = request.getPics().replace("[\"", "").replace("\"]", "")
+                    .replace("\"", "");
             storeProductReply.setPics(systemAttachmentService.clearPrefix(ArrayUtils.toString(pics)));
         }
         Boolean execute = transactionTemplate.execute(e -> {
@@ -188,6 +191,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 添加虚拟评论
+     *
      * @param request 评论参数
      * @return 评论结果
      */
@@ -197,19 +201,20 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
         BeanUtils.copyProperties(request, storeProductReply);
         if (StringUtils.isNotBlank(request.getPics())) {
             String pics = request.getPics()
-                    .replace("[","")
-                    .replace("]","")
-                    .replace("\"","");
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace("\"", "");
             storeProductReply.setPics(systemAttachmentService.clearPrefix(ArrayUtils.toString(pics)));
         }
         storeProductReply.setAvatar(systemAttachmentService.clearPrefix(storeProductReply.getAvatar()));
-        storeProductReply.setUnique(CrmebUtil.randomCount(11111,9999)+"");
+        storeProductReply.setUnique(CrmebUtil.randomCount(11111, 9999) + "");
         return save(storeProductReply);
     }
 
     /**
      * 订单是否已回复
-     * @param unique skuId
+     *
+     * @param unique  skuId
      * @param orderId 订单id
      * @return 回复内容
      */
@@ -227,6 +232,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * H5商品评论统计
+     *
      * @param productId 商品编号
      * @return MyRecord
      */
@@ -263,6 +269,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * H5商品详情评论信息
+     *
      * @param proId 商品编号
      * @return ProductDetailReplyResponse
      */
@@ -321,8 +328,9 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 移动端商品评论列表
-     * @param proId 商品编号
-     * @param type 评价等级|0=全部,1=好评,2=中评,3=差评
+     *
+     * @param proId            商品编号
+     * @param type             评价等级|0=全部,1=好评,2=中评,3=差评
      * @param pageParamRequest 分页参数
      * @return PageInfo<ProductReplyResponse>
      */
@@ -381,6 +389,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 删除评论
+     *
      * @param id 评论id
      * @return Boolean
      */
@@ -394,6 +403,7 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 商品评论回复
+     *
      * @param request 回复参数
      */
     @Override
@@ -416,13 +426,13 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
             case "all":
                 break;
             case "good":
-                lqw.apply( " (product_score + service_score) >= 8");
+                lqw.apply(" (product_score + service_score) >= 8");
                 break;
             case "medium":
-                lqw.apply( " (product_score + service_score) < 8 and (product_score + service_score) > 4");
+                lqw.apply(" (product_score + service_score) < 8 and (product_score + service_score) > 4");
                 break;
             case "poor":
-                lqw.apply( " (product_score + service_score) <= 4");
+                lqw.apply(" (product_score + service_score) <= 4");
                 break;
         }
         return dao.selectCount(lqw);
@@ -430,9 +440,10 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 如果所有的都已评价，那么订单完成
+     *
+     * @return Integer
      * @author Mr.Zhang
      * @since 2020-06-03
-     * @return Integer
      */
     private void completeOrder(StoreProductReply storeProductReply, Integer count, StoreOrder storeOrder) {
         Integer replyCount = getReplyCountByEntity(storeProductReply, true);
@@ -447,9 +458,10 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 检测当前商品是否可以评论
+     *
+     * @return Integer
      * @author Mr.Zhang
      * @since 2020-06-03
-     * @return Integer
      */
     private Integer checkIsReply(StoreProductReply storeProductReply) {
 
@@ -488,9 +500,10 @@ public class StoreProductReplyServiceImpl extends ServiceImpl<StoreProductReplyD
 
     /**
      * 根据商品id  订单id  用户id 获取评论信息
+     *
+     * @return Integer
      * @author Mr.Zhang
      * @since 2020-06-03
-     * @return Integer
      */
     private Integer getReplyCountByEntity(StoreProductReply request, boolean isAll) {
         LambdaQueryWrapper<StoreProductReply> lambdaQueryWrapper = new LambdaQueryWrapper<>();

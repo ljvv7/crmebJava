@@ -6,14 +6,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.product.StoreProductRelation;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserCollectAllRequest;
 import com.zbkj.common.request.UserCollectRequest;
 import com.zbkj.common.response.UserRelationResponse;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.model.product.StoreProductRelation;
 import com.zbkj.service.dao.StoreProductRelationDao;
 import com.zbkj.service.service.StoreProductRelationService;
 import com.zbkj.service.service.UserService;
@@ -50,13 +50,14 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 添加收藏产品
+     *
      * @param request UserCollectAllRequest 新增参数
      * @return boolean
      */
     @Override
     public Boolean all(UserCollectAllRequest request) {
         Integer[] arr = request.getProductId();
-        if(arr.length < 1){
+        if (arr.length < 1) {
             throw new CrmebException("请选择产品");
         }
 
@@ -66,7 +67,7 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
         deleteAll(request, uid, "collect");  //先删除所有已存在的
 
         ArrayList<StoreProductRelation> storeProductRelationList = new ArrayList<>();
-        for (Integer productId: list) {
+        for (Integer productId : list) {
             StoreProductRelation storeProductRelation = new StoreProductRelation();
             storeProductRelation.setUid(uid);
             storeProductRelation.setType("collect");
@@ -101,8 +102,9 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 取消收藏产品
+     *
      * @param request UserCollectAllRequest 参数
-     * @param type 类型
+     * @param type    类型
      */
     private void deleteAll(UserCollectAllRequest request, Integer uid, String type) {
         LambdaQueryWrapper<StoreProductRelation> lambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -115,8 +117,9 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 根据产品id和类型获取对应列表
+     *
      * @param productId 产品id
-     * @param type 类型
+     * @param type      类型
      * @return 对应结果
      */
     @Override
@@ -129,22 +132,24 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 获取用户当前是否喜欢该商品
-     * @param userId 用户id
+     *
+     * @param userId    用户id
      * @param productId 商品id
      * @return 是否喜欢标识
      */
     @Override
-    public List<StoreProductRelation> getLikeOrCollectByUser(Integer userId, Integer productId,boolean isLike) {
-        String typeValue = isLike?"like":"collect";
+    public List<StoreProductRelation> getLikeOrCollectByUser(Integer userId, Integer productId, boolean isLike) {
+        String typeValue = isLike ? "like" : "collect";
         LambdaQueryWrapper<StoreProductRelation> lqr = new LambdaQueryWrapper<>();
         lqr.eq(StoreProductRelation::getProductId, productId);
         lqr.eq(StoreProductRelation::getUid, userId);
-        lqr.eq(StoreProductRelation::getType,typeValue);
+        lqr.eq(StoreProductRelation::getType, typeValue);
         return dao.selectList(lqr);
     }
 
     /**
      * 获取用户收藏列表
+     *
      * @param pageParamRequest 分页参数
      * @return List<UserRelationResponse>
      */
@@ -157,6 +162,7 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 获取用户的收藏数量
+     *
      * @param uid 用户uid
      * @return 收藏数量
      */
@@ -164,12 +170,13 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
     public Integer getCollectCountByUid(Integer uid) {
         LambdaQueryWrapper<StoreProductRelation> lqr = Wrappers.lambdaQuery();
         lqr.eq(StoreProductRelation::getUid, uid);
-        lqr.eq(StoreProductRelation::getType,"collect");
+        lqr.eq(StoreProductRelation::getType, "collect");
         return dao.selectCount(lqr);
     }
 
     /**
      * 根据商品Id取消收藏
+     *
      * @param proId 商品Id
      * @return Boolean
      */
@@ -183,6 +190,7 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 根据商品Id取消收藏
+     *
      * @param proId 商品Id
      * @return Boolean
      */
@@ -198,6 +206,7 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 根据日期获取收藏量
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return Integer
      */
@@ -211,7 +220,8 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 根据日期获取收藏量
-     * @param date 日期，yyyy-MM-dd格式
+     *
+     * @param date  日期，yyyy-MM-dd格式
      * @param proId 商品id
      * @return Integer
      */
@@ -226,6 +236,7 @@ public class StoreProductRelationServiceImpl extends ServiceImpl<StoreProductRel
 
     /**
      * 添加收藏
+     *
      * @param request 收藏参数
      */
     @Override

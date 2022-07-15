@@ -26,10 +26,10 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="UserRechargeRequest对象", description="充值")
+@ApiModel(value = "UserRechargeRequest对象", description = "充值")
 public class UserRechargeRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "充值金额")
 //    @DecimalMin(value = "1", message = "充值金额不能小于1") todo 测试完后放开

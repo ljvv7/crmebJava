@@ -30,6 +30,7 @@ public class SmsTemplateServiceImpl extends ServiceImpl<SmsTemplateDao, SmsTempl
 
     /**
      * 获取详情
+     *
      * @param id 模板id
      * @return SmsTemplate
      */

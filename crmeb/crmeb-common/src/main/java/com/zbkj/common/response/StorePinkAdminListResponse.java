@@ -3,8 +3,6 @@ package com.zbkj.common.response;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 /**
  * 拼团列表响应体
  * +----------------------------------------------------------------------
@@ -20,7 +18,7 @@ import java.math.BigDecimal;
 @Data
 public class StorePinkAdminListResponse {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "拼团ID")
     private Integer id;

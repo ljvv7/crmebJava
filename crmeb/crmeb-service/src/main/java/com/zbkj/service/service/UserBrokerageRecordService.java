@@ -1,12 +1,12 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.response.SpreadCommissionDetailResponse;
 import com.github.pagehelper.PageInfo;
-import com.zbkj.common.request.BrokerageRecordRequest;
-import com.zbkj.common.request.RetailShopStairUserRequest;
 import com.zbkj.common.model.user.UserBrokerageRecord;
+import com.zbkj.common.request.BrokerageRecordRequest;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.request.RetailShopStairUserRequest;
+import com.zbkj.common.response.SpreadCommissionDetailResponse;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,7 +28,8 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取记录列表
-     * @param linkId 关联id
+     *
+     * @param linkId   关联id
      * @param linkType 关联类型
      * @return 记录列表
      */
@@ -36,7 +37,8 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取记录(订单不可用此方法)
-     * @param linkId 关联id
+     *
+     * @param linkId   关联id
      * @param linkType 关联类型
      * @return 记录列表
      */
@@ -49,19 +51,22 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 昨天得佣金
+     *
      * @param uid 用户uid
      */
     BigDecimal getYesterdayIncomes(Integer uid);
 
     /**
      * 获取佣金明细列表根据uid
-     * @param uid uid
+     *
+     * @param uid              uid
      * @param pageParamRequest 分页参数
      */
     PageInfo<SpreadCommissionDetailResponse> findDetailListByUid(Integer uid, PageParamRequest pageParamRequest);
 
     /**
      * 获取累计推广条数
+     *
      * @param uid 用户uid
      * @return Integer
      */
@@ -69,7 +74,8 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取推广记录列表
-     * @param uid 用户uid
+     *
+     * @param uid              用户uid
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -77,7 +83,8 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取推广记录列表
-     * @param request 用户uid
+     *
+     * @param request          用户uid
      * @param pageParamRequest 分页参数
      * @return PageInfo
      */
@@ -85,7 +92,8 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取月份对应的推广订单数
-     * @param uid 用户uid
+     *
+     * @param uid       用户uid
      * @param monthList 月份列表
      * @return Map
      */
@@ -93,6 +101,7 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取佣金排行榜（周、月）
+     *
      * @param type week、month
      * @return List
      */
@@ -100,6 +109,7 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 根据Uid和时间参数获取分佣记录列表
+     *
      * @param uid 用户uid
      * @return List
      */
@@ -107,6 +117,7 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 佣金总金额（单位时间）
+     *
      * @param dateLimit 时间参数
      * @return BigDecimal
      */
@@ -114,6 +125,7 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 单位时间消耗的佣金
+     *
      * @param dateLimit 时间参数
      * @return BigDecimal
      */
@@ -121,6 +133,7 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取冻结期佣金
+     *
      * @param uid uid
      * @return BigDecimal
      */
@@ -128,7 +141,8 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 佣金记录列表
-     * @param request 筛选条件
+     *
+     * @param request          筛选条件
      * @param pageParamRequest 分页参数
      * @return PageInfo
      */
@@ -136,6 +150,7 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 根据日期获取支付佣金金额（确认到账佣金）
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return BigDecimal
      */
@@ -143,6 +158,7 @@ public interface UserBrokerageRecordService extends IService<UserBrokerageRecord
 
     /**
      * 获取累计佣金转余额金额
+     *
      * @return BigDecimal
      */
     BigDecimal getTotalYuePrice();

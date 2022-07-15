@@ -49,18 +49,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public CommonResult bindException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
-        return CommonResult.failed(ExceptionCodeEnum.VALIDATE_FAILED,Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        return CommonResult.failed(ExceptionCodeEnum.VALIDATE_FAILED, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
 
     /**
      * 拦截参数类型不正确
+     *
      * @param e
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public CommonResult bindException(HttpMediaTypeNotSupportedException e){
-        return CommonResult.failed(ExceptionCodeEnum.PRAM_NOT_MATCH,Objects.requireNonNull(e.getMessage()));
+    public CommonResult bindException(HttpMediaTypeNotSupportedException e) {
+        return CommonResult.failed(ExceptionCodeEnum.PRAM_NOT_MATCH, Objects.requireNonNull(e.getMessage()));
     }
 
 
@@ -70,13 +71,13 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public <T> CommonResult<?> defaultExceptionHandler(Exception e) {
         e.printStackTrace();
-        if(e instanceof CrmebException) {
-            return CommonResult.failed(ExceptionCodeEnum.FAILED,Objects.requireNonNull(e.getMessage()));
+        if (e instanceof CrmebException) {
+            return CommonResult.failed(ExceptionCodeEnum.FAILED, Objects.requireNonNull(e.getMessage()));
         }
-        if(e instanceof MissingServletRequestParameterException){
+        if (e instanceof MissingServletRequestParameterException) {
             return CommonResult.failed(ExceptionCodeEnum.PRAM_NOT_MATCH, Objects.requireNonNull(e.getMessage()));
         }
         //未知错误
-        return CommonResult.failed(ExceptionCodeEnum.ERROR,e.getMessage());
+        return CommonResult.failed(ExceptionCodeEnum.ERROR, e.getMessage());
     }
 }

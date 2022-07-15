@@ -8,8 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 /**
  * 服务开通请求对象
@@ -33,7 +31,7 @@ public class ServiceOpenRequest {
 
     @ApiModelProperty(value = "服务类型:sms,短信;copy,产品复制;expr_query,物流查询;expr_dump,电子面单", required = true)
     @NotBlank(message = "服务类型不能为空")
-    @StringContains(limitValues = {"sms","copy","expr_query","expr_dump"}, message = "未知的服务类型")
+    @StringContains(limitValues = {"sms", "copy", "expr_query", "expr_dump"}, message = "未知的服务类型")
     private String type;
 
     @ApiModelProperty(value = "短信签名，短信开通必填")

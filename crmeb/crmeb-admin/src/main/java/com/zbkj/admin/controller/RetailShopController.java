@@ -46,6 +46,7 @@ public class RetailShopController {
 
     /**
      * 分销员列表
+     *
      * @param keywords         搜索参数
      * @param dateLimit        时间参数
      * @param pageParamRequest 分页参数
@@ -65,6 +66,7 @@ public class RetailShopController {
 
     /**
      * 根据用户参数获取推广人列表
+     *
      * @param request          查询参数
      * @param pageParamRequest 分页参数
      * @return 查询结果推广人列表
@@ -80,6 +82,7 @@ public class RetailShopController {
 
     /**
      * 根据参数获取推广订单列表
+     *
      * @param request          查询参数
      * @param pageParamRequest 分页参数
      * @return 查询结果推广人订单列表
@@ -94,6 +97,7 @@ public class RetailShopController {
 
     /**
      * 清除上级推广人
+     *
      * @param id 当前被清理的用户id
      * @return 推广关系清理后的结果
      */
@@ -106,6 +110,7 @@ public class RetailShopController {
 
     /**
      * 分销设置获取
+     *
      * @return 保存分销设置
      */
     @PreAuthorize("hasAuthority('admin:retail:spread:manage:get')")
@@ -117,6 +122,7 @@ public class RetailShopController {
 
     /**
      * 分销管理信息保存
+     *
      * @param retailShopRequest 分销管理对象
      * @return 保存结果
      */

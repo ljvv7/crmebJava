@@ -1,13 +1,13 @@
 package com.zbkj.admin.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.zbkj.admin.service.ValidateCodeService;
+import com.zbkj.admin.vo.ValidateCode;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.utils.RedisUtil;
 import com.zbkj.common.utils.ValidateCodeUtil;
-import com.zbkj.admin.service.ValidateCodeService;
-import com.zbkj.admin.vo.ValidateCode;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +52,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
 
     /**
      * 获取redis key
+     *
      * @param md5Key value的md5加密值
      */
     public String getRedisKey(String md5Key) {

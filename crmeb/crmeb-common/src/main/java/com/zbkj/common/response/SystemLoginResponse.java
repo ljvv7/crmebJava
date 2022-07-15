@@ -24,7 +24,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemLoginResponse对象", description="PC登录返回对象")
+@ApiModel(value = "SystemLoginResponse对象", description = "PC登录返回对象")
 public class SystemLoginResponse implements Serializable {
 
     @ApiModelProperty(value = "id")

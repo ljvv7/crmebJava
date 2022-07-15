@@ -4,21 +4,21 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.IndexInfoResponse;
-import com.zbkj.common.response.IndexProductResponse;
-import com.zbkj.common.response.ProductActivityItemResponse;
-import com.zbkj.common.vo.MyRecord;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.constants.SysConfigConstants;
 import com.zbkj.common.constants.SysGroupDataConstants;
 import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.model.record.UserVisitRecord;
 import com.zbkj.common.model.product.StoreProduct;
+import com.zbkj.common.model.record.UserVisitRecord;
 import com.zbkj.common.model.system.SystemConfig;
 import com.zbkj.common.model.user.User;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.response.IndexInfoResponse;
+import com.zbkj.common.response.IndexProductResponse;
+import com.zbkj.common.response.ProductActivityItemResponse;
+import com.zbkj.common.utils.CrmebUtil;
+import com.zbkj.common.vo.MyRecord;
 import com.zbkj.front.service.IndexService;
 import com.zbkj.service.delete.ProductUtils;
 import com.zbkj.service.service.*;
@@ -31,17 +31,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
-* IndexServiceImpl 接口实现
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * IndexServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class IndexServiceImpl implements IndexService {
 
@@ -84,7 +84,7 @@ public class IndexServiceImpl implements IndexService {
         indexInfoResponse.setHomePageSaleListStyle(systemConfigService.getValueByKey(Constants.CONFIG_IS_PRODUCT_LIST_STYLE));// 首页商品列表模板配置
         indexInfoResponse.setSubscribe(false);
         User user = userService.getInfo();
-        if(ObjectUtil.isNotNull(user) && user.getSubscribe()) {
+        if (ObjectUtil.isNotNull(user) && user.getSubscribe()) {
             indexInfoResponse.setSubscribe(user.getSubscribe());
         }
 
@@ -99,7 +99,8 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 热门搜索
-     * @return List<HashMap<String, String>>
+     *
+     * @return List<HashMap < String, String>>
      */
     @Override
     public List<HashMap<String, Object>> hotKeywords() {
@@ -108,13 +109,14 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 微信分享配置
+     *
      * @return Object
      */
     @Override
     public HashMap<String, String> getShareConfig() {
         HashMap<String, String> map = new HashMap<>();
         HashMap<String, String> info = systemConfigService.info(Constants.CONFIG_FORM_ID_PUBLIC);
-        if(info == null) {
+        if (info == null) {
             throw new CrmebException("请配置公众号分享信息！");
         }
         map.put("img", info.get(SysConfigConstants.CONFIG_KEY_ADMIN_WECHAT_SHARE_IMAGE));
@@ -125,7 +127,8 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 获取首页商品列表
-     * @param type 类型 【1 精品推荐 2 热门榜单 3首发新品 4促销单品】
+     *
+     * @param type             类型 【1 精品推荐 2 热门榜单 3首发新品 4促销单品】
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -135,7 +138,7 @@ public class IndexServiceImpl implements IndexService {
             return CommonPage.restPage(new ArrayList<>());
         }
         List<StoreProduct> storeProductList = storeProductService.getIndexProduct(type, pageParamRequest);
-        if(CollUtil.isEmpty(storeProductList)) {
+        if (CollUtil.isEmpty(storeProductList)) {
             return CommonPage.restPage(new ArrayList<>());
         }
         CommonPage<StoreProduct> storeProductCommonPage = CommonPage.restPage(storeProductList);
@@ -191,6 +194,7 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 获取颜色配置
+     *
      * @return SystemConfig
      */
     @Override
@@ -200,6 +204,7 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 获取版本信息
+     *
      * @return MyRecord
      */
     @Override
@@ -215,6 +220,7 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 获取全局本地图片域名
+     *
      * @return String
      */
     @Override

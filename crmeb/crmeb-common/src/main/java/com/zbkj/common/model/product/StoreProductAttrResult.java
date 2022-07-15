@@ -25,10 +25,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_attr_result")
-@ApiModel(value="StoreProductAttrResult对象", description="商品属性详情表")
+@ApiModel(value = "StoreProductAttrResult对象", description = "商品属性详情表")
 public class StoreProductAttrResult implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "ID")
     private Integer id;

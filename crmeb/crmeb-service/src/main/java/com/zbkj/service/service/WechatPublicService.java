@@ -21,6 +21,7 @@ public interface WechatPublicService {
 
     /**
      * 保存自定义菜单
+     *
      * @param data 菜单json
      * @return Boolean
      */
@@ -28,6 +29,7 @@ public interface WechatPublicService {
 
     /**
      * 删除自定义菜单
+     *
      * @return Boolean
      */
     Boolean deleteMenus();

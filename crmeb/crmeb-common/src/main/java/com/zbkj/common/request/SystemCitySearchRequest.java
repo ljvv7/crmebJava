@@ -28,12 +28,12 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_city")
-@ApiModel(value="SystemCitySearchRequest对象", description="城市表列表搜索条件")
+@ApiModel(value = "SystemCitySearchRequest对象", description = "城市表列表搜索条件")
 public class SystemCitySearchRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "父级id", required = true, example= "0")
+    @ApiModelProperty(value = "父级id", required = true, example = "0")
     @NotNull(message = "父级id不能为空")  //不可为空
     @DecimalMin(value = "0", message = "父级id必须大于等于0") //数字最小值为0
     private Integer parentId;

@@ -25,10 +25,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="UserUpdateSpreadRequest对象", description="更新推广人请求对象")
+@ApiModel(value = "UserUpdateSpreadRequest对象", description = "更新推广人请求对象")
 public class UserUpdateSpreadRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户编号")
     @NotNull(message = "请选择用户")

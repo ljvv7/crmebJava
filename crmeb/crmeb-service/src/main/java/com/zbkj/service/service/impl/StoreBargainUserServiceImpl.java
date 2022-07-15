@@ -7,26 +7,26 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.BargainFrontRequest;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.response.BargainRecordResponse;
-import com.zbkj.common.response.BargainUserInfoResponse;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.utils.DateUtil;
-import com.zbkj.common.vo.dateLimitUtilVo;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.bargain.StoreBargain;
 import com.zbkj.common.model.bargain.StoreBargainUser;
 import com.zbkj.common.model.bargain.StoreBargainUserHelp;
-import com.zbkj.common.request.StoreBargainUserSearchRequest;
-import com.zbkj.common.response.StoreBargainUserResponse;
 import com.zbkj.common.model.order.StoreOrder;
 import com.zbkj.common.model.user.User;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.BargainFrontRequest;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.request.StoreBargainUserSearchRequest;
+import com.zbkj.common.response.BargainRecordResponse;
+import com.zbkj.common.response.BargainUserInfoResponse;
+import com.zbkj.common.response.StoreBargainUserResponse;
+import com.zbkj.common.utils.CrmebUtil;
+import com.zbkj.common.utils.DateUtil;
+import com.zbkj.common.vo.dateLimitUtilVo;
 import com.zbkj.service.dao.StoreBargainUserDao;
 import com.zbkj.service.service.*;
 import org.springframework.beans.BeanUtils;
@@ -71,11 +71,12 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
 
     /**
-    * 分页展示砍价参与用户列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<StoreBargainUser>
-    */
+     * 分页展示砍价参与用户列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<StoreBargainUser>
+     */
     @Override
     public PageInfo<StoreBargainUserResponse> getList(StoreBargainUserSearchRequest request, PageParamRequest pageParamRequest) {
         Page<StoreBargainUser> startPage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -118,6 +119,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 获取砍价用户列表
+     *
      * @param bargainId 砍价商品ID
      * @return List<StoreBargainUser>
      */
@@ -131,6 +133,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 通过砍价商品ID + 用户uid 获取用户砍价中砍价商品信息
+     *
      * @param bargainId 砍价商品编号
      * @param uid       参与用户uid
      * @return StoreBargainUser
@@ -146,6 +149,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 砍价商品用户根据实体查询
+     *
      * @param bargainUser 砍价活动
      * @return List<StoreBargainUser>
      */
@@ -172,12 +176,13 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 获取用户砍价信息
+     *
      * @param bargainFrontRequest 请求参数
      * @return BargainUserInfoResponse
      */
     @Override
     public BargainUserInfoResponse getBargainUserInfo(BargainFrontRequest bargainFrontRequest) {
-        if (ObjectUtil.isNull(bargainFrontRequest.getBargainUserId()) || bargainFrontRequest.getBargainUserId()<= 0) { // 获取自己的砍价信息
+        if (ObjectUtil.isNull(bargainFrontRequest.getBargainUserId()) || bargainFrontRequest.getBargainUserId() <= 0) { // 获取自己的砍价信息
             return oneselfBargainActivity(bargainFrontRequest);
         }
         return otherBargainActivity(bargainFrontRequest);
@@ -185,6 +190,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 其他途径进入砍价活动
+     *
      * @param bargainFrontRequest 请求参数
      * @return BargainUserInfoResponse
      */
@@ -273,7 +279,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
             bargainStatus = 3;// 砍价中
             BigDecimal alreadyPrice = bargainUser.getPrice();// 已砍金额
             BigDecimal surplusPrice = bargainUser.getBargainPrice().subtract(storeBargain.getMinPrice()).subtract(alreadyPrice);// 剩余金额
-            percent =  CrmebUtil.percentInstanceIntVal(alreadyPrice, alreadyPrice.add(surplusPrice));
+            percent = CrmebUtil.percentInstanceIntVal(alreadyPrice, alreadyPrice.add(surplusPrice));
             infoResponse.setBargainStatus(bargainStatus);
             infoResponse.setAlreadyPrice(alreadyPrice);
             infoResponse.setSurplusPrice(surplusPrice);
@@ -359,6 +365,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 获取好友助力列表
+     *
      * @param bargainUserId 砍价活动id
      * @return List<StoreBargainUserHelp>
      */
@@ -375,6 +382,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 自己的砍价活动
+     *
      * @param bargainFrontRequest 请求参数
      * @return BargainUserInfoResponse
      */
@@ -496,7 +504,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
         bargainStatus = 3;// 砍价中
         BigDecimal alreadyPrice = storeBargainUser.getPrice();// 已砍金额
         BigDecimal surplusPrice = storeBargainUser.getBargainPrice().subtract(storeBargain.getMinPrice()).subtract(alreadyPrice);// 剩余金额
-        percent =  CrmebUtil.percentInstanceIntVal(alreadyPrice, alreadyPrice.add(surplusPrice));
+        percent = CrmebUtil.percentInstanceIntVal(alreadyPrice, alreadyPrice.add(surplusPrice));
         infoResponse.setBargainStatus(bargainStatus);
         infoResponse.setAlreadyPrice(alreadyPrice);
         infoResponse.setSurplusPrice(surplusPrice);
@@ -509,6 +517,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 获取最后一条砍价信息
+     *
      * @return StoreBargainUser
      */
     private StoreBargainUser getLastByIdAndUid(Integer id, Integer uid) {
@@ -522,6 +531,7 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 砍价记录
+     *
      * @return PageInfo<BargainRecordResponse>
      */
     @Override
@@ -590,8 +600,9 @@ public class StoreBargainUserServiceImpl extends ServiceImpl<StoreBargainUserDao
 
     /**
      * 获取用户参与砍价活动的次数（成功）
+     *
      * @param bargainId 砍价商品id
-     * @param uid 用户uid
+     * @param uid       用户uid
      * @return 用户参与砍价活动的次数（成功）
      */
     private Integer getCountByBargainIdAndUid(Integer bargainId, Integer uid) {

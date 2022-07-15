@@ -22,8 +22,8 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="BaseMessageVo对象", description="微信消息基础模板")
-public class BaseMessageVo{
+@ApiModel(value = "BaseMessageVo对象", description = "微信消息基础模板")
+public class BaseMessageVo {
     @ApiModelProperty(value = "开发者微信号")
     protected String ToUserName;
 

@@ -1,19 +1,19 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.model.product.StoreProductRule;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreProductRuleRequest;
 import com.zbkj.common.request.StoreProductRuleSearchRequest;
+import com.zbkj.common.response.CommonResult;
+import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.service.service.StoreProductRuleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -40,13 +40,14 @@ public class StoreProductRuleController {
 
     /**
      * 分页显示商品规则值(规格)表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:product:rule:list')")
     @ApiOperation(value = "分页列表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<StoreProductRule>>  getList(
+    public CommonResult<CommonPage<StoreProductRule>> getList(
             @Validated StoreProductRuleSearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<StoreProductRule> storeProductRuleCommonPage =
                 CommonPage.restPage(storeProductRuleService.getList(request, pageParamRequest));
@@ -55,6 +56,7 @@ public class StoreProductRuleController {
 
     /**
      * 新增商品规则值(规格)表
+     *
      * @param storeProductRuleRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:product:rule:save')")
@@ -70,6 +72,7 @@ public class StoreProductRuleController {
 
     /**
      * 删除商品规则值(规格)表
+     *
      * @param ids Integer
      */
     @PreAuthorize("hasAuthority('admin:product:rule:delete')")
@@ -85,6 +88,7 @@ public class StoreProductRuleController {
 
     /**
      * 修改商品规则值(规格)表
+     *
      * @param storeProductRuleRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:product:rule:update')")
@@ -100,6 +104,7 @@ public class StoreProductRuleController {
 
     /**
      * 查询商品规则值(规格)表信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:product:rule:info')")
@@ -108,7 +113,7 @@ public class StoreProductRuleController {
     public CommonResult<StoreProductRule> info(@PathVariable Integer id) {
         StoreProductRule storeProductRule = storeProductRuleService.getById(id);
         return CommonResult.success(storeProductRule);
-   }
+    }
 }
 
 

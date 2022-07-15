@@ -98,6 +98,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
     /**
      * 查询支付结果
+     *
      * @param orderNo 订单编号
      * @return
      */
@@ -213,7 +214,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
                         storePink.setStopTime(headPink.getStopTime());
                     } else {
                         DateTime hourTime = cn.hutool.core.date.DateUtil.offsetHour(dateTime, effectiveTime);
-                        long stopTime =  hourTime.getTime();
+                        long stopTime = hourTime.getTime();
                         if (stopTime > storeCombination.getStopTime()) {
                             stopTime = storeCombination.getStopTime();
                         }
@@ -277,8 +278,9 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
     /**
      * 微信充值预下单接口
+     *
      * @param userRecharge 充值订单
-     * @param clientIp      ip
+     * @param clientIp     ip
      * @return
      */
     @Override
@@ -347,6 +349,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
     /**
      * 生成微信查询订单对象
+     *
      * @return
      */
     private Map<String, String> getWxChantQueryPayVo(String orderNo, String appId, String mchId, String signKey) {
@@ -362,6 +365,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
     /**
      * 获取微信预下单对象
+     *
      * @return
      */
     private CreateOrderRequestVo getUnifiedorderVo(UserRecharge userRecharge, String openid, String ip, String appId, String mchId, String signKey) {
@@ -424,7 +428,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
             }
             CreateOrderResponseVo responseVo = CrmebUtil.mapToObj(map, CreateOrderResponseVo.class);
             if (responseVo.getReturnCode().toUpperCase().equals("FAIL")) {
-                throw new CrmebException("微信下单失败1！" +  responseVo.getReturnMsg());
+                throw new CrmebException("微信下单失败1！" + responseVo.getReturnMsg());
             }
 
             if (responseVo.getResultCode().toUpperCase().equals("FAIL")) {

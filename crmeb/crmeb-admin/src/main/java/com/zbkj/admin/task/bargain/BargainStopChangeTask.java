@@ -34,11 +34,11 @@ public class BargainStopChangeTask {
     private StoreBargainService storeBargainService;
 
     @Scheduled(cron = "0 0 0 */1 * ?") //5秒钟同步一次数据
-    public void init(){
+    public void init() {
         logger.info("---BargainStopChangeTask------bargain stop status change task: Execution Time - {}", DateUtil.nowDateTime());
         try {
             storeBargainService.stopAfterChange();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             logger.error("BargainStopChangeTask" + " | msg : " + e.getMessage());
         }

@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="BargainFrontRequest对象", description="砍价公共请求对象")
+@ApiModel(value = "BargainFrontRequest对象", description = "砍价公共请求对象")
 public class BargainFrontRequest {
 
     @ApiModelProperty(value = "砍价商品ID", required = true)

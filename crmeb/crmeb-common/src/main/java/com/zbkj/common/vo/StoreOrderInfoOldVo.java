@@ -24,10 +24,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreOrderInfoVo对象", description="订单购物详情表")
+@ApiModel(value = "StoreOrderInfoVo对象", description = "订单购物详情表")
 public class StoreOrderInfoOldVo implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     private Integer id;
@@ -44,7 +44,6 @@ public class StoreOrderInfoOldVo implements Serializable {
     @ApiModelProperty(value = "唯一id")
     @TableField(value = "`unique`")
     private String unique;
-
 
 
 }

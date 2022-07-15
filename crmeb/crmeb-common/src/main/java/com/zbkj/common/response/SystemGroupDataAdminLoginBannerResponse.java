@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemGroupDataAdminLoginBannerResponse对象", description="后台登录页面轮播图")
+@ApiModel(value = "SystemGroupDataAdminLoginBannerResponse对象", description = "后台登录页面轮播图")
 public class SystemGroupDataAdminLoginBannerResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "图片")
     private String pic;

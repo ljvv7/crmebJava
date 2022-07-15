@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="HomeRateResponse对象", description="主页统计数据对象")
+@ApiModel(value = "HomeRateResponse对象", description = "主页统计数据对象")
 public class HomeRateResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "今日销售额")
     private Object sales;

@@ -1,15 +1,11 @@
 package com.zbkj.admin.controller;
 
 import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreCombinationRequest;
 import com.zbkj.common.request.StoreCombinationSearchRequest;
 import com.zbkj.common.request.StorePinkSearchRequest;
-import com.zbkj.common.response.StoreCombinationResponse;
-import com.zbkj.common.response.StorePinkAdminListResponse;
-import com.zbkj.common.response.StorePinkDetailResponse;
-import com.zbkj.common.response.StoreProductInfoResponse;
+import com.zbkj.common.response.*;
 import com.zbkj.service.service.StoreCombinationService;
 import com.zbkj.service.service.StorePinkService;
 import io.swagger.annotations.Api;
@@ -49,74 +45,79 @@ public class StoreCombinationController {
 
     /**
      * 分页显示拼团商品表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      * @return
      */
     @PreAuthorize("hasAuthority('admin:combination:list')")
     @ApiOperation(value = "分页显示拼团商品表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<StoreCombinationResponse>> getList(@Validated StoreCombinationSearchRequest request, @Validated PageParamRequest pageParamRequest){
+    public CommonResult<CommonPage<StoreCombinationResponse>> getList(@Validated StoreCombinationSearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<StoreCombinationResponse> commonPage = CommonPage.restPage(storeCombinationService.getList(request, pageParamRequest));
         return CommonResult.success(commonPage);
     }
 
     /**
      * 新增拼团商品表
+     *
      * @param request 新增参数
      */
     @PreAuthorize("hasAuthority('admin:combination:save')")
     @ApiOperation(value = "新增拼团商品")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public CommonResult<String> save(@RequestBody @Validated StoreCombinationRequest request){
-        if(storeCombinationService.saveCombination(request)){
+    public CommonResult<String> save(@RequestBody @Validated StoreCombinationRequest request) {
+        if (storeCombinationService.saveCombination(request)) {
             return CommonResult.success("新增拼团商品成功");
-        }else{
+        } else {
             return CommonResult.failed("新增拼团商品失败");
         }
     }
 
     /**
      * 删除拼团商品表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:combination:delete')")
     @ApiOperation(value = "删除拼团商品")
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public CommonResult<String> delete(@RequestParam(value = "id") Integer id){
-        if(storeCombinationService.deleteById(id)){
+    public CommonResult<String> delete(@RequestParam(value = "id") Integer id) {
+        if (storeCombinationService.deleteById(id)) {
             return CommonResult.success();
-        }else{
+        } else {
             return CommonResult.failed();
         }
     }
 
     /**
      * 修改拼团商品表
+     *
      * @param storeCombinationRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:combination:update')")
     @ApiOperation(value = "修改拼团商品")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public CommonResult<String> update(@RequestBody @Validated StoreCombinationRequest storeCombinationRequest){
-        if(storeCombinationService.updateCombination(storeCombinationRequest)){
+    public CommonResult<String> update(@RequestBody @Validated StoreCombinationRequest storeCombinationRequest) {
+        if (storeCombinationService.updateCombination(storeCombinationRequest)) {
             return CommonResult.success();
-        }else{
+        } else {
             return CommonResult.failed();
         }
     }
 
     /**
      * 查询拼团商品信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:combination:info')")
     @ApiOperation(value = "拼团商品详情")
     @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public CommonResult<StoreProductInfoResponse> info(@RequestParam(value = "id") Integer id){
+    public CommonResult<StoreProductInfoResponse> info(@RequestParam(value = "id") Integer id) {
         StoreProductInfoResponse detail = storeCombinationService.getAdminDetail(id);
         return CommonResult.success(detail);
-   }
+    }
 
     /**
      * 修改拼团商品状态
@@ -124,10 +125,10 @@ public class StoreCombinationController {
     @PreAuthorize("hasAuthority('admin:combination:update:status')")
     @ApiOperation(value = "修改拼团商品状态")
     @RequestMapping(value = "/update/status", method = RequestMethod.POST)
-    public CommonResult<Object> updateStatus(@RequestParam(value = "id") Integer id, @RequestParam @Validated boolean isShow){
-        if(storeCombinationService.updateCombinationShow(id, isShow)){
+    public CommonResult<Object> updateStatus(@RequestParam(value = "id") Integer id, @RequestParam @Validated boolean isShow) {
+        if (storeCombinationService.updateCombinationShow(id, isShow)) {
             return CommonResult.success();
-        }else{
+        } else {
             return CommonResult.failed();
         }
     }
@@ -149,7 +150,7 @@ public class StoreCombinationController {
     @PreAuthorize("hasAuthority('admin:combination:combine:list')")
     @ApiOperation(value = "拼团列表")
     @RequestMapping(value = "/combine/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<StorePinkAdminListResponse>> getCombineList(@Validated StorePinkSearchRequest request, @Validated PageParamRequest pageParamRequest){
+    public CommonResult<CommonPage<StorePinkAdminListResponse>> getCombineList(@Validated StorePinkSearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<StorePinkAdminListResponse> responseCommonPage = CommonPage.restPage(storePinkService.getList(request, pageParamRequest));
         return CommonResult.success(responseCommonPage);
     }

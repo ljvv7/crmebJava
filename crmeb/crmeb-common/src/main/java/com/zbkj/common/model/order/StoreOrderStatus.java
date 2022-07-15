@@ -1,14 +1,14 @@
 package com.zbkj.common.model.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 订单操作记录表
@@ -26,10 +26,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_order_status")
-@ApiModel(value="StoreOrderStatus对象", description="订单操作记录表")
+@ApiModel(value = "StoreOrderStatus对象", description = "订单操作记录表")
 public class StoreOrderStatus implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单id")
     private Integer oid;

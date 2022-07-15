@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="CreateOrderRequestVo对象", description="微信统一下单对象")
+@ApiModel(value = "CreateOrderRequestVo对象", description = "微信统一下单对象")
 public class CreateOrderRequestVo {
     @ApiModelProperty(value = "appId，公众号名称，由商户传入", required = true)
     private String appid;
@@ -91,8 +91,6 @@ public class CreateOrderRequestVo {
 
     @ApiModelProperty(value = "该字段用于上报支付的场景信息,针对H5支付有以下三种场景,请根据对应场景上报,H5支付不建议在APP端使用，针对场景1，2请接入APP支付，不然可能会出现兼容性问题")
     private String scene_info;
-
-
 
 
 }

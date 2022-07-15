@@ -6,21 +6,21 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.BrokerageRecordConstants;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.response.SpreadCommissionDetailResponse;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zbkj.common.constants.BrokerageRecordConstants;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.model.user.User;
+import com.zbkj.common.model.user.UserBrokerageRecord;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.BrokerageRecordRequest;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.request.RetailShopStairUserRequest;
+import com.zbkj.common.response.SpreadCommissionDetailResponse;
 import com.zbkj.common.utils.ArrayUtil;
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.vo.dateLimitUtilVo;
-import com.zbkj.common.request.BrokerageRecordRequest;
-import com.zbkj.common.request.RetailShopStairUserRequest;
-import com.zbkj.common.model.user.User;
-import com.zbkj.common.model.user.UserBrokerageRecord;
 import com.zbkj.service.dao.UserBrokerageRecordDao;
 import com.zbkj.service.service.UserBrokerageRecordService;
 import com.zbkj.service.service.UserService;
@@ -64,7 +64,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 根据订单编号获取记录列表
-     * @param linkId 关联id
+     *
+     * @param linkId   关联id
      * @param linkType 关联类型
      * @return 记录列表
      */
@@ -78,7 +79,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取记录(订单不可用此方法)
-     * @param linkId 关联id
+     *
+     * @param linkId   关联id
      * @param linkType 关联类型
      * @return 记录列表
      */
@@ -105,7 +107,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
             // 查询对应的用户
             User user = userService.getById(record.getUid());
             if (ObjectUtil.isNull(user)) {
-                continue ;
+                continue;
             }
             record.setStatus(BrokerageRecordConstants.BROKERAGE_RECORD_STATUS_COMPLETE);
             // 计算佣金余额
@@ -128,6 +130,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 昨天得佣金
+     *
      * @param uid 用户uid
      * @return BigDecimal
      */
@@ -150,7 +153,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取佣金明细列表根据uid
-     * @param uid uid
+     *
+     * @param uid              uid
      * @param pageParamRequest 分页参数
      */
     @Override
@@ -177,6 +181,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取累计推广条数
+     *
      * @param uid 用户uid
      * @return Integer
      */
@@ -192,7 +197,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取推广记录列表
-     * @param uid 用户uid
+     *
+     * @param uid              用户uid
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -209,7 +215,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取推广记录列表
-     * @param request 用户uid
+     *
+     * @param request          用户uid
      * @param pageParamRequest 分页参数
      * @return PageInfo
      */
@@ -240,7 +247,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取月份对应的推广订单数
-     * @param uid 用户uid
+     *
+     * @param uid       用户uid
      * @param monthList 月份列表
      * @return Map
      */
@@ -266,6 +274,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取佣金排行榜（周、月）
+     *
      * @param type week、month
      * @return List
      */
@@ -276,7 +285,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
         queryWrapper.eq("link_type", BrokerageRecordConstants.BROKERAGE_RECORD_LINK_TYPE_ORDER);
         queryWrapper.eq("status", BrokerageRecordConstants.BROKERAGE_RECORD_STATUS_COMPLETE);
         dateLimitUtilVo dateLimit = DateUtil.getDateLimit(type);
-        if(!StringUtils.isBlank(dateLimit.getStartTime())){
+        if (!StringUtils.isBlank(dateLimit.getStartTime())) {
             queryWrapper.between("update_time", dateLimit.getStartTime(), dateLimit.getEndTime());
         }
         queryWrapper.groupBy("uid");
@@ -286,6 +295,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 根据Uid获取分佣记录列表
+     *
      * @param uid 用户uid
      * @return List
      */
@@ -301,6 +311,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 佣金总金额（单位时间）
+     *
      * @param dateLimit 时间参数
      * @return BigDecimal
      */
@@ -324,6 +335,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 单位时间消耗的佣金
+     *
      * @param dateLimit 时间参数
      * @return
      */
@@ -346,6 +358,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取冻结期佣金
+     *
      * @param uid uid
      * @return BigDecimal
      */
@@ -365,7 +378,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 佣金记录列表
-     * @param request 筛选条件
+     *
+     * @param request          筛选条件
      * @param pageParamRequest 分页参数
      * @return PageInfo
      */
@@ -411,6 +425,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 根据日期获取支付佣金金额（确认到账佣金）
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return BigDecimal
      */
@@ -427,6 +442,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取累计佣金转余额金额
+     *
      * @return BigDecimal
      */
     @Override
@@ -441,7 +457,8 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 根据月份获取佣金明细
-     * @param uid uid
+     *
+     * @param uid   uid
      * @param month 月份
      * @return
      */
@@ -458,6 +475,7 @@ public class UserBrokerageRecordServiceImpl extends ServiceImpl<UserBrokerageRec
 
     /**
      * 获取需要解冻的记录列表
+     *
      * @return 记录列表
      */
     private List<UserBrokerageRecord> findThawList() {

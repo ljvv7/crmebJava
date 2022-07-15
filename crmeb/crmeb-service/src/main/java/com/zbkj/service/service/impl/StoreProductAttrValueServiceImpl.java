@@ -40,9 +40,8 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
     private SystemConfigService systemConfigService;
 
     /**
-     *
      * @param productId 商品id
-     * @param attrId 属性id
+     * @param attrId    属性id
      * @return 商品属性集合
      */
     @Override
@@ -50,7 +49,7 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
         LambdaQueryWrapper<StoreProductAttrValue> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.eq(StoreProductAttrValue::getProductId, productId);
         lambdaQueryWrapper.eq(StoreProductAttrValue::getType, type);
-        if(null != attrId){
+        if (null != attrId) {
             lambdaQueryWrapper.eq(StoreProductAttrValue::getId, attrId);
         }
         lambdaQueryWrapper.eq(StoreProductAttrValue::getIsDel, false);
@@ -59,6 +58,7 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
 
     /**
      * 根据产品属性查询
+     *
      * @param storeProductAttrValue 商品属性参数
      * @return 查询到的属性结果
      */
@@ -71,20 +71,22 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
 
     /**
      * 根据商品id删除AttrValue
+     *
      * @param productId 商品id
-     * @param type 类型区分是是否添加营销
+     * @param type      类型区分是是否添加营销
      * @reture 删除结果
      */
     @Override
-    public boolean removeByProductId(Integer productId,int type) {
+    public boolean removeByProductId(Integer productId, int type) {
         LambdaQueryWrapper<StoreProductAttrValue> lambdaQW = Wrappers.lambdaQuery();
-        lambdaQW.eq(StoreProductAttrValue::getProductId, productId).eq(StoreProductAttrValue::getType,type);
+        lambdaQW.eq(StoreProductAttrValue::getProductId, productId).eq(StoreProductAttrValue::getType, type);
         return dao.delete(lambdaQW) > 0;
     }
 
     /**
      * 根据id、类型查询
-     * @param id ID
+     *
+     * @param id   ID
      * @param type 类型
      * @return StoreProductAttrValue
      */
@@ -100,9 +102,10 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
 
     /**
      * 根据sku查询
+     *
      * @param productId 商品id
-     * @param suk   sku
-     * @param type  规格类型
+     * @param suk       sku
+     * @param type      规格类型
      * @return StoreProductAttrValue
      */
     @Override
@@ -117,10 +120,11 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
 
     /**
      * 添加(退货)/扣减库存
-     * @param id 秒杀商品id
-     * @param num 数量
+     *
+     * @param id            秒杀商品id
+     * @param num           数量
      * @param operationType 类型：add—添加，sub—扣减
-     * @param type 活动类型 0=商品，1=秒杀，2=砍价，3=拼团
+     * @param type          活动类型 0=商品，1=秒杀，2=砍价，3=拼团
      * @return Boolean
      */
     @Override
@@ -156,8 +160,9 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
 
     /**
      * 删除商品规格属性值
+     *
      * @param productId 商品id
-     * @param type 商品类型
+     * @param type      商品类型
      * @return Boolean
      */
     @Override
@@ -171,8 +176,9 @@ public class StoreProductAttrValueServiceImpl extends ServiceImpl<StoreProductAt
 
     /**
      * 获取商品规格列表
+     *
      * @param productId 商品id
-     * @param type 商品类型
+     * @param type      商品类型
      * @return List
      */
     @Override

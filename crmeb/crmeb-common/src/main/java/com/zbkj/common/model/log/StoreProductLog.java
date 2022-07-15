@@ -28,10 +28,10 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_log")
-@ApiModel(value="StoreProductLog对象", description="商品统计")
+@ApiModel(value = "StoreProductLog对象", description = "商品统计")
 public class StoreProductLog implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "商品统计表ID")
     @TableId(value = "id", type = IdType.AUTO)

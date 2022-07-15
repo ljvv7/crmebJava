@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="WxRefundResponseVo", description="微信退款返回对象")
+@ApiModel(value = "WxRefundResponseVo", description = "微信退款返回对象")
 public class WxRefundResponseVo {
     @ApiModelProperty(value = "SUCCESS/FAIL此字段是通信标识，非交易标识，交易是否成功需要查看trade_state来判断")
     @JsonProperty(value = "return_code")

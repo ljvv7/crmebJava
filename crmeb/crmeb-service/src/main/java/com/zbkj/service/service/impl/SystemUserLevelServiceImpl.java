@@ -51,6 +51,7 @@ public class SystemUserLevelServiceImpl extends ServiceImpl<SystemUserLevelDao, 
 
     /**
      * 分页显示设置用户等级表
+     *
      * @return List<SystemUserLevel>
      */
     @Override
@@ -63,6 +64,7 @@ public class SystemUserLevelServiceImpl extends ServiceImpl<SystemUserLevelDao, 
 
     /**
      * 新增设置用户等级表
+     *
      * @param request SystemUserLevelRequest 新增参数
      * @return boolean
      * 等级名称不能重复
@@ -79,9 +81,10 @@ public class SystemUserLevelServiceImpl extends ServiceImpl<SystemUserLevelDao, 
 
     /**
      * 添加、修改校验
+     *
      * @param request 用户等级参数
-     * 等级名称不能重复
-     * 等级级别不能重复
+     *                等级名称不能重复
+     *                等级级别不能重复
      */
     private void checkLevel(SystemUserLevelRequest request) {
         SystemUserLevel temp;
@@ -139,8 +142,9 @@ public class SystemUserLevelServiceImpl extends ServiceImpl<SystemUserLevelDao, 
 
     /**
      * 系统等级更新
-     * @param id    等级id
-     * @param request   等级数据
+     *
+     * @param id      等级id
+     * @param request 等级数据
      * @return Boolean
      */
     @Override
@@ -189,6 +193,7 @@ public class SystemUserLevelServiceImpl extends ServiceImpl<SystemUserLevelDao, 
 
     /**
      * 删除系统等级
+     *
      * @param id 等级id
      * @return Boolean
      */
@@ -211,6 +216,7 @@ public class SystemUserLevelServiceImpl extends ServiceImpl<SystemUserLevelDao, 
 
     /**
      * 使用/禁用
+     *
      * @param request request
      */
     @Override
@@ -238,6 +244,7 @@ public class SystemUserLevelServiceImpl extends ServiceImpl<SystemUserLevelDao, 
 
     /**
      * 获取可用等级列表
+     *
      * @return List
      */
     @Override

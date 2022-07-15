@@ -131,11 +131,12 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     private SmsTemplateService smsTemplateService;
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return CommonPage<StoreOrderDetailResponse>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return CommonPage<StoreOrderDetailResponse>
+     */
     @Override
     public CommonPage<StoreOrderDetailResponse> getAdminList(StoreOrderSearchRequest request, PageParamRequest pageParamRequest) {
         Page<Object> startPage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -163,8 +164,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * H5订单列表
-     * @param uid 用户uid
-     * @param status 评价等级|0=未支付,1=待发货,2=待收货,3=待评价,4=已完成,-3=售后/退款
+     *
+     * @param uid              用户uid
+     * @param status           评价等级|0=未支付,1=待发货,2=待收货,3=待评价,4=已完成,-3=售后/退款
      * @param pageParamRequest 分页参数
      * @return 订单结果列表
      */
@@ -180,6 +182,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 创建订单
+     *
      * @param storeOrder 订单参数
      * @return 结果标识
      */
@@ -190,6 +193,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 订单基本查询一条
+     *
      * @param storeOrder 参数
      * @return 查询结果
      */
@@ -202,7 +206,8 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 核销列表
-     * @param request 请求参数
+     *
+     * @param request          请求参数
      * @param pageParamRequest 分页类参数
      * @return List<StoreOrder>
      */
@@ -217,7 +222,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         }
 
         if (!StringUtils.isBlank(request.getKeywords())) {
-            where += " and (real_name like '%"+ request.getKeywords() +"%' or user_phone = '"+ request.getKeywords() +"' or order_id = '" + request.getKeywords() + "' or id = '" + request.getKeywords() + "' )";
+            where += " and (real_name like '%" + request.getKeywords() + "%' or user_phone = '" + request.getKeywords() + "' or order_id = '" + request.getKeywords() + "' or id = '" + request.getKeywords() + "' )";
         }
 
         if (request.getStoreId() != null && request.getStoreId() > 0) {
@@ -259,11 +264,12 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 格式化订单信息，对外输出一致
+     *
      * @param orderList List<StoreOrder> 订单列表
      * @return List<StoreOrderItemResponse>
      */
     private List<StoreOrderDetailResponse> formatOrder1(List<StoreOrder> orderList) {
-        List<StoreOrderDetailResponse> detailResponseList  = new ArrayList<>();
+        List<StoreOrderDetailResponse> detailResponseList = new ArrayList<>();
         if (CollUtil.isEmpty(orderList)) {
             return detailResponseList;
         }
@@ -300,6 +306,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单类型（前端展示）
+     *
      * @param storeOrder 订单
      * @return String
      */
@@ -341,13 +348,14 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 格式化订单信息，对外输出一致
+     *
      * @param storeOrderList List<StoreOrder> 订单列表
+     * @return List<StoreOrderItemResponse>
      * @author Mr.Zhang
      * @since 2020-05-28
-     * @return List<StoreOrderItemResponse>
      */
     private List<StoreOrderItemResponse> formatOrder(List<StoreOrder> storeOrderList) {
-        List<StoreOrderItemResponse> storeOrderItemResponseArrayList  = new ArrayList<>();
+        List<StoreOrderItemResponse> storeOrderItemResponseArrayList = new ArrayList<>();
         if (null == storeOrderList || storeOrderList.size() < 1) {
             return storeOrderItemResponseArrayList;
         }
@@ -374,7 +382,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
         //获取推广人id集合
         List<Integer> spreadPeopleUidList = new ArrayList<>();
-        for(Map.Entry<Integer, User> entry : userList.entrySet()) {
+        for (Map.Entry<Integer, User> entry : userList.entrySet()) {
             spreadPeopleUidList.add(entry.getValue().getSpreadUid());
         }
 
@@ -409,7 +417,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             storeOrderItemResponse.setPayTypeStr(getPayType(storeOrder.getPayType()));
 
             //推广人信息
-            if (!userList.isEmpty()  && null != userList.get(storeOrder.getUid()) && mapListInUid.containsKey(userList.get(storeOrder.getUid()).getSpreadUid())) {
+            if (!userList.isEmpty() && null != userList.get(storeOrder.getUid()) && mapListInUid.containsKey(userList.get(storeOrder.getUid()).getSpreadUid())) {
                 storeOrderItemResponse.getSpreadInfo().setId(mapListInUid.get(userList.get(storeOrder.getUid()).getSpreadUid()).getUid());
                 storeOrderItemResponse.getSpreadInfo().setName(mapListInUid.get(userList.get(storeOrder.getUid()).getSpreadUid()).getNickname());
             }
@@ -458,10 +466,11 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 累计消费
+     *
      * @param userId Integer 用户id
+     * @return UserBalanceResponse
      * @author Mr.Zhang
      * @since 2020-06-10
-     * @return UserBalanceResponse
      */
     @Override
     public BigDecimal getSumBigDecimal(Integer userId, String date) {
@@ -485,15 +494,16 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 按开始结束时间分组订单
-     * @param date String 时间范围
+     *
+     * @param date    String 时间范围
      * @param lefTime int 截取创建时间长度
+     * @return HashMap<String, Object>
      * @author Mr.Zhang
      * @since 2020-05-16
-     * @return HashMap<String, Object>
      */
     public List<StoreOrder> getOrderGroupByDate(String date, int lefTime) {
         QueryWrapper<StoreOrder> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("sum(pay_price) as pay_price", "left(create_time, "+lefTime+") as orderId", "count(id) as id");
+        queryWrapper.select("sum(pay_price) as pay_price", "left(create_time, " + lefTime + ") as orderId", "count(id) as id");
         if (StringUtils.isNotBlank(date)) {
             dateLimitUtilVo dateLimit = DateUtil.getDateLimit(date);
             queryWrapper.between("create_time", dateLimit.getStartTime(), dateLimit.getEndTime());
@@ -502,7 +512,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         return dao.selectList(queryWrapper);
     }
 
-    /** 退款
+    /**
+     * 退款
+     *
      * @param request StoreOrderRefundRequest 退款参数
      * @return boolean
      * 这里只处理订单状态
@@ -574,6 +586,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 订单详情（PC）
+     *
      * @param orderNo 订单编号
      * @return StoreOrderInfoResponse
      */
@@ -610,11 +623,13 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         return storeOrderInfoResponse;
     }
 
-    /** 发送货物
+    /**
+     * 发送货物
+     *
      * @param request StoreOrderSendRequest 发货参数
+     * @return boolean
      * @author Mr.Zhang
      * @since 2020-06-10
-     * @return boolean
      */
     @Override
     public Boolean send(StoreOrderSendRequest request) {
@@ -641,8 +656,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 订单备注
+     *
      * @param orderNo 订单编号
-     * @param mark 备注
+     * @param mark    备注
      * @return Boolean
      */
     @Override
@@ -654,8 +670,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 拒绝退款
+     *
      * @param orderNo 订单编号
-     * @param reason String 原因
+     * @param reason  String 原因
      * @return Boolean
      */
     @Override
@@ -689,10 +706,11 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 查询单条
+     *
      * @param storeOrder StoreOrder 订单参数
+     * @return StoreOrder
      * @author Mr.Zhang
      * @since 2020-05-28
-     * @return StoreOrder
      */
     @Override
     public StoreOrder getInfoByEntity(StoreOrder storeOrder) {
@@ -703,6 +721,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单快递信息
+     *
      * @param orderNo 订单编号
      * @return LogisticsResultVo
      */
@@ -722,6 +741,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 订单 top 查询参数
+     *
      * @param status 状态参数
      * @return 订单查询结果
      */
@@ -729,14 +749,15 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     public Integer getTopDataUtil(Integer status, Integer userId) {
         LambdaQueryWrapper<StoreOrder> lqw = new LambdaQueryWrapper<>();
         orderUtils.statusApiByWhere(lqw, status);
-        lqw.eq(StoreOrder::getUid,userId);
+        lqw.eq(StoreOrder::getUid, userId);
         return dao.selectCount(lqw);
     }
 
     /**
      * 改价
-     * @param orderNo 订单编号
-     * @param price 修改后的价格
+     *
+     * @param orderNo  订单编号
+     * @param price    修改后的价格
      * @param oldPrice 原支付金额
      */
     private Boolean orderEditPrice(String orderNo, BigDecimal price, BigDecimal oldPrice) {
@@ -753,7 +774,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
      * 根据时间参数统计订单销售额
      *
      * @param dateLimit 时间区间
-     * @param type 类型
+     * @param type      类型
      * @return 统计订单信息
      */
     @Override
@@ -764,20 +785,20 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         String dateStartD = dateRange.getStartTime();
         String dateEndD = dateRange.getEndTime();
         int days = DateUtil.daysBetween(
-                DateUtil.strToDate(dateStartD,Constants.DATE_FORMAT_DATE),
-                DateUtil.strToDate(dateEndD,Constants.DATE_FORMAT_DATE)
+                DateUtil.strToDate(dateStartD, Constants.DATE_FORMAT_DATE),
+                DateUtil.strToDate(dateEndD, Constants.DATE_FORMAT_DATE)
         );
         // 同时间区间的上一个时间起点
         String perDateStart = DateUtil.addDay(
-                DateUtil.strToDate(dateStartD,Constants.DATE_FORMAT_DATE), -days, Constants.DATE_FORMAT_START);
+                DateUtil.strToDate(dateStartD, Constants.DATE_FORMAT_DATE), -days, Constants.DATE_FORMAT_START);
         // 当前时间区间
         String dateStart = DateUtil.addDay(
-                DateUtil.strToDate(dateStartD,Constants.DATE_FORMAT_DATE),0,Constants.DATE_FORMAT_START);
+                DateUtil.strToDate(dateStartD, Constants.DATE_FORMAT_DATE), 0, Constants.DATE_FORMAT_START);
         String dateEnd = DateUtil.addDay(
-                DateUtil.strToDate(dateEndD,Constants.DATE_FORMAT_DATE),0,Constants.DATE_FORMAT_END);
+                DateUtil.strToDate(dateEndD, Constants.DATE_FORMAT_DATE), 0, Constants.DATE_FORMAT_END);
 
         // 上一个时间段查询
-        List<StoreOrder> orderPerList = getOrderPayedByDateLimit(perDateStart,dateStart);
+        List<StoreOrder> orderPerList = getOrderPayedByDateLimit(perDateStart, dateStart);
 
         // 当前时间段
         List<StoreOrder> orderCurrentList = getOrderPayedByDateLimit(dateStart, dateEnd);
@@ -786,30 +807,30 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             double perSumPrice = orderPerList.stream().mapToDouble(e -> e.getPayPrice().doubleValue()).sum();
             double currentSumPrice = orderCurrentList.stream().mapToDouble(e -> e.getPayPrice().doubleValue()).sum();
 
-            response.setChart(dao.getOrderStatisticsPriceDetail(new StoreDateRangeSqlPram(dateStart,dateEnd)));
-            response.setTime(BigDecimal.valueOf(currentSumPrice).setScale(2,BigDecimal.ROUND_HALF_UP));
+            response.setChart(dao.getOrderStatisticsPriceDetail(new StoreDateRangeSqlPram(dateStart, dateEnd)));
+            response.setTime(BigDecimal.valueOf(currentSumPrice).setScale(2, BigDecimal.ROUND_HALF_UP));
             // 当前营业额和上一个同比营业额增长区间
             increasePrice = currentSumPrice - perSumPrice;
             if (increasePrice <= 0) response.setGrowthRate(0);
             else if (perSumPrice == 0) response.setGrowthRate((int) increasePrice * 100);
-            else response.setGrowthRate((int)((increasePrice * perSumPrice) * 100));
-        }else if (type ==2) {
-            response.setChart(dao.getOrderStatisticsOrderCountDetail(new StoreDateRangeSqlPram(dateStart,dateEnd)));
+            else response.setGrowthRate((int) ((increasePrice * perSumPrice) * 100));
+        } else if (type == 2) {
+            response.setChart(dao.getOrderStatisticsOrderCountDetail(new StoreDateRangeSqlPram(dateStart, dateEnd)));
             response.setTime(BigDecimal.valueOf(orderCurrentList.size()));
             increasePrice = orderCurrentList.size() - orderPerList.size();
             if (increasePrice <= 0) response.setGrowthRate(0);
             else if (orderPerList.size() == 0) response.setGrowthRate((int) increasePrice);
-            else response.setGrowthRate((int)((increasePrice / orderPerList.size()) * 100));
+            else response.setGrowthRate((int) ((increasePrice / orderPerList.size()) * 100));
         }
-        response.setIncreaseTime(increasePrice+"");
-        response.setIncreaseTimeStatus(increasePrice >= 0 ? 1:2);
+        response.setIncreaseTime(increasePrice + "");
+        response.setIncreaseTimeStatus(increasePrice >= 0 ? 1 : 2);
         return response;
     }
 
     /**
      * 获取用户当天的秒杀数量
      *
-     * @param uid 用户uid
+     * @param uid       用户uid
      * @param seckillId 秒杀商品id
      * @return 用户当天的秒杀商品订单数量
      */
@@ -827,8 +848,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取用户当前的砍价订单
-     * @param uid    用户uid
-     * @return  用户当前的砍价订单
+     *
+     * @param uid 用户uid
+     * @return 用户当前的砍价订单
      */
     @Override
     public List<StoreOrder> getUserCurrentBargainOrders(Integer uid, Integer bargainId) {
@@ -841,8 +863,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取用户当前的拼团订单
-     * @param uid    用户uid
-     * @return  用户当前的拼团订单
+     *
+     * @param uid 用户uid
+     * @return 用户当前的拼团订单
      */
     @Override
     public List<StoreOrder> getUserCurrentCombinationOrders(Integer uid, Integer combinationId) {
@@ -862,6 +885,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取面单默认配置信息
+     *
      * @return ExpressSheetVo
      */
     @Override
@@ -871,6 +895,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 更新支付结果
+     *
      * @param orderNo 订单编号
      * @return Boolean
      */
@@ -880,12 +905,13 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         lqw.set(StoreOrder::getPaid, true);
         lqw.set(StoreOrder::getPayTime, DateUtil.nowDateTime());
         lqw.eq(StoreOrder::getOrderId, orderNo);
-        lqw.eq(StoreOrder::getPaid,false);
+        lqw.eq(StoreOrder::getPaid, false);
         return update(lqw);
     }
 
     /**
      * 跟据订单号列表获取订单列表Map
+     *
      * @param orderNoList 订单号列表
      * @return Map
      */
@@ -903,6 +929,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取推广订单总金额
+     *
      * @param orderNoList 订单编号列表
      * @return BigDecimal
      */
@@ -917,6 +944,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取所有收货订单id集合
+     *
      * @return List<StoreOrder>
      */
     @Override
@@ -934,8 +962,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
     }
 
     /**
-     *
-     * @param userId 用户uid
+     * @param userId           用户uid
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -953,6 +980,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 订单改价
+     *
      * @param request 改价请求对象
      * @return 改价结果
      */
@@ -967,10 +995,10 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             throw new CrmebException("系统只支持一次改价");
         }
         // 修改价格和原来价格相同
-        if (existOrder.getPayPrice().compareTo(request.getPayPrice()) ==0) {
+        if (existOrder.getPayPrice().compareTo(request.getPayPrice()) == 0) {
             throw new CrmebException(StrUtil.format("修改价格不能和原支付价格相同 原价 {} 修改价 {}", existOrder.getPayPrice(), request.getPayPrice()));
         }
-        String oldPrice = existOrder.getPayPrice()+"";
+        String oldPrice = existOrder.getPayPrice() + "";
 
         Boolean execute = transactionTemplate.execute(e -> {
             // 修改订单价格
@@ -983,7 +1011,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         });
         if (!execute) {
             throw new CrmebException(Constants.RESULT_ORDER_EDIT_PRICE_SUCCESS
-                    .replace("${orderNo}", existOrder.getOrderId()).replace("${price}", request.getPayPrice()+""));
+                    .replace("${orderNo}", existOrder.getOrderId()).replace("${price}", request.getPayPrice() + ""));
         }
         // 发送改价短信提醒
         SystemNotification notification = systemNotificationService.getByMark(NotifyConstants.MODIFY_ORDER_PRICE_MARK);
@@ -1001,6 +1029,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单总数量
+     *
      * @param uid 用户uid
      * @return Integer
      */
@@ -1016,6 +1045,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取用户总消费金额
+     *
      * @param userId 用户uid
      * @return BigDecimal
      */
@@ -1033,6 +1063,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单数量(时间)
+     *
      * @param uid 用户uid
      * @return Integer
      */
@@ -1052,6 +1083,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取用户消费金额(时间)
+     *
      * @param userId 用户uid
      * @return BigDecimal
      */
@@ -1073,7 +1105,8 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取砍价订单
-     * @param bargainId 砍价商品id
+     *
+     * @param bargainId     砍价商品id
      * @param bargainUserId 用户砍价活动id
      * @return StoreOrder
      */
@@ -1089,6 +1122,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单状态数量
+     *
      * @return StoreOrderCountItemResponse
      */
     @Override
@@ -1122,6 +1156,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单统计数据
+     *
      * @param dateLimit 时间端
      * @return StoreOrderTopItemResponse
      */
@@ -1141,6 +1176,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 订单删除
+     *
      * @param orderNo 订单编号
      * @return Boolean
      */
@@ -1159,6 +1195,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 通过日期获取商品交易件数
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return Integer
      */
@@ -1173,6 +1210,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 通过日期获取商品交易成功件数
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return Integer
      */
@@ -1188,6 +1226,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 通过日期获取订单数量
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return Integer
      */
@@ -1202,6 +1241,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 通过日期获取支付订单数量
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return Integer
      */
@@ -1216,6 +1256,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 通过日期获取支付订单金额
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return BigDecimal
      */
@@ -1231,8 +1272,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 通过日期获取支付订单金额
+     *
      * @param startDate 日期
-     * @param endDate 日期
+     * @param endDate   日期
      * @return BigDecimal
      */
     @Override
@@ -1247,6 +1289,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 通过日期获取余额支付订单支付金额
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return BigDecimal
      */
@@ -1263,6 +1306,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取累计消费金额
+     *
      * @return BigDecimal
      */
     @Override
@@ -1276,6 +1320,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据日期获取下单用户数量
+     *
      * @param date 日期
      * @return Integer
      */
@@ -1294,8 +1339,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据日期获取下单用户数量
+     *
      * @param startDate 日期
-     * @param endDate 日期
+     * @param endDate   日期
      * @return Integer
      */
     @Override
@@ -1313,6 +1359,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据日期获取成交用户数量
+     *
      * @param date 日期
      * @return Integer
      */
@@ -1332,8 +1379,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据日期获取成交用户数量
+     *
      * @param startDate 日期
-     * @param endDate 日期
+     * @param endDate   日期
      * @return Integer
      */
     @Override
@@ -1352,6 +1400,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据用户uid列表获取成交用户数量
+     *
      * @param uidList 用户列表
      * @return Integer
      */
@@ -1371,6 +1420,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据用户uid列表获取支付金额
+     *
      * @param uidList 用户列表
      * @return BigDecimal
      */
@@ -1390,6 +1440,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取待发货订单数量
+     *
      * @return Integer
      */
     @Override
@@ -1415,7 +1466,8 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取佣金相关数据
-     * @param uid 用户uid
+     *
+     * @param uid      用户uid
      * @param spreadId 推广人uid
      */
     @Override
@@ -1427,13 +1479,14 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据时间参数获取有效订单
+     *
      * @return 有效订单列表
      */
     private List<StoreOrder> getOrderPayedByDateLimit(String startTime, String endTime) {
         LambdaQueryWrapper<StoreOrder> lqw = Wrappers.lambdaQuery();
-        lqw.eq(StoreOrder::getIsDel, false).eq(StoreOrder::getPaid, true).eq(StoreOrder::getRefundStatus,0)
+        lqw.eq(StoreOrder::getIsDel, false).eq(StoreOrder::getPaid, true).eq(StoreOrder::getRefundStatus, 0)
                 .between(StoreOrder::getCreateTime, startTime, endTime);
-     return dao.selectList(lqw);
+        return dao.selectList(lqw);
     }
 
     private StoreOrder getInfoException(String orderNo) {
@@ -1446,8 +1499,10 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         return storeOrder;
     }
 
-    /** 快递
-     * @param request StoreOrderSendRequest 发货参数
+    /**
+     * 快递
+     *
+     * @param request    StoreOrderSendRequest 发货参数
      * @param storeOrder StoreOrder 订单信息
      */
     private void express(StoreOrderSendRequest request, StoreOrder storeOrder) {
@@ -1485,6 +1540,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 发货通知
+     *
      * @param storeOrder 订单
      */
     private void sendGoodsNotify(StoreOrder storeOrder) {
@@ -1528,7 +1584,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         if (storeOrder.getIsChannel().equals(Constants.ORDER_PAY_CHANNEL_PUBLIC) && notification.getIsWechat().equals(1)) {
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_WECHAT);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             // 发送微信模板消息
             temMap.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "订单发货提醒");
@@ -1543,7 +1599,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             // 小程序发送订阅消息
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_ROUTINE);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             // 组装数据
             // 注释部分为丰享汇小程序
@@ -1562,6 +1618,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 电子面单
+     *
      * @param request
      * @param storeOrder
      * @param express
@@ -1634,8 +1691,10 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         if (StrUtil.isBlank(request.getToAddr())) throw new CrmebException("请填写寄件人地址");
     }
 
-    /** 送货上门
-     * @param request StoreOrderSendRequest 发货参数
+    /**
+     * 送货上门
+     *
+     * @param request    StoreOrderSendRequest 发货参数
      * @param storeOrder StoreOrder 订单信息
      * @author Mr.Zhang
      * @since 2020-06-10
@@ -1703,7 +1762,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         if (storeOrder.getIsChannel().equals(Constants.ORDER_PAY_CHANNEL_PUBLIC) && notification.getIsWechat().equals(1)) {
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_WECHAT);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             map.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "订单配送提醒");
             map.put("keyword1", storeOrder.getOrderId());
@@ -1718,7 +1777,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
             // 小程序发送订阅消息
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_ROUTINE);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
 
             if (proName.length() > 20) {
@@ -1736,8 +1795,10 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
         }
     }
 
-    /** 虚拟
-     * @param request StoreOrderSendRequest 发货参数
+    /**
+     * 虚拟
+     *
+     * @param request    StoreOrderSendRequest 发货参数
      * @param storeOrder StoreOrder 订单信息
      * @author Mr.Zhang
      * @since 2020-06-10
@@ -1758,8 +1819,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单总数
+     *
      * @param dateLimit 时间端
-     * @param status String 状态
+     * @param status    String 状态
      * @return Integer
      */
     private Integer getCount(String dateLimit, String status) {
@@ -1775,8 +1837,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单总数
+     *
      * @param dateLimit 时间端
-     * @param status String 状态
+     * @param status    String 状态
      * @return Integer
      */
     private Integer getCount(String dateLimit, String status, Integer type) {
@@ -1795,8 +1858,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单金额
+     *
      * @param dateLimit 时间端
-     * @param type  支付类型
+     * @param type      支付类型
      * @return Integer
      */
     private BigDecimal getAmount(String dateLimit, String type) {
@@ -1820,8 +1884,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取request的where条件
+     *
      * @param queryWrapper QueryWrapper<StoreOrder> 表达式
-     * @param request StoreOrderSearchRequest 请求参数
+     * @param request      StoreOrderSearchRequest 请求参数
      */
     private void getRequestTimeWhere(QueryWrapper<StoreOrder> queryWrapper, StoreOrderSearchRequest request) {
         if (StringUtils.isNotBlank(request.getDateLimit())) {
@@ -1832,8 +1897,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据订单状态获取where条件
+     *
      * @param queryWrapper QueryWrapper<StoreOrder> 表达式
-     * @param status String 类型
+     * @param status       String 类型
      */
     private void getStatusWhereNew(QueryWrapper<StoreOrder> queryWrapper, String status) {
         if (StrUtil.isBlank(status)) {
@@ -1881,7 +1947,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
                 break;
             case Constants.ORDER_STATUS_REFUNDING: //退款中
                 queryWrapper.eq("paid", 1);
-                queryWrapper.in("refund_status", 1,3);
+                queryWrapper.in("refund_status", 1, 3);
                 queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_REFUNDED: //已退款
@@ -1902,8 +1968,9 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 根据订单状态获取where条件
+     *
      * @param queryWrapper QueryWrapper<StoreOrder> 表达式
-     * @param status String 类型
+     * @param status       String 类型
      */
     private void getStatusWhere(QueryWrapper<StoreOrder> queryWrapper, String status) {
         if (StrUtil.isBlank(status)) {
@@ -1949,7 +2016,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
                 break;
             case Constants.ORDER_STATUS_REFUNDING: //退款中
                 queryWrapper.eq("paid", 1);
-                queryWrapper.in("refund_status", 1,3);
+                queryWrapper.in("refund_status", 1, 3);
                 queryWrapper.eq("is_del", 0);
                 break;
             case Constants.ORDER_STATUS_REFUNDED: //已退款
@@ -1970,6 +2037,7 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
     /**
      * 获取订单状态
+     *
      * @param storeOrder StoreOrder 订单信息
      * @author Mr.Zhang
      * @since 2020-06-12
@@ -2082,8 +2150,10 @@ public class StoreOrderServiceImpl extends ServiceImpl<StoreOrderDao, StoreOrder
 
         return map;
     }
+
     /**
      * 获取支付文字
+     *
      * @param payType String 支付方式
      */
     private String getPayType(String payType) {

@@ -1,18 +1,18 @@
 package com.zbkj.admin.controller;
 
+import com.zbkj.common.model.user.UserTag;
 import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserTagRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.UserTagService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
-import com.zbkj.common.model.user.UserTag;
 
 
 /**
@@ -38,18 +38,20 @@ public class UserTagController {
 
     /**
      * 分页显示用户分标签
+     *
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:user:tag:list')")
     @ApiOperation(value = "分页列表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<UserTag>>  getList(@Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<UserTag>> getList(@Validated PageParamRequest pageParamRequest) {
         CommonPage<UserTag> userTagCommonPage = CommonPage.restPage(userTagService.getList(pageParamRequest));
         return CommonResult.success(userTagCommonPage);
     }
 
     /**
      * 新增用户分标签
+     *
      * @param userTagRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:user:tag:save')")
@@ -64,6 +66,7 @@ public class UserTagController {
 
     /**
      * 删除用户分标签
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:user:tag:delete')")
@@ -78,7 +81,8 @@ public class UserTagController {
 
     /**
      * 修改用户标签
-     * @param id integer id
+     *
+     * @param id             integer id
      * @param userTagRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:user:tag:update')")
@@ -93,6 +97,7 @@ public class UserTagController {
 
     /**
      * 查询用户标签
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:user:tag:info')")
@@ -100,7 +105,7 @@ public class UserTagController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public CommonResult<UserTag> info(@RequestParam(value = "id") Integer id) {
         return CommonResult.success(userTagService.getById(id));
-   }
+    }
 }
 
 

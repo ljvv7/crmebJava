@@ -8,9 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -28,9 +25,9 @@ import javax.validation.constraints.NotNull;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OrderRefundApplyRequest对象", description="订单申请退款")
+@ApiModel(value = "OrderRefundApplyRequest对象", description = "订单申请退款")
 public class OrderRefundApplyRequest {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "退款原因", required = true)
     @NotNull(message = "退款原因必须填写")
@@ -50,5 +47,5 @@ public class OrderRefundApplyRequest {
 
     @ApiModelProperty(value = "待退款订单")
     @NotNull(message = "待退款订单 不能为空")
-    private String  uni;
+    private String uni;
 }

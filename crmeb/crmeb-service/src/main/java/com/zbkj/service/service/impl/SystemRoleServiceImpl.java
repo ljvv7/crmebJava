@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.system.SystemAdmin;
@@ -21,7 +22,6 @@ import com.zbkj.common.vo.CategoryTreeVo;
 import com.zbkj.common.vo.LoginUserVo;
 import com.zbkj.common.vo.MenuCheckTree;
 import com.zbkj.common.vo.MenuCheckVo;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.service.dao.SystemRoleDao;
 import com.zbkj.service.service.CategoryService;
 import com.zbkj.service.service.SystemMenuService;
@@ -71,6 +71,7 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
 
     /**
      * 获取所有角色
+     *
      * @return List
      */
     @Override
@@ -82,11 +83,12 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
     }
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<SystemRole>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<SystemRole>
+     */
     @Override
     public List<SystemRole> getList(SystemRoleSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -105,6 +107,7 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
 
     /**
      * 根据id集合获取对应权限列表
+     *
      * @param ids id集合
      * @return 对应的权限列表
      */
@@ -119,7 +122,7 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
     @Override
     public List<CategoryTreeVo> menu() {
         List<Integer> categoryIdList = getRoleListInRoleId();
-        System.out.println("权限列表:categoryIdList:"+ JSON.toJSONString(categoryIdList));
+        System.out.println("权限列表:categoryIdList:" + JSON.toJSONString(categoryIdList));
         return categoryService.getListTree(Constants.CATEGORY_TYPE_MENU, 1, categoryIdList);
     }
 
@@ -141,6 +144,7 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
 
     /**
      * 添加身份
+     *
      * @param systemRoleRequest 身份参数
      * @return Boolean
      */
@@ -173,8 +177,9 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
 
     /**
      * 判断角色名称是否存在
+     *
      * @param roleName 角色名称
-     * @param id 角色id
+     * @param id       角色id
      * @return Boolean
      */
     private Boolean existName(String roleName, Integer id) {
@@ -190,6 +195,7 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
 
     /**
      * 修改身份管理表
+     *
      * @param systemRoleRequest 修改参数
      */
     @Override
@@ -223,6 +229,7 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
 
     /**
      * 删除角色
+     *
      * @param id 角色id
      * @return Boolean
      */
@@ -241,6 +248,7 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
 
     /**
      * 获取角色详情
+     *
      * @param id 角色id
      * @return RoleInfoResponse
      */
@@ -271,25 +279,25 @@ public class SystemRoleServiceImpl extends ServiceImpl<SystemRoleDao, SystemRole
         return response;
     }
 
-    private List<Integer> getRoleListInRoleId(){
+    private List<Integer> getRoleListInRoleId() {
         //获取当前用户的所有权限
 //        SystemAdmin systemAdmin = systemAdminService.getInfo();
         LoginUserVo loginUserVo = SecurityUtil.getLoginUserVo();
         SystemAdmin systemAdmin = loginUserVo.getUser();
-        if (null == systemAdmin || StringUtils.isBlank(systemAdmin.getRoles())){
+        if (null == systemAdmin || StringUtils.isBlank(systemAdmin.getRoles())) {
             throw new CrmebException("没有权限访问！");
         }
 
         //获取用户权限组
         List<SystemRole> systemRoleList = getVoListInId(systemAdmin.getRoles());
-        if (systemRoleList.size() < 1){
+        if (systemRoleList.size() < 1) {
             throw new CrmebException("没有权限访问！");
         }
 
         //获取用户权限规则
         List<Integer> categoryIdList = new ArrayList<>();
         for (SystemRole systemRole : systemRoleList) {
-            if (StringUtils.isBlank(systemRole.getRules())){
+            if (StringUtils.isBlank(systemRole.getRules())) {
                 continue;
             }
 

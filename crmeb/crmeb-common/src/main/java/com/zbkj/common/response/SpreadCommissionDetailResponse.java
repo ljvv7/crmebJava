@@ -29,19 +29,18 @@ import java.util.List;
 public class SpreadCommissionDetailResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "月份")
+    private String date;
+    @ApiModelProperty(value = "数据")
+    private List<UserBrokerageRecord> list;
 
-    public SpreadCommissionDetailResponse() {}
+    public SpreadCommissionDetailResponse() {
+    }
 
     public SpreadCommissionDetailResponse(String date, List<UserBrokerageRecord> list) {
         this.date = date;
         this.list = list;
     }
-
-    @ApiModelProperty(value = "月份")
-    private String date;
-
-    @ApiModelProperty(value = "数据")
-    private List<UserBrokerageRecord> list;
 
 
 }

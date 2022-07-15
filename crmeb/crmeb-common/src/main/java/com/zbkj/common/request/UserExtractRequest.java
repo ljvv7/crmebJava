@@ -29,10 +29,10 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="UserExtractRequest对象", description="用户提现")
+@ApiModel(value = "UserExtractRequest对象", description = "用户提现")
 public class UserExtractRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "姓名")
     @NotBlank(message = "提现用户名称必须填写")

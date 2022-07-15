@@ -24,7 +24,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ComponentProductSearchRequest对象", description="组件商品列表搜索Request对象")
+@ApiModel(value = "ComponentProductSearchRequest对象", description = "组件商品列表搜索Request对象")
 public class ComponentProductSearchRequest implements Serializable {
 
     private static final long serialVersionUID = -2196197495866986580L;

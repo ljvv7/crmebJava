@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RoutineMyTemplateVo对象", description="微信小程序订阅消息Vo对象")
+@ApiModel(value = "RoutineMyTemplateVo对象", description = "微信小程序订阅消息Vo对象")
 public class RoutineMyTemplateVo {
 
     @ApiModelProperty(value = "模板ID")

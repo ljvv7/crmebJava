@@ -28,10 +28,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreCombinationRequest对象", description="拼团商品请求对象")
+@ApiModel(value = "StoreCombinationRequest对象", description = "拼团商品请求对象")
 public class StoreCombinationRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "拼团商品ID|新增时不填，修改时必填")
     private Integer id;

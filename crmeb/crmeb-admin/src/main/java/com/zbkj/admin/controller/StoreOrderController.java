@@ -46,7 +46,8 @@ public class StoreOrderController {
 
     /**
      * 分页显示订单表
-     *  @param request          搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:order:list')")
@@ -74,7 +75,7 @@ public class StoreOrderController {
     @PreAuthorize("hasAuthority('admin:order:list:data')")
     @ApiOperation(value = "获取订单统计数据")
     @RequestMapping(value = "/list/data", method = RequestMethod.GET)
-    public CommonResult<StoreOrderTopItemResponse> getOrderData(@RequestParam(value = "dateLimit", defaultValue = "")String dateLimit) {
+    public CommonResult<StoreOrderTopItemResponse> getOrderData(@RequestParam(value = "dateLimit", defaultValue = "") String dateLimit) {
         return CommonResult.success(storeOrderService.getOrderData(dateLimit));
     }
 

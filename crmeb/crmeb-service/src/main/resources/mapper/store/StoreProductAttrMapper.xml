@@ -8,6 +8,6 @@
             attr_values = #{ attrValues },
             type = #{ type }
         </set>
-         where product_id = #{ productId, jdbcType=INTEGER}
+        where product_id = #{ productId, jdbcType=INTEGER}
     </update>
 </mapper>

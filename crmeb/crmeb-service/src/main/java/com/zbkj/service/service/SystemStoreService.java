@@ -1,8 +1,8 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.system.SystemStore;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreNearRequest;
 import com.zbkj.common.request.SystemStoreRequest;
 import com.zbkj.common.response.StoreNearResponse;
@@ -26,8 +26,9 @@ public interface SystemStoreService extends IService<SystemStore> {
 
     /**
      * 门店自提分页列表
-     * @param keywords 搜索条件
-     * @param status 状态
+     *
+     * @param keywords         搜索条件
+     * @param status           状态
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -35,6 +36,7 @@ public interface SystemStoreService extends IService<SystemStore> {
 
     /**
      * 根据基本参数获取
+     *
      * @param systemStore 基本参数
      * @return 门店自提结果
      */
@@ -42,19 +44,22 @@ public interface SystemStoreService extends IService<SystemStore> {
 
     /**
      * 修改门店显示状态
-     * @param id integer id
+     *
+     * @param id     integer id
      * @param status 状态
      */
     Boolean updateStatus(Integer id, Boolean status);
 
     /**
      * 删除门店自提
+     *
      * @param id Integer
      */
     Boolean delete(Integer id);
 
     /**
      * 表头数量
+     *
      * @return HashMap<String, Integer>
      */
     HashMap<String, Integer> getCount();
@@ -65,31 +70,36 @@ public interface SystemStoreService extends IService<SystemStore> {
 
     /**
      * 新增门店自提
+     *
      * @param request SystemStoreRequest 新增参数
      */
     Boolean create(SystemStoreRequest request);
 
     /**
      * 修改门店自提
-     * @param id integer id
+     *
+     * @param id      integer id
      * @param request 修改参数
      */
     Boolean update(Integer id, SystemStoreRequest request);
 
     /**
      * 彻底删除
+     *
      * @param id 提货点编号
      */
     Boolean completeLyDelete(Integer id);
 
     /**
      * 提货点恢复
+     *
      * @param id 提货点编号
      */
     Boolean recovery(Integer id);
 
     /**
      * 门店自提详情
+     *
      * @param id Integer
      * @return SystemStore
      */

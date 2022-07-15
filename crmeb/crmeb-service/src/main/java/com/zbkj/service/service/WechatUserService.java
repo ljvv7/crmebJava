@@ -12,6 +12,6 @@ package com.zbkj.service.service;
  * | Author: CRMEB Team <admin@crmeb.com>
  * +----------------------------------------------------------------------
  */
-public interface WechatUserService{
+public interface WechatUserService {
 //    void push(String userId, Integer newsId);
 }

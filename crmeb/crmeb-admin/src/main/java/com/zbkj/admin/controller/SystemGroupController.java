@@ -1,19 +1,22 @@
 package com.zbkj.admin.controller;
 
+import com.zbkj.common.model.system.SystemGroup;
 import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemGroupRequest;
 import com.zbkj.common.request.SystemGroupSearchRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.SystemGroupService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.*;
-import com.zbkj.common.model.system.SystemGroup;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -39,19 +42,21 @@ public class SystemGroupController {
 
     /**
      * 分页显示组合数据表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:system:group:list')")
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<SystemGroup>>  getList(@Validated SystemGroupSearchRequest request, @Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<SystemGroup>> getList(@Validated SystemGroupSearchRequest request, @Validated PageParamRequest pageParamRequest) {
         CommonPage<SystemGroup> systemGroupCommonPage = CommonPage.restPage(systemGroupService.getList(request, pageParamRequest));
         return CommonResult.success(systemGroupCommonPage);
     }
 
     /**
      * 新增组合数据
+     *
      * @param systemGroupRequest 新增参数
      */
     @PreAuthorize("hasAuthority('admin:system:group:save')")
@@ -66,6 +71,7 @@ public class SystemGroupController {
 
     /**
      * 删除组合数据表
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:group:delete')")
@@ -80,7 +86,8 @@ public class SystemGroupController {
 
     /**
      * 修改组合数据表
-     * @param id integer id
+     *
+     * @param id                 integer id
      * @param systemGroupRequest 修改参数
      */
     @PreAuthorize("hasAuthority('admin:system:group:update')")
@@ -95,6 +102,7 @@ public class SystemGroupController {
 
     /**
      * 查询组合数据表信息
+     *
      * @param id Integer
      */
     @PreAuthorize("hasAuthority('admin:system:group:info')")
@@ -102,7 +110,7 @@ public class SystemGroupController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public CommonResult<SystemGroup> info(@RequestParam(value = "id") Integer id) {
         return CommonResult.success(systemGroupService.getById(id));
-   }
+    }
 }
 
 

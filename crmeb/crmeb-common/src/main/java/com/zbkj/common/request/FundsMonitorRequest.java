@@ -1,6 +1,5 @@
 package com.zbkj.common.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zbkj.common.annotation.StringContains;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,8 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 资金监控
@@ -27,7 +24,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="FundsMonitorRequest对象", description="资金监控")
+@ApiModel(value = "FundsMonitorRequest对象", description = "资金监控")
 public class FundsMonitorRequest implements Serializable {
 
     private static final long serialVersionUID = 3362714265772774491L;

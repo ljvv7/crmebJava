@@ -5,14 +5,14 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.seckill.StoreSeckillManger;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreSeckillMangerRequest;
 import com.zbkj.common.request.StoreSeckillMangerSearchRequest;
 import com.zbkj.common.response.StoreSeckillManagerResponse;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.DateUtil;
-import com.zbkj.common.model.seckill.StoreSeckillManger;
 import com.zbkj.service.dao.StoreSeckillMangerDao;
 import com.zbkj.service.service.StoreSeckillMangerService;
 import com.zbkj.service.service.SystemAttachmentService;
@@ -47,20 +47,22 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
 
     @Autowired
     private SystemAttachmentService systemAttachmentService;
+
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<StoreSeckillManger>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<StoreSeckillManger>
+     */
     @Override
     public List<StoreSeckillManagerResponse> getList(StoreSeckillMangerSearchRequest request, PageParamRequest pageParamRequest) {
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
 
         //带 StoreSeckillManger 类的多条件查询
         LambdaQueryWrapper<StoreSeckillManger> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        if(null != request.getName()) lambdaQueryWrapper.like(StoreSeckillManger::getName, request.getName());
-        if(null != request.getStatus()) lambdaQueryWrapper.eq(StoreSeckillManger::getStatus, request.getStatus());
+        if (null != request.getName()) lambdaQueryWrapper.like(StoreSeckillManger::getName, request.getName());
+        if (null != request.getStatus()) lambdaQueryWrapper.eq(StoreSeckillManger::getStatus, request.getStatus());
 
         lambdaQueryWrapper.orderByAsc(StoreSeckillManger::getSort);
 
@@ -111,14 +113,14 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
     private boolean updateByCondition(StoreSeckillManger storeSeckillManger) {
         StoreSeckillManger ssm = new StoreSeckillManger();
         ssm.setId(storeSeckillManger.getId());
-        if(StrUtil.isNotBlank(storeSeckillManger.getName())) ssm.setName(storeSeckillManger.getName());
-        if(StrUtil.isNotBlank(storeSeckillManger.getImg()))
+        if (StrUtil.isNotBlank(storeSeckillManger.getName())) ssm.setName(storeSeckillManger.getName());
+        if (StrUtil.isNotBlank(storeSeckillManger.getImg()))
             ssm.setImg(systemAttachmentService.clearPrefix(storeSeckillManger.getImg()));
-        if(StrUtil.isNotBlank(storeSeckillManger.getSilderImgs()))
+        if (StrUtil.isNotBlank(storeSeckillManger.getSilderImgs()))
             ssm.setSilderImgs(systemAttachmentService.clearPrefix(storeSeckillManger.getSilderImgs()));
-        if(null != storeSeckillManger.getStatus()) ssm.setStatus(storeSeckillManger.getStatus());
-        if(null != storeSeckillManger.getStartTime()) ssm.setStartTime(storeSeckillManger.getStartTime());
-        if(null != storeSeckillManger.getEndTime()) ssm.setEndTime(storeSeckillManger.getEndTime());
+        if (null != storeSeckillManger.getStatus()) ssm.setStatus(storeSeckillManger.getStatus());
+        if (null != storeSeckillManger.getStartTime()) ssm.setStartTime(storeSeckillManger.getStartTime());
+        if (null != storeSeckillManger.getEndTime()) ssm.setEndTime(storeSeckillManger.getEndTime());
         return dao.updateById(ssm) > 0;
     }
 
@@ -132,7 +134,7 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
     public StoreSeckillManagerResponse detail(int id) {
         StoreSeckillManger storeSeckillManger = dao.selectById(id);
         StoreSeckillManagerResponse response = new StoreSeckillManagerResponse();
-        BeanUtils.copyProperties(storeSeckillManger,response);
+        BeanUtils.copyProperties(storeSeckillManger, response);
         cTime(storeSeckillManger, response);
         return response;
     }
@@ -146,7 +148,7 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
     public List<StoreSeckillManger> getCurrentSeckillManager() {
         int currentHour = DateUtil.getCurrentHour();
         LambdaQueryWrapper<StoreSeckillManger> lqw = Wrappers.lambdaQuery();
-        lqw.le(StoreSeckillManger::getStartTime,currentHour).gt(StoreSeckillManger::getEndTime,currentHour);
+        lqw.le(StoreSeckillManger::getStartTime, currentHour).gt(StoreSeckillManger::getEndTime, currentHour);
         return dao.selectList(lqw);
     }
 
@@ -165,7 +167,8 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
 
     /**
      * 更新秒杀配置
-     * @param id id
+     *
+     * @param id                        id
      * @param storeSeckillMangerRequest 秒杀配置
      * @return 结果
      */
@@ -177,24 +180,24 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
         // 对request中的time做分割后赋值给mode中的start和end属性
         setTimeRangeFromRequest(storeSeckillMangerRequest, storeSeckillManger);
         List<StoreSeckillManger> existTimes = checkTimeRangeUnique(storeSeckillManger);
-        if(existTimes.size() > 1){
+        if (existTimes.size() > 1) {
             throw new CrmebException("当前时间段的秒杀配置已存在");
-        }else if(existTimes.size() == 1) {
+        } else if (existTimes.size() == 1) {
             // 判断开始时间 结束时间 是否被包涵
             LambdaQueryWrapper<StoreSeckillManger> startAndEndExcuseQuery = Wrappers.lambdaQuery();
-            startAndEndExcuseQuery.ge(StoreSeckillManger::getStartTime,storeSeckillManger.getStartTime())
-                    .le(StoreSeckillManger::getEndTime,storeSeckillManger.getEndTime());
+            startAndEndExcuseQuery.ge(StoreSeckillManger::getStartTime, storeSeckillManger.getStartTime())
+                    .le(StoreSeckillManger::getEndTime, storeSeckillManger.getEndTime());
             List<StoreSeckillManger> storeSeckillMangers = dao.selectList(startAndEndExcuseQuery);
             // 时间区间改大 不存在的情况
-            if(CollUtil.isEmpty(storeSeckillMangers) && storeSeckillMangers.size() == 0){
+            if (CollUtil.isEmpty(storeSeckillMangers) && storeSeckillMangers.size() == 0) {
                 return updateByCondition(storeSeckillManger);
                 // 时间区间改小 id一样且仅仅存在一条
-            }else if(storeSeckillMangers.size() == 1 && storeSeckillMangers.get(0).getId().equals(id)){
+            } else if (storeSeckillMangers.size() == 1 && storeSeckillMangers.get(0).getId().equals(id)) {
                 return updateByCondition(storeSeckillManger);
-            }else{
+            } else {
                 throw new CrmebException("当前时间段的秒杀配置已存在");
             }
-        }else {
+        } else {
             return updateByCondition(storeSeckillManger);
         }
     }
@@ -210,8 +213,9 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
             responses.add(r);
         });
     }
+
     // 详情用 格式化time 对前端输出一致
-    private void  cTime(StoreSeckillManger e, StoreSeckillManagerResponse r) {
+    private void cTime(StoreSeckillManger e, StoreSeckillManagerResponse r) {
         String pStartTime = e.getStartTime().toString();
         String pEndTime = e.getEndTime().toString();
         String startTime = pStartTime.length() == 1 ? "0" + pStartTime : pStartTime;
@@ -221,11 +225,12 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
 
     /**
      * 兼容时间参数 request中String格式 mode中Integer
+     *
      * @param storeSeckillMangerRequest request参数
      * @param storeSeckillManger        秒杀配置实体
      */
     private void setTimeRangeFromRequest(@Validated @RequestBody StoreSeckillMangerRequest storeSeckillMangerRequest, StoreSeckillManger storeSeckillManger) {
-        if(!storeSeckillMangerRequest.getTime().contains(",")){
+        if (!storeSeckillMangerRequest.getTime().contains(",")) {
             throw new CrmebException("时间参数不正确 例如:01:00,02:00");
         }
         String[] timeRage = storeSeckillMangerRequest.getTime().split(",");
@@ -237,6 +242,7 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
 
     /**
      * 获取移动端列表 (正在进行和马上开始的秒杀)
+     *
      * @return List<StoreSeckillManagerResponse>
      */
     @Override
@@ -260,6 +266,7 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
 
     /**
      * 获取所有秒杀配置
+     *
      * @return List
      */
     @Override
@@ -278,6 +285,7 @@ public class StoreSeckillMangerServiceImpl extends ServiceImpl<StoreSeckillMange
 
     /**
      * 添加秒杀配置
+     *
      * @param storeSeckillMangerRequest 配置参数
      */
     @Override

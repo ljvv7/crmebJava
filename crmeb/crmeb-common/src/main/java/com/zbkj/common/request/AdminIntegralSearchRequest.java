@@ -1,6 +1,5 @@
 package com.zbkj.common.request;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="AdminIntegralSearchRequest对象", description="后台积分查询请求对象")
+@ApiModel(value = "AdminIntegralSearchRequest对象", description = "后台积分查询请求对象")
 public class AdminIntegralSearchRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "添加时间")
     private String dateLimit;

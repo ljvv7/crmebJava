@@ -3,13 +3,13 @@ package com.zbkj.service.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.constants.Constants;
+import com.zbkj.common.model.system.SystemAttachment;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SystemAttachmentMoveRequest;
 import com.zbkj.common.request.SystemAttachmentRequest;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.CrmebUtil;
-import com.zbkj.common.model.system.SystemAttachment;
 import com.zbkj.service.dao.SystemAttachmentDao;
 import com.zbkj.service.service.SystemAttachmentService;
 import com.zbkj.service.service.SystemConfigService;
@@ -45,8 +45,9 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
 
     /**
      * 同步到云服务， 更新图片上传类型
+     *
      * @param attId Integer 主键id
-     * @param type int 图片上传类型 1本地 2七牛云 3OSS 4COS
+     * @param type  int 图片上传类型 1本地 2七牛云 3OSS 4COS
      */
     @Override
     public void updateCloudType(Integer attId, int type) {
@@ -58,7 +59,8 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
 
     /**
      * 附件分页
-     * @param pid Integer pid
+     *
+     * @param pid              Integer pid
      * @param pageParamRequest PageParamRequest 分页参数
      * @return List<SystemAttachment>
      */
@@ -67,8 +69,8 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
         PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
         LambdaQueryWrapper<SystemAttachment> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(SystemAttachment::getPid, pid);
-        if(StringUtils.isNotEmpty(attType)){
-            lambdaQueryWrapper.in(SystemAttachment::getAttType, StringUtils.split(attType,","));
+        if (StringUtils.isNotEmpty(attType)) {
+            lambdaQueryWrapper.in(SystemAttachment::getAttType, StringUtils.split(attType, ","));
         }
         lambdaQueryWrapper.orderByDesc(SystemAttachment::getAttId);
         return dao.selectList(lambdaQueryWrapper);
@@ -76,17 +78,19 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
 
     /**
      * 给图片加前缀
+     *
      * @param path String 路径
      * @return String
      */
     @Override
     public String prefixImage(String path) {
         // 如果那些域名不需要加，则跳过
-        return path.replace(Constants.UPLOAD_TYPE_IMAGE+"/", getCdnUrl() + "/"+ Constants.UPLOAD_TYPE_IMAGE+"/");
+        return path.replace(Constants.UPLOAD_TYPE_IMAGE + "/", getCdnUrl() + "/" + Constants.UPLOAD_TYPE_IMAGE + "/");
     }
 
     /**
      * 给文件加前缀
+     *
      * @param path String 路径
      * @return String
      */
@@ -101,6 +105,7 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
 
     /**
      * 获取cdn url
+     *
      * @return String
      */
     private String getCdnUrl() {
@@ -122,21 +127,22 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
             default:
                 break;
         }
-        return systemConfigService.getValueByKey(pre+"UploadUrl");
+        return systemConfigService.getValueByKey(pre + "UploadUrl");
     }
 
     /**
      * 清除 cdn url， 在保存数据的时候使用
+     *
      * @param path String 文件路径
      * @return String
      */
     @Override
     public String clearPrefix(String path) {
-        if(StringUtils.isBlank(path)){
+        if (StringUtils.isBlank(path)) {
             return path;
         }
         Constants.CND_URL = getCdnUrl();
-        if(path.contains(getCdnUrl() + "/")){
+        if (path.contains(getCdnUrl() + "/")) {
             return path.replace(getCdnUrl() + "/", "");
         }
 
@@ -145,6 +151,7 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
 
     /**
      * 新增附件
+     *
      * @param systemAttachmentRequest 新增参数
      */
     @Override
@@ -156,6 +163,7 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
 
     /**
      * 编辑附件
+     *
      * @param systemAttachmentRequest 更新参数
      */
     @Override
@@ -167,6 +175,7 @@ public class SystemAttachmentServiceImpl extends ServiceImpl<SystemAttachmentDao
 
     /**
      * 更改图片目录
+     *
      * @param move 参数
      */
     @Override

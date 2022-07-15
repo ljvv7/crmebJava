@@ -6,22 +6,22 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.model.user.User;
-import com.zbkj.common.model.user.UserExperienceRecord;
-import com.zbkj.common.model.user.UserIntegralRecord;
-import com.zbkj.common.model.user.UserSign;
-import com.zbkj.common.request.PageParamRequest;
+import com.github.pagehelper.PageHelper;
 import com.zbkj.common.constants.Constants;
 import com.zbkj.common.constants.ExperienceRecordConstants;
 import com.zbkj.common.constants.IntegralRecordConstants;
 import com.zbkj.common.constants.SysGroupDataConstants;
 import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.user.User;
+import com.zbkj.common.model.user.UserExperienceRecord;
+import com.zbkj.common.model.user.UserIntegralRecord;
+import com.zbkj.common.model.user.UserSign;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.response.UserSignInfoResponse;
-import com.zbkj.common.vo.UserSignMonthVo;
-import com.zbkj.common.vo.UserSignVo;
-import com.github.pagehelper.PageHelper;
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.vo.SystemGroupDataSignConfigVo;
+import com.zbkj.common.vo.UserSignMonthVo;
+import com.zbkj.common.vo.UserSignVo;
 import com.zbkj.service.dao.UserSignDao;
 import com.zbkj.service.service.*;
 import org.springframework.beans.BeanUtils;
@@ -139,7 +139,7 @@ public class UserSignServiceImpl extends ServiceImpl<UserSignDao, UserSign> impl
         for (SystemGroupDataSignConfigVo systemSignConfigVo : config) {
             if (user.getSignNum().equals(systemSignConfigVo.getDay())) {
                 configVo = systemSignConfigVo;
-                break ;
+                break;
             }
         }
         if (ObjectUtil.isNull(configVo)) {
@@ -281,6 +281,7 @@ public class UserSignServiceImpl extends ServiceImpl<UserSignDao, UserSign> impl
 
     /**
      * 获取用户签到信息
+     *
      * @return UserSignInfoResponse
      */
     @Override
@@ -305,7 +306,7 @@ public class UserSignServiceImpl extends ServiceImpl<UserSignDao, UserSign> impl
         }
 
         // 连续签到天数：当前用户已经签到完一个周期，那么重置
-        if (userSignInfoResponse.getSignNum() > 0 &&  userSignInfoResponse.getSignNum().equals(getSignConfig().size())) {
+        if (userSignInfoResponse.getSignNum() > 0 && userSignInfoResponse.getSignNum().equals(getSignConfig().size())) {
             userSignInfoResponse.setSignNum(0);
             userService.repeatSignNum(user.getUid());
         }
@@ -373,6 +374,7 @@ public class UserSignServiceImpl extends ServiceImpl<UserSignDao, UserSign> impl
 
     /**
      * 获取签到的最后一条记录
+     *
      * @param uid 用户id
      * @return UserSign
      */
@@ -402,7 +404,7 @@ public class UserSignServiceImpl extends ServiceImpl<UserSignDao, UserSign> impl
     /**
      * 条件获取列表
      *
-     * @param sign sign
+     * @param sign             sign
      * @param pageParamRequest 分页参数
      * @return List<UserSign>
      */

@@ -49,13 +49,12 @@ import java.util.Objects;
 @Component
 public class RestTemplateUtil {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     public static final String WXPAYSDK_VERSION = "WXPaySDK/3.0.9";
     public static final String USER_AGENT = WXPAYSDK_VERSION +
             " (" + System.getProperty("os.arch") + " " + System.getProperty("os.name") + " " + System.getProperty("os.version") +
             ") Java/" + System.getProperty("java.version") + " HttpClient/" + HttpClient.class.getPackage().getImplementationVersion();
+    @Autowired
+    private RestTemplate restTemplate;
 
 //    /**
 //     * 设置超时时间
@@ -70,6 +69,7 @@ public class RestTemplateUtil {
 
     /**
      * 发送GET请求
+     *
      * @param url
      * @param param
      * @return
@@ -84,6 +84,7 @@ public class RestTemplateUtil {
 
     /**
      * 发送GET请求
+     *
      * @param url
      * @return
      */
@@ -95,6 +96,7 @@ public class RestTemplateUtil {
 
     /**
      * 发送GET请求
+     *
      * @param url
      * @return
      */
@@ -105,13 +107,14 @@ public class RestTemplateUtil {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<Map<String, Object>> requestEntity =
-                new HttpEntity<>( headers);
+                new HttpEntity<>(headers);
 
-        return restTemplate.exchange( url, HttpMethod.GET, requestEntity, JSONObject.class).getBody();
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, JSONObject.class).getBody();
     }
 
     /**
      * 发送GET请求 支持header
+     *
      * @param url
      * @return
      */
@@ -126,10 +129,10 @@ public class RestTemplateUtil {
             headers.add(entry.getKey(), entry.getValue());
         }
 
-            HttpEntity<Map<String, Object>> requestEntity =
-                new HttpEntity<>( headers);
+        HttpEntity<Map<String, Object>> requestEntity =
+                new HttpEntity<>(headers);
 
-        return restTemplate.exchange( url, HttpMethod.GET, requestEntity, JSONObject.class).getBody();
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, JSONObject.class).getBody();
     }
 
 
@@ -173,8 +176,6 @@ public class RestTemplateUtil {
     }
 
 
-
-
     /**
      * 发送POST-JSON请求
      *
@@ -214,7 +215,7 @@ public class RestTemplateUtil {
 
         headers.add("Accept", MediaType.APPLICATION_JSON.toString());
 
-        HttpEntity<String> requestEntity = new HttpEntity<>( headers);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 
         JSONObject body = restTemplate.postForEntity(url, requestEntity, JSONObject.class).getBody();
 
@@ -229,7 +230,7 @@ public class RestTemplateUtil {
      * @return
      */
 
-    public String postXml(String url, String xml){
+    public String postXml(String url, String xml) {
         HttpHeaders headers = new HttpHeaders();
 
         MediaType type = MediaType.parseMediaType("application/xml; charset=UTF-8");
@@ -237,10 +238,10 @@ public class RestTemplateUtil {
         HttpEntity<String> requestEntity = new HttpEntity<>(xml, headers);
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestEntity, String.class);
-        try{
-            System.out.println("responseEntity"+responseEntity);
+        try {
+            System.out.println("responseEntity" + responseEntity);
             return new String(Objects.requireNonNull(responseEntity.getBody()).getBytes("UTF-8"), StandardCharsets.UTF_8);
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }
@@ -293,7 +294,7 @@ public class RestTemplateUtil {
 
         HttpPost httpPost = new HttpPost(url);
 
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(8*1000).setConnectTimeout(6*1000).build();
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(8 * 1000).setConnectTimeout(6 * 1000).build();
         httpPost.setConfig(requestConfig);
 
         StringEntity postEntity = new StringEntity(xml, "UTF-8");
@@ -311,12 +312,10 @@ public class RestTemplateUtil {
      *
      * @param url
      * @param params
-     * @return
-     *
-     * 表单提交，返回数据分为两部分，一个代表成功，一个是返回的数据内容
+     * @return 表单提交，返回数据分为两部分，一个代表成功，一个是返回的数据内容
      */
 
-    public String postFormData(String url, LinkedMultiValueMap<String, Object> params ) {
+    public String postFormData(String url, LinkedMultiValueMap<String, Object> params) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
@@ -336,8 +335,7 @@ public class RestTemplateUtil {
     }
 
 
-
-    public String postMapData(String url, Map<String, Object> params ) {
+    public String postMapData(String url, Map<String, Object> params) {
 
         //cs
         HttpHeaders headers = new HttpHeaders();
@@ -348,16 +346,16 @@ public class RestTemplateUtil {
         HttpEntity<Map<String, Object>> requestEntity =
                 new HttpEntity<>(params, headers);
 
-        String body1 = restTemplate.postForEntity( url, requestEntity, String.class).getBody();
+        String body1 = restTemplate.postForEntity(url, requestEntity, String.class).getBody();
 
 
         System.out.println(body1);
 
-        return  body1;
+        return body1;
 
     }
 
-    public String postMapData(String url, Map<String, Object> params,  Map<String, String> header) {
+    public String postMapData(String url, Map<String, Object> params, Map<String, String> header) {
 
         //cs
         HttpHeaders headers = new HttpHeaders();
@@ -372,17 +370,17 @@ public class RestTemplateUtil {
         HttpEntity<Map<String, Object>> requestEntity =
                 new HttpEntity<>(params, headers);
 
-        String body1 = restTemplate.postForEntity( url, requestEntity, String.class).getBody();
+        String body1 = restTemplate.postForEntity(url, requestEntity, String.class).getBody();
 
 
         System.out.println(body1);
 
-        return  body1;
+        return body1;
 
     }
 
 
-    public String postStringData(String url,String data ) {
+    public String postStringData(String url, String data) {
 
         //cs
         HttpHeaders headers = new HttpHeaders();

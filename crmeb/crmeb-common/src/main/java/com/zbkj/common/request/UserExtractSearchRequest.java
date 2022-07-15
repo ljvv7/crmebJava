@@ -25,10 +25,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_user_extract")
-@ApiModel(value="UserExtract对象", description="用户提现表")
+@ApiModel(value = "UserExtract对象", description = "用户提现表")
 public class UserExtractSearchRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "搜索关键字")
     private String keywords;

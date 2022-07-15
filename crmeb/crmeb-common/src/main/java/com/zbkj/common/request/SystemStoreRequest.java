@@ -27,10 +27,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemStoreRequest对象", description="提货点")
+@ApiModel(value = "SystemStoreRequest对象", description = "提货点")
 public class SystemStoreRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "门店名称")
     @NotBlank(message = "请填写门店名称")

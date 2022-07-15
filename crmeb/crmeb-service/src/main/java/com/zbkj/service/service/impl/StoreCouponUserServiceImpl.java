@@ -6,28 +6,28 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.UserCouponReceiveRequest;
-import com.zbkj.common.vo.MyRecord;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.constants.CouponConstants;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.vo.OrderInfoDetailVo;
-import com.zbkj.common.vo.OrderInfoVo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.constants.CouponConstants;
+import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.coupon.StoreCoupon;
+import com.zbkj.common.model.coupon.StoreCouponUser;
+import com.zbkj.common.model.user.User;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.request.StoreCouponUserRequest;
+import com.zbkj.common.request.StoreCouponUserSearchRequest;
+import com.zbkj.common.request.UserCouponReceiveRequest;
+import com.zbkj.common.response.StoreCouponUserOrder;
+import com.zbkj.common.response.StoreCouponUserResponse;
 import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.utils.RedisUtil;
-import com.zbkj.common.model.coupon.StoreCoupon;
-import com.zbkj.common.model.coupon.StoreCouponUser;
-import com.zbkj.common.request.StoreCouponUserRequest;
-import com.zbkj.common.request.StoreCouponUserSearchRequest;
-import com.zbkj.common.response.StoreCouponUserOrder;
-import com.zbkj.common.response.StoreCouponUserResponse;
-import com.zbkj.common.model.user.User;
+import com.zbkj.common.vo.MyRecord;
+import com.zbkj.common.vo.OrderInfoDetailVo;
+import com.zbkj.common.vo.OrderInfoVo;
 import com.zbkj.service.dao.StoreCouponUserDao;
 import com.zbkj.service.service.StoreCouponService;
 import com.zbkj.service.service.StoreCouponUserService;
@@ -81,11 +81,12 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
     private RedisUtil redisUtil;
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @return List<StoreCouponUser>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<StoreCouponUser>
+     */
     @Override
     public PageInfo<StoreCouponUserResponse> getList(StoreCouponUserSearchRequest request, PageParamRequest pageParamRequest) {
         Page<StoreCouponUser> storeCouponUserPage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -96,11 +97,11 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
             lambdaQueryWrapper.like(StoreCouponUser::getName, request.getName());
         }
 
-        if (request.getUid() !=null && request.getUid() > 0) {
+        if (request.getUid() != null && request.getUid() > 0) {
             lambdaQueryWrapper.eq(StoreCouponUser::getUid, request.getUid());
         }
 
-        if (request.getStatus() !=null) {
+        if (request.getStatus() != null) {
             lambdaQueryWrapper.eq(StoreCouponUser::getStatus, request.getStatus());
         }
 
@@ -131,6 +132,7 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 领券/批量领券
+     *
      * @param request 新增参数
      * @return boolean
      */
@@ -198,8 +200,9 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 过滤已经领取过此优惠券的用户id
+     *
      * @param couponId Integer 优惠券id
-     * @param uidList List<Integer> 用户id集合
+     * @param uidList  List<Integer> 用户id集合
      */
     private void filterReceiveUserInUid(Integer couponId, List<Integer> uidList) {
         LambdaQueryWrapper<StoreCouponUser> lambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -214,13 +217,14 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 用户已领取的优惠券
+     *
      * @param userId Integer 用户id
+     * @return boolean
      * @author Mr.Zhang
      * @since 2020-05-18
-     * @return boolean
      */
     @Override
-    public HashMap<Integer, StoreCouponUser>  getMapByUserId(Integer userId) {
+    public HashMap<Integer, StoreCouponUser> getMapByUserId(Integer userId) {
         List<StoreCouponUser> list = findListByUid(userId);
 
         if (list.size() < 1) {
@@ -242,6 +246,7 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 根据购物车id获取可用优惠券
+     *
      * @param preOrderNo 预下单订单号
      * @return 优惠券集合
      */
@@ -287,8 +292,9 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 移动端列表
-     * @param type 类型，usable-可用，unusable-不可用
-     * @param userId 用户id
+     *
+     * @param type             类型，usable-可用，unusable-不可用
+     * @param userId           用户id
      * @param pageParamRequest 分页类参数
      * @return List<StoreCouponUser>
      */
@@ -399,8 +405,9 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 支付成功赠送处理
+     *
      * @param couponId 优惠券编号
-     * @param uid  用户uid
+     * @param uid      用户uid
      * @return MyRecord
      */
     @Override
@@ -482,7 +489,8 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 根据uid获取列表
-     * @param uid uid
+     *
+     * @param uid              uid
      * @param pageParamRequest 分页参数
      * @return 优惠券列表
      */
@@ -500,6 +508,7 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 获取可用优惠券数量
+     *
      * @param uid 用户uid
      * @return Integer
      */
@@ -513,7 +522,7 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
             return 0;
         }
         Date date = DateUtil.nowDateTime();
-        for (int i = 0; i < storeCouponUserList.size();) {
+        for (int i = 0; i < storeCouponUserList.size(); ) {
             StoreCouponUser couponUser = storeCouponUserList.get(i);
             //判断是否在使用时间内
             if (ObjectUtil.isNotNull(couponUser.getStartTime()) && ObjectUtil.isNotNull(couponUser.getEndTime())) {
@@ -529,7 +538,8 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
 
     /**
      * 我的优惠券列表
-     * @param type 类型，usable-可用，unusable-不可用
+     *
+     * @param type             类型，usable-可用，unusable-不可用
      * @param pageParamRequest 分页参数
      * @return CommonPage<StoreCouponUserResponse>
      */
@@ -544,7 +554,7 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
         }
         Date date = DateUtil.nowDateTime();
         List<StoreCouponUserResponse> responseList = CollUtil.newArrayList();
-        for (StoreCouponUser storeCouponUser :couponUserList) {
+        for (StoreCouponUser storeCouponUser : couponUserList) {
             StoreCouponUserResponse storeCouponUserResponse = new StoreCouponUserResponse();
             BeanUtils.copyProperties(storeCouponUser, storeCouponUserResponse);
             String validStr = "usable";// 可用
@@ -584,8 +594,8 @@ public class StoreCouponUserServiceImpl extends ServiceImpl<StoreCouponUserDao, 
         lambdaQueryWrapper.and(i -> i.and(
                 //通用券  商品券  品类券
                 t -> t.eq(StoreCouponUser::getUseType, 1)
-                        .or(p -> p.eq(StoreCouponUser::getUseType , 2).apply(StrUtil.format(" primary_key in ({})", productIdStr)))
-                        .or(c -> c.eq(StoreCouponUser::getUseType , 3).apply(StrUtil.format(" primary_key in ({})", categoryIdStr)))
+                        .or(p -> p.eq(StoreCouponUser::getUseType, 2).apply(StrUtil.format(" primary_key in ({})", productIdStr)))
+                        .or(c -> c.eq(StoreCouponUser::getUseType, 3).apply(StrUtil.format(" primary_key in ({})", categoryIdStr)))
 
         ));
     }

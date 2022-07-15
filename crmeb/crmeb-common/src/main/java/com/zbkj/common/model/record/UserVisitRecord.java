@@ -27,10 +27,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_user_visit_record")
-@ApiModel(value="UserVisitRecord对象", description="用户访问记录表")
+@ApiModel(value = "UserVisitRecord对象", description = "用户访问记录表")
 public class UserVisitRecord implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;

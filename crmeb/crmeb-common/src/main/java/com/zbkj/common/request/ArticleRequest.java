@@ -13,23 +13,23 @@ import java.io.Serializable;
 
 /**
  * 文章管理 Request
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ArticleRequest对象", description="文章管理表")
+@ApiModel(value = "ArticleRequest对象", description = "文章管理表")
 public class ArticleRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "分类id", required = true)
     @NotBlank(message = "请选择分类")
@@ -69,7 +69,7 @@ public class ArticleRequest implements Serializable {
     @NotNull(message = "是否热门(小程序)不能为空")
     private Boolean isHot;
 
-    @ApiModelProperty(value = "是否轮播图(小程序)" , example = "true")
+    @ApiModelProperty(value = "是否轮播图(小程序)", example = "true")
     @NotNull(message = "是否轮播图(小程序)不能为空")
     private Boolean isBanner;
 

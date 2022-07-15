@@ -30,10 +30,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_user_level")
-@ApiModel(value="SystemUserLevelRequest对象", description="设置用户等级表")
+@ApiModel(value = "SystemUserLevelRequest对象", description = "设置用户等级表")
 public class SystemUserLevelRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "等级id")
     private Integer id;

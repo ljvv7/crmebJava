@@ -48,7 +48,6 @@
     </appender>
 
 
-
     <!--输出到文件-->
 
     <!-- 时间滚动输出 level为 DEBUG 日志 -->
@@ -215,20 +214,20 @@
     </appender>
 
     <!--<appender name="LOGSTASH" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-        <!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>-->
+    <!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>-->
 
-        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-            <!--<fileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.log</fileNamePattern>-->
-        <!--</rollingPolicy>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+    <!--<fileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.log</fileNamePattern>-->
+    <!--</rollingPolicy>-->
 
     <!--</appender>-->
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="DEBUG_FILE" />
-<!--        <appender-ref ref="INFO_FILE" />-->
-<!--        <appender-ref ref="WARN_FILE" />-->
-        <appender-ref ref="ERROR_FILE" />
+        <appender-ref ref="DEBUG_FILE"/>
+        <!--        <appender-ref ref="INFO_FILE" />-->
+        <!--        <appender-ref ref="WARN_FILE" />-->
+        <appender-ref ref="ERROR_FILE"/>
         <!--<appender-ref ref="LOGSTASH"/>-->
     </root>
 </configuration>

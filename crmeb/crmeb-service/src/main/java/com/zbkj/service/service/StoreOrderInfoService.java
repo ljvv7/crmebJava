@@ -29,6 +29,7 @@ public interface StoreOrderInfoService extends IService<StoreOrderInfo> {
 
     /**
      * 批量添加订单详情
+     *
      * @param storeOrderInfos 订单详情集合
      * @return 保存结果
      */
@@ -36,7 +37,8 @@ public interface StoreOrderInfoService extends IService<StoreOrderInfo> {
 
     /**
      * 通过订单编号和规格号查询
-     * @param uni 规格号
+     *
+     * @param uni     规格号
      * @param orderId 订单编号
      * @return StoreOrderInfo
      */
@@ -44,6 +46,7 @@ public interface StoreOrderInfoService extends IService<StoreOrderInfo> {
 
     /**
      * 获取订单详情vo列表
+     *
      * @param orderId 订单id
      * @return List<StoreOrderInfoVo>
      */
@@ -51,6 +54,7 @@ public interface StoreOrderInfoService extends IService<StoreOrderInfo> {
 
     /**
      * 获取订单详情-订单编号
+     *
      * @param orderNo 订单编号
      * @return List
      */
@@ -58,7 +62,8 @@ public interface StoreOrderInfoService extends IService<StoreOrderInfo> {
 
     /**
      * 根据时间、商品id获取销售件数
-     * @param date 时间，格式'yyyy-MM-dd'
+     *
+     * @param date  时间，格式'yyyy-MM-dd'
      * @param proId 商品id
      * @return Integer
      */
@@ -66,7 +71,8 @@ public interface StoreOrderInfoService extends IService<StoreOrderInfo> {
 
     /**
      * 根据时间、商品id获取销售额
-     * @param date 时间，格式'yyyy-MM-dd'
+     *
+     * @param date  时间，格式'yyyy-MM-dd'
      * @param proId 商品id
      * @return BigDecimal
      */

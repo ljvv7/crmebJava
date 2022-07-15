@@ -3,11 +3,14 @@
 <mapper namespace="com.zbkj.service.dao.UserBillDao">
 
     <select id="getListAdminAndIntegeal" resultType="com.zbkj.common.response.UserBillResponse" parameterType="map">
-        SELECT ub.id,ub.link_id AS linkId,ub.pm,ub.title,ub.category,ub.type,ub.number,ub.balance,ub.mark,ub.status,ub.create_time AS createTime,ub.update_time AS updateTime,u.nickname,ub.uid FROM eb_user_bill ub
+        SELECT ub.id,ub.link_id AS
+        linkId,ub.pm,ub.title,ub.category,ub.type,ub.number,ub.balance,ub.mark,ub.status,ub.create_time AS
+        createTime,ub.update_time AS updateTime,u.nickname,ub.uid FROM eb_user_bill ub
         LEFT JOIN eb_user u ON ub.uid = u.uid
         where 1 = 1
         <if test="keywords != '' and keywords != null ">
-            and ( ub.id like #{keywords} or ub.uid like #{keywords} or ub.link_id like #{keywords, jdbcType=VARCHAR} or ub.title like #{keywords, jdbcType=VARCHAR} or u.nickname like #{keywords, jdbcType=VARCHAR})
+            and ( ub.id like #{keywords} or ub.uid like #{keywords} or ub.link_id like #{keywords, jdbcType=VARCHAR} or
+            ub.title like #{keywords, jdbcType=VARCHAR} or u.nickname like #{keywords, jdbcType=VARCHAR})
         </if>
         <if test="type != '' and type != null">
             and ub.type = #{type, jdbcType=VARCHAR}
@@ -16,7 +19,7 @@
             and ub.category = #{category, jdbcType=VARCHAR}
         </if>
         <if test="userIdList != null">
-            and ub.uid in 
+            and ub.uid in
             <foreach collection="userIdList" item="userIdList" index="index" open="(" separator="," close=")">
                 #{userIdList}
             </foreach>
@@ -29,7 +32,9 @@
     </select>
 
     <select id="fundMonitoring" resultType="com.zbkj.common.response.UserBillResponse" parameterType="map">
-        SELECT ub.id,ub.link_id AS linkId,ub.pm,ub.title,ub.category,ub.type,ub.number,ub.balance,ub.mark,ub.status,ub.create_time AS createTime,ub.update_time AS updateTime,u.nickname,ub.uid FROM eb_user_bill ub
+        SELECT ub.id,ub.link_id AS
+        linkId,ub.pm,ub.title,ub.category,ub.type,ub.number,ub.balance,ub.mark,ub.status,ub.create_time AS
+        createTime,ub.update_time AS updateTime,u.nickname,ub.uid FROM eb_user_bill ub
         LEFT JOIN eb_user u ON ub.uid = u.uid
         where ub.category = 'now_money'
         <if test="keywords != '' and keywords != null ">

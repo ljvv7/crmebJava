@@ -1,10 +1,10 @@
 package com.zbkj.admin.controller;
 
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.order.StoreOrderStatus;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StoreOrderStatusSearchRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.service.service.StoreOrderStatusService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,14 +41,15 @@ public class StoreOrderStatusController {
 
     /**
      * 分页显示订单操作记录表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:order:status:list')")
     @ApiOperation(value = "分页列表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<StoreOrderStatus>>  getList(@Validated StoreOrderStatusSearchRequest request,
-                                                               @Validated PageParamRequest pageParamRequest){
+    public CommonResult<CommonPage<StoreOrderStatus>> getList(@Validated StoreOrderStatusSearchRequest request,
+                                                              @Validated PageParamRequest pageParamRequest) {
         CommonPage<StoreOrderStatus> storeOrderStatusCommonPage = CommonPage.restPage(storeOrderStatusService.getList(request, pageParamRequest));
         return CommonResult.success(storeOrderStatusCommonPage);
     }

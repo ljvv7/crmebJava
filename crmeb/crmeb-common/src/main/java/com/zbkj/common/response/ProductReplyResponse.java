@@ -24,9 +24,9 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ProductReplyResponse对象", description="商品评论H5详情响应对象")
+@ApiModel(value = "ProductReplyResponse对象", description = "商品评论H5详情响应对象")
 public class ProductReplyResponse {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "评论ID")
     private Integer id;

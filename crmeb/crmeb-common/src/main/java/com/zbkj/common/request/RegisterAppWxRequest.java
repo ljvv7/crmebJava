@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RegisterAppWxRequest对象", description="App微信注册/登录请求对象")
+@ApiModel(value = "RegisterAppWxRequest对象", description = "App微信注册/登录请求对象")
 public class RegisterAppWxRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户openId")
     private String openId;

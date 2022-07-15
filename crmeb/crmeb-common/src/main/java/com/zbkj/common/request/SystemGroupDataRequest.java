@@ -25,10 +25,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_group_data")
-@ApiModel(value="SystemGroupDataRequest对象", description="组合数据详情表")
+@ApiModel(value = "SystemGroupDataRequest对象", description = "组合数据详情表")
 public class SystemGroupDataRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "对应的数据组id")
     private Integer gid;

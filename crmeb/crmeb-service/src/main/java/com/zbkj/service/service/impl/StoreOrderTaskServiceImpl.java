@@ -127,37 +127,39 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
 
     /**
      * 用户取消订单
+     *
      * @author Mr.Zhang
      * @since 2020-07-09
      */
     @Override
     @Transactional(rollbackFor = {RuntimeException.class, Error.class, CrmebException.class})
     public Boolean cancelByUser(StoreOrder storeOrder) {
-        try{
+        try {
             /*
-            * 1、修改订单状态 （用户操作的时候已处理）
-            * 2、写订单日志
-            * 3、回滚库存
-            * 4、回滚优惠券
-            * 5、回滚积分
-            * */
+             * 1、修改订单状态 （用户操作的时候已处理）
+             * 2、写订单日志
+             * 3、回滚库存
+             * 4、回滚优惠券
+             * 5、回滚积分
+             * */
 
             //写订单日志
             storeOrderStatusService.createLog(storeOrder.getId(), "cancel_order", "取消订单");
             // 退优惠券
-            if (storeOrder.getCouponId() > 0 ) {
+            if (storeOrder.getCouponId() > 0) {
                 StoreCouponUser couponUser = couponUserService.getById(storeOrder.getCouponId());
                 couponUser.setStatus(CouponConstants.STORE_COUPON_USER_STATUS_USABLE);
                 couponUserService.updateById(couponUser);
             }
             return rollbackStock(storeOrder);
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     /**
      * 完成订单
+     *
      * @author Mr.Zhang
      * @since 2020-07-09
      */
@@ -168,29 +170,30 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
          * 1、修改订单状态 （用户操作的时候已处理）
          * 2、写订单日志
          * */
-        try{
+        try {
             storeOrderStatusService.createLog(storeOrder.getId(), "check_order_over", "用户评价");
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     /**
      * 回滚库存
+     *
      * @param storeOrder 订单信息
      */
     private Boolean rollbackStock(StoreOrder storeOrder) {
-        try{
+        try {
             // 查找出商品详情
             List<StoreOrderInfo> orderInfoList = storeOrderInfoService.getListByOrderNo(storeOrder.getOrderId());
-            if(null == orderInfoList || orderInfoList.size() < 1){
+            if (null == orderInfoList || orderInfoList.size() < 1) {
                 return true;
             }
 
             // 兼容处理秒杀数据退款
             // 秒杀商品回滚库存和销量
-            if(null != storeOrder.getSeckillId() && storeOrder.getSeckillId() > 0){
+            if (null != storeOrder.getSeckillId() && storeOrder.getSeckillId() > 0) {
                 // 秒杀只会有一个商品
                 StoreOrderInfo orderInfo = orderInfoList.get(0);
                 StoreSeckill storeSeckill = storeSeckillService.getByIdException(storeOrder.getSeckillId());
@@ -233,7 +236,7 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
                     attrValueService.operationStock(orderInfoVo.getAttrValueId(), orderInfoVo.getPayNum(), "add", Constants.PRODUCT_TYPE_NORMAL);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 //            throw new CrmebException(e.getMessage());
             logger.error("回滚库存失败，error = " + e.getMessage());
             return true;
@@ -352,7 +355,7 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
             }
 
             // 退优惠券
-            if (storeOrder.getCouponId() > 0 ) {
+            if (storeOrder.getCouponId() > 0) {
                 StoreCouponUser couponUser = couponUserService.getById(storeOrder.getCouponId());
                 couponUser.setStatus(CouponConstants.STORE_COUPON_USER_STATUS_USABLE);
                 couponUserService.updateById(couponUser);
@@ -401,7 +404,7 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
             //写订单日志
             storeOrderStatusService.createLog(storeOrder.getId(), "cancel", "到期未支付系统自动取消");
             // 退优惠券
-            if (storeOrder.getCouponId() > 0 ) {
+            if (storeOrder.getCouponId() > 0) {
                 StoreCouponUser couponUser = couponUserService.getById(storeOrder.getCouponId());
                 couponUser.setStatus(CouponConstants.STORE_COUPON_USER_STATUS_USABLE);
                 couponUserService.updateById(couponUser);
@@ -417,6 +420,7 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
 
     /**
      * 订单收货task处理
+     *
      * @param orderId 订单id
      * @return Boolean
      * 1.写订单日志
@@ -523,7 +527,7 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
         if (storeOrder.getIsChannel().equals(Constants.ORDER_PAY_CHANNEL_PUBLIC) && notification.getIsWechat().equals(1)) {
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_WECHAT);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             // 发送微信模板消息
             temMap.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "您购买的商品已确认收货！");
@@ -537,13 +541,13 @@ public class StoreOrderTaskServiceImpl implements StoreOrderTaskService {
             // 小程序发送订阅消息
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_ROUTINE);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             // 组装数据
             // 获取商品名称
             String storeNameAndCarNumString = orderUtils.getStoreNameAndCarNumString(storeOrder.getId());
             if (StrUtil.isBlank(storeNameAndCarNumString)) {
-                return ;
+                return;
             }
             if (storeNameAndCarNumString.length() > 20) {
                 storeNameAndCarNumString = storeNameAndCarNumString.substring(0, 15) + "***";

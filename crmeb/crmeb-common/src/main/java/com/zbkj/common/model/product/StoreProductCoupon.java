@@ -1,14 +1,15 @@
 package com.zbkj.common.model.product;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 商品优惠券
@@ -26,10 +27,18 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product_coupon")
-@ApiModel(value="StoreProductCoupon对象", description="")
+@ApiModel(value = "StoreProductCoupon对象", description = "")
 public class StoreProductCoupon implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+    @ApiModelProperty(value = "商品id")
+    private Integer productId;
+    @ApiModelProperty(value = "优惠劵id")
+    private Integer issueCouponId;
+    @ApiModelProperty(value = "添加时间")
+    private Integer addTime;
 
     public StoreProductCoupon() {
     }
@@ -39,18 +48,6 @@ public class StoreProductCoupon implements Serializable {
         this.issueCouponId = issueCouponId;
         this.addTime = addTime;
     }
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
-    @ApiModelProperty(value = "商品id")
-    private Integer productId;
-
-    @ApiModelProperty(value = "优惠劵id")
-    private Integer issueCouponId;
-
-    @ApiModelProperty(value = "添加时间")
-    private Integer addTime;
 
 
 }

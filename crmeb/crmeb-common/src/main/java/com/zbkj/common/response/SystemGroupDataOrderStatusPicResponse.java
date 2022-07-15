@@ -23,10 +23,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemGroupDataOrderStatusPicResponse对象", description="订单状态图片")
+@ApiModel(value = "SystemGroupDataOrderStatusPicResponse对象", description = "订单状态图片")
 public class SystemGroupDataOrderStatusPicResponse implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单状态")
     private int orderStatus;

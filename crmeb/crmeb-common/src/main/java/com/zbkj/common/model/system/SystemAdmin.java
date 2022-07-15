@@ -28,10 +28,10 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_admin")
-@ApiModel(value="SystemAdmin对象", description="后台管理员表")
+@ApiModel(value = "SystemAdmin对象", description = "后台管理员表")
 public class SystemAdmin implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "后台管理员表ID")
     @TableId(value = "id", type = IdType.AUTO)

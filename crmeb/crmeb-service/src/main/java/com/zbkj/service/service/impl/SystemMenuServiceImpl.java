@@ -38,16 +38,15 @@ import java.util.stream.Collectors;
 @Service
 public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu> implements SystemMenuService {
 
+    private static final String CACHE_LIST_KEY = "menuList";
     @Resource
     private SystemMenuDao dao;
-
     @Autowired
     private RedisUtil redisUtil;
 
-    private static final String CACHE_LIST_KEY = "menuList";
-
     /**
      * 通过权限获取管理员可访问目录
+     *
      * @return List<SystemMenu>
      */
     @Override
@@ -63,6 +62,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 获取所有菜单
+     *
      * @return List<SystemMenu>
      */
     @Override
@@ -76,6 +76,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 菜单列表
+     *
      * @param request 请求参数
      */
     @Override
@@ -95,6 +96,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 新增菜单
+     *
      * @param request 菜单参数
      * @return Boolean
      */
@@ -118,6 +120,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 根据id删除菜单
+     *
      * @param id 菜单id
      * @return Boolean
      */
@@ -151,6 +154,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 修改菜单
+     *
      * @param request 菜单参数
      * @return Boolean
      */
@@ -176,6 +180,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 获取菜单详情
+     *
      * @param id 菜单id
      * @return SystemMenu
      */
@@ -190,6 +195,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 修改菜单显示状态
+     *
      * @param id 菜单id
      * @return Boolean
      */
@@ -221,6 +227,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 菜单缓存树
+     *
      * @return List
      */
     @Override
@@ -245,6 +252,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 通过用户id获取权限
+     *
      * @param userId 用户id
      * @return List
      */
@@ -255,6 +263,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 获取用户路由
+     *
      * @param userId 用户id
      * @return List
      */
@@ -265,6 +274,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 根据菜单id获取所有下级对象
+     *
      * @param pid 菜单id
      * @return List<SystemMenu>
      */
@@ -277,6 +287,7 @@ public class SystemMenuServiceImpl extends ServiceImpl<SystemMenuDao, SystemMenu
 
     /**
      * 获取详细信息
+     *
      * @param id 菜单id
      * @return SystemMenu
      */

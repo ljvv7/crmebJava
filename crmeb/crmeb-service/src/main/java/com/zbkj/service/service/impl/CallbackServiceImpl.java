@@ -53,36 +53,75 @@ import java.util.*;
 public class CallbackServiceImpl implements CallbackService {
 
     private static final Logger logger = LoggerFactory.getLogger(CallbackServiceImpl.class);
+    private static final List<String> list = new ArrayList<>();
+
+    static {
+        list.add("total_fee");
+        list.add("cash_fee");
+        list.add("coupon_fee");
+        list.add("coupon_count");
+        list.add("refund_fee");
+        list.add("settlement_refund_fee");
+        list.add("settlement_total_fee");
+        list.add("cash_refund_fee");
+        list.add("coupon_refund_fee");
+        list.add("coupon_refund_count");
+    }
 
     @Autowired
     private RechargePayService rechargePayService;
-
     @Autowired
     private StoreOrderService storeOrderService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private UserRechargeService userRechargeService;
-
     @Autowired
     private RedisUtil redisUtil;
-
     @Autowired
     private SystemConfigService systemConfigService;
-
     @Autowired
     private TransactionTemplate transactionTemplate;
-
     @Autowired
     private StoreCombinationService storeCombinationService;
-
     @Autowired
     private StorePinkService storePinkService;
-
     @Autowired
     private WechatPayInfoService wechatPayInfoService;
+
+    /**
+     * java自带的是PKCS5Padding填充，不支持PKCS7Padding填充。
+     * 通过BouncyCastle组件来让java里面支持PKCS7Padding填充
+     * 在加解密之前加上：Security.addProvider(new BouncyCastleProvider())，
+     * 并给Cipher.getInstance方法传入参数来指定Java使用这个库里的加/解密算法。
+     */
+    public static String decryptToStr(String reqInfo, String signKey) throws Exception {
+        Security.addProvider(new BouncyCastleProvider());
+//        byte[] decodeReqInfo = Base64.decode(reqInfo);
+        byte[] decodeReqInfo = base64DecodeJustForWxPay(reqInfo).getBytes(StandardCharsets.ISO_8859_1);
+        SecretKeySpec key = new SecretKeySpec(SecureUtil.md5(signKey).toLowerCase().getBytes(), "AES");
+        Cipher cipher;
+        cipher = Cipher.getInstance("AES/ECB/PKCS7Padding");
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        return new String(cipher.doFinal(decodeReqInfo), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 仅仅为微信解析密文使用
+     *
+     * @param source 待解析密文
+     * @return 结果
+     */
+    public static String base64DecodeJustForWxPay(final String source) {
+        String result = "";
+        final Base64.Decoder decoder = Base64.getDecoder();
+        try {
+            result = new String(decoder.decode(source), "ISO-8859-1");
+        } catch (final UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * 微信支付回调
@@ -91,7 +130,7 @@ public class CallbackServiceImpl implements CallbackService {
     public String weChat(String xmlInfo) {
         StringBuffer sb = new StringBuffer();
         sb.append("<xml>");
-        if(StrUtil.isBlank(xmlInfo)){
+        if (StrUtil.isBlank(xmlInfo)) {
             sb.append("<return_code><![CDATA[FAIL]]></return_code>");
             sb.append("<return_msg><![CDATA[xmlInfo is blank]]></return_msg>");
             sb.append("</xml>");
@@ -99,7 +138,7 @@ public class CallbackServiceImpl implements CallbackService {
             return sb.toString();
         }
 
-        try{
+        try {
             HashMap<String, Object> map = WxPayUtil.processResponseXml(xmlInfo);
             // 通信是否成功
             String returnCode = (String) map.get("return_code");
@@ -215,7 +254,7 @@ public class CallbackServiceImpl implements CallbackService {
                             storePink.setStopTime(headPink.getStopTime());
                         } else {
                             DateTime hourTime = cn.hutool.core.date.DateUtil.offsetHour(dateTime, effectiveTime);
-                            long stopTime =  hourTime.getTime();
+                            long stopTime = hourTime.getTime();
                             if (stopTime > storeCombination.getStopTime()) {
                                 stopTime = storeCombination.getStopTime();
                             }
@@ -248,10 +287,10 @@ public class CallbackServiceImpl implements CallbackService {
                 userRecharge.setOrderId(callbackVo.getOutTradeNo());
                 userRecharge.setUid(attachVo.getUserId());
                 userRecharge = userRechargeService.getInfoByEntity(userRecharge);
-                if(ObjectUtil.isNull(userRecharge)){
+                if (ObjectUtil.isNull(userRecharge)) {
                     throw new CrmebException("没有找到订单信息");
                 }
-                if(userRecharge.getPaid()){
+                if (userRecharge.getPaid()) {
                     sb.append("<return_code><![CDATA[SUCCESS]]></return_code>");
                     sb.append("<return_msg><![CDATA[OK]]></return_msg>");
                     sb.append("</xml>");
@@ -266,7 +305,7 @@ public class CallbackServiceImpl implements CallbackService {
             }
             sb.append("<return_code><![CDATA[SUCCESS]]></return_code>");
             sb.append("<return_msg><![CDATA[OK]]></return_msg>");
-        }catch (Exception e){
+        } catch (Exception e) {
             sb.append("<return_code><![CDATA[FAIL]]></return_code>");
             sb.append("<return_msg><![CDATA[").append(e.getMessage()).append("]]></return_msg>");
             logger.error("wechat pay error : 业务异常==》" + e.getMessage());
@@ -278,6 +317,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     /**
      * 微信退款回调
+     *
      * @param xmlInfo 微信回调json
      * @return MyRecord
      */
@@ -317,6 +357,7 @@ public class CallbackServiceImpl implements CallbackService {
 
     /**
      * 支付订单回调通知
+     *
      * @return MyRecord
      */
     private MyRecord refundNotify(String xmlInfo, MyRecord notifyRecord) {
@@ -324,7 +365,7 @@ public class CallbackServiceImpl implements CallbackService {
         refundRecord.set("status", "fail");
         StringBuilder sb = new StringBuilder();
         sb.append("<xml>");
-        if(StrUtil.isBlank(xmlInfo)){
+        if (StrUtil.isBlank(xmlInfo)) {
             sb.append("<return_code><![CDATA[FAIL]]></return_code>");
             sb.append("<return_msg><![CDATA[xmlInfo is blank]]></return_msg>");
             sb.append("</xml>");
@@ -393,37 +434,6 @@ public class CallbackServiceImpl implements CallbackService {
         return signKey;
     }
 
-    /**
-     * java自带的是PKCS5Padding填充，不支持PKCS7Padding填充。
-     * 通过BouncyCastle组件来让java里面支持PKCS7Padding填充
-     * 在加解密之前加上：Security.addProvider(new BouncyCastleProvider())，
-     * 并给Cipher.getInstance方法传入参数来指定Java使用这个库里的加/解密算法。
-     */
-    public static String decryptToStr(String reqInfo, String signKey) throws Exception {
-        Security.addProvider(new BouncyCastleProvider());
-//        byte[] decodeReqInfo = Base64.decode(reqInfo);
-        byte[] decodeReqInfo = base64DecodeJustForWxPay(reqInfo).getBytes(StandardCharsets.ISO_8859_1);
-        SecretKeySpec key = new SecretKeySpec(SecureUtil.md5(signKey).toLowerCase().getBytes(), "AES");
-        Cipher cipher;
-        cipher = Cipher.getInstance("AES/ECB/PKCS7Padding");
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        return new String(cipher.doFinal(decodeReqInfo), StandardCharsets.UTF_8);
-    }
-
-    private static final List<String> list = new ArrayList<>();
-    static {
-        list.add("total_fee");
-        list.add("cash_fee");
-        list.add("coupon_fee");
-        list.add("coupon_count");
-        list.add("refund_fee");
-        list.add("settlement_refund_fee");
-        list.add("settlement_total_fee");
-        list.add("cash_refund_fee");
-        list.add("coupon_refund_fee");
-        list.add("coupon_refund_count");
-    }
-
     private Map<String, Object> _strMap2ObjMap(Map<String, String> params) {
         Map<String, Object> map = new HashMap<>();
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -440,21 +450,5 @@ public class CallbackServiceImpl implements CallbackService {
             map.put(entry.getKey(), entry.getValue());
         }
         return map;
-    }
-
-    /**
-     * 仅仅为微信解析密文使用
-     * @param source 待解析密文
-     * @return 结果
-     */
-    public static String base64DecodeJustForWxPay(final String source) {
-        String result = "";
-        final Base64.Decoder decoder = Base64.getDecoder();
-        try {
-            result = new String(decoder.decode(source), "ISO-8859-1");
-        } catch (final UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return result;
     }
 }

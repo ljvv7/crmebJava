@@ -21,10 +21,10 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OnePassLogisticsTrackVo对象", description = "一号通物流轨迹对象")
+@ApiModel(value = "OnePassLogisticsTrackVo对象", description = "一号通物流轨迹对象")
 public class OnePassLogisticsTrackVo {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "变动时间")
     private String time;

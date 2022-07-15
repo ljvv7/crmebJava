@@ -39,13 +39,14 @@ public class SystemWriteOffOrderController {
 
     /**
      * 分页显示订单表
-     * @param request 搜索条件
+     *
+     * @param request          搜索条件
      * @param pageParamRequest 分页参数
      */
     @PreAuthorize("hasAuthority('admin:system:order:list')")
     @ApiOperation(value = "分页列表") //配合swagger使用
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public CommonResult<SystemWriteOffOrderResponse>  getList(
+    public CommonResult<SystemWriteOffOrderResponse> getList(
             @Validated SystemWriteOffOrderSearchRequest request,
             @Validated PageParamRequest pageParamRequest) {
         return CommonResult.success(storeOrderService.getWriteOffList(request, pageParamRequest));

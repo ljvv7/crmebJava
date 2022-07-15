@@ -6,28 +6,28 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.constants.NotifyConstants;
-import com.zbkj.common.model.system.SystemNotification;
-import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.request.OrderRefundApplyRequest;
-import com.zbkj.common.vo.MyRecord;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.constants.UserConstants;
-import com.zbkj.common.exception.CrmebException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zbkj.common.utils.DateUtil;
-import com.zbkj.common.vo.dateLimitUtilVo;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.constants.NotifyConstants;
+import com.zbkj.common.constants.UserConstants;
+import com.zbkj.common.exception.CrmebException;
 import com.zbkj.common.model.combination.StoreCombination;
 import com.zbkj.common.model.combination.StorePink;
+import com.zbkj.common.model.order.StoreOrder;
+import com.zbkj.common.model.system.SystemNotification;
+import com.zbkj.common.model.user.User;
+import com.zbkj.common.model.user.UserToken;
+import com.zbkj.common.page.CommonPage;
+import com.zbkj.common.request.OrderRefundApplyRequest;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.StorePinkSearchRequest;
 import com.zbkj.common.response.StorePinkAdminListResponse;
 import com.zbkj.common.response.StorePinkDetailResponse;
-import com.zbkj.common.model.order.StoreOrder;
-import com.zbkj.common.model.user.User;
-import com.zbkj.common.model.user.UserToken;
+import com.zbkj.common.utils.DateUtil;
+import com.zbkj.common.vo.MyRecord;
+import com.zbkj.common.vo.dateLimitUtilVo;
 import com.zbkj.service.dao.StorePinkDao;
 import com.zbkj.service.service.*;
 import org.springframework.beans.BeanUtils;
@@ -81,13 +81,14 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
 
     /**
-    * 列表
-    * @param request 请求参数
-    * @param pageParamRequest 分页类参数
-    * @author HZW
-    * @since 2020-11-13
-    * @return List<StorePink>
-    */
+     * 列表
+     *
+     * @param request          请求参数
+     * @param pageParamRequest 分页类参数
+     * @return List<StorePink>
+     * @author HZW
+     * @since 2020-11-13
+     */
     @Override
     public PageInfo<StorePinkAdminListResponse> getList(StorePinkSearchRequest request, PageParamRequest pageParamRequest) {
         Page<StorePink> pinkPage = PageHelper.startPage(pageParamRequest.getPage(), pageParamRequest.getLimit());
@@ -121,6 +122,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * 获取拼团列表cid
+     *
      * @param cid 拼团商品id
      * @return
      */
@@ -134,6 +136,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * 拼团实体查询
+     *
      * @param storePink
      * @return
      */
@@ -146,6 +149,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * PC拼团详情列表
+     *
      * @param pinkId 团长pinkId
      * @return
      */
@@ -201,7 +205,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
         lqw.le(StorePink::getStopTime, System.currentTimeMillis());
         List<StorePink> headList = dao.selectList(lqw);
         if (CollUtil.isEmpty(headList)) {
-            return ;
+            return;
         }
         /**
          * 1.判断是否拼团成功
@@ -284,15 +288,16 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * 发送消息通知
+     *
      * @param record 参数
-     * @param user 拼团用户
+     * @param user   拼团用户
      */
     private void pushMessageOrder(MyRecord record, User user, SystemNotification notification) {
         if (!record.getStr("payType").equals(Constants.PAY_TYPE_WE_CHAT)) {
-            return ;
+            return;
         }
         if (record.getInt("isChannel").equals(2)) {
-            return ;
+            return;
         }
 
         UserToken userToken;
@@ -301,7 +306,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
         if (record.getInt("isChannel").equals(Constants.ORDER_PAY_CHANNEL_PUBLIC) && notification.getIsWechat().equals(1)) {
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_WECHAT);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             // 发送微信模板消息
             temMap.put(Constants.WE_CHAT_TEMP_KEY_FIRST, "恭喜您拼团成功！我们将尽快为您发货。");
@@ -313,13 +318,13 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
             // 小程序发送订阅消息
             userToken = userTokenService.getTokenByUserId(user.getUid(), UserConstants.USER_TOKEN_TYPE_ROUTINE);
             if (ObjectUtil.isNull(userToken)) {
-                return ;
+                return;
             }
             // 组装数据
 //        temMap.put("character_string1",  record.getStr("orderNo"));
 //        temMap.put("thing2", record.getStr("proName"));
 //        temMap.put("thing5", "恭喜您拼团成功！我们将尽快为您发货。");
-            temMap.put("character_string10",  record.getStr("orderNo"));
+            temMap.put("character_string10", record.getStr("orderNo"));
             temMap.put("thing7", record.getStr("proName"));
             temMap.put("thing9", "恭喜您拼团成功！我们将尽快为您发货。");
             templateMessageService.pushMiniTemplateMessage(notification.getRoutineId(), temMap, userToken.getToken());
@@ -328,6 +333,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * 拼团成功
+     *
      * @param kid
      * @return
      */
@@ -349,6 +355,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * 根据订单编号获取
+     *
      * @param orderId
      * @return
      */
@@ -361,6 +368,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * 获取最后3个拼团信息（不同用户）
+     *
      * @return List
      */
     @Override
@@ -376,6 +384,7 @@ public class StorePinkServiceImpl extends ServiceImpl<StorePinkDao, StorePink> i
 
     /**
      * 获取拼团参与总人数
+     *
      * @return Integer
      */
     @Override

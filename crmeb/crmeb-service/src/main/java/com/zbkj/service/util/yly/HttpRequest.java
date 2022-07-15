@@ -83,8 +83,8 @@ class HttpRequest {
         String reqStr = "";
         if (null != paramMap && !paramMap.isEmpty()) {
             for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-                System.out.println("key = " + (String)entry.getKey() + ", value = " + (String)entry.getValue());
-                reqStr = (String)entry.getKey() + "=" + (String)entry.getValue() + "&" + reqStr;
+                System.out.println("key = " + (String) entry.getKey() + ", value = " + (String) entry.getValue());
+                reqStr = (String) entry.getKey() + "=" + (String) entry.getValue() + "&" + reqStr;
             }
             reqStr = reqStr.substring(0, reqStr.length() - 1);
         }

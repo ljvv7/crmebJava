@@ -20,12 +20,14 @@ import java.util.List;
 public interface StoreProductCouponService extends IService<StoreProductCoupon> {
     /**
      * 根据产品id删除 优惠券关联信息
+     *
      * @param productId 产品id
      */
     boolean deleteByProductId(Integer productId);
 
     /**
      * 根据商品id获取已关联优惠券信息
+     *
      * @param productId 商品id
      * @return 已关联优惠券
      */

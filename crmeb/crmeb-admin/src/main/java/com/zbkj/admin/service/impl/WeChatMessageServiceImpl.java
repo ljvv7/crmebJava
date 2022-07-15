@@ -1,14 +1,14 @@
 package com.zbkj.admin.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zbkj.admin.service.WeChatMessageService;
+import com.zbkj.admin.vo.*;
 import com.zbkj.common.constants.WeChatConstants;
+import com.zbkj.common.model.article.Article;
+import com.zbkj.common.model.wechat.WechatReply;
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.utils.RedisUtil;
 import com.zbkj.common.utils.XmlUtil;
-import com.zbkj.common.model.article.Article;
-import com.zbkj.admin.service.WeChatMessageService;
-import com.zbkj.admin.vo.*;
-import com.zbkj.common.model.wechat.WechatReply;
 import com.zbkj.service.service.ArticleService;
 import com.zbkj.service.service.SystemAttachmentService;
 import com.zbkj.service.service.UserTokenService;
@@ -80,10 +80,11 @@ public class WeChatMessageServiceImpl implements WeChatMessageService {
 
     /**
      * 处理微信推送过来的消息，并且组装成需要发送的数据，二次处理
+     *
      * @param request HttpServletRequest request请求
+     * @return String
      * @author Mr.Zhang
      * @since 2020-06-03
-     * @return String
      */
     @Override
     public String init(HttpServletRequest request) {
@@ -97,11 +98,10 @@ public class WeChatMessageServiceImpl implements WeChatMessageService {
         setEventKey(map.getOrDefault("EventKey", ""));
 
 
-
         //处理内容
         getReplyByContent();
 
-        if(null == getWechatReply()){
+        if (null == getWechatReply()) {
             return "";
         }
 
@@ -114,18 +114,19 @@ public class WeChatMessageServiceImpl implements WeChatMessageService {
 
     /**
      * 匹配关键字并且组装xml数据
+     *
+     * @return String
      * @author Mr.Zhang
      * @since 2020-06-03
-     * @return String
      */
     private String setXml() {
-        if(StringUtils.isBlank(getWechatReply().getType())){
+        if (StringUtils.isBlank(getWechatReply().getType())) {
             return "";
         }
         String type = getWechatReply().getType().toLowerCase();
         MessageReplyDataVo messageReplyDataVo = JSONObject.toJavaObject(JSONObject.parseObject(wechatReply.getData()), MessageReplyDataVo.class);
 
-        switch (type){
+        switch (type) {
             case WeChatConstants.WE_CHAT_MESSAGE_RESP_MESSAGE_TYPE_TEXT:
                 MessageTextVo messageTextVo = new MessageTextVo(getFromUserName(), getToUserName(), messageReplyDataVo.getContent());
                 return XmlUtil.objectToXml(messageTextVo);
@@ -143,29 +144,30 @@ public class WeChatMessageServiceImpl implements WeChatMessageService {
 
     /**
      * 组装文章消息
+     *
      * @param articleId Integer 文章id
+     * @return MessageVoiceVo
      * @author Mr.Zhang
      * @since 2020-06-03
-     * @return MessageVoiceVo
      */
     private String getNews(Integer articleId) {
         Article article = articleService.getById(articleId);
-        if(null == article || article.getStatus() || article.getHide()){
+        if (null == article || article.getStatus() || article.getHide()) {
             return "";
         }
 
         return "<xml>\n" +
-                "  <ToUserName><![CDATA["+fromUserName+"]]></ToUserName>\n" +
-                "  <FromUserName><![CDATA["+toUserName+"]]></FromUserName>\n" +
-                "  <CreateTime>"+ DateUtil.getNowTime() +"</CreateTime>\n" +
+                "  <ToUserName><![CDATA[" + fromUserName + "]]></ToUserName>\n" +
+                "  <FromUserName><![CDATA[" + toUserName + "]]></FromUserName>\n" +
+                "  <CreateTime>" + DateUtil.getNowTime() + "</CreateTime>\n" +
                 "  <MsgType><![CDATA[news]]></MsgType>\n" +
                 "  <ArticleCount>1</ArticleCount>\n" +
                 "  <Articles>\n" +
                 "    <item>\n" +
-                "      <Title><![CDATA["+article.getTitle()+"]]></Title>\n" +
-                "      <Description><![CDATA["+article.getShareSynopsis()+"]]></Description>\n" +
-                "      <PicUrl><![CDATA["+article.getImageInput()+"]]></PicUrl>\n" +
-                "      <Url><![CDATA["+article.getUrl()+"]]></Url>\n" +
+                "      <Title><![CDATA[" + article.getTitle() + "]]></Title>\n" +
+                "      <Description><![CDATA[" + article.getShareSynopsis() + "]]></Description>\n" +
+                "      <PicUrl><![CDATA[" + article.getImageInput() + "]]></PicUrl>\n" +
+                "      <Url><![CDATA[" + article.getUrl() + "]]></Url>\n" +
                 "    </item>\n" +
                 "  </Articles>\n" +
                 "</xml>\n";
@@ -174,17 +176,18 @@ public class WeChatMessageServiceImpl implements WeChatMessageService {
 
     /**
      * 处理不同的消息类型
+     *
      * @author Mr.Zhang
      * @since 2020-06-03
      */
     private void getReplyByContent() {
         WechatReply wp = new WechatReply();
-        switch (getMsgType()){
+        switch (getMsgType()) {
             case WeChatConstants.WE_CHAT_MESSAGE_REQ_MESSAGE_TYPE_EVENT:
-                if(StringUtils.isBlank(getEvent())){
+                if (StringUtils.isBlank(getEvent())) {
                     break;
                 }
-                switch (getEvent().toLowerCase()){
+                switch (getEvent().toLowerCase()) {
                     case WeChatConstants.WE_CHAT_MESSAGE_EVENT_TYPE_UNSUBSCRIBE:
                     case WeChatConstants.WE_CHAT_MESSAGE_EVENT_TYPE_SCAN:
                     case WeChatConstants.WE_CHAT_MESSAGE_EVENT_TYPE_LOCATION:
@@ -214,7 +217,7 @@ public class WeChatMessageServiceImpl implements WeChatMessageService {
                 break;
         }
 
-        if(null == wp){
+        if (null == wp) {
             //无效关键字回复
             wp = wechatReplyService.getVoByKeywords(WeChatConstants.WE_CHAT_MESSAGE_DEFAULT_CONTENT_KEY);
         }

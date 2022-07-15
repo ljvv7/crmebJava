@@ -2,9 +2,9 @@ package com.zbkj.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.model.express.ShippingTemplatesFree;
 import com.zbkj.common.request.ShippingTemplatesFreeRequest;
+import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.service.dao.ShippingTemplatesFreeDao;
 import com.zbkj.service.service.ShippingTemplatesFreeService;
 import com.zbkj.service.service.SystemCityService;
@@ -18,17 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* ShippingTemplatesFreeServiceImpl 接口实现
-*  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
-*/
+ * ShippingTemplatesFreeServiceImpl 接口实现
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
+ */
 @Service
 public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTemplatesFreeDao, ShippingTemplatesFree> implements ShippingTemplatesFreeService {
 
@@ -42,9 +42,10 @@ public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTempla
 
     /**
      * 保存配送区域
+     *
      * @param shippingTemplatesFreeRequestList List<ShippingTemplatesFreeRequest> 运费集合
-     * @param type Integer 计费方式
-     * @param tempId Integer 运费模板id
+     * @param type                             Integer 计费方式
+     * @param tempId                           Integer 运费模板id
      * @author Mr.Zhang
      * @since 2020-05-20
      */
@@ -59,12 +60,12 @@ public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTempla
 
         for (ShippingTemplatesFreeRequest shippingTemplatesFreeRequest : shippingTemplatesFreeRequestList) {
             String uniqueKey = DigestUtils.md5Hex(shippingTemplatesFreeRequest.toString());
-            if(shippingTemplatesFreeRequest.getCityId().equals("all") || shippingTemplatesFreeRequest.getCityId().equals("0")){
+            if (shippingTemplatesFreeRequest.getCityId().equals("all") || shippingTemplatesFreeRequest.getCityId().equals("0")) {
                 cityIdList = getCityIdList();
-            }else{
+            } else {
                 cityIdList = CrmebUtil.stringToArray(shippingTemplatesFreeRequest.getCityId());
             }
-            for (Integer cityId: cityIdList) {
+            for (Integer cityId : cityIdList) {
                 ShippingTemplatesFree shippingTemplatesFree = new ShippingTemplatesFree();
                 shippingTemplatesFree.setCityId(cityId);
                 shippingTemplatesFree.setTitle(shippingTemplatesFreeRequest.getTitle());
@@ -86,12 +87,13 @@ public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTempla
 
     /**
      * 获取所有城市cityId
+     *
+     * @return List<Integer>
      * @author Mr.Zhang
      * @since 2020-04-16
-     * @return List<Integer>
      */
     private List<Integer> getCityIdList() {
-        if(this.cityIdList == null || this.cityIdList.size() < 1){
+        if (this.cityIdList == null || this.cityIdList.size() < 1) {
             this.cityIdList = systemCityService.getCityIdList();
         }
         return this.cityIdList;
@@ -99,6 +101,7 @@ public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTempla
 
     /**
      * 把模板下的所有数据标记为无效
+     *
      * @param tempId Integer 运费模板id
      * @author Mr.Zhang
      * @since 2020-05-20
@@ -114,6 +117,7 @@ public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTempla
 
     /**
      * 删除模板下的无效数据
+     *
      * @param tempId Integer 运费模板id
      */
     @Override
@@ -126,6 +130,7 @@ public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTempla
 
     /**
      * 根据模板编号、城市ID查询
+     *
      * @param tempId 模板编号
      * @param cityId 城市ID
      * @return 运费模板
@@ -143,6 +148,7 @@ public class ShippingTemplatesFreeServiceImpl extends ServiceImpl<ShippingTempla
 
     /**
      * 分组查询
+     *
      * @param tempId Integer 运费模板id
      * @return List<ShippingTemplatesFreeRequest>
      */

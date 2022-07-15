@@ -2,7 +2,6 @@ package com.zbkj.common.request;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zbkj.common.constants.RegularConstants;
-import com.zbkj.common.utils.ValidateFormUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,7 +10,9 @@ import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -30,10 +31,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_admin")
-@ApiModel(value="SystemAdminAddRequest对象", description="后台管理员表")
+@ApiModel(value = "SystemAdminAddRequest对象", description = "后台管理员表")
 public class SystemAdminAddRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "后台管理员账号", required = true)
     @NotNull(message = "后台管理员账号不能为空")

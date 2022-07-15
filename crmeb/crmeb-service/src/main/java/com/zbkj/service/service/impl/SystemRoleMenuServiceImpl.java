@@ -34,6 +34,7 @@ public class SystemRoleMenuServiceImpl extends ServiceImpl<SystemRoleMenuDao, Sy
 
     /**
      * 通过角色id删除
+     *
      * @param rid 角色id
      */
     @Override
@@ -45,6 +46,7 @@ public class SystemRoleMenuServiceImpl extends ServiceImpl<SystemRoleMenuDao, Sy
 
     /**
      * 通过角色id获取菜单列表
+     *
      * @param rid 角色id
      * @return List
      */

@@ -12,7 +12,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -25,10 +24,10 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="SystemMenu对象", description="系统菜单请求对象")
+@ApiModel(value = "SystemMenu对象", description = "系统菜单请求对象")
 public class SystemMenuRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "菜单ID，新增时不填，修改时必填")
     private Integer id;
@@ -52,7 +51,7 @@ public class SystemMenuRequest implements Serializable {
 
     @NotEmpty(message = "菜单类型不能为空")
     @ApiModelProperty(value = "类型，M-目录，C-菜单，A-按钮")
-    @StringContains(limitValues = {"M","C","A"}, message = "未知的菜单类型")
+    @StringContains(limitValues = {"M", "C", "A"}, message = "未知的菜单类型")
     private String menuType;
 
     @ApiModelProperty(value = "排序")

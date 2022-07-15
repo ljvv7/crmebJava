@@ -28,12 +28,14 @@ public interface StoreOrderVerification {
 
     /**
      * 核销月详情
+     *
      * @return 月详情
      */
     List<StoreStaffDetail> getOrderVerificationDetail(StoreOrderStaticsticsRequest request);
 
     /**
      * 根据核销码核销订单
+     *
      * @param vCode 核销码
      * @return 核销结果
      */
@@ -41,6 +43,7 @@ public interface StoreOrderVerification {
 
     /**
      * 根据核销码查询待核销订单
+     *
      * @param vCode 核销码
      * @return 待核销订单详情
      */

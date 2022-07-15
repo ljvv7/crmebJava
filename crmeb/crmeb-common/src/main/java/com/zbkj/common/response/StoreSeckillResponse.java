@@ -77,11 +77,11 @@ public class StoreSeckillResponse {
     private String description;
 
     @ApiModelProperty(value = "开始时间")
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
     @ApiModelProperty(value = "结束时间")
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date stopTime;
 
     @ApiModelProperty(value = "添加时间")
@@ -136,7 +136,7 @@ public class StoreSeckillResponse {
     private List<StoreProductAttrValueResponse> attrValue;
 
     @ApiModelProperty(value = "管理端用于映射attrResults")
-    private List<HashMap<String,Object>> attrValues;
+    private List<HashMap<String, Object>> attrValues;
 
     private Integer[] cateIds;
 

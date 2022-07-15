@@ -1,7 +1,5 @@
 package com.zbkj.common.request;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +10,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -31,10 +28,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_store_staff")
-@ApiModel(value="SystemStoreStaff对象", description="门店店员表")
+@ApiModel(value = "SystemStoreStaff对象", description = "门店店员表")
 public class SystemStoreStaffRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "管理员 id")
     @Min(value = 1, message = "请选择管理员")
@@ -49,7 +46,7 @@ public class SystemStoreStaffRequest implements Serializable {
 
     @ApiModelProperty(value = "核销员 名称 [昵称]")
     @NotBlank(message = "核销员名称不能为空")
-    @Length(max = 64,message = "核销员名称不能超过64个字符")
+    @Length(max = 64, message = "核销员名称不能超过64个字符")
     private String staffName;
 
     @ApiModelProperty(value = "手机号码")

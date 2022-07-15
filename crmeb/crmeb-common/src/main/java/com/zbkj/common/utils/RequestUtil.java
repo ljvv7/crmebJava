@@ -12,31 +12,32 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *  Request工具类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * Request工具类
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
-public class RequestUtil extends HttpServlet{
+public class RequestUtil extends HttpServlet {
     public static HttpServletRequest getRequest() {
-        if(RequestContextHolder.getRequestAttributes() != null){
+        if (RequestContextHolder.getRequestAttributes() != null) {
             return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
 
         }
 
         return null;
     }
-    public static HashMap<String, Object> getRequestParamAndHeader(){
 
-        try{
+    public static HashMap<String, Object> getRequestParamAndHeader() {
+
+        try {
             HttpServletRequest request = getRequest();
-            if(request == null){
+            if (request == null) {
                 return null;
             }
 
@@ -44,19 +45,19 @@ public class RequestUtil extends HttpServlet{
             HashMap<String, Object> data = new HashMap<>();
             HashMap<String, Object> requestParams = new HashMap<>();
             Enumeration<String> paraNames = request.getParameterNames();
-            if(paraNames != null){
-                for(Enumeration<String> enumeration =paraNames;enumeration.hasMoreElements();){
-                    String key= enumeration.nextElement();
+            if (paraNames != null) {
+                for (Enumeration<String> enumeration = paraNames; enumeration.hasMoreElements(); ) {
+                    String key = enumeration.nextElement();
                     requestParams.put(key, request.getParameter(key));
                 }
             }
 
             HashMap<String, Object> requestFilter = new HashMap<>();
             Enumeration<String> attributeNames = request.getAttributeNames();
-            if(attributeNames != null){
-                for ( Enumeration<String> attributeNames1 = attributeNames; attributeNames1.hasMoreElements();) {
-                    String key= attributeNames1.nextElement();
-                    if(key.contains("request_")){
+            if (attributeNames != null) {
+                for (Enumeration<String> attributeNames1 = attributeNames; attributeNames1.hasMoreElements(); ) {
+                    String key = attributeNames1.nextElement();
+                    if (key.contains("request_")) {
                         requestFilter.put(key, request.getAttribute(key));
                     }
                 }
@@ -71,10 +72,10 @@ public class RequestUtil extends HttpServlet{
             //header 信息
             Enumeration<String> headerNames = request.getHeaderNames();
             HashMap<String, Object> headerParams = new HashMap<>();
-            if(headerNames != null){
-                for(Enumeration<String> enumeration = headerNames;enumeration.hasMoreElements();){
-                    String key= enumeration.nextElement();
-                    String value=request.getHeader(key);
+            if (headerNames != null) {
+                for (Enumeration<String> enumeration = headerNames; enumeration.hasMoreElements(); ) {
+                    String key = enumeration.nextElement();
+                    String value = request.getHeader(key);
                     headerParams.put(key, value);
                 }
             }
@@ -82,21 +83,21 @@ public class RequestUtil extends HttpServlet{
 
 
             return data;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static String getDomain(){
+    public static String getDomain() {
         HttpServletRequest request = getRequest();
-        if(request == null){
+        if (request == null) {
             return null;
         }
         return request.getServerName() + ":" + request.getServerPort();
     }
 
-    public static String getUri(HttpServletRequest request){
+    public static String getUri(HttpServletRequest request) {
         String uri = request.getRequestURI();
         List<String> list = CrmebUtil.stringToArrayStrRegex(uri, "/");
         list.removeIf(StringUtils::isNumeric); //去掉url中的数字参数

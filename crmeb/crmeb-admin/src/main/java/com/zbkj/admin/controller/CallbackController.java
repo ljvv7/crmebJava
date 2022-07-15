@@ -37,7 +37,7 @@ public class CallbackController {
      */
     @ApiOperation(value = "微信支付回调")
     @RequestMapping(value = "/wechat", method = RequestMethod.POST)
-    public String weChat(@RequestBody String  request) {
+    public String weChat(@RequestBody String request) {
         System.out.println("微信支付回调 request ===> " + request);
         String response = callbackService.weChat(request);
         System.out.println("微信支付回调 response ===> " + response);

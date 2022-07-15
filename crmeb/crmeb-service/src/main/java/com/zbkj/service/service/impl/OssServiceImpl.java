@@ -37,11 +37,11 @@ public class OssServiceImpl implements OssService {
         OSS ossClient = new OSSClientBuilder().build(cloudVo.getRegion(), cloudVo.getAccessKey(), cloudVo.getSecretKey());
         try {
             //判断bucket是否存在
-            if (!ossClient.doesBucketExist(cloudVo.getBucketName())){
+            if (!ossClient.doesBucketExist(cloudVo.getBucketName())) {
                 ossClient.createBucket(cloudVo.getBucketName());
             }
 
-            if(!file.exists()){
+            if (!file.exists()) {
                 logger.info("上传文件" + localFile + "不存在：");
                 return;
             }
@@ -50,7 +50,7 @@ public class OssServiceImpl implements OssService {
             PutObjectResult putObjectResult = ossClient.putObject(putObjectRequest);
             logger.info("上传文件 -- 结束：" + putObjectResult.getETag());
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new CrmebException(e.getMessage());
         } finally {
             ossClient.shutdown();

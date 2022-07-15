@@ -29,9 +29,9 @@ public class MenuTree {
     }
 
     //建立树形结构
-    public List<MenusResponse> buildTree(){
+    public List<MenusResponse> buildTree() {
         List<MenusResponse> treeMenus = new ArrayList<MenusResponse>();
-        for(MenusResponse menuNode : getRootNode()) {
+        for (MenusResponse menuNode : getRootNode()) {
             menuNode = buildChildTree(menuNode);
             treeMenus.add(menuNode);
         }
@@ -51,10 +51,10 @@ public class MenuTree {
     }
 
     //递归，建立子树形结构
-    private MenusResponse buildChildTree(MenusResponse pNode){
+    private MenusResponse buildChildTree(MenusResponse pNode) {
         List<MenusResponse> childMenus = new ArrayList<MenusResponse>();
-        for(MenusResponse menuNode : menuList) {
-            if(menuNode.getPid().equals(pNode.getId())) {
+        for (MenusResponse menuNode : menuList) {
+            if (menuNode.getPid().equals(pNode.getId())) {
                 childMenus.add(buildChildTree(menuNode));
             }
         }
@@ -64,9 +64,9 @@ public class MenuTree {
 
     //获取根节点
     private List<MenusResponse> getRootNode() {
-        List<MenusResponse> rootMenuLists = new  ArrayList<MenusResponse>();
-        for(MenusResponse menuNode : menuList) {
-            if(menuNode.getPid().equals(0)) {
+        List<MenusResponse> rootMenuLists = new ArrayList<MenusResponse>();
+        for (MenusResponse menuNode : menuList) {
+            if (menuNode.getPid().equals(0)) {
                 rootMenuLists.add(menuNode);
             }
         }

@@ -32,7 +32,8 @@ import java.io.InputStream;
 public class UploadWeChatMediaUtil {
     /**
      * 把文件上传到指定url上去
-     * @param url 上传地址
+     *
+     * @param url  上传地址
      * @param file 待上传文件
      */
     public static JSONObject uploadFile(String url, InputStream file, String fileName) throws IOException {
@@ -65,10 +66,10 @@ public class UploadWeChatMediaUtil {
                     return JSONObject.parseObject(responseEntityStr);
                 }
                 EntityUtils.consume(resEntity);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw new CrmebException(e.getMessage());
-            }finally {
+            } finally {
                 response.close();
             }
         } catch (IOException e) {

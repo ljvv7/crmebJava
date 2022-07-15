@@ -21,8 +21,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="AttachVo对象", description="支付附加对象")
+@ApiModel(value = "AttachVo对象", description = "支付附加对象")
 public class AttachVo {
+
+    @ApiModelProperty(value = "业务类型， 订单 = order， 充值 = recharge", required = true)
+    private String type = "order";
+    @ApiModelProperty(value = "用户id", required = true)
+    private Integer userId;
 
     public AttachVo() {
     }
@@ -31,11 +36,5 @@ public class AttachVo {
         this.type = type;
         this.userId = userId;
     }
-
-    @ApiModelProperty(value = "业务类型， 订单 = order， 充值 = recharge", required = true)
-    private String type = "order";
-
-    @ApiModelProperty(value = "用户id", required = true)
-    private Integer userId;
 
 }

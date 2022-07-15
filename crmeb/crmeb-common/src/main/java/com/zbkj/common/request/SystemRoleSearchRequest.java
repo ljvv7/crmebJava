@@ -17,7 +17,7 @@ import lombok.Data;
  */
 @Data
 public class SystemRoleSearchRequest {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "身份管理名称")
     private String roleName;

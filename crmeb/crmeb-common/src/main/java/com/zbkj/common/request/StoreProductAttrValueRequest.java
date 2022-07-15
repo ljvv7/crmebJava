@@ -10,7 +10,6 @@ import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.LinkedHashMap;
 
 /**
  * 商品属性值表
@@ -27,10 +26,10 @@ import java.util.LinkedHashMap;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="StoreProductAttrValueRequest对象", description="商品属性值表")
+@ApiModel(value = "StoreProductAttrValueRequest对象", description = "商品属性值表")
 public class StoreProductAttrValueRequest implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "ID")
     private Integer id;
 

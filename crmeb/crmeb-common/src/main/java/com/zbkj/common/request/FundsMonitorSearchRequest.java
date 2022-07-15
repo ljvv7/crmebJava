@@ -26,7 +26,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="FundsMonitorSearchRequest对象", description="资金监控")
+@ApiModel(value = "FundsMonitorSearchRequest对象", description = "资金监控")
 public class FundsMonitorSearchRequest implements Serializable {
 
     @ApiModelProperty(value = "搜索关键字")

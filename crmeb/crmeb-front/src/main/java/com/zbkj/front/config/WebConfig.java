@@ -32,14 +32,6 @@ public class WebConfig implements WebMvcConfigurer {
     // 这里使用一个Bean为的是可以在拦截器中自由注入，也可以在拦截器中使用SpringUtil.getBean 获取
     // 但是觉得这样更优雅
 
-    @Bean
-    public HandlerInterceptor frontTokenInterceptor(){
-        return new FrontTokenInterceptor();
-    }
-
-    @Bean
-    public ResponseFilter responseFilter(){ return new ResponseFilter(); }
-
     @Value("${swagger.basic.username}")
     private String username;
     @Value("${swagger.basic.password}")
@@ -47,6 +39,15 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${swagger.basic.check}")
     private Boolean check;
 
+    @Bean
+    public HandlerInterceptor frontTokenInterceptor() {
+        return new FrontTokenInterceptor();
+    }
+
+    @Bean
+    public ResponseFilter responseFilter() {
+        return new ResponseFilter();
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -102,8 +103,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FilterRegistrationBean filterRegister()
-    {
+    public FilterRegistrationBean filterRegister() {
         //注册过滤器
         FilterRegistrationBean registration = new FilterRegistrationBean(responseFilter());
         registration.addUrlPatterns("/*");

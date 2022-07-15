@@ -16,19 +16,22 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 微信支付工具类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 public class WxPayUtil {
 
@@ -67,6 +70,7 @@ public class WxPayUtil {
 
     /**
      * 获取sign
+     *
      * @param vo      微信公共下单对象
      * @param signKey 微信签名key
      * @return String
@@ -94,8 +98,9 @@ public class WxPayUtil {
 
     /**
      * 获取sign
-     * @param wxRefundVo  微信退款对象
-     * @param signKey 微信签名key
+     *
+     * @param wxRefundVo 微信退款对象
+     * @param signKey    微信签名key
      * @return String
      */
     public static String getSign(WxRefundVo wxRefundVo, String signKey) {
@@ -121,7 +126,8 @@ public class WxPayUtil {
 
     /**
      * 获取sign
-     * @param map      待签名数据
+     *
+     * @param map     待签名数据
      * @param signKey 微信签名key
      * @return String
      */
@@ -146,7 +152,8 @@ public class WxPayUtil {
 
     /**
      * 获取sign
-     * @param map      待签名数据
+     *
+     * @param map     待签名数据
      * @param signKey 微信签名key
      * @return String
      */
@@ -171,15 +178,17 @@ public class WxPayUtil {
 
     /**
      * 获取当前时间戳，单位秒
-     * @return  Long
+     *
+     * @return Long
      */
     public static Long getCurrentTimestamp() {
-        return System.currentTimeMillis()/1000;
+        return System.currentTimeMillis() / 1000;
     }
 
     /**
      * 获取当前时间戳，单位毫秒
-     * @return  Long
+     *
+     * @return Long
      */
     public static Long getCurrentTimestampMs() {
         return System.currentTimeMillis();

@@ -46,6 +46,7 @@ public class WeChatController {
 
     /**
      * 创建微信菜单
+     *
      * @param data 菜单数据，具体json格式参考微信开放平台
      */
     @PreAuthorize("hasAuthority('admin:wechat:menu:public:create')")

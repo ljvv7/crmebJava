@@ -69,6 +69,7 @@ public class OrderTaskServiceImpl implements OrderTaskService {
 
     /**
      * 用户取消订单
+     *
      * @author Mr.Zhang
      * @since 2020-07-09
      */
@@ -105,6 +106,7 @@ public class OrderTaskServiceImpl implements OrderTaskService {
 
     /**
      * 执行 用户退款申请
+     *
      * @author Mr.Zhang
      * @since 2020-07-09
      */
@@ -142,6 +144,7 @@ public class OrderTaskServiceImpl implements OrderTaskService {
 
     /**
      * 完成订单
+     *
      * @author Mr.Zhang
      * @since 2020-07-09
      */
@@ -275,7 +278,7 @@ public class OrderTaskServiceImpl implements OrderTaskService {
         // 查找所有收获状态订单
         List<StoreOrder> orderList = storeOrderService.findIdAndUidListByReceipt();
         if (CollUtil.isEmpty(orderList)) {
-            return ;
+            return;
         }
         logger.info("OrderTaskServiceImpl.autoComplete | size:0");
 
@@ -284,13 +287,13 @@ public class OrderTaskServiceImpl implements OrderTaskService {
             StoreOrderStatus orderStatus = storeOrderStatusService.getLastByOrderId(order.getId());
             if (!orderStatus.getChangeType().equals("user_take_delivery")) {
                 logger.error("订单自动完成：订单记录最后一条不是收货状态，orderId = " + order.getId());
-                continue ;
+                continue;
             }
             // 判断是否到自动完成时间（收货时间向后偏移7天）
             String comTime = DateUtil.addDay(orderStatus.getCreateTime(), 7, Constants.DATE_FORMAT);
             int compareDate = DateUtil.compareDate(comTime, DateUtil.nowDateTime(Constants.DATE_FORMAT), Constants.DATE_FORMAT);
             if (compareDate < 0) {
-                continue ;
+                continue;
             }
 
             /**

@@ -1,9 +1,9 @@
 package com.zbkj.service.service;
 
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.SmsApplyTempRequest;
 import com.zbkj.common.request.SmsModifySignRequest;
 import com.zbkj.common.vo.MyRecord;
-import com.zbkj.common.request.PageParamRequest;
 
 import java.math.BigDecimal;
 
@@ -52,9 +52,10 @@ public interface SmsService {
 
     /**
      * 发送支付成功短信
-     * @param phone 手机号
-     * @param orderNo 订单编号
-     * @param payPrice 支付金额
+     *
+     * @param phone     手机号
+     * @param orderNo   订单编号
+     * @param payPrice  支付金额
      * @param msgTempId 短信模板id
      * @return Boolean
      */
@@ -62,55 +63,61 @@ public interface SmsService {
 
     /**
      * 发送管理员下单短信提醒短信
-     * @param phone 手机号
-     * @param orderNo 订单编号
-     * @param realName 管理员名称
+     *
+     * @param phone     手机号
+     * @param orderNo   订单编号
+     * @param realName  管理员名称
      * @param msgTempId 短信模板id
      */
     Boolean sendCreateOrderNotice(String phone, String orderNo, String realName, Integer msgTempId);
 
     /**
      * 发送订单支付成功管理员提醒短信
-     * @param phone 手机号
-     * @param orderNo 订单编号
-     * @param realName 管理员名称
+     *
+     * @param phone     手机号
+     * @param orderNo   订单编号
+     * @param realName  管理员名称
      * @param msgTempId 短信模板id
      */
     Boolean sendOrderPaySuccessNotice(String phone, String orderNo, String realName, Integer msgTempId);
 
     /**
      * 发送用户退款管理员提醒短信
-     * @param phone 手机号
-     * @param orderNo 订单编号
-     * @param realName 管理员名称
+     *
+     * @param phone     手机号
+     * @param orderNo   订单编号
+     * @param realName  管理员名称
      * @param msgTempId 短信模板id
      */
     Boolean sendOrderRefundApplyNotice(String phone, String orderNo, String realName, Integer msgTempId);
 
     /**
      * 发送用户确认收货管理员提醒短信
-     * @param phone 手机号
-     * @param orderNo 订单编号
-     * @param realName 管理员名称
+     *
+     * @param phone     手机号
+     * @param orderNo   订单编号
+     * @param realName  管理员名称
      * @param msgTempId 短信模板id
      */
     Boolean sendOrderReceiptNotice(String phone, String orderNo, String realName, Integer msgTempId);
 
     /**
      * 发送订单改价提醒短信
-     * @param phone 手机号
-     * @param orderNo 订单编号
-     * @param price 修改后的支付金额
+     *
+     * @param phone     手机号
+     * @param orderNo   订单编号
+     * @param price     修改后的支付金额
      * @param msgTempId 短信模板id
      */
     Boolean sendOrderEditPriceNotice(String phone, String orderNo, BigDecimal price, Integer msgTempId);
 
     /**
      * 发送订单发货提醒短信
-     * @param phone 手机号
-     * @param nickName 用户昵称
+     *
+     * @param phone     手机号
+     * @param nickName  用户昵称
      * @param storeName 商品名称
-     * @param orderNo 订单编号
+     * @param orderNo   订单编号
      * @param msgTempId 短信模板id
      */
     Boolean sendOrderDeliverNotice(String phone, String nickName, String storeName, String orderNo, Integer msgTempId);

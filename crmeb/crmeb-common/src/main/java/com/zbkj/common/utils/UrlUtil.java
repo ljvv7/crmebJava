@@ -1,34 +1,21 @@
 package com.zbkj.common.utils;
 
-import cn.hutool.core.util.StrUtil;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * url 工具类
- *  +----------------------------------------------------------------------
- *  | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
- *  +----------------------------------------------------------------------
- *  | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
- *  +----------------------------------------------------------------------
- *  | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
- *  +----------------------------------------------------------------------
- *  | Author: CRMEB Team <admin@crmeb.com>
- *  +----------------------------------------------------------------------
+ * +----------------------------------------------------------------------
+ * | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+ * +----------------------------------------------------------------------
+ * | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+ * +----------------------------------------------------------------------
+ * | Author: CRMEB Team <admin@crmeb.com>
+ * +----------------------------------------------------------------------
  */
 public class UrlUtil {
-    public static class UrlEntity {
-        /**
-         * 基础url
-         */
-        public String baseUrl;
-        /**
-         * url参数
-         */
-        public Map<String, String> params;
-    }
-
     /**
      * 解析url
      *
@@ -63,7 +50,7 @@ public class UrlUtil {
         return entity;
     }
 
-    public static String getParamsByKey(String url,String key){
+    public static String getParamsByKey(String url, String key) {
         UrlEntity entity = parse(url);
         return entity.params.get(key);
     }
@@ -78,5 +65,16 @@ public class UrlUtil {
         entity = parse("http://www.123.com?id=1&name=小明");
         System.out.println(entity.baseUrl + "\n" + entity.params);
         System.out.println(entity.params.get("id"));
+    }
+
+    public static class UrlEntity {
+        /**
+         * 基础url
+         */
+        public String baseUrl;
+        /**
+         * url参数
+         */
+        public Map<String, String> params;
     }
 }

@@ -42,6 +42,7 @@ public class WeChatPushController {
 
     /**
      * 新增后台管理员表
+     *
      * @param message string message
      * @author Mr.Zhang
      * @since 2020-04-13
@@ -49,11 +50,11 @@ public class WeChatPushController {
     @ApiOperation(value = "gitlab钩子")
     @RequestMapping(value = "/gitlab", method = RequestMethod.POST)
     @ApiImplicitParams({
-            @ApiImplicitParam(name="message", value="推送消息内容"),
-            @ApiImplicitParam(name="token", value="企业微信群token"),
+            @ApiImplicitParam(name = "message", value = "推送消息内容"),
+            @ApiImplicitParam(name = "token", value = "企业微信群token"),
     })
     public CommonResult<Object> gitlab(@RequestBody String message,
-                                       @RequestParam(name = "token", required = true) String token){
+                                       @RequestParam(name = "token", required = true) String token) {
 
         Map<String, Object> map = new HashMap<>();
         map.put("msgtype", "text");
@@ -69,7 +70,7 @@ public class WeChatPushController {
         JSONObject jsonObject = JSONObject.parseObject(message);
         String action = jsonObject.getString("object_kind");
         String content;
-        switch(action){
+        switch (action) {
             case "push":
                 content = jsonObject.getJSONArray("commits").getJSONObject(0).getJSONObject("author").getString("name") + " " +
                         action + " " +
@@ -86,11 +87,11 @@ public class WeChatPushController {
                 break;
             case "note":
                 String author = "未知用户";
-                if(jsonObject.containsKey("commit")){
+                if (jsonObject.containsKey("commit")) {
                     author = jsonObject.getJSONObject("commit").getJSONObject("author").getString("name");
                 }
 
-                if(jsonObject.containsKey("last_commit")){
+                if (jsonObject.containsKey("last_commit")) {
                     author = jsonObject.getJSONObject("last_commit").getJSONObject("author").getString("name");
                 }
 
@@ -120,6 +121,7 @@ public class WeChatPushController {
 
     /**
      * 新增后台管理员表
+     *
      * @param message string message
      * @author Mr.Zhang
      * @since 2020-04-13
@@ -127,11 +129,11 @@ public class WeChatPushController {
     @ApiOperation(value = "消息推送")
     @RequestMapping(value = "/push", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name="message", value="推送消息内容"),
-            @ApiImplicitParam(name="token", value="企业微信群token"),
+            @ApiImplicitParam(name = "message", value = "推送消息内容"),
+            @ApiImplicitParam(name = "token", value = "企业微信群token"),
     })
     public CommonResult<Object> push(@RequestParam(name = "message") String message,
-                                    @RequestParam(name = "token") String token){
+                                     @RequestParam(name = "token") String token) {
 
         Map<String, Object> map = new HashMap<>();
         map.put("msgtype", "text");

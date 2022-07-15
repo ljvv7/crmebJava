@@ -1,8 +1,8 @@
 package com.zbkj.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.model.product.StoreProductRelation;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.common.request.UserCollectAllRequest;
 import com.zbkj.common.request.UserCollectRequest;
 import com.zbkj.common.response.UserRelationResponse;
@@ -27,6 +27,7 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 取消收藏
+     *
      * @param requestJson 收藏idsJson
      * @return Boolean
      */
@@ -34,15 +35,17 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 批量收藏
+     *
      * @param request 收藏参数
      * @return Boolean
      */
     Boolean all(UserCollectAllRequest request);
 
-    List<StoreProductRelation> getLikeOrCollectByUser(Integer userId, Integer productId,boolean isLike);
+    List<StoreProductRelation> getLikeOrCollectByUser(Integer userId, Integer productId, boolean isLike);
 
     /**
      * 获取用户收藏列表
+     *
      * @param pageParamRequest 分页参数
      * @return List<UserRelationResponse>
      */
@@ -50,6 +53,7 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 获取用户的收藏数量
+     *
      * @param uid 用户uid
      * @return 收藏数量
      */
@@ -57,6 +61,7 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 根据商品Id取消收藏
+     *
      * @param proId 商品Id
      * @return Boolean
      */
@@ -64,6 +69,7 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 根据商品Id取消收藏
+     *
      * @param proId 商品Id
      * @return Boolean
      */
@@ -71,6 +77,7 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 根据日期获取收藏量
+     *
      * @param date 日期，yyyy-MM-dd格式
      * @return Integer
      */
@@ -78,7 +85,8 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 根据日期获取收藏量
-     * @param date 日期，yyyy-MM-dd格式
+     *
+     * @param date  日期，yyyy-MM-dd格式
      * @param proId 商品id
      * @return Integer
      */
@@ -86,6 +94,7 @@ public interface StoreProductRelationService extends IService<StoreProductRelati
 
     /**
      * 添加收藏
+     *
      * @param request 收藏参数
      */
     Boolean add(UserCollectRequest request);

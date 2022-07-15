@@ -33,7 +33,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_store_product")
-@ApiModel(value="StoreProduct对象", description="商品表")
+@ApiModel(value = "StoreProduct对象", description = "商品表")
 public class StoreProductResponse implements Serializable {
 
     @ApiModelProperty(value = "商品id")
@@ -176,7 +176,7 @@ public class StoreProductResponse implements Serializable {
     private List<StoreProductAttrValueResponse> attrValue;
 
     @ApiModelProperty(value = "管理端用于映射attrResults")
-    private List<HashMap<String,Object>> attrValues;
+    private List<HashMap<String, Object>> attrValues;
 
     private Integer[] cateIds;
 

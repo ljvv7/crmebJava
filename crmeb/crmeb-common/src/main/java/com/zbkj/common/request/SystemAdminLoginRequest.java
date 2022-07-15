@@ -27,7 +27,7 @@ public class SystemAdminLoginRequest {
 
     @ApiModelProperty(value = "后台管理员密码", example = "userPassword")
     @NotEmpty(message = "密码 不能为空")
-    @Length(min = 6, max = 30 ,message = "密码长度在6-30个字符")
+    @Length(min = 6, max = 30, message = "密码长度在6-30个字符")
     private String pwd;
 
     @ApiModelProperty(value = "key", required = true)

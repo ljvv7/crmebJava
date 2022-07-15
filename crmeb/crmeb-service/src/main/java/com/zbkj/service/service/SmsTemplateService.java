@@ -19,6 +19,7 @@ public interface SmsTemplateService extends IService<SmsTemplate> {
 
     /**
      * 获取详情
+     *
      * @param id 模板id
      * @return SmsTemplate
      */

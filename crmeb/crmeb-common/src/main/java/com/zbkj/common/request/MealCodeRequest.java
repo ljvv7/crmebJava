@@ -45,12 +45,12 @@ public class MealCodeRequest {
 
     @ApiModelProperty(value = "套餐类型:sms,短信;copy,产品复制;expr_query,物流查询;expr_dump,电子面单", required = true)
     @NotBlank(message = "套餐类型不能为空")
-    @StringContains(limitValues = {"sms","copy","expr_query","expr_dump"}, message = "未知的套餐类型")
+    @StringContains(limitValues = {"sms", "copy", "expr_query", "expr_dump"}, message = "未知的套餐类型")
     private String type;
 
     @ApiModelProperty(value = "支付类型 weixin：微信支付/alipay：支付宝支付", required = true)
     @NotBlank(message = "支付类型不能为空")
-    @StringContains(limitValues = {"weixin","alipay"}, message = "未知的支付类型")
+    @StringContains(limitValues = {"weixin", "alipay"}, message = "未知的支付类型")
     private String payType;
 
 }

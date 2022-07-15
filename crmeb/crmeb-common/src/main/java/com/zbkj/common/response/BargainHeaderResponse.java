@@ -24,7 +24,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="BargainHeaderResponse对象", description="砍价商品列表header响应对象")
+@ApiModel(value = "BargainHeaderResponse对象", description = "砍价商品列表header响应对象")
 public class BargainHeaderResponse {
 
     @ApiModelProperty(value = "参与砍价总人数")

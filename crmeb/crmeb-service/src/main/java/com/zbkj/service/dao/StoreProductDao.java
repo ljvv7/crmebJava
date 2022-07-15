@@ -1,7 +1,7 @@
 package com.zbkj.service.dao;
 
-import com.zbkj.common.model.product.StoreProduct;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zbkj.common.model.product.StoreProduct;
 
 /**
  * 商品表 Mapper 接口

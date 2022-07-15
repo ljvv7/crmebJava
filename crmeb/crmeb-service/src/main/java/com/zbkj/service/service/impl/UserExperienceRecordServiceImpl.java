@@ -3,10 +3,10 @@ package com.zbkj.service.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zbkj.common.request.PageParamRequest;
-import com.zbkj.common.constants.ExperienceRecordConstants;
 import com.github.pagehelper.PageHelper;
+import com.zbkj.common.constants.ExperienceRecordConstants;
 import com.zbkj.common.model.user.UserExperienceRecord;
+import com.zbkj.common.request.PageParamRequest;
 import com.zbkj.service.dao.UserExperienceRecordDao;
 import com.zbkj.service.service.UserExperienceRecordService;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,8 @@ public class UserExperienceRecordServiceImpl extends ServiceImpl<UserExperienceR
 
     /**
      * 获取用户经验列表（移动端）
-     * @param userId 用户id
+     *
+     * @param userId           用户id
      * @param pageParamRequest 分页参数
      * @return List
      */
@@ -50,8 +51,9 @@ public class UserExperienceRecordServiceImpl extends ServiceImpl<UserExperienceR
 
     /**
      * 通过订单编号获取记录
+     *
      * @param orderNo 订单编号
-     * @param uid uid
+     * @param uid     uid
      * @return UserExperienceRecord
      */
     @Override

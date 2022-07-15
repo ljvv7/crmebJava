@@ -1,6 +1,5 @@
 package com.zbkj.common.request;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

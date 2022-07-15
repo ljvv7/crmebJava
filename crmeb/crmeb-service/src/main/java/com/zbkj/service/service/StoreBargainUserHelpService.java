@@ -24,6 +24,7 @@ public interface StoreBargainUserHelpService extends IService<StoreBargainUserHe
 
     /**
      * 列表
+     *
      * @param bargainUserId 砍价活动id
      * @return List<StoreBargainUserHelpResponse>
      */
@@ -31,6 +32,7 @@ public interface StoreBargainUserHelpService extends IService<StoreBargainUserHe
 
     /**
      * 获取帮忙砍价好友数量
+     *
      * @param bargainId 砍价商品Id
      * @return Long
      */
@@ -38,7 +40,8 @@ public interface StoreBargainUserHelpService extends IService<StoreBargainUserHe
 
     /**
      * 获取帮忙砍价好友数量
-     * @param bargainId 砍价商品Id
+     *
+     * @param bargainId  砍价商品Id
      * @param bargainUid 砍价用户uid
      * @return Long
      */
@@ -46,6 +49,7 @@ public interface StoreBargainUserHelpService extends IService<StoreBargainUserHe
 
     /**
      * 砍价
+     *
      * @param bargainFrontRequest 砍价请求参数
      * @return Map<String, Object>
      */
@@ -53,12 +57,14 @@ public interface StoreBargainUserHelpService extends IService<StoreBargainUserHe
 
     /**
      * 获取参与砍价总人数（次）
+     *
      * @return Integer
      */
     Integer getCount();
 
     /**
      * 获取好友助力列表
+     *
      * @param bargainUserId 砍价用户表id
      * @return List<StoreBargainUserHelp>
      */
@@ -66,16 +72,18 @@ public interface StoreBargainUserHelpService extends IService<StoreBargainUserHe
 
     /**
      * 是否帮砍过
+     *
      * @param bargainUserId 用户砍价活动id
-     * @param uid 用户uid
+     * @param uid           用户uid
      * @return Boolean
      */
     Boolean getIsHelp(Integer bargainUserId, Integer uid);
 
     /**
      * 获取该砍价商品用户的帮砍次数
-     * @param bargainId 砍价商品id
-     * @param uid 用户uid
+     *
+     * @param bargainId         砍价商品id
+     * @param uid               用户uid
      * @param bargainUserIdList 用户参与砍价活动id数组
      * @return Integer
      */

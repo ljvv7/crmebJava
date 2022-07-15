@@ -37,6 +37,7 @@ public class ValidateCodeUtil {
 
     /**
      * 将构造函数私有化 禁止new创建
+     *
      * @author Mr.Zhang
      * @since 2020-04-16
      */
@@ -46,9 +47,10 @@ public class ValidateCodeUtil {
 
     /**
      * 获取随机字符
+     *
+     * @return String
      * @author Mr.Zhang
      * @since 2020-04-16
-     * @return String
      */
     private static String getRandomChar(int index) {
         //获取指定位置index的字符，并转换成字符串表示形式
@@ -57,13 +59,14 @@ public class ValidateCodeUtil {
 
     /**
      * 获取随机指定区间的随机数
+     *
      * @param min (指定最小数)
      * @param max (指定最大数)
+     * @return String
      * @author Mr.Zhang
      * @since 2020-04-16
-     * @return String
      */
-    private static int getRandomNum(int min,int max) {
+    private static int getRandomNum(int min, int max) {
         return RandomUtil.randomInt(min, max);
     }
 
@@ -76,32 +79,34 @@ public class ValidateCodeUtil {
 
     /**
      * 获得颜色
+     *
      * @param frontColor 覆盖颜色
-     * @param backColor 背景色
+     * @param backColor  背景色
+     * @return Color
      * @author Mr.Zhang
      * @since 2020-04-16
-     * @return Color
      */
     private static Color getRandColor(int frontColor, int backColor) {
-        if(frontColor > 255)
+        if (frontColor > 255)
             frontColor = 255;
-        if(backColor > 255)
+        if (backColor > 255)
             backColor = 255;
 
         int red = frontColor + random.nextInt(backColor - frontColor - 16);
-        int green = frontColor + random.nextInt(backColor - frontColor -14);
-        int blue = frontColor + random.nextInt(backColor - frontColor -18);
+        int green = frontColor + random.nextInt(backColor - frontColor - 14);
+        int blue = frontColor + random.nextInt(backColor - frontColor - 18);
         return new Color(red, green, blue);
     }
 
     /**
      * 绘制字符串,返回绘制的字符串
-     * @param graphics 获得BufferedImage对象的Graphics对象
+     *
+     * @param graphics     获得BufferedImage对象的Graphics对象
      * @param randomString 随机字符串
-     * @param i 坐标倍数
+     * @param i            坐标倍数
+     * @return string
      * @author Mr.Zhang
      * @since 2020-04-16
-     * @return string
      */
     private static String drawString(Graphics graphics, String randomString, int i) {
         Graphics2D g2d = (Graphics2D) graphics;
@@ -109,16 +114,17 @@ public class ValidateCodeUtil {
         g2d.setColor(new Color(random.nextFloat(), random.nextFloat(), random.nextFloat()));//设置颜色
         String randChar = getRandomChar(random.nextInt(randString.length()));
         randomString += randChar;   //组装
-        int rot = getRandomNum(1,10);
+        int rot = getRandomNum(1, 10);
         g2d.translate(random.nextInt(3), random.nextInt(3));
         g2d.rotate(rot * Math.PI / 180);
-        g2d.drawString(randChar, 13*i, 20);
+        g2d.drawString(randChar, 13 * i, 20);
         g2d.rotate(-rot * Math.PI / 180);
         return randomString;
     }
 
     /**
      * 绘制干扰线
+     *
      * @param graphics 获得BufferedImage对象的Graphics对象
      * @author Mr.Zhang
      * @since 2020-04-16
@@ -135,9 +141,10 @@ public class ValidateCodeUtil {
 
     /**
      * 生成Base64图片验证码
+     *
+     * @return String
      * @author Mr.Zhang
      * @since 2020-04-16
-     * @return String
      */
     public static Validate getRandomCode() {
         validate = validate == null ? new Validate() : validate;
@@ -149,12 +156,12 @@ public class ValidateCodeUtil {
         Graphics.setFont(new Font("Times New Roman", Font.ROMAN_BASELINE, 18));//设置字体
         Graphics.setColor(getRandColor(110, 133));//设置颜色
         //绘制干扰线
-        for(int i = 0; i <= lineSize; i++) {
+        for (int i = 0; i <= lineSize; i++) {
             drawLine(Graphics);
         }
         //绘制字符
         String randomString = "";
-        for(int i = 1; i <= stringNum; i++) {
+        for (int i = 1; i <= stringNum; i++) {
             randomString = drawString(Graphics, randomString, i);
             validate.setValue(randomString);
         }
@@ -173,7 +180,7 @@ public class ValidateCodeUtil {
                 bs.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            }finally{
+            } finally {
                 bs = null;
             }
         }
@@ -182,23 +189,27 @@ public class ValidateCodeUtil {
 
     /**
      * 验证码类
+     *
      * @author Mr.Zhang
      * @since 2020-04-16
      */
-    public static class Validate implements Serializable{
+    public static class Validate implements Serializable {
         private static final long serialVersionUID = 1L;
-        private String Base64Str;		//Base64 值
-        private String value;			//验证码值
+        private String Base64Str;        //Base64 值
+        private String value;            //验证码值
 
         public String getBase64Str() {
             return Base64Str;
         }
+
         public void setBase64Str(String base64Str) {
             Base64Str = base64Str;
         }
+
         public String getValue() {
             return value;
         }
+
         public void setValue(String value) {
             this.value = value;
         }

@@ -1,8 +1,8 @@
 package com.zbkj.front.controller;
 
 import com.zbkj.common.page.CommonPage;
-import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.request.PageParamRequest;
+import com.zbkj.common.response.CommonResult;
 import com.zbkj.common.response.UserSignInfoResponse;
 import com.zbkj.common.vo.SystemGroupDataSignConfigVo;
 import com.zbkj.common.vo.UserSignMonthVo;
@@ -44,22 +44,24 @@ public class UserSignController {
 
     /**
      * 签到列表
+     *
      * @param pageParamRequest 分页参数
      */
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CommonResult<CommonPage<UserSignVo>>  getList(@Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<UserSignVo>> getList(@Validated PageParamRequest pageParamRequest) {
         CommonPage<UserSignVo> userSignCommonPage = CommonPage.restPage(userSignService.getList(pageParamRequest));
         return CommonResult.success(userSignCommonPage);
     }
 
     /**
      * 签到列表，年月纬度
+     *
      * @param pageParamRequest 分页参数
      */
     @ApiOperation(value = "分页列表")
     @RequestMapping(value = "/month", method = RequestMethod.GET)
-    public CommonResult<CommonPage<UserSignMonthVo>>  getListGroupMonth(@Validated PageParamRequest pageParamRequest) {
+    public CommonResult<CommonPage<UserSignMonthVo>> getListGroupMonth(@Validated PageParamRequest pageParamRequest) {
         CommonPage<UserSignMonthVo> userSignCommonPage = CommonPage.restPage(userSignService.getListGroupMonth(pageParamRequest));
         return CommonResult.success(userSignCommonPage);
     }

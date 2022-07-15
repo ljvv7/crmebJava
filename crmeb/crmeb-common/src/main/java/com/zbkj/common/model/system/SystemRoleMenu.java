@@ -25,10 +25,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("eb_system_role_menu")
-@ApiModel(value="SystemRoleMenu对象", description="角色菜单关联表")
+@ApiModel(value = "SystemRoleMenu对象", description = "角色菜单关联表")
 public class SystemRoleMenu implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "角色id")
     private Integer rid;
