@@ -26,7 +26,7 @@ public @interface StringContains {
 
     String message() default "字符串不符合规则";
 
-    String[] limitValues() default {};
+    String[] limitValues() default { };
 
     Class<?>[] groups() default { };
 
