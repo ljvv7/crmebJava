@@ -2,37 +2,103 @@
 branches: {
   }
 fileChange:
+  /.gitignore:
+    newFile: !uuid '204d12e07e229f929531ec7d9814187a8acde411'
+    oldFile: !uuid '5945855736117567ba8835a3a130d429a65a0210'
   /admin:
-    newFile: !uuid 'fd102ff3be5bc83fdeec901f534ce0908c76c7c9'
-    oldFile: !uuid '17bb7bbffdd352196e8ee1fba46d3c47061fe25f'
+    newFile: !uuid 'a97b072ad3714953c64fad23437bf04d0214f70b'
+    oldFile: !uuid 'fd102ff3be5bc83fdeec901f534ce0908c76c7c9'
+  /admin/package.json:
+    newFile: !uuid 'd5e80835c1ce320e370703ff66442e25436fc611'
+    oldFile: !uuid '7cfa198b50c96767cd591f106d9ae21a0047d31a'
   /admin/src:
-    newFile: !uuid 'e8723ce1956be0f6ce3f425614270affaf1d398c'
-    oldFile: !uuid 'bc1fcda992fd780325d43a67e9584bf8eafd62c5'
+    newFile: !uuid '43e2912859b0a6b087c505c53f4803730eab2c6d'
+    oldFile: !uuid 'e8723ce1956be0f6ce3f425614270affaf1d398c'
   /admin/src/api:
-    newFile: !uuid '2ac4d2c298f12beef262493dcc6cc9b57fdddb65'
-    oldFile: !uuid '00dc3879a2e9a7e839617ff0d205a5612fc12048'
+    newFile: !uuid 'f3b97e62ae8e9feb6fd330b5de89da0889231f69'
+    oldFile: !uuid '2ac4d2c298f12beef262493dcc6cc9b57fdddb65'
   /admin/src/api/codegen.js:
-    newFile: !uuid 'e69de29bb2d1d6434b8b29ae775ad8c2e48c5391'
-    oldFile: null
+    newFile: !uuid '3b54267da00c46fdd7a3bcf56c3813cd8cf3544d'
+    oldFile: !uuid 'e69de29bb2d1d6434b8b29ae775ad8c2e48c5391'
   /admin/src/router:
-    newFile: !uuid '03fbdfb0ec371c81fad1f773b9ca223b4a18d39a'
-    oldFile: !uuid '2d2c8f4d67c32f83e27668486b2adc38d04cc6a7'
+    newFile: !uuid '435b455c1f0f1a97060c163e71102457a4b6377a'
+    oldFile: !uuid '03fbdfb0ec371c81fad1f773b9ca223b4a18d39a'
+  /admin/src/router/index.js:
+    newFile: !uuid '5e3b7422f60d0fb7173e5dc745b6d19a79c2dd13'
+    oldFile: !uuid '6b4a7dc9b7d3d43d47f8ca021327f2a30add9792'
   /admin/src/router/modules:
-    newFile: !uuid 'ea4eb8eb0ad7cf80498e244f2f1ea65a2683e218'
-    oldFile: !uuid '37fdeacba379601907803e9160a3690904ff6bf7'
+    newFile: !uuid 'ccbdcb0751931f8ec09e94d4835f60d974de0874'
+    oldFile: !uuid 'ea4eb8eb0ad7cf80498e244f2f1ea65a2683e218'
   /admin/src/router/modules/codegen.js:
-    newFile: !uuid 'b0ee45c3b6750ce99562250ca8a8c66564b20096'
-    oldFile: null
+    newFile: !uuid '19eb82f133b31525b03501de14ec4f1c5a0d1613'
+    oldFile: !uuid 'b0ee45c3b6750ce99562250ca8a8c66564b20096'
   /admin/src/views:
-    newFile: !uuid 'acd59f8c6d02cf07c8d263395c5a895a7a743f60'
-    oldFile: !uuid '3dfc7cf5c5eff2e330d9ec83a2edddb86f9f71c1'
+    newFile: !uuid 'cd869ba110f1237eddfaad4efa7d87056526c085'
+    oldFile: !uuid 'acd59f8c6d02cf07c8d263395c5a895a7a743f60'
   /admin/src/views/codegen:
-    newFile: !uuid '0aa910dfe7685e4b666792ab068d640c95bd3d0a'
-    oldFile: null
+    newFile: !uuid 'b441dc379807681f9f20e1d007900ae24e1c5896'
+    oldFile: !uuid '0aa910dfe7685e4b666792ab068d640c95bd3d0a'
   /admin/src/views/codegen/codegenList.vue:
-    newFile: !uuid '4445f390242b5f3521d7349c99a591cc900ef8d7'
-    oldFile: null
-gitCommitId: !uuid '800b1b54a86ea87e9273bb0304a9a86ef4a28555'
+    newFile: !uuid '29a7bf968610148ceaa1ce6150d0c338bab7ccc1'
+    oldFile: !uuid '4445f390242b5f3521d7349c99a591cc900ef8d7'
+  /admin/vue.config.js:
+    newFile: !uuid '59dc742cab69ca052a67d4a0a79541eed8f01638'
+    oldFile: !uuid 'c8397dd799ee6ab201e1084b4c4d6f802af42b15'
+  /crmeb:
+    newFile: !uuid '7a1e1e929603d98771fc0bd0d35071d0a47348d3'
+    oldFile: !uuid '380e21cf01676d7a6f2a9813592898c2367355ca'
+  /crmeb/crmeb-admin:
+    newFile: !uuid '79b653b8dfdfa0c4736d8ac6425f45444a5dc464'
+    oldFile: !uuid '7b64e5653934843e698ec5f3064e8991b7ec3ed6'
+  /crmeb/crmeb-admin/src:
+    newFile: !uuid '7ee78c5346376abb376589ac4f4f4cf4cb913c42'
+    oldFile: !uuid '33a44376808d98aca984abc8758e18a11c11e1ba'
+  /crmeb/crmeb-admin/src/main:
+    newFile: !uuid 'ce2d6833044c5e68751d57d7073cfec2085b27b3'
+    oldFile: !uuid 'c68c7f54c0dc63dedeb9256c7b4a829b77e3258b'
+  /crmeb/crmeb-admin/src/main/resources:
+    newFile: !uuid '2d6e50b899d88f6bb70b626831bbd4077d7b5f44'
+    oldFile: !uuid '2e37bb1bd504b4d6e4c564ad8718bdf14fe5880c'
+  /crmeb/crmeb-admin/src/main/resources/application.yml:
+    newFile: !uuid 'b523daec09b86d5ab861aa746ad3c7e759f347d8'
+    oldFile: !uuid '796d9addbe0cac0cdbff334952d3f7c9f741d3fb'
+  /crmeb/crmeb-common:
+    newFile: !uuid '0358e7df47f2a464174383d043e2df181a3c88c4'
+    oldFile: !uuid '8e8382e01267c198788b15cef7928938d4f0e62b'
+  /crmeb/crmeb-common/src:
+    newFile: !uuid '8b4e60dc1c8d8dcb34a284fa50829de503ac3afa'
+    oldFile: !uuid 'a89f17d555f27c68f4aac21c8550af6d4e913c8e'
+  /crmeb/crmeb-common/src/main:
+    newFile: !uuid 'd0bec9052562b144da1cc3264087e45f232ec1a5'
+    oldFile: !uuid '6df60ac4070dd7fe981840c7a14868edaf3ba31d'
+  /crmeb/crmeb-common/src/main/java:
+    newFile: !uuid '1f75e54228b7768d620e8b7b240bb21681450b02'
+    oldFile: !uuid 'e446a54039e1065db595fa64587e733396bc8d86'
+  /crmeb/crmeb-common/src/main/java/com:
+    newFile: !uuid 'fb3bd7afc26881dab610ab23784898bd7cdc9a58'
+    oldFile: !uuid '38c3d2dfe8983facec0d8a25e76cc860fa36c935'
+  /crmeb/crmeb-common/src/main/java/com/zbkj:
+    newFile: !uuid '6194b1558df245d0b661938619a47a7a940ae4cc'
+    oldFile: !uuid '8cd6e4b6a08ac942bc8ec8db06f9824e8d715dce'
+  /crmeb/crmeb-common/src/main/java/com/zbkj/common:
+    newFile: !uuid 'b7647d40179a9fcfa03c9d038e0f8a75b60acc7d'
+    oldFile: !uuid 'b36f76f5fa211daa3f5d7478a75bf81c1926e066'
+  /crmeb/crmeb-common/src/main/java/com/zbkj/common/utils:
+    newFile: !uuid '45f5afaf58066631e7421a4a6c0ec682a41567f3'
+    oldFile: !uuid '5241f1b33b768587e9082a6c39dda23cfb3cf51e'
+  /crmeb/crmeb-common/src/main/java/com/zbkj/common/utils/genutils:
+    newFile: !uuid '65936b5fea8250d95710dc0a46f0866980c0660c'
+    oldFile: !uuid 'c404bfeaa0da1f9df614b77e5b1e1fbcb5e34cf0'
+  /crmeb/crmeb-common/src/main/java/com/zbkj/common/utils/genutils/GenCodeUtils.java:
+    newFile: !uuid 'd885b9665bf0b32e68407d093798062cb8a22dc3'
+    oldFile: !uuid 'b4dddfbc8932805012da27eca5a73a657ac8a63d'
+  /crmeb/sql:
+    newFile: !uuid '18554628e1be335c5b3cf9c56a12ee73e43bad84'
+    oldFile: !uuid '3a4f69cbeffc3ce8c35c61c55a0da25836914b0e'
+  /crmeb/sql/Crmeb_1.3.4.sql:
+    newFile: !uuid 'e587380475bdcd6bc0f564d89cae6a114c4e9631'
+    oldFile: !uuid 'e5344c8b54c34eeca92a0cbd8a35cdd424b2215d'
+gitCommitId: !uuid 'd3b93d20fd624f587b6fc9ffcb26c3f2ec5ae0e3'
 renames: {
   }
-revisionId: 218
+revisionId: 219
