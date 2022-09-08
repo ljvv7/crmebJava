@@ -2,37 +2,37 @@
 branches: {
   }
 fileChange:
-  /crmeb:
-    newFile: !uuid '380e21cf01676d7a6f2a9813592898c2367355ca'
-    oldFile: !uuid '73137d73e408909fdd4bfd320d535cbd616d7383'
-  /crmeb/crmeb-common:
-    newFile: !uuid '8e8382e01267c198788b15cef7928938d4f0e62b'
-    oldFile: !uuid 'a0e908d8570173c24681ca87beccb4f1461e99b0'
-  /crmeb/crmeb-common/src:
-    newFile: !uuid 'a89f17d555f27c68f4aac21c8550af6d4e913c8e'
-    oldFile: !uuid '3b32902d441d749736d81a446b4c499acb2a6985'
-  /crmeb/crmeb-common/src/main:
-    newFile: !uuid '6df60ac4070dd7fe981840c7a14868edaf3ba31d'
-    oldFile: !uuid '22d1ad3c480504b01cc4d72efc67dc24361394c0'
-  /crmeb/crmeb-common/src/main/java:
-    newFile: !uuid 'e446a54039e1065db595fa64587e733396bc8d86'
-    oldFile: !uuid '12c22a482b61f9a8cef5a6a2098584f720d8035a'
-  /crmeb/crmeb-common/src/main/java/com:
-    newFile: !uuid '38c3d2dfe8983facec0d8a25e76cc860fa36c935'
-    oldFile: !uuid '3d1f3be352a0d6c3d81d6c5695d56df2cddf1808'
-  /crmeb/crmeb-common/src/main/java/com/zbkj:
-    newFile: !uuid '8cd6e4b6a08ac942bc8ec8db06f9824e8d715dce'
-    oldFile: !uuid '342d8aaf721a990bc12cb3f7c350469b368ea1f6'
-  /crmeb/crmeb-common/src/main/java/com/zbkj/common:
-    newFile: !uuid 'b36f76f5fa211daa3f5d7478a75bf81c1926e066'
-    oldFile: !uuid '473e4e3107d23dbf873fdd428c32e9ae83cad2df'
-  /crmeb/crmeb-common/src/main/java/com/zbkj/common/utils:
-    newFile: !uuid '5241f1b33b768587e9082a6c39dda23cfb3cf51e'
-    oldFile: !uuid '4065c0fcfc8a3244711f6f5dac8fdff07dd9dcc1'
-  /crmeb/crmeb-common/src/main/java/com/zbkj/common/utils/RestTemplateUtil.java:
-    newFile: !uuid '8cf338bc311771db61c311a1c14ff8d189f7a84d'
-    oldFile: !uuid 'ecd9d585a76c71d1ba11d941b147c4fa815b2dae'
-gitCommitId: !uuid '583f173e165047a838b42692b20c696e5c7b88df'
+  /admin:
+    newFile: !uuid 'fd102ff3be5bc83fdeec901f534ce0908c76c7c9'
+    oldFile: !uuid '17bb7bbffdd352196e8ee1fba46d3c47061fe25f'
+  /admin/src:
+    newFile: !uuid 'e8723ce1956be0f6ce3f425614270affaf1d398c'
+    oldFile: !uuid 'bc1fcda992fd780325d43a67e9584bf8eafd62c5'
+  /admin/src/api:
+    newFile: !uuid '2ac4d2c298f12beef262493dcc6cc9b57fdddb65'
+    oldFile: !uuid '00dc3879a2e9a7e839617ff0d205a5612fc12048'
+  /admin/src/api/codegen.js:
+    newFile: !uuid 'e69de29bb2d1d6434b8b29ae775ad8c2e48c5391'
+    oldFile: null
+  /admin/src/router:
+    newFile: !uuid '03fbdfb0ec371c81fad1f773b9ca223b4a18d39a'
+    oldFile: !uuid '2d2c8f4d67c32f83e27668486b2adc38d04cc6a7'
+  /admin/src/router/modules:
+    newFile: !uuid 'ea4eb8eb0ad7cf80498e244f2f1ea65a2683e218'
+    oldFile: !uuid '37fdeacba379601907803e9160a3690904ff6bf7'
+  /admin/src/router/modules/codegen.js:
+    newFile: !uuid 'b0ee45c3b6750ce99562250ca8a8c66564b20096'
+    oldFile: null
+  /admin/src/views:
+    newFile: !uuid 'acd59f8c6d02cf07c8d263395c5a895a7a743f60'
+    oldFile: !uuid '3dfc7cf5c5eff2e330d9ec83a2edddb86f9f71c1'
+  /admin/src/views/codegen:
+    newFile: !uuid '0aa910dfe7685e4b666792ab068d640c95bd3d0a'
+    oldFile: null
+  /admin/src/views/codegen/codegenList.vue:
+    newFile: !uuid '4445f390242b5f3521d7349c99a591cc900ef8d7'
+    oldFile: null
+gitCommitId: !uuid '800b1b54a86ea87e9273bb0304a9a86ef4a28555'
 renames: {
   }
-revisionId: 217
+revisionId: 218
