@@ -3,42 +3,9 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'ebc59254c4818d9a82ad1605e886d10ab72b1cbb'
-    oldFile: !uuid 'e64f48b31624239c8d841b6187aa61a00c127240'
-  /crmeb:
-    newFile: !uuid '8bbfba663d67dfe1c0665d188add73dfe6b616a8'
-    oldFile: !uuid '7a1e1e929603d98771fc0bd0d35071d0a47348d3'
-  /crmeb/crmeb-service:
-    newFile: !uuid '28d80214894715b9de8e0f7533a6d207401ab40b'
-    oldFile: !uuid '510c36105b8215f84191e8fc5fd0bf672b2f1a3e'
-  /crmeb/crmeb-service/src:
-    newFile: !uuid 'f4e5fcf0b6a8b1854b5e3c54fb0343a868b9111c'
-    oldFile: !uuid 'b7b7978f888a255d3e58cd93ed74566cd33617bb'
-  /crmeb/crmeb-service/src/main:
-    newFile: !uuid '819f6b9fc9f79ddcd24fa7534e8d2db4e5708778'
-    oldFile: !uuid 'bb3de05aa03b9d776e923a912e9591f03af04edd'
-  /crmeb/crmeb-service/src/main/java:
-    newFile: !uuid '04e8c694c874ffe28b482e4fd8eecf7db1d0fdec'
-    oldFile: !uuid '5ca99ef4618c1e9fb2d154a7f5602c4d44a001d5'
-  /crmeb/crmeb-service/src/main/java/com:
-    newFile: !uuid '1a04620d66f41d23d1739413b86baa78854d5c20'
-    oldFile: !uuid 'd9a147259159322c31cc05acf6b61e5bcf671386'
-  /crmeb/crmeb-service/src/main/java/com/zbkj:
-    newFile: !uuid '4f51f901bf25e4fe5668285b8e053ef3ce1278df'
-    oldFile: !uuid '758b9209fc7fb54ef5bd1d8f0ac3976ff04976e0'
-  /crmeb/crmeb-service/src/main/java/com/zbkj/service:
-    newFile: !uuid 'd053b211a7f16dc266c1812b841be060d930a3d4'
-    oldFile: !uuid 'df85af33cbace78ef9dcf557d365a77ab26ac875'
-  /crmeb/crmeb-service/src/main/java/com/zbkj/service/service:
-    newFile: !uuid 'dfb7c6b66419610392e1a722aefeba53f2cb067d'
-    oldFile: !uuid 'fe320f6e095bfd66355a6cc69b543c5b8fa2a366'
-  /crmeb/crmeb-service/src/main/java/com/zbkj/service/service/impl:
-    newFile: !uuid '3f0d0872093acbbeda54337c35a1ca2747cbbc91'
-    oldFile: !uuid '4a1f2a297981d11bac71cf4b4ae5edb0c2993b64'
-  /crmeb/crmeb-service/src/main/java/com/zbkj/service/service/impl/OrderServiceImpl.java:
-    newFile: !uuid '2bc9e38678e6f9c626e96910bf517e59f0509598'
-    oldFile: !uuid '3d1ce6e1fd11c2afcc28bd275f255b65cfaac085'
-gitCommitId: !uuid '8f43328b60446d75ffd85bbbc1915fac97b88989'
+    newFile: !uuid 'ab8d7122535d5ef384f4f28513348b53387d6a9f'
+    oldFile: !uuid 'ebc59254c4818d9a82ad1605e886d10ab72b1cbb'
+gitCommitId: !uuid '96cf53257d0963bba9ff5e5478e2b661595bdec3'
 renames: {
   }
-revisionId: 220
+revisionId: 221
