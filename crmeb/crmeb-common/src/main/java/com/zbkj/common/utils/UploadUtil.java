@@ -104,7 +104,7 @@ public class UploadUtil {
                 throw new CrmebException("目标文件创建失败...");
             }
         }
-        return file;
+        return file.getAbsoluteFile();
     }
 
     /**
