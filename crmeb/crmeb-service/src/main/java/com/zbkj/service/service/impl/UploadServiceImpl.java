@@ -1,11 +1,6 @@
 package com.zbkj.service.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.zbkj.common.constants.Constants;
-import com.zbkj.common.exception.CrmebException;
-import com.zbkj.common.vo.CloudVo;
-import com.zbkj.common.vo.FileResultVo;
-import com.zbkj.common.vo.UploadCommonVo;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -14,12 +9,22 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import com.zbkj.common.config.CrmebConfig;
+import com.zbkj.common.constants.Constants;
+import com.zbkj.common.exception.CrmebException;
+import com.zbkj.common.model.system.SystemAttachment;
 import com.zbkj.common.utils.CrmebUtil;
 import com.zbkj.common.utils.DateUtil;
 import com.zbkj.common.utils.UploadUtil;
-import com.zbkj.common.model.system.SystemAttachment;
-import com.zbkj.common.config.CrmebConfig;
-import com.zbkj.service.service.*;
+import com.zbkj.common.vo.CloudVo;
+import com.zbkj.common.vo.FileResultVo;
+import com.zbkj.common.vo.UploadCommonVo;
+import com.zbkj.service.service.CosService;
+import com.zbkj.service.service.OssService;
+import com.zbkj.service.service.QiNiuService;
+import com.zbkj.service.service.SystemAttachmentService;
+import com.zbkj.service.service.SystemConfigService;
+import com.zbkj.service.service.UploadService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -70,9 +75,10 @@ public class UploadServiceImpl implements UploadService {
 
     /**
      * 图片上传
+     *
      * @param multipartFile 文件
-     * @param model 模块 用户user,商品product,微信wechat,news文章
-     * @param pid 分类ID 0编辑器,1商品图片,2拼团图片,3砍价图片,4秒杀图片,5文章图片,6组合数据图,7前台用户,8微信系列
+     * @param model         模块 用户user,商品product,微信wechat,news文章
+     * @param pid           分类ID 0编辑器,1商品图片,2拼团图片,3砍价图片,4秒杀图片,5文章图片,6组合数据图,7前台用户,8微信系列
      * @return FileResultVo
      */
     @Override
@@ -111,9 +117,9 @@ public class UploadServiceImpl implements UploadService {
 
         // 文件大小验证
         // 文件分隔符转化为当前系统的格式
-        float fileSize = (float)multipartFile.getSize() / 1024 / 1024;
+        float fileSize = (float) multipartFile.getSize() / 1024 / 1024;
         String fs = String.format("%.2f", fileSize);
-        if( fileSize > uploadCommonVo.getSize()){
+        if (fileSize > uploadCommonVo.getSize()) {
             throw new CrmebException("最大允许上传" + uploadCommonVo.getSize() + " MB的文件, 当前文件大小为 " + fs + " MB");
         }
 
@@ -184,25 +190,25 @@ public class UploadServiceImpl implements UploadService {
             case 2:
                 systemAttachment.setImageType(2);
                 pre = "qn";
-                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre+"UploadUrl"));
-                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre+"AccessKey"));
-                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre+"SecretKey"));
-                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre+"StorageName"));
-                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre+"StorageRegion"));
+                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre + "UploadUrl"));
+                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre + "AccessKey"));
+                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre + "SecretKey"));
+                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre + "StorageName"));
+                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre + "StorageRegion"));
 
-                try{
+                try {
                     // 构造一个带指定Zone对象的配置类, 默认华东
                     Configuration cfg = new Configuration(Region.huadong());
-                    if(cloudVo.getRegion().equals("huabei")){
+                    if ("huabei".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.huabei());
                     }
-                    if(cloudVo.getRegion().equals("huanan")){
+                    if ("huanan".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.huanan());
                     }
-                    if(cloudVo.getRegion().equals("beimei")){
+                    if ("beimei".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.beimei());
                     }
-                    if(cloudVo.getRegion().equals("dongnanya")){
+                    if ("dongnanya".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.xinjiapo());
                     }
 
@@ -217,36 +223,36 @@ public class UploadServiceImpl implements UploadService {
 //                    qiNiuService.uploadFile(uploadManager, cloudVo, upToken,
 //                            systemAttachment.getSattDir(), webPathQn + "/" + systemAttachment.getSattDir(), systemAttachment.getAttId());   //异步处理
                     qiNiuService.uploadFile(uploadManager, cloudVo, upToken,
-                            systemAttachment.getSattDir(), webPathQn + "/" + systemAttachment.getSattDir(), file);   //异步处理
-                }catch (Exception e){
+                                            systemAttachment.getSattDir(), webPathQn + "/" + systemAttachment.getSattDir(), file);   //异步处理
+                } catch (Exception e) {
                     logger.error("AsyncServiceImpl.qCloud.fail " + e.getMessage());
                 }
                 break;
             case 3:
                 systemAttachment.setImageType(3);
                 pre = "al";
-                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre+"UploadUrl"));
-                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre+"AccessKey"));
-                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre+"SecretKey"));
-                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre+"StorageName"));
-                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre+"StorageRegion"));
-                try{
+                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre + "UploadUrl"));
+                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre + "AccessKey"));
+                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre + "SecretKey"));
+                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre + "StorageName"));
+                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre + "StorageRegion"));
+                try {
                     String webPathAl = crmebConfig.getImagePath();
                     logger.info("AsyncServiceImpl.oss.id " + systemAttachment.getAttId());
-                    ossService.upload(cloudVo, systemAttachment.getSattDir(),  webPathAl + "/" + systemAttachment.getSattDir(),
-                            file);
-                }catch (Exception e){
+                    ossService.upload(cloudVo, systemAttachment.getSattDir(), webPathAl + "/" + systemAttachment.getSattDir(),
+                                      file);
+                } catch (Exception e) {
                     logger.error("AsyncServiceImpl.oss fail " + e.getMessage());
                 }
                 break;
             case 4:
                 systemAttachment.setImageType(4);
                 pre = "tx";
-                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre+"UploadUrl"));
-                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre+"AccessKey"));
-                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre+"SecretKey"));
-                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre+"StorageName"));
-                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre+"StorageRegion"));
+                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre + "UploadUrl"));
+                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre + "AccessKey"));
+                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre + "SecretKey"));
+                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre + "StorageName"));
+                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre + "StorageRegion"));
                 // 1 初始化用户身份信息(secretId, secretKey)
                 COSCredentials cred = new BasicCOSCredentials(cloudVo.getAccessKey(), cloudVo.getSecretKey());
                 // 2 设置bucket的区域, COS地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
@@ -254,19 +260,20 @@ public class UploadServiceImpl implements UploadService {
                 // 3 生成 cos 客户端。
                 COSClient cosClient = new COSClient(cred, clientConfig);
 
-                try{
+                try {
                     String webPathTx = crmebConfig.getImagePath();
                     logger.info("AsyncServiceImpl.cos.id " + systemAttachment.getAttId());
                     cosService.uploadFile(cloudVo, systemAttachment.getSattDir(), webPathTx + "/" + systemAttachment.getSattDir(), systemAttachment.getAttId(), cosClient);
-                }catch (Exception e){
+                } catch (Exception e) {
                     logger.error("AsyncServiceImpl.cos.fail " + e.getMessage());
-                }finally {
+                } finally {
                     cosClient.shutdown();
                 }
                 break;
+            default:
         }
         systemAttachmentService.save(systemAttachment);
-        if (!fileIsSave.equals("1")) {
+        if (!"1".equals(fileIsSave)) {
             // 删除本地文件
             file.delete();
         }
@@ -275,9 +282,10 @@ public class UploadServiceImpl implements UploadService {
 
     /**
      * 文件长传
+     *
      * @param multipartFile 文件
-     * @param model 模块 用户user,商品product,微信wechat,news文章
-     * @param pid 分类ID 0编辑器,1商品图片,2拼团图片,3砍价图片,4秒杀图片,5文章图片,6组合数据图,7前台用户,8微信系列
+     * @param model         模块 用户user,商品product,微信wechat,news文章
+     * @param pid           分类ID 0编辑器,1商品图片,2拼团图片,3砍价图片,4秒杀图片,5文章图片,6组合数据图,7前台用户,8微信系列
      * @return FileResultVo
      * @throws IOException
      */
@@ -315,9 +323,9 @@ public class UploadServiceImpl implements UploadService {
 
         //文件大小验证
         // 文件分隔符转化为当前系统的格式
-        float fileSize = (float)multipartFile.getSize() / 1024 / 1024;
+        float fileSize = (float) multipartFile.getSize() / 1024 / 1024;
         String fs = String.format("%.2f", fileSize);
-        if( fileSize > uploadCommonVo.getSize()){
+        if (fileSize > uploadCommonVo.getSize()) {
             throw new CrmebException("最大允许上传" + uploadCommonVo.getSize() + " MB的文件, 当前文件大小为 " + fs + " MB");
         }
 
@@ -380,7 +388,7 @@ public class UploadServiceImpl implements UploadService {
         }
         // 判断是否保存本地
         String fileIsSave = systemConfigService.getValueByKeyException("file_is_save");
-        if (fileIsSave.equals("1")) {
+        if ("1".equals(fileIsSave)) {
             multipartFile.transferTo(file);
         }
 
@@ -392,25 +400,25 @@ public class UploadServiceImpl implements UploadService {
             case 2:
                 systemAttachment.setImageType(2);
                 pre = "qn";
-                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre+"UploadUrl"));
-                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre+"AccessKey"));
-                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre+"SecretKey"));
-                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre+"StorageName"));
-                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre+"StorageRegion"));
+                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre + "UploadUrl"));
+                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre + "AccessKey"));
+                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre + "SecretKey"));
+                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre + "StorageName"));
+                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre + "StorageRegion"));
 
-                try{
+                try {
                     // 构造一个带指定Zone对象的配置类, 默认华东
                     Configuration cfg = new Configuration(Region.huadong());
-                    if(cloudVo.getRegion().equals("huabei")){
+                    if ("huabei".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.huabei());
                     }
-                    if(cloudVo.getRegion().equals("huanan")){
+                    if ("huanan".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.huanan());
                     }
-                    if(cloudVo.getRegion().equals("beimei")){
+                    if ("beimei".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.beimei());
                     }
-                    if(cloudVo.getRegion().equals("dongnanya")){
+                    if ("dongnanya".equals(cloudVo.getRegion())) {
                         cfg = new Configuration(Region.xinjiapo());
                     }
 
@@ -423,36 +431,36 @@ public class UploadServiceImpl implements UploadService {
                     String webPathQn = crmebConfig.getImagePath();
                     logger.info("AsyncServiceImpl.qCloud.id " + systemAttachment.getAttId());
                     qiNiuService.uploadFile(uploadManager, cloudVo, upToken,
-                            systemAttachment.getSattDir(), webPathQn + "/" + systemAttachment.getSattDir(), file);
-                }catch (Exception e){
+                                            systemAttachment.getSattDir(), webPathQn + "/" + systemAttachment.getSattDir(), file);
+                } catch (Exception e) {
                     logger.error("AsyncServiceImpl.qCloud.fail " + e.getMessage());
                 }
                 break;
             case 3:
                 systemAttachment.setImageType(3);
                 pre = "al";
-                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre+"UploadUrl"));
-                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre+"AccessKey"));
-                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre+"SecretKey"));
-                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre+"StorageName"));
-                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre+"StorageRegion"));
-                try{
+                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre + "UploadUrl"));
+                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre + "AccessKey"));
+                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre + "SecretKey"));
+                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre + "StorageName"));
+                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre + "StorageRegion"));
+                try {
                     String webPathAl = crmebConfig.getImagePath();
                     logger.info("AsyncServiceImpl.oss.id " + systemAttachment.getAttId());
-                    ossService.upload(cloudVo, systemAttachment.getSattDir(),  webPathAl + "/" + systemAttachment.getSattDir(),
-                            file);
-                }catch (Exception e){
+                    ossService.upload(cloudVo, systemAttachment.getSattDir(), webPathAl + "/" + systemAttachment.getSattDir(),
+                                      file);
+                } catch (Exception e) {
                     logger.error("AsyncServiceImpl.oss fail " + e.getMessage());
                 }
                 break;
             case 4:
                 systemAttachment.setImageType(4);
                 pre = "tx";
-                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre+"UploadUrl"));
-                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre+"AccessKey"));
-                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre+"SecretKey"));
-                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre+"StorageName"));
-                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre+"StorageRegion"));
+                cloudVo.setDomain(systemConfigService.getValueByKeyException(pre + "UploadUrl"));
+                cloudVo.setAccessKey(systemConfigService.getValueByKeyException(pre + "AccessKey"));
+                cloudVo.setSecretKey(systemConfigService.getValueByKeyException(pre + "SecretKey"));
+                cloudVo.setBucketName(systemConfigService.getValueByKeyException(pre + "StorageName"));
+                cloudVo.setRegion(systemConfigService.getValueByKeyException(pre + "StorageRegion"));
                 // 1 初始化用户身份信息(secretId, secretKey)
                 COSCredentials cred = new BasicCOSCredentials(cloudVo.getAccessKey(), cloudVo.getSecretKey());
                 // 2 设置bucket的区域, COS地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
@@ -460,16 +468,17 @@ public class UploadServiceImpl implements UploadService {
                 // 3 生成 cos 客户端。
                 COSClient cosClient = new COSClient(cred, clientConfig);
 
-                try{
+                try {
                     String webPathTx = crmebConfig.getImagePath();
                     logger.info("AsyncServiceImpl.cos.id " + systemAttachment.getAttId());
                     cosService.uploadFile(cloudVo, systemAttachment.getSattDir(), webPathTx + "/" + systemAttachment.getSattDir(), file, cosClient);
-                }catch (Exception e){
+                } catch (Exception e) {
                     logger.error("AsyncServiceImpl.cos.fail " + e.getMessage());
-                }finally {
+                } finally {
                     cosClient.shutdown();
                 }
                 break;
+            default:
         }
         systemAttachmentService.save(systemAttachment);
         return resultFile;

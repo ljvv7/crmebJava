@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
     <!-- 根据需要自行配置 -->
     <property name="APP_NAME" value="Crmeb"/>
     <property name="log.path" value="./crmeb_log"></property>
@@ -56,9 +58,9 @@
         <file>${log.path}/log_debug.log</file>
         <!--日志文件输出格式-->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-
+            <pattern>${FILE_LOG_PATTERN}</pattern>
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
-            <pattern>
+            <!--<pattern>
 
                 <pattern>
                     {
@@ -70,7 +72,7 @@
                     "message": "%msg" }
                     %n
                 </pattern>
-            </pattern>
+            </pattern>-->
             <charset>utf-8</charset>
         </encoder>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
@@ -97,9 +99,9 @@
         <file>${log.path}/log_info.log</file>
         <!--日志文件输出格式-->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-
+            <pattern>${FILE_LOG_PATTERN}</pattern>
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
-            <pattern>
+            <!--<pattern>
 
                 <pattern>
                     {
@@ -111,7 +113,7 @@
                     "message": "%msg" }
                     %n
                 </pattern>
-            </pattern>
+            </pattern>-->
             <charset>utf-8</charset>
         </encoder>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
@@ -138,9 +140,9 @@
         <file>${log.path}/log_warn.log</file>
         <!--日志文件输出格式-->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-
+            <pattern>${FILE_LOG_PATTERN}</pattern>
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
-            <pattern>
+            <!--<pattern>
 
                 <pattern>
                     {
@@ -152,7 +154,7 @@
                     "message": "%msg" }
                     %n
                 </pattern>
-            </pattern>
+            </pattern>-->
             <charset>utf-8</charset>
         </encoder>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
@@ -179,9 +181,9 @@
         <file>${log.path}/log_error.log</file>
         <!--日志文件输出格式-->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-
+            <pattern>${FILE_LOG_PATTERN}</pattern>
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
-            <pattern>
+            <!--<pattern>
 
                 <pattern>
                     {
@@ -193,7 +195,7 @@
                     "message": "%msg" }
                     %n
                 </pattern>
-            </pattern>
+            </pattern>-->
             <charset>utf-8</charset>
         </encoder>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
@@ -223,7 +225,7 @@
     </appender>
     <!-- 日志输出级别 -->
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DEBUG_FILE" />
         <appender-ref ref="INFO_FILE" />
         <appender-ref ref="WARN_FILE" />
