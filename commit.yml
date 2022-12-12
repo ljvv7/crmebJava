@@ -3,9 +3,27 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'ab8d7122535d5ef384f4f28513348b53387d6a9f'
-    oldFile: !uuid 'ebc59254c4818d9a82ad1605e886d10ab72b1cbb'
-gitCommitId: !uuid '96cf53257d0963bba9ff5e5478e2b661595bdec3'
+    newFile: !uuid 'aed93e983d485d92dc5f553534dedeb64b46f585'
+    oldFile: !uuid 'ab8d7122535d5ef384f4f28513348b53387d6a9f'
+  /crmeb:
+    newFile: !uuid '910e5c7556126b19fc3ad55be9703d48a0443b6a'
+    oldFile: !uuid '8bbfba663d67dfe1c0665d188add73dfe6b616a8'
+  /crmeb/crmebimage:
+    newFile: !uuid '0812c969040ca35f983c6bb9424d262f1b806a7d'
+    oldFile: !uuid 'ad63250a568caef9de7958c5181e6e4fee7b4dd5'
+  /crmeb/crmebimage/crmebimage:
+    newFile: !uuid '8e74530a52ad6a6ec4e4961bf0c4c6d34e4644ad'
+    oldFile: !uuid '6876a4e559eb08dae3e50e5e277f8b21d06ec4cf'
+  /crmeb/crmebimage/crmebimage/demoimage:
+    newFile: !uuid 'c7b12b521c99c6541cec3865dec108d0b5dc241a'
+    oldFile: !uuid 'd4ce5916d78889312e6064f4dc040f6d6e8c1a0c'
+  /crmeb/crmebimage/crmebimage/demoimage/02yulan.jpg:
+    newFile: !uuid '7b143a15f059f641258aeaf27d74502bcb4baba8'
+    oldFile: !uuid '1fed00016c302ac37238ca05fd2c9597d0c5bb2e'
+  /crmeb/crmebimage/crmebimage/demoimage/17lianxikefu.png:
+    newFile: !uuid '283486916cb52b5423e2151be8cc861fcb94a690'
+    oldFile: !uuid '40ae42090e05708aade6f2e6e33f0ddb73ffe54c'
+gitCommitId: !uuid 'c9773b2b697442d434483a250b4879f81ecfb88e'
 renames: {
   }
-revisionId: 221
+revisionId: 222
