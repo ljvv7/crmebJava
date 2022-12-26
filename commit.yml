@@ -3,27 +3,30 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'aed93e983d485d92dc5f553534dedeb64b46f585'
-    oldFile: !uuid 'ab8d7122535d5ef384f4f28513348b53387d6a9f'
+    newFile: !uuid 'eb38763b62e339d2819b07da14292c10132b8bf7'
+    oldFile: !uuid 'aed93e983d485d92dc5f553534dedeb64b46f585'
   /crmeb:
-    newFile: !uuid '910e5c7556126b19fc3ad55be9703d48a0443b6a'
-    oldFile: !uuid '8bbfba663d67dfe1c0665d188add73dfe6b616a8'
+    newFile: !uuid 'a4235ba08f3ebb46c0adc263cea1f6a47f1762dd'
+    oldFile: !uuid '910e5c7556126b19fc3ad55be9703d48a0443b6a'
   /crmeb/crmebimage:
-    newFile: !uuid '0812c969040ca35f983c6bb9424d262f1b806a7d'
-    oldFile: !uuid 'ad63250a568caef9de7958c5181e6e4fee7b4dd5'
+    newFile: !uuid '7d557ebb11e65536910fbc8187b6f8dad86468be'
+    oldFile: !uuid '0812c969040ca35f983c6bb9424d262f1b806a7d'
   /crmeb/crmebimage/crmebimage:
-    newFile: !uuid '8e74530a52ad6a6ec4e4961bf0c4c6d34e4644ad'
-    oldFile: !uuid '6876a4e559eb08dae3e50e5e277f8b21d06ec4cf'
+    newFile: !uuid 'b191777a9a78ad90f1cb3f8adc7a97b5eeb1e8c4'
+    oldFile: !uuid '8e74530a52ad6a6ec4e4961bf0c4c6d34e4644ad'
   /crmeb/crmebimage/crmebimage/demoimage:
-    newFile: !uuid 'c7b12b521c99c6541cec3865dec108d0b5dc241a'
-    oldFile: !uuid 'd4ce5916d78889312e6064f4dc040f6d6e8c1a0c'
-  /crmeb/crmebimage/crmebimage/demoimage/02yulan.jpg:
-    newFile: !uuid '7b143a15f059f641258aeaf27d74502bcb4baba8'
-    oldFile: !uuid '1fed00016c302ac37238ca05fd2c9597d0c5bb2e'
-  /crmeb/crmebimage/crmebimage/demoimage/17lianxikefu.png:
-    newFile: !uuid '283486916cb52b5423e2151be8cc861fcb94a690'
-    oldFile: !uuid '40ae42090e05708aade6f2e6e33f0ddb73ffe54c'
-gitCommitId: !uuid 'c9773b2b697442d434483a250b4879f81ecfb88e'
+    newFile: !uuid '47bcd833bf82eef14b39f3e67fe68d5f646fb2db'
+    oldFile: !uuid 'c7b12b521c99c6541cec3865dec108d0b5dc241a'
+  /crmeb/crmebimage/crmebimage/demoimage/c1.jpg:
+    newFile: !uuid '0f549153a1802dad288f9b5059c01eb690996c50'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/c2.jpg:
+    newFile: !uuid '306d4480f194fdeabccef7eace4cd2a4feb60f24'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/kefu.jpg:
+    newFile: !uuid 'c593687b4fd30090578578c2ca3ba8db90ff2db3'
+    oldFile: null
+gitCommitId: !uuid '33dd34166935014bb7614703b542535d8e6aa962'
 renames: {
   }
-revisionId: 222
+revisionId: 223
