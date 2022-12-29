@@ -3,30 +3,24 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'eb38763b62e339d2819b07da14292c10132b8bf7'
-    oldFile: !uuid 'aed93e983d485d92dc5f553534dedeb64b46f585'
+    newFile: !uuid '96803f47ec3db6895561986ddfcc1573813d4b08'
+    oldFile: !uuid 'eb38763b62e339d2819b07da14292c10132b8bf7'
   /crmeb:
-    newFile: !uuid 'a4235ba08f3ebb46c0adc263cea1f6a47f1762dd'
-    oldFile: !uuid '910e5c7556126b19fc3ad55be9703d48a0443b6a'
+    newFile: !uuid 'aac53c282e9dabc74a9c26ac941f139c7ca97d5c'
+    oldFile: !uuid 'a4235ba08f3ebb46c0adc263cea1f6a47f1762dd'
   /crmeb/crmebimage:
-    newFile: !uuid '7d557ebb11e65536910fbc8187b6f8dad86468be'
-    oldFile: !uuid '0812c969040ca35f983c6bb9424d262f1b806a7d'
+    newFile: !uuid '81ed2f0f9985e06b2c229deab43b84630782c529'
+    oldFile: !uuid '7d557ebb11e65536910fbc8187b6f8dad86468be'
   /crmeb/crmebimage/crmebimage:
-    newFile: !uuid 'b191777a9a78ad90f1cb3f8adc7a97b5eeb1e8c4'
-    oldFile: !uuid '8e74530a52ad6a6ec4e4961bf0c4c6d34e4644ad'
+    newFile: !uuid 'eded8e6550b6b432d6e711e4c80946ce74f2a2a5'
+    oldFile: !uuid 'b191777a9a78ad90f1cb3f8adc7a97b5eeb1e8c4'
   /crmeb/crmebimage/crmebimage/demoimage:
-    newFile: !uuid '47bcd833bf82eef14b39f3e67fe68d5f646fb2db'
-    oldFile: !uuid 'c7b12b521c99c6541cec3865dec108d0b5dc241a'
-  /crmeb/crmebimage/crmebimage/demoimage/c1.jpg:
-    newFile: !uuid '0f549153a1802dad288f9b5059c01eb690996c50'
+    newFile: !uuid '534c530288808fd49dde8dd04f0f4f1e909a4258'
+    oldFile: !uuid '47bcd833bf82eef14b39f3e67fe68d5f646fb2db'
+  /crmeb/crmebimage/crmebimage/demoimage/gitee-java.jpg:
+    newFile: !uuid '42ebaa798542b81e57d2577d3834a61e62ec0293'
     oldFile: null
-  /crmeb/crmebimage/crmebimage/demoimage/c2.jpg:
-    newFile: !uuid '306d4480f194fdeabccef7eace4cd2a4feb60f24'
-    oldFile: null
-  /crmeb/crmebimage/crmebimage/demoimage/kefu.jpg:
-    newFile: !uuid 'c593687b4fd30090578578c2ca3ba8db90ff2db3'
-    oldFile: null
-gitCommitId: !uuid '33dd34166935014bb7614703b542535d8e6aa962'
+gitCommitId: !uuid '4d70bab54b187e93850de31878f71f9b4ef7fe73'
 renames: {
   }
-revisionId: 223
+revisionId: 224
