@@ -3,24 +3,9 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid '96803f47ec3db6895561986ddfcc1573813d4b08'
-    oldFile: !uuid 'eb38763b62e339d2819b07da14292c10132b8bf7'
-  /crmeb:
-    newFile: !uuid 'aac53c282e9dabc74a9c26ac941f139c7ca97d5c'
-    oldFile: !uuid 'a4235ba08f3ebb46c0adc263cea1f6a47f1762dd'
-  /crmeb/crmebimage:
-    newFile: !uuid '81ed2f0f9985e06b2c229deab43b84630782c529'
-    oldFile: !uuid '7d557ebb11e65536910fbc8187b6f8dad86468be'
-  /crmeb/crmebimage/crmebimage:
-    newFile: !uuid 'eded8e6550b6b432d6e711e4c80946ce74f2a2a5'
-    oldFile: !uuid 'b191777a9a78ad90f1cb3f8adc7a97b5eeb1e8c4'
-  /crmeb/crmebimage/crmebimage/demoimage:
-    newFile: !uuid '534c530288808fd49dde8dd04f0f4f1e909a4258'
-    oldFile: !uuid '47bcd833bf82eef14b39f3e67fe68d5f646fb2db'
-  /crmeb/crmebimage/crmebimage/demoimage/gitee-java.jpg:
-    newFile: !uuid '42ebaa798542b81e57d2577d3834a61e62ec0293'
-    oldFile: null
-gitCommitId: !uuid '4d70bab54b187e93850de31878f71f9b4ef7fe73'
+    newFile: !uuid 'fa16c52d672106e91519db7391e52f399a1071a0'
+    oldFile: !uuid '96803f47ec3db6895561986ddfcc1573813d4b08'
+gitCommitId: !uuid 'cd96dbf7e689323e08b6a26fb8a33a405c4d3998'
 renames: {
   }
-revisionId: 224
+revisionId: 225
