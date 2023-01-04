@@ -3,9 +3,27 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'e337eb1f16ee0ab36e45341f509341b401fe290d'
-    oldFile: !uuid '0d95bfa4e676ae8269d34b4042351437d867fbd1'
-gitCommitId: !uuid '1321a2b0e53893265203ceba2e42d09b97a989b1'
+    newFile: !uuid '41d2884d04607315f5956c818c0419748ab65374'
+    oldFile: !uuid 'e337eb1f16ee0ab36e45341f509341b401fe290d'
+  /crmeb:
+    newFile: !uuid 'b421ab3c50979c9d807a1cff13596aec7675c0a1'
+    oldFile: !uuid 'b5d152fb08419b4f86ff6df98bf705f0d553c13e'
+  /crmeb/crmebimage:
+    newFile: !uuid '3eabde8cedeb06fe43d1f1acd5ed6b104f0dff7c'
+    oldFile: !uuid 'f8de9beff58dbf86d9d75686d3bf5e69b6799b5c'
+  /crmeb/crmebimage/crmebimage:
+    newFile: !uuid 'b61be09ae8d3f37a569264df61ada51f529230d6'
+    oldFile: !uuid '823d216963ebc0c298f1af23a369f267a5a774f8'
+  /crmeb/crmebimage/crmebimage/demoimage:
+    newFile: !uuid '4ce3644ee48a99760da0a19443472040aed24ea1'
+    oldFile: !uuid 'a7f50cd59ac53f9086124eba2e8c0f0ea1495d12'
+  /crmeb/crmebimage/crmebimage/demoimage/danshanghu_kefu.jpg:
+    newFile: !uuid '92068e935aab08a281ddd2f114b6fc951a686cea'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/duoshanghu_kefu.jpg:
+    newFile: !uuid 'e071e00c04aaaf60100f5708126a1e10da17e27c'
+    oldFile: null
+gitCommitId: !uuid 'cf6071a39674faf39188bce050e804f72865c24d'
 renames: {
   }
-revisionId: 235
+revisionId: 236
