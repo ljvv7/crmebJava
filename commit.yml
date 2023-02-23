@@ -2,10 +2,22 @@
 branches: {
   }
 fileChange:
-  /LICENSE:
-    newFile: !uuid '2c1a5c55fa0da2956512b101e89aee01be3b0d32'
-    oldFile: !uuid '152f2f3695e17132a288be363636078352426c03'
-gitCommitId: !uuid '90b377a6e70d22717cd161dc9c683b4281375ec3'
+  /README.md:
+    newFile: !uuid '4dda5307b685d37b824fd9482106a0f9758da242'
+    oldFile: !uuid '84fa4af70cd7179a6264e80bc363e17c34d2837f'
+  /crmeb:
+    newFile: !uuid '821fd2e4a5525f530c108389c1301799f4a06231'
+    oldFile: !uuid 'b421ab3c50979c9d807a1cff13596aec7675c0a1'
+  /crmeb/crmebimage:
+    newFile: !uuid '54b1a07f371441b874cff06320074eb068b03ef8'
+    oldFile: !uuid '3eabde8cedeb06fe43d1f1acd5ed6b104f0dff7c'
+  /crmeb/crmebimage/crmebimage:
+    newFile: !uuid '8b66a7136448d2227a828692af72761a3fd5e37b'
+    oldFile: !uuid 'b61be09ae8d3f37a569264df61ada51f529230d6'
+  /crmeb/crmebimage/crmebimage/官方社区@2x.jpg:
+    newFile: !uuid '8400843d230f1c3736ac8d7ca3f5940e5300ea54'
+    oldFile: null
+gitCommitId: !uuid '68d9148fa7784afafeeff2df1e64d9275a8d3098'
 renames: {
   }
-revisionId: 239
+revisionId: 240
