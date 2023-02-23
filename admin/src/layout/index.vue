@@ -26,7 +26,7 @@ export default {
   name: 'Layout',
   data(){
     return {
-      openImage: true
+      openImage: false
     }
   },
   components: {

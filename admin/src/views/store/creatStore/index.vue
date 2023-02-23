@@ -306,7 +306,7 @@
               </el-form-item>
             </el-col>
             <el-col v-bind="grid">
-              <el-form-item label="积分：">
+              <el-form-item label="获得积分：">
                 <el-input-number v-model="formValidate.giveIntegral" :min="0" placeholder="请输入排序" :disabled="isDisabled" />
               </el-form-item>
             </el-col>
@@ -1199,8 +1199,8 @@
           let list = response.list;
           let arr = [],arr1 = [];
           const listArr = [{ name: '是否热卖', value: 'isGood' }];
-          let typeLists = [ 
-            { name: '', value: 'isHot',type:'2' },   //热门榜单 
+          let typeLists = [
+            { name: '', value: 'isHot',type:'2' },   //热门榜单
             { name: '', value: 'isBenefit' ,type:'4'}, //促销单品
             { name: '', value: 'isBest',type:'1' }, //精品推荐
             { name: '', value: 'isNew',type:'3' }]; //首发新品
