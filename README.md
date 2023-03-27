@@ -1,47 +1,8 @@
- <div align="center" >
-    <img src="https://images.gitee.com/uploads/images/2021/1109/164354_0aafe3d2_892944.gif" />
-</div>
-<div align="center">
-
-# CRMEB开源商城系统Java版
-
-</div>
-<div align="center" >
-    <a href="http://www.crmeb.com">
-        <img src="https://img.shields.io/badge/Licence-GPL3.0-green.svg?style=flat" />
-    </a>
-    <a href='https://gitee.com/ZhongBangKeJi/crmeb_java/members'>
-        <img src='https://gitee.com/ZhongBangKeJi/crmeb_java/badge/fork.svg?theme=dark' alt='fork'></img>
-    </a>
-   <a href='https://gitee.com/ZhongBangKeJi/crmeb_java/stargazers'>
-        <img src='https://gitee.com/ZhongBangKeJi/crmeb_java/badge/star.svg?theme=dark' alt='star'></img>
-    </a>
-</div>
-
-<div align="center">
-
-[官网](https://www.crmeb.com/) |
-[在线体验](https://admin.java.crmeb.net) |
-[帮助文档](https://doc.crmeb.com/java/crmeb_java) |
-[技术社区](https://www.crmeb.com/ask/)
-
-[comment]: <> ([宽屏预览]&#40;https://gitee.com/ZhongBangKeJi/crmeb_java/blob/master/README.md&#41;)
-
-</div>
-<div align="center" >
-    <a href="https://gitee.com/ZhongBangKeJi/crmeb_java/blob/master/README.md">宽 屏 预 览</a>
-</div>
-
-<div align="center">
-    如果对您有帮助，您可以点右上角 "Star" ❤️ 支持一下 谢谢！
-</div>
+# 开源商城系统Java版
 
 ### 介绍：
 
-CRMEB Java版商城系统是一款基于Java + Uni-app 开发的新零售社交电商系统，能够真正帮助企业基于微信公众号、小程序、移动端等，实现会员管理、数据分析,精准营销的电子商务管理系统。
-
-CRMEB开源商城PHP：https://gitee.com/ZhongBangKeJi/CRMEB
-
+Java版商城系统是一款基于Java + Uni-app 开发的新零售社交电商系统，能够真正帮助企业基于微信公众号、小程序、移动端等，实现会员管理、数据分析,精准营销的电子商务管理系统。
 
 系统代码全开源无加密，独立部署、二开方便，适用于企业新零售、分销、拼团、砍价，秒杀等各种业务需求。
 
@@ -84,32 +45,15 @@ CRMEB开源商城PHP：https://gitee.com/ZhongBangKeJi/CRMEB
 
 移动端 uniapp 开发 使用 HbuilderX 开发
 
-### 官方论坛
-![输入图片说明](crmeb/crmebimage/crmebimage/%E5%AE%98%E6%96%B9%E7%A4%BE%E5%8C%BA@2x.jpg)
-产品BUG、优化建议，欢迎社区反馈：[https://www.crmeb.com/ask/thread/list/152](https://www.crmeb.com/ask/thread/list/152)
-
-### 系统演示：
-![](crmeb/crmebimage/crmebimage/demoimage/c1.jpg)
-移动端：https://java.crmeb.net<br>
-WEBPC管理端：https://admin.java.crmeb.net<br>
-账号密码： demo/crmeb.com<br>
+WEBPC管理端账号密码： demo/crmeb.com<br>
 
 自己搭建演示账号
 移动端 18292417675 / crmeb@123456
 管理端 admin / 123456
 
-### 官方论坛
-产品BUG、优化建议，欢迎社区反馈：https://www.crmeb.com/ask/thread/list/152
-
 ### 系统文档
 安装文档、产品介绍、技术文档：https://doc.crmeb.com/java/crmeb_java
 
-### 技术交流群
-CRMEB JAVA 技术交流QQ群 1群 🈵️<br>
-CRMEB JAVA 技术交流QQ群 2群 482685880 🔥<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=Ss382XU1MITXy9B-qx15GC3G7WVaImIG&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="CRMEB Java技术交流2群" title="CRMEB Java技术交流2群"> 点击添加群 482685880</a>
-
-使用中遇到bug 或者问题可以在gitee 上提 Issues
-如果直接点击加群无反应可复制QQ号码手动加入
 ### 移动端预览
 ![](crmeb/crmebimage/crmebimage/demoimage/03-mobile-01.png)
 ![](crmeb/crmebimage/crmebimage/demoimage/04-mobile-02.png)
@@ -133,32 +77,6 @@ CRMEB JAVA 技术交流QQ群 2群 482685880 🔥<a target="_blank" href="https:/
 2:app       移动商城         UniApp标准开发(H5 + 微信小程序)<br>
 3:crmeb     Api            Java SpringBoot + mybatisPlus<br>
 4:接口文档   Api对应的接口文档也可以部署项目后查看<br>
-
-视频教程 B站视频教程 持续更新中 [点击观看 💻🖥️](https://www.bilibili.com/video/BV1bP4y1n76P/?vd_source=40854aeda5bba4b8766afd5a99623b16)
-
-
-### 商业版
-<!-- ![](crmeb/crmebimage/crmebimage/demoimage/c2.jpg) -->
-购买商业版： http://crmeb.com/web/index/java<br>
-多商户Java版：http://s.crmeb.com/goods_detail/750<br>
-
-### 联系客服
-[![](/crmeb/crmebimage/crmebimage/demoimage/duoshanghu_kefu.jpg)](http://s.crmeb.com/goods_detail/750)
-[![](/crmeb/crmebimage/crmebimage/demoimage/danshanghu_kefu.jpg)](http://s.crmeb.com/goods_detail/714)
-
-
-
-
-### 特别鸣谢
-核心开发团队
-
-产品：木子刀客
-
-技术：❄指缝de阳光，怪兽的猫，大粽子，乡关何处
-
-UI：被子横盖显得高🐰
-
-测试：请叫我绵绵🐏
 
 ### 使用须知
 1.允许用于个人学习、毕业设计、教学案例、公益事业、商业使用;<br>
