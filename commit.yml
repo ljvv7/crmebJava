@@ -2,16 +2,13 @@
 branches: {
   }
 fileChange:
-  /app:
-    newFile: !uuid '0ee3ad093aadd5f912324c7a76da8af2b92286d0'
-    oldFile: !uuid '0eed6a759841d8e95201b1967f57e774f1c0ecab'
-  /app/api:
-    newFile: !uuid 'b84205b947f9d095c20571ff980d081348220994'
-    oldFile: !uuid 'f0f1cab80d23398cf4c14de99f016a5d0ded60a0'
-  /app/api/user.js:
-    newFile: !uuid '4a4c187b3bb388329c674ba0c5c7c63a09c78e47'
-    oldFile: !uuid 'fb270a34aa12057cc8171638e15da391e935f372'
-gitCommitId: !uuid 'd9a47d1b54824e78185c2fc6af9582957e843afd'
+  /安装必读——CRMEB开源商城系统Java版.docx:
+    newFile: !uuid 'b777b1e667657666d6993b548c2357ad11a90faa'
+    oldFile: null
+  /寻找CRMEB开源项目推广大使活动.docx:
+    newFile: null
+    oldFile: !uuid '1438d301ad4f3e61d293c6ae618d49642f10d4ea'
+gitCommitId: !uuid '6f8a24580139ed4bd6fd93cdbab1670e71122841'
 renames: {
   }
-revisionId: 244
+revisionId: 245
