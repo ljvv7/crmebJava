@@ -185,7 +185,7 @@ export function getProductGood() {
  * 
  */
 export function getReplyProduct(id) {
-	return request.get('reply/product/' + id, {
+	return request.get('reply/product/' + id,{}, {
 		noAuth: true
 	})
 }
