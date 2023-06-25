@@ -3,30 +3,9 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid '59184035149f167713b7b950fdae8a7ba50c8a15'
-    oldFile: !uuid '3f8bdcfd45d20f5cb32c72cdb00745ef02fee7a8'
-  /crmeb:
-    newFile: !uuid '99b5e63068207a54ca22a358ebb6724ad2a24fd0'
-    oldFile: !uuid 'b43462cbd1dce2b6c821f9b22701b2da433fdee2'
-  /crmeb/crmebimage:
-    newFile: !uuid '3af419cb187c59ea60ed48b4ba5e961975aa5d21'
-    oldFile: !uuid '9c64dfda9593b5a2554b74174442584b0a158a62'
-  /crmeb/crmebimage/crmebimage:
-    newFile: !uuid 'f24137cae037d8e664d1d5d6c95431970ede42d9'
-    oldFile: !uuid '011d2d683ac2efe8dbbfeeb8c3bb2238ba8f668d'
-  /crmeb/crmebimage/crmebimage/demoimage:
-    newFile: !uuid 'f5d76cf801189887d281b02665cc1d0e825b8de3'
-    oldFile: !uuid 'c9ef807fa895b77e7a4ea1e7ba454b6b9e2749ea'
-  /crmeb/crmebimage/crmebimage/demoimage/13yemiandesiner-min.gif:
-    newFile: !uuid '85608c1267d83a30d9ed068e626e3f92e1284ab0'
-    oldFile: null
-  /crmeb/crmebimage/crmebimage/demoimage/14yijianhuanse-min.gif:
-    newFile: !uuid '996b4b58e02f3e38c8894be74daeab754de8f689'
-    oldFile: null
-  /crmeb/crmebimage/crmebimage/demoimage/15webPCadmin-min.gif:
-    newFile: !uuid 'c89714c965d63fc256b42de17e6c7885310eaadf'
-    oldFile: null
-gitCommitId: !uuid 'd6d2a145f027400ae5716489a9b219231893c4de'
+    newFile: !uuid 'c9e739d4d4c643681c3747a2bf6416584762a6f2'
+    oldFile: !uuid '59184035149f167713b7b950fdae8a7ba50c8a15'
+gitCommitId: !uuid 'c7484de2a4d83c9a26e958da17bb773d1133f0b9'
 renames: {
   }
-revisionId: 267
+revisionId: 268
