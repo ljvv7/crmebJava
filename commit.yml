@@ -2,10 +2,10 @@
 branches: {
   }
 fileChange:
-  /14yijianhuanse.gif:
+  /15webPCadmin.gif:
     newFile: null
-    oldFile: !uuid 'c31cf54841fae41e8a65dc0719930ba8c2bcce31'
-gitCommitId: !uuid '579bb29dfdb96ee966844185bffff0c97e555d93'
+    oldFile: !uuid '163468829e7fda52a2d61505686cd0be9c1baec3'
+gitCommitId: !uuid 'd123c793f22b3dc5b2fa43747af2a0c93ba3baae'
 renames: {
   }
-revisionId: 263
+revisionId: 264
