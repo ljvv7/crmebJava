@@ -2,58 +2,10 @@
 branches: {
   }
 fileChange:
-  /crmeb:
-    newFile: !uuid 'b43462cbd1dce2b6c821f9b22701b2da433fdee2'
-    oldFile: !uuid 'ebcd4523fee53e15954291c19461136d2b57eb30'
-  /crmeb/crmeb-admin:
-    newFile: !uuid '651ba3c6549c8a3c51d76a0955bde05c7ed1dcbc'
-    oldFile: !uuid '23529d71dd410e2c1ec39fe731a5858c147d7128'
-  /crmeb/crmeb-admin/src:
-    newFile: !uuid 'e51b1f5f7e995cc300918a7b4a3979a8ab05ce16'
-    oldFile: !uuid 'f43d24b1f647ec3b4201d6934629cc1952cc2c94'
-  /crmeb/crmeb-admin/src/main:
-    newFile: !uuid 'dbc10f5bcab1c2d9549205ae9f669e6cd5d16eab'
-    oldFile: !uuid 'ed208f6ed33ab0dddb7e01ff85bea7b5faf5fc5f'
-  /crmeb/crmeb-admin/src/main/resources:
-    newFile: !uuid '1f0e88de3436d60b4346d2b0744145e694d17c1a'
-    oldFile: !uuid '2161ec07abe018b01d9bed97534908f8b4061316'
-  /crmeb/crmeb-admin/src/main/resources/application-beta.yml:
-    newFile: !uuid '367d16cc40c909af7afa7c349a31c79c8f952bd5'
-    oldFile: !uuid '1dcdcb46065bfb179a854cfa157197880f8a606c'
-  /crmeb/crmeb-admin/src/main/resources/application-dev.yml:
-    newFile: !uuid '404a81584ecf6dde83f9ef25b0495363f418bd23'
-    oldFile: !uuid '0e1939376f598e78fbf7b900db4808b49bb4fe6a'
-  /crmeb/crmeb-admin/src/main/resources/application-prod.yml:
-    newFile: !uuid 'e1544e303cc65fb3017da1ec0d622f20aee802af'
-    oldFile: !uuid '6ce0f40c839143a515f3b7615a08f38e22479cd9'
-  /crmeb/crmeb-admin/src/main/resources/application.yml:
-    newFile: !uuid 'febde3b1398479068ebbb6c64f70b63de762ee7f'
-    oldFile: !uuid 'f3f9eb527da641eff2020148e49a5a152bbe162a'
-  /crmeb/crmeb-front:
-    newFile: !uuid '80b132109323a2bee5894b027964c712b138ea92'
-    oldFile: !uuid '3830c7413a76b2130be7de6a5f65806f132ea9b0'
-  /crmeb/crmeb-front/src:
-    newFile: !uuid '12d2e448be26a9d65f10c2bdd39bb39d33f6164d'
-    oldFile: !uuid '7e5a2f302ab20abb52a31c752f68aa52aafeb880'
-  /crmeb/crmeb-front/src/main:
-    newFile: !uuid 'ce06722bf420e7cf1631b1229eec82d21ea9e879'
-    oldFile: !uuid '16a8749660b7b312d7dfd61657dcf6a98bfb4121'
-  /crmeb/crmeb-front/src/main/resources:
-    newFile: !uuid 'a1f2ce2f3b97a81090aa9838f750880b1e7470a6'
-    oldFile: !uuid '283ee0fcbd387f9ef0e4f2aec7667d4bd00a1e6e'
-  /crmeb/crmeb-front/src/main/resources/application-beta.yml:
-    newFile: !uuid 'c2beaff6b7595e24596bec2a2917e37c1e899480'
-    oldFile: !uuid 'b36da275c4fc30228f8aa0762ba94cc61abbc6f6'
-  /crmeb/crmeb-front/src/main/resources/application-dev.yml:
-    newFile: !uuid '1d5a53026df10d1ec29a153a7f965f7cb1d4d0ba'
-    oldFile: !uuid 'f242712832e7c273e931206e54d3325a66dbc7ad'
-  /crmeb/crmeb-front/src/main/resources/application-prod.yml:
-    newFile: !uuid '3bc577f4c5b6b2246d2e69352de038140f429c31'
-    oldFile: !uuid 'f6ebde4d0b749e10365c118ceb95c6aca0d2e270'
-  /crmeb/crmeb-front/src/main/resources/application.yml:
-    newFile: !uuid 'f4d78b4ae18df845b084a6185cdce1268ba1e5ff'
-    oldFile: !uuid '318ba73f4fe9868e7c5ced4797a38b5175eaa9ce'
-gitCommitId: !uuid '198cf19d5761d0ad731b4731909b28c7f932f166'
+  /README.md:
+    newFile: !uuid '592fcb43b13cd2e3ca8b9e55afdf7f11d332081c'
+    oldFile: !uuid '74702bcf67c8d9705e037416334f32cae376ea94'
+gitCommitId: !uuid '5426b1b32c54ee2c216a1efa1c54c6fc6bc0e0c5'
 renames: {
   }
-revisionId: 254
+revisionId: 255
