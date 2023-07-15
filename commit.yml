@@ -3,9 +3,30 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'c9e739d4d4c643681c3747a2bf6416584762a6f2'
-    oldFile: !uuid '59184035149f167713b7b950fdae8a7ba50c8a15'
-gitCommitId: !uuid 'c7484de2a4d83c9a26e958da17bb773d1133f0b9'
+    newFile: !uuid '96ccd904a223c671a3bfaa0ae635e54a2dfcec00'
+    oldFile: !uuid 'c9e739d4d4c643681c3747a2bf6416584762a6f2'
+  /crmeb:
+    newFile: !uuid '4d059cbe37404ba025b16eb6d4fea617c5e9267e'
+    oldFile: !uuid '99b5e63068207a54ca22a358ebb6724ad2a24fd0'
+  /crmeb/crmebimage:
+    newFile: !uuid '23ba9ca5cb594d5150daeb8aee3fd10305dfceb6'
+    oldFile: !uuid '3af419cb187c59ea60ed48b4ba5e961975aa5d21'
+  /crmeb/crmebimage/crmebimage:
+    newFile: !uuid 'b9f2852fd86ad36ccfd76de119b724dc3b36cc26'
+    oldFile: !uuid 'f24137cae037d8e664d1d5d6c95431970ede42d9'
+  /crmeb/crmebimage/crmebimage/demoimage:
+    newFile: !uuid '385656d4a4bf1265ba0596b01621286ced56afc2'
+    oldFile: !uuid 'f5d76cf801189887d281b02665cc1d0e825b8de3'
+  /crmeb/crmebimage/crmebimage/demoimage/crmebdouyin.jpg:
+    newFile: !uuid 'b97a716020db6689eaa71a58c8f73fded97ce402'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/cus01.jpg:
+    newFile: !uuid '676a6f17964e516811a9d765fd1a8bc59db14f2f'
+    oldFile: null
+  /crmeb/crmebimage/crmebimage/demoimage/javaop2.jpg:
+    newFile: !uuid 'ee91dffe586e75b23e1da5d3de4bfcd3c4150793'
+    oldFile: null
+gitCommitId: !uuid '24fba07e8a577d015607baa16e179838ed885feb'
 renames: {
   }
-revisionId: 268
+revisionId: 269
