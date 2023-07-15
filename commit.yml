@@ -3,24 +3,9 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid '5a141318249771e00f088510cb19840472cdfb14'
-    oldFile: !uuid '5fb176801de871c714f008fa637a76a707751456'
-  /crmeb:
-    newFile: !uuid 'e1a0539b19c65e23458ace21f65dfea1846bd042'
-    oldFile: !uuid '4d059cbe37404ba025b16eb6d4fea617c5e9267e'
-  /crmeb/crmebimage:
-    newFile: !uuid '09b6d999f0365beb0ba47aff89d52aa625cd8667'
-    oldFile: !uuid '23ba9ca5cb594d5150daeb8aee3fd10305dfceb6'
-  /crmeb/crmebimage/crmebimage:
-    newFile: !uuid '01b2f3cad7444c3d2cab34b45329f459b4dd2558'
-    oldFile: !uuid 'b9f2852fd86ad36ccfd76de119b724dc3b36cc26'
-  /crmeb/crmebimage/crmebimage/demoimage:
-    newFile: !uuid '811eb57779830d92f0137a3ad06477b2e73cd63b'
-    oldFile: !uuid '385656d4a4bf1265ba0596b01621286ced56afc2'
-  /crmeb/crmebimage/crmebimage/demoimage/qqcus.jpg:
-    newFile: !uuid 'da43f2d43b278939238090ab1b3b5140ac87abda'
-    oldFile: null
-gitCommitId: !uuid '29a4dad980bfeb31e9ed770eef380a3ca3d0c074'
+    newFile: !uuid '3112b74496b9f20885bbf256d725a54e15d1ec5f'
+    oldFile: !uuid '5a141318249771e00f088510cb19840472cdfb14'
+gitCommitId: !uuid '1e7457a68269bf624348fdbf30bbc39a9f613ba7'
 renames: {
   }
-revisionId: 271
+revisionId: 272
