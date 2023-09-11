@@ -3,9 +3,36 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid 'c7153b6bfe7028998ccae89a744300e0b9b7e207'
-    oldFile: !uuid 'af2f2c4f63b42a2d31afb2f5863a804845481143'
-gitCommitId: !uuid 'd8968eb05d531f05e3f8f1594fb020c855885e36'
+    newFile: !uuid 'f561136a67962e7f15e8f23384bda1235bd80c6e'
+    oldFile: !uuid 'c7153b6bfe7028998ccae89a744300e0b9b7e207'
+  /admin:
+    newFile: !uuid '2b2ce5181fc09d2830a61f70824df4129b1eca99'
+    oldFile: !uuid '43c8f302528f55b380bcf657393b6727ba8b5fcb'
+  /admin/src:
+    newFile: !uuid 'f10ffe8c4d03d9edccd130aca1282b0787898aa9'
+    oldFile: !uuid '0c435e065cfc08b1e6170c84636d4256d2354c7e'
+  /admin/src/views:
+    newFile: !uuid '7408fef8f0e35c4b0e9c1ae2370c92aaf05fb676'
+    oldFile: !uuid '1f70a3ed3e23d43ebeb292d99f133b9965525cfb'
+  /admin/src/views/store:
+    newFile: !uuid '4920f11312525712ec4d77a9cb264e93d6590453'
+    oldFile: !uuid 'a01fdb5854fd7b446c3c34edd4de30c1a0f6e4cf'
+  /admin/src/views/store/creatStore:
+    newFile: !uuid 'c8b2ed01649848f4bb87e05edc6e275e38ba8238'
+    oldFile: !uuid '7d6157d12e0ff000f13048519e99fa0837ecb0c3'
+  /admin/src/views/store/creatStore/index.vue:
+    newFile: !uuid 'cb1922c69c5c6cb32d03b4d163b9feb04aa4cf05'
+    oldFile: !uuid '03826c67932db4339c329620bb143bb6cac152cb'
+  /app:
+    newFile: !uuid '6e57484947513393f4dd51b2b44b6334c3ae1bee'
+    oldFile: !uuid '0ee3ad093aadd5f912324c7a76da8af2b92286d0'
+  /app/api:
+    newFile: !uuid 'aa688d726557a25380a6020840d6cd726d51c03e'
+    oldFile: !uuid 'b84205b947f9d095c20571ff980d081348220994'
+  /app/api/store.js:
+    newFile: !uuid 'a7750656afa21c30b4c919b6b9a2d52b2f030231'
+    oldFile: !uuid '0be14a76716f9e10e2498016323f2a9fb25e62e8'
+gitCommitId: !uuid '6c6ccce62560fc8102b272340d260b14e6e9a47d'
 renames: {
   }
-revisionId: 275
+revisionId: 276
