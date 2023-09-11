@@ -15,7 +15,6 @@ import com.zbkj.common.vo.OnePassLogisticsQueryVo;
 import com.zbkj.service.service.LogisticService;
 import com.zbkj.service.service.OnePassService;
 import com.zbkj.service.service.SystemConfigService;
-import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,6 @@ import java.util.concurrent.TimeUnit;
  *  | Author: CRMEB Team <admin@crmeb.com>
  *  +----------------------------------------------------------------------
 */
-@Data
 @Service
 public class LogisticsServiceImpl implements LogisticService {
 
@@ -53,11 +51,12 @@ public class LogisticsServiceImpl implements LogisticService {
     @Autowired
     private OnePassService onePassService;
 
-    private String redisKey = Constants.LOGISTICS_KEY;
-    private Long redisCacheSeconds = 1800L;
+    private static final String REDIS_KEY = Constants.LOGISTICS_KEY;
 
-    private String expressNo;
+    private static final Long REDIS_CACHE_SECONDS = 1800L;
 
+    // 使用ThreadLocal替代共享变量
+    private final ThreadLocal<String> expressNoPool = new ThreadLocal<>();
 
     /** 快递
      * @param expressNo String 物流单号
@@ -69,46 +68,52 @@ public class LogisticsServiceImpl implements LogisticService {
      */
     @Override
     public LogisticsResultVo info(String expressNo, String type, String com, String phone) {
-        LogisticsResultVo resultVo = new LogisticsResultVo();
-        setExpressNo(expressNo);
-        JSONObject result = getCache();
-        if (ObjectUtil.isNotNull(result)) {
-            return JSONObject.toJavaObject(result, LogisticsResultVo.class);
-        }
-        String logisticsType = systemConfigService.getValueByKeyException("logistics_type");
-        if ("1".equals(logisticsType)) {// 平台查询
-            OnePassLogisticsQueryVo queryVo = onePassService.exprQuery(expressNo, com);
-            if (ObjectUtil.isNull(queryVo)) {
-                return resultVo;
+        // 放进ThreadLocal里
+        expressNoPool.set(expressNo);
+        try {
+            LogisticsResultVo resultVo = new LogisticsResultVo();
+            JSONObject result = getCache();
+            if (ObjectUtil.isNotNull(result)) {
+                return JSONObject.toJavaObject(result, LogisticsResultVo.class);
             }
-            // 一号通vo转公共返回vo
-            resultVo = queryToResultVo(queryVo);
-            String jsonString = JSONObject.toJSONString(resultVo);
-            saveCache(JSONObject.parseObject(jsonString));
-        }
-        if ("2".equals(logisticsType)) {// 阿里云查询
-            String appCode = systemConfigService.getValueByKey(Constants.CONFIG_KEY_LOGISTICS_APP_CODE);
-
-            // 顺丰请输入单号 : 收件人或寄件人手机号后四位。例如：123456789:1234
-            if (StrUtil.isNotBlank(com) && "shunfengkuaiyun".equals(com)) {
-                expressNo = expressNo.concat(":").concat(StrUtil.sub(phone, 7, -1));
+            String logisticsType = systemConfigService.getValueByKeyException("logistics_type");
+            if ("1".equals(logisticsType)) {// 平台查询
+                OnePassLogisticsQueryVo queryVo = onePassService.exprQuery(expressNo, com);
+                if (ObjectUtil.isNull(queryVo)) {
+                    return resultVo;
+                }
+                // 一号通vo转公共返回vo
+                resultVo = queryToResultVo(queryVo);
+                String jsonString = JSONObject.toJSONString(resultVo);
+                saveCache(JSONObject.parseObject(jsonString));
             }
-            String url = Constants.LOGISTICS_API_URL + "?no=" + expressNo;
-            if(StringUtils.isNotBlank(type)){
-                url += "&type=" + type;
+            if ("2".equals(logisticsType)) {// 阿里云查询
+                String appCode = systemConfigService.getValueByKey(Constants.CONFIG_KEY_LOGISTICS_APP_CODE);
+
+                // 顺丰请输入单号 : 收件人或寄件人手机号后四位。例如：123456789:1234
+                if (StrUtil.isNotBlank(com) && "shunfengkuaiyun".equals(com)) {
+                    expressNo = expressNo.concat(":").concat(StrUtil.sub(phone, 7, -1));
+                }
+                String url = Constants.LOGISTICS_API_URL + "?no=" + expressNo;
+                if(StringUtils.isNotBlank(type)){
+                    url += "&type=" + type;
+                }
+
+                HashMap<String, String> header = new HashMap<>();
+                header.put("Authorization", "APPCODE " + appCode);
+
+                JSONObject data = restTemplateUtil.getData(url, header);
+                checkResult(data);
+                //把数据解析成对象返回到前端
+                result = data.getJSONObject("result");
+                saveCache(result);
+                resultVo = JSONObject.toJavaObject(result, LogisticsResultVo.class);
             }
-
-            HashMap<String, String> header = new HashMap<>();
-            header.put("Authorization", "APPCODE " + appCode);
-
-            JSONObject data = restTemplateUtil.getData(url, header);
-            checkResult(data);
-            //把数据解析成对象返回到前端
-            result = data.getJSONObject("result");
-            saveCache(result);
-            resultVo = JSONObject.toJavaObject(result, LogisticsResultVo.class);
+            return resultVo;
+        } finally {
+            // 防止内存泄漏
+            expressNoPool.remove();
         }
-        return resultVo;
     }
 
     /**
@@ -140,9 +145,9 @@ public class LogisticsServiceImpl implements LogisticService {
      * @return JSONObject
      */
     private JSONObject getCache() {
-        Object data = redisUtil.get(getRedisKey() + getExpressNo());
+        Object data = redisUtil.get(REDIS_KEY + expressNoPool.get());
         if(null != data){
-         return JSONObject.parseObject(data.toString());
+            return JSONObject.parseObject(data.toString());
         }
         return null;
     }
@@ -153,7 +158,7 @@ public class LogisticsServiceImpl implements LogisticService {
      * @since 2020-07-06
      */
     private void saveCache(JSONObject data) {
-        redisUtil.set(getRedisKey() + getExpressNo(), data.toJSONString(), getRedisCacheSeconds(), TimeUnit.SECONDS);
+        redisUtil.set(REDIS_KEY + expressNoPool.get(), data.toJSONString(), REDIS_CACHE_SECONDS, TimeUnit.SECONDS);
     }
 
     /** 获取快递缓存
