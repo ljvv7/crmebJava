@@ -2,70 +2,25 @@
 branches: {
   }
 fileChange:
+  /README.md:
+    newFile: !uuid '4764699829e8b2fb58ffef343558676c400a51e1'
+    oldFile: !uuid 'f561136a67962e7f15e8f23384bda1235bd80c6e'
   /crmeb:
-    newFile: !uuid '2bde2bbf2285468482fd250347fc1c14c8badc45'
-    oldFile: !uuid 'e1a0539b19c65e23458ace21f65dfea1846bd042'
-  /crmeb/crmeb-admin:
-    newFile: !uuid '6965bbe5c93aa952a6258c2f37ed9dad2080b79a'
-    oldFile: !uuid '651ba3c6549c8a3c51d76a0955bde05c7ed1dcbc'
-  /crmeb/crmeb-admin/src:
-    newFile: !uuid '9576d2cf22457a69b7072b5018853d8a7c675f6e'
-    oldFile: !uuid 'e51b1f5f7e995cc300918a7b4a3979a8ab05ce16'
-  /crmeb/crmeb-admin/src/main:
-    newFile: !uuid '9f2019255c38983bf5547d1ecea1b7a07352454e'
-    oldFile: !uuid 'dbc10f5bcab1c2d9549205ae9f669e6cd5d16eab'
-  /crmeb/crmeb-admin/src/main/java:
-    newFile: !uuid '66176d75d755c7a3fc58c173c426ef29d2110c9a'
-    oldFile: !uuid '2413890bc6b2e00951958950d2864fc99feafb3f'
-  /crmeb/crmeb-admin/src/main/java/com:
-    newFile: !uuid '729737e7b513275c69132e7b65c544fb571d7f60'
-    oldFile: !uuid '4a2418cfbd5360a3597e5124953c879786af586b'
-  /crmeb/crmeb-admin/src/main/java/com/zbkj:
-    newFile: !uuid '96a0667c3c9e1e66f53eef22d2c8a6ca762ee5ad'
-    oldFile: !uuid '678cc5972ca1f1e10a3422a04478610ecfc0f0b5'
-  /crmeb/crmeb-admin/src/main/java/com/zbkj/admin:
-    newFile: !uuid '3b124cf154274b63cf07d80c03fbe28658472a13'
-    oldFile: !uuid 'c968d6878873138993721a4504247ba9d09daaab'
-  /crmeb/crmeb-admin/src/main/java/com/zbkj/admin/acpect:
-    newFile: !uuid 'ba0c57868f481ca59052cbfc0b34e0081c997299'
+    newFile: !uuid '2efb36044eb15ab15214f3b2e01a2c5c75b66d42'
+    oldFile: !uuid '2bde2bbf2285468482fd250347fc1c14c8badc45'
+  /crmeb/crmebimage:
+    newFile: !uuid '8313a51c2ebdab4e1f2b4a7a61c4764c0d45c0e3'
+    oldFile: !uuid '09b6d999f0365beb0ba47aff89d52aa625cd8667'
+  /crmeb/crmebimage/crmebimage:
+    newFile: !uuid 'a7319e81ae55eba7bf54ce551a277ed17cc70feb'
+    oldFile: !uuid '01b2f3cad7444c3d2cab34b45329f459b4dd2558'
+  /crmeb/crmebimage/crmebimage/demoimage:
+    newFile: !uuid 'c41bfe1b515ab3334bf66b79afd68e4f1e3965c8'
+    oldFile: !uuid '811eb57779830d92f0137a3ad06477b2e73cd63b'
+  /crmeb/crmebimage/crmebimage/demoimage/wellcomJavaGroup.jpg:
+    newFile: !uuid 'ce6424ff7932e295acab5d5223430f597ff87e24'
     oldFile: null
-  /crmeb/crmeb-admin/src/main/java/com/zbkj/admin/acpect/ControllerAspect.java:
-    newFile: !uuid '1e043a8c0997950490283d9e8b741a3d60edbeb2'
-    oldFile: null
-  /crmeb/crmeb-admin/src/main/resources:
-    newFile: !uuid '92941ee1e9d54b4fb35d0d3f5a505910caabe66a'
-    oldFile: !uuid '1f0e88de3436d60b4346d2b0744145e694d17c1a'
-  /crmeb/crmeb-admin/src/main/resources/application.yml:
-    newFile: !uuid '02720d8f1f91c208f72536aae1216a59aecf5880'
-    oldFile: !uuid 'febde3b1398479068ebbb6c64f70b63de762ee7f'
-  /crmeb/crmeb-common:
-    newFile: !uuid 'b59a80f0d6ea3170a6f78e1e3b40db413f355873'
-    oldFile: !uuid '7805335eea3d3158975e46dfc5ed5b5b815691ec'
-  /crmeb/crmeb-common/src:
-    newFile: !uuid 'e03a687c978be7e70cfae42684ee0d6a6d3a8e80'
-    oldFile: !uuid 'd7c3e60612bac905d95f3cc37b444da6edba1690'
-  /crmeb/crmeb-common/src/main:
-    newFile: !uuid '4f3efb07844d2008776327efebad6264c4f08fe2'
-    oldFile: !uuid '4780d3ec3cde827e33c0c934beae83b7aaefd28a'
-  /crmeb/crmeb-common/src/main/java:
-    newFile: !uuid '01c0f9f1de3415a0fb4acaeb6c1ddf0e7f00eb26'
-    oldFile: !uuid 'fedea1e52e339668ce266118401ec56804d39380'
-  /crmeb/crmeb-common/src/main/java/com:
-    newFile: !uuid 'ac08188852627030ab5179930c3c9304e898fe8c'
-    oldFile: !uuid '953820470be4cace675d7a8913c829bfabaede4f'
-  /crmeb/crmeb-common/src/main/java/com/zbkj:
-    newFile: !uuid '5dedb126fac657e7278299b3541d164366eb658a'
-    oldFile: !uuid 'ab138db7cb7305f2003231b820e215ee44d65212'
-  /crmeb/crmeb-common/src/main/java/com/zbkj/common:
-    newFile: !uuid 'd8a89837f239f4fe060d215e6d130afc39b7b445'
-    oldFile: !uuid 'ce483f3042be6de90fa42204ffc90c0805f2df2f'
-  /crmeb/crmeb-common/src/main/java/com/zbkj/common/acpect:
-    newFile: null
-    oldFile: !uuid 'c260ca3b670ee01c8930af57e4688a75bc3b636c'
-  /crmeb/crmeb-common/src/main/java/com/zbkj/common/acpect/ControllerAspect.java:
-    newFile: null
-    oldFile: !uuid 'f9e51661d615841752519a2a2cd9c04f5648984c'
-gitCommitId: !uuid 'b689d744720a49408d24808ec0b13a5d8cf31e26'
-renames:
-  /crmeb/crmeb-admin/src/main/java/com/zbkj/admin/acpect/ControllerAspect.java: /crmeb/crmeb-common/src/main/java/com/zbkj/common/acpect/ControllerAspect.java
-revisionId: 277
+gitCommitId: !uuid '58c527bd9315667342d1420003b1f528d57ebf5f'
+renames: {
+  }
+revisionId: 278
