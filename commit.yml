@@ -3,24 +3,9 @@ branches: {
   }
 fileChange:
   /README.md:
-    newFile: !uuid '4764699829e8b2fb58ffef343558676c400a51e1'
-    oldFile: !uuid 'f561136a67962e7f15e8f23384bda1235bd80c6e'
-  /crmeb:
-    newFile: !uuid '2efb36044eb15ab15214f3b2e01a2c5c75b66d42'
-    oldFile: !uuid '2bde2bbf2285468482fd250347fc1c14c8badc45'
-  /crmeb/crmebimage:
-    newFile: !uuid '8313a51c2ebdab4e1f2b4a7a61c4764c0d45c0e3'
-    oldFile: !uuid '09b6d999f0365beb0ba47aff89d52aa625cd8667'
-  /crmeb/crmebimage/crmebimage:
-    newFile: !uuid 'a7319e81ae55eba7bf54ce551a277ed17cc70feb'
-    oldFile: !uuid '01b2f3cad7444c3d2cab34b45329f459b4dd2558'
-  /crmeb/crmebimage/crmebimage/demoimage:
-    newFile: !uuid 'c41bfe1b515ab3334bf66b79afd68e4f1e3965c8'
-    oldFile: !uuid '811eb57779830d92f0137a3ad06477b2e73cd63b'
-  /crmeb/crmebimage/crmebimage/demoimage/wellcomJavaGroup.jpg:
-    newFile: !uuid 'ce6424ff7932e295acab5d5223430f597ff87e24'
-    oldFile: null
-gitCommitId: !uuid '58c527bd9315667342d1420003b1f528d57ebf5f'
+    newFile: !uuid '857c28477451bc2c3de0ae88bd2459b55b5b7808'
+    oldFile: !uuid '4764699829e8b2fb58ffef343558676c400a51e1'
+gitCommitId: !uuid '1718108ee4a5aecf348ed4fdcf148842e10aec93'
 renames: {
   }
-revisionId: 278
+revisionId: 279
