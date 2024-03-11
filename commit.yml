@@ -1,44 +1,9 @@
 !revision
 branches: {
   }
-fileChange:
-  /crmeb:
-    newFile: !uuid '1d02ded27e7118555d21ef33d62ade6d1be0fc74'
-    oldFile: !uuid '2efb36044eb15ab15214f3b2e01a2c5c75b66d42'
-  /crmeb/crmeb-service:
-    newFile: !uuid '65a23692759531cf7f43847757e6cef4e477ed00'
-    oldFile: !uuid 'f6e00403a35fb4a5524991113d32f794cf64c847'
-  /crmeb/crmeb-service/src:
-    newFile: !uuid '2f8f3b48f13e5358e1aa843069a81aac5111deab'
-    oldFile: !uuid '8a15186947b5740f53a85040334a0f9d6af2d50a'
-  /crmeb/crmeb-service/src/main:
-    newFile: !uuid '129ac69478e1771689d963eb2848e9a1115613b7'
-    oldFile: !uuid '1979431928a37c6a560dee3ca3c3269d1c916204'
-  /crmeb/crmeb-service/src/main/resources:
-    newFile: !uuid '8dd5c21d679e4ecbfee34f65d6b082b643decb49'
-    oldFile: !uuid '1d859659714248eb54d4e0a22318d8b854cad728'
-  /crmeb/crmeb-service/src/main/resources/mapper:
-    newFile: !uuid '601958fc036c37df7dc46422732974e3b094f155'
-    oldFile: !uuid 'b52992873788b914f701e4ac44682e048d4a3874'
-  /crmeb/crmeb-service/src/main/resources/mapper/finance:
-    newFile: !uuid 'afd64ff6e2a2607826d0b08a961864164ffe6d67'
-    oldFile: !uuid 'd54f9e4e3a19fb85c4c381109ed0ed14ac658f66'
-  /crmeb/crmeb-service/src/main/resources/mapper/finance/UserFundsMonitorMapper.xml:
-    newFile: !uuid '318cb49e492ce1611ce3b2fa1302f592eb7968d3'
-    oldFile: !uuid 'a2f12b2dd6fb5f0e7dab5aa9667a916384d9f17a'
-  /crmeb/crmeb-service/src/main/resources/mapper/system:
-    newFile: !uuid 'a15c85668be89037ce5839096b18022165512517'
-    oldFile: !uuid '3a3322bd2aaae8f2659645915573808cd35e81c8'
-  /crmeb/crmeb-service/src/main/resources/mapper/system/SystemStoreMapper.xml:
-    newFile: !uuid '6ee9e336ddf8a585af5615ba2c52d9a4edf2deb6'
-    oldFile: !uuid 'd03d195e1b42344d61d362a309e62d3f7f1cf3f9'
-  /crmeb/crmeb-service/src/main/resources/mapper/user:
-    newFile: !uuid 'f606758c4bb7d545e1fa9e1cde49a180fafb827a'
-    oldFile: !uuid '73baf5540c655a8362500d239ebe4b7f9a0b42c5'
-  /crmeb/crmeb-service/src/main/resources/mapper/user/UserMapper.xml:
-    newFile: !uuid '0d4cfc1f18557ce1a57cf6dcf0572f94b0848918'
-    oldFile: !uuid '897f88114c1b643ed7eefde83014d996191ca8ba'
-gitCommitId: !uuid '533ec84d35b96952e7da862d2b16d47ad9b3bc00'
+fileChange: {
+  }
+gitCommitId: !uuid 'ef4b5b165cc05f342f4dc9877e8fbb6df03e5845'
 renames: {
   }
-revisionId: 284
+revisionId: 285
